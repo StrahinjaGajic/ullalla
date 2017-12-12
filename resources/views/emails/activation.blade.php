@@ -1,0 +1,1 @@
+<p>Please, click on the link to activate your account: <a href="{{ url('user/activation/' . $userToBeActivated->token) }}">{{ url('user/activation/' . $userToBeActivated->token) }}</a></p>

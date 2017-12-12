@@ -1,0 +1,207 @@
+ /****** Form Validation Profile Style ******/
+.wizard > .steps > ul > li {
+  width: 33%;
+}
+
+ .wizard .content {
+  min-height: 100px;
+}
+.wizard .content > .body {
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  position: relative;
+}
+
+/******* Sign In Page ********/
+.section-signin,
+.section-signup {
+  margin-top: 50px;
+}
+
+/********** Create Profile Modal ***********/
+.section-create-profile .modal.in .modal-dialog {
+  margin-top: 150px !important;
+  width: 800px;
+  overflow-y: initial !important;
+}
+
+.section-create-profile .modal .content.is-scrollable {
+  height: 400px;
+  overflow-y: auto !important;
+}
+
+.section-create-profile #profileForm .form-group {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.section-create-profile input.form-control {
+  margin-bottom: 0px !important;
+}
+
+.section-create-profile textarea.form-control {
+  border: none;
+  height: 200px;
+}
+
+.section-create-profile .price-table-container  {
+  margin-top: 20px;
+}
+
+.section-create-profile .price-table-container span {
+  top: 0px;
+  vertical-align: middle;
+}
+
+.section-create-profile .price-table-container th,
+.section-create-profile .price-table-container td {
+  padding: 10px !important;
+}
+
+/****** Radio and checkbox input fields ******/
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none !important;
+  position: relative;
+  z-index: 1000;
+  min-height: 24px !important;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 20px;
+  text-align: center;
+  line-height: 10px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+
+.default-packages-section .has-error {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/***** Upload Care preview image ******/
+.image-preview-multiple ._list {
+  padding-top: 20px;
+}
+.image-preview-multiple ._item {
+  padding: 0 0 10px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 185px;
+  word-break: break-word;
+  font-size: 12px;
+  line-height: normal;
+}
+.image-preview-multiple ._item img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  padding: 0 10px 6px;
+}
+
+/****** Working Time  *******/
+table.working-times-table label .control__indicator,
+#available_24_7 label .control__indicator {
+  background-color: #ccc;
+}
+
+table.working-times-table td:not(:first-child), 
+table.working-times-table th:not(:first-child) {
+  text-align: center;
+}
+
+table.working-times-table td {
+  vertical-align: middle !important;
+}
+
+table.working-times-table .form-control {
+  width: auto;
+  display: inline-block;
+}
+
+table.working-times-table .form-control + span {
+  margin-right: 10px;
+}
+
+table.working-times-table .control--checkbox {
+  margin-bottom: 4px !important;
+}
+
+table.working-times-table .control--checkbox a,
+#available_24_7 .control--checkbox a {
+  display: block;
+  margin-top: 4px;
+}
+
+#available_24_7 {
+  margin-left: 7px; 
+  margin-bottom: 10px;
+}
+
+#available_24_7 .control input:checked ~ .control__indicator {
+  background: #f26522 !important;
+}
+
+.working-times-disabled * {
+  color: #ccc !important;
+}
+
+.working-times-disabled .control input:checked ~ .control__indicator {
+  background: #ccc !important;
+}
+

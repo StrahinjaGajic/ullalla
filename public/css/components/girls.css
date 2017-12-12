@@ -1,0 +1,61 @@
+.section-girls .left-sidebar .canton-layout .layout-list,
+.section-girls .left-sidebar .services-layout .layout-list,
+.section-girls .left-sidebar .languages-layout .layout-list {
+	height: 400px;
+	overflow-y: scroll;
+	/*overflow-x: hidden;*/
+}
+
+.section-girls .pages a {
+	vertical-align: top !important;
+}
+
+
+.section-single-girl .info-table td:last-child {
+	text-align: right; 
+	color: #f26522;
+}
+
+.section-single-girl .info-table td {
+	font-weight: 600;
+	padding: 11px;
+}
+
+
+.section-single-girl .services-table i.fa-check {
+	margin-right: 3px; 
+	color: #f26522;
+}
+
+.section-single-girl .services-table td {
+	font-weight: 600;
+}
+
+
+
+
+/******* Single Girl ********/
+#map {
+	height: 600px;
+	width: 600px;
+}
+
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+
+/****** Filters ******/
+.layout-title {
+	cursor: pointer;
+}
