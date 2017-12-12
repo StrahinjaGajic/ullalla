@@ -34,7 +34,12 @@
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
 							<a>
-								<img id="zoom1" src="{{ $user->photos . 'nth/2/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="b-1">
+								<img id="expand" src="{{ $user->photos . 'nth/2/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="">
+								<div id="myModal" class="modal">
+                                      <span class="close">&times;</span>
+                                      <img class="modal-content" id="img01">
+                                      <div id="caption"></div>
+                                </div>
 							</a>
 						</div>
 						<div class="single-zoom-thumb">
@@ -53,11 +58,9 @@
 						<div class="product-name">
 							<h3><a>{{ $user->nickname }}</a></h3>
 						</div>
-						@if($user->about_me)
-							<div class="product-reveiw">
-								<p>{{ Str::words($user->about_me, 40) }}</p>
-							</div>
-						@endif
+						<div class="product-reveiw">
+							<p>{{ Str::words($user->about_me, 40) }}</p>
+						</div>
 						<table class="info-table">{{ parseSingleUserData(getBioFields(), $user) }}</table>
 					</div>
 				</div>
@@ -305,10 +308,43 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fB
 
 	}
 </script>
+
+
 <script>
 	$(function () {
 		$('.nav-tabs').find('li:first-child').addClass('active');
 		$('.tab-content').find('.tab-pane:first-child').addClass('active');
 	});
 </script>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('expand');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+    $('body').css('overflow','hidden');
+    $('body').css('position','fixed');
+    $('body').css('overflow','auto');
+
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+}
+</script>
+
+
+
 @stop

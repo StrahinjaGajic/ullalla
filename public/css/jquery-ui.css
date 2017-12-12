@@ -761,6 +761,7 @@ button.ui-button::-moz-focus-inner {
 .ui-slider-horizontal .ui-slider-range {
 	top: 0;
 	height: 100%;
+    background: #f26522;
 }
 .ui-slider-horizontal .ui-slider-range-min {
 	left: 0;
