@@ -149,6 +149,8 @@ return [
 
 
         'photos'                => 'Photos',
+        'photos_1'              => 'Photos',
+        'nickname_1'            => 'Nickname',
     ],
 
 ];

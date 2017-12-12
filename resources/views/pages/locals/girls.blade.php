@@ -24,8 +24,8 @@
                         <input class="effect-16" type="text" placeholder="" name="nickname_{{ $girl->id }}" value="{{ $girl->nickname }}">
                         <label>Nickname</label>
                         <span class="focus-border"></span>
-                        @if ($errors->has('nickname'))
-                            <span class="help-block">{{ $errors->first('nickname') }}</span>
+                        @if ($errors->has('nickname_'. $girl->id))
+                            <span class="help-block">{{ $errors->first('nickname_'. $girl->id ) }}</span>
                         @endif
                     </div>
                     <label>Photos</label>
@@ -45,6 +45,9 @@
                             </div>
                         </div>
                     </div>
+                    @if ($errors->has('photos_'. $girl->id))
+                        <span class="help-block">{{ $errors->first('photos_'. $girl->id ) }}</span>
+                    @endif
                 @endforeach
                 <button type="submit" class="btn btn-default">Save Changes</button>
                 {!! Form::close() !!}
@@ -63,6 +66,9 @@
                                 <div class="form-group">
                                     <label class="control-label">Nickname*</label>
                                     <input type="text" class="form-control" name="nickname" />
+                                    @if ($errors->has('nickname'))
+                                        <span class="help-block">{{ $errors->first('nickname') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <div class="image-preview-multiple">
@@ -70,6 +76,9 @@
                                         <div class="_list"></div>
                                     </div>
                                 </div>
+                                @if ($errors->has('photos'))
+                                    <span class="help-block">{{ $errors->first('newPhotos') }}</span>
+                                @endif
                             </div>
                         </section>
                         {!! Form::close() !!}

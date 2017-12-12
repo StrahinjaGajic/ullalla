@@ -218,9 +218,17 @@ class LocalController extends Controller
     {
         $local = Auth::guard('local')->user();
         foreach($local->girls as $girl){
+
+            $photos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
+            $reqPhotos = (int) substr($photos, -2, 1);
+            $request->merge(['photos_'. $girl->id => $reqPhotos]);
+            $this->validate($request, [
+                'nickname_'. $girl->id => 'required|min:4|max:20',
+                'photos_'. $girl->id => 'numeric|min:4',
+            ]);
             $nickname = 'nickname_'. $girl->id;
             $girl->nickname = $request->$nickname;
-            $girl->photos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
+            $girl->photos = $photos;
             $girl->save();
         }
         return redirect()->back()->with('success', 'Data successfully saved.');
@@ -229,7 +237,17 @@ class LocalController extends Controller
     public function postCreateGirls(Request $request)
     {
         $local = Auth::guard('local')->user();
-        $local->girls()->create(['nickname' => $request->nickname, 'photos' => storeAndGetUploadCareFiles(request('newPhotos')), 'local_id' => $local->id]);
+        $photos = storeAndGetUploadCareFiles(request('newPhotos'));
+        /*
+        $request->merge(['photos' => storeAndGetUploadCareFiles(request('photos'))]);
+        $request->merge(['photos' => substr($request->photos, -2, 1)]);
+        $request->merge(['photos' => (int) $request->photos]);
+        $this->validate($request, [
+            'nickname' => 'ruquired|min:4|max:20',
+            'photos' => 'numeric|min:4',
+        ]);
+        */
+        $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
         return redirect()->back()->with('success', 'Data successfully saved.');
     }
 }
