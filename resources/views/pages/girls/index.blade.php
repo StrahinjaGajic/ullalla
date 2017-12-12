@@ -31,9 +31,28 @@
 						<h2>Search Filter</h2>
 					</div>
 					<div class="left-sidebar">
+						<div class="shop-layout">
+							<div class="layout-title">
+								<h2>Location</h2>
+							</div>
+							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
+								<ul>
+									<li>
+										<label for="amount">Radius:</label>
+										<div class="location-inputs">
+											<input type="hidden" name="radius" value="{{ old('radius') }}">
+										</div>
+										<div id="radius-ranger" style="margin: 10px;"></div>
+										<div class="slider-value-wrapper">
+											<span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
 						<div class="shop-layout canton-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Canton</a>
 								
 							</div>
@@ -58,7 +77,7 @@
 
 						<div class="shop-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Price</a>
 							</div>
 							<div class="layout-list" style="{{ !request('price_from') && !request('price_to') ? 'display: none;' : '' }}">
@@ -81,7 +100,7 @@
 						</div>
 						<div class="shop-layout services-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Service</a>
 							</div>
 							<div class="layout-list" style="{{ !request('services') ? 'display: none;' : '' }}">
@@ -103,7 +122,7 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Type</a>
 							</div>
 							<div class="layout-list" style="{{ !request('type') ? 'display: none;' : '' }}">
@@ -126,7 +145,7 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Hair Color</a>
 							</div>
 							<div class="layout-list" style="{{ !request('hair_color') ? 'display: none;' : '' }}">
@@ -147,7 +166,7 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Breast Size</a>
 							</div>
 							<div class="layout-list" style="{{ !request('breast_size') ? 'display: none;' : '' }}">
@@ -168,7 +187,7 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Age</a>
 							</div>
 							<div class="layout-list" style="{{ !request('age') ? 'display: none;' : '' }}">
@@ -192,8 +211,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-                               <img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-                                <a>Escorting</a>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>Escorting</a>
 							</div>
 							<div class="layout-list" style="{{ !request('price_type') ? 'display: none;' : '' }}">
 								<ul>
@@ -233,7 +252,7 @@
 						</div>
 						<div class="shop-layout services-layout">
 							<div class="layout-title">
-							<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
 								<a>Languages</a>
 							</div>
 							<div class="layout-list" style="{{ !request('spoken_languages') ? 'display: none;' : '' }}">
@@ -244,7 +263,7 @@
 											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('spoken_languages'), request()->query() , $num, 'spoken_languages', $spokenLanguage), false)) }}">{{ $spokenLanguage->spoken_language_name }}
 												<span>({{ $spokenLanguage->users()->approved()->payed()->count() }})</span>
 											</a>
-											<input type="checkbox" name="spoken_languages[]" value="{{ $spokenLanguage->id }}" {{ request('spoken_languages') && in_array($spokenLanguage->id, request('spoken_languages')) ? 'checked' : '' }}/>
+											<input type="checkbox" name="spoken_languages[]" value="{{ $spokenLanguage->spoken_language_code }}" {{ request('spoken_languages') && in_array($spokenLanguage->spoken_language_code, request('spoken_languages')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
 										</label>
 										<?php $num++; ?>
@@ -291,6 +310,9 @@
 								</div>
 							</div>
 							<div class="tab-content">
+								<div class="filters-reset">
+									<a href="{{ url('girls') }}" class="btn btn-default">Reset Filters</a>
+								</div>
 								@if ($users->count())
 								<div id="shop-product" class="tab-pane active">
 									<div class="row">
@@ -403,6 +425,55 @@
 @section('perPageScripts')
 
 <script>
+	var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+	$('#radius-ranger').slider({
+		range: 'min',
+		min: 0,
+		max: 20,
+		value: initialRadius,
+		slide: function( event, ui ) {
+			$('.radius').text(ui.value);
+		},
+		change: function( event, ui ) {
+
+			var input = $('input[name="radius"]');
+			var $radius = input.val(ui.value);
+
+			var $url = getUrl('/get_radius');
+
+			var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query())  ? json_encode(request()->query()) : "{}" }}';
+
+			var requestQueryClearedJSON = requestQueryString
+			.replace(/&quot;/gi,"\"")
+			.replace(/\[/gi,"")
+			.replace(/\]/gi,"");
+
+			var requestQueryObj = JSON.parse(requestQueryClearedJSON);
+
+			delete requestQueryObj.radius;
+
+			var requestData = Object.assign({
+				radius: $radius.val()
+			}, requestQueryObj);
+
+			console.log(requestData);
+
+			$.ajax({
+				data: requestData,
+				url: $url,
+				dataType: 'json',
+				method: 'get',
+				success: function (data) {
+					window.location.href = data.url;
+					},
+					error: function (data) {
+					}
+				});
+		}
+	});
+</script>
+
+<script>
 	$( function() {
 		var slider = $( "#price-ranger" );
 		var initialPriceFrom = '{{ old('price_from') }}';
@@ -430,7 +501,6 @@
 				.replace(/\[/gi,"")
 				.replace(/\]/gi,"");
 
-				var requestQueryClearedJSON = JSON.stringify({});
 				var requestQueryObj = JSON.parse(requestQueryClearedJSON);
 
 				delete requestQueryObj.price_to;
@@ -465,6 +535,11 @@
 			var that = $(this);
 			that.closest('.shop-layout').find('.layout-list').toggle('fast');
 		});
+	});
+</script>
+<script>
+	$('.control__indicator').on('click', function () {
+		window.location.href = $(this).closest('label').find('a').attr('href');
 	});
 </script>
 @stop

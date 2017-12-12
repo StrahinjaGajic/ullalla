@@ -17,6 +17,9 @@
 		</div>
 		<div class="col-sm-10 profile-info">
 			<h3>Personal info</h3>
+			@if(Session::has('success'))
+				<div class="alert alert-success">{{ Session::get('success') }}</div>
+			@endif
 			{!! Form::model($user, ['url' => '@' . $user->username . '/working_time/store', 'method' => 'put']) !!}
 			<div class="row">
 				<div class="col-sm-12">

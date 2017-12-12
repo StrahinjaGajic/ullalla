@@ -16,7 +16,9 @@
 			{!! parseEditProfileMenu('services') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			
+			@if(Session::has('success'))
+					<div class="alert alert-success">{{ Session::get('success') }}</div>
+				@endif
 			{!! Form::model($user, ['url' => '@' . $user->username . '/services/store', 'method' => 'put']) !!}
 			<h3>Services Offered For:</h3>
 			<div class="row">

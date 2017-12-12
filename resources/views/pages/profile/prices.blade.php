@@ -19,6 +19,9 @@
         <div class="col-sm-10 profile-info">
             <div class="col-sm-12">
                 <h2>Prices</h2>
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
             </div>
             {!! Form::model($user, ['url' => '@' . $user->username . '/prices/store', 'method' => 'put']) !!}
             <div class="price_section">

@@ -13,41 +13,44 @@
 </div>
 
 <div class="container theme-cactus">
-  <div class="row">
-   <div class="col-sm-2 vertical-menu">
-    {!! parseEditProfileMenu('gallery') !!}
-</div>
-<div class="col-sm-10 profile-info">
-    {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
-    <h3>Gallery</h3>
     <div class="row">
-        <h1>Photos</h1>
-        <div class="form-group">
-            <div class="image-preview-multiple">
-                <input type="hidden" role="uploadcare-uploader" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                <div class="_list">
-                    @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
-                    <div class="_item">
-                        <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/250x200/' }}">
+        <div class="col-sm-2 vertical-menu">
+            {!! parseEditProfileMenu('gallery') !!}
+        </div>
+        <div class="col-sm-10 profile-info">
+            {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
+            <h3>Gallery</h3>
+            <div class="row">
+                <h1>Photos</h1>
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
+                <div class="form-group">
+                    <div class="image-preview-multiple">
+                        <input type="hidden" role="uploadcare-uploader" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                        <div class="_list">
+                            @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
+                            <div class="_item">
+                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/250x200/' }}">
+                            </div>
+                            @endfor
+                        </div>
                     </div>
-                    @endfor
+                </div>
+                <h1>Videos</h1>
+                <div class="form-group upload-video">
+                    <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                    <video id="video" width="320" height="240" loop style="display: block;"></video>
                 </div>
             </div>
-        </div>
-        <h1>Videos</h1>
-        <div class="form-group upload-video">
-            <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-            <video id="video" width="320" height="240" loop style="display: block;"></video>
+            <button type="submit" class="btn btn-default">Save Changes</button>
+            {!! Form::close() !!}
         </div>
     </div>
-    <button type="submit" class="btn btn-default">Save Changes</button>
-    {!! Form::close() !!}
-</div>
-</div>
-@stop
+    @stop
 
-@section('perPageScripts')
-<script>
+    @section('perPageScripts')
+    <script>
 
 ////////// 2. UPLOAD CARE ////////
 const widget = uploadcare.Widget('[role=uploadcare-uploader]')
@@ -79,7 +82,7 @@ function minDimensions(width, height) {
         if (imageInfo !== null) {
             console.log();
             if (imageInfo.width < width || imageInfo.height < height) {
-                throw new Error('dimensions');
+                throw new Error('minDimensions');
             }
         }
     };
@@ -109,35 +112,35 @@ function fileTypeLimit(types) {
 }
 
 $(function() {
-    // preview images initialization
-    $('.image-preview-multiple').each(function() {
-        installWidgetPreviewMultiple(
-            uploadcare.MultipleWidget($(this).children('input')),
-            $(this).children('._list')
-            );
-    });
+// preview images initialization
+$('.image-preview-multiple').each(function() {
+    installWidgetPreviewMultiple(
+        uploadcare.MultipleWidget($(this).children('input')),
+        $(this).children('._list')
+        );
+});
 
-    $('[role=uploadcare-uploader]').each(function() {
-        var widget = uploadcare.Widget(this);
-        widget.validators.push(minDimensions(490, 560));
-    });
+$('[role=uploadcare-uploader]').each(function() {
+    var widget = uploadcare.Widget(this);
+    widget.validators.push(minDimensions(490, 560));
+});
 
-    var video = document.getElementById('video');
-    var source = document.createElement('source');
-    var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
-    widget.value('{{ $user->videos }}')
-    widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));    
-    widget.validators.push(maxFileSize(20000000));
-    // preview single video
-    widget.onUploadComplete(function (fileInfo) {
-        source.setAttribute('src', fileInfo.cdnUrl);
-        video.appendChild(source);
-        // video.play();
-    });
-    // remove video element
-    $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
-        $('.upload-video').find('#video').remove();
-    });
+var video = document.getElementById('video');
+var source = document.createElement('source');
+var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
+widget.value('{{ $user->videos }}')
+widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));    
+widget.validators.push(maxFileSize(20000000));
+// preview single video
+widget.onUploadComplete(function (fileInfo) {
+    source.setAttribute('src', fileInfo.cdnUrl);
+    video.appendChild(source);
+// video.play();
+});
+// remove video element
+$('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
+    $('.upload-video').find('#video').remove();
+});
 });
 
 </script>

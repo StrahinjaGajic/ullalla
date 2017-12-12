@@ -467,6 +467,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+
         // define languages input
         $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });
 
@@ -474,6 +475,7 @@ class ProfileController extends Controller
         $levels = array_map(function($languageLevel) {
             return ['language_level' => $languageLevel];
         }, $spokenLanguages);
+
 
         // get combined data
         $syncData = array_combine(array_keys($spokenLanguages), $levels);

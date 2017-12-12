@@ -63,13 +63,14 @@
 								<input type="text" class="form-control" name="weight" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">date</label>
-								<select name="ancestry" class="form-control">
-									@foreach(getTypes() as $type)
-									<option value="{{ $type }}">{{ $type }}</option>
-									@endforeach
-								</select>
-							</div>
+									<label class="control-label">Type</label>
+									<select name="ancestry" class="form-control">
+										<option value=""></option>
+										@foreach(getTypes() as $type)
+											<option value="{{ $type }}">{{ ucfirst($type) }}</option>
+										@endforeach
+									</select>
+								</div>
 							<div class="form-group">
 								<label class="control-label">Figure</label>
 								<select name="figure" class="form-control">
@@ -537,12 +538,12 @@
 								@foreach($spokenLanguages->take(7) as $language)
 								<tr>
 									<td>
-										<img src="{{ asset('flags/4x3/' . $language->id . '.svg') }}" alt="" height="20" width="30">
+										<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
 										{{ $language->spoken_language_name }}
 									</td>
 									<td>
 										<div class="slider"></div>
-										<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->id }}]" value="">
+										<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->spoken_language_code }}]" value="">
 									</td>
 								</tr>
 								@endforeach
@@ -551,12 +552,12 @@
 								@foreach($spokenLanguages->splice(7) as $language)
 								<tr>
 									<td>
-										<img src="{{ asset('flags/4x3/' . $language->id . '.svg') }}" alt="" height="20" width="30">
+										<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
 										{{ $language->spoken_language_name }}
 									</td>
 									<td>
 										<div class="slider"></div>
-										<input type="hidden" name="spoken_language[{{ $language->id }}]" value="0">
+										<input type="hidden" name="spoken_language[{{ $language->spoken_language_code }}]" value="0">
 									</td>
 								</tr>
 								@endforeach
@@ -655,7 +656,6 @@
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('js/profileValidation.js') }}"></script>
-<script src="{{ asset('js/billing.js') }}"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -677,14 +677,6 @@ $(window).on('load',function(){
 	});
 });
 
-// if user changes the value of input field (in some cases can be useful)
-// $(function () {
-// 	$('input[name="spoken_language"]').change(function () {
-// 		var value = this.value.substring(1);
-// 		console.log(value);
-// 		$(this).siblings('.slider').slider('value', parseInt(value));
-// 	});
-// });
 
 $(function () {
 	$('.show-more a').on('click', function(e){
@@ -703,8 +695,6 @@ $('#create_profile_modal').modal({
 });
 // make modal content scrolablle
 $('#profileForm').find('.content').addClass('is-scrollable');
-// initially set default value to empty
-$('#date_of_birth').val('');
 // get new start and end year
 var start = new Date();
 start.setFullYear(start.getFullYear());
@@ -764,7 +754,7 @@ function minDimensions(width, height) {
 		if (imageInfo !== null) {
 			console.log();
 			if (imageInfo.width < width || imageInfo.height < height) {
-				throw new Error('dimensions');
+				throw new Error('minDimensions');
 			}
 		}
 	};
@@ -821,27 +811,6 @@ $(function() {
 	$('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
 		$('.upload-video').find('#video').remove();
 	});
-
-	// 	<input type="hidden" role="uploadcare-uploader" name="video" data-multiple="true"/>
-	// <div id="preview"></div>
-	// preview multiple videos
-	// var preview = document.getElementById('preview');
-	// var widget = uploadcare.MultipleWidget('[role=uploadcare-uploader]');
-	// widget.onDialogOpen(function (dialog) {
-	// 	dialog.fileColl.onAnyDone(function (file) {
-	// 		file.done(function (fileInfo) {
-	// 			var video = document.createElement('video');
-	// 			video.width = 320;
-	// 			video.height = 240;
-	// 			video.loop = true;
-	// 			var source = document.createElement('source');
-	// 			source.setAttribute('src', fileInfo.cdnUrl);
-	// 			video.appendChild(source);
-	// 			preview.appendChild(video);
- //     			// video.play();
- //     		})
-	// 	})
-	// })
 });
 </script>
 <script>
@@ -1094,5 +1063,17 @@ $(function () {
 		e.preventDefault();	
 	});
 </script>
+
+<!-- Validation variables -->
+	<script type="text/javascript">
+		var requiredField = '{{ __('validation.required_field') }}';
+		var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
+		var olderThan = '{{ __('validation.older_than_18') }}';
+		var stringLength = '{{ __('validation.string_length') }}';
+		var numericError = '{{ __('validation.numeric_error') }}';
+		var invalidUrl = '{{ __('validation.url_invalid') }}';
+		var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
+		var maxFiles = '{{ __('validation.max_files') }}';
+	</script>
 @stop
 
