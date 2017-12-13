@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         'service_options',
         'spoken_languages',
         'local_types',
+        'local_packages',
 	];
 
     /**
@@ -41,5 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceOptionTableSeeder::class);
         $this->call(SpokenLanguageTableSeeder::class);
         $this->call(LocalTypeSeeder::class);
+        $this->call(LocalPackageSeeder::class);
     }
 }

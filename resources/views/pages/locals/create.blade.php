@@ -251,6 +251,52 @@
                                 </div>
                             </div>
                         </section>
+                        <h2>Packages</h2>
+                        <section data-step="5">
+                            <div class="col-xs-12">
+                                <div class="form-group club-info">
+                                    <div class="row">
+                                        <div class="col-xs-12 default-packages-section" id="default-packages-section">
+                                            <h3>Default Packages</h3>
+                                            <div class="has-error">
+                                                <div id="alertPackageMessage" class="help-block"></div>
+                                            </div>
+                                            <table class="table packages-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Duration</th>
+                                                    <th>Price</th>
+                                                    <th>Activation Date</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php $counter = 1; ?>
+                                                @foreach ($packages as $package)
+                                                    <tr>
+                                                        <td>{{ $package->package_name }}</td>
+                                                        <td>{{ $package->package_duration }}</td>
+                                                        <td>{{ $package->package_price }}</td>
+                                                        <td>
+                                                            <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+                                                        </td>
+                                                        <td>
+                                                            <label class="control control--checkbox">
+                                                                <input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+                                                                <div class="control__indicator"></div>
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $counter++; ?>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                         {!! Form::close() !!}
                     </div>
                 </div>

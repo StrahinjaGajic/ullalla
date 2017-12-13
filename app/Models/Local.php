@@ -68,4 +68,9 @@ class Local extends Authenticatable
     {
         return $this->hasMany('App\Models\LocalGirl');
     }
+
+    public function package()
+    {
+        return $this->belongsTo('App\Models\LocalPackages');
+    }
 }

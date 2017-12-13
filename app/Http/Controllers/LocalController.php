@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\Models\LocalType;
+use App\Models\LocalPackage;
 
 class LocalController extends Controller
 {
@@ -28,8 +29,9 @@ class LocalController extends Controller
     public function getCreate()
     {
         $local = Auth::guard('local')->user();
+        $packages = LocalPackage::all();
         $types = LocalType::all();
-        return view('pages.locals.create', compact('local', 'types'));
+        return view('pages.locals.create', compact('local', 'types', 'packages'));
     }
 
     public function postCreate(Request $request)
