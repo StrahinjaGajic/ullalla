@@ -37,9 +37,11 @@ class CreateLocalsTable extends Migration
             $table->integer('club_outdoor_id')->unsigned()->nullable();
             $table->integer('local_type_id')->unsigned()->nullable();
             $table->integer('package1_id')->unsigned()->nullable();
+            $table->integer('is_active_d_package')->nullable();
             $table->string('package1_duration');
             $table->timestamp('package1_activation_date')->nullable();
             $table->timestamp('package1_expiry_date')->nullable();
+            $table->string('stripe_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

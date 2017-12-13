@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use Carbon\Carbon;
 use App\Models\LocalType;
 use App\Models\LocalPackage;
+use Stripe\{Charge, Customer};
 
 class LocalController extends Controller
 {
@@ -36,10 +38,8 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
+        /*
         $this->validate($request, [
-            'username' => 'required|min:4|max:20',
-            'email' => 'required|email|max:40',
-            're-password' => 'required_with:password|same:password',
             'name' => 'required|max:25',
             'street' => 'required|max:40',
             'city' => 'required|max:30',
@@ -47,7 +47,7 @@ class LocalController extends Controller
             'web' => 'required',
             'phone' => 'required|max:20',
         ]);
-
+*/
         // get working time
         $workingTime = getWorkingTime(
             $request->days,
@@ -58,15 +58,19 @@ class LocalController extends Controller
             $request->time_to_m
         );
 
+        $defaultPackageInput = request('ullalla_package')[0];
+        $defaultPackage = LocalPackage::findOrFail($defaultPackageInput);
+        $defaultPackageActivationDateInput = request('default_package_activation_date')[$defaultPackage->id];
+        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
+        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+        if(request('package_duration')[$defaultPackage->id] == 'month'){
+            $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+        }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
+            $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+        }
+
         try {
             $user = Auth::guard('local')->user();
-            $user->username = request('username');
-            $user->email = request('email');
-            if ($request->password) {
-                $request->merge(['password' => bcrypt($request->password)]);
-            } else {
-                $request->merge(['password' => $user->password]);
-            }
             $user->name = request('name');
             $user->phone = request('phone');
             $user->web = request('web');
@@ -83,14 +87,31 @@ class LocalController extends Controller
             $user->club_wellness_id = setClubInfo('wellness', request('wellness'), request('wellness-free'));
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
             $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));
+            $user->package1_id = $defaultPackage->id;
+            $user->is_active_d_package = 1;
+            $user->package1_duration = request('package_duration')[$defaultPackage->id];
+            $user->package1_activation_date = $defaultPackageActivationDate;
+            $user->package1_expiry_date = $defaultPackageExpiryDate;
             $user->save();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ]);
         }
-        Session::flash('success', 'Profile Successfullt Created');
-        return redirect('/');
+        try {
+            // create a customer
+            $customer = Customer::create([
+                'email' => request('stripeEmail'),
+                'source' => request('stripeToken'),
+            ]);
+            $user->stripe_id = $customer->id;
+            $user->save();
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => $e->getMessage()
+            ], 422);
+        }
+        Session::flash('account_created', __('messages.account_created_but_not_approved'));
     }
 
     public function getContact()
@@ -102,6 +123,9 @@ class LocalController extends Controller
     public function postContact(Request $request)
     {
         $this->validate($request, [
+            'username' => 'required|min:4|max:20',
+            'email' => 'required|email|max:40',
+            're-password' => 'required_with:password|same:password',
             'name' => 'required|max:25',
             'street' => 'required|max:40',
             'city' => 'required|max:30',
@@ -111,6 +135,13 @@ class LocalController extends Controller
         ]);
 
         $local = Auth::guard('local')->user();
+        $local->username = request('username');
+        $local->email = request('email');
+        if ($request->password) {
+            $request->merge(['password' => bcrypt($request->password)]);
+        } else {
+            $request->merge(['password' => $local->password]);
+        }
         $local->username = $request->username;
         $local->street = $request->street;
         $local->city = $request->city;
@@ -240,15 +271,13 @@ class LocalController extends Controller
     {
         $local = Auth::guard('local')->user();
         $photos = storeAndGetUploadCareFiles(request('newPhotos'));
-        /*
-        $request->merge(['photos' => storeAndGetUploadCareFiles(request('photos'))]);
-        $request->merge(['photos' => substr($request->photos, -2, 1)]);
-        $request->merge(['photos' => (int) $request->photos]);
+        $request->merge(['newPhotos' => storeAndGetUploadCareFiles(request('newPhotos'))]);
+        $request->merge(['newPhotos' => substr($request->photos, -2, 1)]);
+        $request->merge(['newPhotos' => (int) $request->photos]);
         $this->validate($request, [
-            'nickname' => 'ruquired|min:4|max:20',
-            'photos' => 'numeric|min:4',
+            'nickname' => 'required|min:4|max:20',
+            'newPhotos' => 'numeric|min:4',
         ]);
-        */
         $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
         return redirect()->back()->with('success', 'Data successfully saved.');
     }

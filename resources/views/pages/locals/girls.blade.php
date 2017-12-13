@@ -76,7 +76,7 @@
                                         <div class="_list"></div>
                                     </div>
                                 </div>
-                                @if ($errors->has('photos'))
+                                @if ($errors->has('newPhotos'))
                                     <span class="help-block">{{ $errors->first('newPhotos') }}</span>
                                 @endif
                             </div>
@@ -89,7 +89,11 @@
     </div>
 @stop
 @section('perPageScripts')
-
+    @if($errors->has('nickname') || $errors->has('newPhotos'))
+        <script>
+            $('#create_profile_modal').modal('show');
+        </script>
+    @endif
     <script src="{{ asset('js/formValidation.min.js') }}"></script>
     <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
@@ -232,5 +236,15 @@
             });
         });
 
+    </script>
+    <script type="text/javascript">
+        var requiredField = '{{ __('validation.required_field') }}';
+        var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
+        var olderThan = '{{ __('validation.older_than_18') }}';
+        var stringLength = '{{ __('validation.string_length') }}';
+        var numericError = '{{ __('validation.numeric_error') }}';
+        var invalidUrl = '{{ __('validation.url_invalid') }}';
+        var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
+        var maxFiles = '{{ __('validation.max_files') }}';
     </script>
 @stop

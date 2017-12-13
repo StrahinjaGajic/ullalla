@@ -275,9 +275,14 @@
                                                 <?php $counter = 1; ?>
                                                 @foreach ($packages as $package)
                                                     <tr>
-                                                        <td>{{ $package->package_name }}</td>
-                                                        <td>{{ $package->package_duration }}</td>
-                                                        <td>{{ $package->package_price }}</td>
+                                                        <td>{{ $package->name }}</td>
+                                                        <td>
+                                                            <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+                                                                <option value="month">Month</option>
+                                                                <option value="year">Year</option>
+                                                            </select>
+                                                        </td>
+                                                        <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
                                                         <td>
                                                             <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
                                                         </td>
@@ -297,6 +302,8 @@
                                 </div>
                             </div>
                         </section>
+                        <input type="hidden" name="stripeToken" id="stripeToken">
+                        <input type="hidden" name="stripeEmail" id="stripeEmail">
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -306,6 +313,8 @@
     @stop
 
     @section('perPageScripts')
+
+
             <!-- Form Validation -->
     <script src="{{ asset('js/formValidation.min.js') }}"></script>
     <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
@@ -316,6 +325,18 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script>
+
+
+        function changePrice(id, month, year){
+            var price = $('#selectDur_' + id + ' :selected').val();
+            if(price == 'month'){
+                price = month;
+            }else if(price == 'year'){
+                price = year;
+            }
+            $('#price_' + id).text(price);
+        }
+
         ////////// 1. MODAL, DATERANGE PICKER, ////////
         // show modal on page load
         $(window).on('load',function(){
@@ -562,6 +583,53 @@
             document.getElementById('entrance-free').checked = false;
             document.getElementById('entrance-cost').checked = false;
         }
+    </script>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+        let stripe = StripeCheckout.configure({
+            key: '{{ config('services.stripe.key') }}',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function (token) {
+                var stripeEmail = $('#stripeEmail');
+                var stripeToken = $('#stripeToken');
+                stripeEmail.val(token.email);
+                stripeToken.val(token.id);
+                // submit the form
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                console.log(url);
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+        $('#profileForm').on('submit', function (e) {
+            stripe.open({
+                name: 'Ullalla',
+                description: '{{ $local->email }}',
+            });
+            e.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var requiredField = '{{ __('validation.required_field') }}';
+        var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
+        var olderThan = '{{ __('validation.older_than_18') }}';
+        var stringLength = '{{ __('validation.string_length') }}';
+        var numericError = '{{ __('validation.numeric_error') }}';
+        var invalidUrl = '{{ __('validation.url_invalid') }}';
+        var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
+        var maxFiles = '{{ __('validation.max_files') }}';
     </script>
 @stop
 
