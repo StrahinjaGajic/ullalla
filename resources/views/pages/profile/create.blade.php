@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Profile')
+@section('title', __('buttons.create_profile'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
@@ -13,15 +13,15 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-					<h2>Bio</h2>
+					<h2>{{ __('buttons.bio') }}</h2>
 					<section data-step="0">
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">First Name*</label>
+								<label class="control-label">{{ __('fields.first_name') }}*</label>
 								<input type="text" class="form-control" name="first_name" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">Last Name*</label>
+								<label class="control-label">{{ __('fields.last_name') }}*</label>
 								<input type="text" class="form-control" name="last_name" />
 							</div>
 							<div class="form-group">

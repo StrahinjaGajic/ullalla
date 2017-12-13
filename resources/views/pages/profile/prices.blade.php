@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Prices')
+@section('title', __('headings.prices'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -18,7 +18,7 @@
         </div>
         <div class="col-sm-10 profile-info">
             <div class="col-sm-12">
-                <h2>Prices</h2>
+                <h2>{{ __('headings.prices') }}</h2>
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
@@ -27,14 +27,14 @@
             <div class="price_section">
                 <div class="col-xs-3">
                     <div class="form-group">
-                        <label>Duration</label>
+                        <label>{{ __('headings.duration') }}</label>
                         <input type="text" class="form-control" name="service_duration" style="margin-top: 0px;" />
                         <div class="help-block"></div>
                     </div>
                 </div>
                 <div class="col-xs-2">
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{{ __('fields.unit') }}</label>
                         <select name="service_price_unit" class="form-control">
                             @foreach(getUnits() as $unit)
                             <option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
@@ -45,14 +45,14 @@
                 </div>
                 <div class="col-xs-2">
                     <div class="form-group">
-                        <label>Price</label>
+                        <label>{{ __('headings.price') }}</label>
                         <input type="text" class="form-control" name="service_price" style="margin-top: 0px;" />
                         <div class="help-block"></div>
                     </div>
                 </div>
                 <div class="col-xs-2">
                     <div class="form-group">
-                        <label>Currency</label>
+                        <label>{{ __('fields.currency') }}</label>
                         <select name="service_price_currency" class="form-control">
                             @foreach(getCurrencies() as $currency)
                             <option value="{{ $currency }}">{{ strtoupper($currency) }}</option>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-xs-2">
                     <div class="form-group">
-                        <label>Type</label>
+                        <label>{{ __('fields.type') }}</label>
                         <select name="price_type" id="price_type" class="form-control">
                             @foreach(getPriceTypes() as $priceType)
                             <option value="{{ $priceType }}">{{ ucfirst($priceType) }}</option>
@@ -75,7 +75,7 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="add-new-price btn btn-default">Add New Price</button>
+                        <button type="submit" class="add-new-price btn btn-default">{{ __('buttons.add_new_price') }}</button>
                     </div>
                 </div>
             </div>
@@ -84,10 +84,10 @@
                 <table class="{{ $user->prices->count() == 0 ? 'is-hidden' : '' }} table">
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Duration</th>
-                            <th>Price</th>
-                            <th>Remove</th>
+                            <th>{{ __('fields.type') }}</th>
+                            <th>{{ __('headings.duration') }}</th>
+                            <th>{{ __('headings.price') }}</th>
+                            <th>{{ __('headings.remove') }}</th>
                         </tr>
                     </thead>
                     <tbody id="prices_body">
@@ -97,7 +97,7 @@
                             <td>{{ $price->service_duration . ' ' . $price->service_price_unit }}</td>
                             <td>{{ $price->service_price . ' ' . strtoupper($price->service_price_currency) }}</td>
                             <td>
-                                <a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price" onclick="return confirm('Are you sure?');">
+                                <a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price" onclick="return confirm('{{ __('global.are_you_sure') }}');">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
@@ -168,7 +168,7 @@
                     href: location.protocol + '//' + location.host + '/ajax/delete_price/' + data.newPriceID,
                     class: 'text-danger delete-price'
                 }).on('click', function() {
-                    return confirm('Are You Sure?');
+                    return confirm('{{ __('global.are_you_sure') }}');
                 }).append(glyphiconSpan).appendTo(td3);
 
                 row.append(td, td1, td2, td3).appendTo(tBody);
