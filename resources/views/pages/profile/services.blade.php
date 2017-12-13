@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Services')
+@section('title', __('headings.services'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -17,10 +17,10 @@
 		</div>
 		<div class="col-sm-10 profile-info">
 			@if(Session::has('success'))
-					<div class="alert alert-success">{{ Session::get('success') }}</div>
-				@endif
+				<div class="alert alert-success">{{ Session::get('success') }}</div>
+			@endif
 			{!! Form::model($user, ['url' => '@' . $user->username . '/services/store', 'method' => 'put']) !!}
-			<h3>Services Offered For:</h3>
+			<h3>{{ __('headings.service_offered_for') }}:</h3>
 			<div class="row">
 				<div class="col-xs-12">
 					@foreach($serviceOptions as $serviceOption)
@@ -36,7 +36,7 @@
 					@endforeach
 				</div>
 			</div>
-			<h3>Service List</h3>
+			<h3>{{ __('headings.service_list') }}</h3>
 			<div class="row">
 				@foreach ($services->chunk(13) as $chunkedServices)
 				<div class="col-sm-4">
@@ -55,8 +55,7 @@
 				</div>
 				@endforeach
 			</div>
-			<button type="submit" class="btn btn-default">Save Changes</button>
-			
+			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			{!! Form::close() !!}
 		</div>
 	</div>

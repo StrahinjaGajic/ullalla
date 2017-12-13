@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Languages')
+@section('title', __('headings.languages'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -16,7 +16,7 @@
 			{!! parseEditProfileMenu('languages') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			<h3>Languages</h3>
+			<h3>{{ __('headings.languages') }}</h3>
 			<div class="row">
 				@if(session()->has('success'))
 					<div class="alert alert-success">
@@ -27,8 +27,8 @@
 				<table class="table language-table">
 					<thead>
 						<tr>
-							<th>Language</th>
-							<th>Level</th>
+							<th>{{ __('headings.language') }}</th>
+							<th>{{ __('headings.level') }}</th>
 						</tr>
 					</thead>
 					<tbody class="language-list">
@@ -76,9 +76,9 @@
 					</tbody>
 				</table>
 				<div class="show-more text-center">
-					<a href="#" class="btn btn-default show-more">Show More</a>
+					<a href="#" class="btn btn-default show-more">{{ __('buttons.show_more') }}</a>
 				</div>
-                <button type="submit" class="btn btn-default">Save Changes</button>
+                <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 				{!! Form::close() !!}
 			</div>
 		</div>
@@ -108,7 +108,7 @@
 		$('.show-more a').on('click', function(e){
 			var that = $(this);
 			e.preventDefault();
-			that.text(that.text() == 'Show More' ? 'Show Less' : 'Show More');
+			that.text(that.text() == '{{ __('buttons.show_more') }}' ? '{{ __('buttons.show_less') }}' : '{{ __('buttons.show_more') }}');
 			$('table.language-table').find('.language-list:last-child').toggle();
 		});
 	});

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Working Time')
+@section('title', __('headings.working_time'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -16,7 +16,7 @@
 			{!! parseEditProfileMenu('working_time') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			<h3>Personal info</h3>
+			<h3>{{ __('headings.working_time') }}</h3>
 			@if(Session::has('success'))
 				<div class="alert alert-success">{{ Session::get('success') }}</div>
 			@endif
@@ -29,11 +29,11 @@
 					?>
 					<div class="form-group">
 						<div id="available_24_7">
-							<label class="control control--checkbox"><a>Available 24/7</a>
+							<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
 								<input type="checkbox" name="available_24_7" {{ stringHasString('Available 24/7', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
 							</label>
-							<label class="control control--checkbox {{ !stringHasString('Available 24/7', $workingTime) ? 'working-times-disabled' : '' }}"><a>Show As Night Escort</a>
+							<label class="control control--checkbox {{ !stringHasString('Available 24/7', $workingTime) ? 'working-times-disabled' : '' }}"><a>{{ __('fields.show_as_night_escort') }}</a>
 								<input type="checkbox" name="available_24_7_night_escort" value="1" {{ !stringHasString('Available 24/7', $workingTime) ? 'disabled' : '' }} {{ stringHasString('&', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
 							</label>
@@ -42,13 +42,13 @@
 							<thead>
 								<tr>
 									<th>
-										<label class="control control--checkbox"><a>Mark All</a>
+										<label class="control control--checkbox"><a>{{ __('fields.mark_all') }}</a>
 											<input type="checkbox" id="select_all_days" {{ count($workingTime) == 7 ? 'checked' : '' }}>
 											<div class="control__indicator"></div>
 										</label>
 									</th>
-									<th>From</th>
-									<th>To</th>
+									<th>{{ __('headings.from') }}</th>
+									<th>{{ __('headings.to') }}</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -91,7 +91,7 @@
 										<span>min</span>
 									</td>
 									<td>
-										<label class="control control--checkbox"><a>Night Escort</a>
+										<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>
 											<input type="checkbox" name="night_escorts[{{ $counter }}]" value="{{ $counter }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))) ? '' : 'disabled' }} {{ ($dbDayOfTheWeek == $dayOfTheWeek) && stringHasString('&', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1]) ? 'checked' : '' }}>
 											<div class="control__indicator"></div>
 										</label>
@@ -101,7 +101,7 @@
 								@endforeach
 							</tbody>
 						</table>
-						<button type="submit" class="btn btn-default">Save Changes</button>
+						<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 					</div>
 				</div>
 			</div>

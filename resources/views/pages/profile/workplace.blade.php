@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Workplace')
+@section('title', __('headings.workplace'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-sm-10 profile-info">
 			{!! Form::model($user, ['url' => '@' . $user->username . '/workplace/store', 'method' => 'put']) !!}
-			<h3>Workplace</h3>
+			<h3>{{ __('headings.workplace') }}</h3>
 			@if(Session::has('success'))
 			<div class="alert alert-success">{{ Session::get('success') }}</div>
 			@endif
@@ -26,7 +26,7 @@
 				<div class="col-sm-4">
 					<div class="region">
 						<select class="input-select" id="Canton" name="canton">
-							<option value="">Canton</option>
+							<option value="">{{ __('fields.canton') }}</option>
 							@foreach($cantons as $canton)
 							<option value="{{ $canton->id }}" {{ getSelectedOption($user->canton_id, $canton->id) }}>{{ $canton->canton_name }}</option>
 							@endforeach
@@ -36,33 +36,33 @@
 				<div class="col-sm-4">
 					<div class="col-3 input-effect">
 						<input class="effect-16" type="text" placeholder="" name="city" value="{{ $user->city }}">
-						<label>City</label>
+						<label>{{ __('fields.city') }}</label>
 						<span class="focus-border"></span>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="col-3 input-effect">
 						<input class="effect-16" type="text" placeholder="" name="zip_code" value="{{ $user->zip_code }}">
-						<label>Zip Code</label>
+						<label>{{ __('fields.zip_code') }}</label>
 						<span class="focus-border"></span>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="col-3 input-effect">
 						<input class="effect-16" type="text" placeholder="" name="address" value="{{ $user->address }}">
-						<label>Address</label>
+						<label>{{ __('fields.address') }}</label>
 						<span class="focus-border"></span>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="col-3 input-effect">
 						<input class="effect-16" type="text" placeholder="" name="club_name" value="{{ $user->club_name }}">
-						<label>Club Name</label>
+						<label>{{ __('fields.club_name') }}</label>
 						<span class="focus-border"></span>
 					</div>
 				</div>
 			</div>
-			<h3>Available For:</h3>
+			<h3>{{ __('headings.available_for') }}:</h3>
 			<div class="row">
 				<div class="col-xs-6">
 					<div class="form-group">
@@ -73,7 +73,7 @@
 							value="1" 
 							id="incall_availability" 
 							{{ $user->incall_type ? 'checked' : '' }}>
-							<a>Incall</a>
+							<a>{{ __('fields.incall') }}</a>
 							<div class="control__indicator"></div>
 						</label>
 						<div class="incall-options" style="{{ !$user->incall_type ? 'display: none;' : '' }}">
@@ -106,7 +106,7 @@
 							value="1" 
 							id="outcall_availability"
 							{{ $user->outcall_type ? 'checked' : '' }}>
-							<a>Outcall</a>
+							<a>{{ __('fields.outcall') }}</a>
 							<div class="control__indicator"></div>
 						</label>
 						<div class="outcall-options" style="{{ !$user->outcall_type ? 'display: none;' : '' }}">
@@ -129,7 +129,7 @@
 					</div>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-default">Save Changes</button>
+			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			{!! Form::close() !!}
 		</div>
 	</div>

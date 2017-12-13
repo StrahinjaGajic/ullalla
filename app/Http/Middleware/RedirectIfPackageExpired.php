@@ -30,7 +30,7 @@ class RedirectIfPackageExpired
             $user->is_active_d_package = 0;
             $user->save();
             return redirect()->action('ProfileController@getPackages', ['username' => $user->username])
-                            ->with('expired_package_info', 'Please upgrade your account.');
+                            ->with('expired_package_info', __('messages.error_default_package_expired'));
         }
 
         return $next($request);
