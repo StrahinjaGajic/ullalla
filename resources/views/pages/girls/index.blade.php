@@ -31,9 +31,9 @@
 						<h2>{{ __('headings.search_filters') }}</h2>
 					</div>
 					<div class="left-sidebar">
-						<div class="shop-layout">
-							<div class="layout-title">
-								<h2>{{ __('fields.location') }}</h2>
+						<div class="shop-layout headerDropdown">
+							<div class="layout-title toggle_arrow">
+								<a>{{ __('fields.location') }} <i class="fa fa-caret-right"></i></a>
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
@@ -56,10 +56,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout canton-layout">
+						<div class="shop-layout canton-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.canton') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.canton') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('canton') ? 'display: none;' : '' }}">
 								<ul>
@@ -80,10 +81,11 @@
 							</div>
 						</div>
 
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('headings.price') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('headings.price') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('price_from') && !request('price_to') ? 'display: none;' : '' }}">
 								<ul>
@@ -103,10 +105,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout services-layout">
+						<div class="shop-layout services-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.service') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.service') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('services') ? 'display: none;' : '' }}">
 								<ul>
@@ -125,10 +128,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.type') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.type') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('type') ? 'display: none;' : '' }}">
 								<ul>
@@ -148,10 +152,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.hair_color') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.hair_color') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('hair_color') ? 'display: none;' : '' }}">
 								<ul>
@@ -169,10 +174,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.breast_size') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.breast_size') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('breast_size') ? 'display: none;' : '' }}">
 								<ul>
@@ -190,10 +196,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.age') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.age') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('age') ? 'display: none;' : '' }}">
 								<ul>
@@ -214,10 +221,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout">
+						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('fields.incall_outcall') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.incall_outcall') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('price_type') ? 'display: none;' : '' }}">
 								<ul>
@@ -241,8 +249,8 @@
 										} else {
 											$completeQueryString = array_merge($requestQuery, $priceTypeQueryString);
 										}
-
 										@endphp
+
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', $completeQueryString, false)) }}">{{ ucfirst($priceType) }}
 												<span>({{ \App\Models\User::approved()->payed()->whereNotNull($priceType . '_type')->count() }})</span>
@@ -255,10 +263,11 @@
 								</ul>
 							</div>
 						</div>
-						<div class="shop-layout services-layout">
+						<div class="shop-layout services-layout headerDropdown">
 							<div class="layout-title">
-								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
-								<a>{{ __('headings.language') }}</a>
+								<div class="layout-title toggle_arrow">
+									<a>{{ __('headings.language') }} <i class="fa fa-caret-right"></i></a>
+								</div>
 							</div>
 							<div class="layout-list" style="{{ !request('spoken_languages') ? 'display: none;' : '' }}">
 								<ul>
@@ -298,7 +307,7 @@
 								<div class="toolbar">
 									<div class="sorter">
 										<div class="sort-by">
-											<label class="sort-none">Sort By</label>
+											<label class="sort-none">{{ __('global.sort_by') }}</label>
 											<select name="order_by" onchange="location=this.value;"">
 												@foreach(getOrderBy() as $key => $order)
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
@@ -541,16 +550,15 @@
 </script>
 <!-- Filters -->
 <script>
-	$(function () {
-		$('.layout-title').on('click', function() {
-			var that = $(this);
-			that.closest('.shop-layout').find('.layout-list').toggle('fast');
-		});
+	$('.control__indicator').on('click', function () {
+		window.location.href = $(this).closest('label').find('a').attr('href');
 	});
 </script>
 <script>
-	$('.control__indicator').on('click', function () {
-		window.location.href = $(this).closest('label').find('a').attr('href');
+	$(".toggle_arrow").on("click", function() {
+		var that = $(this);
+		that.closest('.shop-layout').find('.layout-list').toggle('fast');
+		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
 	});
 </script>
 @stop
