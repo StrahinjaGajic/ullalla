@@ -824,6 +824,7 @@ input:focus {
     margin-bottom: 15px;
     cursor: pointer;
     font-weight: 500;
+    line-height: 2;
 }
 
 .control input {
@@ -1097,6 +1098,118 @@ h3 {
     color: #4a6e78 !important;
     margin-top: 20px;
     width: 75%;
+}
+
+
+.choice{
+    margin-bottom: 40px;
+}
+
+
+.uploadcare--menu__items {
+    background: #222;
+}
+
+.uploadcare--dialog__panel {
+    background: #222;
+}
+
+.uploadcare--panel__content{
+    background: #222;
+    color: white;
+    border: 1px solid #eee;
+   
+}
+
+
+.uploadcare--panel__footer {
+    background: #222;
+    color: white;
+    border-top: 1px solid #eee;
+}
+
+.uploadcare--panel_multiple .uploadcare--tab_name_preview .uploadcare--tab__footer {
+    border-top: 1px solid #eee;  
+}
+
+.uploadcare--panel_multiple .uploadcare--tab_name_preview .uploadcare--tab__footer:before {
+    content: none;
+}
+
+.uploadcare--dialog__panel .uploadcare--menu, .uploadcare--dialog__panel .uploadcare--menu__item {
+    background: #222;
+    border: 1px solid #eee;
+    color: white;
+}
+
+.uploadcare--dialog__panel .uploadcare--menu, .uploadcare--dialog__panel .uploadcare--menu__item:hover {
+    background: #f26522;
+    color: white;
+}
+
+.uploadcare--button_primary {
+    background: #f26522;
+    color: white;
+    border: none;
+}
+
+.uploadcare--button_primary:hover {
+    background: #f26522;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.uploadcare--dialog__close {
+    color: #f26522;
+}
+
+.uploadcare--file {
+    color: white;
+}
+
+
+
+.uploadcare--progressbar {
+    background: #157cfc;
+}
+
+.uploadcare--file_status_uploading .uploadcare--file__preview {
+    background: #157cfc;
+    color: #157cfc!important;
+}
+
+.uploadcare--progressbar__value {
+    background: #157cfc;
+}
+
+.uploadcare--progress_type_canvas {
+    color: #157cfc;
+}
+
+.uploadcare--icon:hover {
+    background: color: #157cfc;
+}
+
+
+.uploadcare--widget__button_type_open {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccd3e1;
+    border-radius: 4px;
+    color: #484848;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 0 30px;
+}
+
+.uploadcare--widget__button_type_open:hover {
+    background: #f26522;
+    color: white;
+        font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
 }
 
 

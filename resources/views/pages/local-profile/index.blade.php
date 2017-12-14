@@ -33,7 +33,7 @@
                         <div class="left-sidebar">
                             <div class="shop-layout">
                                 <div class="layout-title">
-                                    <h2>Local Types</h2>
+                                    <a>Local Types</a>
                                 </div>
                                 <div class="layout-list">
                                     <ul>

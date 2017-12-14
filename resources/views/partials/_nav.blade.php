@@ -50,13 +50,13 @@
                                             @php 
                                             $currentLanguage = Session::has('locale') ? asset('flags/4x3/' . Session::get('locale') . '.svg') : asset('flags/4x3/de.svg');
                                             @endphp
-                                            <img src="{{ $currentLanguage }}" alt="" height="10" width="20">
+                                            <img style="margin-bottom: 3px;" src="{{ $currentLanguage }}" alt="" height="10" width="20">
                                             <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 @foreach(getLanguages() as $key => $language)
                                                 <li>
                                                     <a href="{{ url('change_language/' . $key) }}">
-                                                        <img src="{{ asset('flags/4x3/' . $key . '.svg') }}" alt="" height="10" width="20">
+                                                        <img style="margin-bottom:1px" src="{{ asset('flags/4x3/' . $key . '.svg') }}" alt="" height="10" width="20">
                                                         <span>{{ __('global.' . strtolower($language)) }}</span>
                                                     </a>
                                                 </li>

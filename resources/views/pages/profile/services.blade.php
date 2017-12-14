@@ -22,7 +22,7 @@
 			{!! Form::model($user, ['url' => '@' . $user->username . '/services/store', 'method' => 'put']) !!}
 			<h3>Services Offered For:</h3>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-12 choice">
 					@foreach($serviceOptions as $serviceOption)
 					<label class="control control--checkbox" style="display: inline-block;">
 						<a>{{ ucfirst($serviceOption->service_option_name) }}</a>
