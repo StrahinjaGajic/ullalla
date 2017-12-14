@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Girls')
+@section('title', __('buttons.private'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ url('css/components/girls.css') }}">
@@ -14,9 +14,9 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="shop-menu">
 						<ul>
-							<li><a href="{{ url('/') }}">Home</a></li>
+							<li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
 							<li class="separator"><i class="fa fa-angle-right"></i></li>
-							<li>search results</li>
+							<li>{{ __('buttons.private') }}</li>
 						</ul>
 					</div>
 				</div>
@@ -28,17 +28,23 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 					<div class="left-sidebar-title">
-						<h2>Search Filter</h2>
+						<h2>{{ __('headings.search_filters') }}</h2>
 					</div>
 					<div class="left-sidebar">
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Location</h2>
+								<h2>{{ __('fields.location') }}</h2>
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
 									<li>
-										<label for="amount">Radius:</label>
+										<div class="city-input">
+											<input type="text" name="city" value="" placeholder="{{ __('fields.city') }}">
+											<a href="" onclick="getLocation()"><img src="{{ asset('svg/location.svg') }}" alt="location"></a>
+										</div>
+									</li>
+									<li>
+										<label for="amount">{{ __('fields.radius') }}:</label>
 										<div class="location-inputs">
 											<input type="hidden" name="radius" value="{{ old('radius') }}">
 										</div>
@@ -52,7 +58,8 @@
 						</div>
 						<div class="shop-layout canton-layout">
 							<div class="layout-title">
-								<h2>Canton</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.canton') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('canton') ? 'display: none;' : '' }}">
 								<ul>
@@ -72,14 +79,16 @@
 								</ul>
 							</div>
 						</div>
+
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Price</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('headings.price') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('price_from') && !request('price_to') ? 'display: none;' : '' }}">
 								<ul>
 									<li>
-										<label for="amount">Price range:</label>
+										<label for="amount">{{ __('fields.price_range') }}:</label>
 										<div class="price-inputs">
 											<input type="hidden" name="price_from" value="{{ old('price_from') }}">
 											<input type="hidden" name="price_to" value="{{ old('price_to') }}">
@@ -96,7 +105,8 @@
 						</div>
 						<div class="shop-layout services-layout">
 							<div class="layout-title">
-								<h2>Service</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.service') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('services') ? 'display: none;' : '' }}">
 								<ul>
@@ -117,7 +127,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Type</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.type') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('type') ? 'display: none;' : '' }}">
 								<ul>
@@ -139,7 +150,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Hair Color</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.hair_color') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('hair_color') ? 'display: none;' : '' }}">
 								<ul>
@@ -159,7 +171,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Breast Size</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.breast_size') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('breast_size') ? 'display: none;' : '' }}">
 								<ul>
@@ -179,7 +192,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Age</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.age') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('age') ? 'display: none;' : '' }}">
 								<ul>
@@ -202,7 +216,8 @@
 						</div>
 						<div class="shop-layout">
 							<div class="layout-title">
-								<h2>Escorting</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('fields.incall_outcall') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('price_type') ? 'display: none;' : '' }}">
 								<ul>
@@ -242,7 +257,8 @@
 						</div>
 						<div class="shop-layout services-layout">
 							<div class="layout-title">
-								<h2>Languages</h2>
+								<img class="right_side_arrow" src="./svg/caret-right.svg" alt="down arrow">
+								<a>{{ __('headings.language') }}</a>
 							</div>
 							<div class="layout-list" style="{{ !request('spoken_languages') ? 'display: none;' : '' }}">
 								<ul>
@@ -269,8 +285,14 @@
 							<div class="tab-bar">
 								<div class="tab-bar-inner">
 									<ul role="tablist" class="nav nav-tabs">
-										<li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">Grid</span></a></li>
-										<li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">List</span></a></li>
+										<li class="active">
+											<a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+											</a>
+										</li>
+										<li>
+											<a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+											</a>
+										</li>
 									</ul>
 								</div>
 								<div class="toolbar">
@@ -287,20 +309,20 @@
 									</div>
 									<div class="pager-list">
 										<div class="limiter">
-											<label>Show</label>
+											<label>{{ __('global.show') }}</label>
 											<select name="show" onchange="location=this.value">
 												@foreach(getShowNumbers() as $number)
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['show' => $number]), false)) }}" {{ request('show') == $number ? 'selected' : '' }}>{{ $number }}</option>
 												@endforeach
 											</select>
-											per page
+											{{ __('global.per_page') }}
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="tab-content">
 								<div class="filters-reset">
-									<a href="{{ url('girls') }}" class="btn btn-default">Reset Filters</a>
+									<a href="{{ url('girls') }}" class="btn btn-default">{{ __('buttons.reset_filters') }}</a>
 								</div>
 								@if ($users->count())
 								<div id="shop-product" class="tab-pane active">
@@ -319,7 +341,7 @@
 													</div>
 													<a href="{{ url('girls/' . $user->nickname) }}">
 														<div class="product-cart">
-															<button class="button">View Profile</button>
+															<button class="button">{{ __('buttons.view_profile') }}</button>
 														</div>
 													</a>
 												</div>
@@ -344,11 +366,11 @@
 														<div class="product-content-shop">
 															<h2><a class="shop-name">{{ $user->nickname }}</a></h2>
 															<div class="pro-deal-text-shop">
-																<p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva... </p>
+																<p>{{ Str::words($user->about_me, 40) }}</p>
 															</div>
 															<a href="{{ url('girls/' . $user->nickname) }}">
 																<div class="product-cart">
-																	<button class="button">View Profile</button>
+																	<button class="button">{{ __('buttons.view_profile') }}</button>
 																</div>
 															</a>
 														</div>
@@ -360,7 +382,7 @@
 									@endforeach
 								</div>
 								@else
-								<h1>No Users Found</h1>
+								<h1>{{ __('headings.no_users_found') }}</h1>
 								@endif
 							</div>
 							<div class="tab-bar tab-bar-bottom">
@@ -373,7 +395,7 @@
 								<div class="toolbar">
 									<div class="sorter">
 										<div class="sort-by">
-											<label class="sort-none">Sort By</label>
+											<label class="sort-none">{{ __('global.sort_by') }}</label>
 											<select name="order_by" onchange="location=this.value;"">
 												@foreach(getOrderBy() as $key => $order)
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
@@ -454,10 +476,10 @@
 				method: 'get',
 				success: function (data) {
 					window.location.href = data.url;
-					},
-					error: function (data) {
-					}
-				});
+				},
+				error: function (data) {
+				}
+			});
 		}
 	});
 </script>
@@ -484,7 +506,7 @@
 
 				var $url = getUrl('/get_price_ranges');
 
-				var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query())  ? json_encode(request()->query()) : "{}" }}';
+				var requestQueryString = '{{ is_array(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 
 				var requestQueryClearedJSON = requestQueryString.replace(/&quot;/gi,"\"")
 				.replace(/\[/gi,"")
@@ -526,7 +548,6 @@
 		});
 	});
 </script>
-
 <script>
 	$('.control__indicator').on('click', function () {
 		window.location.href = $(this).closest('label').find('a').attr('href');
