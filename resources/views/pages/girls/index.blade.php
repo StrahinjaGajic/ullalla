@@ -308,7 +308,7 @@
 									<div class="sorter">
 										<div class="sort-by">
 											<label class="sort-none">{{ __('global.sort_by') }}</label>
-											<select name="order_by" onchange="location=this.value;"">
+											<select name="order_by" onchange="location=this.value;">
 												@foreach(getOrderBy() as $key => $order)
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
@@ -405,7 +405,7 @@
 									<div class="sorter">
 										<div class="sort-by">
 											<label class="sort-none">{{ __('global.sort_by') }}</label>
-											<select name="order_by" onchange="location=this.value;"">
+											<select name="order_by" onchange="location=this.value;">
 												@foreach(getOrderBy() as $key => $order)
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
