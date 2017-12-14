@@ -416,17 +416,37 @@ function isJson($string) {
 }
 
 function getDaysForExpiry($package_id) {
-    $days = '';
+    $days = [];
     if ($package_id == 1) {
-        $days = '2';
+        $days = [
+            '2'
+        ];
     } else if ($package_id == 2) {
-        $days = '4';
+        $days = [
+            '4',
+            '2',
+        ];
     } elseif ($package_id == 3 || $package_id == 4) {
-        $days = '7';
+        $days = [
+            '7',
+            '4',
+            '2',
+        ];
     } elseif ($package_id == 5) {
-        $days = '15';
-    } elseif ($package_id == 6 || $package_id == 7) {
-        $days = '30';
+        $days = [
+            '15',
+            '7',
+            '4',
+            '2',
+        ];
+    } elseif ($package_id == 6) {
+        $days = [
+            '30',
+            '15',
+            '7',
+            '4',
+            '2',
+        ];
     }
 
     return $days;

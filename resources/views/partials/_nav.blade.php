@@ -42,7 +42,7 @@
                                         <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                         @endif
                                         @endif
-                                        <li><a href="{{ url('signout') }}">{{ __('buttons.signin') }}</a></li>
+                                        <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
                                         @endif
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -97,7 +97,7 @@
                                          <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                          @endif
                                          @endif
-                                         <li><a href="{{ url('signout') }}">{{ __('buttons.signin') }}</a></li>
+                                         <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
                                          @endif
                                          <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
