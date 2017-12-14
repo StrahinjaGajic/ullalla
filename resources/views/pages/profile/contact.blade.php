@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact')
+@section('title', __('headings.contact'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -18,33 +18,33 @@
         </div>
         <div class="col-sm-10 profile-info">
             {!! Form::model($user, ['url' => '@' . $user->username . '/contact/store', 'method' => 'put']) !!}
-            <h3>Contact</h3>
+            <h3>{{ __('headings.contact') }}</h3>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
                         <input class="effect-16" type="text" placeholder="" name="email" value="{{ $user->email }}">
-                        <label>Email</label>
+                        <label>{{ __('fields.email') }}</label>
                         <span class="focus-border"></span>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
                         <input class="effect-16" type="text" placeholder="" name="website" value="{{ $user->website }}">
-                        <label>Website</label>
+                        <label>{{ __('fields.website') }}</label>
                         <span class="focus-border"></span>
                     </div>
                 </div>
                 <div class="col-sm-4"> 
                     <div class="col-3 input-effect">
                         <input class="effect-16" type="text" placeholder="" name="phone" value="{{ $user->phone }}">
-                        <label>Phone number</label>
+                        <label>{{ __('fields.phone') }}</label>
                         <span class="focus-border"></span>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
                         <input class="effect-16" type="text" placeholder="" name="mobile" value="{{ $user->mobile }}">
-                        <label>Mobile number</label>
+                        <label>{{ __('fields.mobile') }}</label>
                         <span class="focus-border"></span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" style="display: block; text-align: left;">Available Apps</label>
+                        <label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
                         @foreach($contactOptions as $contactOption)
                         <label class="control control--checkbox" style="margin-right: 20px;"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
                             <input 
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="control-label" style="display: block; text-align: left;">I Prefer</label>
+                        <label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
                         @foreach(getPreferedOptions() as $key => $preferedOption)
                         <div class="col-sm-6" style="padding: 0px; margin: 0px;">
                             <label style="margin-right: 20px;">
@@ -90,7 +90,7 @@
                                 value="1" 
                                 style="display: inline-block;" 
                                 {{ $user->no_withheld_numbers ? 'checked' : '' }}>
-                                <a>No Withheld Numbers</a>
+                                <a>{{ __('fields.no_withheld_numbers') }}</a>
                                 <div class="control__indicator"></div>
                             </label>
                         </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>   
             </div>
-            <button type="submit" class="btn btn-default">Save Changes</button>
+            <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
             {!! Form::close() !!}
         </div>
     </div>

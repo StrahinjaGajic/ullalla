@@ -89,6 +89,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
 
     'skype_required' => 'Skype name is required',
+    'choose_package' => 'Please, choose the package',
 
     /* Javascript Validation */
     'max_files' => 'You must select at least 4 files',

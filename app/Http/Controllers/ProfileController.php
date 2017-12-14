@@ -503,8 +503,8 @@ class ProfileController extends Controller
         $expiredGirlPackage = null;
         $expiredGirlOfTheMonthPackage = null;
 
-        $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id))->format('Y-m-d');
-        $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id))->format('Y-m-d');
+        $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
+        $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
 
         if (Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
             $showDefaultPackages = true;
@@ -515,7 +515,7 @@ class ProfileController extends Controller
 
         if ($user) {
             if ($user->is_active_d_package == 1) {
-                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package1_id));
+                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package1_id)[0]);
                 $expiredGirlPackage = DB::table('users')
                     ->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
                     ->where('users.id', $user->id)
@@ -524,7 +524,7 @@ class ProfileController extends Controller
             }
 
             if ($user->is_active_gotm_package) {
-                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id));
+                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id)[0]);
                 $expiredGirlOfTheMonthPackage = DB::table('users')
                     ->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
                     ->where('users.id', $user->id)

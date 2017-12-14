@@ -17,7 +17,9 @@ use App\Events\PackageExpired;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
 use App\Http\Controllers\Controller;
+use App\Mail\DefaultPackageExpiredMail;
 use App\Events\MonthOfTheGirlPackageExpired;
+use App\Mail\GirlOfTheMonthPackageExpiredMail;
 
 class AuthController extends Controller
 {
@@ -64,7 +66,7 @@ class AuthController extends Controller
 		//send an email with the activation token used from user_activations table
 		Mail::to($user->email)->send(new ActivationMail($userActivation));
 
-		Session::flash('success', __('messages.success_check_activation_link'));
+		return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.success_check_activation_link'));
 
 	}
 
@@ -93,12 +95,21 @@ class AuthController extends Controller
 					return redirect('/')->with('not_approved', __('messages.info_account_not_approved'));
 				}
 
+				$daysForExpiryDefaultPackage = getDaysForExpiry($user->package1_id);
+				$daysForExpiryGotmPackage = getDaysForExpiry($user->package2_id);
+
 				// get expiry date days before expiration
-				$expiryDateDefaultPackage = getPackageExpiryDate(getDaysForExpiry($user->package1_id));
-				$expiryDateGirlOfTheMonthPackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id));
+				$firstDateForDefaultPackageExpiryNotification = getPackageExpiryDate($daysForExpiryDefaultPackage[0]);
+				$firstDateForGotmPackageExpiryNotification = getPackageExpiryDate($daysForExpiryGotmPackage[0]);
+
 				// get expiry dates from db
-				$package1ExpiryDate = Carbon::parse($user->package1_expiry_date)->format('Y-m-d');
-				$package2ExpiryDate = Carbon::parse($user->package2_expiry_date)->format('Y-m-d');
+				$package1ExpiryDateCarbonParsed = Carbon::parse($user->package1_expiry_date);
+				$package2ExpiryDateCarbonParsed = Carbon::parse($user->package2_expiry_date);
+				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
+				$package2ExpiryDate = $package2ExpiryDateCarbonParsed->format('Y-m-d');
+
+				// carbon now formated
+				$carbonNowFormated = Carbon::now()->format('Y-m-d');
 
 				// deactivate packages if it they are expired
 				if (Carbon::now() >= $package2ExpiryDate) {
@@ -114,18 +125,36 @@ class AuthController extends Controller
 					$user->is_active_d_package = 0;
 					$user->save();
 					return redirect()->action('ProfileController@getPackages', ['username' => $user->username])
-						->with('expired_package_info', __('messages.error_default_package_expired'));
+					->with('expired_package_info', __('messages.error_default_package_expired'));
 				}
 
 				// package expiry notifications
-				if ($package1ExpiryDate < $expiryDateDefaultPackage) {
+				if ($package1ExpiryDate < $firstDateForDefaultPackageExpiryNotification) {
 					event(new PackageExpired($user));
 					Session::flash('defaultGirlPackageExpired', __('messages.default_package_about_to_expire'));
 				}
-
-				if ($package2ExpiryDate < $expiryDateGirlOfTheMonthPackage) {
+				
+				if ($package2ExpiryDate < $firstDateForGotmPackageExpiryNotification) {
 					event(new MonthOfTheGirlPackageExpired($user));
 					Session::flash('gotmPackageExpired', __('messages.gotm_package_about_to_expire'));
+				}
+
+				// defaultPackageAboutToExpireDatesForSendingMails
+				foreach (getDaysForExpiry($user->package1_id) as $day) {
+					if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
+						// send mail
+						$aboutToExpire = '';
+						Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
+					}
+				}
+
+				// girlOfTheMonthAboutToExpireDatesForSendingMails
+				foreach (getDaysForExpiry($user->package2_id) as $day) {
+					if ($carbonNowFormated == $package2ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
+						// send mail
+						$aboutToExpire = '';
+						Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
+					}
 				}
 
 				// $diff=date_diff(Carbon::now(), date_create($user->package1_expiry_date));
@@ -136,7 +165,7 @@ class AuthController extends Controller
 			}
 		} elseif (Auth::guard('local')->attempt(['username' => $request->username, 'password' => $request->password])) {
 			$local = Auth::guard('local')->user();
-			if ($local->activated == '0') {
+			if ($local->activated != 1) {
 				Auth::guard('local')->logout();
 				return redirect()->back()->with('error', __('messages.error_activate_account'));
 			}

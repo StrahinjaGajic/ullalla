@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Gallery')
+@section('title', __('headings.gallery'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -19,9 +19,9 @@
         </div>
         <div class="col-sm-10 profile-info">
             {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
-            <h3>Gallery</h3>
+            <h3>{{ __('headings.gallery') }}</h3>
             <div class="row">
-                <h1>Photos</h1>
+                <h4>{{ __('headings.photos') }}</h4>
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
@@ -37,13 +37,13 @@
                         </div>
                     </div>
                 </div>
-                <h1>Videos</h1>
+                <h4>{{ __('headings.videos') }}</h4>
                 <div class="form-group upload-video">
                     <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
                     <video id="video" width="320" height="240" loop style="display: block;"></video>
                 </div>
             </div>
-            <button type="submit" class="btn btn-default">Save Changes</button>
+            <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
             {!! Form::close() !!}
         </div>
     </div>

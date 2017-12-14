@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Packages')
+@section('title', __('headings.packages'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
 @stop
 
 @section('content')
@@ -18,28 +19,27 @@
 		</div>
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
-			
 			@if($user->is_active_d_package || $user->is_active_gotm_package)
-			<h3>Active Packages</h3>
+			<h3>{{ __('headings.active_packages') }}</h3>
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Type</th>
-						<th>Activation Date</th>
-						<th>Expiry Date</th>
+						<th>{{ __('fields.type') }}</th>
+						<th>{{ __('headings.activation_date') }}</th>
+						<th>{{ __('headings.expiry_date') }}</th>
 					</tr>
 				</thead>	
 				<tbody>
 					@if($user->is_active_d_package)
 					<tr>
-						<td>Default Package</td>
+						<td>{{ __('headings.default_package') }}</td>
 						<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
 						<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
 					</tr>
 					@endif
 					@if($user->is_active_gotm_package)
 					<tr>
-						<td>Girl Of The Month Package</td>
+						<td>{{ __('headings.gotm_package') }}</td>
 						<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
 						<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
 					</tr>
@@ -57,20 +57,20 @@
 			{!! Form::model($user, ['url' => '@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 			@if($showDefaultPackages)
 			<div class="col-xs-12 default-packages-section" id="default-packages-section">
-				<h3>Default Packages</h3>
+				<h3>{{ __('headings.default_packages') }}</h3>
 				<div class="has-error">
 					<div id="alertPackageMessage" class="help-block"></div>
 				</div>
 				@if($errors->has('ullalla_package'))
-				<p class="has-error">Default package is required</p>
+				<p class="has-error">{{ __('validation.default_package_required') }}</p>
 				@endif
 				<table class="table packages-table">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Duration</th>
-							<th>Price</th>
-							<th>Activation Date</th>
+							<th>{{ __('headings.name') }}</th>
+							<th>{{ __('headings.duration') }}</th>
+							<th>{{ __('headings.price') }}</th>
+							<th>{{ __('headings.activation_date') }}</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -94,21 +94,21 @@
 					</tbody>
 				</table>
 				@if(!$showGotmPackages)
-				<button type="submit" class="btn btn-default">Save Changes</button>
+				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 				@endif
 			</div>
 			@endif
 
 			@if($showGotmPackages)
 			<div class="col-xs-12">
-				<h3>Girl of the Month</h3>
+				<h3>{{ __('headings.gotm_package') }}</h3>
 				<table class="table packages-table package-girl-month">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Duration</th>
-							<th>Price</th>
-							<th>Activation Date</th>
+							<th{{ __('headings.name') }}</th>
+							<th>{{ __('headings.duration') }}</th>
+							<th>{{ __('headings.price') }}</th>
+							<th>{{ __('headings.activation_date') }}</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -132,7 +132,7 @@
 						@endforeach
 					</tbody>
 				</table>
-				<button type="submit" class="btn btn-default">Save Changes</button>
+				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			</div>
 			@endif
 			<input type="hidden" name="stripeToken" id="stripeToken">
@@ -148,6 +148,17 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
+
+@if(Session::has('expired_package_info'))
+<script>
+    swal(
+        '{{ __('headings.default_error_title') }}',
+        '{{ Session::get('expired_package_info') }}',
+        'error'
+    );
+</script>
+@endif
 <script>
 	// get new start and end year
 	var end = new Date();
@@ -214,9 +225,9 @@
 				var errors = response.errors;
 				if (errors) {
 					if (typeof errors.default_package_error !== 'undefined') {
-						$('div.packages-errors').addClass('alert alert-danger').text('Default package is required');
+						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
 					} else if (typeof errors.month_girl_package_error !== 'undefined') {
-						$('div.packages-errors').addClass('alert alert-danger').text('Please, choose the package');
+						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 					} else {
 						window.location.href = 'http://ullalla.app/@' + username  + '/packages';
 					}
