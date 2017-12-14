@@ -36,6 +36,12 @@ class CreateLocalsTable extends Migration
             $table->integer('club_food_id')->unsigned()->nullable();
             $table->integer('club_outdoor_id')->unsigned()->nullable();
             $table->integer('local_type_id')->unsigned()->nullable();
+            $table->integer('package1_id')->unsigned()->nullable();
+            $table->integer('is_active_d_package')->nullable();
+            $table->string('package1_duration');
+            $table->timestamp('package1_activation_date')->nullable();
+            $table->timestamp('package1_expiry_date')->nullable();
+            $table->string('stripe_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
@@ -44,6 +50,7 @@ class CreateLocalsTable extends Migration
             $table->foreign('club_food_id')->references('id')->on('clubs_info')->onDelete('cascade');
             $table->foreign('club_outdoor_id')->references('id')->on('clubs_info')->onDelete('cascade');
             $table->foreign('local_type_id')->references('id')->on('local_types')->onDelete('cascade');
+            $table->foreign('package1_id')->references('id')->on('local_packages')->onDelete('cascade');
         });
     }
 

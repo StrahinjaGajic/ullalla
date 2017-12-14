@@ -165,7 +165,7 @@ class AuthController extends Controller
 			}
 		} elseif (Auth::guard('local')->attempt(['username' => $request->username, 'password' => $request->password])) {
 			$local = Auth::guard('local')->user();
-			if ($local->activated == '0') {
+			if ($local->activated != 1) {
 				Auth::guard('local')->logout();
 				return redirect()->back()->with('error', __('messages.error_activate_account'));
 			}
