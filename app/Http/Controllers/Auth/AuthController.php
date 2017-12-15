@@ -139,24 +139,6 @@ class AuthController extends Controller
 					Session::flash('gotmPackageExpired', __('messages.gotm_package_about_to_expire'));
 				}
 
-				// defaultPackageAboutToExpireDatesForSendingMails
-				foreach (getDaysForExpiry($user->package1_id) as $day) {
-					if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
-						// send mail
-						$aboutToExpire = '';
-						Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
-					}
-				}
-
-				// girlOfTheMonthAboutToExpireDatesForSendingMails
-				foreach (getDaysForExpiry($user->package2_id) as $day) {
-					if ($carbonNowFormated == $package2ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
-						// send mail
-						$aboutToExpire = '';
-						Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
-					}
-				}
-
 				// $diff=date_diff(Carbon::now(), date_create($user->package1_expiry_date));
 				// dd($diff->days);
 				return redirect('/');
