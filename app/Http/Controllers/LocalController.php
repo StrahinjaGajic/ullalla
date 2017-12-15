@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use Auth;
 use Session;
+use Validator;
 use Carbon\Carbon;
 use App\Models\LocalType;
 use App\Models\LocalPackage;
@@ -15,6 +17,7 @@ class LocalController extends Controller
     public function __construct()
     {
         $this->middleware('auth:local');
+        $this->middleware('package.expiry', ['except' => ['getPackages', 'postPackages', 'getCreate', 'postCreate']]);
         $this->middleware('has_package', [
             'only' => [
                 'getCreate',
@@ -68,6 +71,8 @@ class LocalController extends Controller
         }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
             $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
         }
+        $price = request('package_duration')[$defaultPackage->id]. '_price';
+        $totalAmount = (int) filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
 
         try {
             $user = Auth::guard('local')->user();
@@ -105,6 +110,7 @@ class LocalController extends Controller
                 'source' => request('stripeToken'),
             ]);
             $user->stripe_id = $customer->id;
+            $user->stripe_amount = $totalAmount;
             $user->save();
         } catch (\Exception $e) {
             return response()->json([
@@ -280,5 +286,104 @@ class LocalController extends Controller
         ]);
         $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
         return redirect()->back()->with('success', 'Data successfully saved.');
+    }
+
+    public function getPackages()
+    {
+        $user = Auth::guard('local')->user();
+        $packages = LocalPackage::all();
+
+        $showDefaultPackages = false;
+
+        $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiryLocal($user->package1_duration)[0])->format('Y-m-d');
+
+        if (Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
+            $showDefaultPackages = true;
+        }
+        return view('pages.locals.packages', compact('user', 'packages', 'showDefaultPackages'));
+    }
+
+    /**
+     * Insert activation and expiry dates if both packages are chosen and billing the user.
+     * If one of them is chosen then insert only that one and bill him.
+     */
+    public function postPackages(Request $request)
+    {
+        $user = Auth::guard('local')->user();
+
+        $totalAmount = 0;
+        $defaultPackageActivationDateInput = request('default_package_activation_date');
+
+        if ($defaultPackageActivationDateInput) {
+            // validate
+            $validator = Validator::make($request->all(), [
+                'ullalla_package' => 'required'
+            ]);
+
+            if ($validator->passes()) {
+                // get default package input
+                $defaultPackageInput = request('ullalla_package')[0];
+
+                // get default package obj and activation date input
+                $defaultPackage = LocalPackage::find($defaultPackageInput);
+                if ($defaultPackage) {
+                    $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
+                    // format default packages dates with carbon
+                    $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
+                    $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+                    if(request('package_duration')[$defaultPackage->id] == 'month'){
+                        $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+                    }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
+                        $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                    }
+                    $price = request('package_duration')[$defaultPackage->id]. '_price';
+                    $totalAmount += (int) filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
+
+                    $user->package1_id = $defaultPackage->id;
+                    $user->is_active_d_package = 1;
+                    $user->package1_duration = request('package_duration')[$defaultPackage->id];
+                    $user->package1_activation_date = $defaultPackageActivationDate;
+                    $user->package1_expiry_date = $defaultPackageExpiryDate;
+                    $user->save();
+                }
+            } else {
+                return response()->json([
+                    'errors' => [
+                        'default_package_error' => $validator->getMessageBag()
+                    ]
+                ]);
+            }
+        }
+
+        // stripe
+        try {
+            // create a customer
+            $customer = Customer::create([
+                'email' => request('stripeEmail'),
+                'source' => request('stripeToken'),
+            ]);
+            $user->stripe_id = $customer->id;
+            $user->stripe_amount = $totalAmount;
+            $user->save();
+
+
+            // charge a customer
+            Charge::create([
+                'customer' => $user->stripe_id,
+                'amount' => $totalAmount * 100,
+                'currency' => 'chf',
+            ]);
+
+            // approve the user
+            $user->approved = '1';
+            $user->save();
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => $e->getMessage()
+            ], 422);
+        }
+
+        Session::flash('success', __('messages.success_changes_saved'));
     }
 }

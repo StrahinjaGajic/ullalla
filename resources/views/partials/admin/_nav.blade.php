@@ -14,6 +14,7 @@
   <ul class="nav navbar-nav">
     <li><a href="{{ url('admin') }}">Dashboard</a></li>
     <li><a href="{{ url('admin/inactive_users') }}">Inactive Users</a></li>    
+    <li><a href="{{ url('admin/inactive_locals') }}">Inactive Locals</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">

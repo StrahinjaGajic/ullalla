@@ -218,6 +218,7 @@ class ProfileController extends Controller
                 'source' => request('stripeToken'),
             ]);
             $user->stripe_id = $customer->id;
+            $user->stripe_amount = $totalAmount;
             $user->save();
         } catch (\Exception $e) {
             return response()->json([
@@ -500,9 +501,6 @@ class ProfileController extends Controller
         $showDefaultPackages = false;
         $showGotmPackages = false;
 
-        $expiredGirlPackage = null;
-        $expiredGirlOfTheMonthPackage = null;
-
         $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
         $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
 
@@ -513,27 +511,7 @@ class ProfileController extends Controller
             $showGotmPackages = true;
         }
 
-        if ($user) {
-            if ($user->is_active_d_package == 1) {
-                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package1_id)[0]);
-                $expiredGirlPackage = DB::table('users')
-                    ->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
-                    ->where('users.id', $user->id)
-                    ->where('notifications.title', 'Default Package Expiration')
-                    ->whereBetween('package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
-            }
-
-            if ($user->is_active_gotm_package) {
-                $expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id)[0]);
-                $expiredGirlOfTheMonthPackage = DB::table('users')
-                    ->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
-                    ->where('users.id', $user->id)
-                    ->where('notifications.title', 'Default Package Expiration')
-                    ->whereBetween('users.package2_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
-            }
-        }
-
-        return view('pages.profile.packages', compact('user', 'packages', 'expiredGirlPackage', 'expiredGirlOfTheMonthPackage', 'showDefaultPackages', 'showGotmPackages'));
+        return view('pages.profile.packages', compact('user', 'packages', 'showDefaultPackages', 'showGotmPackages'));
     }
 
     /**

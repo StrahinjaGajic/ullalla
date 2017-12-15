@@ -84,6 +84,9 @@ Route::get('locals/@{username}/girls', 'LocalController@getGirls');
 Route::put('locals/@{username}/girls/store', 'LocalController@postGirls');
 Route::put('locals/@{username}/girls/create', 'LocalController@postCreateGirls');
 
+Route::get('locals/@{username}/packages', 'LocalController@getPackages');
+Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');
+
 # LOCAL PROFILE CONTROLLER
 Route::get('locals/{username}', 'LocalProfileController@getLocal');
 Route::get('locals', [
@@ -103,6 +106,14 @@ Route::middleware(['roles'])->group(function () {
 	]);
 	Route::post('admin/inactive_users/approve/{id}', [
 		'uses' => 'AdminController@approveUser',
+		'roles' => ['Admin']
+	]);
+	Route::get('admin/inactive_locals', [
+		'uses' => 'AdminController@getInactiveLocals',
+		'roles' => ['Admin']
+	]);
+	Route::post('admin/inactive_locals/approve/{id}', [
+		'uses' => 'AdminController@approveLocal',
 		'roles' => ['Admin']
 	]);
 });
