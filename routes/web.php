@@ -130,6 +130,13 @@ Route::get('get_radius', 'GirlController@getRadius');
 #NOTIFICATION CONTROLLER
 Route::get('@{username}/notifications', 'NotificationController@getIndex');
 
+#CONTACT CONTROLLER
+Route::get('contact', 'ContactController@getIndex');
+Route::post('contact/send', 'ContactController@postIndex');
+
+#FAQ CONTROLLER
+Route::get('faq', 'FaqController@getIndex');
+
 
 
 
