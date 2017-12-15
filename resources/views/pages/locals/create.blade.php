@@ -319,8 +319,7 @@
     <script src="{{ asset('js/formValidation.min.js') }}"></script>
     <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('js/profileValidation.js') }}"></script>
-    <script src="{{ asset('js/billing.js') }}"></script>
+    <script src="{{ asset('js/localValidation.js') }}"></script>s
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>

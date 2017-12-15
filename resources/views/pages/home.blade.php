@@ -185,7 +185,19 @@
 
 @section('perPageScripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
-
+@if(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
+    <script>
+        swal({
+            title: '{{ __('headings.package_expiration_title') }}',
+            confirmButtonText: '{{ __('buttons.close') }}',
+            html: '{!! __('messages.package_about_to_expire', [
+                                'note' => $localDefaultPackageExpired->note,
+                                'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+                                ]) !!}',
+            type: 'warning',
+        });
+    </script>
+@endif
 @if(Session::has('not_approved'))
 <script>
     swal(
@@ -212,7 +224,7 @@
                 title: '{{ __('headings.package_expiration_title') }}',
                 confirmButtonText: '{{ __('buttons.close') }}',
                 html: '{!! __('messages.package_about_to_expire', [
-                    'note' => $defaultPackageExpired->note, 
+                    'note' => $defaultPackageExpired->note,
                     'url' => url('@' . Auth::user()->username . '/packages')
                     ]) !!}',
                     type: 'warning',

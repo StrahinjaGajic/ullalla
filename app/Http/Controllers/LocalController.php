@@ -41,7 +41,7 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
-        /*
+
         $this->validate($request, [
             'name' => 'required|max:25',
             'street' => 'required|max:40',
@@ -50,7 +50,7 @@ class LocalController extends Controller
             'web' => 'required',
             'phone' => 'required|max:20',
         ]);
-*/
+
         // get working time
         $workingTime = getWorkingTime(
             $request->days,
