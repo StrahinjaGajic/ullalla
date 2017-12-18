@@ -318,7 +318,7 @@
                                     });
                                 </script>
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places"></script>
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initializeAutocomplete"></script>
 
                                 <script>
                                     var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
@@ -341,7 +341,6 @@
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(showPosition);
-                                            var autocomplete = new google.maps.places.Autocomplete(inputCity);
                                         } else { 
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
@@ -351,6 +350,12 @@
                                         x.innerHTML = "Latitude: " + position.coords.latitude + 
                                         "<br>Longitude: " + position.coords.longitude; 
                                     }
+
+                                    function initializeAutocomplete() {
+                                        var autocomplete = new google.maps.places.Autocomplete(inputCity);
+                                    }
+
+                                    google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
                                 </script>
 
                                 <!-- radius -->
