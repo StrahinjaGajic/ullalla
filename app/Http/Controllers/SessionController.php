@@ -47,4 +47,9 @@ class SessionController extends Controller
 			'packagePrice' => Session::has('month_girl_package') ? Session::get('month_girl_package') : null
 		]);
 	}
+
+	public function storeGuestData()
+	{
+		
+	}
 }

@@ -342,7 +342,9 @@
                                         var autocomplete = new google.maps.places.Autocomplete(
                                             (inputCity), {
                                                 types: ['geocode']
-                                            });                                        
+                                            });
+                                        autocomplete.setComponentRestrictions(
+                                            {'country': ['ch']});                         
                                     }
 
                                     function getLocation() {
