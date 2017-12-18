@@ -124,6 +124,7 @@
                         <div id="radius-ranger" style="margin: 10px;"></div>
                         <div class="slider-value-wrapper">
                             <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+                            <span class="length-unit">km</span>
                         </div>
                     </div>
                 </div>
@@ -334,37 +335,32 @@
 
                                 <!-- geolocation -->
                                 <script>
-                                    var x = document.getElementById("location");
+                                    var location = document.getElementById('location');
                                     var inputCity = document.getElementById('city');
 
                                     function initialize() {
-                                        var autocomplete = new google.maps.places.Autocomplete(
-                                            (inputCity), {
-                                                types: ['geocode']
-                                            });                                        
-                                    }
-
-                                    function fillInAddress() {
-                                        return true;
+                                        var autocomplete = new google.maps.places.Autocomplete(inputCity);                                        
                                     }
 
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
                                                 var geocoder = new google.maps.Geocoder;
+                                                var lat = position.coords.latitude
                                                 var latlng = {
                                                     lat: position.coords.latitude, 
                                                     lng: position.coords.longitude
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
-                                                    console.log(results);
+                                                    if (results[0]) {
+                                                        inputCity.val(results[0].formatted_address);
+                                                    }
                                                 });
                                             });
                                         } else {
-                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                            location.innerHTML = "This browser does not support Geolocation.";
                                         }
                                     }
-
                                 </script>
 
                                 <!-- radius -->
