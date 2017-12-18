@@ -337,27 +337,26 @@
                                     var x = document.getElementById("location");
                                     var inputCity = document.getElementById('city');
 
-                                    var autocomplete = new google.maps.places.Autocomplete(inputCity);
-
-                                    console.log(autocomplete);
-                                    
-                                    function getLocation(autocomplete) {
-                                        if (navigator.geolocation) {
-                                            navigator.geolocation.getCurrentPosition(showPosition);
-                                            // populate the city value
-                                            autocomplete.addListener('place_changed', function() {
-                                                var place = autocomplete.getPlace();
-                                                if (!place.geometry) {
-                                                    // User entered the name of a Place that was not suggested and
-                                                    // pressed the Enter key, or the Place Details request failed.
-                                                    window.alert("No details available for input: '" + place.name);
-                                                    return;
-                                                }
-
-                                                var address = place.formatted_address;
-                                                console.log(address);
+                                    function initialize() {
+                                        autocomplete = new google.maps.places.Autocomplete(
+                                            (inputCity), {
+                                                types: ['geocode']
                                             });
-                                        } else { 
+                                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                                            fillInAddress();
+                                        });
+                                    }
+
+                                    function fillInAddress() {
+                                        return true;
+                                    }
+
+                                    function getLocation() {
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(function (position) {
+                                                console.log(position);
+                                            });
+                                        } else {
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
                                     }
@@ -366,6 +365,8 @@
                                         x.innerHTML = "Latitude: " + position.coords.latitude + 
                                         "<br>Longitude: " + position.coords.longitude; 
                                     }
+
+                                    initialize();
 
                                 </script>
 
