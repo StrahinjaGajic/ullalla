@@ -1048,7 +1048,7 @@ $(function () {
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
-				window.location.href = "http://ullalla.app";
+				window.location.href = getUrl();
 			})
 			.fail(function(data, textStatus) {
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
