@@ -338,10 +338,11 @@
                                     var inputCity = document.getElementById('city');
 
                                     function initialize() {
-                                        autocomplete = new google.maps.places.Autocomplete(
+                                        var autocomplete = new google.maps.places.Autocomplete(
                                             (inputCity), {
                                                 types: ['geocode']
                                             });
+                                        var geocoder = new google.maps.Geocoder;
                                         google.maps.event.addListener(autocomplete, 'place_changed', function () {
                                             fillInAddress();
                                         });
@@ -354,7 +355,13 @@
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
-                                                console.log(position);
+                                                var latlng = {
+                                                    lat: position.coords.latitude, 
+                                                    lng: position.coords.longitude
+                                                };
+                                                geocoder.geocode({'location': latlng}, function(results, status) {
+                                                        console.log(results);
+                                                });
                                             });
                                         } else {
                                             x.innerHTML = "Geolocation is not supported by this browser.";
@@ -362,8 +369,8 @@
                                     }
 
                                     function showPosition(position) {
-                                        x.innerHTML = "Latitude: " + position.coords.latitude + 
-                                        "<br>Longitude: " + position.coords.longitude; 
+                                        x.innerHTML = "Latitude: " +  + 
+                                        "<br>Longitude: " + ; 
                                     }
 
                                     initialize();
