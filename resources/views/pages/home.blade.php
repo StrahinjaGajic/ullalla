@@ -337,6 +337,7 @@
                                 <script>
                                     var x = document.getElementById("location");
                                     var inputCity = document.getElementById('city');
+                                    var token = $('input[name="_token"]').val();
 
                                     function initialize() {
                                         var autocomplete = new google.maps.places.Autocomplete(
@@ -360,6 +361,14 @@
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
                                                     if (results[0]) {
                                                         inputCity.value = results[0].formatted_address;
+                                                        $.ajax({
+                                                            url: getUrl('/get_guest_data'),
+                                                            type: 'post',
+                                                            data: {lat: lat, lng: lng, _token: token},
+                                                            success: function (data) {
+                                                                return true;
+                                                            }
+                                                        });
                                                     }
                                                 });
                                             });

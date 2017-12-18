@@ -48,8 +48,8 @@ class SessionController extends Controller
 		]);
 	}
 
-	public function storeGuestData()
-	{
-		
+	public function storeGuestData(Request $request)
+	{	
+		dd($request);
 	}
 }
