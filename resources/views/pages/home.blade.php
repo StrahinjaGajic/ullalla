@@ -345,7 +345,12 @@
                                                 types: ['geocode']
                                             });
                                         autocomplete.setComponentRestrictions(
-                                            {'country': ['ch']});                         
+                                            {'country': ['ch']});       
+
+                                        autocomplete.addListener('place_changed', function() { 
+                                            var place = autocomplete.getPlace();
+                                            console.log(place);
+                                        });                  
                                     }
 
                                     function getLocation() {

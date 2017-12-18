@@ -13,8 +13,6 @@ class SearchController extends Controller
             'radius' => 'required'
         ]);
 
-        // $users = $request-
-
-        dd($request->all());
+        dd();
     }
 }
