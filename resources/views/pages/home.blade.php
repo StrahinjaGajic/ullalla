@@ -112,7 +112,7 @@
                     <div class="region">
                     </div>
                     <div class="region geolocation">
-                        <input name="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
+                        <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
                         <img src="" alt="">
                         <a onclick="getLocation()">
                             <img src="{{ asset('svg/location.svg') }}" alt="">
@@ -319,7 +319,7 @@
                                     });
                                 </script>
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&callback=initMap"></script>
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4sensor=false&libraries=places"></script>
 
                                 <script>
                                     var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
@@ -337,10 +337,12 @@
                                 <!-- geolocation -->
                                 <script>
                                     var x = document.getElementById("location");
+                                    var inputCity = document.getElementById('city');
 
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(showPosition);
+                                            var autocomplete = new google.maps.places.Autocomplete(input);
                                         } else { 
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
