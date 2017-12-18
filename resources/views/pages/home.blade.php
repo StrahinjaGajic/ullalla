@@ -346,10 +346,11 @@
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
                                                 var geocoder = new google.maps.Geocoder;
-                                                var lat = position.coords.latitude
+                                                var lat = position.coords.latitude;
+                                                var lng = position.coords.longitude;
                                                 var latlng = {
-                                                    lat: position.coords.latitude, 
-                                                    lng: position.coords.longitude
+                                                    lat: lat, 
+                                                    lng: lng
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
                                                     if (results[0]) {
@@ -358,7 +359,7 @@
                                                 });
                                             });
                                         } else {
-                                            location.innerHTML = "This browser does not support Geolocation.";
+                                            location.innerHTML = 'This browser does not support Geolocation.';
                                         }
                                     }
                                 </script>
