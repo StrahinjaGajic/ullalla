@@ -368,11 +368,6 @@
                                         }
                                     }
 
-                                    function showPosition(position) {
-                                        x.innerHTML = "Latitude: " +  + 
-                                        "<br>Longitude: " + ; 
-                                    }
-
                                     initialize();
 
                                 </script>
