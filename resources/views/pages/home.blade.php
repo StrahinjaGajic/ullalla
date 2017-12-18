@@ -124,7 +124,7 @@
                         <div id="radius-ranger" style="margin: 10px;"></div>
                         <div class="slider-value-wrapper">
                             <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
-                            <span class="length-unit">km</span>
+                            <span>km</span>
                         </div>
                     </div>
                 </div>
@@ -335,11 +335,14 @@
 
                                 <!-- geolocation -->
                                 <script>
-                                    var location = document.getElementById('location');
+                                    var x = document.getElementById("location");
                                     var inputCity = document.getElementById('city');
 
                                     function initialize() {
-                                        var autocomplete = new google.maps.places.Autocomplete(inputCity);                                        
+                                        var autocomplete = new google.maps.places.Autocomplete(
+                                            (inputCity), {
+                                                types: ['geocode']
+                                            });                                        
                                     }
 
                                     function getLocation() {
@@ -359,9 +362,10 @@
                                                 });
                                             });
                                         } else {
-                                            location.innerHTML = 'This browser does not support Geolocation.';
+                                            x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
                                     }
+
                                 </script>
 
                                 <!-- radius -->
