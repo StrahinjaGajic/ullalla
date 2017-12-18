@@ -68,13 +68,13 @@
 											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
-										<span>hrs</span>
+										<span>{{ __('global.hrs') }}</span>
 										<select name="time_from_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
 											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
-										<span>min</span>
+										<span>{{ __('global.min') }}</span>
 									</td>
 									<td>
 										<select name="time_to[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
@@ -82,13 +82,13 @@
 											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
-										<span>hrs</span>
+										<span>{{ __('global.hrs') }}</span>
 										<select name="time_to_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
 											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
-										<span>min</span>
+										<span>{{ __('global.min') }}</span>
 									</td>
 									<td>
 										<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>

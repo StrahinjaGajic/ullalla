@@ -484,7 +484,7 @@
 							</div>
 							<div class="col-xs-2">
 								<div class="form-group">
-									<label class="control-label">{{ __('fields.type') }}Type</label>
+									<label class="control-label">{{ __('fields.type') }}</label>
 									<select name="price_type" id="price_type" class="form-control">
 										@foreach(getPriceTypes() as $priceType)
 										<option value="{{ $priceType }}">{{ ucfirst($priceType) }}</option>
@@ -495,17 +495,17 @@
 							</div>
 							<div class="col-xs-12">
 								<input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
-								<button type="submit" class="add-new-price">Add New Price</button>
+								<button type="submit" class="add-new-price">{{ __('buttons.add_new_price') }}</button>
 							</div>
 						</div>
 						<div class="col-xs-12 price-table-container">
 							<table class="{{ $prices->count() == 0 ? 'is-hidden' : '' }}">
 								<thead>
 									<tr>
-										<th>Type</th>
-										<th>Duration</th>
-										<th>Price</th>
-										<th>Remove</th>
+										<th>{{ __('fields.type') }}</th>
+										<th>{{ __('headings.duration') }}</th>
+										<th>{{ __('headings.price') }}</th>
+										<th>{{ __('headings.remove') }}</th>
 									</tr>
 								</thead>
 								<tbody id="prices_body">
@@ -525,13 +525,13 @@
 							</table>
 						</div>
 					</section>
-					<h2>Languages</h2>
+					<h2>{{ __('headings.languages') }}</h2>
 					<section data-step="7">
 						<table class="table language-table">
 							<thead>
 								<tr>
-									<th>Language</th>
-									<th>Level</th>
+									<th>{{ __('headings.language') }}</th>
+									<th>{{ __('headings.level') }}</th>
 								</tr>
 							</thead>
 							<tbody class="language-list">
@@ -564,23 +564,23 @@
 							</tbody>
 						</table>
 						<div class="show-more text-center">
-							<a href="#" class="btn btn-default">Show More</a>
+							<a href="#" class="btn btn-default">{{ __('buttons.show_more') }}</a>
 						</div>
 					</section>
-					<h2>Packages</h2>
+					<h2>{{ __('headings.packages') }}</h2>
 					<section data-step="8">
 						<div class="col-xs-12 default-packages-section" id="default-packages-section">
-							<h3>Default Packages</h3>
+							<h3>{{ __('headings.default_packages') }}</h3>
 							<div class="has-error">
 								<div id="alertPackageMessage" class="help-block"></div>
 							</div>
 							<table class="table packages-table">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Duration</th>
-										<th>Price</th>
-										<th>Activation Date</th>
+										<th>{{ __('headings.name') }}</th>
+										<th>{{ __('headings.duration') }}</th>
+										<th>{{ __('headings.price') }}</th>
+										<th>{{ __('headings.activation_date') }}</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -607,14 +607,14 @@
 							</table>
 						</div>
 						<div class="col-xs-12">
-							<h3>Girl of the Month</h3>
+							<h3>{{ __('headings.gotm') }}</h3>
 							<table class="table packages-table package-girl-month">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Duration</th>
-										<th>Price</th>
-										<th>Activation Date</th>
+										<th>{{ __('headings.name') }}</th>
+										<th>{{ __('headings.duration') }}</th>
+										<th>{{ __('headings.price') }}</th>
+										<th>{{ __('headings.activation_date') }}</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -682,7 +682,7 @@ $(function () {
 	$('.show-more a').on('click', function(e){
 		var that = $(this);
 		e.preventDefault();
-		that.text(that.text() == 'Show More' ? 'Show Less' : 'Show More');
+		that.text(that.text() == '{{ __('buttons.show_more') }}' ? '{{ __('buttons.show_less') }}' : '{{ __('buttons.show_more') }}');
 		$('table.language-table').find('.language-list:last-child').toggle();
 	});
 });
