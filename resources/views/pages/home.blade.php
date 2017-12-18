@@ -319,7 +319,7 @@
                                     });
                                 </script>
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&sensor=false&libraries=places"></script>
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places"></script>
 
                                 <script>
                                     var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
