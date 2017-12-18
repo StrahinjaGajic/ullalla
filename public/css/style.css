@@ -2539,13 +2539,13 @@ table.services-table td {
     position: relative;
 }
 
-.geolocation a {
+a.geolocation-button {
     position: absolute;
     top: 6px;
     right: 8px;
     cursor: pointer;
 }
 
-.geolocation img {
+img.geolocation-image {
     width: 15px;
 }
