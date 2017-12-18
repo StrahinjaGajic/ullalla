@@ -27,6 +27,7 @@ return [
 	'signout' => 'Sign Out',
 	'profile' => 'Profile',
 	'create_profile' => 'Create Profile',
+	'search_results' => 'Search Results',
 
 	# edit profile
 	'save_changes' => 'Save Changes',
@@ -40,5 +41,15 @@ return [
 	'reset_filters' => 'Reset Filters',
 	'grid' => 'Grid',
 	'list' => 'List',
+
+    #locals-single
+    'work_time' => 'Work Time',
+    'club_info' => 'Club Info',
+    'girls' => 'Girls',
+    'video' => 'Video',
+    'day' => 'Day',
+    'from' => 'From',
+    'to' => 'To',
+
 
 ];

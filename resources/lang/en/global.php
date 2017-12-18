@@ -10,4 +10,6 @@ return [
     'per_page' => 'per page',
     'show' => 'Show',
     'sort_by' => 'Sort By',
+    'min' => 'min',
+    'hrs' => 'hrs',
 ];

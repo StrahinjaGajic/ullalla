@@ -16,14 +16,14 @@
             {!! parseEditLocalProfileMenu('about_me') !!}
         </div>
         <div class="col-sm-10 profile-info" >
-            <h3>About Me</h3>
+            <h3>{{ __('headings.about_me') }}</h3>
             <div class="row">
                 {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/about_me/store', 'method' => 'put']) !!}
                 <div class="form-group">
-                    <label for="comment">Text Area</label>
+                    <label for="comment">{{ __('labels.text_area') }}</label>
                     <textarea class="form-control" rows="5" id="comment" name="about_me">{{ $local->about_me }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-default">Save Changes</button>
+                <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
                 {!! Form::close() !!}
             </div>
         </div>

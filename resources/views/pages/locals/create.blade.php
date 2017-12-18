@@ -13,38 +13,38 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         {!! Form::open(['url' => 'locals/@' . $local->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-                        <h2>Contact</h2>
+                        <h2>{{ __('headings.contact') }}</h2>
                         <section data-step="0">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label">Name*</label>
+                                    <label class="control-label">{{ __('labels.name') }}*</label>
                                     <input type="text" class="form-control" name="name" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Phone</label>
+                                    <label class="control-label">{{ __('labels.phone') }}</label>
                                     <input type="text" class="form-control" name="phone" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Web</label>
+                                    <label class="control-label">{{ __('labels.web') }}</label>
                                     <input type="text" class="form-control" name="web" />
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label">Street</label>
+                                    <label class="control-label">{{ __('labels.street') }}</label>
                                     <input type="text" class="form-control" name="street" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">ZIP</label>
+                                    <label class="control-label">{{ __('labels.zip') }}</label>
                                     <input type="text" class="form-control" name="zip" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">City</label>
+                                    <label class="control-label">{{ __('labels.city') }}</label>
                                     <input type="text" class="form-control" name="city" />
                                 </div>
                             </div>
                         </section>
-                        <h2>Gallery</h2>
+                        <h2>{{ __('headings.gallery') }}</h2>
                         <section data-step="1">
                             <div class="form-group">
                                 <div class="image-preview">
@@ -63,12 +63,12 @@
                                 <video id="video" width="320" height="240" loop style="display: block;"></video>
                             </div>
                         </section>
-                        <h2>Working Hours</h2>
+                        <h2>{{ __('headings.working_hours') }}</h2>
                         <section data-step="2">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <div id="available_24_7">
-                                        <label class="control control--checkbox"><a>Available 24/7</a>
+                                        <label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
                                             <input type="checkbox" name="available_24_7">
                                             <div class="control__indicator"></div>
                                         </label>
@@ -77,13 +77,13 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                <label class="control control--checkbox"><a>Mark All</a>
+                                                <label class="control control--checkbox"><a>{{ __('labels.mark_all') }}</a>
                                                     <input type="checkbox" id="select_all_days">
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </th>
-                                            <th>From</th>
-                                            <th>To</th>
+                                            <th>{{ __('buttons.from') }}</th>
+                                            <th>{{ __('buttons.to') }}</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -103,13 +103,13 @@
                                                             <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>hrs</span>
+                                                    <span>{{ __('global.hrs') }}</span>
                                                     <select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                             <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>min</span>
+                                                    <span>{{ __('global.min') }}</span>
                                                 </td>
                                                 <td>
                                                     <select name="time_to[{{ $counter }}]" class="form-control" disabled="">
@@ -117,13 +117,13 @@
                                                             <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>hrs</span>
+                                                    <span>{{ __('global.hrs') }}</span>
                                                     <select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                             <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>min</span>
+                                                    <span>{{ __('global.min') }}</span>
                                                 </td>
                                             </tr>
                                             <?php $counter++; ?>
@@ -133,13 +133,13 @@
                                 </div>
                             </div>
                         </section>
-                        <h2>About us</h2>
+                        <h2>{{ __('headings.about_us') }}</h2>
                         <section data-step="3">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">About us</label><br>
+                                    <label class="control-label">{{ __('labels.about_us') }}</label><br>
                                     <textarea name="about_me" style="width:100%;height:250px;"></textarea>
-                                    <label class="control-label">Local type</label><br>
+                                    <label class="control-label">{{ __('labels.local_type') }}</label><br>
                                     <select name="local_type_id">
                                         @foreach($types as $type)
                                             <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -148,42 +148,42 @@
                                 </div>
                             </div>
                         </section>
-                        <h2>Club Info</h2>
+                        <h2>{{ __('headings.club_info') }}</h2>
                         <section data-step="4">
                             <div class="col-xs-12">
                                 <div class="form-group club-info">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">Entrance</label>
+                                            <label class="control-label">{{ __('labels.entrance') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" id="entrance-na" onclick="uncheckEntranceFree()" name="entrance" value="1" checked>
-                                            <label class="control-label">N / A</label>
+                                            <label class="control-label">{{ __('labels.n_a') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" id="entrance-free" onclick="uncheckEntrance()" name="entrance-free" value="1">
-                                            <label class="control-label">Free</label>
+                                            <label class="control-label">{{ __('labels.free') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" id="entrance-cost" onclick="uncheckEntrance()" name="entrance-free" value="2">
-                                            <label class="control-label">With cost</label>
+                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">Wellness</label>
+                                            <label class="control-label">{{ __('labels.wellness') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="wellness" value="1" onclick="hideWellness()" checked>
-                                            <label class="control-label">N / A</label>
+                                            <label class="control-label">{{ __('labels.n_a') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="wellness" value="2" onclick="showWellness()">
-                                            <label class="control-label">Yes</label>
+                                            <label class="control-label">{{ __('labels.yes') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="wellness" value="3" onclick="hideWellness()">
-                                            <label class="control-label">No</label>
+                                            <label class="control-label">{{ __('labels.no') }}</label>
                                         </div>
                                     </div>
                                     <div class="row hidden" id="wellness-show">
@@ -191,30 +191,30 @@
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="wellness-free" value="1">
-                                            <label class="control-label">Free</label>
+                                            <label class="control-label">{{ __('labels.free') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="wellness-free" value="2">
-                                            <label class="control-label">With cost</label>
+                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">Food and drinks</label>
+                                            <label class="control-label">{{ __('labels.food_and_drinks') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="food" value="1" onclick="hideFood()" checked>
-                                            <label class="control-label">N / A</label>
+                                            <label class="control-label">{{ __('labels.n_a') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="food" value="2" onclick="showFood()">
-                                            <label class="control-label">Yes</label>
+                                            <label class="control-label">{{ __('labels.yes') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="food" value="3" onclick="hideFood()">
-                                            <label class="control-label">No</label>
+                                            <label class="control-label">{{ __('labels.no') }}</label>
                                         </div>
                                     </div>
                                     <div class="row hidden" id="food-show">
@@ -222,52 +222,52 @@
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="food-free" value="1">
-                                            <label class="control-label">Free</label>
+                                            <label class="control-label">{{ __('labels.free') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="food-free" value="2">
-                                            <label class="control-label">With cost</label>
+                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">Outdoor area</label>
+                                            <label class="control-label">{{ __('labels.outdoor_area') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="outdoor" value="1" checked>
-                                            <label class="control-label">N / A</label>
+                                            <label class="control-label">{{ __('labels.n_a') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="outdoor" value="2">
-                                            <label class="control-label">Yes</label>
+                                            <label class="control-label">{{ __('labels.yes') }}</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="radio" name="outdoor" value="3">
-                                            <label class="control-label">No</label>
+                                            <label class="control-label">{{ __('labels.no') }}</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <h2>Packages</h2>
+                        <h2>{{ __('headings.packages') }}</h2>
                         <section data-step="5">
                             <div class="col-xs-12">
                                 <div class="form-group club-info">
                                     <div class="row">
                                         <div class="col-xs-12 default-packages-section" id="default-packages-section">
-                                            <h3>Default Packages</h3>
+                                            <h3>{{ __('headings.default_packages') }}</h3>
                                             <div class="has-error">
                                                 <div id="alertPackageMessage" class="help-block"></div>
                                             </div>
                                             <table class="table packages-table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Duration</th>
-                                                    <th>Price</th>
-                                                    <th>Activation Date</th>
+                                                    <th>{{ __('headings.name') }}</th>
+                                                    <th>{{ __('headings.duration') }}</th>
+                                                    <th>{{ __('headings.price') }}</th>
+                                                    <th>{{ __('headings.activation_date') }}</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
@@ -278,8 +278,8 @@
                                                         <td>{{ $package->name }}</td>
                                                         <td>
                                                             <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-                                                                <option value="month">Month</option>
-                                                                <option value="year">Year</option>
+                                                                <option value="month">{{ __('tables.month') }}</option>
+                                                                <option value="year">{{ __('tables.year') }}</option>
                                                             </select>
                                                         </td>
                                                         <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
@@ -586,41 +586,41 @@
     </script>
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    <script>
-        let stripe = StripeCheckout.configure({
-            key: '{{ config('services.stripe.key') }}',
-            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-            locale: 'auto',
-            token: function (token) {
-                var stripeEmail = $('#stripeEmail');
-                var stripeToken = $('#stripeToken');
-                stripeEmail.val(token.email);
-                stripeToken.val(token.id);
-                // submit the form
-                var username = '{{ $local->username }}';
-                var url = getUrl('/locals/@' + username + '/store');
-                console.log(url);
-                var token = $('input[name="_token"]').val();
-                var form = $('#profileForm');
-                var data = form.serialize();
-                // fire ajax post request
-                $.post(url, data)
-                        .done(function (data) {
-                            window.location.href = getUrl("");
-                        })
-                        .fail(function(data, textStatus) {
-                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                        });
-            }
-        });
-        $('#profileForm').on('submit', function (e) {
-            stripe.open({
-                name: 'Ullalla',
-                description: '{{ $local->email }}',
-            });
-            e.preventDefault();
-        });
-    </script>
+    {{--<script>--}}
+        {{--let stripe = StripeCheckout.configure({--}}
+            {{--key: '{{ config('services.stripe.key') }}',--}}
+            {{--image: 'https://stripe.com/img/documentation/checkout/marketplace.png',--}}
+            {{--locale: 'auto',--}}
+            {{--token: function (token) {--}}
+                {{--var stripeEmail = $('#stripeEmail');--}}
+                {{--var stripeToken = $('#stripeToken');--}}
+                {{--stripeEmail.val(token.email);--}}
+                {{--stripeToken.val(token.id);--}}
+                {{--// submit the form--}}
+                {{--var username = '{{ $local->username }}';--}}
+                {{--var url = getUrl('/locals/@' + username + '/store');--}}
+                {{--console.log(url);--}}
+                {{--var token = $('input[name="_token"]').val();--}}
+                {{--var form = $('#profileForm');--}}
+                {{--var data = form.serialize();--}}
+                {{--// fire ajax post request--}}
+                {{--$.post(url, data)--}}
+                        {{--.done(function (data) {--}}
+                            {{--window.location.href = getUrl("");--}}
+                        {{--})--}}
+                        {{--.fail(function(data, textStatus) {--}}
+                            {{--$('.default-packages-section').find('.help-block').text(data.responseJSON.status);--}}
+                        {{--});--}}
+            {{--}--}}
+        {{--});--}}
+        {{--$('#profileForm').on('submit', function (e) {--}}
+            {{--stripe.open({--}}
+                {{--name: 'Ullalla',--}}
+                {{--description: '{{ $local->email }}',--}}
+            {{--});--}}
+            {{--e.preventDefault();--}}
+        {{--});--}}
+    {{--</script>--}}
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';

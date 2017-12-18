@@ -14,9 +14,9 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="shop-menu">
                             <ul>
-                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
                                 <li class="separator"><i class="fa fa-angle-right"></i></li>
-                                <li>search results</li>
+                                <li>{{ __('buttons.search_results') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -28,12 +28,12 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                         <div class="left-sidebar-title">
-                            <h2>Search Filter</h2>
+                            <h2>{{ __('headings.search_filters') }}</h2>
                         </div>
                         <div class="left-sidebar">
                             <div class="shop-layout">
                                 <div class="layout-title">
-                                    <h2>Local Types</h2>
+                                    <h2>{{ __('headings.local_types') }}</h2>
                                 </div>
                                 <div class="layout-list">
                                     <ul>
@@ -61,14 +61,14 @@
                                 <div class="tab-bar">
                                     <div class="tab-bar-inner">
                                         <ul role="tablist" class="nav nav-tabs">
-                                            <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">Grid</span></a></li>
-                                            <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">List</span></a></li>
+                                            <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span></a></li>
+                                            <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="toolbar">
                                         <div class="sorter">
                                             <div class="sort-by">
-                                                <label class="sort-none">Sort By</label>
+                                                <label class="sort-none">{{ __('global.sort_by') }}</label>
                                                 <select name="order_by" onchange="location=this.value;"">
                                                 @foreach(getLoclasOrderBy() as $key => $order)
                                                     <option value="{{ urldecode(route('locals', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
@@ -79,13 +79,13 @@
                                         </div>
                                         <div class="pager-list">
                                             <div class="limiter">
-                                                <label>Show</label>
+                                                <label>{{ __('global.show') }}</label>
                                                 <select name="show" onchange="location=this.value">
                                                     @foreach(getShowNumbers() as $number)
                                                         <option value="{{ urldecode(route('locals', array_merge(request()->query(), ['show' => $number]), false)) }}" {{ request('show') == $number ? 'selected' : '' }}>{{ $number }}</option>
                                                     @endforeach
                                                 </select>
-                                                per page
+                                                {{ __('global.per_page') }}
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                                                         </div>
                                                                         <a href="{{ url('girls/' . $local->username) }}">
                                                                             <div class="product-cart">
-                                                                                <button class="button">View Profile</button>
+                                                                                <button class="button">{{ __('buttons.view_profile') }}</button>
                                                                             </div>
                                                                         </a>
                                                                     </div>
@@ -149,20 +149,20 @@
                                             @endforeach
                                         </div>
                                     @else
-                                        <h1>No Users Found</h1>
+                                        <h1>{{ __('headings.no_users_found') }}</h1>
                                     @endif
                                 </div>
                                 <div class="tab-bar tab-bar-bottom">
                                     <div class="tab-bar-inner">
                                         <ul role="tablist" class="nav nav-tabs">
-                                            <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">Grid</span></a></li>
-                                            <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">List</span></a></li>
+                                            <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span></a></li>
+                                            <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="toolbar">
                                         <div class="sorter">
                                             <div class="sort-by">
-                                                <label class="sort-none">Sort By</label>
+                                                <label class="sort-none">{{ __('global.sort_by') }}</label>
                                                 <select name="order_by" onchange="location=this.value;"">
                                                 @foreach(getLoclasOrderBy() as $key => $order)
                                                     <option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>

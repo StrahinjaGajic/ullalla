@@ -19,9 +19,9 @@
 </div>
 <div class="col-sm-10 profile-info">
     {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/gallery/store', 'method' => 'PUT']) !!}
-    <h3 style="margin-bottom: 40px;">Gallery</h3>
+    <h3 style="margin-bottom: 40px;">{{ __('headings.gallery') }}</h3>
     <div class="row">
-        <h1>Logo</h1>
+        <h1>{{ __('headings.logo') }}</h1>
         <div class="form-group">
             <div class="image-preview">
                 <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="490x560 minimum" data-images-only=""><br><br>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <h1>Photos</h1>
+        <h1>{{ __('headings.photos') }}</h1>
         <div class="form-group">
             <div class="image-preview-multiple">
                 <input type="hidden" onchange="aa()" role="uploadcare-uploader" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
@@ -48,7 +48,7 @@
         @if ($errors->has('photos'))
             <span class="help-block">{{ $errors->first('photos') }}</span>
         @endif
-        <h1>Videos</h1>
+        <h1>{{ __('headings.videos') }}</h1>
         <div class="form-group upload-video">
             <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/><br><br>
             <video id="video" width="320" height="240" loop style="display: block;"></video>
