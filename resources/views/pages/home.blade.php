@@ -349,7 +349,16 @@
 
                                         autocomplete.addListener('place_changed', function() { 
                                             var place = autocomplete.getPlace();
-                                            console.log(place);
+                                            var lat = place.geometry.location.lat();
+                                            var lng = place.geometry.location.lng();
+                                            $.ajax({
+                                                url: getUrl('/get_guest_data'),
+                                                type: 'post',
+                                                data: {lat: lat, lng: lng, _token: token},
+                                                success: function (data) {
+                                                    return true;
+                                                }
+                                            });
                                         });                  
                                     }
 
