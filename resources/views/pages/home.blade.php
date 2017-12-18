@@ -317,7 +317,7 @@
                                     });
                                 </script>
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places"></script>
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
 
                                 <script>
                                     var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
@@ -367,8 +367,6 @@
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
                                     }
-
-                                    initialize();
 
                                 </script>
 
