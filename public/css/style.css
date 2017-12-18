@@ -2541,8 +2541,8 @@ table.services-table td {
 
 .geolocation a {
     position: absolute;
-    top: 6;
-    right: 8;
+    top: 6px;
+    right: 8px;
     cursor: pointer;
 }
 
