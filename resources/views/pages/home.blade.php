@@ -337,8 +337,10 @@
                                     var x = document.getElementById("location");
                                     var inputCity = document.getElementById('city');
 
-                                    var autocomplete = new google.maps.places.Autocomplete(input);
+                                    var autocomplete = new google.maps.places.Autocomplete(inputCity);
 
+                                    console.log(autocomplete);
+                                    
                                     function getLocation(autocomplete) {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(showPosition);
