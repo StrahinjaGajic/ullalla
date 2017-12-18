@@ -341,11 +341,7 @@
                                         var autocomplete = new google.maps.places.Autocomplete(
                                             (inputCity), {
                                                 types: ['geocode']
-                                            });
-                                        var geocoder = new google.maps.Geocoder;
-                                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                                            fillInAddress();
-                                        });
+                                            });                                        
                                     }
 
                                     function fillInAddress() {
@@ -355,12 +351,13 @@
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
+                                                var geocoder = new google.maps.Geocoder;
                                                 var latlng = {
                                                     lat: position.coords.latitude, 
                                                     lng: position.coords.longitude
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
-                                                        console.log(results);
+                                                    console.log(results);
                                                 });
                                             });
                                         } else {
