@@ -42,6 +42,7 @@ class CreateLocalsTable extends Migration
             $table->timestamp('package1_activation_date')->nullable();
             $table->timestamp('package1_expiry_date')->nullable();
             $table->string('stripe_id')->nullable();
+            $table->string('stripe_amount')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

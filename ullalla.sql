@@ -26,7 +26,7 @@ CREATE TABLE `cantons` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `canton_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,8 +35,35 @@ CREATE TABLE `cantons` (
 
 LOCK TABLES `cantons` WRITE;
 /*!40000 ALTER TABLE `cantons` DISABLE KEYS */;
-INSERT INTO `cantons` VALUES (1,'Waadt'),(2,'Genf'),(3,'Freiburg'),(4,'Bern'),(5,'Wallis'),(6,'Neuenburg'),(7,'Jura'),(8,'Solothurn'),(9,'Basel-Landschaft'),(10,'Basel-Stadt'),(11,'Aargau'),(12,'Luzern'),(13,'Obwalden'),(14,'Nidwalden'),(15,'Zug'),(16,'Uri'),(17,'Schwytz'),(18,'Tessin'),(19,'Graubünden'),(20,'IT'),(21,'St. Gallen'),(22,'Zürich'),(23,'Schaffhausen'),(24,'Büsingen'),(25,'Thurgau'),(26,'Glarus'),(27,'Appenzell Ausserrhoden'),(28,'Appenzell Innerrhoden'),(29,'Fürstentum Liechtenstein');
+INSERT INTO `cantons` VALUES (1,'Zürich'),(2,'Bern'),(3,'Luzern'),(4,'Uri'),(5,'Schwyz'),(6,'Obwalden'),(7,'Nidwalden'),(8,'Glarus'),(9,'Zug'),(10,'Fribourg'),(11,'Solothurn'),(12,'Basel-Stadt'),(13,'Basel-Landschaft'),(14,'Schaffhausen'),(15,'Appenzell Ausserrhoden'),(16,'Appenzell Innerrhoden'),(17,'St. Gallen'),(18,'Graubünden'),(19,'Aargau'),(20,'Thurgau'),(21,'Ticino'),(22,'Vaud'),(23,'Valais'),(24,'Neuchâtel'),(25,'Geneva'),(26,'Jura');
 /*!40000 ALTER TABLE `cantons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clubs_info`
+--
+
+DROP TABLE IF EXISTS `clubs_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clubs_info` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` int(11) NOT NULL,
+  `free` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clubs_info`
+--
+
+LOCK TABLES `clubs_info` WRITE;
+/*!40000 ALTER TABLE `clubs_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clubs_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -105,6 +132,117 @@ INSERT INTO `countries` VALUES (4,'Kabul','Afghan','004','afghani','AFN','pul','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `local_girls`
+--
+
+DROP TABLE IF EXISTS `local_girls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `local_girls` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `local_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `local_girls_local_id_foreign` (`local_id`),
+  CONSTRAINT `local_girls_local_id_foreign` FOREIGN KEY (`local_id`) REFERENCES `locals` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `local_girls`
+--
+
+LOCK TABLES `local_girls` WRITE;
+/*!40000 ALTER TABLE `local_girls` DISABLE KEYS */;
+/*!40000 ALTER TABLE `local_girls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `local_types`
+--
+
+DROP TABLE IF EXISTS `local_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `local_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `local_types`
+--
+
+LOCK TABLES `local_types` WRITE;
+/*!40000 ALTER TABLE `local_types` DISABLE KEYS */;
+INSERT INTO `local_types` VALUES (1,'Tip 1','2017-12-12 21:06:10','2017-12-12 21:06:10'),(2,'Tip 2','2017-12-12 21:06:10','2017-12-12 21:06:10'),(3,'Tip 3','2017-12-12 21:06:10','2017-12-12 21:06:10'),(4,'Tip 4','2017-12-12 21:06:10','2017-12-12 21:06:10'),(5,'Tip 5','2017-12-12 21:06:10','2017-12-12 21:06:10'),(6,'Tip 6','2017-12-12 21:06:10','2017-12-12 21:06:10');
+/*!40000 ALTER TABLE `local_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `locals`
+--
+
+DROP TABLE IF EXISTS `locals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `locals` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `activated` int(11) DEFAULT NULL,
+  `approved` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `street` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `web` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `about_me` text COLLATE utf8mb4_unicode_ci,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `videos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `working_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `club_entrance_id` int(10) unsigned DEFAULT NULL,
+  `club_wellness_id` int(10) unsigned DEFAULT NULL,
+  `club_food_id` int(10) unsigned DEFAULT NULL,
+  `club_outdoor_id` int(10) unsigned DEFAULT NULL,
+  `local_type_id` int(10) unsigned DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locals_club_entrance_id_foreign` (`club_entrance_id`),
+  KEY `locals_club_wellness_id_foreign` (`club_wellness_id`),
+  KEY `locals_club_food_id_foreign` (`club_food_id`),
+  KEY `locals_club_outdoor_id_foreign` (`club_outdoor_id`),
+  KEY `locals_local_type_id_foreign` (`local_type_id`),
+  CONSTRAINT `locals_club_entrance_id_foreign` FOREIGN KEY (`club_entrance_id`) REFERENCES `clubs_info` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `locals_club_food_id_foreign` FOREIGN KEY (`club_food_id`) REFERENCES `clubs_info` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `locals_club_outdoor_id_foreign` FOREIGN KEY (`club_outdoor_id`) REFERENCES `clubs_info` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `locals_club_wellness_id_foreign` FOREIGN KEY (`club_wellness_id`) REFERENCES `clubs_info` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `locals_local_type_id_foreign` FOREIGN KEY (`local_type_id`) REFERENCES `local_types` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `locals`
+--
+
+LOCK TABLES `locals` WRITE;
+/*!40000 ALTER TABLE `locals` DISABLE KEYS */;
+/*!40000 ALTER TABLE `locals` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -116,7 +254,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +263,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (21,'2017_11_01_150903_setup_countries_table',1),(22,'2017_11_01_150904_charify_countries_table',1),(23,'2017_11_01_152958_create_services_table',1),(24,'2017_11_01_155723_create_cantons_table',1),(25,'2017_11_01_163800_create_user_types_table',1),(26,'2017_11_02_000000_create_users_table',1),(27,'2017_11_02_100000_create_password_resets_table',1),(28,'2017_11_02_153237_create_user_service_table',1),(29,'2017_11_02_175533_create_prices_table',1),(30,'2017_11_02_181235_create_packages_table',1),(31,'2017_11_03_161925_create_user_activations_table',1),(32,'2017_11_13_205100_create_roles_table',1),(33,'2017_11_13_205202_create_user_role_table',1),(34,'2017_11_22_153939_create_notifications_table',1),(35,'2017_11_29_161731_create_contact_options_table',1),(36,'2017_11_29_162151_create_user_contact_option',1),(37,'2017_11_29_172652_create_service_options_table',1),(38,'2017_11_29_173003_create_user_service_options_table',1),(39,'2017_11_29_213138_create_spoken_languages_table',1),(40,'2017_11_29_213458_create_user_spoken_language_table',1);
+INSERT INTO `migrations` VALUES (42,'2017_11_01_150903_setup_countries_table',1),(43,'2017_11_01_150904_charify_countries_table',1),(44,'2017_11_01_152958_create_services_table',1),(45,'2017_11_01_155723_create_cantons_table',1),(46,'2017_11_01_163800_create_user_types_table',1),(47,'2017_11_02_000000_create_users_table',1),(48,'2017_11_02_100000_create_password_resets_table',1),(49,'2017_11_02_153237_create_user_service_table',1),(50,'2017_11_02_175533_create_prices_table',1),(51,'2017_11_02_181235_create_packages_table',1),(52,'2017_11_03_161925_create_user_activations_table',1),(53,'2017_11_04_201104_create_clubs_info_table',1),(54,'2017_11_07_120653_create_local_types_table',1),(55,'2017_11_13_205100_create_roles_table',1),(56,'2017_11_13_205202_create_user_role_table',1),(57,'2017_11_22_153939_create_notifications_table',1),(58,'2017_11_29_161731_create_contact_options_table',1),(59,'2017_11_29_162151_create_user_contact_option',1),(60,'2017_11_29_172652_create_service_options_table',1),(61,'2017_11_29_173003_create_user_service_options_table',1),(62,'2017_11_29_213138_create_spoken_languages_table',1),(63,'2017_11_29_213458_create_user_spoken_language_table',1),(64,'2017_11_30_144509_create_locals_table',1),(65,'2017_12_07_121332_create_local_girls_table',1),(66,'2017_12_07_173643_add_spoken_language_code_to_spoken_languages_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +284,7 @@ CREATE TABLE `notifications` (
   `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +293,7 @@ CREATE TABLE `notifications` (
 
 LOCK TABLES `notifications` WRITE;
 /*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
-INSERT INTO `notifications` VALUES (4,NULL,'Girl of The Month Package Expiration','Your girl of the month package expires on 6th December 2017',0,1,'App\\Models\\User','2017-12-05 18:02:13');
+INSERT INTO `notifications` VALUES (3,NULL,'Girl of The Month Package Expiration','Your girl of the month package expires on 12th December 2017',0,1,'App\\Models\\User','2017-12-13 22:34:17');
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +321,7 @@ CREATE TABLE `packages` (
 
 LOCK TABLES `packages` WRITE;
 /*!40000 ALTER TABLE `packages` DISABLE KEYS */;
-INSERT INTO `packages` VALUES (1,'7 / S','7 Days','50 CF','2017-11-30 16:04:16','2017-11-30 16:04:16'),(2,'14 / M','14 Days','150 CF','2017-11-30 16:04:16','2017-11-30 16:04:16'),(3,'30 / L','30 Days','250 CF','2017-11-30 16:04:16','2017-11-30 16:04:16'),(4,'90 / XL','90 Days','350 CF','2017-11-30 16:04:16','2017-11-30 16:04:16'),(5,'180 / XXL','180 Days','450 CF','2017-11-30 16:04:16','2017-11-30 16:04:16'),(6,'360 / XXXL','360 Days','550 CF','2017-11-30 16:04:16','2017-11-30 16:04:16');
+INSERT INTO `packages` VALUES (1,'7 / S','7 Days','50 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09'),(2,'14 / M','14 Days','150 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09'),(3,'30 / L','30 Days','250 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09'),(4,'90 / XL','90 Days','350 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09'),(5,'180 / XXL','180 Days','450 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09'),(6,'360 / XXXL','360 Days','550 CHF','2017-12-12 21:06:09','2017-12-12 21:06:09');
 /*!40000 ALTER TABLE `packages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,8 +335,7 @@ DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -229,7 +366,7 @@ CREATE TABLE `prices` (
   PRIMARY KEY (`id`),
   KEY `prices_user_id_foreign` (`user_id`),
   CONSTRAINT `prices_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +375,7 @@ CREATE TABLE `prices` (
 
 LOCK TABLES `prices` WRITE;
 /*!40000 ALTER TABLE `prices` DISABLE KEYS */;
-INSERT INTO `prices` VALUES (7,1,'incall',12,100,'hours','usd'),(8,1,'incall',32,35,'hours','eur'),(9,1,'incall',12,23,'hours','eur'),(10,1,'outcall',12,32,'hours','usd'),(11,1,'outcall',32,23,'hours','usd'),(12,1,'incall',15,30,'minutes','chf');
+INSERT INTO `prices` VALUES (1,1,'outcall',12,23,'days','chf'),(2,1,'outcall',23,43,'days','chf'),(3,1,'outcall',65,45,'days','chf');
 /*!40000 ALTER TABLE `prices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +402,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Standard User','A standard registered user with no admin rights.','2017-11-30 16:04:17','2017-11-30 16:04:17'),(2,'Moderator','A moderator of the website who has similar permissions as the admin, but is not allowed to go to the admin page etc.','2017-11-30 16:04:17','2017-11-30 16:04:17'),(3,'Admin','An admin of the website who has similar permissions as the super admin, but still some of the permissions are restricted.','2017-11-30 16:04:17','2017-11-30 16:04:17');
+INSERT INTO `roles` VALUES (1,'Standard User','A standard registered user with no admin rights.','2017-12-12 21:06:10','2017-12-12 21:06:10'),(2,'Moderator','A moderator of the website who has similar permissions as the admin, but is not allowed to go to the admin page etc.','2017-12-12 21:06:10','2017-12-12 21:06:10'),(3,'Admin','An admin of the website who has similar permissions as the super admin, but still some of the permissions are restricted.','2017-12-12 21:06:10','2017-12-12 21:06:10');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,6 +464,7 @@ DROP TABLE IF EXISTS `spoken_languages`;
 CREATE TABLE `spoken_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `spoken_language_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `spoken_language_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -337,7 +475,7 @@ CREATE TABLE `spoken_languages` (
 
 LOCK TABLES `spoken_languages` WRITE;
 /*!40000 ALTER TABLE `spoken_languages` DISABLE KEYS */;
-INSERT INTO `spoken_languages` VALUES (1,'English'),(2,'German'),(3,'Italian'),(4,'French'),(5,'Spanish'),(6,'Russian'),(7,'Portuguese'),(8,'Dutch'),(9,'Serbian'),(10,'Slovenian'),(11,'Slovak'),(12,'Greek'),(13,'Bulgarian'),(14,'Czech'),(15,'Indian'),(16,'Arabic'),(17,'Japanese'),(18,'Chinese'),(19,'Finnish'),(20,'Norwegian'),(21,'Swedish'),(22,'Danish'),(23,'Turkish'),(24,'Polish'),(25,'Romanian');
+INSERT INTO `spoken_languages` VALUES (1,'English','en'),(2,'German','de'),(3,'Italian','it'),(4,'French','fr'),(5,'Spanish','es'),(6,'Russian','ru'),(7,'Portuguese','pt'),(8,'Dutch','nl'),(9,'Serbian','rs'),(10,'Slovenian','sl'),(11,'Slovak','sk'),(12,'Greek','gr'),(13,'Bulgarian','bg'),(14,'Czech','cz'),(15,'Indian','in'),(16,'Arabic','sa'),(17,'Japanese','jp'),(18,'Chinese','cn'),(19,'Finnish','fi'),(20,'Norwegian','no'),(21,'Swedish','se'),(22,'Danish','dk'),(23,'Turkish','tr'),(24,'Polish','pl'),(25,'Romanian','ro');
 /*!40000 ALTER TABLE `spoken_languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,13 +489,14 @@ DROP TABLE IF EXISTS `user_activations`;
 CREATE TABLE `user_activations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
+  `user_type` int(11) NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_activations_user_id_foreign` (`user_id`),
   CONSTRAINT `user_activations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,6 +505,7 @@ CREATE TABLE `user_activations` (
 
 LOCK TABLES `user_activations` WRITE;
 /*!40000 ALTER TABLE `user_activations` DISABLE KEYS */;
+INSERT INTO `user_activations` VALUES (1,1,1,'',NULL,NULL),(2,14,1,'C9JVh6PJQ3tu3bOwGkH41YxGbuNSRmcdhYc69ag9',NULL,NULL);
 /*!40000 ALTER TABLE `user_activations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,7 +525,7 @@ CREATE TABLE `user_contact_option` (
   KEY `user_contact_option_contact_option_id_foreign` (`contact_option_id`),
   CONSTRAINT `user_contact_option_contact_option_id_foreign` FOREIGN KEY (`contact_option_id`) REFERENCES `contact_options` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_contact_option_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +534,7 @@ CREATE TABLE `user_contact_option` (
 
 LOCK TABLES `user_contact_option` WRITE;
 /*!40000 ALTER TABLE `user_contact_option` DISABLE KEYS */;
-INSERT INTO `user_contact_option` VALUES (16,1,1),(18,1,2);
+INSERT INTO `user_contact_option` VALUES (1,1,2),(2,1,3);
 /*!40000 ALTER TABLE `user_contact_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,7 +584,7 @@ CREATE TABLE `user_service` (
   KEY `user_service_service_id_foreign` (`service_id`),
   CONSTRAINT `user_service_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_service_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -453,7 +593,6 @@ CREATE TABLE `user_service` (
 
 LOCK TABLES `user_service` WRITE;
 /*!40000 ALTER TABLE `user_service` DISABLE KEYS */;
-INSERT INTO `user_service` VALUES (2,1,1),(3,1,2),(4,1,3),(6,1,5),(7,1,6),(8,1,7),(9,1,17),(10,1,21),(11,1,22),(12,1,25),(13,1,30),(14,1,33),(15,1,35),(16,1,8),(17,1,9),(18,1,10),(19,1,12),(20,1,18),(21,1,19),(22,1,23),(23,1,24),(24,1,32),(25,1,37);
 /*!40000 ALTER TABLE `user_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -473,7 +612,7 @@ CREATE TABLE `user_service_options` (
   KEY `user_service_options_service_option_id_foreign` (`service_option_id`),
   CONSTRAINT `user_service_options_service_option_id_foreign` FOREIGN KEY (`service_option_id`) REFERENCES `service_options` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_service_options_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -482,7 +621,6 @@ CREATE TABLE `user_service_options` (
 
 LOCK TABLES `user_service_options` WRITE;
 /*!40000 ALTER TABLE `user_service_options` DISABLE KEYS */;
-INSERT INTO `user_service_options` VALUES (3,1,2),(5,1,3);
 /*!40000 ALTER TABLE `user_service_options` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,7 +641,7 @@ CREATE TABLE `user_spoken_language` (
   KEY `user_spoken_language_spoken_language_id_foreign` (`spoken_language_id`),
   CONSTRAINT `user_spoken_language_spoken_language_id_foreign` FOREIGN KEY (`spoken_language_id`) REFERENCES `spoken_languages` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_spoken_language_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -512,7 +650,7 @@ CREATE TABLE `user_spoken_language` (
 
 LOCK TABLES `user_spoken_language` WRITE;
 /*!40000 ALTER TABLE `user_spoken_language` DISABLE KEYS */;
-INSERT INTO `user_spoken_language` VALUES (13,1,1,5),(14,1,2,1),(16,1,4,1),(17,1,5,2),(19,1,7,3);
+INSERT INTO `user_spoken_language` VALUES (11,1,2,2),(12,1,3,1),(13,1,1,3),(14,1,4,3),(15,1,5,2);
 /*!40000 ALTER TABLE `user_spoken_language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -590,6 +728,8 @@ CREATE TABLE `users` (
   `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lat` decimal(9,6) DEFAULT NULL,
+  `lng` decimal(9,6) DEFAULT NULL,
   `club_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `incall_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `outcall_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -605,15 +745,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_username_unique` (`username`),
-  UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_user_type_id_foreign` (`user_type_id`),
   KEY `users_country_id_foreign` (`country_id`),
   KEY `users_canton_id_foreign` (`canton_id`),
   CONSTRAINT `users_canton_id_foreign` FOREIGN KEY (`canton_id`) REFERENCES `cantons` (`id`) ON DELETE CASCADE,
   CONSTRAINT `users_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
   CONSTRAINT `users_user_type_id_foreign` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -622,7 +760,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'shogun','disabledbyfb@gmail.com','$2y$10$fTonWOr57DdzeVZuLxdpmuSQmwB8hO2zMxg7CFScyE6rGNFk7dT.q',1,1,1,1,1,'Paolo','Meloni','Paco',108,'24','145',NULL,'female','bisexual','european','normal','e','green','brunette','yes','no',NULL,'partial',NULL,'no','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.','http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/','https://ucarecdn.com/4b4dbead-8c71-4852-8c77-bc43c5e8d2b2/','012312','2343',NULL,'sms_and_call',NULL,1,2,'Pirot','iyu','Tanasko Rajic 64','asd','define_yourself|sdsdf','Hotel','[\"Monday|06:09 - 08:08&1\",\"Thuesday|10:09 - 09:11\",\"Wednesday|08:10 - 10:10&3\",\"Thursday|05:09 - 12:13&4\",\"Friday|07:06 - 00:00\",\"Saturday|00:00 - 00:00&6\",\"Sunday|00:00 - 00:00&7\"]',2,'2017-12-01 00:00:00','2017-12-15 00:00:00',1,'2017-11-30 00:00:00','2017-12-07 00:00:00','cus_BrimERULRcs9EK','IehhXcSTlOJotGjyKVE50ociBuSksdqsBtM9ZsBM27EUPaudywHY8xYWxkJw','2017-11-30 16:04:16','2017-12-05 19:15:02'),(2,'test1','test1@test1.com','$2y$10$L7ODV4EXAfFC3PPw.BhXRugtIBUNe4iUk1LbGr7Iq9.MQ/6UmN9F.',1,1,0,1,1,'Jena2','Jansen2','Jena2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(3,'test2','test2@test2.com','$2y$10$WQbbiBXvOhynxZtWMBBXVuO4dUVSFOUGGDBOq4Qql0t9b4RmOQeRK',1,1,0,0,0,'Jena3','Jansen3','Jena3',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(4,'test3','test3@test3.com','$2y$10$tchuQ5TpOsMhsgWcBZVizO1BKSwvTNPc834IFyTxQqUqsmKYtlY.a',1,1,1,1,0,'Jena4','Jansen4','Jena4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,2,NULL,NULL,NULL,'Home','Private Apartment','Home',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(5,'test4','test4@test4.com','$2y$10$Jb8OMZlI8s9wi2BEtfxBKeq.WQQLiFZLTTUeJFX8CJ5KPO2mjskFy',1,1,1,1,0,'Jena5','Jansen5','Jena5',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(6,'test5','test5@test5.com','$2y$10$RlBCWB/piPry.pBDawMYcOTD03Gi1TTmfZrnPPOH4ipT10j1eECMK',1,1,0,1,0,'Jena6','Jansen6','Jena6',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(7,'test6','test6@test6.com','$2y$10$PbWCHItUpzHGTQRixJ748u5NG4aryVsd.HPu6LKm8eVLawNV3JxGK',1,1,1,1,0,'Jena7','Jansen7','Jena7',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(8,'test7','test7@test7.com','$2y$10$RLfkJJI1.YZK9ZXwrjdZeeXxs2XUTe/ACnOBSC4g8d/T9eJ4Z3sjK',1,1,1,1,0,'Jena8','Jansen8','Jena8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(9,'test8','test8@test8.com','$2y$10$r6HanMTPj2Q3oND4nBvgj.YJpK/nyfervjsUyYBO9KSWAWV2/LibO',1,1,1,1,0,'Jena8','Jansen8','Jena8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(10,'test9','test9@test9.com','$2y$10$CiL9dRBl4hDQF5NDSRhFQOxThM7xle0gXL18lTY9nUnTo/SSupjLu',1,1,1,1,0,'Jena9','Jansen9','Jena9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(11,'test10','test10@test10.com','$2y$10$FJvQivuoKW2VugemJ0vUmuc0jsXq8koGikPR3sdAdxadBzsYPU.X2',1,1,1,1,0,'Jena10','Jansen10','Jena10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(12,'test11','test11@test11.com','$2y$10$OzHfw2ujbc9fm7r73WD8UeWLarMSXRYc53LGySMiS7qV.C3iHso9K',1,1,1,1,0,'Jena11','Jansen11','Jena11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17'),(13,'test12','test12@test12.com','$2y$10$bFRZdwzLwsH5RbuiIo9izuDmDFgXhkPa2k69YcOGeyJEvDFE2vmQm',1,1,0,1,0,'Jena12','Jansen12','Jena12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-11-30 16:04:17','2017-11-30 16:04:17');
+INSERT INTO `users` VALUES (1,'shogun','disabledbyfb@gmail.com','$2y$10$zJ9A5IYrAvuBgLBw.V5bUuiE.INWDgw2cJe.PZ/73DwtkYl/kbgt.',1,1,1,1,0,'Jena','Jansen','Jena',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'sms_and_call','skr',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,'2017-12-01 00:00:00','2017-12-20 20:32:59',1,'2017-12-13 00:00:00','2017-12-12 00:00:00','cus_BwQ91JEyodyKM8','urKHTL2oKLFti9ZGPQRVlomRbZekUkumZYwAxljTraIYo6Dx9QoMSaBznAZn','2017-12-12 21:06:09','2017-12-13 23:34:17'),(2,'test1','test1@test1.com','$2y$10$nQRjFP9TpSC.ng7ExejGyuz5qfpyxoioBkKUJxsxiYg8gVHYmxte.',1,1,0,0,0,'Jena2','Jansen2','Jena2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:09','2017-12-12 21:06:09'),(3,'test2','test2@test2.com','$2y$10$45qduuFC0AhtKjWra0Ao2eENg0p4KhcqSyzmA0HaN/GbEYLqiWExC',1,1,0,0,0,'Jena3','Jansen3','Jena3',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:09','2017-12-12 21:06:09'),(4,'test3','test3@test3.com','$2y$10$V6EOJkhtOb2ctrIap8CTYuBnOxaDPtDTY/4HkhQ40cQKkdd.2SWqm',1,1,1,0,0,'Jena4','Jansen4','Jena4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:09','2017-12-12 21:06:09'),(5,'test4','test4@test4.com','$2y$10$IWi0DAfumOHRg2bGAMBEDOCSwaBegqjPsJj3hL.TLrLAXGZ8FhejK',1,1,1,0,0,'Jena5','Jansen5','Jena5',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:09','2017-12-12 21:06:09'),(6,'test5','test5@test5.com','$2y$10$CbGS7z3Zv.YXN2GiJNloEOo6TSQyTPBZc5NcXfKECzSEciD5b.Q6y',1,1,0,0,0,'Jena6','Jansen6','Jena6',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(7,'test6','test6@test6.com','$2y$10$.kC9IEN7voE6z818mEnmGOUJSxwMgFujxHiSr9nYwlurNi/Ud4O6W',1,1,1,0,0,'Jena7','Jansen7','Jena7',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(8,'test7','test7@test7.com','$2y$10$II45G8MM5HzPtfrZ6AlKoOKX7oywPcazfr5NY.8RcsZmPqKUzZ.Oq',1,1,1,0,0,'Jena8','Jansen8','Jena8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(9,'test8','test8@test8.com','$2y$10$oHvbxBq2p9fxlLdCc9.bcOp4cQVaSb0rztxHhWnZseOh0g.coZehK',1,1,1,0,0,'Jena8','Jansen8','Jena8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(10,'test9','test9@test9.com','$2y$10$ieUCt/711Q8jkSSXzloAg.KYdvF/r5GKJA4mNNpHm.2RKfT96EVYO',1,1,1,0,0,'Jena9','Jansen9','Jena9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(11,'test10','test10@test10.com','$2y$10$1Ec3Dr1BalcQRQHoAxfaFOIlxgW96yvtySqq8eazo55zGIuLl9.pe',1,1,1,0,0,'Jena10','Jansen10','Jena10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(12,'test11','test11@test11.com','$2y$10$mXbYYy5oZlNUSxdrMKhDp.N.JBckfuXUGWPfjPozLVFbvRUNvOsHa',1,1,1,0,0,'Jena11','Jansen11','Jena11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(13,'test12','test12@test12.com','$2y$10$B3oZwDZ4Svqcb7hwu3tEXukqBAmcp0LhgYSevNx1QP4Z/0hBbz41a',1,1,0,0,0,'Jena12','Jansen12','Jena12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-12 21:06:10','2017-12-12 21:06:10'),(14,'oroku','something@something.com','$2y$10$xc3JhHk1Y1I8ZWB/zA.a3ua4a62ajdeJKEf4IYNQw/hqCSRScp5Zq',1,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2017-12-13 19:45:16','2017-12-13 19:45:16');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -635,4 +773,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-06 21:35:03
+-- Dump completed on 2017-12-14  9:14:44

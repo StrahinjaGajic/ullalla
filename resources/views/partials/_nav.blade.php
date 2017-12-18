@@ -25,24 +25,24 @@
                                         <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                         <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
                                         @if(!Auth::check() && !Auth::guard('local')->check())
-                                        <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
-                                        <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
+                                            <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
+                                            <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
                                         @else
-                                        @if($user && $user->approved == '1')
-                                        @if(Auth::guard('local')->user())
-                                        <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.profile') }}</a></li>
-                                        @elseif(Auth::user())
-                                        <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.profile') }}</a></li>
-                                        @endif
-                                        @endif
-                                        @if($user && !$user->package1_id)
-                                        @if(Auth::guard('local')->user())
-                                        <li><a href="{{ url('locals/@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
-                                        @elseif(Auth::user())
-                                        <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
-                                        @endif
-                                        @endif
-                                        <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
+                                            @if($user && $user->approved == '1')
+                                                @if(Auth::guard('local')->user())
+                                                    <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.profile') }}</a></li>
+                                                @elseif(Auth::user())
+                                                    <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.profile') }}</a></li>
+                                                @endif
+                                            @endif
+                                            @if($user && !$user->package1_id)
+                                                @if(Auth::guard('local')->user())
+                                                    <li><a href="{{ url('locals/@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
+                                                @elseif(Auth::user())
+                                                    <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
+                                                @endif
+                                            @endif
+                                            <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
                                         @endif
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

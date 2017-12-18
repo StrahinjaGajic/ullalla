@@ -90,15 +90,8 @@ ul {
     width: 129px;
     height: 40px;
     background: #f26522;
-    color: #fff;
-    display: block;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    color: white;
     border: none;
-    text-align: center;
 }
 
 .add-new-price:hover {
@@ -111,7 +104,7 @@ th, tr, td {
     color: white;
     text-transform: uppercase;
     font-weight: 100!important;
-    padding: 20px!important;
+    padding: 9px!important;
 }
 
 .language-table {
@@ -239,7 +232,34 @@ th, tr, td {
 .section-create-profile .price-table-container th,
 .section-create-profile .price-table-container td {
   padding: 10px !important;
+    font-size: 12px;
 }
+
+.ui-corner-all {
+    margin-top: 4px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    margin-top: 0;
+}
+
+.ui-slider-horizontal .ui-slider-range {
+    margin-top: 0;
+}
+
+.package_activation{
+    text-align: center;
+    font-size: 14px!important;
+}
+
+.package_activation:hover{
+    cursor: pointer;
+}
+
+.table-condensed {
+    margin-right: 8px;
+}
+
 
 /****** Radio and checkbox input fields ******/
 @keyframes click-wave {
@@ -315,6 +335,24 @@ th, tr, td {
   margin-bottom: 15px;
 }
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 20px;
+    color: white;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.col-xs-12 {
+    margin-bottom: 20px;
+}
+
 /***** Upload Care preview image ******/
 .image-preview-multiple ._list {
   padding-top: 20px;
@@ -358,6 +396,7 @@ table.working-times-table .form-control {
 
 table.working-times-table .form-control + span {
   margin-right: 10px;
+    font-size: 12px;
 }
 
 table.working-times-table .control--checkbox {
@@ -367,6 +406,7 @@ table.working-times-table .control--checkbox {
 table.working-times-table .control--checkbox a,
 #available_24_7 .control--checkbox a {
   display: block;
+    margin-top: 1px;
 }
 
 #available_24_7 {

@@ -495,7 +495,7 @@
 							</div>
 							<div class="col-xs-12">
 								<input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
-								<button type="submit" class="add-new-price btn btn-default">Add New Price</button>
+								<button type="submit" class="add-new-price">Add New Price</button>
 							</div>
 						</div>
 						<div class="col-xs-12 price-table-container">
@@ -538,7 +538,7 @@
 								@foreach($spokenLanguages->take(7) as $language)
 								<tr>
 									<td>
-										<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
+										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
 										{{ $language->spoken_language_name }}
 									</td>
 									<td>
@@ -552,7 +552,7 @@
 								@foreach($spokenLanguages->splice(7) as $language)
 								<tr>
 									<td>
-										<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
+										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
 										{{ $language->spoken_language_name }}
 									</td>
 									<td>

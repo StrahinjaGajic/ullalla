@@ -69,6 +69,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('package2_activation_date')->nullable();
             $table->timestamp('package2_expiry_date')->nullable();
             $table->string('stripe_id')->nullable();
+            $table->string('stripe_amount')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

@@ -452,6 +452,27 @@ function getDaysForExpiry($package_id) {
     return $days;
 }
 
+function getDaysForExpiryLocal($package_duration) {
+    $days = [];
+    if ($package_duration == 'month') {
+        $days = [
+            '7',
+            '4',
+            '2',
+        ];
+    } else if ($package_duration == 'year') {
+        $days = [
+            '30',
+            '15',
+            '7',
+            '4',
+            '2',
+        ];
+    }
+
+    return $days;
+}
+
 function getPackageExpiryDate($days) {
     return date("Y-m-d", strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "+" . $days . " days"));
 }
@@ -499,6 +520,7 @@ function getEditLocalProfilePages() {
         'about_me' => 'About me',
         'club_info' => 'Club Info',
         'girls' => 'Girls',
+        'packages' => 'Packages',
     ];
 }
 
