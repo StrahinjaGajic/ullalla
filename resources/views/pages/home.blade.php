@@ -357,7 +357,7 @@
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
                                                     if (results[0]) {
-                                                        inputCity.val(results[0].formatted_address);
+                                                        inputCity.value = results[0].formatted_address;
                                                     }
                                                 });
                                             });
