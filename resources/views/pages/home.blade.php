@@ -127,7 +127,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div style="width: 101%; text-align: center"><button class="button1 button2" onclick="getLocation()">Geolocalization</button></div> --}}
                 <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}
@@ -341,6 +340,19 @@
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(showPosition);
+                                            // populate the city value
+                                            autocomplete.addListener('place_changed', function() {
+                                                var place = autocomplete.getPlace();
+                                                if (!place.geometry) {
+                                                // User entered the name of a Place that was not suggested and
+                                                // pressed the Enter key, or the Place Details request failed.
+                                                window.alert("No details available for input: '" + place.name);
+                                                return;
+                                            }
+
+                                        var address = place.formatted_address;
+                                        console.log(address);
+                                    });
                                         } else { 
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
@@ -354,8 +366,6 @@
                                     function initializeAutocomplete() {
                                         var autocomplete = new google.maps.places.Autocomplete(inputCity);
                                     }
-
-                                    google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
                                 </script>
 
                                 <!-- radius -->
