@@ -342,7 +342,7 @@
                                     function getLocation() {
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(showPosition);
-                                            var autocomplete = new google.maps.places.Autocomplete(input);
+                                            var autocomplete = new google.maps.places.Autocomplete(inputCity);
                                         } else { 
                                             x.innerHTML = "Geolocation is not supported by this browser.";
                                         }
