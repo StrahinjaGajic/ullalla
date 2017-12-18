@@ -317,7 +317,7 @@
                                     });
                                 </script>
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initializeAutocomplete"></script>
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places"></script>
 
                                 <script>
                                     var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
@@ -337,9 +337,7 @@
                                     var x = document.getElementById("location");
                                     var inputCity = document.getElementById('city');
 
-                                    var autocomplete = function initializeAutocomplete() {
-                                        new google.maps.places.Autocomplete(inputCity);
-                                    }
+                                    var autocomplete = new google.maps.places.Autocomplete(input);
 
                                     function getLocation(autocomplete) {
                                         if (navigator.geolocation) {
