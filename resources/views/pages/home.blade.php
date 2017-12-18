@@ -111,8 +111,21 @@
                 <div class="containere1">
                     <div class="region">
                     </div>
-                    <div class="region">
+                    <div class="region geolocation">
                         <input name="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
+                        <img src="" alt="">
+                        <a onclick="getLocation()">
+                            <img src="{{ asset('svg/location.svg') }}" alt="">
+                        </a>
+                        <p id="location"></p>
+                        <label for="amount">{{ __('fields.radius') }}:</label>
+                        <div class="location-inputs">
+                            <input type="hidden" name="radius" value="{{ old('radius') }}">
+                        </div>
+                        <div id="radius-ranger" style="margin: 10px;"></div>
+                        <div class="slider-value-wrapper">
+                            <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+                        </div>
                     </div>
                 </div>
                 {{-- <div style="width: 101%; text-align: center"><button class="button1 button2" onclick="getLocation()">Geolocalization</button></div> --}}
@@ -186,95 +199,71 @@
 @section('perPageScripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
 @if(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
-    <script>
-        swal({
-            title: '{{ __('headings.package_expiration_title') }}',
-            confirmButtonText: '{{ __('buttons.close') }}',
-            html: '{!! __('messages.package_about_to_expire', [
-                                'note' => $localDefaultPackageExpired->note,
-                                'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
-                                ]) !!}',
+<script>
+    swal({
+        title: '{{ __('headings.package_expiration_title') }}',
+        confirmButtonText: '{{ __('buttons.close') }}',
+        html: '{!! __('messages.package_about_to_expire', [
+            'note' => $localDefaultPackageExpired->note,
+            'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+            ]) !!}',
             type: 'warning',
         });
     </script>
-@endif
-@if(Session::has('not_approved'))
-<script>
-    swal(
-        '{{ __('buttons.info_account_not_approved_title') }}',
-        '{{ Session::get('not_approved') }}',
-        'info'
-        );
-    </script>
     @endif
-
-    @if(Session::has('account_created'))
+    @if(Session::has('not_approved'))
     <script>
         swal(
-            '{{ __('buttons.account_created_title') }}',
-            '{{ Session::get('account_created') }}',
+            '{{ __('buttons.info_account_not_approved_title') }}',
+            '{{ Session::get('not_approved') }}',
             'info'
             );
         </script>
         @endif
 
-        @if((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && Session::has('gotm_expired_package_info'))
+        @if(Session::has('account_created'))
         <script>
-            swal.queue([{
-                title: '{{ __('headings.package_expiration_title') }}',
-                confirmButtonText: '{{ __('buttons.close') }}',
-                html: '{!! __('messages.package_about_to_expire', [
-                    'note' => $defaultPackageExpired->note,
-                    'url' => url('@' . Auth::user()->username . '/packages')
-                    ]) !!}',
-                    type: 'warning',
-                    showLoaderOnConfirm: true,
-                    preConfirm: () => {
-                        return swal({
-                            title: '{{ __('headings.default_error_title') }}',
-                            html: '{!! Session::get('gotm_expired_package_info') !!}',
-                            type: 'error'
-                        })
-                    }
-                }]);
+            swal(
+                '{{ __('buttons.account_created_title') }}',
+                '{{ Session::get('account_created') }}',
+                'info'
+                );
             </script>
+            @endif
 
-            @elseif(Session::has('gotm_expired_package_info'))
+            @if((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && Session::has('gotm_expired_package_info'))
             <script>
-                swal(
-                    '{{ __('headings.default_error_title') }}',
-                    '{!! Session::get('gotm_expired_package_info') !!}',
-                    'warning'
-                    );
+                swal.queue([{
+                    title: '{{ __('headings.package_expiration_title') }}',
+                    confirmButtonText: '{{ __('buttons.close') }}',
+                    html: '{!! __('messages.package_about_to_expire', [
+                        'note' => $defaultPackageExpired->note,
+                        'url' => url('@' . Auth::user()->username . '/packages')
+                        ]) !!}',
+                        type: 'warning',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return swal({
+                                title: '{{ __('headings.default_error_title') }}',
+                                html: '{!! Session::get('gotm_expired_package_info') !!}',
+                                type: 'error'
+                            })
+                        }
+                    }]);
                 </script>
 
-                @elseif((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && (Session::has('gotmPackageExpired') && $gotmPackageExpired))
+                @elseif(Session::has('gotm_expired_package_info'))
                 <script>
-                    swal.queue([{
-                        title: '{{ __('headings.package_expiration_title') }}',
-                        confirmButtonText: '{{ __('buttons.close') }}',
-                        html: '{!! __('messages.package_about_to_expire', [
-                            'note' => $defaultPackageExpired->note, 
-                            'url' => url('@' . Auth::user()->username . '/packages')
-                            ]) !!}',
-                            type: 'warning',
-                            showLoaderOnConfirm: true,
-                            preConfirm: () => {
-                                return swal({
-                                    title: '{{ __('headings.package_expiration_title') }}',
-                                    html: '{!! __('messages.package_about_to_expire', [
-                                        'note' => $gotmPackageExpired->note, 
-                                        'url' => url('@' . Auth::user()->username . '/packages')
-                                        ]) !!}',
-                                        type: 'warning'
-                                    })
-                            }
-                        }]);
+                    swal(
+                        '{{ __('headings.default_error_title') }}',
+                        '{!! Session::get('gotm_expired_package_info') !!}',
+                        'warning'
+                        );
                     </script>
 
-                    @elseif(Session::has('defaultGirlPackageExpired') && $defaultPackageExpired)
+                    @elseif((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && (Session::has('gotmPackageExpired') && $gotmPackageExpired))
                     <script>
-                        swal({
+                        swal.queue([{
                             title: '{{ __('headings.package_expiration_title') }}',
                             confirmButtonText: '{{ __('buttons.close') }}',
                             html: '{!! __('messages.package_about_to_expire', [
@@ -282,43 +271,99 @@
                                 'url' => url('@' . Auth::user()->username . '/packages')
                                 ]) !!}',
                                 type: 'warning',
-                            });
+                                showLoaderOnConfirm: true,
+                                preConfirm: () => {
+                                    return swal({
+                                        title: '{{ __('headings.package_expiration_title') }}',
+                                        html: '{!! __('messages.package_about_to_expire', [
+                                            'note' => $gotmPackageExpired->note, 
+                                            'url' => url('@' . Auth::user()->username . '/packages')
+                                            ]) !!}',
+                                            type: 'warning'
+                                        })
+                                }
+                            }]);
                         </script>
 
-                        @elseif(Session::has('gotmPackageExpired') && $gotmPackageExpired)
+                        @elseif(Session::has('defaultGirlPackageExpired') && $defaultPackageExpired)
                         <script>
                             swal({
                                 title: '{{ __('headings.package_expiration_title') }}',
+                                confirmButtonText: '{{ __('buttons.close') }}',
                                 html: '{!! __('messages.package_about_to_expire', [
-                                    'note' => $gotmPackageExpired->note, 
+                                    'note' => $defaultPackageExpired->note, 
                                     'url' => url('@' . Auth::user()->username . '/packages')
                                     ]) !!}',
-                                    type: 'warning'
+                                    type: 'warning',
                                 });
                             </script>
-                            @endif
 
+                            @elseif(Session::has('gotmPackageExpired') && $gotmPackageExpired)
                             <script>
-                                $(function () {
-                                    $("input.checkbox-button:checkbox").on('change', function() {
-                                        $('input.checkbox-button:checkbox').not(this).prop('checked', false);
+                                swal({
+                                    title: '{{ __('headings.package_expiration_title') }}',
+                                    html: '{!! __('messages.package_about_to_expire', [
+                                        'note' => $gotmPackageExpired->note, 
+                                        'url' => url('@' . Auth::user()->username . '/packages')
+                                        ]) !!}',
+                                        type: 'warning'
                                     });
-                                });
-                            </script>
+                                </script>
+                                @endif
 
-                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&callback=initMap"></script>
+                                <script>
+                                    $(function () {
+                                        $("input.checkbox-button:checkbox").on('change', function() {
+                                            $('input.checkbox-button:checkbox').not(this).prop('checked', false);
+                                        });
+                                    });
+                                </script>
 
-                            <script>
-                                var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
-                                $('#radius-ranger').slider({
-                                    range: 'min',
-                                    min: 0,
-                                    max: 20,
-                                    value: initialRadius,
-                                    slide: function( event, ui ) {
-                                        $('.radius').text(ui.value);
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&callback=initMap"></script>
+
+                                <script>
+                                    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+                                    $('#radius-ranger').slider({
+                                        range: 'min',
+                                        min: 0,
+                                        max: 20,
+                                        value: initialRadius,
+                                        slide: function( event, ui ) {
+                                            $('.radius').text(ui.value);
+                                        }
+                                    });
+                                </script>
+
+                                <!-- geolocation -->
+                                <script>
+                                    var x = document.getElementById("location");
+
+                                    function getLocation() {
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(showPosition);
+                                        } else { 
+                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                        }
                                     }
-                                });
-                            </script>
 
-                            @stop
+                                    function showPosition(position) {
+                                        x.innerHTML = "Latitude: " + position.coords.latitude + 
+                                        "<br>Longitude: " + position.coords.longitude; 
+                                    }
+                                </script>
+
+                                <!-- radius -->
+                                <script>
+                                    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+                                    $('#radius-ranger').slider({
+                                        range: 'min',
+                                        min: 0,
+                                        max: 20,
+                                        value: initialRadius,
+                                        slide: function( event, ui ) {
+                                            $('.radius').text(ui.value);
+                                        }
+                                    });
+                                </script>
+
+                                @stop

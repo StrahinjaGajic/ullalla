@@ -12,5 +12,9 @@ class SearchController extends Controller
             'type' => 'required',
             'radius' => 'required'
         ]);
+
+        // $users = $request-
+
+        dd($request->all());
     }
 }
