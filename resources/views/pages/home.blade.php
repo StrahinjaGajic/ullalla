@@ -113,8 +113,7 @@
                     </div>
                     <div class="region geolocation">
                         <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
-                        <img src="" alt="">
-                        <a onclick="getLocation()">
+                        <a onclick="getLocation()" style="cursor: pointer;">
                             <img src="{{ asset('svg/location.svg') }}" alt="">
                         </a>
                         <p id="location"></p>
