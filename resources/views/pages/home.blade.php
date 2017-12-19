@@ -347,82 +347,85 @@
                                         value: initialRadius,
                                         slide: function( event, ui ) {
                                             $('.radius').text(ui.value);
-                                        }
-                                    });
-                                </script>
+                                        },
+                                        change: function( event, ui ) {
+                                            $('input[name="radius"]').val(ui.value);
+                                        });
+                                });
+                            </script>
 
-                                <!-- geolocation -->
-                                <script>
-                                    var x = document.getElementById("location");
-                                    var inputCity = document.getElementById('city');
-                                    var token = $('input[name="_token"]').val();
+                            <!-- geolocation -->
+                            <script>
+                                var x = document.getElementById("location");
+                                var inputCity = document.getElementById('city');
+                                var token = $('input[name="_token"]').val();
 
-                                    function initialize() {
-                                        var autocomplete = new google.maps.places.Autocomplete(
-                                            (inputCity), {
-                                                types: ['geocode']
-                                            });
-                                        autocomplete.setComponentRestrictions(
-                                            {'country': ['ch']});       
+                                function initialize() {
+                                    var autocomplete = new google.maps.places.Autocomplete(
+                                        (inputCity), {
+                                            types: ['geocode']
+                                        });
+                                    autocomplete.setComponentRestrictions(
+                                        {'country': ['ch']});       
 
-                                        autocomplete.addListener('place_changed', function() { 
-                                            var place = autocomplete.getPlace();
-                                            var lat = place.geometry.location.lat();
-                                            var lng = place.geometry.location.lng();
-                                            $.ajax({
-                                                url: getUrl('/get_guest_data'),
-                                                type: 'post',
-                                                data: {lat: lat, lng: lng, _token: token},
-                                                success: function (data) {
-                                                    return true;
+                                    autocomplete.addListener('place_changed', function() { 
+                                        var place = autocomplete.getPlace();
+                                        var lat = place.geometry.location.lat();
+                                        var lng = place.geometry.location.lng();
+                                        $.ajax({
+                                            url: getUrl('/get_guest_data'),
+                                            type: 'post',
+                                            data: {lat: lat, lng: lng, _token: token},
+                                            success: function (data) {
+                                                return true;
+                                            }
+                                        });
+                                    });                  
+                                }
+
+                                function getLocation() {
+                                    if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(function (position) {
+                                            var geocoder = new google.maps.Geocoder;
+                                            var lat = position.coords.latitude;
+                                            var lng = position.coords.longitude;
+                                            var latlng = {
+                                                lat: lat, 
+                                                lng: lng
+                                            };
+                                            geocoder.geocode({'location': latlng}, function(results, status) {
+                                                if (results[0]) {
+                                                    inputCity.value = results[0].formatted_address;
+                                                    $.ajax({
+                                                        url: getUrl('/get_guest_data'),
+                                                        type: 'post',
+                                                        data: {lat: lat, lng: lng, _token: token},
+                                                        success: function (data) {
+                                                            return true;
+                                                        }
+                                                    });
                                                 }
                                             });
-                                        });                  
+                                        });
+                                    } else {
+                                        x.innerHTML = "Geolocation is not supported by this browser.";
                                     }
+                                }
 
-                                    function getLocation() {
-                                        if (navigator.geolocation) {
-                                            navigator.geolocation.getCurrentPosition(function (position) {
-                                                var geocoder = new google.maps.Geocoder;
-                                                var lat = position.coords.latitude;
-                                                var lng = position.coords.longitude;
-                                                var latlng = {
-                                                    lat: lat, 
-                                                    lng: lng
-                                                };
-                                                geocoder.geocode({'location': latlng}, function(results, status) {
-                                                    if (results[0]) {
-                                                        inputCity.value = results[0].formatted_address;
-                                                        $.ajax({
-                                                            url: getUrl('/get_guest_data'),
-                                                            type: 'post',
-                                                            data: {lat: lat, lng: lng, _token: token},
-                                                            success: function (data) {
-                                                                return true;
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            });
-                                        } else {
-                                            x.innerHTML = "Geolocation is not supported by this browser.";
-                                        }
+                            </script>
+
+                            <!-- radius -->
+                            <script>
+                                var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+                                $('#radius-ranger').slider({
+                                    range: 'min',
+                                    min: 0,
+                                    max: 20,
+                                    value: initialRadius,
+                                    slide: function( event, ui ) {
+                                        $('.radius').text(ui.value);
                                     }
+                                });
+                            </script>
 
-                                </script>
-
-                                <!-- radius -->
-                                <script>
-                                    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
-                                    $('#radius-ranger').slider({
-                                        range: 'min',
-                                        min: 0,
-                                        max: 20,
-                                        value: initialRadius,
-                                        slide: function( event, ui ) {
-                                            $('.radius').text(ui.value);
-                                        }
-                                    });
-                                </script>
-
-                                @stop
+                            @stop
