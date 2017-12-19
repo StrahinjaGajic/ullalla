@@ -99,14 +99,11 @@ class GirlController extends Controller
 			}
 		}
 
-		$users = $users->where('users.approved', '=', '1')
-			->where('users.is_active_d_package', '=', '1')
-			->select('users.*')
-			->groupBy('users.username');
-
 		$orderBy = $request->order_by ? $request->order_by : null;
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
+
+		dd($users);
 
 		// ->groupBy('users.username');
 		$users = $users->where('users.approved', '=', '1')
