@@ -21,17 +21,10 @@ class SearchController extends Controller
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
 
-		$haversine = "(6371 * acos(cos(radians('. $lat .'))
-                * cos(radians(users.lat))
-                * cos(radians(users.lng)
-                - radians('. $lng .'))
-                + sin(radians('. $lat .'))
-                * sin(radians(users.lat))))";
-
-		// $users = $users->select()
-		//     			->whereRaw("{$haversine} < ?", [$radius]);
 		$users = User::nearLatLng($lat, $lng, $radius)->get();
+		unset($request->query()['type']);
+		unset($request->query()['_token']);
 
-		dd($users);
+		return redirect(urldecode(route('girls', $request->query(), false)));
     }
 }

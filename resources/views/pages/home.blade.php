@@ -73,7 +73,7 @@
 <div class="banner-area home-4-2">
     <div class="container">
         <div class="row">
-            {!! Form::open(['url' => 'search']) !!}
+            {!! Form::open(['url' => 'search', 'method' => 'get']) !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 100%; margin-bottom: 30px;">
                 <span class="search"><h3 style="font-size: 18px; color: #363636; font-weight: 800;">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">
@@ -86,7 +86,7 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" />
+                            <input class="checkbox-button" type="checkbox" name="type" value="girl" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-venus fa-2x"></i>
                                 <label for="female" class="checkbox-tile-label">{{ __('fields.girl') }}</label>
@@ -100,7 +100,7 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" />
+                            <input class="checkbox-button" type="checkbox" name="type" value="local" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-home fa-2x"></i>
                                 <label for="local" class="checkbox-tile-label">{{ __('fields.local') }}</label>
@@ -146,6 +146,7 @@
                         </div>
                     </div>
                 </div>
+                {{ csrf_field() }}
                 <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}

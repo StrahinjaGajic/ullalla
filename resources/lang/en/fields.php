@@ -56,7 +56,7 @@ return [
 	'radius' => 'Radius',
 	'price_range' => 'Price Range',
 	'incall_outcall' => 'Incall/Outcall',
-	'location' => 'Lcoation',
+	'location' => 'Location',
 	'service' => 'Service',
 
     # locals

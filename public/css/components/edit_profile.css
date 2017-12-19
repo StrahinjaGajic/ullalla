@@ -1240,9 +1240,7 @@ h3 {
 
 .image-preview-multiple ._item img {
     display: block;
-    width: 150px;
-    height: 150px;
-    padding: 0 10px 6px;
+    margin: 0 10px 6px;
 }
 
 /***** Working Time *****/
