@@ -13,7 +13,7 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-					<h2>{{ __('buttons.bio') }}</h2>
+					<h2>{{ __('headings.bio') }}</h2>
 					<section data-step="0">
 						<div class="col-xs-6">
 							<div class="form-group">
