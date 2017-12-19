@@ -138,7 +138,7 @@ class AuthController extends Controller
 					Session::flash('defaultGirlPackageExpired', __('messages.default_package_about_to_expire'));
 				}
 				
-				if ($package2ExpiryDate < $firstDateForGotmPackageExpiryNotification) {
+				if (isset($firstDateForGotmPackageExpiryNotification) && $package2ExpiryDate < $firstDateForGotmPackageExpiryNotification) {
 					event(new MonthOfTheGirlPackageExpired($user));
 					Session::flash('gotmPackageExpired', __('messages.gotm_package_about_to_expire'));
 				}
