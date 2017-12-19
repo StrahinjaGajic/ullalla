@@ -339,7 +339,7 @@
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="single-product">
 												<div class="product-img">
-													<a class="a-img"><img class="primary-img" src="http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/nth/2/-/resize/263x300/" alt="" />
+													<a class="a-img"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="profile image" />
 													</a>
 												</div>
 												<div class="product-content">
