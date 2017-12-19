@@ -31,7 +31,7 @@
                         <div class="_list">
                             @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
                             <div class="_item">
-                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/250x200/' }}">
+                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/200x229/' }}">
                             </div>
                             @endfor
                         </div>
@@ -40,7 +40,7 @@
                 <h4>{{ __('headings.videos') }}</h4>
                 <div class="form-group upload-video">
                     <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-                    <video id="video" width="320" height="240" loop style="display: block;"></video>
+                    <video id="video" width="320" height="240" loop style="display: block;" controls=""></video>
                 </div>
             </div>
             <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
@@ -64,11 +64,9 @@ function installWidgetPreviewMultiple(widget, list) {
             $.when.apply(null, fileGroup.files()).done(function() {
                 $.each(arguments, function(i, fileInfo) {
                     var src = fileInfo.cdnUrl;
-                    console.log(src);
-
                     list.append(
                         $('<div/>', {'class': '_item'}).append(
-                            [$('<img/>', {src: src, style: "width: 250px; height: 200px;"})])
+                            [$('<img/>', {src: src, style: "width: 200px; height: 229px;"})])
                         );
                 });
             });
