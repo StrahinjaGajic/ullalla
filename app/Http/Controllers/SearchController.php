@@ -28,17 +28,17 @@ class SearchController extends Controller
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
 
-		$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
+		$users = User::nearLatLng($lat, $lng, $radius)
+		->where('users.approved', '=', '1')
+		->where('users.is_active_d_package', '=', '1')
+		->paginate(9);
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
 
 		Session::put('users', $users);
 		Session::save();
-		// Session::put('query', $query);
-
-		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
-
+		
 		return redirect(urldecode(route('girls', $query, false)));
 	}
 }

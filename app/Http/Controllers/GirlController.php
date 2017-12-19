@@ -21,13 +21,6 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
-		dd(Session::get('users'));
-
-		// array_merge($request->query(), Session::get('query'));
-		if (Session::has('users')) {
-			$users = Session::get('users');
-		}
-
 		if ($request->has('radius')) {
 			$radius = (int)request('radius');
 			$location = file_get_contents('http://freegeoip.net/json/24.135.165.252');
@@ -111,7 +104,12 @@ class GirlController extends Controller
 			->select('users.*')
 			->groupBy('users.username');
 		$users = isset($orderBy) ? $users->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $users;
-		$users = isset($show) ? $users->paginate($show) : $users->paginate(9);
+
+		if (Session::has('users')) {
+			$users = Session::pull('users');
+		} else {
+			$users = isset($show) ? $users->paginate($show) : $users->paginate(9);
+		}
 
 		$request->flash();
 
