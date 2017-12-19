@@ -86,7 +86,7 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="checkbox" />
+                            <input class="checkbox-button" type="checkbox" name="type" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-venus fa-2x"></i>
                                 <label for="female" class="checkbox-tile-label">{{ __('fields.girl') }}</label>
