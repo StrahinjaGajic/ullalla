@@ -37,7 +37,7 @@
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
-									<li>
+									<li class="geolocation">
 										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ request('city') }}" />
 										<a onclick="getLocation();" class="geolocation-button">
 											<img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
