@@ -78,7 +78,7 @@ class GirlController extends Controller
 
 		$users = $users->where('users.approved', '=', '1')
 		->where('users.is_active_d_package', '=', '1')
-		->select('users.*')
+		// ->select('users.*')
 		->groupBy('users.username');
 		$users = isset($orderBy) ? $users->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $users;
 
