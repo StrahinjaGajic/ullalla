@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -10,9 +11,26 @@ class SearchController extends Controller
     {
         $this->validate($request, [
             'type' => 'required',
-            'radius' => 'required'
+            'radius' => 'required',
+            'city' => 'required'
         ]);
 
-        dd();
+
+		$radius = (int)request('radius');
+		$lat = Session::get('lat');
+		$lng = Session::get('lng');
+
+		$haversine = "(6371 * acos(cos(radians('. $lat .'))
+                * cos(radians(users.lat))
+                * cos(radians(users.lng)
+                - radians('. $lng .'))
+                + sin(radians('. $lat .'))
+                * sin(radians(users.lat))))";
+
+		// $users = $users->select()
+		//     			->whereRaw("{$haversine} < ?", [$radius]);
+		$users = User::nearLatLng($lat, $lng, $radius)->get();
+
+		dd($users->get());
     }
 }

@@ -50,7 +50,6 @@ class SessionController extends Controller
 
 	public function storeGuestData(Request $request)
 	{
-		dd($request->all());
 		Session::put('lat', $request->lat);
 		Session::put('lng', $request->lng);
 		Session::put('guest_ip_address', $_SERVER['REMOTE_ADDR']);
