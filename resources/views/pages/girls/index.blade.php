@@ -140,10 +140,10 @@
 										<?php $num = 1; ?>
 										@foreach(getTypes() as $key => $type)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('type'), request()->query() , $num, 'type', $type), false)) }}">{{ $type }}
+											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
 												<span>({{ \App\Models\User::approved()->payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
-											<input type="checkbox" name="type[]" value="{{ $type }}" {{ request('type') && in_array($type, request('type')) ? 'checked' : '' }}/>
+											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
 										</label>
 										<?php $num++; ?>

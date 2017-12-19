@@ -58,8 +58,8 @@ class GirlController extends Controller
 				->whereIn('user_spoken_language.spoken_language_id', $request->languages);
 		}
 
-		if ($request->has('type')) {
-			$users = $users->whereIn('users.type', $request->type);
+		if ($request->has('types')) {
+			$users = $users->whereIn('users.type', $request->types);
 		}
 
 		if ($request->has('price_type')) {
