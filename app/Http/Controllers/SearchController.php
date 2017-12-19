@@ -31,6 +31,6 @@ class SearchController extends Controller
 		//     			->whereRaw("{$haversine} < ?", [$radius]);
 		$users = User::nearLatLng($lat, $lng, $radius)->get();
 
-		dd($users->get());
+		dd($users);
     }
 }
