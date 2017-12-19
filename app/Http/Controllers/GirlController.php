@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Session;
 use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
