@@ -51,6 +51,7 @@
 										<div id="radius-ranger" style="margin: 10px;"></div>
 										<div class="slider-value-wrapper">
 											<span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+											<span>km</span>
 										</div>
 									</li>
 								</ul>
