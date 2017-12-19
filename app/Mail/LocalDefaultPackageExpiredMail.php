@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class DefaultPackageExpiredMail extends Mailable
+class LocalDefaultPackageExpiredMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,7 @@ class DefaultPackageExpiredMail extends Mailable
      *
      * @return void
      */
-    public function __construct($user, $aboutToExpire = null)
+    public function __construct()
     {
         $this->user = $user;
         $this->aboutToExpire = $aboutToExpire;
@@ -33,6 +33,6 @@ class DefaultPackageExpiredMail extends Mailable
     public function build()
     {
         return $this->from('hello@ullalla.com', 'Ullalla')
-        ->view('emails.default_package_expired_email');
+            ->view('emails.local_default_package_expired_email');
     }
 }

@@ -7,22 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class DefaultPackageExpiredMail extends Mailable
+class Contact extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
-    public $aboutToExpire;
+    public $datas;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user, $aboutToExpire = null)
+    public function __construct($datas)
     {
-        $this->user = $user;
-        $this->aboutToExpire = $aboutToExpire;
+        $this->datas = $datas;
     }
 
     /**
@@ -32,7 +30,7 @@ class DefaultPackageExpiredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@ullalla.com', 'Ullalla')
-        ->view('emails.default_package_expired_email');
+        return $this->from($this->datas->email, $this->datas->name)
+            ->view('emails.contact');
     }
 }

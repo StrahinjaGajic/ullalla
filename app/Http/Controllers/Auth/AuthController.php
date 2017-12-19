@@ -14,6 +14,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Mail\ActivationMail;
 use App\Events\PackageExpired;
+use App\Events\LocalDefaultPackageExpired;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
 use App\Http\Controllers\Controller;
@@ -139,24 +140,6 @@ class AuthController extends Controller
 					Session::flash('gotmPackageExpired', __('messages.gotm_package_about_to_expire'));
 				}
 
-				// defaultPackageAboutToExpireDatesForSendingMails
-				foreach (getDaysForExpiry($user->package1_id) as $day) {
-					if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
-						// send mail
-						$aboutToExpire = '';
-						Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
-					}
-				}
-
-				// girlOfTheMonthAboutToExpireDatesForSendingMails
-				foreach (getDaysForExpiry($user->package2_id) as $day) {
-					if ($carbonNowFormated == $package2ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
-						// send mail
-						$aboutToExpire = '';
-						Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
-					}
-				}
-
 				// $diff=date_diff(Carbon::now(), date_create($user->package1_expiry_date));
 				// dd($diff->days);
 				return redirect('/');
@@ -169,10 +152,36 @@ class AuthController extends Controller
 				Auth::guard('local')->logout();
 				return redirect()->back()->with('error', __('messages.error_activate_account'));
 			}
-			if ($local->name == null) {
-				return redirect()->action('LocalController@getCreate', ['username' => $local->username]);
-			} else {
+			if ($local->package1_id) {
+				if ($local->approved == '0') {
+					return redirect('/')->with('not_approved', __('messages.info_account_not_approved'));
+				}
+
+				// get expiry dates from db
+				$package1ExpiryDateCarbonParsed = Carbon::parse($local->package1_expiry_date);
+				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
+
+				if (Carbon::now() >= $package1ExpiryDate) {
+					$local->is_active_d_package = 0;
+					$local->save();
+					return redirect()->action('LocalController@getPackages', ['username' => $local->username])
+						->with('expired_package_info', __('messages.error_default_package_expired'));
+				}
+
+				$daysForExpiryDefaultPackage = getDaysForExpiryLocal($local->package1_duration);
+
+				// get expiry date days before expiration
+				$firstDateForDefaultPackageExpiryNotification = getPackageExpiryDate($daysForExpiryDefaultPackage[0]);
+
+				// package expiry notifications
+				if ($package1ExpiryDate < $firstDateForDefaultPackageExpiryNotification) {
+					event(new LocalDefaultPackageExpired($local));
+					Session::flash('localDefaultPackageExpired', __('messages.default_package_about_to_expire'));
+				}
+
 				return redirect('/');
+			} else {
+				return redirect()->action('LocalController@getCreate', ['username' => $local->username]);
 			}
 		}
 		return redirect()->back()->with('error', __('messages.wrong_credentials'));

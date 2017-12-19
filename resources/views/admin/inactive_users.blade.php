@@ -21,24 +21,26 @@
 		</thead>
 		<tbody>
 			@foreach($users as $user)
-				<td>{{ $user->first_name }}</td>
-				<td>{{ $user->last_name }}</td>
-				<td>{{ $user->nickname }}</td>
-				<td>
-					{!! Form::open(['url' => 'admin/inactive_users/approve/' . $user->id]) !!}
-					<button type="submit" class="btn">Approve</button>
-					{!! Form::close() !!}
-				</td>
-				<td>
-					{!! Form::open() !!}
-					<button type="submit" class="btn"></button>
-					{!! Form::close() !!}
-				</td>
-				<td>
-					{!! Form::open() !!}
-					<button type="submit" class="btn"></button>
-					{!! Form::close() !!}
-				</td>
+				<tr>
+					<td>{{ $user->first_name }}</td>
+					<td>{{ $user->last_name }}</td>
+					<td>{{ $user->nickname }}</td>
+					<td>
+						{!! Form::open(['url' => 'admin/inactive_users/approve/' . $user->id]) !!}
+						<button type="submit" class="btn">Approve</button>
+						{!! Form::close() !!}
+					</td>
+					<td>
+						{!! Form::open() !!}
+						<button type="submit" class="btn"></button>
+						{!! Form::close() !!}
+					</td>
+					<td>
+						{!! Form::open() !!}
+						<button type="submit" class="btn"></button>
+						{!! Form::close() !!}
+					</td>
+				</tr>
 			@endforeach
 		</tbody>
 	</table>

@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MonthOfTheGirlPackageExpired' => [
             'App\Listeners\MonthOfTheGirlPackageExpiredNotification',
         ],
+        'App\Events\LocalDefaultPackageExpired' => [
+            'App\Listeners\LocalDefaultPackageExpiredNotification',
+        ],
     ];
 
     /**

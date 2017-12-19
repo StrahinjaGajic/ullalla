@@ -84,6 +84,9 @@ Route::get('locals/@{username}/girls', 'LocalController@getGirls');
 Route::put('locals/@{username}/girls/store', 'LocalController@postGirls');
 Route::put('locals/@{username}/girls/create', 'LocalController@postCreateGirls');
 
+Route::get('locals/@{username}/packages', 'LocalController@getPackages');
+Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');
+
 # LOCAL PROFILE CONTROLLER
 Route::get('locals/{username}', 'LocalProfileController@getLocal');
 Route::get('locals', [
@@ -105,6 +108,14 @@ Route::middleware(['roles'])->group(function () {
 		'uses' => 'AdminController@approveUser',
 		'roles' => ['Admin']
 	]);
+	Route::get('admin/inactive_locals', [
+		'uses' => 'AdminController@getInactiveLocals',
+		'roles' => ['Admin']
+	]);
+	Route::post('admin/inactive_locals/approve/{id}', [
+		'uses' => 'AdminController@approveLocal',
+		'roles' => ['Admin']
+	]);
 });
 
 # GIRL CONTROLLER
@@ -119,7 +130,16 @@ Route::get('get_radius', 'GirlController@getRadius');
 #NOTIFICATION CONTROLLER
 Route::get('@{username}/notifications', 'NotificationController@getIndex');
 
+#CONTACT CONTROLLER
+Route::get('contact', 'ContactController@getIndex');
+Route::post('contact/send', 'ContactController@postIndex');
 
+#FAQ CONTROLLER
+Route::get('faq', 'FaqController@getIndex');
+
+# SEARCH CONTROLLER
+Route::post('search', 'SearchController@getQuickSeachResults');
+Route::post('get_guest_data', 'SessionController@storeGuestData');
 
 
 

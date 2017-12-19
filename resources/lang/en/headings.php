@@ -29,7 +29,7 @@ return [
 	'personal_info' => 'Personal Info',
 
     # contact
-    'i_prefer' => 'I prefer',
+    'i_prefer' => 'I Prefer',
     'available_apps' => 'Available Apps',
 
     # gallery
@@ -69,9 +69,16 @@ return [
     'search_filters' => 'Search Filters',
     'no_users_found' => 'No Users Found',
 
+    # locals
+    'local_types' => 'Local Types',
+    'club_info' => 'Club Info',
+    'working_hours' => 'Working Hours',
+    'about_us' => 'About Us',
+    'logo' => 'Logo',
+    'add_girl' => 'Add Girl',
 
-
-
+    #locals-single
+    'local_type' => 'Local Type',
 
 
 

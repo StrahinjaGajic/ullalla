@@ -36,12 +36,13 @@ class LocalProfileController extends Controller
     public function getLocal($username)
     {
         $local = Local::username($username)->approved()->first();
+
         if($local) {
             $entrance = getClubInfo($local->clubEntrance);
             $wellness = getClubInfo($local->clubWellness);
             $food = getClubInfo($local->clubFood);
             $outdoor = getClubInfo($local->clubOutdoor);
-            return view('pages.local-profile.single', compact('local', 'entrance', 'wellness', 'food', 'outdoor'));
+            return view('pages.local-profile.single', compact('local' ,'entrance', 'wellness', 'food', 'outdoor'));
         }
     }
 }

@@ -2533,3 +2533,19 @@ table.info-table td,
 table.services-table td {
     padding: 10px;
 }
+
+/**** home page ****/
+.geolocation {
+    position: relative;
+}
+
+a.geolocation-button {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    cursor: pointer;
+}
+
+img.geolocation-image {
+    width: 15px;
+}
