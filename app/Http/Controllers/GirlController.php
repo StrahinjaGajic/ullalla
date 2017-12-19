@@ -21,6 +21,8 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
+		dd(Session::get('users'));
+
 		if ($request->has('radius')) {
 			$radius = (int)request('radius');
 			$location = file_get_contents('http://freegeoip.net/json/24.135.165.252');
