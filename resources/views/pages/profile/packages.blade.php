@@ -84,8 +84,9 @@
 								<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
 							</td>
 							<td>
-								<label>
-									<input type="radio" class="option-input radio ullalla-package-radio" name="ullalla_package[]" value="{{ $package->id }}" />
+								<label class="control control--checkbox">
+									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+									<div class="control__indicator"></div>
 								</label>
 							</td>
 						</tr>
@@ -206,9 +207,10 @@
 </script>
 
 <script>
-	$("input.gotm_checkbox:checkbox").on('change', function() {
-		console.log('asdsa');
-		$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
+	$(function () {
+		$("input.gotm_checkbox:checkbox").on('change', function() {
+			$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
+		});
 	});
 </script>
 
