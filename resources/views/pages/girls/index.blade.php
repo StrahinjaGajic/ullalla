@@ -38,10 +38,10 @@
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
 									<li>
-										<div class="city-input">
-											<input type="text" name="city" value="" placeholder="{{ __('fields.city') }}">
-											<a href="" onclick="getLocation()"><img src="{{ asset('svg/location.svg') }}" alt="location"></a>
-										</div>
+										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ request('city') }}" />
+										<a onclick="getLocation();" class="geolocation-button">
+											<img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+										</a>
 									</li>
 									<li>
 										<label for="amount">{{ __('fields.radius') }}:</label>
