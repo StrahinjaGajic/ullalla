@@ -25,8 +25,9 @@ class SearchController extends Controller
 		$cantons = Canton::with('users')->get();
 
 		$radius = (int)request('radius');
-		$lat = Session::get('lat');
-		$lng = Session::get('lng');
+		$session = new Session();
+		$lat = $sessoin->get('lat');
+		$lng = $sessoin->get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius);
 		$query = $request->query();
