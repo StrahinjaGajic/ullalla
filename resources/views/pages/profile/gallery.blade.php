@@ -66,7 +66,7 @@ function installWidgetPreviewMultiple(widget, list) {
                     var src = fileInfo.cdnUrl;
                     list.append(
                         $('<div/>', {'class': '_item'}).append(
-                            [$('<img/>', {src: src, style: "width: 185px; height: 211px;"})])
+                            [$('<img/>', {src: src})])
                         );
                 });
             });
