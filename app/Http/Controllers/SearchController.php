@@ -8,13 +8,18 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function getQuickSeachResults(Request $request)
-    {
-        $this->validate($request, [
-            'type' => 'required',
-            'radius' => 'required',
-            'city' => 'required'
-        ]);
+	public function getQuickSeachResults(Request $request)
+	{		
+		$this->validate($request, [
+			'type' => 'required',
+			'radius' => 'required',
+			'city' => 'required'
+		]);
+
+		$services = Service::with('users')->get();
+		$spokenLanguages = SpokenLanguage::with('users')->get();
+		$maxPrice = \DB::table('prices')->max('service_price');
+		$cantons = Canton::with('users')->get();
 
 
 		$radius = (int)request('radius');
@@ -25,8 +30,8 @@ class SearchController extends Controller
 		unset($request->query()['type']);
 		unset($request->query()['_token']);
 
-		return view('pages.girls.index', compact('users'));
+		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
 		// return redirect(urldecode(route('girls', $request->query(), false)));
-    }
+	}
 }
