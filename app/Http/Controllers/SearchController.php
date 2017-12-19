@@ -29,8 +29,8 @@ class SearchController extends Controller
 		$lng = Session::get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius)
-		->where('users.approved', '=', '1')
-		->where('users.is_active_d_package', '=', '1')
+		->where('approved', '=', '1')
+		->where('is_active_d_package', '=', '1')
 		->paginate(9);
 		$query = $request->query();
 		unset($query['type']);
@@ -38,7 +38,7 @@ class SearchController extends Controller
 
 		Session::put('users', $users);
 		Session::save();
-		
+
 		return redirect(urldecode(route('girls', $query, false)));
 	}
 }
