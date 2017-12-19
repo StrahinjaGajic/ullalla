@@ -166,7 +166,7 @@
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
 
-	var $package2ExpiryDate = '{{ $user->package2_expiry_date }}';
+	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
 
 	var defaultPackageStartDate = JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}');
 	var defaultPackageStartDate = new Date(defaultPackageStartDate[0].date);
