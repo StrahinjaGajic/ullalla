@@ -161,14 +161,18 @@
 @endif
 <script>
 	// get new start and end year
+	var start = new Date();
+	start.setFullYear(start.getFullYear());
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
+
+	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
 
 	var defaultPackageStartDate = JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}');
 	var defaultPackageStartDate = new Date(defaultPackageStartDate[0].date);
 	var defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
 	
-	var gotmPackageStartDate = JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}');
+	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$package2ExpiryDate]) !!}') : start;
 	var gotmPackageStartDate = new Date(gotmPackageStartDate[0].date);
 	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
 
