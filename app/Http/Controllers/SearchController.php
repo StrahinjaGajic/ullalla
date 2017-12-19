@@ -33,9 +33,9 @@ class SearchController extends Controller
 		unset($query['type']);
 		unset($query['_token']);
 
-		dd($users);
-
 		Session::put('users', $users);
+
+		dd(Session::get('users'));
 
 		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
