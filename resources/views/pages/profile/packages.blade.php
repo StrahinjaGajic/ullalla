@@ -242,10 +242,10 @@
 					} else if (typeof errors.month_girl_package_error !== 'undefined') {
 						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 					} else {
-						window.location.href = 'http://ullalla.app/@' + username  + '/packages';
+						window.location.href = getUrl('/@' + username  + '/packages');
 					}
 				} else {
-					window.location.href = 'http://ullalla.app/@' + username  + '/packages';
+					window.location.href = getUrl('/@' + username  + '/packages');
 				}
 			})
 			.fail(function(data, textStatus) {
