@@ -443,7 +443,7 @@
 @stop
 
 @section('perPageScripts')
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
 <script>
 	var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
 	$('#radius-ranger').slider({
@@ -560,5 +560,64 @@
 		that.closest('.shop-layout').find('.layout-list').toggle('fast');
 		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
 	});
+</script>
+
+<!-- geolocation -->
+<script>
+	var x = document.getElementById("location");
+	var inputCity = document.getElementById('city');
+	var token = $('input[name="_token"]').val();
+
+	function initialize() {
+		var autocomplete = new google.maps.places.Autocomplete(
+			(inputCity), {
+				types: ['geocode']
+			});
+		autocomplete.setComponentRestrictions(
+			{'country': ['ch']});       
+
+		autocomplete.addListener('place_changed', function() { 
+			var place = autocomplete.getPlace();
+			var lat = place.geometry.location.lat();
+			var lng = place.geometry.location.lng();
+			$.ajax({
+				url: getUrl('/get_guest_data'),
+				type: 'post',
+				data: {lat: lat, lng: lng, _token: token},
+				success: function (data) {
+					return true;
+				}
+			});
+		});                  
+	}
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var geocoder = new google.maps.Geocoder;
+				var lat = position.coords.latitude;
+				var lng = position.coords.longitude;
+				var latlng = {
+					lat: lat, 
+					lng: lng
+				};
+				geocoder.geocode({'location': latlng}, function(results, status) {
+					if (results[0]) {
+						inputCity.value = results[0].formatted_address;
+						$.ajax({
+							url: getUrl('/get_guest_data'),
+							type: 'post',
+							data: {lat: lat, lng: lng, _token: token},
+							success: function (data) {
+								return true;
+							}
+						});
+					}
+				});
+			});
+		} else {
+			x.innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
 </script>
 @stop
