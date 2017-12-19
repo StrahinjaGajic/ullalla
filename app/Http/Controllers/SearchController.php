@@ -24,7 +24,6 @@ class SearchController extends Controller
 		$maxPrice = \DB::table('prices')->max('service_price');
 		$cantons = Canton::with('users')->get();
 
-
 		$radius = (int)request('radius');
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');

@@ -86,7 +86,7 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" value="girl" />
+                            <input class="checkbox-button" type="checkbox" name="type[]" value="girl" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-venus fa-2x"></i>
                                 <label for="female" class="checkbox-tile-label">{{ __('fields.girl') }}</label>
@@ -100,7 +100,7 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" value="local" />
+                            <input class="checkbox-button" type="checkbox" name="type[]" value="local" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-home fa-2x"></i>
                                 <label for="local" class="checkbox-tile-label">{{ __('fields.local') }}</label>
