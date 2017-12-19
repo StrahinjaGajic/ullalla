@@ -22,8 +22,8 @@ class SearchController extends Controller
 		$lng = Session::get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius)->get();
-		$queryString = unset($request->query()['type'])
+		unset($request->query()['type']);
 
-		return redirect(urldecode(route('girls', $queryString, false)));
+		return redirect(urldecode(route('girls', $request->query(), false)));
     }
 }
