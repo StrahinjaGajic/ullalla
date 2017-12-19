@@ -21,9 +21,9 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
-		if (Session::has('users')) {
-			dd(Session::get('users'));
-			$userss = Session::get('users');
+		if (Session::has('userss')) {
+			dd(Session::get('userss'));
+			$userss = Session::get('userss');
 		}
 
 		if ($request->has('radius')) {
