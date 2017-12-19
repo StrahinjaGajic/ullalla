@@ -28,7 +28,7 @@ class SearchController extends Controller
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
 
-		$users = User::nearLatLng($lat, $lng, $radius);
+		$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
