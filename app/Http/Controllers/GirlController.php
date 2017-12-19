@@ -21,7 +21,10 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
-		dd(Session::get('users'));
+		array_merge($request->query(), Session::get('query'));
+		if (Session::has('users')) {
+			$users = Session::get('users');
+		}
 
 		if ($request->has('radius')) {
 			$radius = (int)request('radius');
@@ -101,7 +104,6 @@ class GirlController extends Controller
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
 
-		// ->groupBy('users.username');
 		$users = $users->where('users.approved', '=', '1')
 			->where('users.is_active_d_package', '=', '1')
 			->select('users.*')
