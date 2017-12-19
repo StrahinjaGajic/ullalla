@@ -123,7 +123,7 @@
 							</td>
 							<td>
 								<label class="control control--checkbox">
-									<input type="checkbox" class="" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+									<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
 									<div class="control__indicator"></div>
 								</label>
 							</td>
@@ -152,14 +152,14 @@
 
 @if(Session::has('expired_package_info'))
 <script>
-    swal(
-        '{{ __('headings.default_error_title') }}',
-        '{{ Session::get('expired_package_info') }}',
-        'error'
-    );
-</script>
-@endif
-<script>
+	swal(
+		'{{ __('headings.default_error_title') }}',
+		'{{ Session::get('expired_package_info') }}',
+		'error'
+		);
+	</script>
+	@endif
+	<script>
 	// get new start and end year
 	var start = new Date();
 	start.setFullYear(start.getFullYear());
@@ -173,7 +173,7 @@
 	var defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
 	
 	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}') : start;
-	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : start;
+	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : gotmPackageStartDate;
 	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
 
 	$(function () {
@@ -202,6 +202,13 @@
 				},
 			});
 		});
+	});
+</script>
+
+<script>
+	$("input.gotm_checkbox:checkbox").on('change', function() {
+		console.log('asdsa');
+		$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
 	});
 </script>
 
