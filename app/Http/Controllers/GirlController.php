@@ -21,6 +21,8 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
+		dd(Session::get('query'));
+
 		array_merge($request->query(), Session::get('query'));
 		if (Session::has('users')) {
 			$users = Session::get('users');
