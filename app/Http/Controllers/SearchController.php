@@ -35,6 +35,6 @@ class SearchController extends Controller
 
 		Session::put('users', $users);
 
-		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
+		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'))->withInput($query);
 	}
 }
