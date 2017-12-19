@@ -80,7 +80,6 @@
 								</ul>
 							</div>
 						</div>
-
 						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
 								<div class="layout-title toggle_arrow">
@@ -566,7 +565,7 @@
 <script>
 	var x = document.getElementById("location");
 	var inputCity = document.getElementById('city');
-	var token = $('input[name="_token"]').val();
+	var token = '{{ csrf_token() }}';
 
 	function initialize() {
 		var autocomplete = new google.maps.places.Autocomplete(
