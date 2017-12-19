@@ -8,7 +8,6 @@ use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
-use Symfony\Component\HttpFoundation\Session\Session as Sessions;
 
 class SearchController extends Controller
 {
@@ -34,8 +33,9 @@ class SearchController extends Controller
 		unset($query['type']);
 		unset($query['_token']);
 
-		$session = new Sessions();
-		$session->set('users', $users);
+		Session::put('users', $users);
+		$request->session()->save();
+
 		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
 		return redirect(urldecode(route('girls', $query, false)));
