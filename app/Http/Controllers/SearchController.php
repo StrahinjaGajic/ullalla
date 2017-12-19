@@ -29,10 +29,11 @@ class SearchController extends Controller
 		$lng = Session::get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
-		unset($request->query()['type']);
-		unset($request->query()['_token']);
+		$query = $request->query();
+		unset($query['type']);
+		unset($query['_token']);
 
-		dd($request->query());
+		dd($query);
 
 		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
