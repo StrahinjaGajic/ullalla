@@ -35,8 +35,6 @@ class SearchController extends Controller
 
 		Session::put('users', $users);
 
-		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
-
-		return redirect()->away(urldecode(route('girls', $query, false)));
+		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 	}
 }
