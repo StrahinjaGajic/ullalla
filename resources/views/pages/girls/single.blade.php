@@ -34,7 +34,7 @@
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
 							<a>
-								<img id="expand" src="{{ $user->photos . 'nth/2/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="">
+								<img id="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="">
 								<div id="myModal" class="modal">
                                       <span class="close">&times;</span>
                                       <img class="modal-content" id="img01">
