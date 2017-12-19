@@ -100,11 +100,16 @@
                             </div>
                         </div> --}}
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="checkbox" />
+                            <input class="checkbox-button" type="checkbox" name="type" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-home fa-2x"></i>
                                 <label for="local" class="checkbox-tile-label">{{ __('fields.local') }}</label>
                             </div>
+                        </div>
+                        <div class="help-block">
+                            @if($errors->has('type'))
+                            {{ $errors->first('type') }}
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -112,19 +117,32 @@
                     <div class="region">
                     </div>
                     <div class="region geolocation">
-                        <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
-                        <a onclick="getLocation();" class="geolocation-button">
-                            <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
-                        </a>
-                        <p id="location"></p>
-                        <label for="amount">{{ __('fields.radius') }}:</label>
-                        <div class="location-inputs">
-                            <input type="hidden" name="radius" value="{{ old('radius') }}">
+                        <div class="form-group">
+                            <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
+                            <a onclick="getLocation();" class="geolocation-button">
+                                <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+                            </a>
+                            <div class="help-block">
+                                @if($errors->has('city'))
+                                {{ $errors->first('city') }}
+                                @endif
+                            </div>
                         </div>
-                        <div id="radius-ranger" style="margin: 10px;"></div>
-                        <div class="slider-value-wrapper">
-                            <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
-                            <span>km</span>
+                        <div class="form-group">
+                            <label for="amount">{{ __('fields.radius') }}:</label>
+                            <div class="location-inputs">
+                                <input type="hidden" name="radius" value="{{ old('radius') }}">
+                            </div>
+                            <div id="radius-ranger" style="margin: 10px;"></div>
+                            <div class="slider-value-wrapper">
+                                <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+                                <span>km</span>
+                            </div>
+                            <div class="help-block">
+                                @if($errors->has('radius'))
+                                {{ $errors->first('radius') }}
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
