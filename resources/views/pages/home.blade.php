@@ -232,7 +232,7 @@
     @if(Session::has('not_approved'))
     <script>
         swal(
-            '{{ __('buttons.info_account_not_approved_title') }}',
+            '{{ __('headings.info_account_not_approved_title') }}',
             '{{ Session::get('not_approved') }}',
             'info'
             );
@@ -242,7 +242,7 @@
         @if(Session::has('account_created'))
         <script>
             swal(
-                '{{ __('buttons.account_created_title') }}',
+                '{{ __('headings.account_created_title') }}',
                 '{{ Session::get('account_created') }}',
                 'info'
                 );
