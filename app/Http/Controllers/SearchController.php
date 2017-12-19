@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use App\Models\spokenLanguages;
+use App\Models\SpokenLanguage;
 
 class SearchController extends Controller
 {
