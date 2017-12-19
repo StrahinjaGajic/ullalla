@@ -26,8 +26,8 @@ class SearchController extends Controller
 
 		$radius = (int)request('radius');
 		$session = new Session();
-		$lat = $sessoin->get('lat');
-		$lng = $sessoin->get('lng');
+		$lat = $session->get('lat');
+		$lng = $session->get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius);
 		$query = $request->query();
