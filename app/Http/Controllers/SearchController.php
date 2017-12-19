@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Session;
 use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SearchController extends Controller
 {
@@ -33,8 +33,8 @@ class SearchController extends Controller
 		unset($query['type']);
 		unset($query['_token']);
 
-		Session::put('users', $users);
-		Session::save();
+		$session = new Session();
+		$session->set('users', $users);
 		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
 		return redirect(urldecode(route('girls', $query, false)));

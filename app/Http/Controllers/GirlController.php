@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use DB;
-use Session;
 use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class GirlController extends Controller
 {
@@ -21,7 +21,8 @@ class GirlController extends Controller
 
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
-		dd(Session::get('users'));
+		$session = new Session();
+		dd($session->get('users'));
 
 		if (Session::has('users')) {
 			$userss = Session::get('users');
