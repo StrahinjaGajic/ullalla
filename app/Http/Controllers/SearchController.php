@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Models\User;
+use App\Models\Canton;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\spokenLanguages;
 
 class SearchController extends Controller
 {
