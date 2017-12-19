@@ -73,7 +73,7 @@
 <div class="banner-area home-4-2">
     <div class="container">
         <div class="row">
-            {!! Form::open(['url' => 'search', 'method' => 'get']) !!}
+            {!! Form::open(['url' => 'search']) !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 100%; margin-bottom: 30px;">
                 <span class="search"><h3 style="font-size: 18px; color: #363636; font-weight: 800;">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">

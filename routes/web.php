@@ -138,7 +138,7 @@ Route::post('contact/send', 'ContactController@postIndex');
 Route::get('faq', 'FaqController@getIndex');
 
 # SEARCH CONTROLLER
-Route::get('search', 'SearchController@getQuickSeachResults');
+Route::post('search', 'SearchController@getQuickSeachResults');
 Route::post('get_guest_data', 'SessionController@storeGuestData');
 
 

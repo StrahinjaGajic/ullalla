@@ -28,13 +28,15 @@ class SearchController extends Controller
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
 
-		$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
+		$users = User::nearLatLng($lat, $lng, $radius);
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
 
 		Session::put('users', $users);
 
-		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'))->withInput($query);
+		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
+
+		return redirect(urldecode(route('girls', $query, false)));
 	}
 }
