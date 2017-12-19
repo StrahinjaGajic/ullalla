@@ -146,6 +146,7 @@
                         </div>
                     </div>
                 </div>
+                {{ csrf_field() }}
                 <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}
