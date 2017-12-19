@@ -116,13 +116,15 @@ class AuthController extends Controller
 				$carbonNowFormated = Carbon::now()->format('Y-m-d');
 
 				// deactivate packages if it they are expired
-				if (Carbon::now() >= $package2ExpiryDate) {
-					$user->is_active_gotm_package = 0;
-					$user->save();
-					if (Carbon::now() < $package1ExpiryDate) {
-						$url = url('@' . $user->username . '/packages');
-						Session::flash('gotm_expired_package_info',
-							__('messages.error_gotm_package_expired', ['url' => $url]));
+				if ($user->package2_id) {
+					if (Carbon::now() >= $package2ExpiryDate) {
+						$user->is_active_gotm_package = 0;
+						$user->save();
+						if (Carbon::now() < $package1ExpiryDate) {
+							$url = url('@' . $user->username . '/packages');
+							Session::flash('gotm_expired_package_info',
+								__('messages.error_gotm_package_expired', ['url' => $url]));
+						}
 					}
 				}
 				if (Carbon::now() >= $package1ExpiryDate) {
