@@ -119,16 +119,10 @@ Route::middleware(['roles'])->group(function () {
 });
 
 # GIRL CONTROLLER
-
-Route::group(['middleware' => 'web'], function() {
-    Route::get('search', 'SearchController@getQuickSeachResults');
-
-	Route::get('girls', [
-		'as' => 'girls',
-		'uses' => 'GirlController@getIndex'
-	]);
-});
-
+Route::get('girls', [
+	'as' => 'girls',
+	'uses' => 'GirlController@getIndex'
+]);
 Route::get('girls/{nickname}', 'GirlController@getGirl');
 Route::get('get_price_ranges', 'GirlController@getPriceRanges');
 Route::get('get_radius', 'GirlController@getRadius');
@@ -144,6 +138,7 @@ Route::post('contact/send', 'ContactController@postIndex');
 Route::get('faq', 'FaqController@getIndex');
 
 # SEARCH CONTROLLER
+Route::get('search', 'SearchController@getQuickSeachResults');
 Route::post('get_guest_data', 'SessionController@storeGuestData');
 
 
