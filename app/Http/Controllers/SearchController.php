@@ -37,6 +37,6 @@ class SearchController extends Controller
 
 		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
-		return redirect(urldecode(route('girls', $query, false)));
+		return redirect()->away(urldecode(route('girls', $query, false)));
 	}
 }

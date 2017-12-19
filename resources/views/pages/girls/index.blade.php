@@ -7,11 +7,6 @@
 @stop
 
 @section('content')
-@php
-if (Session::has('users')) {
-	dd('asdasasd');
-}
-@endphp
 <div class="wrapper section-girls">
 	<div class="single-product-menu">
 		<div class="container">
