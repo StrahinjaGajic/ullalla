@@ -24,9 +24,9 @@ class GirlController extends Controller
 		$session = new Session();
 		dd($session->get('users'));
 
-		if (Session::has('users')) {
-			$userss = Session::get('users');
-		}
+		// if (Session::has('users')) {
+		// 	$userss = Session::get('users');
+		// }
 
 		if ($request->has('radius')) {
 			$radius = (int)request('radius');

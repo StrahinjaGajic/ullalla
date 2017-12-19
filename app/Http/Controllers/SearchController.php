@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Session as Sessions;
 
 class SearchController extends Controller
 {
@@ -25,16 +26,15 @@ class SearchController extends Controller
 		$cantons = Canton::with('users')->get();
 
 		$radius = (int)request('radius');
-		$session = new Session();
-		$lat = $session->get('lat');
-		$lng = $session->get('lng');
+		$lat = Session::get('lat');
+		$lng = Session::get('lng');
 
 		$users = User::nearLatLng($lat, $lng, $radius);
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
 
-		$session = new Session();
+		$session = new Sessions();
 		$session->set('users', $users);
 		// return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
 
