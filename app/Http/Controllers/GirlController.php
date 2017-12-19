@@ -106,8 +106,6 @@ class GirlController extends Controller
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
 
-		dd($userss);
-
 		// ->groupBy('users.username');
 		$users = $users->where('users.approved', '=', '1')
 			->where('users.is_active_d_package', '=', '1')
