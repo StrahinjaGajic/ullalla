@@ -22,7 +22,7 @@ class GirlController extends Controller
 		$users = DB::table('users')->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
 
-		dd(Session::get('users'));
+		var_dump(Session::get('users'));
 
 		if (Session::has('users')) {
 			$userss = Session::get('users');
