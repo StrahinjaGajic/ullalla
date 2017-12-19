@@ -25,6 +25,8 @@ class SearchController extends Controller
 		unset($request->query()['type']);
 		unset($request->query()['_token']);
 
-		return redirect(urldecode(route('girls', $request->query(), false)));
+		return view('pages.girls.index', compact('users'));
+
+		// return redirect(urldecode(route('girls', $request->query(), false)));
     }
 }

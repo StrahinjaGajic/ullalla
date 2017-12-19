@@ -37,7 +37,7 @@ class GirlController extends Controller
 
 			// $users = $users->select()
 			//     			->whereRaw("{$haversine} < ?", [$radius]);
-			// $users = $users->nearLatLng($lat, $lng, $radius)->get();
+			// $users = $users->nearLatLng($lat, $lng, $radius);
 
 		}
 
