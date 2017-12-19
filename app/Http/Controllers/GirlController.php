@@ -23,7 +23,7 @@ class GirlController extends Controller
 
 		if (Session::has('users')) {
 			dd(Session::get('users'));
-			$users = Session::get('users');
+			$userss = Session::get('users');
 		}
 
 		if ($request->has('radius')) {
@@ -104,7 +104,7 @@ class GirlController extends Controller
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
 
-		dd($users);
+		dd($userss);
 
 		// ->groupBy('users.username');
 		$users = $users->where('users.approved', '=', '1')
