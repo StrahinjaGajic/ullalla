@@ -123,12 +123,11 @@ Route::middleware(['roles'])->group(function () {
 Route::group(['middleware' => 'web'], function() {
     Route::get('search', 'SearchController@getQuickSeachResults');
 
-Route::get('girls', [
-	'as' => 'girls',
-	'uses' => 'GirlController@getIndex'
-]);
-}
-
+	Route::get('girls', [
+		'as' => 'girls',
+		'uses' => 'GirlController@getIndex'
+	]);
+});
 
 Route::get('girls/{nickname}', 'GirlController@getGirl');
 Route::get('get_price_ranges', 'GirlController@getPriceRanges');
