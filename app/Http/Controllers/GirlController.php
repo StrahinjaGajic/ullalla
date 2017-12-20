@@ -22,15 +22,19 @@ class GirlController extends Controller
 
 
 		if ($request->has('radius')) {
-			$radius = (int)request('radius');
-			$location = file_get_contents('http://freegeoip.net/json/24.135.165.252');
-			$location = json_decode($location, true);
+			$radius = request('radius');
+			
+			if (Session::has('lat')) {
+				$lat = Session::get('lat');
+			}
+			if (Session::has('lng')) {
+				$lng = Session::get('lng');
+			}
 
-			$lat = 47.559841;
-			$lng = 7.582087;
-
-			$users = User::nearLatLng($lat, $lng, $radius, $request);
-		}else{
+			if (isset($lat) && isset($lng)) {
+				$users = User::nearLatLng($lat, $lng, $radius, $request);
+			}
+		} else {
 			$users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id')
 							->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
 							->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
@@ -81,15 +85,9 @@ class GirlController extends Controller
 			}
 		}
 
-
-
-
 		$orderBy = $request->order_by ? $request->order_by : null;
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
-
-
-
 		$users = isset($orderBy) ? $users->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $users;
 
 		if (Session::has('users')) {
@@ -97,8 +95,6 @@ class GirlController extends Controller
 		} else {
 			$users = isset($show) ? $users->paginate($show) : $users->paginate(9);
 		}
-
-		dd($users);
 
 		$request->flash();
 
