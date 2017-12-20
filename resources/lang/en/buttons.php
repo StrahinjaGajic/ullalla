@@ -51,5 +51,7 @@ return [
     'from' => 'From',
     'to' => 'To',
 
-
+    #auth
+    'login' => 'Login',
+    'register' => 'Register',
 ];

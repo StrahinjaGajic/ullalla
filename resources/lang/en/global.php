@@ -12,4 +12,5 @@ return [
     'sort_by' => 'Sort By',
     'min' => 'min',
     'hrs' => 'hrs',
+    'forgot_password' => 'Forgot Password',
 ];

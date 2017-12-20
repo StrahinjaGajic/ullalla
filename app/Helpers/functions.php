@@ -30,77 +30,77 @@ function storeAndGetUploadCareFiles($file, $dbObject = null) {
 }
 
 function getSexes() {
-    return ['male', 'female', 'transsexual'];
+    return [__('functions.male'), __('functions.female'), __('functions.transsexual')];
 }
 
 function getSexOrientations() {
-    return ['heterosexual', 'bisexual', 'homosexual'];
+    return [__('functions.heterosexual'), __('functions.bisexual'), __('functions.homosexual')];
 }
 
 function getAnswers() {
-    return ['yes', 'no', 'occasionally'];
+    return [__('functions.yes'), __('functions.no'), __('functions.occasionally')];
 }
 
 function getTypes() {
-    return ['asian', 'black', 'european', 'latina', 'indian', 'arabian', 'mixed', 'other'];
+    return [__('functions.asian'), __('functions.black'), __('functions.european'), __('functions.latina'), __('functions.india'), __('functions.arabian'), __('functions.mixed'), __('functions.other')];
 }
 
 function getFigures() {
-    return ['athletic', 'chubby', 'normal', 'slim', 'other'];
+    return [__('functions.athletic'), __('functions.chubby'), __('functions.normal'), __('functions.slim'), __('functions.other')];
 }
 
 function getBreastSizes() {
-    return ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+    return [__('functions.a'), __('functions.b'), __('functions.c'), __('functions.d'), __('functions.e'), __('functions.f'), __('functions.g')];
 }
 
 function getEyeColors() {
-    return ['black', 'brown', 'green', 'blue', 'gray', 'other'];
+    return [__('functions.black'), __('functions.brown'), __('functions.green'), __('functions.blue'), __('functions.gray'), __('functions.other')];
 }
 
 function getHairColors() {
-    return ['black', 'brunette', 'blond', 'red', 'other'];
+    return [__('functions.black'), __('functions.brunette'), __('functions.blond'), __('functions.red'), __('functions.other')];
 }
 
 function getShaveOptions() {
-    return ['shaved', 'partial', 'hairy'];
+    return [__('functions.shaved'), __('functions.partial'), __('functions.hairy')];
 }
 
 function getUnits() {
-    return ['days', 'hours', 'minutes'];
+    return [__('functions.days'), __('functions.hours'), __('functions.minutes')];
 }
 
 function getPreferedOptions() {
     return [
-        'sms_and_call' => 'SMS And Call',
-        'sms_only' => 'SMS Only',
-        'call_only' => 'Call Only',
+        'sms_and_call' => __('functions.sms_and_call'),
+        'sms_only' => __('functions.sms_only'),
+        'call_only' => __('functions.call_only'),
     ];
 }
 
 function getIncallOptions() {
     return [
-        'private_apartment' => 'Private Apartment',
-        'hotel' => 'Hotel',
-        'club_studio' => 'Club/Studio',
-        'define_yourself' => 'Define Yourself',
+        'private_apartment' => __('functions.private_apartment'),
+        'hotel' => __('functions.hotel'),
+        'club_studio' => __('functions.club_studio'),
+        'define_yourself' => __('functions.define_yourself'),
     ];
 }
 
 function getOutcallOptions() {
     return [
-        'home' => 'Home',
-        'hotel' => 'Hotel',
-        'home_and_hotel' => 'Home And Hotel',
-        'define_yourself' => 'Define Yourself',
+        'home' => __('functions.home'),
+        'hotel' => __('functions.hotel'),
+        'home_and_hotel' => __('functions.home_and_hotel'),
+        'define_yourself' => __('functions.define_yourself'),
     ];
 }
 
 function getCurrencies() {
-    return ['chf', 'eur', 'usd'];
+    return [__('functions.chf'), __('functions.eur'), __('functions.usd')];
 }
 
 function getPriceTypes() {
-    return ['outcall', 'incall'];
+    return [__('functions.outcall'), __('functions.incall')];
 }
 
 function getFilterYears() {
@@ -113,10 +113,10 @@ function getFilterYears() {
 
 function getLanguages() {
     return [
-        'de' => 'German',
-        'fr' => 'French',
-        'it' => 'Italian',
-        'en' => 'English',
+        'de' => __('functions.de'),
+        'fr' => __('functions.fr'),
+        'it' => __('functions.it'),
+        'en' => __('functions.en'),
     ];
 }
 
@@ -140,17 +140,18 @@ function getMinutesList() {
     return $minutes;
 }
 
+
 function getDaysOfTheWeek() {
-    return ['Monday', 'Thuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return [__('functions.monday'), __('functions.tuesday'), __('functions.wednesday'), __('functions.thursday'), __('functions.friday'), __('functions.saturday'), __('functions.sunday')];
 }
 
 function getWorkingTime($days, $available_24_7, $timeFrom, $timeFromM, $timeTo, $timeToM, $showAsNightEscort = null, $nightEscorts = null) {
     $workingTime = null;
     // girl availability and working hours
     if ($available_24_7) {
-        $workingTime = 'Available 24/7';
+        $workingTime = __('fields.available_24_7');
         if ($showAsNightEscort) {
-            $workingTime .= '&' . 'Night Escort';
+            $workingTime .= '&' . __('fields.night_escort');
         }
     } elseif ($days) {
         // loop through each day and put in array day of the week delimited (|) with time from and time to
@@ -177,17 +178,17 @@ function getWorkingTime($days, $available_24_7, $timeFrom, $timeFromM, $timeTo, 
 
 function getBioFields() {
     return [
-        'age' => 'Age',
-        'type' => 'Type',
-        'country_id' => 'Nationality',
-        'eye_color' => 'Eyes',
-        'hair_color' => 'Hair',
-        'height' => 'Height',
-        'weight' => 'Weight',
-        'breast_size' => 'Breast Size',
-        'intimate' => 'Intimate',
-        'smoker' => 'Smoker',
-        'alcohol' => 'Alcohol',
+        'age' => __('functions.age'),
+        'type' => __('functions.type'),
+        'country_id' => __('functions.country_id'),
+        'eye_color' => __('functions.eye_color'),
+        'hair_color' => __('functions.hair_color'),
+        'height' => __('functions.height'),
+        'weight' => __('functions.weight'),
+        'breast_size' => __('functions.breast_size'),
+        'intimate' => __('functions.intimate'),
+        'smoker' => __('functions.smoker'),
+        'alcohol' => __('functions.alcohol'),
     ];
 }
 
@@ -214,14 +215,14 @@ function parseSingleUserData($fields, $user) {
 
 function getContactFields() {
     return [
-        'email' => 'Email',
-        'phone' => 'Phone',
-        'mobile' => 'Mobile Phone',
-        'website' => 'Website',
+        'email' => __('functions.email'),
+        'phone' => __('functions.phone'),
+        'mobile' => __('functions.mobile'),
+        'website' => __('functions.website'),
         'contact_options' => ['Available Apps' => 'contact_option_name'],
-        'skype_name' => 'Skype Name',
-        'prefered_contact_option' => 'I Prefer',
-        'no_withheld_numbers' => 'Withheld Numbers',
+        'skype_name' => __('functions.skype_name'),
+        'prefered_contact_option' => __('functions.prefered_contact_option'),
+        'no_withheld_numbers' => __('functions.no_withheld_numbers'),
     ];
 }
 
@@ -260,11 +261,11 @@ function parseSingleContactData($fields, $user) {
 
 function getWorkplaceFields() {
     return [
-        'club_name' => 'Club',
-        'city' => 'City',
-        'address' => 'Address',
-        'incall_type' => 'Incall',
-        'outcall_type' => 'Outcall',
+        'club_name' => __('functions.club_name'),
+        'city' => __('functions.city'),
+        'address' => __('functions.address'),
+        'incall_type' => __('functions.incall_type'),
+        'outcall_type' => __('functions.outcall_type'),
     ];
 }
 
@@ -311,11 +312,11 @@ function getshowNumbers() {
 
 function getOrderBy() {
     return [
-        'nickname_asc' => 'Nickname',
-        'created_at_desc' => 'Newest',
-        'created_at_asc' => 'Oldest',
-        'service_price_asc' => 'Price Ascending',
-        'service_price_desc' => 'Price Descending',
+        'nickname_asc' => __('functions.nickname_asc'),
+        'created_at_desc' => __('functions.created_at_desc'),
+        'created_at_asc' => __('functions.created_at_asc'),
+        'service_price_asc' => __('functions.service_price_asc'),
+        'service_price_desc' => __('functions.service_price_desc'),
     ];
 }
 
@@ -356,17 +357,17 @@ function getUrlWithFilters($input, $query, $i, $inputName, $obj) {
 
 function getEditProfilePages() {
     return [
-        'bio' => 'Bio',
-        'about_me' => 'About Me',
-        'languages' => 'Languages',
-        'gallery' => 'Gallery',
-        'contact' => 'Contact',
-        'services' => 'Services',
-        'workplace' => 'Workplace',
-        'working_time' => 'Working Time',
-        'prices' => 'Prices',
-        'packages' => 'Packages',
-        'banners' => 'Banners'
+        'bio' => __('functions.bio'),
+        'about_me' => __('functions.about_me'),
+        'languages' => __('functions.languages'),
+        'gallery' => __('functions.gallery'),
+        'contact' => __('functions.contact'),
+        'services' => __('functions.services'),
+        'workplace' => __('functions.workplace'),
+        'working_time' => __('functions.working_time'),
+        'prices' => __('functions.prices'),
+        'packages' => __('functions.packages'),
+        'banners' => __('functions.banners')
     ];
 }
 
@@ -474,7 +475,7 @@ function getDaysForExpiryLocal($package_duration) {
 }
 
 function getPackageExpiryDate($days) {
-    return date("Y-m-d", strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "+" . $days . " days"));
+    return date("Y-m-d", strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "+" . $days . " " . __('functions.days')));
 }
 
 function daysToAddToExpiry($package_id) {
@@ -506,21 +507,21 @@ function array_search_reverse($key, $array){
 # LOCAL FUNCTIONS
 function getLoclasOrderBy() {
     return [
-        'username_asc' => 'Username',
-        'created_at_desc' => 'Newest',
-        'created_at_asc' => 'Oldest',
+        'username_asc' => __('functions.username_asc'),
+        'created_at_desc' => __('functions.created_at_desc'),
+        'created_at_asc' => __('functions.created_at_asc'),
     ];
 }
 
 function getEditLocalProfilePages() {
     return [
-        'contact' => 'Contact',
-        'gallery' => 'Gallery',
-        'working_time' => 'Working Time',
-        'about_me' => 'About me',
-        'club_info' => 'Club Info',
-        'girls' => 'Girls',
-        'packages' => 'Packages',
+        'contact' => __('functions.contact'),
+        'gallery' => __('functions.gallery'),
+        'working_time' => __('functions.working_time'),
+        'about_me' => __('functions.about_me'),
+        'club_info' => __('functions.club_info'),
+        'girls' => __('functions.girls'),
+        'packages' => __('functions.packages'),
     ];
 }
 
@@ -565,23 +566,23 @@ function setClubInfo($name, $data, $data_free) {
 function getClubInfo($data) {
     if ($data->value != 0) {
         if ($data->value == 1) {
-            return "N / A";
+            return __('labels.n_a');
         } elseif ($data->value == 2) {
             if ($data->free == 1) {
-                return "Yes (Free)";
+                return __('functions.yes_free');
             } elseif ($data->free == 2) {
-                return "Yes (With cost)";
+                return __('functions.yes_with_cost');
             } else {
-                return "Yes";
+                return __('labels.yes');
             }
         } elseif ($data->value == 3) {
-            return "No";
+            return __('labels.no');
         }
     } else {
         if ($data->free == 1) {
-            return "Free";
+            return __('labels.free');
         } elseif ($data->free == 2) {
-            return "With cost";
+            return __('labels.with_cost');
         }
     }
 }

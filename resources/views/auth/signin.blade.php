@@ -35,7 +35,7 @@
                         @endif
                         
                         <div class="pull-left" style="margin-left: -15px;">
-                            <a style="color:white" href="{{ url('password/reset') }}">Forgot Password?</a>
+                            <a style="color:white" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
                         </div>
 
 
@@ -43,10 +43,10 @@
                        <br>
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">Login</button>
+                                <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">Register</button>
+                                <button type="submit" class="btn btn-default">{{ __('buttons.register') }}</button>
                             </div>
                         </div>
 
