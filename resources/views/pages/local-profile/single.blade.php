@@ -16,9 +16,9 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="shop-menu">
                             <ul>
-                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
                                 <li class="separator"><i class="fa fa-angle-right"></i></li>
-                                <li>profil</li>
+                                <li>{{ __('buttons.profile') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             </div>
                             <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                                 <tr>
-                                    <td>Local Type</td>
+                                    <td>{{ __('headings.local_type') }}</td>
                                     <td>{{ $local->local_type->name }}</td>
                                 </tr>
                             </table>
@@ -72,17 +72,17 @@
                         <div class="product-description-tab custom-tab">
                             <ul class="nav nav-tabs" role="tablist">
                                 @if ($local->about_me)
-                                    <li class="active"><a href="#girl-description" data-toggle="tab">About Me</a></li>
+                                    <li class="active"><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
                                 @endif
                                 @if($local->working_time)
-                                    <li><a href="#girl-workinghours" data-toggle="tab">Work Time</a></li>
+                                    <li><a href="#girl-workinghours" data-toggle="tab">{{ __('buttons.work_time') }}</a></li>
                                 @endif
-                                <li><a href="#girl-clubinfo" data-toggle="tab">Club Info</a></li>
+                                <li><a href="#girl-clubinfo" data-toggle="tab">{{ __('buttons.club_info') }}</a></li>
                                 @if(count($local->girls) > 0)
-                                    <li><a href="#girl-girls" data-toggle="tab">Girls</a></li>
+                                    <li><a href="#girl-girls" data-toggle="tab">{{ __('buttons.girls') }}</a></li>
                                 @endif
                                 @if($local->videos)
-                                    <li><a href="#girl-video" data-toggle="tab">Video</a></li>
+                                    <li><a href="#girl-video" data-toggle="tab">{{ __('buttons.video') }}</a></li>
                                 @endif
                             </ul>
                             <div class="tab-content">
@@ -99,9 +99,9 @@
                                             <table class="table working-times-table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Day</th>
-                                                    <th>From</th>
-                                                    <th>To</th>
+                                                    <th>{{ __('buttons.day') }}</th>
+                                                    <th>{{ __('buttons.from') }}</th>
+                                                    <th>{{ __('buttons.to') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -121,19 +121,19 @@
                                 <div class="tab-pane" id="girl-clubinfo">
                                     <table class="table working-times-table">
                                         <tr>
-                                            <td>Entrance</td>
+                                            <td>{{ __('tables.entrance') }}</td>
                                             <td>{{ $entrance }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Wellness</td>
+                                            <td>{{ __('tables.wellness') }}</td>
                                             <td>{{ $wellness }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Food and drinks</td>
+                                            <td>{{ __('tables.food_and_drinks') }}</td>
                                             <td>{{ $food }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Outdoor Area</td>
+                                            <td>{{ __('tables.outdoor_area') }}</td>
                                             <td>{{ $outdoor }}</td>
                                         </tr>
                                     </table>

@@ -212,8 +212,7 @@ class User extends Authenticatable
         );
 
         $subselect = clone $query;
-        $subselect
-        ->selectRaw(DB::raw($haversine));
+        $subselect->selectRaw(DB::raw($haversine));
 
         $latDistance      = $radius / $distanceUnit;
         $latNorthBoundary = $lat - $latDistance;

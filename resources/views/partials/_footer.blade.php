@@ -24,8 +24,10 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+        <p style="margin-top: 25px;">© Webtory 2017. All Rights Reserved.</p>
     </div>
 </section>
 @include('partials._scripts')

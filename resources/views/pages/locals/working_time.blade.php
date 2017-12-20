@@ -16,7 +16,7 @@
 			{!! parseEditLocalProfileMenu('working_time') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			<h3>Working Time</h3>
+			<h3>{{ __('headings.working_time') }}</h3>
 			{!! Form::model($local, ['url' => 'locals/@' . $local->username . '/working_time/store', 'method' => 'put']) !!}
 			<div class="row">
 				<div class="col-sm-12">
@@ -26,7 +26,7 @@
 					?>
 					<div class="form-group">
 						<div id="available_24_7">
-							<label class="control control--checkbox"><a>Available 24/7</a>
+							<label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
 								<input type="checkbox" name="available_24_7" {{ stringHasString('Available 24/7', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
 							</label>
@@ -35,7 +35,7 @@
 							<thead>
 								<tr>
 									<th>
-										<label class="control control--checkbox"><a>Mark All</a>
+										<label class="control control--checkbox"><a>{{ __('labels.mark_all') }}</a>
 											<input type="checkbox" id="select_all_days" {{ count($workingTime) == 7 ? 'checked' : '' }}>
 											<div class="control__indicator"></div>
 										</label>
@@ -61,13 +61,13 @@
 											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
-										<span>hrs</span>
+										<span>{{ __('global.hrs') }}</span>
 										<select name="time_from_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
 											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
-										<span>min</span>
+										<span>{{ __('global.min') }}</span>
 									</td>
 									<td>
 										<select name="time_to[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
@@ -75,20 +75,20 @@
 											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
-										<span>hrs</span>
+										<span>{{ __('global.hrs') }}</span>
 										<select name="time_to_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
 											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
-										<span>min</span>
+										<span>{{ __('global.min') }}</span>
 									</td>
 								</tr>
 								<?php $counter++; ?>
 								@endforeach
 							</tbody>
 						</table>
-						<button type="submit" class="btn btn-default">Save Changes</button>
+						<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 					</div>
 				</div>
 			</div>

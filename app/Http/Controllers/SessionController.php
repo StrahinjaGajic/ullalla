@@ -47,4 +47,11 @@ class SessionController extends Controller
 			'packagePrice' => Session::has('month_girl_package') ? Session::get('month_girl_package') : null
 		]);
 	}
+
+	public function storeGuestData(Request $request)
+	{
+		Session::put('lat', $request->lat);
+		Session::put('lng', $request->lng);
+		Session::put('guest_ip_address', $_SERVER['REMOTE_ADDR']);
+	}
 }

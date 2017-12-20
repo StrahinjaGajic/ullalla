@@ -22,13 +22,13 @@
                 @foreach($local->girls as $girl)
                     <div class="col-3 input-effect {{ $errors->has('nickname') ? 'has-error' : ''  }}">
                         <input class="effect-16" type="text" placeholder="" name="nickname_{{ $girl->id }}" value="{{ $girl->nickname }}">
-                        <label>Nickname</label>
+                        <label>{{ __('fields.nickname') }}</label>
                         <span class="focus-border"></span>
                         @if ($errors->has('nickname_'. $girl->id))
                             <span class="help-block">{{ $errors->first('nickname_'. $girl->id ) }}</span>
                         @endif
                     </div>
-                    <label>Photos</label>
+                    <label>{{ __('headings.photos') }}Photos</label>
                     <div class="form-group">
                         <div class="image-preview-multiple">
                             <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-crop="490x560 minimum" data-images-only="" data-multiple="">
@@ -60,11 +60,11 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         {!! Form::open(['url' => 'locals/@' . $local->username . '/girls/create', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-                        <h2>Add Girl</h2>
+                        <h2>{{ __('headings.add_girl') }}</h2>
                         <section data-step="0">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">Nickname*</label>
+                                    <label class="control-label">{{ __('fields.nickname') }}*</label>
                                     <input type="text" class="form-control" name="nickname" />
                                     @if ($errors->has('nickname'))
                                         <span class="help-block">{{ $errors->first('nickname') }}</span>

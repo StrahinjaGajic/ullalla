@@ -56,11 +56,45 @@ return [
 	'radius' => 'Radius',
 	'price_range' => 'Price Range',
 	'incall_outcall' => 'Incall/Outcall',
-	'location' => 'Lcoation',
+	'location' => 'Location',
 	'service' => 'Service',
 
+    # locals
+    'male' => 'Male',
+    'female' => 'Female',
 
-
+    #profile
+    'transsexual' => 'Transsexual',
+    'heterosexual' => 'Heterosexual',
+    'bisexual' => 'Bisexual',
+    'homosexual' => 'Homosexual',
+    'normal' => 'Normal',
+    'slim' => 'Slim',
+    'athletic' => 'Athletic',
+    'chubby' => 'Chubby',
+    'a' => 'A',
+    'b' => 'B',
+    'c' => 'C',
+    'd' => 'D',
+    'e' => 'E',
+    'f' => 'F',
+    'g' => 'G',
+    'black' => 'Black',
+    'brow' => 'Brow',
+    'green' => 'Green',
+    'blue' => 'Blue',
+    'gray' => 'Gray',
+    'other' => 'Other',
+    'brunette' => 'Brunette',
+    'blond' => 'Blond',
+    'red' => 'Red',
+    'shaved' => 'Shaved',
+    'hairy' => 'Hairy',
+    'partial' => 'Partial',
+    'occasionally' => 'Occasionally',
+    'website_url' => 'Website URL',
+    'telephone' => 'Telephone',
+    'mobile_phone' => 'Mobile Phone',
 
 
 

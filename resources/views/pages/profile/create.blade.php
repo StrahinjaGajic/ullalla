@@ -13,7 +13,7 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-					<h2>{{ __('buttons.bio') }}</h2>
+					<h2>{{ __('headings.bio') }}</h2>
 					<section data-step="0">
 						<div class="col-xs-6">
 							<div class="form-group">
@@ -25,11 +25,11 @@
 								<input type="text" class="form-control" name="last_name" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">Nickname*</label>
+								<label class="control-label">{{ __('fields.nickname') }}*</label>
 								<input type="text" class="form-control" name="nickname" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">Nationality</label>
+								<label class="control-label">{{ __('fields.nationality') }}</label>
 								<select name="nationality_id" class="form-control">
 									<option value=""></option>
 									@foreach ($countries as $country)
@@ -38,32 +38,32 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Sex*</label>
+								<label class="control-label">{{ __('fields.sex') }}*</label>
 								<select name="sex" class="form-control">
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="transsexual">Transsexual</option>
+									<option value="male">{{ __('fields.male') }}</option>
+									<option value="female">{{ __('fields.female') }}</option>
+									<option value="transsexual">{{ __('fields.transsexual') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Sex Orientation</label>
+								<label class="control-label">{{ __('fields.sex_orientation') }}</label>
 								<select name="sex_orientation" class="form-control">
 									<option value=""></option>
-									<option value="heterosexual">Heterosexual</option>
-									<option value="bisexual">Bisexual</option>
-									<option value="homosexual">Homosexual</option>
+									<option value="heterosexual">{{ __('fields.heterosexual') }}</option>
+									<option value="bisexual">{{ __('fields.bisexual') }}</option>
+									<option value="homosexual">{{ __('fields.homosexual') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Height</label>
+								<label class="control-label">{{ __('fields.height') }}</label>
 								<input type="text" class="form-control" name="height" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">Weight</label>
+								<label class="control-label">{{ __('fields.weight') }}</label>
 								<input type="text" class="form-control" name="weight" />
 							</div>
 							<div class="form-group">
-									<label class="control-label">Type</label>
+									<label class="control-label">{{ __('fields.type') }}</label>
 									<select name="ancestry" class="form-control">
 										<option value=""></option>
 										@foreach(getTypes() as $type)
@@ -72,20 +72,20 @@
 									</select>
 								</div>
 							<div class="form-group">
-								<label class="control-label">Figure</label>
+								<label class="control-label">{{ __('fields.figure') }}Figure</label>
 								<select name="figure" class="form-control">
 									<option value=""></option>
-									<option value="normal">Normal</option>
-									<option value="slim">Slim</option>
-									<option value="athletic">Athletic</option>
-									<option value="chubby">Chubby</option>
-									<option value="other">Other</option>
+									<option value="normal">{{ __('fields.normal') }}</option>
+									<option value="slim">{{ __('fields.slim') }}</option>
+									<option value="athletic">{{ __('fields.athletic') }}</option>
+									<option value="chubby">{{ __('fields.chubby') }}</option>
+									<option value="other">{{ __('fields.other') }}</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Age*</label>
+								<label class="control-label">{{ __('fields.age') }}*</label>
 								<select name="age" id="age" class="form-control">
 									@for ($age=18; $age <= 60 ; $age++) 
 										<option value="{{ $age }}">{{ $age }}</option>
@@ -93,102 +93,101 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Breast Size</label>
+								<label class="control-label">{{ __('fields.breast_size') }}</label>
 								<select name="breast_size" class="form-control">
 									<option value=""></option>
-									<option value="a">A</option>
-									<option value="b">B</option>
-									<option value="c">C</option>
-									<option value="d">D</option>
-									<option value="E">E</option>
-									<option value="F">F</option>
-									<option value="G">G</option>
+									<option value="a">{{ __('fields.a') }}</option>
+									<option value="b">{{ __('fields.b') }}</option>
+									<option value="c">{{ __('fields.c') }}</option>
+									<option value="d">{{ __('fields.d') }}</option>
+									<option value="E">{{ __('fields.e') }}</option>
+									<option value="F">{{ __('fields.f') }}</option>
+									<option value="G">{{ __('fields.g') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Eye Color</label>
+								<label class="control-label">{{ __('fields.eye_color') }}</label>
 								<select name="eye_color" class="form-control">
 									<option value=""></option>
-									<option value="black">Black</option>
-									<option value="Brown">Brown</option>
-									<option value="green">Green</option>
-									<option value="blue">Blue</option>
-									<option value="gray">Gray</option>
-									<option value="other">Other</option>
+									<option value="black">{{ __('fields.black') }}</option>
+									<option value="Brown">{{ __('fields.brown') }}</option>
+									<option value="green">{{ __('fields.green') }}</option>
+									<option value="blue">{{ __('fields.blue') }}</option>
+									<option value="gray">{{ __('fields.gray') }}</option>
+									<option value="other">{{ __('fields.other') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Hair Color</label>
+								<label class="control-label">{{ __('fields.hair_color') }}</label>
 								<select name="hair_color" class="form-control">
 									<option value=""></option>
-									<option value="black">Black</option>
-									<option value="brunette">Brunette</option>
-									<option value="blond">Blond</option>
-									<option value="red">Red</option>
-									<option value="other">Other</option>
+									<option value="black">{{ __('fields.black') }}</option>
+									<option value="brunette">{{ __('fields.brunette') }}</option>
+									<option value="blond">{{ __('fields.blond') }}</option>
+									<option value="red">{{ __('fields.red') }}</option>
+									<option value="other">{{ __('fields.other') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Tattoos</label>
+								<label class="control-label">{{ __('fields.tattoos') }}</label>
 								<select name="tattoos" class="form-control">
 									<option value=""></option>
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
+									<option value="yes">{{ __('labels.yes') }}</option>
+									<option value="no">{{ __('labels.no') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Piercings</label>
+								<label class="control-label">{{ __('fields.piercings') }}</label>
 								<select name="piercings" class="form-control">
 									<option value=""></option>
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
+									<option value="yes">{{ __('labels.yes') }}</option>
+									<option value="no">{{ __('labels.no') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Body Hair</label>
+								<label class="control-label">{{ __('fields.body_hair') }}</label>
 								<select name="body_hair" class="form-control">
 									<option value=""></option>
-									<option value="shaved">Shaved</option>
-									<option value="hairy">Hairy</option>
-									<option value="partial">Partial</option>
+									<option value="shaved">{{ __('fields.shaved') }}</option>
+									<option value="hairy">{{ __('fields.hairy') }}</option>
+									<option value="partial">{{ __('fields.partial') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Intimate</label>
+								<label class="control-label">{{ __('fields.intimate') }}</label>
 								<select name="intimate" class="form-control">
 									<option value=""></option>
-									<option value="shaved">Shaved</option>
-									<option value="hairy">Hairy</option>
-									<option value="partial">Partial</option>
+									<option value="shaved">{{ __('fields.shaved') }}</option>
+									<option value="hairy">{{ __('fields.hairy') }}</option>
+									<option value="partial">{{ __('fields.partial') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Smoker</label>
+								<label class="control-label">{{ __('fields.smoker') }}</label>
 								<select name="smoker" class="form-control">
 									<option value=""></option>
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
-									<option value="occasionally">Occasionally</option>
+									<option value="yes">{{ __('labels.yes') }}</option>
+									<option value="no">{{ __('labels.no') }}</option>
+									<option value="occasionally">{{ __('fields.occasionally') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Alcohol</label>
+								<label class="control-label">{{ __('fields.alcohol') }}</label>
 								<select name="alcohol" class="form-control">
 									<option value=""></option>
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
-									<option value="occasionally">Occasionally</option>
+                                    <option value="yes">{{ __('labels.yes') }}</option>
+                                    <option value="no">{{ __('labels.no') }}</option>
+									<option value="occasionally">{{ __('fields.occasionally') }}</option>
 								</select>
 							</div>
-						</div>
 						<div class="col-xs-12">
 							<div class="form-group">
-								<label class="control-label">About Me</label>
+								<label class="control-label">{{ __('headings.about_me') }}</label>
 								<textarea name="about_me" class="form-control"></textarea>
 							</div>
 						</div>
 					</section>
-					<h2>Gallery</h2>
+					<h2>{{ __('headings.gallery') }}</h2>
 					<section data-step="1">
 						<div class="form-group">
 							<div class="image-preview-multiple">
@@ -201,46 +200,57 @@
 							<video id="video" width="320" height="240" loop style="display: block;"></video>
 						</div>
 					</section>
-					<h2>Contact</h2>
+					<h2>{{ __('headings.contact') }}</h2>
 					<section data-step="2">
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Email*</label>
+								<label class="control-label">{{ __('fields.email') }}</label>
 								<input type="text" class="form-control" name="email" value="{{ $user->email }}" />
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Website URL</label>
+								<label class="control-label">{{ __('fields.website_url') }}</label>
 								<input type="text" class="form-control" name="website"/>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Telephone</label>
+								<label class="control-label">{{ __('fields.telephone') }}</label>
 								<input type="text" class="form-control" name="phone"/>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Mobile Phone</label>
+								<label class="control-label">{{ __('fields.mobile_phone') }}</label>
 								<input type="text" class="form-control" name="mobile"/>
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div id="options" class="col-xs-12">
+						<div class="col-xs-6" style="padding-left: 0px;">
 							<div class="form-group">
-								<label class="control-label" style="display: block; text-align: left;">Available Apps</label>
+								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 								@foreach($contactOptions as $contactOption)
-								<label class="control control--checkbox" style="margin-right: 20px;"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
+								<label class="control control--checkbox apps"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
 									<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
 									<div class="control__indicator"></div>
 								</label>
 								@endforeach
 							</div>
+							
+				        <div class="col skype-name" style="display: none;">
+							<div class="form-group">
+								<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
+							</div>
 						</div>
+							
+						</div>
+						
+
+						
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label" style="display: block; text-align: left;">I Prefer</label>
+								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
 								@foreach(getPreferedOptions() as $key => $preferedOption)
 								<div class="col-xs-6" style="padding: 0px; margin: 0px;">
 									<label style="margin-right: 20px;">
@@ -250,24 +260,23 @@
 								</div>	
 								@endforeach
 								<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+								
 									<label class="control control--checkbox" style="margin-right: 20px; margin-left:0px;">
-										<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>No Withheld Numbers</a>
+										<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>{{ __('fields.no_withheld_numbers') }}</a>
 										<div class="control__indicator"></div>
 									</label>
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-6 skype-name" style="display: none;">
-							<div class="form-group">
-								<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
-							</div>
+                        
+
 						</div>
 					</section>
-					<h2>Workplace</h2>
+					<h2>{{ __('headings.workplace') }}</h2>
 					<section data-step="3">
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Canton</label>
+								<label class="control-label">{{ __('fields.canton') }}</label>
 								<select name="canton" class="form-control">
 									<option value=""></option>
 									@foreach($cantons as $canton)
@@ -278,33 +287,33 @@
 						</div>
 						<div class="col-xs-4">
 							<div class="form-group">
-								<label class="control-label">City</label>
+								<label class="control-label">{{ __('fields.city') }}</label>
 								<input type="text" class="form-control" name="city"/>
 							</div>
 						</div>
 						<div class="col-xs-2">
 							<div class="form-group">
-								<label class="control-label">Zip Code</label>
+								<label class="control-label">{{ __('fields.zip_code') }}</label>
 								<input type="text" class="form-control" name="zip_code"/>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Address</label>
+								<label class="control-label">{{ __('fields.address') }}</label>
 								<input type="text" class="form-control" name="address"/>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">Club Name</label>
+								<label class="control-label">{{ __('fields.club_name') }}</label>
 								<input type="text" class="form-control" name="club_name"/>
 							</div>
 						</div>
-						<h3>Available For:</h3>
+						<h3 style="padding-left: 15px;">{{ __('headings.available_for') }}:</h3>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control control--checkbox">
-									<input type="checkbox" name="incall" value="1" id="incall_availability"><a>Incall</a>
+								<label class="control control--checkbox apps">
+									<input type="checkbox" name="incall" value="1" id="incall_availability"><a>{{ __('fields.incall') }}</a>
 									<div class="control__indicator"></div>
 								</label>
 								<div class="incall-options" style="display: none;">
@@ -320,7 +329,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control control--checkbox">
+								<label class="control control--checkbox apps">
 									<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>Outcall</a>
 									<div class="control__indicator"></div>
 								</label>
@@ -336,16 +345,16 @@
 							</div>
 						</div>
 					</section>
-					<h2>Working Hours</h2>
+					<h2>{{ __('headings.working_hours') }}</h2>
 					<section data-step="4">
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div id="available_24_7">
-									<label class="control control--checkbox"><a>Available 24/7</a>
+									<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
 										<input type="checkbox" name="available_24_7">
 										<div class="control__indicator"></div>
 									</label>
-									<label class="control control--checkbox working-times-disabled" style="margin-left: 20px;"><a>Show As Night Escort</a>
+									<label class="control control--checkbox working-times-disabled" style="margin-left: 20px;"><a>{{ __('fields.show_as_night_escort') }}</a>
 										<input type="checkbox" name="available_24_7_night_escort" value="1" disabled="">
 										<div class="control__indicator"></div>
 									</label>
@@ -354,13 +363,13 @@
 									<thead>
 										<tr>
 											<th>
-												<label class="control control--checkbox"><a>Mark All</a>
+												<label class="control control--checkbox"><a>{{ __('fields.mark_all') }}</a>
 													<input type="checkbox" id="select_all_days">
 													<div class="control__indicator"></div>
 												</label>
 											</th>
-											<th>From</th>
-											<th>To</th>
+											<th>{{ __('headings.from') }}</th>
+											<th>{{ __('headings.to') }}</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -380,13 +389,13 @@
 													<option value="{{ $hour }}">{{ $hour }}</option>
 													@endforeach
 												</select>
-												<span>hrs</span>
+												<span>{{ __('global.hrs') }}</span>
 												<select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
 													@foreach(getMinutesList() as $minute)
 													<option value="{{ $minute }}">{{ $minute }}</option>
 													@endforeach
 												</select>
-												<span>min</span>
+												<span>{{ __('global.min') }}</span>
 											</td>
 											<td>
 												<select name="time_to[{{ $counter }}]" class="form-control" disabled="">
@@ -394,16 +403,16 @@
 													<option value="{{ $hour }}">{{ $hour }}</option>
 													@endforeach
 												</select>
-												<span>hrs</span>
+												<span>{{ __('global.hrs') }}</span>
 												<select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
 													@foreach(getMinutesList() as $minute)
 													<option value="{{ $minute }}">{{ $minute }}</option>
 													@endforeach
 												</select>
-												<span>min</span>
+												<span>{{ __('global.min') }}</span>
 											</td>
 											<td>
-												<label class="control control--checkbox"><a>Night Escort</a>
+												<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>
 													<input type="checkbox" name="night_escorts[{{ $counter }}]" value="{{ $counter }}" disabled="">
 													<div class="control__indicator"></div>
 												</label>
@@ -416,9 +425,9 @@
 							</div>
 						</div>
 					</section>
-					<h2>Services</h2>
+					<h2>{{ __('headings.services') }}</h2>
 					<section data-step="5" class="services-section">
-						<h3>Services Offered For:</h3>
+						<h3>{{ __('headings.service_offered_for') }}:</h3>
 						<div class="col-xs-12">
 							@foreach($serviceOptions as $serviceOption)
 							<label class="control control--checkbox"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
@@ -428,7 +437,7 @@
 							@endforeach
 						</div>
 						<div class="service-list">
-							<h3>Service List</h3>
+							<h3>{{ __('headings.service_list') }}</h3>
 							@foreach ($services->chunk(19) as $chunkedServices)
 							<div class="col-xs-6">
 								@foreach($chunkedServices as $service)
@@ -443,19 +452,19 @@
 							@endforeach
 						</div>
 					</section>
-					<h2>Prices</h2>
+					<h2>{{ __('headings.prices') }}</h2>
 					<section data-step="6">
 						<div class="price_section">
 							<div class="col-xs-3">
 								<div class="form-group">
-									<label class="control-label">Duration</label>
+									<label class="control-label">{{ __('headings.duration') }}</label>
 									<input type="text" class="form-control" name="service_duration"/>
 									<div class="help-block"></div>
 								</div>
 							</div>
 							<div class="col-xs-2">
 								<div class="form-group">
-									<label class="control-label">Unit</label>
+									<label class="control-label">{{ __('fields.unit') }}</label>
 									<select name="service_price_unit" class="form-control">
 										@foreach(getUnits() as $unit)
 										<option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
@@ -466,14 +475,14 @@
 							</div>
 							<div class="col-xs-3">
 								<div class="form-group">
-									<label class="control-label">Price</label>
+									<label class="control-label">{{ __('headings.price') }}</label>
 									<input type="text" class="form-control" name="service_price"/>
 									<div class="help-block"></div>
 								</div>
 							</div>
 							<div class="col-xs-2">
 								<div class="form-group">
-									<label class="control-label">Currency</label>
+									<label class="control-label">{{ __('fields.currency') }}</label>
 									<select name="service_price_currency" class="form-control">
 										@foreach(getCurrencies() as $currency)
 										<option value="{{ $currency }}">{{ strtoupper($currency) }}</option>
@@ -484,7 +493,7 @@
 							</div>
 							<div class="col-xs-2">
 								<div class="form-group">
-									<label class="control-label">Type</label>
+									<label class="control-label">{{ __('fields.type') }}Type</label>
 									<select name="price_type" id="price_type" class="form-control">
 										@foreach(getPriceTypes() as $priceType)
 										<option value="{{ $priceType }}">{{ ucfirst($priceType) }}</option>
@@ -1048,7 +1057,7 @@ $(function () {
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
-				window.location.href = "http://ullalla.app";
+				window.location.href = getUrl();
 			})
 			.fail(function(data, textStatus) {
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);

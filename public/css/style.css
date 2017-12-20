@@ -1865,7 +1865,7 @@ th {
     text-transform: uppercase;
 }
 
-.shop-layout {
+.shop-layout h2 {
    
 }
 
@@ -2472,52 +2472,6 @@ input {
     margin-left: 10px;
     margin-top: 10px;
 }
-
-/*.uploadcare-widget {
-margin: 30px 0 20px 0;
-}
-
-.uploadcare-widget-button {
-padding: 17px 56px;
-font-weight: 600;
-background: #00b1b3;
-}
-
-.uploadcare-widget-button:hover {
-background: #14A0AE;
-}
-
-.uploadcare-widget-dragndrop-area {
-padding: 7px 0px;
-margin-top: -25px;
-margin-left: 12px;
-border-radius: 0;
-}*/
-
-/*** image preview */
-
-.image-preview-multiple ._list {
-    padding-top: 20px;
-}
-
-.image-preview-multiple ._item {
-    padding: 0 0 10px;
-    display: inline-block;
-    text-align: center;
-    vertical-align: top;
-    /*  width: 100px;*/
-    word-break: break-word;
-    font-size: 12px;
-    line-height: normal;
-}
-
-.image-preview-multiple ._item img {
-    display: block;
-    /*width: 80px;*/
-    /*height: 80px;*/
-    padding: 0 10px 6px;
-}
-
 /***** end upload care *****/
 
 /***** Datepicker ******/
@@ -2532,4 +2486,20 @@ border-radius: 0;
 table.info-table td,
 table.services-table td {
     padding: 10px;
+}
+
+/**** home page ****/
+.geolocation {
+    position: relative;
+}
+
+a.geolocation-button {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    cursor: pointer;
+}
+
+img.geolocation-image {
+    width: 15px;
 }
