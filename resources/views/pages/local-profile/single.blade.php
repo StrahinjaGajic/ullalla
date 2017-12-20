@@ -93,7 +93,7 @@
                                 @endif
                                 @if($local->working_time)
                                     <div class="tab-pane" id="girl-workinghours">
-                                        @if($local->working_time == 'Available 24/7')
+                                        @if($local->working_time == __('fields.available_24_7') ) {{--uradjen prevod za 24/7 uporedjuje se vrednost iz baze, PROVERITI--}}
                                             {{ $local->working_time }}
                                         @else
                                             <table class="table working-times-table">

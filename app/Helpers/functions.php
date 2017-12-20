@@ -200,7 +200,7 @@ function parseSingleUserData($fields, $user) {
             $html .= '<tr>
 			<td>' . $field . ':</td>
 			<td>';
-            if ($field == 'Nationality') {
+            if ($field == __('fields.nationality')) {
                 $html .= \App\Models\Country::where('id', $value)->value('citizenship');
             } else {
                 $html .= ucfirst($value);
@@ -219,7 +219,7 @@ function getContactFields() {
         'phone' => __('functions.phone'),
         'mobile' => __('functions.mobile'),
         'website' => __('functions.website'),
-        'contact_options' => ['Available Apps' => 'contact_option_name'],
+        'contact_options' => [__('headings.available_apps') => 'contact_option_name'],
         'skype_name' => __('functions.skype_name'),
         'prefered_contact_option' => __('functions.prefered_contact_option'),
         'no_withheld_numbers' => __('functions.no_withheld_numbers'),
@@ -246,7 +246,7 @@ function parseSingleContactData($fields, $user) {
                     $html .= getPreferedOptions()[$value];
                 } else {
                     if ($key == 'no_withheld_numbers') {
-                        $html .= $value == 0 ? 'Yes' : 'No';
+                        $html .= $value == 0 ? __('labels.yes') : __('labels.no');
                     } else {
                         $html .= $value;
                     }

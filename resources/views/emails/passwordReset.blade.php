@@ -1,3 +1,3 @@
-<p>Click on the link to reset your password:</p>
+<p>{{ __('messages.reset_password') }}:</p>
 <br>
 <a href="{{ $actionUrl }}">{{ $actionUrl }}</a>

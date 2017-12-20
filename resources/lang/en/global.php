@@ -13,4 +13,13 @@ return [
     'min' => 'min',
     'hrs' => 'hrs',
     'forgot_password' => 'Forgot Password',
+    'manage_locals' => 'Manage Locals',
+    'reset_password' => 'Reset Password',
+    'new_password' => 'New Password',
+    'repeat_password' => 'Repeat Password',
+    'title' => 'Title',
+    'message' => 'Message',
+    'f_a_q' => 'Frequently Asked Questions',
+    'km' => 'km',
+    'short_info' => 'short info',
 ];
