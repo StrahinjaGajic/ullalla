@@ -122,9 +122,9 @@ function getLanguages() {
 
 function getQuickSearchTypes() {
     return [
-        __('functions.girl'),
-        __('functions.trans'),
-        __('functions.local'),
+        'venus' => __('functions.girl'),
+        'transgender' => __('functions.trans'),
+        'home' => __('functions.local'),
     ];
 }
 

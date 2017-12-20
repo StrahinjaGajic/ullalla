@@ -78,11 +78,11 @@
                 <span class="search"><h3 style="font-size: 18px; color: #363636; font-weight: 800;">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">
                     <div class="checkbox-tile-group">
-                        @foreach(getQuickSearchTypes() as $userType)
+                        @foreach(getQuickSearchTypes() as $key => $userType)
                         <div class="input-container">
                             <input class="checkbox-button" type="checkbox" name="type" value="{{ $userType }}" />
                             <div class="checkbox-tile">
-                                <i class="fa fa-venus fa-2x"></i>
+                                <i class="fa fa-{{ $key }} fa-2x"></i>
                                 <label for="female" class="checkbox-tile-label">{{ $userType }}</label>
                             </div>
                         </div>
