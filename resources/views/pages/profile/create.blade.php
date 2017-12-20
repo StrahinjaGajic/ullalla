@@ -191,7 +191,7 @@
 					<section data-step="1">
 						<div class="form-group">
 							<div class="image-preview-multiple">
-								<input type="hidden" role="uploadcare-uploader" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+								<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
 								<div class="_list"></div>
 							</div>
 						</div>
@@ -638,7 +638,7 @@
 										</td>
 										<td>
 											<label class="control control--checkbox">
-												<input type="checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+												<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
 												<div class="control__indicator"></div>
 											</label>
 										</td>
@@ -753,7 +753,7 @@ function installWidgetPreviewMultiple(widget, list) {
 				});
 			});
 		}
-		$('#profileForm').formValidation('revalidateField', 'photos');
+		// $('#profileForm').formValidation('revalidateField', 'photos');
 	});
 }
 
@@ -920,13 +920,15 @@ $(function () {
 		});
 	});
 });
+</script>
 
-// my checkbox act like a radio button
-$(function () {
-	$("input.ullalla-package-checkbox:checkbox").on('change', function() {
-		$('input.ullalla-package-checkbox:checkbox').not(this).prop('checked', false);
+<script>
+	// my checkbox act like a radio button
+	$(function () {
+		$("input.gotm_checkbox:checkbox").on('change', function() {
+			$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
+		});
 	});
-});
 </script>
 
 <!-- Contact script -->
