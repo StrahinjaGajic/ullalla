@@ -342,5 +342,4 @@ span.onclick = function() {
 	});
 </script>
 
-
 @stop
