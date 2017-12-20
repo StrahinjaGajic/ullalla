@@ -78,10 +78,6 @@ class AuthController extends Controller
 
 	public function postSignin(SignInRequest $request)
 	{
-		if ($_SERVER['REMOTE_ADDR'] != '24.135.165.252') {
-			return 'Temporarily Down For Maintenance';
-		}
-
 		if (Auth::attempt($request->only(['username', 'password']))) {
 			$user = Auth::user();
 			if ($user->activated == '0') {
