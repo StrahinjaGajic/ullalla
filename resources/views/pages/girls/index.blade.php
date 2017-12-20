@@ -580,15 +580,12 @@
 			var lat = place.geometry.location.lat();
 			var lng = place.geometry.location.lng();
 			var address = place.formatted_address;
-			var $url = '{{ request()->query() }}';
 			$.ajax({
 				url: getUrl('/get_guest_data'),
 				type: 'post',
-				data: {lat: lat, lng: lng, address: address, url: $url, _token: token},
+				data: {lat: lat, lng: lng, address: address, _token: token},
 				success: function (data) {
-					if (data.url) {
-						window.location.href = data.url;
-					}
+					window.location.reload();
 				}
 			});
 		});                  
@@ -608,15 +605,12 @@
 					if (results[0]) {
 						var address = results[0].formatted_address;
 						inputCity.value = address;
-						var $url = '{{ request()->query() }}';
 						$.ajax({
 							url: getUrl('/get_guest_data'),
 							type: 'post',
-							data: {lat: lat, lng: lng, address: address, url: $url, _token: token},
+							data: {lat: lat, lng: lng, address: address, _token: token},
 							success: function (data) {
-								if (data.url) {
-									window.location.href = data.url;
-								}
+								window.location.reload();
 							}
 						});
 					}
