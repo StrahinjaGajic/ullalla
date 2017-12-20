@@ -33,7 +33,7 @@
 				<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
-							<a>
+							<a href="#">
 								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
