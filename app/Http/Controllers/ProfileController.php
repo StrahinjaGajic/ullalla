@@ -500,9 +500,12 @@ class ProfileController extends Controller
 
         $showDefaultPackages = false;
         $showGotmPackages = false;
+        $dayFromWhichGotmPackagesShouldBeShown = null;
 
         $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
-        $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
+        if ($user->package2_id) {
+            $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
+        }
 
         if (Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
             $showDefaultPackages = true;
@@ -719,7 +722,7 @@ class ProfileController extends Controller
         } else {
             if ($request->ajax()) {
                 return response(__('messages.error_somethings_wrong'), 500)
-                    ->header('Content-Type', 'json/application');
+                ->header('Content-Type', 'json/application');
             } else {
                 return redirect()->action('ProfileController@getCreate', ['@username' => $user->username]);
             }

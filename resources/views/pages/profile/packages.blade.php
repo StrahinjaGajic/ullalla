@@ -84,8 +84,9 @@
 								<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
 							</td>
 							<td>
-								<label>
-									<input type="radio" class="option-input radio ullalla-package-radio" name="ullalla_package[]" value="{{ $package->id }}" />
+								<label class="control control--checkbox">
+									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+									<div class="control__indicator"></div>
 								</label>
 							</td>
 						</tr>
@@ -123,7 +124,7 @@
 							</td>
 							<td>
 								<label class="control control--checkbox">
-									<input type="checkbox" class="" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+									<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
 									<div class="control__indicator"></div>
 								</label>
 							</td>
@@ -152,24 +153,28 @@
 
 @if(Session::has('expired_package_info'))
 <script>
-    swal(
-        '{{ __('headings.default_error_title') }}',
-        '{{ Session::get('expired_package_info') }}',
-        'error'
-    );
-</script>
-@endif
-<script>
+	swal(
+		'{{ __('headings.default_error_title') }}',
+		'{{ Session::get('expired_package_info') }}',
+		'error'
+		);
+	</script>
+	@endif
+	<script>
 	// get new start and end year
+	var start = new Date();
+	start.setFullYear(start.getFullYear());
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
+
+	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
 
 	var defaultPackageStartDate = JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}');
 	var defaultPackageStartDate = new Date(defaultPackageStartDate[0].date);
 	var defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
 	
-	var gotmPackageStartDate = JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}');
-	var gotmPackageStartDate = new Date(gotmPackageStartDate[0].date);
+	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}') : start;
+	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : gotmPackageStartDate;
 	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
 
 	$(function () {
@@ -197,6 +202,14 @@
 					format: 'DD-MM-YYYY'
 				},
 			});
+		});
+	});
+</script>
+
+<script>
+	$(function () {
+		$("input.gotm_checkbox:checkbox").on('change', function() {
+			$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
 		});
 	});
 </script>
@@ -232,10 +245,10 @@
 					} else if (typeof errors.month_girl_package_error !== 'undefined') {
 						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 					} else {
-						window.location.href = 'http://ullalla.app/@' + username  + '/packages';
+						window.location.href = getUrl('/@' + username  + '/packages');
 					}
 				} else {
-					window.location.href = 'http://ullalla.app/@' + username  + '/packages';
+					window.location.href = getUrl('/@' + username  + '/packages');
 				}
 			})
 			.fail(function(data, textStatus) {

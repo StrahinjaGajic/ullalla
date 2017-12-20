@@ -33,7 +33,7 @@
                         <div class="left-sidebar">
                             <div class="shop-layout">
                                 <div class="layout-title">
-                                    <h2>{{ __('headings.local_types') }}</h2>
+                                    <a>{{ __('headings.local_types') }}</a>
                                 </div>
                                 <div class="layout-list">
                                     <ul>

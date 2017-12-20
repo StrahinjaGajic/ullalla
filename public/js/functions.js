@@ -1,5 +1,6 @@
-function getUrl(route) {
-	return location.protocol + '//' + location.host + route;
+function getUrl(route = null) {
+	var $url = location.protocol + '//' + location.host;
+	return route !== null ? $url + route : $url;
 }
 
 function capitalizeFirstLetter(string) {

@@ -219,6 +219,8 @@ i{
     text-transform: uppercase;
 }
 
+
+
 .headerDropdown .rotateCaret {
     animation-name: rotateCaret;
     animation-duration: .5s;

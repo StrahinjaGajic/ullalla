@@ -37,11 +37,11 @@
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
-									<li>
-										<div class="city-input">
-											<input type="text" name="city" value="" placeholder="{{ __('fields.city') }}">
-											<a href="" onclick="getLocation()"><img src="{{ asset('svg/location.svg') }}" alt="location"></a>
-										</div>
+									<li class="geolocation">
+										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ request('city') }}" />
+										<a onclick="getLocation();" class="geolocation-button">
+											<img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+										</a>
 									</li>
 									<li>
 										<label for="amount">{{ __('fields.radius') }}:</label>
@@ -51,6 +51,7 @@
 										<div id="radius-ranger" style="margin: 10px;"></div>
 										<div class="slider-value-wrapper">
 											<span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
+											<span>km</span>
 										</div>
 									</li>
 								</ul>
@@ -80,7 +81,6 @@
 								</ul>
 							</div>
 						</div>
-
 						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
 								<div class="layout-title toggle_arrow">
@@ -140,10 +140,10 @@
 										<?php $num = 1; ?>
 										@foreach(getTypes() as $key => $type)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('type'), request()->query() , $num, 'type', $type), false)) }}">{{ $type }}
+											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
 												<span>({{ \App\Models\User::approved()->payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
-											<input type="checkbox" name="type[]" value="{{ $type }}" {{ request('type') && in_array($type, request('type')) ? 'checked' : '' }}/>
+											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
 										</label>
 										<?php $num++; ?>
@@ -340,7 +340,7 @@
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="single-product">
 												<div class="product-img">
-													<a class="a-img"><img class="primary-img" src="http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/nth/2/-/resize/263x300/" alt="" />
+													<a class="a-img"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="profile image" />
 													</a>
 												</div>
 												<div class="product-content">
@@ -367,7 +367,7 @@
 												<div class="single-product">
 													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 														<div class="product-img">
-															<a class="a-img" href="shop.html#"><img class="primary-img" src="http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/nth/2/-/resize/263x300/" alt="" />
+															<a class="a-img" href="shop.html#"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="profile image" />
 															</a>
 														</div>
 													</div>
@@ -443,7 +443,7 @@
 @stop
 
 @section('perPageScripts')
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
 <script>
 	var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
 	$('#radius-ranger').slider({
@@ -560,5 +560,64 @@
 		that.closest('.shop-layout').find('.layout-list').toggle('fast');
 		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
 	});
+</script>
+
+<!-- geolocation -->
+<script>
+	var x = document.getElementById("location");
+	var inputCity = document.getElementById('city');
+	var token = '{{ csrf_token() }}';
+
+	function initialize() {
+		var autocomplete = new google.maps.places.Autocomplete(
+			(inputCity), {
+				types: ['geocode']
+			});
+		autocomplete.setComponentRestrictions(
+			{'country': ['ch']});       
+
+		autocomplete.addListener('place_changed', function() { 
+			var place = autocomplete.getPlace();
+			var lat = place.geometry.location.lat();
+			var lng = place.geometry.location.lng();
+			$.ajax({
+				url: getUrl('/get_guest_data'),
+				type: 'post',
+				data: {lat: lat, lng: lng, _token: token},
+				success: function (data) {
+					return true;
+				}
+			});
+		});                  
+	}
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var geocoder = new google.maps.Geocoder;
+				var lat = position.coords.latitude;
+				var lng = position.coords.longitude;
+				var latlng = {
+					lat: lat, 
+					lng: lng
+				};
+				geocoder.geocode({'location': latlng}, function(results, status) {
+					if (results[0]) {
+						inputCity.value = results[0].formatted_address;
+						$.ajax({
+							url: getUrl('/get_guest_data'),
+							type: 'post',
+							data: {lat: lat, lng: lng, _token: token},
+							success: function (data) {
+								return true;
+							}
+						});
+					}
+				});
+			});
+		} else {
+			x.innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
 </script>
 @stop

@@ -13,7 +13,7 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-					<h2>{{ __('buttons.bio') }}</h2>
+					<h2>{{ __('headings.bio') }}</h2>
 					<section data-step="0">
 						<div class="col-xs-6">
 							<div class="form-group">
@@ -180,7 +180,6 @@
 									<option value="occasionally">{{ __('fields.occasionally') }}</option>
 								</select>
 							</div>
-						</div>
 						<div class="col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('headings.about_me') }}</label>
@@ -205,7 +204,7 @@
 					<section data-step="2">
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.email') }}*</label>
+								<label class="control-label">{{ __('fields.email') }}</label>
 								<input type="text" class="form-control" name="email" value="{{ $user->email }}" />
 							</div>
 						</div>
@@ -227,17 +226,28 @@
 								<input type="text" class="form-control" name="mobile"/>
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div id="options" class="col-xs-12">
+						<div class="col-xs-6" style="padding-left: 0px;">
 							<div class="form-group">
 								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 								@foreach($contactOptions as $contactOption)
-								<label class="control control--checkbox" style="margin-right: 20px;"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
+								<label class="control control--checkbox apps"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
 									<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
 									<div class="control__indicator"></div>
 								</label>
 								@endforeach
 							</div>
+							
+				        <div class="col skype-name" style="display: none;">
+							<div class="form-group">
+								<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
+							</div>
 						</div>
+							
+						</div>
+						
+
+						
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
@@ -250,6 +260,7 @@
 								</div>	
 								@endforeach
 								<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+								
 									<label class="control control--checkbox" style="margin-right: 20px; margin-left:0px;">
 										<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>{{ __('fields.no_withheld_numbers') }}</a>
 										<div class="control__indicator"></div>
@@ -257,10 +268,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-6 skype-name" style="display: none;">
-							<div class="form-group">
-								<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
-							</div>
+                        
+
 						</div>
 					</section>
 					<h2>{{ __('headings.workplace') }}</h2>
@@ -300,10 +309,10 @@
 								<input type="text" class="form-control" name="club_name"/>
 							</div>
 						</div>
-						<h3>{{ __('headings.available_for') }}:</h3>
+						<h3 style="padding-left: 15px;">{{ __('headings.available_for') }}:</h3>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control control--checkbox">
+								<label class="control control--checkbox apps">
 									<input type="checkbox" name="incall" value="1" id="incall_availability"><a>{{ __('fields.incall') }}</a>
 									<div class="control__indicator"></div>
 								</label>
@@ -320,7 +329,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control control--checkbox">
+								<label class="control control--checkbox apps">
 									<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>Outcall</a>
 									<div class="control__indicator"></div>
 								</label>
@@ -1048,7 +1057,7 @@ $(function () {
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
-				window.location.href = "http://ullalla.app";
+				window.location.href = getUrl();
 			})
 			.fail(function(data, textStatus) {
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
