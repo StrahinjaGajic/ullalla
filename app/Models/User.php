@@ -204,7 +204,7 @@ class User extends Authenticatable
             throw new Exception("Longitude must be between -180 and 180 degrees.");
         }
 
-        $haversine = sprintf('*, (%f * DEGREES(ACOS(COS(RADIANS(%f)) * COS(RADIANS(lat)) * COS(RADIANS(%f - lng)) + SIN(RADIANS(%f)) * SIN(RADIANS(lat))))) AS distance',
+        $haversine = sprintf('(%f * DEGREES(ACOS(COS(RADIANS(%f)) * COS(RADIANS(lat)) * COS(RADIANS(%f - lng)) + SIN(RADIANS(%f)) * SIN(RADIANS(lat))))) AS distance',
             $distanceUnit,
             $lat,
             $lng,
@@ -212,7 +212,8 @@ class User extends Authenticatable
         );
 
         $subselect = clone $query;
-        $subselect->selectRaw(DB::raw($haversine));
+        $subselect->selectRaw(DB::raw($haversine))
+                ->leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
         $latDistance      = $radius / $distanceUnit;
         $latNorthBoundary = $lat - $latDistance;

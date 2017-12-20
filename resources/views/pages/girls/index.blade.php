@@ -461,7 +461,7 @@
 
 			var $url = getUrl('/get_radius');
 
-			var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query())  ? json_encode(request()->query()) : "{}" }}';
+			var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 
 			var requestQueryClearedJSON = requestQueryString
 			.replace(/&quot;/gi,"\"")
@@ -515,7 +515,7 @@
 
 				var $url = getUrl('/get_price_ranges');
 
-				var requestQueryString = '{{ is_array(request()->query()) ? json_encode(request()->query()) : "{}" }}';
+				var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 
 				var requestQueryClearedJSON = requestQueryString.replace(/&quot;/gi,"\"")
 				.replace(/\[/gi,"")

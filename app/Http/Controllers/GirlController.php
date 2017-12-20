@@ -19,7 +19,7 @@ class GirlController extends Controller
 		$maxPrice = \DB::table('prices')->max('service_price');
 		$cantons = Canton::with('users')->get();
 
-		$users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id');
+		// $users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id');
 
 		if ($request->has('radius')) {
 			$radius = (int)request('radius');
@@ -29,7 +29,7 @@ class GirlController extends Controller
 			$lat = 43.148018;
 			$lng = 22.589060;
 
-			$users = $users->nearLatLng($lat, $lng, $radius);
+			$users = User::nearLatLng($lat, $lng, $radius);
 		}
 
 		dd($users->toSql());
