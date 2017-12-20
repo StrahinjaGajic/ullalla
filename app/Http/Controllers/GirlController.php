@@ -29,8 +29,10 @@ class GirlController extends Controller
 			$lat = 43.148018;
 			$lng = 22.589060;
 
-			// $users = $users->nearLatLng($lat, $lng, $radius);
+			$users = $users->nearLatLng($lat, $lng, $radius);
 		}
+
+		dd($users->toSql());
 
 		if ($request->has('canton')) {
 			$users = $users->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
