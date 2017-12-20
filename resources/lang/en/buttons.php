@@ -54,4 +54,9 @@ return [
     #auth
     'login' => 'Login',
     'register' => 'Register',
+    'approve' => 'Approve',
+    'rrl' => 'Request Reset Link',
+
+    #contact
+    'submit'=> 'Submit',
 ];

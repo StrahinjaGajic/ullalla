@@ -215,7 +215,7 @@ class AuthController extends Controller
 				$user->activated = '1';
 				$user->save();
 
-				return redirect()->action('Auth\AuthController@getSignin')->with('success', 'Account successfully activated. You may now sign in.');
+				return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.account_activated'));
 			}
 			if ($check->user_type == 2) {
 				$local = Local::find($check->user_id);
@@ -228,9 +228,9 @@ class AuthController extends Controller
 				$local->activated = '1';
 				$local->save();
 				redirect()->action('Auth\AuthController@getSignin')->with('success',
-					('messages.account_activated'));
+                    __('messages.account_activated'));
 
-				return redirect()->action('Auth\AuthController@getSignin')->with('success', 'Account successfully activated. You may now sign in.');
+				return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.account_activated'));
 			}
 			return redirect()->action('Auth\AuthController@getSignin')->with('error', __('messages.error_somethings_wrong'));
 		}

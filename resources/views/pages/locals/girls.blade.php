@@ -28,7 +28,7 @@
                             <span class="help-block">{{ $errors->first('nickname_'. $girl->id ) }}</span>
                         @endif
                     </div>
-                    <label>{{ __('headings.photos') }}Photos</label>
+                    <label>{{ __('headings.photos') }}</label>
                     <div class="form-group">
                         <div class="image-preview-multiple">
                             <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-crop="490x560 minimum" data-images-only="" data-multiple="">
@@ -49,7 +49,7 @@
                         <span class="help-block">{{ $errors->first('photos_'. $girl->id ) }}</span>
                     @endif
                 @endforeach
-                <button type="submit" class="btn btn-default">Save Changes</button>
+                <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -175,7 +175,7 @@
                 if (imageInfo !== null) {
                     console.log();
                     if (imageInfo.width < width || imageInfo.height < height) {
-                        throw new Error('dimensions');
+                        throw new Error({{ __('messages.dimensions') }});
                     }
                 }
             };
@@ -185,7 +185,7 @@
         function maxFileSize(size) {
             return function (fileInfo) {
                 if (fileInfo.size !== null && fileInfo.size > size) {
-                    throw new Error("fileMaximumSize");
+                    throw new Error({{ __('messages.file_maximum_size') }});
                 }
             }
         }
@@ -199,7 +199,7 @@
                 }
                 var extension = fileInfo.name.split('.').pop();
                 if (types.indexOf(extension) == -1) {
-                    throw new Error("fileType");
+                    throw new Error({{ __('messages.file_type') }});
                 }
             };
         }

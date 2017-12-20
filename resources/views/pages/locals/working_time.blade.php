@@ -25,7 +25,7 @@
 					$workingTime = isJson($local->working_time) ? json_decode($local->working_time) : $local->working_time;
 					?>
 					<div class="form-group">
-						<div id="available_24_7">
+						<div id="available_24_7">                    {{--PROVERITI AVAILABLE 24/7,MOGUCE DA JE VREDNOST IZ BAZE--}}
 							<label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
 								<input type="checkbox" name="available_24_7" {{ stringHasString('Available 24/7', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
@@ -40,8 +40,8 @@
 											<div class="control__indicator"></div>
 										</label>
 									</th>
-									<th>From</th>
-									<th>To</th>
+									<th>{{ __('buttons.from') }}</th>
+									<th>{{ __('buttons.to') }}</th>
 									<th></th>
 								</tr>
 							</thead>

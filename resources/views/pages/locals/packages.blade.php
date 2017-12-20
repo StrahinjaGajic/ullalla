@@ -70,8 +70,8 @@
 							<td>{{ $package->name }}</td>
 							<td>
 								<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-									<option value="month">Month</option>
-									<option value="year">Year</option>
+									<option value="month">{{ __('tables.month') }}</option>
+									<option value="year">{{ __('tables.year') }}</option>
 								</select>
 							</td>
 							<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
@@ -110,7 +110,7 @@
     swal(
         '{{ __('headings.default_error_title') }}',
         '{{ Session::get('expired_package_info') }}',
-        'error'
+		'{{ __('messages.error') }}'
     );
 </script>
 @endif

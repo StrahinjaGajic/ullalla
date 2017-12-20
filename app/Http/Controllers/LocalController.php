@@ -157,7 +157,7 @@ class LocalController extends Controller
 
         $local->save();
 
-        return redirect()->back()->with('success', 'Contact successfully saved.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getGallery()
@@ -183,7 +183,7 @@ class LocalController extends Controller
         $local->videos = storeAndGetUploadCareFiles(request('video'));
         $local->save();
 
-        return redirect()->back()->with('success', 'Gallery successfully updated.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getWorkingTimes()
@@ -210,7 +210,7 @@ class LocalController extends Controller
         $local->working_time = $workingTime;
         $local->save();
 
-        return redirect()->back()->with('success', 'Work time successfully updated.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getAbout()
@@ -226,7 +226,7 @@ class LocalController extends Controller
         $local->about_me = request('about_me');
         $local->save();
 
-        return redirect()->back()->with('success', 'Data successfully saved.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getClubInfo()
@@ -244,7 +244,7 @@ class LocalController extends Controller
         editClubInfo($local->club_food_id, request('food'), request('food-free'));
         editClubInfo($local->club_outdoor_id, request('outdoor'), request('outdoor-free'));
 
-        return redirect()->back()->with('success', 'Data successfully saved.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getGirls()
@@ -270,7 +270,7 @@ class LocalController extends Controller
             $girl->photos = $photos;
             $girl->save();
         }
-        return redirect()->back()->with('success', 'Data successfully saved.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function postCreateGirls(Request $request)
@@ -285,7 +285,7 @@ class LocalController extends Controller
             'newPhotos' => 'numeric|min:4',
         ]);
         $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
-        return redirect()->back()->with('success', 'Data successfully saved.');
+        return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
     public function getPackages()

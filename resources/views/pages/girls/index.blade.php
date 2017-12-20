@@ -51,7 +51,7 @@
 										<div id="radius-ranger" style="margin: 10px;"></div>
 										<div class="slider-value-wrapper">
 											<span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
-											<span>km</span>
+											<span>{{ __('global.km') }}</span>
 										</div>
 									</li>
 								</ul>
@@ -346,7 +346,7 @@
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
 													<div class="pro-price">
-														<p>short info</p>
+														<p>short info{{ __('global.short_info') }}</p>
 													</div>
 													<a href="{{ url('girls/' . $user->nickname) }}">
 														<div class="product-cart">
@@ -616,7 +616,7 @@
 				});
 			});
 		} else {
-			x.innerHTML = "Geolocation is not supported by this browser.";
+			x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
 		}
 	}
 </script>

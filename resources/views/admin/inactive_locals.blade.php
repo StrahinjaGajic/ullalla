@@ -14,10 +14,10 @@
     @endif
     <table>
         <thead>
-        <th>Username</th>
-        <th>Name</th>
-        <th>E-mail</th>
-        <th colspan="3">Manage Locals</th>
+        <th>{{ __('labels.username') }}</th>
+        <th>{{ __('labels.name') }}</th>
+        <th>{{ __('labels.email') }}</th>
+        <th colspan="3">{{ __('global.manage_locals') }}</th>
         </thead>
         <tbody>
         @foreach($locals as $local)
@@ -27,7 +27,7 @@
             <td>{{ $local->email }}</td>
             <td>
                 {!! Form::open(['url' => 'admin/inactive_locals/approve/' . $local->id]) !!}
-                <button type="submit" class="btn">Approve</button>
+                <button type="submit" class="btn">{{ __('buttons.approve') }}</button>
                 {!! Form::close() !!}
             </td>
         </tr>

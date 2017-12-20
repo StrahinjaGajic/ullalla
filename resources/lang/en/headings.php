@@ -31,6 +31,7 @@ return [
     # contact
     'i_prefer' => 'I Prefer',
     'available_apps' => 'Available Apps',
+    'contact_info' => 'Contact Information',
 
     # gallery
     'photos' => 'Photos',
@@ -80,6 +81,8 @@ return [
     #locals-single
     'local_type' => 'Local Type',
 
-    #profile
+    #girls
+    'map'=> 'Map',
+    'i_o_s_f'=> 'I Offer Services For',
 
 ];

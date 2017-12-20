@@ -27,31 +27,31 @@
                         <div class="col-lg-12 col-sm-12 col-xs-12">
                             {!! Form::open(['url' => 'contact/send', 'method' => 'POST']) !!}
                                 <div class="fieldset contact">
-                                    <h2 class="legend">Contact Information</h2>
+                                    <h2 class="legend">{{ __('headings.contact_info') }}</h2>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 npl">
                                         <label class="l-contact">
-                                            Name
+                                            {{ __('labels.name') }}
                                             <em>*</em>
                                         </label>
                                         <input name="name" class="form-control" type="text" required>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 contactemail npr">
                                         <label class="l-contact">
-                                            Email
+                                            {{ __('labels.email') }}
                                             <em>*</em>
                                         </label>
                                         <input name="email" class="form-control" type="email" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 npl">
                                         <label class="l-contact">
-                                            Subject
+                                            {{ __('labels.subject') }}
                                             <em>*</em>
                                         </label>
                                         <input name="subject" class="form-control" type="text" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 np">
                                         <label class="l-contact">
-                                            Comment
+                                            {{ __('labels.comment') }}
                                             <em>*</em>
                                         </label>
                                         <textarea name="message" class="form-control" required></textarea>
@@ -60,10 +60,10 @@
                                 <div class="actions actn-contact">
                                     <label class="c-contact cc-con">
                                         <em>*</em>
-                                        Required Fields
+                                        {{ __('labels.required_fields') }}
                                     </label><br>
                                     <div class="product-cart contact">
-                                        <button type="submit" class="button">submit</button>
+                                        <button type="submit" class="button">{{ __('buttons.submit') }}</button>
                                     </div>
                                 </div>
                             {!! Form::close() !!}

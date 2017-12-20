@@ -16,7 +16,8 @@ return [
     'outdoor_area' => 'Outdoor Area',
 
     'username' => 'Username',
-    'email' => 'Email',
+    'surname' => 'Surname',
+    'email' => 'E-mail',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',
     'name' => 'Name',
@@ -29,4 +30,8 @@ return [
     'mark_all' => 'Mark All',
     'about_us' => 'About Us',
     'local_type' => 'Local Type',
+    'manage_user' => 'Manage User',
+    'subject' => 'Subject',
+    'comment' => 'Comment',
+    'required_fields' => 'Required Fields',
 ];

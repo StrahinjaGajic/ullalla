@@ -42,7 +42,7 @@ class AdminController extends Controller
 		});
 
 		if ($result === true) {
-			return redirect()->back()->with('success', 'User Successfully Approved');
+			return redirect()->back()->with('success', __('messages.success_changes_saved'));
 		}
 	}
 
@@ -77,7 +77,7 @@ class AdminController extends Controller
 		});
 
 		if ($result === true) {
-			return redirect()->back()->with('success', 'User Successfully Approved');
+			return redirect()->back()->with('success', __('messages.success_changes_saved'));
 		}
 	}
 }

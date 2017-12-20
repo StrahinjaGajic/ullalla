@@ -15,7 +15,7 @@
                         <div class="form-group row {{ $errors->has('username') ? 'has-danger' : '' }}">
                             <label for="username" class="col-2 col-form-label"></label>
                             <div class="col-6">
-                                <input id="username" class="form-control {{ $errors->has('username') ? 'form-control-danger' : '' }}" type="text" placeholder="Username" name="username" value="{{ old('username') }}" autofocus> @if ($errors->has('username'))
+                                <input id="username" class="form-control {{ $errors->has('username') ? 'form-control-danger' : '' }}" type="text" placeholder="{{ __('labels.username') }}" name="username" value="{{ old('username') }}" autofocus> @if ($errors->has('username'))
                                 <div class="form-control-feedback">{{ $errors->first('email') }}</div>
                                 @endif
                             </div>
@@ -23,7 +23,7 @@
                         <div class="form-group row {{ $errors->has('password') ? 'has-danger' : '' }}">
                             <label for="password" class="col-2 col-form-label"></label>
                             <div class="col-6">
-                                <input id="password" class="form-control {{ $errors->has('password') ? 'form-control-danger' : '' }}" type="password" placeholder="Password" name="password"> @if ($errors->has('password'))
+                                <input id="password" class="form-control {{ $errors->has('password') ? 'form-control-danger' : '' }}" type="password" placeholder="{{ __('labels.password') }}" name="password"> @if ($errors->has('password'))
                                 <div class="form-control-feedback">{{ $errors->first('password') }}</div>
                                 @endif
                             </div>
