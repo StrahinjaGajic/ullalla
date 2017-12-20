@@ -76,7 +76,7 @@
 					<div class="product-description-tab custom-tab">
 						<ul class="nav nav-tabs" role="tablist">
 							@if($user->videos)
-							<li><a href="#girl-videos" data-toggle="tab">{{ __('headings.Videos') }}</a></li>
+							<li><a href="#girl-videos" data-toggle="tab">{{ __('headings.videos') }}</a></li>
 							@endif
 							@if ($user->about_me)
 							<li><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
