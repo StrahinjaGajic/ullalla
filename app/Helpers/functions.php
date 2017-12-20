@@ -120,6 +120,14 @@ function getLanguages() {
     ];
 }
 
+function getQuickSearchTypes() {
+    return [
+        __('functions.girl'),
+        __('functions.trans'),
+        __('functions.local'),
+    ];
+}
+
 function makeStringFromFilterYears($startAge, $endAge) {
     return $startAge . '-' . $endAge;
 }

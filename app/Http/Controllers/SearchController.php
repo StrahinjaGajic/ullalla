@@ -42,6 +42,10 @@ class SearchController extends Controller
 		Session::put('users', $users);
 		Session::save();
 
-		return redirect(urldecode(route('girls', $query, false)));
+		if ($request->type == 'girl') {
+			return redirect(urldecode(route('girls', $query, false)));
+		} elseif ($request->type == 'local') {
+			return redirect(urldecode(route('locals', $query, false)));
+		}
 	}
 }

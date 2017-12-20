@@ -190,4 +190,9 @@ return [
     'yes_free' => 'Yes (Free)',
     'yes_with_cost' => 'Yes (With cost)',
 
+    #
+    'girl' => 'girl',
+    'trans' => 'trans',
+    'local' => 'local',
+
 ];
