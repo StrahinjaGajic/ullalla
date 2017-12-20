@@ -31,7 +31,7 @@
                         <div class="_list">
                             @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
                             <div class="_item">
-                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/200x229/' }}">
+                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/185x211/' }}">
                             </div>
                             @endfor
                         </div>
@@ -66,7 +66,7 @@ function installWidgetPreviewMultiple(widget, list) {
                     var src = fileInfo.cdnUrl;
                     list.append(
                         $('<div/>', {'class': '_item'}).append(
-                            [$('<img/>', {src: src})])
+                            [$('<img/>', {src: src, style: 'width: 185px; height: 211px;'})])
                         );
                 });
             });
