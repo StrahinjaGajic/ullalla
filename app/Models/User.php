@@ -192,7 +192,7 @@ class User extends Authenticatable
     }
 
 
-    public function scopeNearLatLng($query, $lat, $lng, $radius = 10, $request)
+    public function scopeNearLatLng($query, $lat, $lng, $radius = 10, $request = null)
     {
         $distanceUnit = 111.045;
 
