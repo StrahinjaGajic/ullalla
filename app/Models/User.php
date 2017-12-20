@@ -220,7 +220,7 @@ class User extends Authenticatable
         + sin(radians($lat))
                     * sin(radians(users.lat)))))";
 
-        $query->selectRaw("{$haversine} AS distance")
+        $query->select('users.*')->selectRaw("{$haversine} AS distance")
         ->leftJoin('prices', 'users.id', '=', 'prices.user_id')
         ->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
         ->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
