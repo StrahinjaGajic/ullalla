@@ -25,14 +25,12 @@ class GirlController extends Controller
 			$radius = (int)request('radius');
 			$location = file_get_contents('http://freegeoip.net/json/24.135.165.252');
 			$location = json_decode($location, true);
-			// dd($colation);
+
 			$lat = 43.148018;
 			$lng = 22.589060;
 
-			$users = $users->nearLatLng($lat, $lng, $radius);
+			// $users = $users->nearLatLng($lat, $lng, $radius);
 		}
-
-		dd($users->get());
 
 		if ($request->has('canton')) {
 			$users = $users->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
