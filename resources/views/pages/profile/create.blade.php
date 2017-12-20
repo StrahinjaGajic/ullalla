@@ -197,7 +197,7 @@
 						</div>
 						<div class="form-group upload-video">
 							<input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-							<video id="video" width="320" height="240" loop style="display: block;"></video>
+							<video id="video" width="320" height="240" loop style="display: block;" controls=""></video>
 						</div>
 					</section>
 					<h2>{{ __('headings.contact') }}</h2>
