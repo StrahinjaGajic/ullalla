@@ -178,20 +178,6 @@ class User extends Authenticatable
         return Carbon::parse($date);
     }
 
-    public function scopeIsWithinMaxDistance($query, $location, $radius = 1) {
-
-        $haversine = "(6371 * acos(cos(radians($location->lat)) 
-                    * cos(radians(users.lat)) 
-                    * cos(radians(users.lng) 
-        - radians($location->lng)) 
-        + sin(radians($location->lat)) 
-                    * sin(radians(users.lat))))";
-        return $query->select()
-        ->selectRaw("{$haversine} AS distance")
-        ->whereRaw("{$haversine} < ?", [$radius]);
-    }
-
-
     public function scopeNearLatLng($query, $lat, $lng, $radius = 10, $request = null)
     {
         $distanceUnit = 111.045;
@@ -279,6 +265,8 @@ class User extends Authenticatable
         }
 
         $query->whereRaw("{$haversine} < ?", [$radius])
+        ->where('users.approved', '=', '1')
+        ->where('users.is_active_d_package', '=', '1')
         ->groupBy('users.username');
 
         return $query;

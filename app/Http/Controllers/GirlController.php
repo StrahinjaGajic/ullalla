@@ -23,7 +23,7 @@ class GirlController extends Controller
 
 		if ($request->has('radius')) {
 			$radius = request('radius');
-			
+
 			if (Session::has('lat')) {
 				$lat = Session::get('lat');
 			}
@@ -83,6 +83,11 @@ class GirlController extends Controller
 					$users->whereBetween('prices.service_price', [$inputPriceFrom, $inputPriceTo]);
 				}
 			}
+
+			$users = $users->where('users.approved', '=', '1')
+			->where('users.is_active_d_package', '=', '1')
+			->select('users.*')
+			->groupBy('users.username');
 		}
 
 		$orderBy = $request->order_by ? $request->order_by : null;
