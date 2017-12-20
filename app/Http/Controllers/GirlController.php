@@ -84,7 +84,6 @@ class GirlController extends Controller
 
 
 
-
 		$orderBy = $request->order_by ? $request->order_by : null;
 		$show = $request->show ? $request->show : null;
 		$radius = $request->radius ? $request->radius : null;
@@ -98,6 +97,8 @@ class GirlController extends Controller
 		} else {
 			$users = isset($show) ? $users->paginate($show) : $users->paginate(9);
 		}
+
+		dd($users);
 
 		$request->flash();
 
