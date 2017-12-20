@@ -121,6 +121,10 @@
                             <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
                             <a onclick="getLocation();" class="geolocation-button">
                                 <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+                                <div class="spinner" style="display: none;">
+                                    <div class="double-bounce1"></div>
+                                    <div class="double-bounce2"></div>
+                                </div>
                             </a>
                             <div class="help-block">
                                 @if($errors->has('city'))
@@ -369,7 +373,9 @@
                                         autocomplete.setComponentRestrictions(
                                             {'country': ['ch']});       
 
-                                        autocomplete.addListener('place_changed', function() { 
+                                        autocomplete.addListener('place_changed', function() {
+                                            $('.geolocation-image').hide();
+                                            $('.spinner').show();
                                             var place = autocomplete.getPlace();
                                             var lat = place.geometry.location.lat();
                                             var lng = place.geometry.location.lng();
@@ -379,13 +385,20 @@
                                                 type: 'post',
                                                 data: {lat: lat, lng: lng, address: address, _token: token},
                                                 success: function (data) {
-                                                    return true;
+                                                    $('.spinner').hide();
+                                                    $('.geolocation-image').show();
+                                                },
+                                                error: function () {
+                                                    $('.spinner').hide();
+                                                    $('.geolocation-image').show();
                                                 }
                                             });
                                         });                  
                                     }
 
                                     function getLocation() {
+                                        $('.geolocation-image').hide();
+                                        $('.spinner').show();
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
                                                 var geocoder = new google.maps.Geocoder;
@@ -404,7 +417,12 @@
                                                             type: 'post',
                                                             data: {lat: lat, lng: lng, address: address, _token: token},
                                                             success: function (data) {
-                                                                return true;
+                                                                $('.spinner').hide();
+                                                                $('.geolocation-image').show();
+                                                            },
+                                                            error: function () {
+                                                                $('.spinner').hide();
+                                                                $('.geolocation-image').show();
                                                             }
                                                         });
                                                     }
