@@ -203,6 +203,7 @@ class User extends Authenticatable
         if (!(is_numeric($lng) && $lng >= -180 && $lng <= 180)) {
             throw new Exception("Longitude must be between -180 and 180 degrees.");
         }
+
         $latDistance      = $radius / $distanceUnit;
         $latNorthBoundary = $lat - $latDistance;
         $latSouthBoundary = $lat + $latDistance;
@@ -220,63 +221,66 @@ class User extends Authenticatable
                     * sin(radians(users.lat)))))";
 
         $query->selectRaw("{$haversine} AS distance")
-            ->leftJoin('prices', 'users.id', '=', 'prices.user_id')
-            ->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
-            ->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
-            ->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id')
-            ->whereRaw(sprintf("lat BETWEEN %f AND %f", $latNorthBoundary, $latSouthBoundary))
-            ->whereRaw(sprintf("lng BETWEEN %f AND %f", $lngEastBoundary, $lngWestBoundary));
+        ->leftJoin('prices', 'users.id', '=', 'prices.user_id')
+        ->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
+        ->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
+        ->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id')
+        ->whereRaw(sprintf("lat BETWEEN %f AND %f", $latNorthBoundary, $latSouthBoundary))
+        ->whereRaw(sprintf("lng BETWEEN %f AND %f", $lngEastBoundary, $lngWestBoundary));
 
-        if ($request->has('canton')) {
-            $query->whereIn('cantons.id', $request->canton);
-        }
-        if ($request->has('services')) {
-            $query->whereIn('user_service.service_id', $request->services);
-        }
-
-        if ($request->has('languages')) {
-            $query->whereIn('user_spoken_language.spoken_language_id', $request->languages);
-        }
-
-        if ($request->has('types')) {
-            $query->whereIn('users.type', $request->types);
-        }
-
-        if ($request->has('price_type')) {
-            $query->whereNotNull('users.' . $request->price_type . '_type');
-        }
-
-        if ($request->has('hair_color')) {
-            $query->whereIn('users.hair_color', $request->hair_color);
-        }
-
-        if ($request->has('breast_size')) {
-            $query->whereIn('users.breast_size', $request->breast_size);
-        }
-
-        if ($request->has('age')) {
-            $inputAges = $request->age;
-            foreach ($request->age as $key => $startAndEndAges) {
-                $agesStrings = explode('-', $startAndEndAges);
-                $startAge = $agesStrings[0];
-                $endAge = $agesStrings[1];
-                $query->whereBetween('users.age', [$startAge, $endAge]);
+        if ($request) {
+            if ($request->has('canton')) {
+                $query->whereIn('cantons.id', $request->canton);
             }
-        }
+            if ($request->has('services')) {
+                $query->whereIn('user_service.service_id', $request->services);
+            }
 
-        $maxPrice = \DB::table('prices')->max('service_price');
-        if ($request->has('price_from') && $request->has('price_to')) {
-            $inputPriceFrom = $request->price_from;
-            $inputPriceTo = $request->price_to;
-            if ($inputPriceFrom == 0 && $inputPriceTo == $maxPrice) {
-                $query = $query;
-            } else {
-                $query->whereBetween('prices.service_price', [$inputPriceFrom, $inputPriceTo]);
+            if ($request->has('languages')) {
+                $query->whereIn('user_spoken_language.spoken_language_id', $request->languages);
+            }
+
+            if ($request->has('types')) {
+                $query->whereIn('users.type', $request->types);
+            }
+
+            if ($request->has('price_type')) {
+                $query->whereNotNull('users.' . $request->price_type . '_type');
+            }
+
+            if ($request->has('hair_color')) {
+                $query->whereIn('users.hair_color', $request->hair_color);
+            }
+
+            if ($request->has('breast_size')) {
+                $query->whereIn('users.breast_size', $request->breast_size);
+            }
+
+            if ($request->has('age')) {
+                $inputAges = $request->age;
+                foreach ($request->age as $key => $startAndEndAges) {
+                    $agesStrings = explode('-', $startAndEndAges);
+                    $startAge = $agesStrings[0];
+                    $endAge = $agesStrings[1];
+                    $query->whereBetween('users.age', [$startAge, $endAge]);
+                }
+            }
+
+            $maxPrice = \DB::table('prices')->max('service_price');
+            if ($request->has('price_from') && $request->has('price_to')) {
+                $inputPriceFrom = $request->price_from;
+                $inputPriceTo = $request->price_to;
+                if ($inputPriceFrom == 0 && $inputPriceTo == $maxPrice) {
+                    $query = $query;
+                } else {
+                    $query->whereBetween('prices.service_price', [$inputPriceFrom, $inputPriceTo]);
+                }
             }
         }
 
         $query->whereRaw("{$haversine} < ?", [$radius])
-            ->groupBy('users.username');
+        ->groupBy('users.username');
+
         return $query;
     }
 }
