@@ -578,6 +578,7 @@
 
 		autocomplete.addListener('place_changed', function() { 
 			var place = autocomplete.getPlace();
+			console.log(place);
 			var lat = place.geometry.location.lat();
 			var lng = place.geometry.location.lng();
 			$.ajax({

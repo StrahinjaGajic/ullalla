@@ -24,14 +24,16 @@ class SearchController extends Controller
 		$maxPrice = \DB::table('prices')->max('service_price');
 		$cantons = Canton::with('users')->get();
 
-		$radius = (int)request('radius');
+		$radius = request('radius');
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
+		$address = Session::get('address');
 
 		$users = User::nearLatLng($lat, $lng, $radius)
 		->where('approved', '=', '1')
 		->where('is_active_d_package', '=', '1')
 		->paginate(9);
+		
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
