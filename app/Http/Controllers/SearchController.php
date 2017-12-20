@@ -33,10 +33,11 @@ class SearchController extends Controller
 		->where('approved', '=', '1')
 		->where('is_active_d_package', '=', '1')
 		->paginate(9);
-		
+
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
+		unset($query['city']);
 
 		Session::put('users', $users);
 		Session::save();

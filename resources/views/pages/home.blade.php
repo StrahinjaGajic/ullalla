@@ -373,10 +373,11 @@
                                             var place = autocomplete.getPlace();
                                             var lat = place.geometry.location.lat();
                                             var lng = place.geometry.location.lng();
+                                            var address = place.formatted_address;
                                             $.ajax({
                                                 url: getUrl('/get_guest_data'),
                                                 type: 'post',
-                                                data: {lat: lat, lng: lng, _token: token},
+                                                data: {lat: lat, lng: lng, address: address, _token: token},
                                                 success: function (data) {
                                                     return true;
                                                 }
@@ -396,11 +397,12 @@
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
                                                     if (results[0]) {
-                                                        inputCity.value = results[0].formatted_address;
+                                                        var address = results[0].formatted_address;
+                                                        inputCity.value = address;
                                                         $.ajax({
                                                             url: getUrl('/get_guest_data'),
                                                             type: 'post',
-                                                            data: {lat: lat, lng: lng, _token: token},
+                                                            data: {lat: lat, lng: lng, address: address, _token: token},
                                                             success: function (data) {
                                                                 return true;
                                                             }
@@ -409,10 +411,9 @@
                                                 });
                                             });
                                         } else {
-                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                            x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
                                         }
                                     }
-
                                 </script>
 
                                 <!-- radius -->

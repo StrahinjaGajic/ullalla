@@ -38,7 +38,7 @@
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
 									<li class="geolocation">
-										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ request('city') }}" />
+										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" />
 										<a onclick="getLocation();" class="geolocation-button">
 											<img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
 										</a>
@@ -573,20 +573,22 @@
 			(inputCity), {
 				types: ['geocode']
 			});
-		autocomplete.setComponentRestrictions(
-			{'country': ['ch']});       
+		autocomplete.setComponentRestrictions({'country': ['ch']});       
 
 		autocomplete.addListener('place_changed', function() { 
 			var place = autocomplete.getPlace();
-			console.log(place);
 			var lat = place.geometry.location.lat();
 			var lng = place.geometry.location.lng();
+			var address = place.formatted_address;
+			var $url = '{{ request()->query() }}';
 			$.ajax({
 				url: getUrl('/get_guest_data'),
 				type: 'post',
-				data: {lat: lat, lng: lng, _token: token},
+				data: {lat: lat, lng: lng, address: address, url: $url, _token: token},
 				success: function (data) {
-					return true;
+					if (data.url) {
+						window.location.href = data.url;
+					}
 				}
 			});
 		});                  
@@ -604,18 +606,22 @@
 				};
 				geocoder.geocode({'location': latlng}, function(results, status) {
 					if (results[0]) {
-						inputCity.value = results[0].formatted_address;
+						var address = results[0].formatted_address;
+						inputCity.value = address;
+						var $url = '{{ request()->query() }}';
 						$.ajax({
 							url: getUrl('/get_guest_data'),
 							type: 'post',
-							data: {lat: lat, lng: lng, _token: token},
+							data: {lat: lat, lng: lng, address: address, url: $url, _token: token},
 							success: function (data) {
-								return true;
+								if (data.url) {
+									window.location.href = data.url;
+								}
 							}
 						});
 					}
 				});
-			});
+			});	
 		} else {
 			x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
 		}

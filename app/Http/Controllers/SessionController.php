@@ -54,5 +54,11 @@ class SessionController extends Controller
 		Session::put('lng', $request->lng);
 		Session::put('address', $request->address);
 		Session::put('guest_ip_address', $_SERVER['REMOTE_ADDR']);
+
+		if ($request->url) {
+			return response()->json([
+				'url' => $request->url
+			]);
+		}
 	}
 }
