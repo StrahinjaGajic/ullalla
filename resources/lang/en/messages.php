@@ -15,4 +15,25 @@ return [
     'account_created_but_not_approved' => 'Profile successfully created, but in order to use it you must wait for its approval.',
 
     'package_about_to_expire' => ':note. <p>Click <a href=":url">HERE</a> to upgrade your account</p>',
+    'session_expired' => 'Session Expired',
+    'email_expire_warning_package' => 'Your Default Package is about to expire. In order to renew your package please click on the following link',
+    'email_expired_package' => 'Your Default Package has expired. In order to renew your package please click on the following link',
+
+    'email_gotm_expire_warning_package' => 'Your Girl of The Month package is about to expire. In order to renew your package please click on the following link',
+    'email_gotm_expired_package' => 'Your Girl of The Month package has expired. In order to renew your package please click on the following link',
+
+    'email_local_expire_warning_package' => 'Your Girl of The Month package is about to expire. In order to renew your package please click on the following link',
+    'email_local_expired_package' => 'Your Girl of The Month package has expired. In order to renew your package please click on the following link',
+    'reset_password' => 'Click on the link to reset your password',
+
+
+    #js-notifications
+    'geolocation_not_supported' => 'Geolocation is not supported by this browser.',
+    'geolocation_not_successful' => 'Geocode was not successful for the following reason:',
+
+    'dimensions' => 'Dimensions',
+    'file_maximum_size' => 'File Maximum Size',
+    'file_type' => 'File Type',
+    'error' => 'error',
+
 ];

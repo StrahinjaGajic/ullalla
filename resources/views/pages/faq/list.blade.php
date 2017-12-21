@@ -21,7 +21,7 @@
                     <div class="row">
 
                         <div class="col-lg-12 col-sm-12 col-xs-12">
-                            <div class="faq-header">Frequently Asked Questions</div>
+                            <div class="faq-header">{{ __('global.f_a_q') }}</div>
                             @foreach($faqs as $faq)
                                 <div class="faq-c">
                                     <div class="faq-q"><span class="faq-t">+</span>{{ $faq->question }}</div>

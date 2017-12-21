@@ -1,6 +1,6 @@
-From:<br><br>
-Name: {{ $datas->name }}<br>
-Email: {{ $datas->email }}<br><br>
+{{ __('headings.from') }}:<br><br>
+{{ __('headings.name') }}: {{ $datas->name }}<br>
+{{ __('labels.email') }}: {{ $datas->email }}<br><br>
 
-Title: {{ $datas->title }}<br>
-Message: <br>{{ $datas->message }}
+{{ __('global.title') }}: {{ $datas->title }}<br>
+{{ __('global.message') }}: <br>{{ $datas->message }}

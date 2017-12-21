@@ -14,10 +14,10 @@
 	@endif
 	<table>
 		<thead>
-			<th>Name</th>
-			<th>Surname</th>
-			<th>Nickname</th>
-			<th colspan="3">Manage User</th>
+			<th>{{ __('labels.name') }}</th>
+			<th>{{ __('labels.surname') }}</th>
+			<th>{{ __('fields.nickname') }}</th>
+			<th colspan="3">{{ __('labels.manage_user') }}</th>
 		</thead>
 		<tbody>
 			@foreach($users as $user)
@@ -27,7 +27,7 @@
 					<td>{{ $user->nickname }}</td>
 					<td>
 						{!! Form::open(['url' => 'admin/inactive_users/approve/' . $user->id]) !!}
-						<button type="submit" class="btn">Approve</button>
+						<button type="submit" class="btn">{{ __('buttons.approve') }}</button>
 						{!! Form::close() !!}
 					</td>
 					<td>

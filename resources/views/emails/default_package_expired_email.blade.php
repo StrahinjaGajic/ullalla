@@ -1,7 +1,7 @@
 @if ($aboutToExpire !== null)
-<p>Your Default Package is about to expire. In order to renew your package please click on the following link:</p>
+<p>{{ __('messages.email_expire_warning_package') }}:</p>
 <a href="{{ url('@' . $user->username . '/packages') }}">{{ url('@' . $user->username . '/packages') }}</a>
 @else
-<p>Your Default Package has expired. In order to renew your package please click on the following link:</p>
+<p>{{ __('messages.email_expired_package') }}:</p>
 <a href="{{ url('@' . $user->username . '/packages') }}">{{ url('@' . $user->username . '/packages') }}</a>
 @endif

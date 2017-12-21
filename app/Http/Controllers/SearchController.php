@@ -19,21 +19,28 @@ class SearchController extends Controller
 			'city' => 'required'
 		]);
 
-		$services = Service::with('users')->get();
-		$spokenLanguages = SpokenLanguage::with('users')->get();
-		$maxPrice = \DB::table('prices')->max('service_price');
-		$cantons = Canton::with('users')->get();
-
-		$radius = (int)request('radius');
+		$radius = request('radius');
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
+		$address = Session::get('address');
 
-		$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
-		unset($request->query()['type']);
-		unset($request->query()['_token']);
+		$users = User::nearLatLng($lat, $lng, $radius)
+		->where('approved', '=', '1')
+		->where('is_active_d_package', '=', '1')
+		->paginate(9);
 
-		return view('pages.girls.index', compact('users', 'services', 'spokenLanguages', 'maxPrice', 'cantons'));
+		$query = $request->query();
+		unset($query['type']);
+		unset($query['_token']);
+		unset($query['city']);
 
-		// return redirect(urldecode(route('girls', $request->query(), false)));
+		Session::put('users', $users);
+		Session::save();
+
+		if ($request->type == 'girl') {
+			return redirect(urldecode(route('girls', $query, false)));
+		} elseif ($request->type == 'local') {
+			return redirect(urldecode(route('locals', $query, false)));
+		}
 	}
 }

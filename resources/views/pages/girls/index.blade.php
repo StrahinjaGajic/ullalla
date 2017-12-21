@@ -38,9 +38,13 @@
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
 									<li class="geolocation">
-										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ request('city') }}" />
+										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" />
 										<a onclick="getLocation();" class="geolocation-button">
 											<img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+											<div class="spinner" style="display: none;">
+												<div class="double-bounce1"></div>
+												<div class="double-bounce2"></div>
+											</div>
 										</a>
 									</li>
 									<li>
@@ -51,7 +55,7 @@
 										<div id="radius-ranger" style="margin: 10px;"></div>
 										<div class="slider-value-wrapper">
 											<span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
-											<span>km</span>
+											<span>{{ __('global.km') }}</span>
 										</div>
 									</li>
 								</ul>
@@ -140,10 +144,10 @@
 										<?php $num = 1; ?>
 										@foreach(getTypes() as $key => $type)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('type'), request()->query() , $num, 'type', $type), false)) }}">{{ $type }}
+											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
 												<span>({{ \App\Models\User::approved()->payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
-											<input type="checkbox" name="type[]" value="{{ $type }}" {{ request('type') && in_array($type, request('type')) ? 'checked' : '' }}/>
+											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
 										</label>
 										<?php $num++; ?>
@@ -313,7 +317,6 @@
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
 											</select>
-											<a class="up-arrow" href="shop.html#"><i class="fa fa-long-arrow-up"></i></a>
 										</div>
 									</div>
 									<div class="pager-list">
@@ -346,7 +349,7 @@
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
 													<div class="pro-price">
-														<p>short info</p>
+														<p>{{ __('global.short_info') }}</p>
 													</div>
 													<a href="{{ url('girls/' . $user->nickname) }}">
 														<div class="product-cart">
@@ -410,7 +413,6 @@
 												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
 											</select>
-											<a class="up-arrow" href="shop.html#"><i class="fa fa-long-arrow-up"></i></a>
 										</div>
 									</div>
 									<div class="pages">
@@ -461,7 +463,7 @@
 
 			var $url = getUrl('/get_radius');
 
-			var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query())  ? json_encode(request()->query()) : "{}" }}';
+			var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 
 			var requestQueryClearedJSON = requestQueryString
 			.replace(/&quot;/gi,"\"")
@@ -515,7 +517,7 @@
 
 				var $url = getUrl('/get_price_ranges');
 
-				var requestQueryString = '{{ is_array(request()->query()) ? json_encode(request()->query()) : "{}" }}';
+				var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 
 				var requestQueryClearedJSON = requestQueryString.replace(/&quot;/gi,"\"")
 				.replace(/\[/gi,"")
@@ -573,25 +575,30 @@
 			(inputCity), {
 				types: ['geocode']
 			});
-		autocomplete.setComponentRestrictions(
-			{'country': ['ch']});       
+		autocomplete.setComponentRestrictions({'country': ['ch']});
 
 		autocomplete.addListener('place_changed', function() { 
+			$('.geolocation-image').hide();
+			$('.spinner').show();
 			var place = autocomplete.getPlace();
 			var lat = place.geometry.location.lat();
 			var lng = place.geometry.location.lng();
+			var address = place.formatted_address;
+			console.log(place);
 			$.ajax({
 				url: getUrl('/get_guest_data'),
 				type: 'post',
-				data: {lat: lat, lng: lng, _token: token},
+				data: {lat: lat, lng: lng, address: address, _token: token},
 				success: function (data) {
-					return true;
+					window.location.reload();
 				}
 			});
 		});                  
 	}
 
 	function getLocation() {
+		$('.geolocation-image').hide();
+		$('.spinner').show();
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function (position) {
 				var geocoder = new google.maps.Geocoder;
@@ -603,20 +610,22 @@
 				};
 				geocoder.geocode({'location': latlng}, function(results, status) {
 					if (results[0]) {
-						inputCity.value = results[0].formatted_address;
+						console.log(results);
+						var address = results[0].formatted_address;
+						inputCity.value = address;
 						$.ajax({
 							url: getUrl('/get_guest_data'),
 							type: 'post',
-							data: {lat: lat, lng: lng, _token: token},
+							data: {lat: lat, lng: lng, address: address, _token: token},
 							success: function (data) {
-								return true;
+								window.location.reload();
 							}
 						});
 					}
 				});
-			});
+			});	
 		} else {
-			x.innerHTML = "Geolocation is not supported by this browser.";
+			x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
 		}
 	}
 </script>

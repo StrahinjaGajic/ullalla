@@ -178,21 +178,7 @@ class User extends Authenticatable
         return Carbon::parse($date);
     }
 
-    public function scopeIsWithinMaxDistance($query, $location, $radius = 1) {
-
-        $haversine = "(6371 * acos(cos(radians($location->lat)) 
-                    * cos(radians(users.lat)) 
-                    * cos(radians(users.lng) 
-        - radians($location->lng)) 
-        + sin(radians($location->lat)) 
-                    * sin(radians(users.lat))))";
-        return $query->select()
-        ->selectRaw("{$haversine} AS distance")
-        ->whereRaw("{$haversine} < ?", [$radius]);
-    }
-
-
-    public function scopeNearLatLng($query, $lat, $lng, $radius = 10)
+    public function scopeNearLatLng($query, $lat, $lng, $radius = 10, $request = null)
     {
         $distanceUnit = 111.045;
 
@@ -204,31 +190,85 @@ class User extends Authenticatable
             throw new Exception("Longitude must be between -180 and 180 degrees.");
         }
 
-        $haversine = sprintf('*, (%f * DEGREES(ACOS(COS(RADIANS(%f)) * COS(RADIANS(lat)) * COS(RADIANS(%f - lng)) + SIN(RADIANS(%f)) * SIN(RADIANS(lat))))) AS distance',
-            $distanceUnit,
-            $lat,
-            $lng,
-            $lat
-        );
-
-        $subselect = clone $query;
-        $subselect
-        ->selectRaw(DB::raw($haversine));
-
         $latDistance      = $radius / $distanceUnit;
         $latNorthBoundary = $lat - $latDistance;
         $latSouthBoundary = $lat + $latDistance;
-        $subselect->whereRaw(sprintf("lat BETWEEN %f AND %f", $latNorthBoundary, $latSouthBoundary));
 
         $lngDistance     = $radius / ($distanceUnit * cos(deg2rad($lat)));
         $lngEastBoundary = $lng - $lngDistance;
         $lngWestBoundary = $lng + $lngDistance;
-        $subselect->whereRaw(sprintf("lng BETWEEN %f AND %f", $lngEastBoundary, $lngWestBoundary));
 
-        $query
-        ->from(DB::raw('(' . $subselect->toSql() . ') as d'))
-        ->where('distance', '<=', $radius);
+
+        $haversine = "(111.045 * degrees(acos(cos(radians($lat))
+                    * cos(radians(users.lat))
+                    * cos(radians(users.lng)
+        - radians($lng))
+        + sin(radians($lat))
+                    * sin(radians(users.lat)))))";
+
+        $query->select('users.*')->selectRaw("{$haversine} AS distance")
+        ->leftJoin('prices', 'users.id', '=', 'prices.user_id')
+        ->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
+        ->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
+        ->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id')
+        ->whereRaw(sprintf("lat BETWEEN %f AND %f", $latNorthBoundary, $latSouthBoundary))
+        ->whereRaw(sprintf("lng BETWEEN %f AND %f", $lngEastBoundary, $lngWestBoundary));
+
+        if ($request) {
+            if ($request->has('canton')) {
+                $query->whereIn('cantons.id', $request->canton);
+            }
+            if ($request->has('services')) {
+                $query->whereIn('user_service.service_id', $request->services);
+            }
+
+            if ($request->has('languages')) {
+                $query->whereIn('user_spoken_language.spoken_language_id', $request->languages);
+            }
+
+            if ($request->has('types')) {
+                $query->whereIn('users.type', $request->types);
+            }
+
+            if ($request->has('price_type')) {
+                $query->whereNotNull('users.' . $request->price_type . '_type');
+            }
+
+            if ($request->has('hair_color')) {
+                $query->whereIn('users.hair_color', $request->hair_color);
+            }
+
+            if ($request->has('breast_size')) {
+                $query->whereIn('users.breast_size', $request->breast_size);
+            }
+
+            if ($request->has('age')) {
+                $inputAges = $request->age;
+                foreach ($request->age as $key => $startAndEndAges) {
+                    $agesStrings = explode('-', $startAndEndAges);
+                    $startAge = $agesStrings[0];
+                    $endAge = $agesStrings[1];
+                    $query->whereBetween('users.age', [$startAge, $endAge]);
+                }
+            }
+
+            $maxPrice = \DB::table('prices')->max('service_price');
+            if ($request->has('price_from') && $request->has('price_to')) {
+                $inputPriceFrom = $request->price_from;
+                $inputPriceTo = $request->price_to;
+                if ($inputPriceFrom == 0 && $inputPriceTo == $maxPrice) {
+                    $query = $query;
+                } else {
+                    $query->whereBetween('prices.service_price', [$inputPriceFrom, $inputPriceTo]);
+                }
+            }
+        }
+
+        $query->whereRaw("{$haversine} < ?", [$radius])
+        ->where('users.approved', '=', '1')
+        ->where('users.is_active_d_package', '=', '1')
+        ->groupBy('users.username');
+
+        return $query;
     }
-
-
 }

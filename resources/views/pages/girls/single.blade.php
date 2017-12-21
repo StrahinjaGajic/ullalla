@@ -18,9 +18,9 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="shop-menu">
 						<ul>
-							<li><a href="{{ url('/') }}">Home</a></li>
+							<li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
 							<li class="separator"><i class="fa fa-angle-right"></i></li>
-							<li>Profile</li>
+							<li>{{ __('buttons.profile') }}</li>
 						</ul>
 					</div>
 				</div>
@@ -33,8 +33,8 @@
 				<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
-							<a>
-								<img id="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="">
+							<a href="#">
+								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
 									<img class="modal-content" id="img01">
@@ -46,7 +46,9 @@
 							<ul class="bxslider" id="gallery_01">
 								@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
 								<li>
-									<a href="single-product.html#" class="elevatezoom-gallery active" data-update="" data-image="{{ $user->photos . 'nth/' . $i . '/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/' . $i . '/-/resize/1044x1200/' }}"><img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" /></a>
+									<a href="#" class="active" data-update="">
+										<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+									</a>
 								</li>
 								@endfor
 							</ul>
@@ -74,31 +76,31 @@
 					<div class="product-description-tab custom-tab">
 						<ul class="nav nav-tabs" role="tablist">
 							@if($user->videos)
-							<li><a href="#girl-videos" data-toggle="tab">Videos</a></li>
+							<li><a href="#girl-videos" data-toggle="tab">{{ __('headings.videos') }}</a></li>
 							@endif
 							@if ($user->about_me)
-							<li><a href="#girl-description" data-toggle="tab">About Me</a></li>
+							<li><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
 							@endif
 							@if($user->services->count())
-							<li><a href="#girl-services" data-toggle="tab">Services</a></li>
+							<li><a href="#girl-services" data-toggle="tab">{{ __('headings.services') }}</a></li>
 							@endif
 							@if($user->hasContact())
-							<li><a href="#girl-contact" data-toggle="tab">Contact</a></li>
+							<li><a href="#girl-contact" data-toggle="tab">{{ __('headings.contact') }}</a></li>
 							@endif
 							@if($user->prices()->count())
-							<li><a href="#girl-prices" data-toggle="tab">Prices</a></li>
+							<li><a href="#girl-prices" data-toggle="tab">{{ __('headings.prices') }}</a></li>
 							@endif
 							@if($user->hasWorkplace())
-							<li><a href="#girl-workplace" data-toggle="tab">Workplace</a></li>
+							<li><a href="#girl-workplace" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
 							@endif
 							@if($user->working_time)
-							<li><a href="#girl-workinghours" data-toggle="tab">Work Time</a></li>
+							<li><a href="#girl-workinghours" data-toggle="tab">{{ __('headings.working_time') }}</a></li>
 							@endif
 							@if($user->spoken_languages()->count())
-							<li><a href="#girl-languages" data-toggle="tab">Languages</a></li>
+							<li><a href="#girl-languages" data-toggle="tab">{{ __('headings.languages') }}</a></li>
 							@endif
 							@if($user->city)
-							<li><a href="#girl-map" data-toggle="tab">Map</a></li>
+							<li><a href="#girl-map" data-toggle="tab">{{ __('headings.map') }}</a></li>
 							@endif
 						</ul>
 						<div class="tab-content">
@@ -117,7 +119,7 @@
 								@if($user->services()->count())
 								<div class="tab-pane" id="girl-services">
 									@if($user->service_options()->count())
-									<h4><strong>I Offer Services For: </strong></h4>
+									<h4><strong>{{ __('headings.i_o_s_f') }}: </strong></h4>
 									<h5>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name') }}</h5>
 									@endif
 									<table class="table services-table">{{ parseChunkedServices($user) }}</table>
@@ -133,9 +135,9 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Type</th>
-												<th>Duration</th>
-												<th>Price</th>
+												<th>{{ __('fields.type') }}</th>
+												<th>{{ __('headings.duration') }}</th>
+												<th>{{ __('headings.price') }}</th>
 											</tr>
 										</thead>
 										<tbody id="prices_body">
@@ -161,9 +163,9 @@
 									<table class="table working-times-table">
 										<thead>
 											<tr>
-												<th>Day</th>
-												<th>From</th>
-												<th>To</th>
+												<th>{{ __('buttons.day') }}</th>
+												<th>{{ __('buttons.from') }}</th>
+												<th>{{ __('buttons.to') }}</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -174,7 +176,7 @@
 												<td>{{ explode('|', $workingTime)[0] }}</td>
 												<td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
 												<td>{{ explode('&', explode(' - ', explode('|', $workingTime)[1])[1])[0] }}</td>
-												<td>{{ isset(explode('&', explode(' - ', explode('|', $workingTime)[1])[1])[1]) ? 'Night Escort' : '' }}</td>
+												<td>{{ isset(explode('&', explode(' - ', explode('|', $workingTime)[1])[1])[1]) ? __('fields.night_escort') : '' }}</td>
 											</tr>
 											@endforeach
 										</tbody>
@@ -289,7 +291,7 @@
 						position: results[0].geometry.location
 					});
 				} else {
-					alert('Geocode was not successful for the following reason: ' + status);
+					alert('{{ __('messages.geolocation_not_successful') }} ' + status);
 				}
 			});
 		}
@@ -310,7 +312,8 @@
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('expand');
+var img = document.getElementsByClassName('expand')[0];
+
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
@@ -332,6 +335,11 @@ span.onclick = function() {
 }
 </script>
 
-
+<script>
+	$('#gallery_01 img').click(function(e) {
+		e.preventDefault();
+		$('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
+	});
+</script>
 
 @stop

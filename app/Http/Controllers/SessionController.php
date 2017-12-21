@@ -13,7 +13,7 @@ class SessionController extends Controller
 		if ($request->radioState == 'off' && Session::has('default_package')) {
 			Session::forget('default_package');
 			return response()->json([
-				'success' => 'session expired',
+				'success' => __('messages.session_expired'),
 			]);
 		}
 		$package = Package::find($request->package_id);
@@ -33,7 +33,7 @@ class SessionController extends Controller
 		if ($request->radioState != 'on' && Session::has('month_girl_package')) {
 			Session::forget('month_girl_package');
 			return response()->json([
-				'success' => 'session expired',
+				'success' => __('messages.session_expired'),
 			]);
 		}
 		$package = Package::find($request->package_id);
@@ -52,6 +52,7 @@ class SessionController extends Controller
 	{
 		Session::put('lat', $request->lat);
 		Session::put('lng', $request->lng);
+		Session::put('address', $request->address);
 		Session::put('guest_ip_address', $_SERVER['REMOTE_ADDR']);
 	}
 }

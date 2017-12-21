@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="image-preview-multiple">
-                                    <input type="hidden" role="uploadcare-uploader" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                                    <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
                             </div>
@@ -400,7 +400,7 @@
                         });
                     });
                 }
-                $('#profileForm').formValidation('revalidateField', 'photos');
+                // $('#profileForm').formValidation('revalidateField', 'photos');
             });
         }
 
@@ -410,7 +410,7 @@
                 if (imageInfo !== null) {
                     console.log();
                     if (imageInfo.width < width || imageInfo.height < height) {
-                        throw new Error('dimensions');
+                        throw new Error('minDimensions');
                     }
                 }
             };
@@ -420,7 +420,7 @@
         function maxFileSize(size) {
             return function (fileInfo) {
                 if (fileInfo.size !== null && fileInfo.size > size) {
-                    throw new Error("fileMaximumSize");
+                    throw new Error('fileMaximumSize');
                 }
             }
         }
@@ -433,7 +433,7 @@
                 }
                 var extension = fileInfo.name.split('.').pop();
                 if (types.indexOf(extension) == -1) {
-                    throw new Error("fileType");
+                    throw new Error('fileType');
                 }
             };
         }
