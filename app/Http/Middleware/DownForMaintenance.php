@@ -26,7 +26,7 @@ class DownForMaintenance
             '24.135.165.252'
         ];
 
-        if (app()->environment() == 'production' && in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)) {
+        if (app()->environment() == 'production' && !in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)) {
             return 'Temporarily Down For Maintenance';
         }
 
