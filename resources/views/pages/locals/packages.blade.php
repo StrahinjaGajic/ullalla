@@ -21,6 +21,7 @@
 		<div class="col-sm-10 profile-info">
 			@if($user->is_active_d_package)
 			<h3>{{ __('headings.active_packages') }}</h3>
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -37,6 +38,7 @@
 					</tr>
 				</tbody>
 			</table>
+		
 			@endif
 			<div class="col-xs-12">
 				@if(Session::has('success'))
