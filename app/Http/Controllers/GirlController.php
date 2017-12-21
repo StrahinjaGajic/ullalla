@@ -19,24 +19,19 @@ class GirlController extends Controller
 		$maxPrice = \DB::table('prices')->max('service_price');
 		$cantons = Canton::with('users')->get();
 
-		if ($request->has('radius')) {
-			$radius = request('radius');
+		$orderBy = $request->order_by ? $request->order_by : null;
+		$show = $request->show ? $request->show : null;
+		$radius = $request->radius ? $request->radius : null;
 
-			if (Session::has('lat')) {
-				$lat = Session::get('lat');
-			}
-			if (Session::has('lng')) {
-				$lng = Session::get('lng');
-			}
-
-			if (isset($lat) && isset($lng)) {
-				$users = User::nearLatLng($lat, $lng, $radius, $request);
-			}
+		if ($radius && is_numeric($radius) && Session::has('lat') && Session::has('lng')) {
+			$lat = Session::get('lat');
+			$lng = Session::get('lng');
+			$users = User::nearLatLng($lat, $lng, $radius, $request);
 		} else {
 			$users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id')
-							->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
-							->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
-							->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id');
+			->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
+			->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
+			->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id');
 
 			if ($request->has('services')) {
 				$users = $users->whereIn('user_service.service_id', $request->services);
@@ -88,9 +83,6 @@ class GirlController extends Controller
 			->groupBy('users.username');
 		}
 
-		$orderBy = $request->order_by ? $request->order_by : null;
-		$show = $request->show ? $request->show : null;
-		$radius = $request->radius ? $request->radius : null;
 		$users = isset($orderBy) ? $users->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $users;
 
 		if (Session::has('users')) {
