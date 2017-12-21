@@ -33,8 +33,8 @@
 				<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
-							<a>
-								<img id="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/2/-/resize/1044x1200/' }}" alt="">
+							<a href="#">
+								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
 									<img class="modal-content" id="img01">
@@ -46,7 +46,9 @@
 							<ul class="bxslider" id="gallery_01">
 								@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
 								<li>
-									<a href="single-product.html#" class="elevatezoom-gallery active" data-update="" data-image="{{ $user->photos . 'nth/' . $i . '/-/resize/490x560/' }}" data-zoom-image="{{ $user->photos . 'nth/' . $i . '/-/resize/1044x1200/' }}"><img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" /></a>
+									<a href="#" class="active" data-update="">
+										<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+									</a>
 								</li>
 								@endfor
 							</ul>
@@ -74,7 +76,7 @@
 					<div class="product-description-tab custom-tab">
 						<ul class="nav nav-tabs" role="tablist">
 							@if($user->videos)
-							<li><a href="#girl-videos" data-toggle="tab">{{ __('headings.Videos') }}</a></li>
+							<li><a href="#girl-videos" data-toggle="tab">{{ __('headings.videos') }}</a></li>
 							@endif
 							@if ($user->about_me)
 							<li><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
@@ -310,7 +312,8 @@
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('expand');
+var img = document.getElementsByClassName('expand')[0];
+
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
@@ -332,6 +335,11 @@ span.onclick = function() {
 }
 </script>
 
-
+<script>
+	$('#gallery_01 img').click(function(e) {
+		e.preventDefault();
+		$('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
+	});
+</script>
 
 @stop

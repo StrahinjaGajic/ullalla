@@ -267,7 +267,12 @@ i{
 
 
 
+/**** bx slider ****/
 
+.bx-next, 
+.bx-prev {
+    z-index: 1;
+}
 
 
 

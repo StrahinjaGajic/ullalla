@@ -78,34 +78,15 @@
                 <span class="search"><h3 style="font-size: 18px; color: #363636; font-weight: 800;">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">
                     <div class="checkbox-tile-group">
-{{--                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="checkbox" />
-                            <div class="checkbox-tile">
-                                <i class="fa fa-mars fa-2x"></i>
-                                <label for="male" class="checkbox-tile-label">Male</label>
-                            </div>
-                        </div> --}}
+                        @foreach(getQuickSearchTypes() as $key => $userType)
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" value="girl" />
+                            <input class="checkbox-button" type="checkbox" name="type" value="{{ $userType }}" />
                             <div class="checkbox-tile">
-                                <i class="fa fa-venus fa-2x"></i>
-                                <label for="female" class="checkbox-tile-label">{{ __('fields.girl') }}</label>
+                                <i class="fa fa-{{ $key }} fa-2x"></i>
+                                <label for="female" class="checkbox-tile-label">{{ $userType }}</label>
                             </div>
                         </div>
-{{--                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="checkbox" />
-                            <div class="checkbox-tile">
-                                <i class="fa fa-transgender fa-2x"></i>
-                                <label for="mix" class="checkbox-tile-label">Mix</label>
-                            </div>
-                        </div> --}}
-                        <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" value="local" />
-                            <div class="checkbox-tile">
-                                <i class="fa fa-home fa-2x"></i>
-                                <label for="local" class="checkbox-tile-label">{{ __('fields.local') }}</label>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="help-block">
                             @if($errors->has('type'))
                             {{ $errors->first('type') }}
@@ -121,6 +102,10 @@
                             <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
                             <a onclick="getLocation();" class="geolocation-button">
                                 <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+                                <div class="spinner" style="display: none;">
+                                    <div class="double-bounce1"></div>
+                                    <div class="double-bounce2"></div>
+                                </div>
                             </a>
                             <div class="help-block">
                                 @if($errors->has('city'))
@@ -369,22 +354,32 @@
                                         autocomplete.setComponentRestrictions(
                                             {'country': ['ch']});       
 
-                                        autocomplete.addListener('place_changed', function() { 
+                                        autocomplete.addListener('place_changed', function() {
+                                            $('.geolocation-image').hide();
+                                            $('.spinner').show();
                                             var place = autocomplete.getPlace();
                                             var lat = place.geometry.location.lat();
                                             var lng = place.geometry.location.lng();
+                                            var address = place.formatted_address;
                                             $.ajax({
                                                 url: getUrl('/get_guest_data'),
                                                 type: 'post',
-                                                data: {lat: lat, lng: lng, _token: token},
+                                                data: {lat: lat, lng: lng, address: address, _token: token},
                                                 success: function (data) {
-                                                    return true;
+                                                    $('.spinner').hide();
+                                                    $('.geolocation-image').show();
+                                                },
+                                                error: function () {
+                                                    $('.spinner').hide();
+                                                    $('.geolocation-image').show();
                                                 }
                                             });
                                         });                  
                                     }
 
                                     function getLocation() {
+                                        $('.geolocation-image').hide();
+                                        $('.spinner').show();
                                         if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(function (position) {
                                                 var geocoder = new google.maps.Geocoder;
@@ -396,13 +391,19 @@
                                                 };
                                                 geocoder.geocode({'location': latlng}, function(results, status) {
                                                     if (results[0]) {
-                                                        inputCity.value = results[0].formatted_address;
+                                                        var address = results[0].formatted_address;
+                                                        inputCity.value = address;
                                                         $.ajax({
                                                             url: getUrl('/get_guest_data'),
                                                             type: 'post',
-                                                            data: {lat: lat, lng: lng, _token: token},
+                                                            data: {lat: lat, lng: lng, address: address, _token: token},
                                                             success: function (data) {
-                                                                return true;
+                                                                $('.spinner').hide();
+                                                                $('.geolocation-image').show();
+                                                            },
+                                                            error: function () {
+                                                                $('.spinner').hide();
+                                                                $('.geolocation-image').show();
                                                             }
                                                         });
                                                     }
@@ -412,7 +413,6 @@
                                             x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
                                         }
                                     }
-
                                 </script>
 
                                 <!-- radius -->

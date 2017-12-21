@@ -52,6 +52,7 @@ class SessionController extends Controller
 	{
 		Session::put('lat', $request->lat);
 		Session::put('lng', $request->lng);
+		Session::put('address', $request->address);
 		Session::put('guest_ip_address', $_SERVER['REMOTE_ADDR']);
 	}
 }
