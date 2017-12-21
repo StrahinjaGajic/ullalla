@@ -165,7 +165,7 @@
                                                             <div class="pro-deal-text-shop">
                                                                 <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva... </p>
                                                             </div>
-                                                            <a href="{{ url('girls/' . $local->username) }}">
+                                                            <a href="{{ url('locals/' . $local->username) }}">
                                                                 <div class="product-cart">
                                                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                                                 </div>
@@ -195,7 +195,7 @@
                                             <label class="sort-none">{{ __('global.sort_by') }}</label>
                                             <select name="order_by" onchange="location=this.value;">
                                                 @foreach(getLoclasOrderBy() as $key => $order)
-                                                <option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
+                                                <option value="{{ urldecode(route('locals', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
                                                 @endforeach
                                             </select>
                                             <a class="up-arrow" href="#toTop"><i class="fa fa-long-arrow-up"></i></a>
@@ -246,7 +246,7 @@
             var input = $('input[name="radius"]');
             var $radius = input.val(ui.value);
 
-            var $url = getUrl('/get_radius');
+            var $url = getUrl('/get_local_radius');
 
             var requestQueryString = '{{ is_array(request()->query()) && !empty(request()->query()) ? json_encode(request()->query()) : "{}" }}';
 

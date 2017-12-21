@@ -24,7 +24,7 @@ class LocalProfileController extends Controller
             $locals = Local::nearLatLng($lat, $lng, $radius, $request);
         } else {
             $locals = DB::table('locals');
-            
+
             if ($request->has('types')) {
                 $locals = $locals->whereIn('locals.local_type_id', $request->types);
             }
@@ -58,6 +58,16 @@ class LocalProfileController extends Controller
             $food = getClubInfo($local->clubFood);
             $outdoor = getClubInfo($local->clubOutdoor);
             return view('pages.local-profile.single', compact('local' ,'entrance', 'wellness', 'food', 'outdoor'));
+        }
+    }
+
+    public function getLocalRadius(Request $request)
+    {
+        if ($request->ajax()) {
+            $url = urldecode(route('locals', $request->query(), false));
+            return response()->json([
+                'url' => $url
+            ]);
         }
     }
 }

@@ -126,6 +126,7 @@ Route::get('girls', [
 Route::get('girls/{nickname}', 'GirlController@getGirl');
 Route::get('get_price_ranges', 'GirlController@getPriceRanges');
 Route::get('get_radius', 'GirlController@getRadius');
+Route::get('get_local_radius', 'LocalProfileController@getLocalRadius');
 
 #NOTIFICATION CONTROLLER
 Route::get('@{username}/notifications', 'NotificationController@getIndex');
