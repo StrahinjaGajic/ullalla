@@ -21,7 +21,7 @@ class DownForMaintenance
     {
         $response = $next($request);
 
-        if (app()->environment() == 'production' && $_SERVER['REMOTE_ADDR'] != '24.135.165.252') {
+        if (app()->environment() == 'production' && $_SERVER['REMOTE_ADDR'] != '24.135.165.252' && $_SERVER['REMOTE_ADDR'] != '109.122.99.8') {
             return 'Temporarily Down For Maintenance';
         }
 
