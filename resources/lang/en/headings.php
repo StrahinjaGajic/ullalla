@@ -10,6 +10,8 @@ return [
     'good_job_title' => 'Good job!',
     'account_created_title' => 'Account created, but not approved',
     'package_expiration_title' => 'Package Expiration',
+    'this_banner_is' => 'This banner is',
+    'this_one_is_also' => 'This one is also',
 
     # edit profile nav
     'about_me' => 'About Me',

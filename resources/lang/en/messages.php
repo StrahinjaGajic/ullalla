@@ -35,5 +35,6 @@ return [
     'file_maximum_size' => 'File Maximum Size',
     'file_type' => 'File Type',
     'error' => 'error',
+    'min_dimensions' => 'Min Dimensions',
 
 ];

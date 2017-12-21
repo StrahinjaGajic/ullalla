@@ -22,4 +22,6 @@ return [
     'f_a_q' => 'Frequently Asked Questions',
     'km' => 'km',
     'short_info' => 'short info',
+    'shop_now' => 'Shop Now',
+    'go_now' => 'Go Now',
 ];

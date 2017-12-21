@@ -324,7 +324,7 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label class="control control--checkbox apps">
-									<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>Outcall</a>
+									<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>{{ __('fields.outcall') }}</a>
 									<div class="control__indicator"></div>
 								</label>
 								<div class="outcall-options" style="display: none;">
@@ -759,7 +759,7 @@ function minDimensions(width, height) {
 		if (imageInfo !== null) {
 			console.log();
 			if (imageInfo.width < width || imageInfo.height < height) {
-				throw new Error('minDimensions');
+				throw new Error({{ __('messages.min_dimensions') }});
 			}
 		}
 	};
@@ -769,7 +769,7 @@ function minDimensions(width, height) {
 function maxFileSize(size) {
 	return function (fileInfo) {
 		if (fileInfo.size !== null && fileInfo.size > size) {
-			throw new Error("fileMaximumSize");
+			throw new Error({{ __('messages.file_maximum_size') }});
 		}
 	}
 }
@@ -782,7 +782,7 @@ function fileTypeLimit(types) {
 		}
 		var extension = fileInfo.name.split('.').pop();
 		if (types.indexOf(extension) == -1) {
-			throw new Error("fileType");
+			throw new Error({{ __('messages.file_type') }});
 		}
 	};
 }

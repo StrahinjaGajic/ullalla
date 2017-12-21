@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Models\User;
+use App\Models\Local;
 use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -24,22 +25,24 @@ class SearchController extends Controller
 		$lng = Session::get('lng');
 		$address = Session::get('address');
 
-		$users = User::nearLatLng($lat, $lng, $radius)
-		->where('approved', '=', '1')
-		->where('is_active_d_package', '=', '1')
-		->paginate(9);
-
 		$query = $request->query();
 		unset($query['type']);
 		unset($query['_token']);
 		unset($query['city']);
 
-		Session::put('users', $users);
-		Session::save();
-
 		if ($request->type == 'girl') {
+			$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
+
+			Session::put('users', $users);
+			Session::save();
+
 			return redirect(urldecode(route('girls', $query, false)));
 		} elseif ($request->type == 'local') {
+			$locals = Local::nearLatLng($lat, $lng, $radius)->paginate(9);
+
+			Session::put('locals', $locals);
+			Session::save();
+
 			return redirect(urldecode(route('locals', $query, false)));
 		}
 	}
