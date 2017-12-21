@@ -110,7 +110,7 @@ class Local extends Authenticatable
 
         if ($request) {
             if ($request->has('types')) {
-                $locals = $locals->whereIn('locals.local_type_id', $request->types);
+                $query->whereIn('locals.local_type_id', $request->types);
             }
         }
 
