@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-sm-6 skype-name" style="{{ !$user->skype_name ? 'display: none' : '' }}">
                     <div class="form-group">
-                        <input type="text" name="skype_name" placeholder="Skype Name" class="form-control" value="{{ $user->skype_name }}">
+                        <input type="text" name="skype_name" placeholder="{{ __('functions.skype_name') }}" class="form-control" value="{{ $user->skype_name }}">
                         @if($errors->has('skype_name'))
                             <div class="has-error">{{ $errors->first('skype_name') }}</div>
                         @endif

@@ -22,7 +22,7 @@
                                 <div class="col-lg-12 text-right">
                                     <div class="fas7-slider-content">
                                         <div class="layer-1-1">
-                                            <h5 class="title1">This banner is</h5>
+                                            <h5 class="title1">{{ __('headings.this_banner_is') }}</h5>
                                         </div>
                                         <div class="layer-1-2">
                                             <h2 class="title2">
@@ -33,7 +33,7 @@
                                             <p class="title3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <br>eiusmod tempor incididunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud.</p>
                                         </div>
                                         <div class="layer-1-4">
-                                            <a class="shop-n" href="/">shop now</a>
+                                            <a class="shop-n" href="/">{{ __('global.shop_now') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 <div class="col-lg-12 text-left">
                                     <div class="fas8-slider-content">
                                         <div class="layer-2-1">
-                                            <h5 class="title1">This one is also</h5>
+                                            <h5 class="title1">{{ __('headings.this_one_is_also') }}</h5>
                                         </div>
                                         <div class="layer-2-2">
                                             <h2 class="title2">
@@ -58,7 +58,7 @@
                                             <p class="title3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do<br> eiusmod tempor incididunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud.</p>
                                         </div>
                                         <div class="layer-2-4">
-                                            <a class="shop-n" href="/">go now</a>
+                                            <a class="shop-n" href="/">{{ __('global.go_now') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                             <div id="radius-ranger" style="margin: 10px;"></div>
                             <div class="slider-value-wrapper">
                                 <span class="radius">{{ old('radius') ? old('radius') : 0 }}</span>
-                                <span>km</span>
+                                <span>{{ __('global.km') }}</span>
                             </div>
                             <div class="help-block">
                                 @if($errors->has('radius'))
@@ -180,7 +180,7 @@
                             <div class="product-content">
                                 <a class="shop-name">{{ $user->nickname }}</a>
                                 <div class="pro-price">
-                                    <p>short info</p>
+                                    <p>{{ __('global.short_info') }}</p>
                                 </div>
                                 <a href="/profile/girl"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
@@ -409,7 +409,7 @@
                                                 });
                                             });
                                         } else {
-                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                            x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
                                         }
                                     }
 
