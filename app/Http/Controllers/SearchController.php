@@ -19,11 +19,6 @@ class SearchController extends Controller
 			'city' => 'required'
 		]);
 
-		$services = Service::with('users')->get();
-		$spokenLanguages = SpokenLanguage::with('users')->get();
-		$maxPrice = \DB::table('prices')->max('service_price');
-		$cantons = Canton::with('users')->get();
-
 		$radius = request('radius');
 		$lat = Session::get('lat');
 		$lng = Session::get('lng');
