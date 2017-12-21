@@ -104,7 +104,6 @@
                                                 <option value="{{ urldecode(route('locals', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
                                                 @endforeach
                                             </select>
-                                            <a class="up-arrow" href="#toTop"><i class="fa fa-long-arrow-up"></i></a>
                                         </div>
                                     </div>
                                     <div class="pager-list">
@@ -198,7 +197,6 @@
                                                 <option value="{{ urldecode(route('locals', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
                                                 @endforeach
                                             </select>
-                                            <a class="up-arrow" href="#toTop"><i class="fa fa-long-arrow-up"></i></a>
                                         </div>
                                     </div>
                                     <div class="pages">
