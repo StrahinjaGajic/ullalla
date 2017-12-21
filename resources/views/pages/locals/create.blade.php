@@ -404,6 +404,10 @@
             });
         }
 
+        setInterval(function(){
+            $('#profileForm').formValidation('revalidateField', 'photos');
+        },500);
+
         function minDimensions(width, height) {
             return function(fileInfo) {
                 var imageInfo = fileInfo.originalImageInfo;
@@ -588,7 +592,7 @@
     {{--<script>--}}
         {{--let stripe = StripeCheckout.configure({--}}
             {{--key: '{{ config('services.stripe.key') }}',--}}
-            {{--image: 'https://stripe.com/img/documentation/checkout/marketplace.png',--}}
+            {{--image: '{{ asset('img/logo.png') }}',--}}
             {{--locale: 'auto',--}}
             {{--token: function (token) {--}}
                 {{--var stripeEmail = $('#stripeEmail');--}}

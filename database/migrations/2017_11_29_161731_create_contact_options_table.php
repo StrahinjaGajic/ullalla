@@ -16,6 +16,7 @@ class CreateContactOptionsTable extends Migration
         Schema::create('contact_options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('contact_option_name');
+            $table->string('icon');
         });
     }
 

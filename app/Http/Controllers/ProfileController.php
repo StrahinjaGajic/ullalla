@@ -75,6 +75,15 @@ class ProfileController extends Controller
 
     public function postCreate(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'nickname' => 'required',
+            'height' => 'required',
+            'weight' => 'required',
+            'about_me' => 'required',
+        ]);
+
         // define inputs
         $defaultPackageInput = request('ullalla_package')[0];
         $monthGirlPackageInput = request('ullalla_package_month_girl');

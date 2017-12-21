@@ -96,6 +96,9 @@ $(function() {
 
                 about_me: {
                     validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
                         stringLength: {
                             max: 200,
                             message: stringLength
@@ -113,6 +116,16 @@ $(function() {
                     validators: {
                         numeric: {
                             message: numericError
+                        },
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
                         }
                     }
                 },
@@ -127,6 +140,20 @@ $(function() {
                     validators: {
                         uri: {
                             message: invalidUrl
+                        }
+                    }
+                },
+                height: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                weight: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
                         }
                     }
                 },
@@ -145,7 +172,7 @@ $(function() {
                             message: maxFiles,
                             callback: function(value, validator, $field) {
                                 var numOfFiles = $field.closest('.image-preview-multiple').find('._list ._item').length;
-                                return (numOfFiles != null && numOfFiles >= 4);
+                                return (numOfFiles != null && numOfFiles != 0);
                             }
                         }
                     }

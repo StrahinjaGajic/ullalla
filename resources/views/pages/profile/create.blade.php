@@ -40,7 +40,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.sex') }}*</label>
 								<select name="sex" class="form-control">
-									<option value="male">{{ __('fields.male') }}</option>
 									<option value="female">{{ __('fields.female') }}</option>
 									<option value="transsexual">{{ __('fields.transsexual') }}</option>
 								</select>
@@ -48,7 +47,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.sex_orientation') }}</label>
 								<select name="sex_orientation" class="form-control">
-									<option value=""></option>
 									<option value="heterosexual">{{ __('fields.heterosexual') }}</option>
 									<option value="bisexual">{{ __('fields.bisexual') }}</option>
 									<option value="homosexual">{{ __('fields.homosexual') }}</option>
@@ -72,7 +70,7 @@
 									</select>
 								</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.figure') }}Figure</label>
+								<label class="control-label">{{ __('fields.figure') }}</label>
 								<select name="figure" class="form-control">
 									<option value=""></option>
 									<option value="normal">{{ __('fields.normal') }}</option>
@@ -147,7 +145,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.body_hair') }}</label>
 								<select name="body_hair" class="form-control">
-									<option value=""></option>
 									<option value="shaved">{{ __('fields.shaved') }}</option>
 									<option value="hairy">{{ __('fields.hairy') }}</option>
 									<option value="partial">{{ __('fields.partial') }}</option>
@@ -165,7 +162,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.smoker') }}</label>
 								<select name="smoker" class="form-control">
-									<option value=""></option>
 									<option value="yes">{{ __('labels.yes') }}</option>
 									<option value="no">{{ __('labels.no') }}</option>
 									<option value="occasionally">{{ __('fields.occasionally') }}</option>
@@ -174,7 +170,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.alcohol') }}</label>
 								<select name="alcohol" class="form-control">
-									<option value=""></option>
                                     <option value="yes">{{ __('labels.yes') }}</option>
                                     <option value="no">{{ __('labels.no') }}</option>
 									<option value="occasionally">{{ __('fields.occasionally') }}</option>
@@ -197,7 +192,6 @@
 						</div>
 						<div class="form-group upload-video">
 							<input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-							<video id="video" width="320" height="240" loop style="display: block;" controls=""></video>
 						</div>
 					</section>
 					<h2>{{ __('headings.contact') }}</h2>
@@ -231,7 +225,7 @@
 							<div class="form-group">
 								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 								@foreach($contactOptions as $contactOption)
-								<label class="control control--checkbox apps"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
+								<label class="control control--checkbox apps"><a>{!! $contactOption->icon !!} {{ ucfirst($contactOption->contact_option_name) }}</a>
 									<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
 									<div class="control__indicator"></div>
 								</label>
@@ -753,10 +747,12 @@ function installWidgetPreviewMultiple(widget, list) {
 				});
 			});
 		}
-		// $('#profileForm').formValidation('revalidateField', 'photos');
 	});
 }
 
+setInterval(function(){
+	$('#profileForm').formValidation('revalidateField', 'photos');
+},500);
 function minDimensions(width, height) {
 	return function(fileInfo) {
 		var imageInfo = fileInfo.originalImageInfo;
@@ -1043,7 +1039,7 @@ $(function () {
 <script>
 	let stripe = StripeCheckout.configure({
 		key: '{{ config('services.stripe.key') }}',
-		image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+		image: '{{ asset('img/logo.png') }}',
 		locale: 'auto',
 		token: function (token) {
 			var stripeEmail = $('#stripeEmail');

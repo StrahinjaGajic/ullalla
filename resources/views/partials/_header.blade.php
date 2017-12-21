@@ -65,4 +65,4 @@
 	};
 </script>
 <script>UPLOADCARE_PUBLIC_KEY = "c3f04780a8cb0f9153fe";</script>
-<script src="https://ucarecdn.com/libs/widget/3.2.0/uploadcare.full.min.js" charset="utf-8"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
