@@ -31,6 +31,8 @@ class CreateLocalsTable extends Migration
             $table->string('photos')->nullable();
             $table->string('videos')->nullable();
             $table->string('working_time')->nullable();
+            $table->decimal('lat', 9, 6)->nullable();
+            $table->decimal('lng', 9, 6)->nullable();
             $table->integer('club_entrance_id')->unsigned()->nullable();
             $table->integer('club_wellness_id')->unsigned()->nullable();
             $table->integer('club_food_id')->unsigned()->nullable();

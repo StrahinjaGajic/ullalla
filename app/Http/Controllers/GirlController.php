@@ -19,8 +19,6 @@ class GirlController extends Controller
 		$maxPrice = \DB::table('prices')->max('service_price');
 		$cantons = Canton::with('users')->get();
 
-
-
 		if ($request->has('radius')) {
 			$radius = request('radius');
 

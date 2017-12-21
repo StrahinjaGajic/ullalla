@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Local;
 use App\Models\LocalType;
 use DB;
+use Session;
 
 class LocalProfileController extends Controller
 {
@@ -17,16 +18,37 @@ class LocalProfileController extends Controller
         $show = $request->show ? $request->show : null;
 
 
-        if ($request->has('types')) {
-            $locals = $locals->whereIn('locals.local_type_id', $request->types);
-        }
+        if ($request->has('radius')) {
+            $radius = request('radius');
 
-        $locals = $locals->where('locals.approved', '=', '1')
+            if (Session::has('lat')) {
+                $lat = Session::get('lat');
+            }
+            if (Session::has('lng')) {
+                $lng = Session::get('lng');
+            }
+
+            if (isset($lat) && isset($lng)) {
+                $locals = Local::nearLatLng($lat, $lng, $radius, $request);
+            }
+        } else {
+            if ($request->has('types')) {
+                $locals = $locals->whereIn('locals.local_type_id', $request->types);
+            }
+
+            $locals = $locals->where('locals.approved', '=', '1')
+            ->where('locals.is_active_d_package', '=', '1')
             ->select('locals.*')
             ->groupBy('locals.username');
-        $locals = isset($orderBy) ? $locals->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $locals;
-        $locals = isset($show) ? $locals->paginate($show) : $locals->paginate(9);
+        }
 
+        $locals = isset($orderBy) ? $locals->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $locals;
+
+        if (Session::has('locals')) {
+            $locals = Session::pull('locals');
+        } else {
+            $locals = isset($show) ? $locals->paginate($show) : $locals->paginate(9);
+        }
 
         $request->flash();
 
