@@ -12,7 +12,6 @@ class LocalProfileController extends Controller
 {
     public function getIndex(Request $request)
     {
-        $locals = DB::table('locals');
         $types = LocalType::all();
 
         $orderBy = $request->order_by ? $request->order_by : null;
@@ -24,6 +23,8 @@ class LocalProfileController extends Controller
             $lng = Session::get('lng');
             $locals = Local::nearLatLng($lat, $lng, $radius, $request);
         } else {
+            $locals = DB::table('locals');
+            
             if ($request->has('types')) {
                 $locals = $locals->whereIn('locals.local_type_id', $request->types);
             }

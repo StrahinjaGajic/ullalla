@@ -31,20 +31,14 @@ class SearchController extends Controller
 		unset($query['city']);
 
 		if ($request->type == 'girl') {
-			$users = User::nearLatLng($lat, $lng, $radius)
-			->where('approved', '=', '1')
-			->where('is_active_d_package', '=', '1')
-			->paginate(9);
+			$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
 
 			Session::put('users', $users);
 			Session::save();
 
 			return redirect(urldecode(route('girls', $query, false)));
 		} elseif ($request->type == 'local') {
-			$locals = Local::nearLatLng($lat, $lng, $radius)
-			->where('approved', '=', '1')
-			->where('is_active_d_package', '=', '1')
-			->paginate(9);
+			$locals = Local::nearLatLng($lat, $lng, $radius)->paginate(9);
 
 			Session::put('locals', $locals);
 			Session::save();
