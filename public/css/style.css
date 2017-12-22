@@ -138,7 +138,6 @@ body {
 
 .logo-img {
     margin-top: 10px;
-    text-align: center;
 }
 
 .header-area.home-3,
@@ -1168,7 +1167,8 @@ button.button {
     margin-top: 30px;
 }
 
-.header-logo-area .logo-img {}
+.header-logo-area .logo-img {
+}
 
 .header-area.home-4 {
     margin-top: 62px;

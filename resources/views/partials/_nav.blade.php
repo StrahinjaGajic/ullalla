@@ -5,14 +5,14 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                         <div class="logo-img home-1">
-                            <a href="/"><img src="{{ asset('img/logo/logo2.png') }}" alt=""></a>
+                            <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="" width="103px;" height="50px;"></a>
                         </div>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                         <div class="top-menu-area">
                             <div class="mainmenu hidden-sm hidden-xs">
                                 <nav>
-                                    <ul style="text-align: center;">
+                                    <ul style="text-align: right;">
                                         @php
                                         $user = null;
                                         if (Auth::user()) {
@@ -24,8 +24,6 @@
                                         <li><a href="/">{{ __('buttons.home') }}</a></li>
                                         <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                         <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
-                                        <li><a href="/contact">Contact</a></li>
-                                        <li><a href="/faq">Faq</a></li>
                                         @if(!Auth::check() && !Auth::guard('local')->check())
                                             <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
                                             <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
