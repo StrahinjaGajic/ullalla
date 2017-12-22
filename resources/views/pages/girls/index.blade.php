@@ -162,50 +162,6 @@
 						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
 								<div class="layout-title toggle_arrow">
-									<a>{{ __('fields.hair_color') }} <i class="fa fa-caret-right"></i></a>
-								</div>
-							</div>
-							<div class="layout-list" style="{{ !request('hair_color') ? 'display: none;' : '' }}">
-								<ul>
-									<li>
-										@foreach(getHairColors() as $hairColor)
-										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('hair_color'), request()->query() , $num, 'hair_color', $hairColor), false)) }}">{{ $hairColor }}
-												<span>({{ \App\Models\User::approved()->payed()->where('hair_color', strtolower($hairColor))->count() }})</span>
-											</a>
-											<input type="checkbox" name="hair_color[]" value="{{ $hairColor }}" {{ request('hair_color') && in_array($hairColor, request('hair_color')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
-										</label>
-										@endforeach
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="shop-layout headerDropdown">
-							<div class="layout-title">
-								<div class="layout-title toggle_arrow">
-									<a>{{ __('fields.breast_size') }} <i class="fa fa-caret-right"></i></a>
-								</div>
-							</div>
-							<div class="layout-list" style="{{ !request('breast_size') ? 'display: none;' : '' }}">
-								<ul>
-									<li>
-										@foreach(getBreastSizes() as $breastSize)
-										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('breast_size'), request()->query() , $num, 'breast_size', $breastSize), false)) }}">{{ $breastSize }}
-												<span>({{ \App\Models\User::approved()->payed()->where('breast_size', strtolower($breastSize))->count() }})</span>
-											</a>
-											<input type="checkbox" name="breast_size[]" value="{{ $breastSize }}" {{ request('breast_size') && in_array($breastSize, request('breast_size')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
-										</label>
-										@endforeach
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="shop-layout headerDropdown">
-							<div class="layout-title">
-								<div class="layout-title toggle_arrow">
 									<a>{{ __('fields.age') }} <i class="fa fa-caret-right"></i></a>
 								</div>
 							</div>
@@ -265,29 +221,6 @@
 											<input type="radio" name="price_type" value="{{ $priceType }}" {{ request('price_type') && $priceType == request('price_type') ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
 										</label>
-										@endforeach
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="shop-layout services-layout headerDropdown">
-							<div class="layout-title">
-								<div class="layout-title toggle_arrow">
-									<a>{{ __('headings.language') }} <i class="fa fa-caret-right"></i></a>
-								</div>
-							</div>
-							<div class="layout-list" style="{{ !request('spoken_languages') ? 'display: none;' : '' }}">
-								<ul>
-									<li>
-										@foreach($spokenLanguages as $spokenLanguage)
-										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('spoken_languages'), request()->query() , $num, 'spoken_languages', $spokenLanguage), false)) }}">{{ $spokenLanguage->spoken_language_name }}
-												<span>({{ $spokenLanguage->users()->approved()->payed()->count() }})</span>
-											</a>
-											<input type="checkbox" name="spoken_languages[]" value="{{ $spokenLanguage->spoken_language_code }}" {{ request('spoken_languages') && in_array($spokenLanguage->spoken_language_code, request('spoken_languages')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
-										</label>
-										<?php $num++; ?>
 										@endforeach
 									</li>
 								</ul>

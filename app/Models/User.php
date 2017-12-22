@@ -210,7 +210,6 @@ class User extends Authenticatable
         ->leftJoin('prices', 'users.id', '=', 'prices.user_id')
         ->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
         ->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
-        ->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id')
         ->whereRaw(sprintf("lat BETWEEN %f AND %f", $latNorthBoundary, $latSouthBoundary))
         ->whereRaw(sprintf("lng BETWEEN %f AND %f", $lngEastBoundary, $lngWestBoundary));
 
@@ -222,24 +221,12 @@ class User extends Authenticatable
                 $query->whereIn('user_service.service_id', $request->services);
             }
 
-            if ($request->has('languages')) {
-                $query->whereIn('user_spoken_language.spoken_language_id', $request->languages);
-            }
-
             if ($request->has('types')) {
                 $query->whereIn('users.type', $request->types);
             }
 
             if ($request->has('price_type')) {
                 $query->whereNotNull('users.' . $request->price_type . '_type');
-            }
-
-            if ($request->has('hair_color')) {
-                $query->whereIn('users.hair_color', $request->hair_color);
-            }
-
-            if ($request->has('breast_size')) {
-                $query->whereIn('users.breast_size', $request->breast_size);
             }
 
             if ($request->has('age')) {
