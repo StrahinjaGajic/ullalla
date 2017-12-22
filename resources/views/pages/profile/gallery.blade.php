@@ -39,7 +39,7 @@
                 </div>
                 <h4>{{ __('headings.videos') }}</h4>
                 <div class="form-group upload-video">
-                    <input type="hidden" role="uploadcare-uploader-video" name="video" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                    <input type="hidden" name="video" id="video-uploader" data-file-types="avi mp4 ogv mov wmv mkv"/>
                     @if($user->videos)
                     <video src="{{ $user->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
                     @else
@@ -55,10 +55,9 @@
 
     @section('perPageScripts')
     <script>
+const photosWidget = uploadcare.Widget('[role=uploadcare-uploader]');
+photosWidget.value('{{ $user->photos }}');
 
-////////// 2. UPLOAD CARE ////////
-const widget = uploadcare.Widget('[role=uploadcare-uploader]');
-widget.value('{{ $user->photos }}');
 // preview uploaded images function
 function installWidgetPreviewMultiple(widget, list) {
     widget.onChange(function(fileGroup) {
@@ -83,7 +82,7 @@ function minDimensions(width, height) {
         if (imageInfo !== null) {
             console.log();
             if (imageInfo.width < width || imageInfo.height < height) {
-                throw new Error({{ __('messages.min_dimensions') }});
+                throw new Error('{{ __('messages.min_dimensions') }}');
             }
         }
     };
@@ -93,7 +92,7 @@ function minDimensions(width, height) {
 function maxFileSize(size) {
     return function (fileInfo) {
         if (fileInfo.size !== null && fileInfo.size > size) {
-            throw new Error({{ __('messages.file_maximum_size') }});
+            throw new Error('{{ __('messages.file_maximum_size') }}');
         }
     }
 }
@@ -107,12 +106,11 @@ function fileTypeLimit(types) {
         }
         var extension = fileInfo.name.split('.').pop();
         if (types.indexOf(extension) == -1) {
-            throw new Error({{ __('messages.file_type') }});
+            throw new Error('{{ __('messages.file_type') }}');
         }
     };
 }
 
-$(function() {
 // preview images initialization
 $('.image-preview-multiple').each(function() {
     installWidgetPreviewMultiple(
@@ -122,27 +120,27 @@ $('.image-preview-multiple').each(function() {
 });
 
 $('[role=uploadcare-uploader]').each(function() {
-    var widget = uploadcare.Widget(this);
-    widget.validators.push(minDimensions(490, 560));
+    var photosWidget = uploadcare.Widget(this);
+    photosWidget.validators.push(minDimensions(490, 560));
 });
 
+
+// videos 
 var video = document.getElementById('video');
 var source = document.createElement('source');
-var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
-widget.value('{{ $user->videos }}')
-widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));    
-widget.validators.push(maxFileSize(20000000));
+const videosWidget = uploadcare.Widget('#video-uploader');
+videosWidget.value('{{ $user->videos }}');
+
+videosWidget.validators.push(fileTypeLimit($('#video-uploader').data('file-types')));    
+videosWidget.validators.push(maxFileSize(20000000));
 // preview single video
-widget.onUploadComplete(function (fileInfo) {
+videosWidget.onUploadComplete(function (fileInfo) {
     source.setAttribute('src', fileInfo.cdnUrl);
     video.appendChild(source);
-// video.play();
 });
-// remove video element
-$('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
-    $('.upload-video').find('#video').remove();
-});
-});
-
+    remove video element
+    $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
+        $('.upload-video').find('#video').remove();
+    });
 </script>
 @stop

@@ -555,7 +555,7 @@ class ProfileController extends Controller
                         // format dates with carbon
                         $carbonDate = Carbon::parse($monthGirlActivationDateInput);
                         $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                        $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
+                        $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id) + 1)->format('Y-m-d H:i:s');
 
                         $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 
@@ -590,7 +590,7 @@ class ProfileController extends Controller
                     // format default packages dates with carbon
                     $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
                     $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                    $defaultPackageExpiryDate = $carbonDate->addDays(daysToAddToExpiry($defaultPackage->id))->format('Y-m-d H:i:s');
+                    $defaultPackageExpiryDate = $carbonDate->addDays(daysToAddToExpiry($defaultPackage->id) + 1)->format('Y-m-d H:i:s');
 
                     $totalAmount += (int) filter_var($defaultPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 
@@ -612,7 +612,7 @@ class ProfileController extends Controller
                             // format dates with carbon
                             $carbonDate = Carbon::parse($monthGirlActivationDateInput);
                             $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                            $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
+                            $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id) + 1)->format('Y-m-d H:i:s');
 
                             $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 

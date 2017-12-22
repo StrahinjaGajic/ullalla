@@ -9,12 +9,12 @@
 @section('content')
 <div class="wrapper section-signup">
     <div class="container">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-4 col-md-offset-4">
             <div class="card">
              <div class="card-block">
                 {!! Form::open(['url' => 'signup', 'id' => 'sign_in_form']) !!}
                 <div class="form-group row {{ $errors->has('user_type') ? ' has-error' : '' }}">
-                    <label for="user_type" class="col-3 col-form-label">{{ __('fields.type') }}</label>
+                    {{-- <label for="user_type" class="col-3 col-form-label">{{ __('fields.type') }}</label> --}}
                     <div class="col-9">
                         <select name="user_type" id="user_type" class="form-control {{ $errors->has('user_type') ? ' form-control-error' : '' }}">
                             @foreach ($userTypes as $userType)
