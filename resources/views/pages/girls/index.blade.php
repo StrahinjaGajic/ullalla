@@ -348,9 +348,6 @@
 												</div>
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
-													<div class="pro-price">
-														<p>{{ __('global.short_info') }}</p>
-													</div>
 													<a href="{{ url('girls/' . $user->nickname) }}">
 														<div class="product-cart">
 															<button class="button">{{ __('buttons.view_profile') }}</button>

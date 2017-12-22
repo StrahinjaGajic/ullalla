@@ -132,9 +132,6 @@
                                                 </div>
                                                 <div class="product-content">
                                                     <a class="shop-name">{{ $local->username }}</a>
-                                                    <div class="pro-price">
-                                                        <p>{{ __('global.short_info') }}</p>
-                                                    </div>
                                                     <a href="{{ url('locals/' . $local->username) }}">
                                                         <div class="product-cart">
                                                             <button class="button">{{ __('buttons.view_profile') }}</button>
