@@ -19,7 +19,7 @@
                         <ul>
                             <li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
                             <li class="separator"><i class="fa fa-angle-right"></i></li>
-                            <li>{{ __('buttons.search_results') }}</li>
+                            <li>{{ __('buttons.locals') }}</li>
                         </ul>
                     </div>
                 </div>

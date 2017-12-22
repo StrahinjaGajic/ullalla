@@ -27,7 +27,7 @@ return [
 	'signout' => 'Sign Out',
 	'profile' => 'Profile',
 	'create_profile' => 'Create Profile',
-	'search_results' => 'Search Results',
+	'locals' => 'Locals',
 
 	# edit profile
 	'save_changes' => 'Save Changes',

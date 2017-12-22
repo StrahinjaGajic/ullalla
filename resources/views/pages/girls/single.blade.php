@@ -336,8 +336,6 @@ span.onclick = function() {
 </script>
 
 <script>
-	$('.nav-tabs').find('li:first-child').addClass('active');
-	$('.tab-content > .tab-pane:first-child').show(); 
 	$('#gallery_01 img').click(function(e) {
 		e.preventDefault();
 		$('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));

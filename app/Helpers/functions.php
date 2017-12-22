@@ -223,7 +223,7 @@ function parseSingleUserData($fields, $user) {
 
 function getContactFields() {
     return [
-        'email' => __('functions.email'),
+        // 'email' => __('functions.email'),
         'phone' => __('functions.phone'),
         'mobile' => __('functions.mobile'),
         'website' => __('functions.website'),
