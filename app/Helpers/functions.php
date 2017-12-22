@@ -622,4 +622,8 @@ function editClubInfo($id, $data, $data_free) {
     return $club->id;
 }
 
+function getNavUris() {
+    return ['/', 'signin', 'signup'];
+}
+
 ?>

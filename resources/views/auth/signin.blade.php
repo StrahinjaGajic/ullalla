@@ -2,14 +2,9 @@
 <link rel="stylesheet" href="{{ asset('css/components/sign_in.css') }}"> @stop @section('content')
 <div class="wrapper section-signin">
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-4 col-md-offset-4 center">
-
                 <div class="card">
-                    <img src="img/logo.png" width="150" height="150" alt="">
-                    <h3 class="card-header text-center">Ullalla</h3>
                     <div class="card-block">
                         {!! Form::open(['url' => 'signin', 'id' => 'sign_in_form']) !!}
                         <div class="form-group row {{ $errors->has('username') ? 'has-danger' : '' }}">

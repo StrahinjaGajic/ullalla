@@ -575,7 +575,7 @@ li.search-hover:hover .search {
 
 .header-area.shop-page {
     position: static;
-    background: #494949;
+    background: #696969;
 }
 
 .shop-menu {
@@ -1170,11 +1170,12 @@ button.button {
 .header-logo-area .logo-img {}
 
 .header-area.home-4 {
-    margin-top: 99px;
+    margin-top: 62px;
 }
 
 .service-wrapp {
-    border-bottom: 1px solid #ebebeb;
+    padding-top: 30px;
+    border-top: 1px solid #ebebeb;
 }
 
 .single-corporate {}
