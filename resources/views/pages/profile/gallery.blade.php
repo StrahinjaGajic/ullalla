@@ -55,8 +55,8 @@
 
     @section('perPageScripts')
     <script>
-const photosWidget = uploadcare.Widget('[role=uploadcare-uploader]');
-photosWidget.value('{{ $user->photos }}');
+    const photosWidget = uploadcare.Widget('[role=uploadcare-uploader]');
+    photosWidget.value('{{ $user->photos }}');
 
 // preview uploaded images function
 function installWidgetPreviewMultiple(widget, list) {
@@ -138,7 +138,7 @@ videosWidget.onUploadComplete(function (fileInfo) {
     source.setAttribute('src', fileInfo.cdnUrl);
     video.appendChild(source);
 });
-    remove video element
+    // remove video element
     $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
         $('.upload-video').find('#video').remove();
     });
