@@ -25,14 +25,14 @@ pre {
     font-size: 11px;
 }
 
-.container {
+/*.container {
     width: 100%;
     padding: 25px 25px 0 25px;
-}
+}*/
 
-.container > :last-child {
+/*.container > :last-child {
     padding-bottom: 25px;
-}
+}*/
 
 .container-half {
     width: 50%;

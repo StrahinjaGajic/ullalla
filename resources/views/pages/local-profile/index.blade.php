@@ -8,6 +8,9 @@
 
 @section('content')
 <div class="wrapper section-girls">
+    <div class="shop-header-banner">
+        <span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
+    </div>
     <div class="single-product-menu">
         <div class="container">
             <div class="row">
@@ -132,6 +135,7 @@
                                                 </div>
                                                 <div class="product-content">
                                                     <a class="shop-name">{{ $local->username }}</a>
+                                                    <div class="pro-price"></div>
                                                     <a href="{{ url('locals/' . $local->username) }}">
                                                         <div class="product-cart">
                                                             <button class="button">{{ __('buttons.view_profile') }}</button>
@@ -213,7 +217,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="single-banner">
                         <a class="last-banner" href="index.html">
-                         <span>
+                           <span>
                             <img src="img/banner/fullwide-banner-4.jpg" alt="">
                         </span>
                     </a>

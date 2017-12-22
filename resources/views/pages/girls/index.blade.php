@@ -8,6 +8,9 @@
 
 @section('content')
 <div class="wrapper section-girls">
+	<div class="shop-header-banner">
+		<span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
+	</div>
 	<div class="single-product-menu">
 		<div class="container">
 			<div class="row">
@@ -348,6 +351,7 @@
 												</div>
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
+													<div class="pro-price"></div>
 													<a href="{{ url('girls/' . $user->nickname) }}">
 														<div class="product-cart">
 															<button class="button">{{ __('buttons.view_profile') }}</button>
