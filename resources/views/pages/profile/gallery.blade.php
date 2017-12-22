@@ -23,7 +23,7 @@
             <div class="row">
                 <h4>{{ __('headings.photos') }}</h4>
                 @if(Session::has('success'))
-                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
                 <div class="form-group">
                     <div class="image-preview-multiple">
@@ -39,8 +39,12 @@
                 </div>
                 <h4>{{ __('headings.videos') }}</h4>
                 <div class="form-group upload-video">
-                    <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-                    <video id="video" width="320" height="240" loop style="display: block;" controls=""></video>
+                    <input type="hidden" role="uploadcare-uploader-video" name="video" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                    @if($user->videos)
+                    <video src="{{ $user->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
+                    @else
+                    <video id="video" width="320" height="240" style="display: none;"></video>
+                    @endif
                 </div>
             </div>
             <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
@@ -53,9 +57,8 @@
     <script>
 
 ////////// 2. UPLOAD CARE ////////
-const widget = uploadcare.Widget('[role=uploadcare-uploader]')
-widget.value('{{ $user->photos }}')
-
+const widget = uploadcare.Widget('[role=uploadcare-uploader]');
+widget.value('{{ $user->photos }}');
 // preview uploaded images function
 function installWidgetPreviewMultiple(widget, list) {
     widget.onChange(function(fileGroup) {
