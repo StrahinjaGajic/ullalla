@@ -52,8 +52,9 @@ return [
     'to' => 'To',
 
     #auth
-    'login' => 'Login',
+    'login' => 'Log In',
     'register' => 'Register',
+    'logout' => 'Log Out',
     'approve' => 'Approve',
     'rrl' => 'Request Reset Link',
 

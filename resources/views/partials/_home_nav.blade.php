@@ -21,8 +21,8 @@
                                         <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                         <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
                                         @if(!Auth::check() && !Auth::guard('local')->check())
-                                            <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
-                                            <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
+                                            <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
+                                            <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
                                         @else
                                             @if($user && $user->approved == '1')
                                                 @if(Auth::guard('local')->user())
@@ -38,7 +38,7 @@
                                                     <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                                 @endif
                                             @endif
-                                            <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
+                                            <li><a href="{{ url('signout') }}">{{ __('buttons.logout') }}</a></li>
                                         @endif
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -76,8 +76,8 @@
                                          <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                          <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
                                          @if(!Auth::check() && !Auth::guard('local')->check())
-                                         <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
-                                         <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
+                                         <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
+                                         <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
                                          @else
                                          @if($user && $user->approved == '1')
                                          @if(Auth::guard('local')->user())
@@ -93,7 +93,7 @@
                                          <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                          @endif
                                          @endif
-                                         <li><a href="{{ url('signout') }}">{{ __('buttons.signout') }}</a></li>
+                                         <li><a href="{{ url('signout') }}">{{ __('buttons.logout') }}</a></li>
                                          @endif
                                          <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

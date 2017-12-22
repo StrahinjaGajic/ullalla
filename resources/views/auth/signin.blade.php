@@ -28,30 +28,19 @@
                             {{ Session::get('error') }}
                         </div>
                         @endif
-                        
-                        <div class="pull-left" style="margin-left: -15px;">
-                            <a style="color:white" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
+                        <div class="pull-left forgot_password row">
+                            <a style="color:#363636" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
                         </div>
-
-
-                       <br>
-                       <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">{{ __('buttons.register') }}</button>
-                            </div>
+                        <div class="row" style="clear: both;">
+                            <div class="text-center">
+                            <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
                         </div>
-
+                        </div>
                         {!! Form::close() !!}
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 @stop

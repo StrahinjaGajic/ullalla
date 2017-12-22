@@ -12,7 +12,7 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="card">
              <div class="card-block">
-                {!! Form::open(['url' => 'signup']) !!}
+                {!! Form::open(['url' => 'signup', 'id' => 'sign_in_form']) !!}
                 <div class="form-group row {{ $errors->has('user_type') ? ' has-error' : '' }}">
                     <label for="user_type" class="col-3 col-form-label">{{ __('fields.type') }}</label>
                     <div class="col-9">
