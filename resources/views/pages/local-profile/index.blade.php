@@ -155,7 +155,7 @@
                                                 <div class="single-product">
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                         <div class="product-img">
-                                                            <a class="a-img" href="shop.html#"><img class="primary-img" src="http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/nth/2/-/resize/263x300/" alt="" />
+                                                            <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/' }}" alt="" />
                                                             </a>
                                                         </div>
                                                     </div>
@@ -163,7 +163,7 @@
                                                         <div class="product-content-shop">
                                                             <h2><a class="shop-name">{{ $local->username }}</a></h2>
                                                             <div class="pro-deal-text-shop">
-                                                                <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Viva... </p>
+                                                                <p>{{ Str::words($local->about_me, 40) }}</p>
                                                             </div>
                                                             <a href="{{ url('locals/' . $local->username) }}">
                                                                 <div class="product-cart">
