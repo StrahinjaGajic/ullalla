@@ -2242,6 +2242,7 @@ a.shop-name {
 
 .contact-area {
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .page-title h1 {
@@ -2303,6 +2304,7 @@ label {
     display: block;
     text-align: right;
     width: 100%;
+    margin-top: 10px;
 }
 
 .product-cart.contact button {
