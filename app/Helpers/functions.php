@@ -315,7 +315,7 @@ function parseChunkedServices($user) {
 }
 
 function getshowNumbers() {
-    return ['9', '12', '24', '36'];
+    return ['12', '24', '36'];
 }
 
 function getOrderBy() {

@@ -24,8 +24,6 @@
                                         <li><a href="/">{{ __('buttons.home') }}</a></li>
                                         <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                         <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
-                                        <li><a href="/contact">Contact</a></li>
-                                        <li><a href="/faq">Faq</a></li>
                                         @if(!Auth::check() && !Auth::guard('local')->check())
                                             <li><a href="{{ url('signin') }}">{{ __('buttons.signin') }}</a></li>
                                             <li><a href="{{ url('signup') }}">{{ __('buttons.signup') }}</a></li>
