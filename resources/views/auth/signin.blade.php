@@ -2,14 +2,9 @@
 <link rel="stylesheet" href="{{ asset('css/components/sign_in.css') }}"> @stop @section('content')
 <div class="wrapper section-signin">
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-4 col-md-offset-4 center">
-
                 <div class="card">
-                    <img src="img/logo.png" width="150" height="150" alt="">
-                    <h3 class="card-header text-center">Ullalla</h3>
                     <div class="card-block">
                         {!! Form::open(['url' => 'signin', 'id' => 'sign_in_form']) !!}
                         <div class="form-group row {{ $errors->has('username') ? 'has-danger' : '' }}">
@@ -33,30 +28,19 @@
                             {{ Session::get('error') }}
                         </div>
                         @endif
-                        
-                        <div class="pull-left" style="margin-left: -15px;">
-                            <a style="color:white" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
+                        <div class="pull-left forgot_password row">
+                            <a style="color:#363636" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
                         </div>
-
-
-                       <br>
-                       <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-default">{{ __('buttons.register') }}</button>
-                            </div>
+                        <div class="row" style="clear: both;">
+                            <div class="text-center">
+                            <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
                         </div>
-
+                        </div>
                         {!! Form::close() !!}
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 @stop

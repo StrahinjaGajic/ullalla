@@ -27,7 +27,7 @@ return [
 	'signout' => 'Logout',
 	'profile' => 'Profile',
 	'create_profile' => 'Create Profile',
-	'search_results' => 'Search Results',
+	'locals' => 'Locals',
 
 	# edit profile
 	'save_changes' => 'Save Changes',
@@ -52,8 +52,9 @@ return [
     'to' => 'To',
 
     #auth
-    'login' => 'Login',
+    'login' => 'Log In',
     'register' => 'Register',
+    'logout' => 'Log Out',
     'approve' => 'Approve',
     'rrl' => 'Request Reset Link',
 

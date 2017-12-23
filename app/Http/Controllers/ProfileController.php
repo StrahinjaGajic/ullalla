@@ -33,14 +33,6 @@ class ProfileController extends Controller
                 'postCreate'
             ]
         ]);
-        $this->middleware('approved', [
-            'except' => [
-                'getCreate',
-                'postCreate',
-                'postNewPrice',
-                'deletePrice'
-            ]
-        ]);
         $this->middleware('package.expiry', [
             'except' => [
                 'getPackages',
@@ -235,6 +227,16 @@ class ProfileController extends Controller
             ], 422);
         }
 
+        try {
+            Charge::create([
+                'customer' => $user->stripe_id,
+                'amount' => $user->stripe_amount,
+                'currency' => 'chf',
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
         //     return true;
         // });
 
@@ -242,8 +244,7 @@ class ProfileController extends Controller
         //     return redirect('/')->with('error', 'There was an error');
         // }
 
-        // Auth::logout();
-        Session::flash('account_created', __('messages.account_created_but_not_approved'));
+        Session::flash('account_created', __('messages.account_created'));
     }
 
     public function getBio()
@@ -635,9 +636,7 @@ class ProfileController extends Controller
 
         }
 
-        // stripe
         try {
-            // create a customer
             $customer = Customer::create([
                 'email' => request('stripeEmail'),
                 'source' => request('stripeToken'),
@@ -645,18 +644,11 @@ class ProfileController extends Controller
             $user->stripe_id = $customer->id;
             $user->save();
 
-
-            // charge a customer
             Charge::create([
                 'customer' => $user->stripe_id,
                 'amount' => $totalAmount * 100,
                 'currency' => 'chf',
             ]);
-
-            // approve the user
-            $user->approved = '1';
-            $user->save();
-
         } catch (\Exception $e) {
             return response()->json([
                 'status' => $e->getMessage()

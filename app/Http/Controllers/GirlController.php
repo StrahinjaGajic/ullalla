@@ -31,14 +31,9 @@ class GirlController extends Controller
 			$users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id')
 			->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
 			->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
-			->leftJoin('user_spoken_language', 'users.id', '=', 'user_spoken_language.user_id');
 
 			if ($request->has('services')) {
 				$users = $users->whereIn('user_service.service_id', $request->services);
-			}
-
-			if ($request->has('languages')) {
-				$users = $users->whereIn('user_spoken_language.spoken_language_id', $request->languages);
 			}
 
 			if ($request->has('types')) {
@@ -47,14 +42,6 @@ class GirlController extends Controller
 
 			if ($request->has('price_type')) {
 				$users = $users->whereNotNull('users.' . $request->price_type . '_type');
-			}
-
-			if ($request->has('hair_color')) {
-				$users = $users->whereIn('users.hair_color', $request->hair_color);
-			}
-
-			if ($request->has('breast_size')) {
-				$users = $users->whereIn('users.breast_size', $request->breast_size);
 			}
 
 			if ($request->has('age')) {
@@ -77,8 +64,7 @@ class GirlController extends Controller
 				}
 			}
 
-			$users = $users->where('users.approved', '=', '1')
-			->where('users.is_active_d_package', '=', '1')
+			$users = $users->where('users.is_active_d_package', '=', '1')
 			->select('users.*')
 			->groupBy('users.username');
 		}
@@ -98,7 +84,7 @@ class GirlController extends Controller
 
 	public function getGirl($nickname)
 	{
-		$user = User::with('services', 'country', 'prices')->nickname($nickname)->approved()->first();
+		$user = User::with('services', 'country', 'prices')->nickname($nickname)->first();
 
 		if (!$user) {
 			redirect()->url('/');

@@ -92,10 +92,6 @@ class AuthController extends Controller
 			// user can sign in
 			if ($user->package1_id) {
 
-				if ($user->approved == '0') {
-					return redirect('/')->with('not_approved', __('messages.info_account_not_approved'));
-				}
-
 				$firstDateForGotmPackageExpiryNotification = null;
 
 				$daysForExpiryDefaultPackage = getDaysForExpiry($user->package1_id);
@@ -158,9 +154,6 @@ class AuthController extends Controller
 				return redirect()->back()->with('error', __('messages.error_activate_account'));
 			}
 			if ($local->package1_id) {
-				if ($local->approved == '0') {
-					return redirect('/')->with('not_approved', __('messages.info_account_not_approved'));
-				}
 
 				// get expiry dates from db
 				$package1ExpiryDateCarbonParsed = Carbon::parse($local->package1_expiry_date);

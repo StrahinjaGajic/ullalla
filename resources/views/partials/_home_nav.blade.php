@@ -1,18 +1,14 @@
 <header>
     <header id="toTop">
-        <div class="header-area home-1 shop-page">
+        <div class="header-area home-4">
             <div class="container">
+                <div class="fixed"><a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt=""></a></div>
                 <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                        <div class="logo-img home-1">
-                            <a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt="" width="103px;" height="50px;"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                        <div class="top-menu-area">
-                            <div class="mainmenu hidden-sm hidden-xs">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="top-menu-area hidden-sm hidden-xs">
+                            <div class="mainmenu home-4">
                                 <nav>
-                                    <ul style="text-align: right;">
+                                    <ul>
                                         @php
                                         $user = null;
                                         if (Auth::user()) {
@@ -69,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mobile-menu-area visible-sm visible-xs">
+                <div class="mobile-menu-area home-4 visible-sm visible-xs">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 visible-sm visible-xs">

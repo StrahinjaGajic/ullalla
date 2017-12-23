@@ -223,7 +223,7 @@ function parseSingleUserData($fields, $user) {
 
 function getContactFields() {
     return [
-        'email' => __('functions.email'),
+        // 'email' => __('functions.email'),
         'phone' => __('functions.phone'),
         'mobile' => __('functions.mobile'),
         'website' => __('functions.website'),
@@ -620,6 +620,10 @@ function editClubInfo($id, $data, $data_free) {
     $club->free = $free;
     $club->save();
     return $club->id;
+}
+
+function getNavUris() {
+    return ['/', 'signin', 'signup'];
 }
 
 ?>

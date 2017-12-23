@@ -138,7 +138,6 @@ body {
 
 .logo-img {
     margin-top: 10px;
-    text-align: center;
 }
 
 .header-area.home-3,
@@ -165,7 +164,7 @@ body {
 
 .header-link-area > ul > li > a,
 .mainmenu nav > ul > li > a {
-    color: #fff;
+    color: #363636;
     display: block;
     font-weight: 400;
     margin: 0 0px 0 30px;
@@ -575,7 +574,8 @@ li.search-hover:hover .search {
 
 .header-area.shop-page {
     position: static;
-    background: #494949;
+    background: #fff;
+    border-bottom: 1px solid #ebebeb;
 }
 
 .shop-menu {
@@ -1167,14 +1167,16 @@ button.button {
     margin-top: 30px;
 }
 
-.header-logo-area .logo-img {}
+.header-logo-area .logo-img {
+}
 
 .header-area.home-4 {
-    margin-top: 99px;
+    margin-top: 62px;
 }
 
 .service-wrapp {
-    border-bottom: 1px solid #ebebeb;
+    padding-top: 30px;
+    border-top: 1px solid #ebebeb;
 }
 
 .single-corporate {}
@@ -2240,6 +2242,7 @@ a.shop-name {
 
 .contact-area {
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .page-title h1 {
@@ -2301,6 +2304,7 @@ label {
     display: block;
     text-align: right;
     width: 100%;
+    margin-top: 10px;
 }
 
 .product-cart.contact button {
@@ -2322,6 +2326,7 @@ label {
     font-size: 2em;
     border-bottom: 1px dotted #ccc;
     padding: 1em 0;
+    color: #f26522;
 }
 
 .faq-c {
@@ -2415,6 +2420,7 @@ input {
 
 .help-block {
     font-size: 13px;
+    text-align: center;
 }
 
 .has-error .help-block {

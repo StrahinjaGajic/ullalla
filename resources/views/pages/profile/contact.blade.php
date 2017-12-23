@@ -19,6 +19,9 @@
         <div class="col-sm-10 profile-info">
             {!! Form::model($user, ['url' => '@' . $user->username . '/contact/store', 'method' => 'put']) !!}
             <h3>{{ __('headings.contact') }}</h3>
+            @if(Session::has('success'))
+            <div class="alert alert-success">{{ Session::get('success') }}</div>
+            @endif
             <div class="row">
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
@@ -100,7 +103,7 @@
                     <div class="form-group">
                         <input type="text" name="skype_name" placeholder="{{ __('functions.skype_name') }}" class="form-control" value="{{ $user->skype_name }}">
                         @if($errors->has('skype_name'))
-                            <div class="has-error">{{ $errors->first('skype_name') }}</div>
+                        <div class="has-error">{{ $errors->first('skype_name') }}</div>
                         @endif
                     </div>
                 </div>   

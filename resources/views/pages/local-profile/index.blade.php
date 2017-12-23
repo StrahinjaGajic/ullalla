@@ -8,6 +8,9 @@
 
 @section('content')
 <div class="wrapper section-girls">
+    <div class="shop-header-banner">
+        <span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
+    </div>
     <div class="single-product-menu">
         <div class="container">
             <div class="row">
@@ -16,7 +19,7 @@
                         <ul>
                             <li><a href="{{ url('/') }}">{{ __('buttons.home') }}</a></li>
                             <li class="separator"><i class="fa fa-angle-right"></i></li>
-                            <li>{{ __('buttons.search_results') }}</li>
+                            <li>{{ __('buttons.locals') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -72,7 +75,7 @@
                                         @foreach($types as $type)
                                         <label class="control control--checkbox">
                                             <a href="{{ urldecode(route('locals', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type->name }}
-                                                <span>({{ \App\Models\Local::approved()->where('local_type_id', $type->id)->count() }})</span>
+                                                <span>({{ \App\Models\Local::payed()->where('local_type_id', $type->id)->count() }})</span>
                                             </a>
                                             <input id="check_type_{{ $type->id }}" type="checkbox" name="types[]" value="{{ $type->id }}" {{ request('types') && in_array($type->id, request('types')) ? 'checked' : '' }}/>
                                             <div class="control__indicator"></div>
@@ -132,9 +135,7 @@
                                                 </div>
                                                 <div class="product-content">
                                                     <a class="shop-name">{{ $local->username }}</a>
-                                                    <div class="pro-price">
-                                                        <p>{{ __('global.short_info') }}</p>
-                                                    </div>
+                                                    <div class="pro-price"></div>
                                                     <a href="{{ url('locals/' . $local->username) }}">
                                                         <div class="product-cart">
                                                             <button class="button">{{ __('buttons.view_profile') }}</button>
@@ -216,7 +217,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="single-banner">
                         <a class="last-banner" href="index.html">
-                         <span>
+                           <span>
                             <img src="img/banner/fullwide-banner-4.jpg" alt="">
                         </span>
                     </a>
