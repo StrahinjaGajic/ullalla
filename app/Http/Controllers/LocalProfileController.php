@@ -29,8 +29,7 @@ class LocalProfileController extends Controller
                 $locals = $locals->whereIn('locals.local_type_id', $request->types);
             }
 
-            $locals = $locals->where('locals.approved', '=', '1')
-            ->where('locals.is_active_d_package', '=', '1')
+            $locals = $locals->where('locals.is_active_d_package', '=', '1')
             ->select('locals.*')
             ->groupBy('locals.username');
         }
@@ -50,7 +49,7 @@ class LocalProfileController extends Controller
 
     public function getLocal($username)
     {
-        $local = Local::username($username)->approved()->first();
+        $local = Local::username($username)->first();
 
         if($local) {
             $entrance = getClubInfo($local->clubEntrance);

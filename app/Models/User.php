@@ -252,7 +252,6 @@ class User extends Authenticatable
         }
 
         $query->whereRaw("{$haversine} < ?", [$radius])
-        ->where('users.approved', '=', '1')
         ->where('users.is_active_d_package', '=', '1')
         ->groupBy('users.username');
 

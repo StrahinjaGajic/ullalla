@@ -41,7 +41,6 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required|max:25',
             'street' => 'required|max:40',
@@ -117,7 +116,18 @@ class LocalController extends Controller
                 'status' => $e->getMessage()
             ], 422);
         }
-        Session::flash('account_created', __('messages.account_created_but_not_approved'));
+
+        try {
+            Charge::create([
+                'customer' => $user->stripe_id,
+                'amount' => $user->stripe_amount,
+                'currency' => 'chf',
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        Session::flash('account_created', __('messages.account_created'));
     }
 
     public function getContact()
@@ -355,9 +365,7 @@ class LocalController extends Controller
             }
         }
 
-        // stripe
         try {
-            // create a customer
             $customer = Customer::create([
                 'email' => request('stripeEmail'),
                 'source' => request('stripeToken'),
@@ -366,17 +374,11 @@ class LocalController extends Controller
             $user->stripe_amount = $totalAmount;
             $user->save();
 
-
-            // charge a customer
             Charge::create([
                 'customer' => $user->stripe_id,
                 'amount' => $totalAmount * 100,
                 'currency' => 'chf',
             ]);
-
-            // approve the user
-            $user->approved = '1';
-            $user->save();
 
         } catch (\Exception $e) {
             return response()->json([
