@@ -2420,6 +2420,7 @@ input {
 
 .help-block {
     font-size: 13px;
+    text-align: center;
 }
 
 .has-error .help-block {
