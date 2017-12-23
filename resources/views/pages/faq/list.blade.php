@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                     <div class="row">
 
                         <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -30,6 +30,17 @@
                                     </div>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                    <div class="shop-banner-area">
+                        <div class="single-banner">
+                            <a href="contact-us.html#">
+                                <span>
+                                    <img src="img/banner/contact%20baner.jpg" alt="banner">
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
