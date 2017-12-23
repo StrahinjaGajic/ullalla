@@ -64,8 +64,7 @@ class GirlController extends Controller
 				}
 			}
 
-			$users = $users->where('users.approved', '=', '1')
-			->where('users.is_active_d_package', '=', '1')
+			$users = $users->where('users.is_active_d_package', '=', '1')
 			->select('users.*')
 			->groupBy('users.username');
 		}
@@ -85,7 +84,7 @@ class GirlController extends Controller
 
 	public function getGirl($nickname)
 	{
-		$user = User::with('services', 'country', 'prices')->nickname($nickname)->approved()->first();
+		$user = User::with('services', 'country', 'prices')->nickname($nickname)->first();
 
 		if (!$user) {
 			redirect()->url('/');

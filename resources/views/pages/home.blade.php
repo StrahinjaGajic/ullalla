@@ -214,59 +214,73 @@
         });
     </script>
     @endif
-    @if(Session::has('not_approved'))
+    @if(Session::has('account_created'))
     <script>
         swal(
-            '{{ __('headings.info_account_not_approved_title') }}',
-            '{{ Session::get('not_approved') }}',
-            'info'
+            '{{ __('headings.account_created_title') }}',
+            '{{ Session::get('account_created') }}',
+            'success'
             );
         </script>
         @endif
 
-        @if(Session::has('account_created'))
+        @if((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && Session::has('gotm_expired_package_info'))
         <script>
-            swal(
-                '{{ __('headings.account_created_title') }}',
-                '{{ Session::get('account_created') }}',
-                'info'
-                );
+            swal.queue([{
+                title: '{{ __('headings.package_expiration_title') }}',
+                confirmButtonText: '{{ __('buttons.close') }}',
+                html: '{!! __('messages.package_about_to_expire', [
+                    'note' => $defaultPackageExpired->note,
+                    'url' => url('@' . Auth::user()->username . '/packages')
+                    ]) !!}',
+                    type: 'warning',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return swal({
+                            title: '{{ __('headings.default_error_title') }}',
+                            html: '{!! Session::get('gotm_expired_package_info') !!}',
+                            type: 'error'
+                        })
+                    }
+                }]);
             </script>
-            @endif
 
-            @if((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && Session::has('gotm_expired_package_info'))
+            @elseif(Session::has('gotm_expired_package_info'))
             <script>
-                swal.queue([{
-                    title: '{{ __('headings.package_expiration_title') }}',
-                    confirmButtonText: '{{ __('buttons.close') }}',
-                    html: '{!! __('messages.package_about_to_expire', [
-                        'note' => $defaultPackageExpired->note,
-                        'url' => url('@' . Auth::user()->username . '/packages')
-                        ]) !!}',
-                        type: 'warning',
-                        showLoaderOnConfirm: true,
-                        preConfirm: () => {
-                            return swal({
-                                title: '{{ __('headings.default_error_title') }}',
-                                html: '{!! Session::get('gotm_expired_package_info') !!}',
-                                type: 'error'
-                            })
-                        }
-                    }]);
+                swal(
+                    '{{ __('headings.default_error_title') }}',
+                    '{!! Session::get('gotm_expired_package_info') !!}',
+                    'warning'
+                    );
                 </script>
 
-                @elseif(Session::has('gotm_expired_package_info'))
+                @elseif((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && (Session::has('gotmPackageExpired') && $gotmPackageExpired))
                 <script>
-                    swal(
-                        '{{ __('headings.default_error_title') }}',
-                        '{!! Session::get('gotm_expired_package_info') !!}',
-                        'warning'
-                        );
+                    swal.queue([{
+                        title: '{{ __('headings.package_expiration_title') }}',
+                        confirmButtonText: '{{ __('buttons.close') }}',
+                        html: '{!! __('messages.package_about_to_expire', [
+                            'note' => $defaultPackageExpired->note, 
+                            'url' => url('@' . Auth::user()->username . '/packages')
+                            ]) !!}',
+                            type: 'warning',
+                            showLoaderOnConfirm: true,
+                            preConfirm: () => {
+                                return swal({
+                                    title: '{{ __('headings.package_expiration_title') }}',
+                                    html: '{!! __('messages.package_about_to_expire', [
+                                        'note' => $gotmPackageExpired->note, 
+                                        'url' => url('@' . Auth::user()->username . '/packages')
+                                        ]) !!}',
+                                        type: 'warning'
+                                    })
+                            }
+                        }]);
                     </script>
 
-                    @elseif((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && (Session::has('gotmPackageExpired') && $gotmPackageExpired))
+                    @elseif(Session::has('defaultGirlPackageExpired') && $defaultPackageExpired)
                     <script>
-                        swal.queue([{
+                        swal({
                             title: '{{ __('headings.package_expiration_title') }}',
                             confirmButtonText: '{{ __('buttons.close') }}',
                             html: '{!! __('messages.package_about_to_expire', [
@@ -274,159 +288,135 @@
                                 'url' => url('@' . Auth::user()->username . '/packages')
                                 ]) !!}',
                                 type: 'warning',
-                                showLoaderOnConfirm: true,
-                                preConfirm: () => {
-                                    return swal({
-                                        title: '{{ __('headings.package_expiration_title') }}',
-                                        html: '{!! __('messages.package_about_to_expire', [
-                                            'note' => $gotmPackageExpired->note, 
-                                            'url' => url('@' . Auth::user()->username . '/packages')
-                                            ]) !!}',
-                                            type: 'warning'
-                                        })
-                                }
-                            }]);
+                            });
                         </script>
 
-                        @elseif(Session::has('defaultGirlPackageExpired') && $defaultPackageExpired)
+                        @elseif(Session::has('gotmPackageExpired') && $gotmPackageExpired)
                         <script>
                             swal({
                                 title: '{{ __('headings.package_expiration_title') }}',
-                                confirmButtonText: '{{ __('buttons.close') }}',
                                 html: '{!! __('messages.package_about_to_expire', [
-                                    'note' => $defaultPackageExpired->note, 
+                                    'note' => $gotmPackageExpired->note, 
                                     'url' => url('@' . Auth::user()->username . '/packages')
                                     ]) !!}',
-                                    type: 'warning',
+                                    type: 'warning'
+                                });
+                            </script>
+                            @endif
+
+                            <script>
+                                $(function () {
+                                    $("input.checkbox-button:checkbox").on('change', function() {
+                                        $('input.checkbox-button:checkbox').not(this).prop('checked', false);
+                                    });
                                 });
                             </script>
 
-                            @elseif(Session::has('gotmPackageExpired') && $gotmPackageExpired)
+                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
+
                             <script>
-                                swal({
-                                    title: '{{ __('headings.package_expiration_title') }}',
-                                    html: '{!! __('messages.package_about_to_expire', [
-                                        'note' => $gotmPackageExpired->note, 
-                                        'url' => url('@' . Auth::user()->username . '/packages')
-                                        ]) !!}',
-                                        type: 'warning'
-                                    });
-                                </script>
-                                @endif
-
-                                <script>
-                                    $(function () {
-                                        $("input.checkbox-button:checkbox").on('change', function() {
-                                            $('input.checkbox-button:checkbox').not(this).prop('checked', false);
-                                        });
-                                    });
-                                </script>
-
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
-
-                                <script>
-                                    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
-                                    $('#radius-ranger').slider({
-                                        range: 'min',
-                                        min: 0,
-                                        max: 20,
-                                        value: initialRadius,
-                                        slide: function( event, ui ) {
-                                            $('.radius').text(ui.value);
-                                        },
-                                        change: function( event, ui ) {
-                                            $('input[name="radius"]').val(ui.value);
-                                        }
-                                    });
-                                </script>
-
-                                <!-- geolocation -->
-                                <script>
-                                    var x = document.getElementById("location");
-                                    var inputCity = document.getElementById('city');
-                                    var token = $('input[name="_token"]').val();
-
-                                    function initialize() {
-                                        var autocomplete = new google.maps.places.Autocomplete(
-                                            (inputCity), {
-                                                types: ['geocode']
-                                            });
-                                        autocomplete.setComponentRestrictions(
-                                            {'country': ['ch']});       
-
-                                        autocomplete.addListener('place_changed', function() {
-                                            $('.geolocation-image').hide();
-                                            $('.spinner').show();
-                                            var place = autocomplete.getPlace();
-                                            var lat = place.geometry.location.lat();
-                                            var lng = place.geometry.location.lng();
-                                            var address = place.formatted_address;
-                                            $.ajax({
-                                                url: getUrl('/get_guest_data'),
-                                                type: 'post',
-                                                data: {lat: lat, lng: lng, address: address, _token: token},
-                                                success: function (data) {
-                                                    $('.spinner').hide();
-                                                    $('.geolocation-image').show();
-                                                },
-                                                error: function () {
-                                                    $('.spinner').hide();
-                                                    $('.geolocation-image').show();
-                                                }
-                                            });
-                                        });                  
+                                var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+                                $('#radius-ranger').slider({
+                                    range: 'min',
+                                    min: 0,
+                                    max: 20,
+                                    value: initialRadius,
+                                    slide: function( event, ui ) {
+                                        $('.radius').text(ui.value);
+                                    },
+                                    change: function( event, ui ) {
+                                        $('input[name="radius"]').val(ui.value);
                                     }
+                                });
+                            </script>
 
-                                    function getLocation() {
+                            <!-- geolocation -->
+                            <script>
+                                var x = document.getElementById("location");
+                                var inputCity = document.getElementById('city');
+                                var token = $('input[name="_token"]').val();
+
+                                function initialize() {
+                                    var autocomplete = new google.maps.places.Autocomplete(
+                                        (inputCity), {
+                                            types: ['geocode']
+                                        });
+                                    autocomplete.setComponentRestrictions(
+                                        {'country': ['ch']});       
+
+                                    autocomplete.addListener('place_changed', function() {
                                         $('.geolocation-image').hide();
                                         $('.spinner').show();
-                                        if (navigator.geolocation) {
-                                            navigator.geolocation.getCurrentPosition(function (position) {
-                                                var geocoder = new google.maps.Geocoder;
-                                                var lat = position.coords.latitude;
-                                                var lng = position.coords.longitude;
-                                                var latlng = {
-                                                    lat: lat, 
-                                                    lng: lng
-                                                };
-                                                geocoder.geocode({'location': latlng}, function(results, status) {
-                                                    if (results[0]) {
-                                                        var address = results[0].formatted_address;
-                                                        inputCity.value = address;
-                                                        $.ajax({
-                                                            url: getUrl('/get_guest_data'),
-                                                            type: 'post',
-                                                            data: {lat: lat, lng: lng, address: address, _token: token},
-                                                            success: function (data) {
-                                                                $('.spinner').hide();
-                                                                $('.geolocation-image').show();
-                                                            },
-                                                            error: function () {
-                                                                $('.spinner').hide();
-                                                                $('.geolocation-image').show();
-                                                            }
-                                                        });
-                                                    }
-                                                });
+                                        var place = autocomplete.getPlace();
+                                        var lat = place.geometry.location.lat();
+                                        var lng = place.geometry.location.lng();
+                                        var address = place.formatted_address;
+                                        $.ajax({
+                                            url: getUrl('/get_guest_data'),
+                                            type: 'post',
+                                            data: {lat: lat, lng: lng, address: address, _token: token},
+                                            success: function (data) {
+                                                $('.spinner').hide();
+                                                $('.geolocation-image').show();
+                                            },
+                                            error: function () {
+                                                $('.spinner').hide();
+                                                $('.geolocation-image').show();
+                                            }
+                                        });
+                                    });                  
+                                }
+
+                                function getLocation() {
+                                    $('.geolocation-image').hide();
+                                    $('.spinner').show();
+                                    if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(function (position) {
+                                            var geocoder = new google.maps.Geocoder;
+                                            var lat = position.coords.latitude;
+                                            var lng = position.coords.longitude;
+                                            var latlng = {
+                                                lat: lat, 
+                                                lng: lng
+                                            };
+                                            geocoder.geocode({'location': latlng}, function(results, status) {
+                                                if (results[0]) {
+                                                    var address = results[0].formatted_address;
+                                                    inputCity.value = address;
+                                                    $.ajax({
+                                                        url: getUrl('/get_guest_data'),
+                                                        type: 'post',
+                                                        data: {lat: lat, lng: lng, address: address, _token: token},
+                                                        success: function (data) {
+                                                            $('.spinner').hide();
+                                                            $('.geolocation-image').show();
+                                                        },
+                                                        error: function () {
+                                                            $('.spinner').hide();
+                                                            $('.geolocation-image').show();
+                                                        }
+                                                    });
+                                                }
                                             });
-                                        } else {
-                                            x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
-                                        }
+                                        });
+                                    } else {
+                                        x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
                                     }
-                                </script>
+                                }
+                            </script>
 
-                                <!-- radius -->
-                                <script>
-                                    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
-                                    $('#radius-ranger').slider({
-                                        range: 'min',
-                                        min: 0,
-                                        max: 20,
-                                        value: initialRadius,
-                                        slide: function( event, ui ) {
-                                            $('.radius').text(ui.value);
-                                        }
-                                    });
-                                </script>
+                            <!-- radius -->
+                            <script>
+                                var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
+                                $('#radius-ranger').slider({
+                                    range: 'min',
+                                    min: 0,
+                                    max: 20,
+                                    value: initialRadius,
+                                    slide: function( event, ui ) {
+                                        $('.radius').text(ui.value);
+                                    }
+                                });
+                            </script>
 
-                                @stop
+                            @stop

@@ -77,7 +77,7 @@
 										@foreach($cantons as $canton)
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('canton'), request()->query() , $num, 'canton', $canton), false)) }}">{{ $canton->canton_name }}
-												<span>({{ $canton->users()->approved()->payed()->count() }})</span>
+												<span>({{ $canton->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="canton[]" value="{{ $canton->id }}" {{ request('canton') && in_array($canton->id, request('canton')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
@@ -124,7 +124,7 @@
 										@foreach($services as $service)
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('services'), request()->query() , $num, 'services', $service), false)) }}">{{ $service->service_name }}
-												<span>({{ $service->users()->approved()->payed()->count() }})</span>
+												<span>({{ $service->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="services[]" value="{{ $service->id }}" {{ request('services') && in_array($service->id, request('services')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
@@ -148,7 +148,7 @@
 										@foreach(getTypes() as $key => $type)
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
-												<span>({{ \App\Models\User::approved()->payed()->where('type', strtolower($type))->count() }})</span>
+												<span>({{ \App\Models\User::payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
 											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
@@ -173,7 +173,7 @@
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('age'), request()->query() , $num, 'age', makeStringFromFilterYears($startAge, $endAge)), false)) }}">
 												{{ makeStringFromFilterYears($startAge, $endAge) }} Years
-												<span>({{ \App\Models\User::approved()->payed()->whereBetween('age', [$startAge, $endAge])->count() }})</span>
+												<span>({{ \App\Models\User::payed()->whereBetween('age', [$startAge, $endAge])->count() }})</span>
 											</a>
 											<input type="checkbox" name="age[]" value="18" {{ request('age') && in_array(makeStringFromFilterYears($startAge, $endAge), request('age')) ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>
@@ -216,7 +216,7 @@
 
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('girls', $completeQueryString, false)) }}">{{ ucfirst($priceType) }}
-												<span>({{ \App\Models\User::approved()->payed()->whereNotNull($priceType . '_type')->count() }})</span>
+												<span>({{ \App\Models\User::payed()->whereNotNull($priceType . '_type')->count() }})</span>
 											</a>
 											<input type="radio" name="price_type" value="{{ $priceType }}" {{ request('price_type') && $priceType == request('price_type') ? 'checked' : '' }}/>
 											<div class="control__indicator"></div>

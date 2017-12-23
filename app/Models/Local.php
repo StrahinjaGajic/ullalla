@@ -39,6 +39,11 @@ class Local extends Authenticatable
         $query->where('approved', '1');
     }
 
+    public static function scopePayed($query)
+    {
+        $query->where('is_active_d_package', '1');
+    }
+
     public function clubEntrance()
     {
         return $this->hasOne('App\Models\ClubInfo', 'id', 'club_entrance_id');
@@ -115,7 +120,6 @@ class Local extends Authenticatable
         }
 
         $query->whereRaw("{$haversine} < ?", [$radius])
-        ->where('locals.approved', '=', '1')
         ->where('locals.is_active_d_package', '=', '1')
         ->groupBy('locals.username');
 

@@ -12,7 +12,7 @@ return [
     'error_somethings_wrong' => 'Something went wrong, please try again.',
     'success_changes_saved' => 'Changes successfully saved.',
     'info_account_not_approved' => 'Your account is not yet approved. Please wait until we verify your profile.',
-    'account_created_but_not_approved' => 'Profile successfully created, but in order to use it you must wait for its approval.',
+    'account_created' => 'Profile successfully created. You may start using your account now.',
 
     'package_about_to_expire' => ':note. <p>Click <a href=":url">HERE</a> to upgrade your account</p>',
     'session_expired' => 'Session Expired',
