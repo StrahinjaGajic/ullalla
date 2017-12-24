@@ -2,6 +2,10 @@
 
 @section('title', '| Forgot Password')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/components/reset.css') }}">
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
