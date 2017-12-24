@@ -40,3 +40,12 @@ img {
     background: #f26522;
     border: none;
 }
+
+input.form-control {
+    border: 1px solid #f26522;
+    border-radius: 0;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: normal;
+    width: 327px;
+}

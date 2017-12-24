@@ -1,4 +1,24 @@
 
+.ui-widget.ui-widget-content {
+    height: 3px;
+    border-radius: 3px;
+    background: #7d7d7d;
+    border: none;
+    margin: 0 0 10px 10px !important;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+    border-radius: 100%;
+    background: #f26522;
+    border: none;
+}
+
+
+
+
+
+
 
 .section-girls .left-sidebar .canton-layout .layout-list,
 .section-girls .left-sidebar .services-layout .layout-list,

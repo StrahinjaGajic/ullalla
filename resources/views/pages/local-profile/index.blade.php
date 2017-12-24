@@ -36,7 +36,7 @@
                     <div class="left-sidebar">
                         <div class="shop-layout headerDropdown">
                             <div class="layout-title toggle_arrow">
-                                <a>{{ __('fields.location') }} <i class="fa fa-caret-right"></i></a>
+                                <a>{{ __('fields.location') }} <i></i></a>
                             </div>
                             <div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
                                 <ul>
@@ -50,7 +50,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li style="margin: 10px 0;">
                                         <label for="amount">{{ __('fields.radius') }}:</label>
                                         <div class="location-inputs">
                                             <input type="hidden" name="radius" value="{{ old('radius') }}">
