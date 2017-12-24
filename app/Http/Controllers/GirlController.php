@@ -96,7 +96,7 @@ class GirlController extends Controller
 	public function getPriceRanges(Request $request)
 	{
 		if ($request->ajax()) {
-			$url = urldecode(route('girls', $request->query(), false));
+			$url = urldecode(route('private', $request->query(), false));
 			return response()->json([
 				'url' => $url
 			]);
@@ -106,7 +106,7 @@ class GirlController extends Controller
 	public function getRadius(Request $request)
 	{
 		if ($request->ajax()) {
-			$url = urldecode(route('girls', $request->query(), false));
+			$url = urldecode(route('private', $request->query(), false));
 			return response()->json([
 				'url' => $url
 			]);
