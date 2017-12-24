@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 	public function getIndex()
 	{
-		$gotm = App\Models\User::whereNotNull('package2_id')->where('sex', 'female')->get();
-		$totm = App\Models\User::whereNotNull('package2_id')->where('sex', 'transsexual')->get();
+		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->get();
+		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->get();
 
 		$user = Auth::user();
 		$defaultPackageExpired = null;

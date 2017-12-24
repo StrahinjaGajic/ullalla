@@ -158,7 +158,7 @@
                         <div class="single-product">
                             <div class="product-img">
                                 <a class="a-img">
-                                    <img class="primary-img" src="/img/girls/1.jpg" alt="" />
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-content">
@@ -166,7 +166,7 @@
                                 <div class="pro-price">
                                     <p>{{ __('global.short_info') }}</p>
                                 </div>
-                                <a href="/profile/girl"><div class="product-cart">
+                                <a href="{{ url('private/' . $user->nickname) }}"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                 </div></a>
                             </div>
@@ -195,7 +195,7 @@
                         <div class="single-product">
                             <div class="product-img">
                                 <a class="a-img">
-                                    <img class="primary-img" src="/img/girls/1.jpg" alt="" />
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-content">
@@ -203,7 +203,7 @@
                                 <div class="pro-price">
                                     <p>{{ __('global.short_info') }}</p>
                                 </div>
-                                <a href="/profile/girl"><div class="product-cart">
+                                <a href="{{ url('private/' . $user->nickname) }}"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                 </div></a>
                             </div>
