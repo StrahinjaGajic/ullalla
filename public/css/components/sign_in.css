@@ -1,7 +1,7 @@
 .wrapper {
     width: 100%;
     height: 100%;
-    padding-top: 30px;
+    padding: 50px 0px;
     display: table;
     background: #fff;
     box-shadow: inset 0 13px 30px -30px hsla(0,0%,0%,.5) ;
@@ -35,6 +35,11 @@ input.form-control::placeholder {
     padding: 40px 0;
 }
 
+.card {
+    padding: 0px 50px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+}
 
 .card-header {
     margin-top: 40px;
@@ -103,6 +108,11 @@ h3 {
     color: #737373;
 }
 
+.section-signin,
+.section-signup {
+    background: #fafafa;
+}
+
 .section-signup .card .form-group,
 .section-signin .card .form-group {
     margin-bottom: 0px;
@@ -119,7 +129,9 @@ h3 {
 }
 
 
-
+.corporate-service-area.home-4 {
+    padding-top: 0px;
+}
 
 
 
