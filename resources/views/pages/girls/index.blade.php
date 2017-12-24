@@ -571,7 +571,6 @@
 		var anchorsThisTitle = tabList.find('a[title=' + title + ']');
 		var anchorsThisHref = $(this).attr('href');
 		var anchorsNotThisTitle = tabList.find('a[title!=' + title + ']');
-		console.log($(anchorsThisHref));
 
 		if (anchorsThisHref == '#shop-product') {
 			$('#shop-list').removeClass('active');
