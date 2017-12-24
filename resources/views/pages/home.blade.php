@@ -141,6 +141,7 @@
             </div>
         </div>
     </div>
+    @if($totm->count() > 0)
     <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -152,8 +153,7 @@
             </div>
             <div class="row">
                 <div class="featured-product-carousel single-indicator">
-                    @php  @endphp
-                    @foreach(App\Models\User::whereNotNull('package2_id')->where('sex', 'female')->get() as $user)
+                    @foreach($gotm as $user)
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <div class="single-product">
                             <div class="product-img">
@@ -177,6 +177,8 @@
             </div>
         </div>
     </section>
+    @endif
+    @if($totm->count() > 0)
     <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -188,8 +190,7 @@
             </div>
             <div class="row">
                 <div class="featured-product-carousel single-indicator">
-                    @php  @endphp
-                    @foreach(App\Models\User::whereNotNull('package2_id')->where('sex', 'transsexual')->get() as $user)
+                    @foreach($gotm as $user)
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <div class="single-product">
                             <div class="product-img">
@@ -213,6 +214,7 @@
             </div>
         </div>
     </section>
+    @endif
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
@@ -460,6 +462,6 @@
                                       interval: 2000
                                     })
                             </script>
--->
+                        -->
 
-                            @stop
+                        @stop
