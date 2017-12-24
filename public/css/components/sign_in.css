@@ -32,13 +32,17 @@ input.form-control::placeholder {
 }
 
 #sign_in_form {
-    padding: 40px 0;
+    padding: 40px 0 20px 0;
 }
 
 .card {
-    padding: 0px 50px;
+    padding: 0px 30px;
     background: #fff;
     border: 1px solid #ebebeb;
+}
+
+.card-block {
+    overflow: hidden;
 }
 
 .card-header {
@@ -119,7 +123,7 @@ h3 {
 }
 
 .forgot_password {
-    margin: 10px 0px 0px -15px; 
+    margin: 10px 0px 10px 0px; 
 }
 
 
@@ -131,6 +135,10 @@ h3 {
 
 .corporate-service-area.home-4 {
     padding-top: 0px;
+}
+
+.card-block input {
+    margin: 0 auto;
 }
 
 

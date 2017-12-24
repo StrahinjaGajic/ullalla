@@ -13,7 +13,7 @@
             <div class="card">
              <div class="card-block">
                 {!! Form::open(['url' => 'signup', 'id' => 'sign_in_form']) !!}
-                <div class="form-group row {{ $errors->has('user_type') ? ' has-error' : '' }}">
+                <div class="form-group {{ $errors->has('user_type') ? ' has-error' : '' }}">
                     {{-- <label for="user_type" class="col-3 col-form-label">{{ __('fields.type') }}</label> --}}
                     <div class="col-9">
                         <select name="user_type" id="user_type" class="form-control {{ $errors->has('user_type') ? ' form-control-error' : '' }}">
@@ -26,7 +26,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
+                <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                     <label for="username" class="col-3 col-form-label"></label>
                     <div class="col-9">
                         <input class="form-control {{ $errors->has('username') ? 'form-control-error' : '' }}" type="text" name="username" placeholder="{{ __('labels.username') }}" value="{{ old('username') }}" autofocus>
@@ -35,7 +35,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
+                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                     <label for="email" class="col-3 col-form-label"></label>
                     <div class="col-9">
                         <input id="email" class="form-control {{ $errors->has('email') ? 'form-control-error' : '' }}" type="text" name="email" placeholder="{{ __('labels.email') }}" value="{{ old('email') }}">
@@ -44,7 +44,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group row {{ $errors->has('password') ? ' has-error' : '' }}">
+                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-3 col-form-label"></label>
                     <div class="col-9">
                         <input id="password" class="form-control{{ $errors->has('password') ? ' form-control-error' : '' }}" type="password" placeholder="{{ __('labels.password') }}" name="password">
@@ -53,7 +53,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group row {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                     <label for="password_confirmation" class="col-3 col-form-label"></label>
                     <div class="col-9">
                         <input id="password_confirmation" class="form-control {{ $errors->has('password_confirmation') ? ' form-control-error' : '' }}" type="password" placeholder="{{ __('labels.confirm_password') }}" name="password_confirmation">

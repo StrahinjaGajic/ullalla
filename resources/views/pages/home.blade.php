@@ -153,7 +153,43 @@
             <div class="row">
                 <div class="featured-product-carousel single-indicator">
                     @php  @endphp
-                    @foreach(App\Models\User::whereNotNull('package2_id')->get() as $user)
+                    @foreach(App\Models\User::whereNotNull('package2_id')->where('sex', 'female')->get() as $user)
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a class="a-img">
+                                    <img class="primary-img" src="/img/girls/1.jpg" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <a class="shop-name">{{ $user->nickname }}</a>
+                                <div class="pro-price">
+                                    <p>{{ __('global.short_info') }}</p>
+                                </div>
+                                <a href="/profile/girl"><div class="product-cart">
+                                    <button class="button">{{ __('buttons.view_profile') }}</button>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-heading pro-title blog-margin">
+                        <h3>{{ __('headings.totm') }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="featured-product-carousel single-indicator">
+                    @php  @endphp
+                    @foreach(App\Models\User::whereNotNull('package2_id')->where('sex', 'transsexual')->get() as $user)
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <div class="single-product">
                             <div class="product-img">

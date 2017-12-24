@@ -80,9 +80,9 @@ Route::put('locals/@{username}/about_me/store', 'LocalController@postAbout');
 Route::get('locals/@{username}/club_info', 'LocalController@getClubInfo');
 Route::put('locals/@{username}/club_info/store', 'LocalController@postClubInfo');
 
-Route::get('locals/@{username}/private', 'LocalController@getGirls');
-Route::put('locals/@{username}/private/store', 'LocalController@postGirls');
-Route::put('locals/@{username}/private/create', 'LocalController@postCreateGirls');
+Route::get('locals/@{username}/girls', 'LocalController@getGirls');
+Route::put('locals/@{username}/girls/store', 'LocalController@postGirls');
+Route::put('locals/@{username}/girls/create', 'LocalController@postCreateGirls');
 
 Route::get('locals/@{username}/packages', 'LocalController@getPackages');
 Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');

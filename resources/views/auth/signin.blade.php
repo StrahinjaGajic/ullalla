@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-block">
                         {!! Form::open(['url' => 'signin', 'id' => 'sign_in_form']) !!}
-                        <div class="form-group row {{ $errors->has('username') ? 'has-danger' : '' }}">
+                        <div class="form-group {{ $errors->has('username') ? 'has-danger' : '' }}">
                             <label for="username" class="col-2 col-form-label"></label>
                             <div class="col-6">
                                 <input id="username" class="form-control {{ $errors->has('username') ? 'form-control-danger' : '' }}" type="text" placeholder="{{ __('labels.username') }}" name="username" value="{{ old('username') }}" autofocus> @if ($errors->has('username'))
@@ -15,7 +15,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row {{ $errors->has('password') ? 'has-danger' : '' }}">
+                        <div class="form-group {{ $errors->has('password') ? 'has-danger' : '' }}">
                             <label for="password" class="col-2 col-form-label"></label>
                             <div class="col-6">
                                 <input id="password" class="form-control {{ $errors->has('password') ? 'form-control-danger' : '' }}" type="password" placeholder="{{ __('labels.password') }}" name="password"> @if ($errors->has('password'))
@@ -28,10 +28,10 @@
                             {{ Session::get('error') }}
                         </div>
                         @endif
-                        <div class="pull-left forgot_password row">
+                        <div class="form-group forgot_password">
                             <a style="color:#363636" href="{{ url('password/reset') }}">{{ __('global.forgot_password') }}?</a>
                         </div>
-                        <div class="row" style="clear: both;">
+                        <div style="clear: both;">
                             <div class="text-center">
                             <button type="submit" class="btn btn-default">{{ __('buttons.login') }}</button>
                         </div>
