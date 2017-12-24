@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Girls')
+@section('title', 'Locals')
 
 @section('styles')
 <link rel="stylesheet" href="{{ url('css/components/girls.css') }}">

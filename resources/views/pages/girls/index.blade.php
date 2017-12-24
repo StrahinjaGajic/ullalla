@@ -76,7 +76,7 @@
 										<?php $num = 1; ?>
 										@foreach($cantons as $canton)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('canton'), request()->query() , $num, 'canton', $canton), false)) }}">{{ $canton->canton_name }}
+											<a href="{{ urldecode(route('private', getUrlWithFilters(request('canton'), request()->query() , $num, 'canton', $canton), false)) }}">{{ $canton->canton_name }}
 												<span>({{ $canton->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="canton[]" value="{{ $canton->id }}" {{ request('canton') && in_array($canton->id, request('canton')) ? 'checked' : '' }}/>
@@ -123,7 +123,7 @@
 									<li>
 										@foreach($services as $service)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('services'), request()->query() , $num, 'services', $service), false)) }}">{{ $service->service_name }}
+											<a href="{{ urldecode(route('private', getUrlWithFilters(request('services'), request()->query() , $num, 'services', $service), false)) }}">{{ $service->service_name }}
 												<span>({{ $service->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="services[]" value="{{ $service->id }}" {{ request('services') && in_array($service->id, request('services')) ? 'checked' : '' }}/>
@@ -147,7 +147,7 @@
 										<?php $num = 1; ?>
 										@foreach(getTypes() as $key => $type)
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
+											<a href="{{ urldecode(route('private', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type }}
 												<span>({{ \App\Models\User::payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
 											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
@@ -171,7 +171,7 @@
 									@foreach (getFilterYears() as $startAge => $endAge)
 									<li>
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', getUrlWithFilters(request('age'), request()->query() , $num, 'age', makeStringFromFilterYears($startAge, $endAge)), false)) }}">
+											<a href="{{ urldecode(route('private', getUrlWithFilters(request('age'), request()->query() , $num, 'age', makeStringFromFilterYears($startAge, $endAge)), false)) }}">
 												{{ makeStringFromFilterYears($startAge, $endAge) }} Years
 												<span>({{ \App\Models\User::payed()->whereBetween('age', [$startAge, $endAge])->count() }})</span>
 											</a>
@@ -215,7 +215,7 @@
 										@endphp
 
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('girls', $completeQueryString, false)) }}">{{ ucfirst($priceType) }}
+											<a href="{{ urldecode(route('private', $completeQueryString, false)) }}">{{ ucfirst($priceType) }}
 												<span>({{ \App\Models\User::payed()->whereNotNull($priceType . '_type')->count() }})</span>
 											</a>
 											<input type="radio" name="price_type" value="{{ $priceType }}" {{ request('price_type') && $priceType == request('price_type') ? 'checked' : '' }}/>
@@ -250,7 +250,7 @@
 											<label class="sort-none">{{ __('global.sort_by') }}</label>
 											<select name="order_by" onchange="location=this.value;">
 												@foreach(getOrderBy() as $key => $order)
-												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
+												<option value="{{ urldecode(route('private', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -260,7 +260,7 @@
 											<label>{{ __('global.show') }}</label>
 											<select name="show" onchange="location=this.value">
 												@foreach(getShowNumbers() as $number)
-												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['show' => $number]), false)) }}" {{ request('show') == $number ? 'selected' : '' }}>{{ $number }}</option>
+												<option value="{{ urldecode(route('private', array_merge(request()->query(), ['show' => $number]), false)) }}" {{ request('show') == $number ? 'selected' : '' }}>{{ $number }}</option>
 												@endforeach
 											</select>
 											{{ __('global.per_page') }}
@@ -270,7 +270,7 @@
 							</div>
 							<div class="tab-content">
 								<div class="filters-reset">
-									<a href="{{ url('girls') }}" class="btn btn-default">{{ __('buttons.reset_filters') }}</a>
+									<a href="{{ url('private') }}" class="btn btn-default">{{ __('buttons.reset_filters') }}</a>
 								</div>
 								@if ($users->count())
 								<div id="shop-product" class="tab-pane active">
@@ -285,7 +285,7 @@
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
 													<div class="pro-price"></div>
-													<a href="{{ url('girls/' . $user->nickname) }}">
+													<a href="{{ url('private/' . $user->nickname) }}">
 														<div class="product-cart">
 															<button class="button">{{ __('buttons.view_profile') }}</button>
 														</div>
@@ -314,7 +314,7 @@
 															<div class="pro-deal-text-shop">
 																<p>{{ Str::words($user->about_me, 40) }}</p>
 															</div>
-															<a href="{{ url('girls/' . $user->nickname) }}">
+															<a href="{{ url('private/' . $user->nickname) }}">
 																<div class="product-cart">
 																	<button class="button">{{ __('buttons.view_profile') }}</button>
 																</div>
@@ -344,7 +344,7 @@
 											<label class="sort-none">{{ __('global.sort_by') }}</label>
 											<select name="order_by" onchange="location=this.value;">
 												@foreach(getOrderBy() as $key => $order)
-												<option value="{{ urldecode(route('girls', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
+												<option value="{{ urldecode(route('private', array_merge(request()->query(), ['order_by' => $key]), false)) }}" {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 												@endforeach
 											</select>
 										</div>

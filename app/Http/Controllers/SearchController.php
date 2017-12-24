@@ -36,7 +36,7 @@ class SearchController extends Controller
 			Session::put('users', $users);
 			Session::save();
 
-			return redirect(urldecode(route('girls', $query, false)));
+			return redirect(urldecode(route('private', $query, false)));
 		} elseif ($request->type == 'local') {
 			$locals = Local::nearLatLng($lat, $lng, $radius)->paginate(9);
 

@@ -23,7 +23,7 @@
                                         @endphp
                                         <li><a href="/">{{ __('buttons.home') }}</a></li>
                                         <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
-                                        <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
+                                        <li><a href="{{ url('private') }}">{{ __('buttons.private') }}</a></li>
                                         @if(!Auth::check() && !Auth::guard('local')->check())
                                             <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
                                             <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
@@ -78,7 +78,7 @@
                                         <ul>
                                          <li><a href="/">{{ __('buttons.home') }}</a></li>
                                          <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
-                                         <li><a href="{{ url('girls') }}">{{ __('buttons.private') }}</a></li>
+                                         <li><a href="{{ url('private') }}">{{ __('buttons.private') }}</a></li>
                                          @if(!Auth::check() && !Auth::guard('local')->check())
                                          <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
                                          <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>

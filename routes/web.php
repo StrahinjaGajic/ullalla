@@ -119,11 +119,11 @@ Route::middleware(['roles'])->group(function () {
 });
 
 # GIRL CONTROLLER
-Route::get('girls', [
-	'as' => 'girls',
+Route::get('private', [
+	'as' => 'private',
 	'uses' => 'GirlController@getIndex'
 ]);
-Route::get('girls/{nickname}', 'GirlController@getGirl');
+Route::get('private/{nickname}', 'GirlController@getGirl');
 Route::get('get_price_ranges', 'GirlController@getPriceRanges');
 Route::get('get_radius', 'GirlController@getRadius');
 Route::get('get_local_radius', 'LocalProfileController@getLocalRadius');

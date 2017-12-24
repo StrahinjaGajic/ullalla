@@ -11,6 +11,9 @@ class HomeController extends Controller
 {
 	public function getIndex()
 	{
+		$gotm = App\Models\User::whereNotNull('package2_id')->where('sex', 'female')->get();
+		$totm = App\Models\User::whereNotNull('package2_id')->where('sex', 'transsexual')->get();
+
 		$user = Auth::user();
 		$defaultPackageExpired = null;
 		if ($user) {
@@ -46,6 +49,6 @@ class HomeController extends Controller
 			}
 		}
 
-		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'localDefaultPackageExpired'));
+		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm'));
 	}
 }
