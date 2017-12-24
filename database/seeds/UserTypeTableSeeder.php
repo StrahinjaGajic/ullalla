@@ -13,11 +13,11 @@ class UserTypeTableSeeder extends Seeder
     public function run()
     {
         $user_type = new UserType;
-        $user_type->user_type_name = 'Private';
+        $user_type->user_type_name_de = 'Private';
         $user_type->save();
 
         $user_type = new UserType;
-        $user_type->user_type_name = 'Local';
+        $user_type->user_type_name_de = 'Local';
         $user_type->save();
     }
 }

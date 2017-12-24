@@ -64,7 +64,8 @@
                         <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                             <tr>
                                 <td>{{ __('headings.local_type') }}</td>
-                                <td>{{ $local->local_type->name }}</td>
+                                @php ($var = 'name_'. config()->get('app.locale'))
+                                <td>{{ $local->local_type->$var }}</td>
                             </tr>
                         </table>
                     </div>

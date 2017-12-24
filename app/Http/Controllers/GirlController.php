@@ -30,7 +30,7 @@ class GirlController extends Controller
 		} else {
 			$users = User::leftJoin('prices', 'users.id', '=', 'prices.user_id')
 			->leftJoin('cantons', 'users.canton_id', '=', 'cantons.id')
-			->leftJoin('user_service', 'users.id', '=', 'user_service.user_id')
+			->leftJoin('user_service', 'users.id', '=', 'user_service.user_id');
 
 			if ($request->has('services')) {
 				$users = $users->whereIn('user_service.service_id', $request->services);

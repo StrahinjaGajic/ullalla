@@ -15,7 +15,10 @@ class CreateSpokenLanguagesTable extends Migration
     {
         Schema::create('spoken_languages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('spoken_language_name');
+            $table->string('spoken_language_name_de');
+            $table->string('spoken_language_name_en');
+            $table->string('spoken_language_name_fr');
+            $table->string('spoken_language_name_it');
         });
     }
 

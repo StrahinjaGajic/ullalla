@@ -13,23 +13,23 @@ class FaqTableSeeder extends Seeder
     public function run()
     {
         $faq = new Faq;
-        $faq->question = 'Pitanje 1';
-        $faq->answer = 'Odgovor 1';
+        $faq->question_de = 'Pitanje 1';
+        $faq->answer_de = 'Odgovor 1';
         $faq->save();
 
         $faq = new Faq;
-        $faq->question = 'Pitanje 2';
-        $faq->answer = 'Odgovor 2';
+        $faq->question_de = 'Pitanje 2';
+        $faq->answer_de = 'Odgovor 2';
         $faq->save();
 
         $faq = new Faq;
-        $faq->question = 'Pitanje 3';
-        $faq->answer = 'Odgovor 3';
+        $faq->question_de = 'Pitanje 3';
+        $faq->answer_de = 'Odgovor 3';
         $faq->save();
 
         $faq = new Faq;
-        $faq->question = 'Pitanje 4';
-        $faq->answer = 'Odgovor 4';
+        $faq->question_de = 'Pitanje 4';
+        $faq->answer_de = 'Odgovor 4';
         $faq->save();
     }
 }

@@ -24,9 +24,11 @@
                             <div class="faq-header">{{ __('global.f_a_q') }}</div>
                             @foreach($faqs as $faq)
                                 <div class="faq-c">
-                                    <div class="faq-q"><span class="faq-t">+</span>{{ $faq->question }}</div>
+                                    @php ($var = 'question_'. config()->get('app.locale'))
+                                    <div class="faq-q"><span class="faq-t">+</span>{{ $faq->$var }}</div>
                                     <div class="faq-a">
-                                        <p>{{ $faq->answer }}</p>
+                                        @php ($var = 'answer_'. config()->get('app.locale'))
+                                        <p>{{ $faq->$var }}</p>
                                     </div>
                                 </div>
                             @endforeach

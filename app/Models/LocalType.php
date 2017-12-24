@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LocalType extends Model
 {
     protected $fillable = [
-        'name'
+        'name_de', 'name_en', 'name_fr', 'name_it',
     ];
 
     public function locals()
