@@ -235,11 +235,11 @@
 								<div class="tab-bar-inner">
 									<ul role="tablist" class="nav nav-tabs">
 										<li class="active">
-											<a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+											<a title="Grid" data-toggle="tab" href="#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
 											</a>
 										</li>
 										<li>
-											<a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+											<a  title="List" data-toggle="tab" href="#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
 											</a>
 										</li>
 									</ul>
@@ -562,5 +562,26 @@
 			x.innerHTML = "{{ __('messages.geolocation_not_supported') }}";
 		}
 	}
+</script>
+
+<script>
+	var tabList = $('ul[role="tablist"]');
+	tabList.find('a').on('click', function () {
+		var title = $(this).attr('title');
+		var anchorsThisTitle = tabList.find('a[title=' + title + ']');
+		var anchorsThisHref = $(this).attr('href');
+		var anchorsNotThisTitle = tabList.find('a[title!=' + title + ']');
+
+		if (anchorsThisHref == '#shop-product') {
+			$('#shop-list').removeClass('active');
+			$(anchorsThisHref).addClass('active');
+		} else {
+			$('#shop-product').removeClass('active');
+			$(anchorsThisHref).addClass('active');
+		}
+
+		anchorsNotThisTitle.closest('li.active').removeClass('active');
+		anchorsThisTitle.closest('li:not(.active)').addClass('active');
+	});
 </script>
 @stop
