@@ -1137,7 +1137,7 @@ button.button {
 }
 
 .banner-area.home-4-2 {
-    margin-top: 25px;
+    margin-top: 60px;
 }
 
 .header-link-area.home-4 ul li a {
@@ -1200,7 +1200,7 @@ div.fixed {
 }
 
 .containere {
-    padding-bottom: 18px;
+    padding-bottom: 28px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1255,12 +1255,11 @@ div.fixed {
     align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
     border: 1px solid #969494;
     border-radius: 5px;
-    padding: 1rem;
+    padding: 1.5rem;
     -webkit-transition: -webkit-transform 300ms ease;
     transition: -webkit-transform 300ms ease;
     transition: transform 300ms ease;
@@ -1307,10 +1306,9 @@ div.fixed {
 
 .containere1 {
     border-top: 1px solid #dddddd;
-    padding-top: 10px;
-    padding-bottom: 7px;
-    margin-left: 76px;
-    margin-right: 76px;
+    padding-top: 28px;
+    margin-left: 67px;
+    margin-right: 63px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2286,7 +2284,7 @@ input.form-control {
     font-family: Arial;
     font-size: 14px;
     font-weight: normal;
-    margin-bottom: 8px;
+    width: 327px;
 }
 
 textarea.form-control {

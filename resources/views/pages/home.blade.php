@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
+<link rel="stylesheet" href="{{ asset('css/components/home.css') }}">
 @stop
 
 <section class="slider-area home-4">
@@ -16,7 +17,6 @@
                         <img src="/img/sliders/S-8.jpg" alt="" title="#slider-direction-2"  />
                     </div>
                     <div id="slider-direction-1" class="t-cn slider-direction slider-one">
-                        <div class="slider-progress"></div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 text-right">
@@ -41,7 +41,6 @@
                         </div>
                     </div>
                     <div id="slider-direction-2" class="slider-direction slider-two">
-                        <div class="slider-progress"></div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 text-left">
@@ -74,8 +73,8 @@
     <div class="container">
         <div class="row">
             {!! Form::open(['url' => 'search', 'method' => 'get']) !!}
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 100%; margin-bottom: 30px;">
-                <span class="search"><h3 style="font-size: 18px; color: #363636; font-weight: 800;">{{ __('headings.quick_search') }}</h3></span>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" style="height: 100%; margin-bottom: 30px;">
+                <span class="search"><h3 id="search_heading">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">
                     <div class="checkbox-tile-group">
                         @foreach(getQuickSearchTypes() as $key => $userType)
@@ -135,9 +134,9 @@
                 <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                 <div class="single-banner home-3">
-                    <a class="last-banner" href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                    <a class="right-banner" href="/#"><!-- <span><img src="/img/banner/banner-13.jpg" alt="" /></span> --></a>
                 </div>
             </div>
         </div>
@@ -418,5 +417,13 @@
                                     }
                                 });
                             </script>
+                            
+<!--
+                            <script>
+                                    $('.owl-item').carousel({
+                                      interval: 2000
+                                    })
+                            </script>
+-->
 
                             @stop

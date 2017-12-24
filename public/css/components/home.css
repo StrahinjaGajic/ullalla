@@ -1,0 +1,42 @@
+.right-banner {
+    height: 376px;
+    background: url('/img/banner/banner-13.jpg') center no-repeat;
+    background-size: cover;
+}
+
+/*
+.last-banner a {
+    height: 376px;
+    width: 652.5px;
+}
+*/
+
+img {
+    max-width: 100%;
+}
+
+#search_heading {
+    font-size: 18px;
+    color: #363636;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.fa-transgender {
+    margin-left: 6px;
+}
+
+.ui-widget.ui-widget-content {
+    height: 3px;
+    border-radius: 3px;
+    background: #7d7d7d;
+    border: none;
+    margin: 0 0 10px 10px !important;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+    border-radius: 100%;
+    background: #f26522;
+    border: none;
+}

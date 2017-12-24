@@ -8,7 +8,8 @@
     $('[data-toggle="tooltip"]').tooltip();
 
     $(".product-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 1,
         margin: 20,
@@ -22,7 +23,8 @@
     });
 
     $(".all-product-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 4,
         pagination:false,
@@ -35,7 +37,8 @@
     });
 
     $(".featured-product-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 4,
         pagination:false,
@@ -48,7 +51,8 @@
     });
 
     $(".blog-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 3,
         pagination:false,
@@ -61,7 +65,8 @@
     });
 
     $(".blog-carousel-home-4").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 2,
         pagination:false,
@@ -74,7 +79,8 @@
     });
 
     $(".brand-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 4,
         pagination:false,
@@ -85,7 +91,8 @@
     });
 
     $(".product-sell-carousel").owlCarousel({
-        autoPlay: false, 
+        autoPlay: 5000,
+        autoplaySpeed: 1500,
         slideSpeed:1500,
         items : 1,
         pagination:false,
