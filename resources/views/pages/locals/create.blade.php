@@ -141,8 +141,9 @@
                                     <textarea name="about_me" style="width:100%;height:250px;"></textarea>
                                     <label class="control-label">{{ __('labels.local_type') }}</label><br>
                                     <select name="local_type_id">
+                                        @php ($var = 'name_'. config()->get('app.locale'))
                                         @foreach($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            <option value="{{ $type->id }}">{{ $type->$var }}</option>
                                         @endforeach
                                     </select>
                                 </div>
