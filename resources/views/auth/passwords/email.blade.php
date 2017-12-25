@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1>Forgot password?</h1>
-            <small>Enter E-mail to help us identify you.</small>
+            <small>Enter your E-mail to help us identify you.</small>
         </div>
         <div class="panel-body">
 
