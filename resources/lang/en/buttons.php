@@ -25,7 +25,9 @@ return [
 	'signin' => 'Login',
 	'signup' => 'Register',
 	'signout' => 'Logout',
-	'profile' => 'Profile',
+	'preview_profile' => 'Preview Profile',
+	'profile' => 'Preview Profile',
+	'settings' => 'Settings',
 	'create_profile' => 'Create Profile',
 
 	# edit profile

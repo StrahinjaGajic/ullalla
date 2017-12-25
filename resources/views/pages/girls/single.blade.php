@@ -106,7 +106,7 @@
 						<div class="tab-content">
 							@if($user->videos)
 							<div class="tab-pane" id="girl-videos">
-								<video poster="/path/to/poster.jpg" controls>
+								<video controls>
 									<source src="{{ $user->videos }}" type="video/mp4">
 									</video>
 								</div>
