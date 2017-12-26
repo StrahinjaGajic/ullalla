@@ -28,7 +28,7 @@
                                             <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
                                             <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
                                         @else
-                                            @if($user && $user->package1_id == '1')
+                                            @if($user && $user->package1_id)
                                                 @if(Auth::guard('local')->user())
                                                     <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
                                                     <li><a href="{{ url('locals/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
@@ -85,7 +85,7 @@
                                          <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
                                          <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
                                          @else
-                                        @if($user && $user->package1_id == '1')
+                                        @if($user && $user->package1_id)
                                             @if(Auth::guard('local')->user())
                                                 <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
                                                 <li><a href="{{ url('locals/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
