@@ -1409,6 +1409,7 @@ input[list] {
     top: 0;
     right: 30px;
     padding-left: 10px;
+    z-index: 5;
 }
 
 .single-zoom-thumb::after {
