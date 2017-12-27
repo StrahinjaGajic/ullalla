@@ -20,6 +20,7 @@
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
 			@if($user->is_active_d_package)
+			
 			<h3>{{ __('headings.active_packages') }}</h3>
 			
 			<table class="table">
@@ -40,6 +41,7 @@
 			</table>
 		
 			@endif
+
 			<div class="col-xs-12">
 				@if(Session::has('success'))
 				<div class="alert alert-success">{{ Session::get('success') }}</div>

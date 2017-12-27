@@ -2167,6 +2167,10 @@ a.shop-name {
     padding: 0;
 }
 
+.pac-container.pac-logo::after {
+    display: none;
+}
+
 
 .control {
     display: block;
