@@ -50,6 +50,110 @@ input.form-control {
     width: 327px;
 }
 
-#city {
-
+.region.geolocation {
+    width: 327px;
 }
+
+#city {
+    width: 270px;
+}
+
+
+.go {
+    background: 0 0;
+    border: 1px solid #f26522;
+    border-radius: 0px;
+    box-shadow: none;
+    color: #7d7d7d;
+}
+
+
+
+
+.go:hover {
+    background: #f26522;
+    color: white;
+    transition-duration: 0.2s;
+    border-color: #f26522;
+    cursor: pointer;
+}
+
+.square-spin {
+    background: #f26522;
+    border: none;
+    color: rgba(255, 255, 255, 0);
+    animation-name: square-spin;
+    animation-fill-mode: both;
+    animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;  
+}
+
+.square-spin:hover{
+    color: rgba(255, 255, 255, 0);
+}
+
+@-webkit-keyframes square-spin {
+    25% {
+        -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+                transform: perspective(100px) rotateX(180deg) rotateY(0);
+    }
+    
+    50% {
+        -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+                transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    }
+    
+    75% {
+        -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+                transform: perspective(100px) rotateX(0) rotateY(180deg);
+    }
+    
+    100% {
+        -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+                transform: perspective(100px) rotateX(0) rotateY(0);
+    }
+}
+
+keyframes square-spin {
+    25% {
+        -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+                transform: perspective(100px) rotateX(180deg) rotateY(0);
+    }
+    
+    50% {
+        -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+                transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    }
+    
+    75% {
+        -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+                transform: perspective(100px) rotateX(0) rotateY(180deg);
+    }
+    
+    100% {
+        -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+                transform: perspective(100px) rotateX(0) rotateY(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

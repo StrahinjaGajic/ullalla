@@ -2504,8 +2504,8 @@ table.services-table td {
 
 a.geolocation-button {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 0px;
+    right: 0px;
     cursor: pointer;
 }
 

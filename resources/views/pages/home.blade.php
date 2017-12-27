@@ -96,22 +96,28 @@
                 <div class="containere1">
                     <div class="region">
                     </div>
+                    
                     <div class="region geolocation">
-                        <div class="form-group">
                             <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control">
                             <a onclick="getLocation();" class="geolocation-button">
-                                <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
+                                <button type="button" class="btn go">Go!</button>
+<!--
                                 <div class="spinner" style="display: none;">
+                                   
                                     <div class="double-bounce1"></div>
                                     <div class="double-bounce2"></div>
+                                    
                                 </div>
+-->
+                                
                             </a>
+                            
                             <div class="help-block">
                                 @if($errors->has('city'))
                                 {{ $errors->first('city') }}
                                 @endif
                             </div>
-                        </div>
+                    
                         <div class="form-group">
                             <label for="amount">{{ __('fields.radius') }}:</label>
                             <div class="location-inputs">
@@ -455,13 +461,12 @@
                                     }
                                 });
                             </script>
-                            
-<!--
                             <script>
-                                    $('.owl-item').carousel({
-                                      interval: 2000
-                                    })
+                                $(document).ready(function(){
+                                    $(".go").click(function(){
+                                        $(".go").addClass("square-spin");
+                                    });
+                                });
                             </script>
-                        -->
 
                         @stop
