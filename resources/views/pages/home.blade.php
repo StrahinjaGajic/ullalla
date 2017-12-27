@@ -98,7 +98,7 @@
                     </div>
                     <div class="region geolocation">
                         <div class="form-group">
-                            <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control"/>
+                            <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control">
                             <a onclick="getLocation();" class="geolocation-button">
                                 <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
                                 <div class="spinner" style="display: none;">
