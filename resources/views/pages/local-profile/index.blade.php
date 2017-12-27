@@ -43,11 +43,7 @@
                                     <li class="geolocation">
                                         <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" />
                                         <a onclick="getLocation();" class="geolocation-button">
-                                            <img src="{{ asset('svg/location.svg') }}" alt="" class="geolocation-image">
-                                            <div class="spinner" style="display: none;">
-                                                <div class="double-bounce1"></div>
-                                                <div class="double-bounce2"></div>
-                                            </div>
+                                            <button type="button" class="btn go"><div class="span">Go!</div></button>
                                         </a>
                                     </li>
                                     <li style="margin: 10px 0;">
@@ -349,4 +345,13 @@
         window.location.href = $(this).closest('label').find('a').attr('href');
     });
 </script>
+
+                            <script>
+                                $(document).ready(function(){
+                                    $(".go").click(function(){
+                                        $(".go").addClass("square-spin");
+                                        $(".span").addClass("square-spin");
+                                    });
+                                });
+                            </script>
 @stop
