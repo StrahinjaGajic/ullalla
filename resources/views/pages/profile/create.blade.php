@@ -759,7 +759,7 @@ function minDimensions(width, height) {
 		if (imageInfo !== null) {
 			console.log();
 			if (imageInfo.width < width || imageInfo.height < height) {
-				throw new Error({{ __('messages.min_dimensions') }});
+				throw new Error('{{ __('messages.min_dimensions') }}');
 			}
 		}
 	};
@@ -769,7 +769,7 @@ function minDimensions(width, height) {
 function maxFileSize(size) {
 	return function (fileInfo) {
 		if (fileInfo.size !== null && fileInfo.size > size) {
-			throw new Error({{ __('messages.file_maximum_size') }});
+			throw new Error('{{ __('messages.file_maximum_size') }}');
 		}
 	}
 }
@@ -782,7 +782,7 @@ function fileTypeLimit(types) {
 		}
 		var extension = fileInfo.name.split('.').pop();
 		if (types.indexOf(extension) == -1) {
-			throw new Error({{ __('messages.file_type') }});
+			throw new Error('{{ __('messages.file_type') }}');
 		}
 	};
 }
