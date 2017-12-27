@@ -316,7 +316,7 @@ font-size: 14px !important;
  }
 
  .ui-corner-all {
-     margin-top: 4px;
+     margin-top: 10px;
  }
 
  .ui-slider-horizontal .ui-slider-handle {
@@ -326,6 +326,20 @@ font-size: 14px !important;
  .ui-slider-horizontal .ui-slider-range {
      margin-top: 0;
  }
+
+.ui-widget.ui-widget-content {
+height: 2px;
+border-radius: 3px;
+background: #ddd;
+border: none;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+    border-radius: 100%;
+    background: #f26522;
+    border: none;
+}
 
  .package_activation {
      text-align: center;

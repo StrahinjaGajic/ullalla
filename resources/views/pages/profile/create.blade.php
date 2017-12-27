@@ -17,15 +17,15 @@
 					<section data-step="0">
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.first_name') }}*</label>
+								<label class="control-label">{{ __('fields.first_name') }} *</label>
 								<input type="text" class="form-control" name="first_name" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.last_name') }}*</label>
+								<label class="control-label">{{ __('fields.last_name') }} *</label>
 								<input type="text" class="form-control" name="last_name" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.nickname') }}*</label>
+								<label class="control-label">{{ __('fields.nickname') }} *</label>
 								<input type="text" class="form-control" name="nickname" />
 							</div>
 							<div class="form-group">
@@ -38,7 +38,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.sex') }}*</label>
+								<label class="control-label">{{ __('fields.sex') }} *</label>
 								<select name="sex" class="form-control">
 									<option value="female">{{ __('fields.female') }}</option>
 									<option value="transsexual">{{ __('fields.transsexual') }}</option>
@@ -53,11 +53,11 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.height') }}</label>
+								<label class="control-label">{{ __('fields.height') }} *</label>
 								<input type="text" class="form-control" name="height" />
 							</div>
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.weight') }}</label>
+								<label class="control-label">{{ __('fields.weight') }} *</label>
 								<input type="text" class="form-control" name="weight" />
 							</div>
 							<div class="form-group">
@@ -81,9 +81,11 @@
 								</select>
 							</div>
 						</div>
+						
+						
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.age') }}*</label>
+								<label class="control-label">{{ __('fields.age') }} *</label>
 								<select name="age" id="age" class="form-control">
 									@for ($age=18; $age <= 60 ; $age++) 
 										<option value="{{ $age }}">{{ $age }}</option>
@@ -175,13 +177,15 @@
 									<option value="occasionally">{{ __('fields.occasionally') }}</option>
 								</select>
 							</div>
-						<div class="col-xs-12">
+                        </div>
+                        						<div class="col-xs-12">
 							<div class="form-group">
-								<label class="control-label">{{ __('headings.about_me') }}</label>
+								<label class="control-label">{{ __('headings.about_me') }} *</label>
 								<textarea name="about_me" class="form-control"></textarea>
 							</div>
 						</div>
 					</section>
+					
 					<h2>{{ __('headings.gallery') }}</h2>
 					<section data-step="1">
 						<div class="form-group">
@@ -216,7 +220,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label class="control-label">{{ __('fields.mobile_phone') }}</label>
+								<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
 								<input type="text" class="form-control" name="mobile"/>
 							</div>
 						</div>
