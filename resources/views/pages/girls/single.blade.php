@@ -37,7 +37,7 @@
 								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
-									<img class="modal-content" id="img01" src="http://www.ucarecdn.com/465dc041-0b41-4b96-9f66-2240f4637843~7/nth/3/-/resize/490x560/">
+									<img class="modal-content" id="img01" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}">
 									<div id="caption"></div>
 									      <div class="modal-footer">
                                                 <button type="button" onclick="prev()" class="btn btn-default btn-prev">Prev</button>
@@ -324,9 +324,6 @@ var modalImg = document.getElementById("img01");
         var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
         
         
-        
-        
-        
         function prev () {
             var now = modalImg.getAttribute("src").substr(-19 , 1);
             
@@ -354,9 +351,7 @@ var modalImg = document.getElementById("img01");
             var now = modalImg.getAttribute("src").substr(-19 , 1);
             
             now = parseInt(now);
-            
-            console.log(now)
-            console.log(all)
+
             
             if (now == all) {
                 

@@ -1,4 +1,3 @@
-
 .ui-widget.ui-widget-content {
     height: 3px;
     border-radius: 3px;
@@ -23,38 +22,38 @@
 .section-girls .left-sidebar .canton-layout .layout-list,
 .section-girls .left-sidebar .services-layout .layout-list,
 .section-girls .left-sidebar .languages-layout .layout-list {
-	height: 400px;
-	overflow-y: scroll;
-	/*overflow-x: hidden;*/
+    height: 400px;
+    overflow-y: scroll;
+    /*overflow-x: hidden;*/
 }
 
 .section-girls .pages a {
-	vertical-align: top !important;
+    vertical-align: top !important;
 }
 
 
 .section-single-girl .info-table td:last-child {
-	text-align: right; 
-	color: #f26522;
+    text-align: right;
+    color: #f26522;
 }
 
 .section-single-girl .info-table td {
-	font-weight: 600;
-	padding: 11px;
+    font-weight: 600;
+    padding: 11px;
 }
 
 
 .section-single-girl .services-table i.fa-check {
-	margin-right: 3px; 
-	color: #f26522;
+    margin-right: 3px;
+    color: #f26522;
 }
 
 .section-single-girl .services-table td {
-	font-weight: 600;
+    font-weight: 600;
 }
 
 
-.fa-caret-right{
+.fa-caret-right {
     float: right;
     z-index: 1001;
     width: 5px;
@@ -63,15 +62,15 @@
 }
 
 .fa-caret-down {
-       float: right;
+    float: right;
     z-index: 1001;
     width: 5px;
     color: #000;
     margin-top: 2px;
-    margin-right: 
+    margin-right:
 }
 
-i{
+i {
     height: 24px;
     width: 24px;
 }
@@ -102,55 +101,99 @@ i{
     margin-bottom: 10px;
 }
 
-.primary-img 
+.plyr {
+    position: relative;
+
+    font-family: Avenir, 'Avenir Next', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    direction: ltr;
+    width: 650px;
+    height: 550px!iportant;
+    margin: 0 auto;
+}
+
+.plyr audio, .plyr video {
+    width: 100%;
+height: 550px!important;
+vertical-align: middle;
+border-radius: inherit;
+}
+
+
+.plyr--video .plyr__controls button:hover {
+    background: #f26522!important;
+    color: #fff;
+}
+
+.plyr__play-large {
+    background: #f26522!important;
+}
+
+.plyr__progress--played,
+.plyr__volume--display {
+    z-index: 1;
+    color: #f26522!important;
+    background: 0 0;
+    transition: none;
+}
 
 /******* Single Girl ********/
+
 #map {
-	height: 600px;
-	width: 100%!important;
+    height: 600px;
+    width: 100%!important;
 }
 
 #floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
 }
 
 #expand {
-     transition: 0.3s;
+    transition: 0.3s;
 }
 
-#expand:hover{
+#expand:hover {
     cursor: pointer;
     opacity: 0.7;
 }
 
 
 /* The Modal (background) */
+
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1002; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1002;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
+
 .modal-content {
     margin: auto;
     display: block;
@@ -161,6 +204,7 @@ i{
 
 
 /* Caption of Modal Image */
+
 #caption {
     margin: auto;
     display: block;
@@ -174,7 +218,9 @@ i{
 }
 
 /* Add Animation */
-.modal-content, #caption {    
+
+.modal-content,
+#caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
@@ -182,16 +228,25 @@ i{
 }
 
 @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
 }
 
 @keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
 
 /* The Close Button */
+
 .close {
     position: absolute;
     top: 15px;
@@ -211,7 +266,8 @@ i{
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
+
+@media only screen and (max-width: 700px) {
     .modal-content {
         width: 100%;
     }
@@ -222,19 +278,20 @@ i{
 
 
 /****** Filters ******/
+
 .layout-title {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .layout-title a {
     height: 51px;
-	color: #424242 !important;
-	display: block; 
-	text-decoration: none;
-	padding: 17px;
-	margin: -1px 0 -1px 0;
-	font-size: 18px;
-	font-weight: bold;
+    color: #424242 !important;
+    display: block;
+    text-decoration: none;
+    padding: 17px;
+    margin: -1px 0 -1px 0;
+    font-size: 18px;
+    font-weight: bold;
     border-top: 1px solid #ebebeb;
     text-transform: uppercase;
 }
@@ -246,22 +303,24 @@ i{
     animation-duration: .5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
-     -webkit-transform-origin: 20% 40%;
+    -webkit-transform-origin: 20% 40%;
 }
 
 
 
-@keyframes rotateCaret{
-  from {
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(90deg);
-    -webkit-transform:rotate (90deg);
-    transform: rotate(90deg);
-  }
+@keyframes rotateCaret {
+    from {
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(90deg);
+        -webkit-transform: rotate (90deg);
+        transform: rotate(90deg);
+    }
 }
 
 
@@ -272,48 +331,26 @@ i{
 }
 
 
-@keyframes rotateCaretBack{
-  from {
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(-90deg);
-    -webkit-transform:rotate (-90deg);
-    transform: rotate(-90deg);
-  }
+@keyframes rotateCaretBack {
+    from {
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(-90deg);
+        -webkit-transform: rotate (-90deg);
+        transform: rotate(-90deg);
+    }
 }
 
 
 
 /**** bx slider ****/
 
-.bx-next, 
+.bx-next,
 .bx-prev {
     z-index: 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
