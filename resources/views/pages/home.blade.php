@@ -100,16 +100,7 @@
                     <div class="region geolocation">
                             <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control">
                             <a onclick="getLocation();" class="geolocation-button">
-                                <button type="button" class="btn go">Go!</button>
-<!--
-                                <div class="spinner" style="display: none;">
-                                   
-                                    <div class="double-bounce1"></div>
-                                    <div class="double-bounce2"></div>
-                                    
-                                </div>
--->
-                                
+                                <button type="button" class="btn go"><div class="span">Go!</div></button> 
                             </a>
                             
                             <div class="help-block">
@@ -465,6 +456,7 @@
                                 $(document).ready(function(){
                                     $(".go").click(function(){
                                         $(".go").addClass("square-spin");
+                                        $(".span").addClass("square-spin");
                                     });
                                 });
                             </script>
