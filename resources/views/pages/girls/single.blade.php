@@ -36,13 +36,17 @@
 							<a href="#">
 								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
-									<span class="close">&times;</span>
-									<img class="modal-content" id="img01" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}">
-									<div id="caption"></div>
-									      <div class="modal-footer">
-                                                <button type="button" onclick="prev()" class="btn btn-default btn-prev">Prev</button>
-                                                <button type="button" onclick="next()" class="btn btn-default btn-next">Next</button>
-                                             </div>
+								<span class="close">&times;</span>
+								<div class="modal-dialog modal-md">
+									
+									<div class="modal-content">
+									<img id="img01" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}">
+                                   <div class="prev-next">    
+                                    <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
+                                    <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+                                        </div>
+                                      </div>
+                                      </div>      
 								</div>
 							</a>
 						</div>
@@ -398,6 +402,12 @@ span.onclick = function() {
 		e.preventDefault();
 		$('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
 	});
+</script>
+
+<script>
+    $('.modal').click(function(e) {
+    if($(e.target).is('.modal'))  $(this).fadeOut(175);
+});
 </script>
 
 

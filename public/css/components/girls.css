@@ -199,9 +199,36 @@ border-radius: inherit;
     display: block;
     width: 80%;
     max-width: 700px;
+    background: 0 0;
+    box-shadow: none;
+    border: none;
 }
 
+.prev-next {
+    margin-top: 15px;
+}
 
+.modal-footer {
+    border: none;
+    margin: 0 auto;
+}
+
+.glyphicon.glyphicon-chevron-left,
+.glyphicon.glyphicon-chevron-right{
+ font-size: 30px;
+    color: #ddd;
+}
+
+.glyphicon.glyphicon-chevron-left:hover,
+.glyphicon.glyphicon-chevron-right:hover {
+    color: #f26522;
+    cursor: pointer;
+}
+
+.glyphicon.glyphicon-chevron-left::before {
+    height: 30px;
+    width: 30px;
+}
 
 /* Caption of Modal Image */
 
