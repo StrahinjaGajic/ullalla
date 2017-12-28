@@ -17,7 +17,7 @@
         </div>
         <div class="col-sm-10 profile-info" >
             <h3>{{ __('headings.about_me') }}</h3>
-            <div class="row">
+            <div class="row" style="margin-left: 1px;">
                 {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/about_me/store', 'method' => 'put']) !!}
                 <div class="form-group">
                     <label for="comment">{{ __('labels.text_area') }}</label>

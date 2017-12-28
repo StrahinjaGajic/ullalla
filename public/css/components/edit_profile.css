@@ -721,7 +721,7 @@ pre {
     z-index: 99;
 }
 
-input[type="text"] {
+input[type="text"], [type="password"], [type="email"] {
     font: 15px/24px "Lato", Arial, sans-serif;
     width: 100%;
     color: #4a6e78;

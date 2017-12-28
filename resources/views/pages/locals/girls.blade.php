@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-10 profile-info">
                 <button id="showModal" type="submit" class="btn btn-default">Add Girl</button><br><br>
-                <h3>Girls</h3>
+                <h3 style="margin: 0;">Girls</h3>
                 {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/girls/store', 'method' => 'put']) !!}
                 @foreach($local->girls as $girl)
                     <div class="col-3 input-effect {{ $errors->has('nickname') ? 'has-error' : ''  }}">

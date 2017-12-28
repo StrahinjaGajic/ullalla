@@ -19,8 +19,9 @@
 		</div>
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
+		
 			@if($user->is_active_d_package)
-			
+			<div class="col-xs-12">
 			<h3>{{ __('headings.active_packages') }}</h3>
 			
 			<table class="table">
@@ -39,7 +40,7 @@
 					</tr>
 				</tbody>
 			</table>
-		
+		</div>
 			@endif
 
 			<div class="col-xs-12">
