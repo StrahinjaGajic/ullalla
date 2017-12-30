@@ -66,6 +66,7 @@
 				@if($errors->has('ullalla_package'))
 				<p class="has-error">{{ __('validation.default_package_required') }}</p>
 				@endif
+				
 				<table class="table packages-table">
 					<thead>
 						<tr>
@@ -135,7 +136,9 @@
 						@endforeach
 					</tbody>
 				</table>
+				<div class="save">
 				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				</div>
 			</div>
 			@endif
 			<input type="hidden" name="stripeToken" id="stripeToken">

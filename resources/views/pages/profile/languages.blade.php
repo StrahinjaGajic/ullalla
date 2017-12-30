@@ -78,7 +78,9 @@
 				<div class="show-more text-center">
 					<a href="#" class="btn btn-default show-more">{{ __('buttons.show_more') }}</a>
 				</div>
+                <div class="save">
                 <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+                </div>
 				{!! Form::close() !!}
 			</div>
 		</div>

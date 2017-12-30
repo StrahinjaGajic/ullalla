@@ -10,7 +10,7 @@
 <section class="slider-area home-4">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-xs-12">
                 <div class="bend niceties preview-1 ho_4">
                     <div id="ensign-nivoslider" class="slides">
                         <img src="/img/sliders/S-7.jpg" alt="" title="#slider-direction-1"  />

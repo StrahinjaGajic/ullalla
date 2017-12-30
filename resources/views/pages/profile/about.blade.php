@@ -22,7 +22,7 @@
                 @endif
                 <div class="row">
                     {!! Form::model($user, ['url' => '@' . $user->username . '/about_me/store', 'method' => 'put']) !!}
-                    <div class="form-group" style="margin-left:15px;">
+                    <div id="about" class="form-group" style="margin-left:15px;">
                         <textarea class="form-control" rows="5" id="comment" name="about_me">{{ $user->about_me }}</textarea>
                         <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
                     </div>

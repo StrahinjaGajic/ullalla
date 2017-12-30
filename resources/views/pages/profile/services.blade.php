@@ -55,7 +55,9 @@
 				</div>
 				@endforeach
 			</div>
+			<div class="save">
 			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+			</div>
 			{!! Form::close() !!}
 		</div>
 	</div>
