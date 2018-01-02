@@ -462,6 +462,10 @@ keyframes square-spin {
 
 
 /*** MEDIA ***/
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-width : 320px) and (max-width: 767px) {
+    
+}
 
 @media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     
@@ -499,6 +503,10 @@ keyframes square-spin {
     padding: 10px 0 35px;
 }
     
+    .product-content-shop {
+        text-align: center;
+        padding-top: 20px;
+    }
 }
 
 
