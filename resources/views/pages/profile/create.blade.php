@@ -9,7 +9,7 @@
 @section('content')
 <div class="wrapper section-create-profile">
 	<div id="create_profile_modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
@@ -225,7 +225,7 @@
 							</div>
 						</div>
 						<div id="options" class="col-xs-12">
-						<div class="col-xs-6" style="padding-left: 0px;">
+						<div class="col-lg-6 col-xs-12" style="">
 							<div class="form-group">
 								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 								@foreach($contactOptions as $contactOption)
@@ -246,7 +246,7 @@
 						
 
 						
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
 								@foreach(getPreferedOptions() as $key => $preferedOption)
@@ -272,7 +272,7 @@
 					</section>
 					<h2>{{ __('headings.workplace') }}</h2>
 					<section data-step="3">
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.canton') }}</label>
 								<select name="canton" class="form-control">
@@ -283,25 +283,25 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-xs-4">
+						<div class="col-lg-4 col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.city') }}</label>
 								<input type="text" class="form-control" name="city"/>
 							</div>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-lg-2 col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.zip_code') }}</label>
 								<input type="text" class="form-control" name="zip_code"/>
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.address') }}</label>
 								<input type="text" class="form-control" name="address"/>
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.club_name') }}</label>
 								<input type="text" class="form-control" name="club_name"/>
@@ -333,7 +333,7 @@
 								</label>
 								<div class="outcall-options" style="display: none;">
 									@foreach(getOutcallOptions() as $key => $outcallOption)
-									<label style="margin-left: 30px; display: block;"">
+									<label style="margin-left: 30px; display: block;">
 										<input type="radio" name="outcall_option" value="{{ $key }}" id="{{ $key == 'define_yourself' ? 'outcall_define_yourself' : '' }}" style="display: inline-block;">
 										{{ $outcallOption }}
 									</label>
@@ -352,11 +352,12 @@
 										<input type="checkbox" name="available_24_7">
 										<div class="control__indicator"></div>
 									</label>
-									<label class="control control--checkbox working-times-disabled" style="margin-left: 20px;"><a>{{ __('fields.show_as_night_escort') }}</a>
+									<label class="control control--checkbox working-times-disabled"><a>{{ __('fields.show_as_night_escort') }}</a>
 										<input type="checkbox" name="available_24_7_night_escort" value="1" disabled="">
 										<div class="control__indicator"></div>
 									</label>
 								</div>
+								<div style="overflow-x: auto;">
 								<table class="table working-times-table">
 									<thead>
 										<tr>
@@ -420,13 +421,14 @@
 										@endforeach
 									</tbody>
 								</table>
-							</div>
+                           </div>
+                            </div>
 						</div>
 					</section>
 					<h2>{{ __('headings.services') }}</h2>
 					<section data-step="5" class="services-section">
 						<h3>{{ __('headings.service_offered_for') }}:</h3>
-						<div class="col-xs-12">
+						<div class="col-lg-12 col-sm-12 col-xs-9" style="margin-bottom:20px;">
 							@foreach($serviceOptions as $serviceOption)
 							<label class="control control--checkbox"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
 								<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
@@ -437,7 +439,7 @@
 						<div class="service-list">
 							<h3>{{ __('headings.service_list') }}</h3>
 							@foreach ($services->chunk(19) as $chunkedServices)
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
 								@foreach($chunkedServices as $service)
 								<div class="form-group">
 									<label class="control control--checkbox" style="display: block;"><a>{{ $service->service_name }}</a>
@@ -453,14 +455,14 @@
 					<h2>{{ __('headings.prices') }}</h2>
 					<section data-step="6">
 						<div class="price_section">
-							<div class="col-xs-3">
+							<div class="col-lg-3 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('headings.duration') }}</label>
 									<input type="text" class="form-control" name="service_duration"/>
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="col-xs-2">
+							<div class="col-lg-2 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.unit') }}</label>
 									<select name="service_price_unit" class="form-control">
@@ -471,14 +473,14 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="col-xs-3">
+							<div class="col-lg-3 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('headings.price') }}</label>
 									<input type="text" class="form-control" name="service_price"/>
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="col-xs-2">
+							<div class="col-lg-2 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.currency') }}</label>
 									<select name="service_price_currency" class="form-control">
@@ -489,7 +491,7 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="col-xs-2">
+							<div class="col-lg-2 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.type') }}</label>
 									<select name="price_type" id="price_type" class="form-control">
@@ -581,6 +583,7 @@
 							<div class="has-error">
 								<div id="alertPackageMessage" class="help-block"></div>
 							</div>
+							<div style="overflow-x: auto;">
 							<table class="table packages-table">
 								<thead>
 									<tr>
@@ -612,9 +615,11 @@
 									@endforeach
 								</tbody>
 							</table>
+							</div>
 						</div>
 						<div class="col-xs-12">
 							<h3>{{ __('headings.gotm') }}</h3>
+							<div style="overflow-x: auto;">
 							<table class="table packages-table package-girl-month">
 								<thead>
 									<tr>
@@ -645,6 +650,7 @@
 									@endforeach
 								</tbody>
 							</table>
+							</div>
 						</div>
 					</section>
 					<input type="hidden" name="stripeToken" id="stripeToken">

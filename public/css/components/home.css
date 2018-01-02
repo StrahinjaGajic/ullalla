@@ -148,10 +148,22 @@ keyframes square-spin {
 
 }
 @media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-
+        .button4 {
+        width: 290px;
+    }
+    
+    #city {
+        width: 230px;
+    }
 }
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-
+    #city {
+        width: 186px;
+    }
+    
+    .button4 {
+        width: 244px;
+    }
 }
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
 
