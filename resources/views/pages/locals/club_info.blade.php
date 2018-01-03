@@ -23,16 +23,22 @@
                         <label class="control-label">{{ __('labels.entrance') }}</label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.n_a') }}
                         <input type="radio" id="entrance-na" onclick="uncheckEntranceFree()" name="entrance" value="1" {{ ($local->clubEntrance->value == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.n_a') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.free') }}
                         <input type="radio" id="entrance-free" onclick="uncheckEntrance()" name="entrance-free" value="1" {{ ($local->clubEntrance->free == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.free') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.with_cost') }}
                         <input type="radio" id="entrance-cost" onclick="uncheckEntrance()" name="entrance-free" value="2" {{ ($local->clubEntrance->free == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.with_cost') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                 </div>
                 <div class="row">
@@ -40,28 +46,38 @@
                         <label class="control-label">{{ __('labels.wellness') }}</label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.n_a') }}
                         <input type="radio" name="wellness" value="1" onclick="hideWellness()" {{ ($local->clubWellness->value == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.n_a') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.yes') }}
                         <input type="radio" id="wellness-yes" name="wellness" value="2" onclick="showWellness()"{{ ($local->clubWellness->value == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.yes') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.no') }}
                         <input type="radio" name="wellness" value="3" onclick="hideWellness()"{{ ($local->clubWellness->value == 3) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.no') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                 </div>
                 <div class="row hidden" id="wellness-show">
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.free') }}
                         <input type="radio" name="wellness-free" value="1" {{ ($local->clubWellness->free == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.free') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.with_cost') }}
                         <input type="radio" name="wellness-free" value="2" {{ ($local->clubWellness->free == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.with_cost') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
                     </div>
@@ -71,28 +87,38 @@
                         <label class="control-label">{{ __('labels.food_and_drinks') }}</label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.n_a') }}
                         <input type="radio" name="food" value="1" onclick="hideFood()" {{ ($local->clubFood->value == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.n_a') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.yes') }}
                         <input type="radio" id="food-yes" name="food" value="2" onclick="showFood()" {{ ($local->clubFood->value == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.yes') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.no') }}
                         <input type="radio" name="food" value="3" onclick="hideFood()" {{ ($local->clubFood->value == 3) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.no') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                 </div>
                 <div class="row hidden" id="food-show">
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.free') }}
                         <input type="radio" name="food-free" value="1" {{ ($local->clubFood->free == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.free') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.with_cost') }}
                         <input type="radio" name="food-free" value="2" {{ ($local->clubFood->free == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.with_cost') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
                     </div>
@@ -102,16 +128,22 @@
                         <label class="control-label">{{ __('labels.outdoor_area') }}</label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.n_a') }}
                         <input type="radio" name="outdoor" value="1" {{ ($local->clubOutdoor->value == 1) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.n_a') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.yes') }}
                         <input type="radio" name="outdoor" value="2" {{ ($local->clubOutdoor->value == 2) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.yes') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                     <div class="col-md-3">
+                       <label class="control control--checkbox">{{ __('labels.no') }}
                         <input type="radio" name="outdoor" value="3" {{ ($local->clubOutdoor->value == 3) ? 'checked' : '' }}>
-                        <label class="control-label">{{ __('labels.no') }}</label>
+                        <div class="control__indicator"></div>
+                        </label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
