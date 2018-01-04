@@ -51,6 +51,7 @@ return [
     'default_package' => 'Default Package',
     'default_packages' => 'Default Packages',
     'gotm_package' => 'Girl of The Month Package',
+    'totm_package' => 'Tran of The Month Package',
     'name' => 'Name',
     'duration' => 'Duration',
     'price' => 'Price',

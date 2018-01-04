@@ -30,7 +30,10 @@ class CreateUsersTable extends Migration
             $table->string('age')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
-            $table->string('sex')->nullable();
+            $table->string('sex_de')->nullable();
+            $table->string('sex_en')->nullable();
+            $table->string('sex_fr')->nullable();
+            $table->string('sex_it')->nullable();
             $table->string('sex_orientation')->nullable();
             $table->string('type')->nullable();
             $table->string('figure')->nullable();

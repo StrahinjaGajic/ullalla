@@ -201,7 +201,8 @@
 										<tbody>
 											@foreach($user->spoken_languages as $spokenLanguage)
 											<tr>
-												<td>{{ $spokenLanguage->spoken_language_name }}</td>
+												@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
+												<td>{{ $spokenLanguage->$var }}</td>
 												<td>
 													@for($level = 1; $level <= 5; $level++)
 													@if($level <= $spokenLanguage->pivot->language_level)

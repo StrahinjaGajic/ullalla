@@ -182,10 +182,10 @@
 					} else if (typeof errors.month_girl_package_error !== 'undefined') {
 						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 					} else {
-						window.location.href = 'http://127.0.0.1:8000/locals/@' + username  + '/packages';
+						window.location.href = getUrl("/locals/@" + username  + "/packages");
 					}
 				} else {
-					window.location.href = 'http://127.0.0.1:8000/locals/@' + username  + '/packages';
+					window.location.href = getUrl("/locals/@" + username  + "/packages");
 				}
 			})
 			.fail(function(data, textStatus) {

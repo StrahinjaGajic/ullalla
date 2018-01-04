@@ -619,7 +619,7 @@
         {{--});--}}
         {{--$('#profileForm').on('submit', function (e) {--}}
             {{--stripe.open({--}}
-                {{--name: 'Ullalla',--}}
+                {{--name: 'Ullall?',--}}
                 {{--description: '{{ $local->email }}',--}}
             {{--});--}}
             {{--e.preventDefault();--}}

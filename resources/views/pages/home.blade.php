@@ -231,12 +231,13 @@
         </div>
     </div>
 </div>
-
 <div id="map"></div>
 
 @stop
 
 @section('perPageScripts')
+@php ($title = 'title_'. config()->get('app.locale'))
+@php ($note = 'note_'. config()->get('app.locale'))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
 @if(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
 <script>
@@ -244,7 +245,7 @@
         title: '{{ __('headings.package_expiration_title') }}',
         confirmButtonText: '{{ __('buttons.close') }}',
         html: '{!! __('messages.package_about_to_expire', [
-            'note' => $localDefaultPackageExpired->note,
+            'note' => $localDefaultPackageExpired->$note,
             'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
             ]) !!}',
             type: 'warning',
@@ -267,7 +268,7 @@
                 title: '{{ __('headings.package_expiration_title') }}',
                 confirmButtonText: '{{ __('buttons.close') }}',
                 html: '{!! __('messages.package_about_to_expire', [
-                    'note' => $defaultPackageExpired->note,
+                    'note' => $defaultPackageExpired->$note,
                     'url' => url('@' . Auth::user()->username . '/packages')
                     ]) !!}',
                     type: 'warning',
@@ -297,7 +298,7 @@
                         title: '{{ __('headings.package_expiration_title') }}',
                         confirmButtonText: '{{ __('buttons.close') }}',
                         html: '{!! __('messages.package_about_to_expire', [
-                            'note' => $defaultPackageExpired->note, 
+                            'note' => $defaultPackageExpired->$note,
                             'url' => url('@' . Auth::user()->username . '/packages')
                             ]) !!}',
                             type: 'warning',
@@ -306,7 +307,7 @@
                                 return swal({
                                     title: '{{ __('headings.package_expiration_title') }}',
                                     html: '{!! __('messages.package_about_to_expire', [
-                                        'note' => $gotmPackageExpired->note, 
+                                        'note' => $gotmPackageExpired->$note,
                                         'url' => url('@' . Auth::user()->username . '/packages')
                                         ]) !!}',
                                         type: 'warning'
@@ -321,7 +322,7 @@
                             title: '{{ __('headings.package_expiration_title') }}',
                             confirmButtonText: '{{ __('buttons.close') }}',
                             html: '{!! __('messages.package_about_to_expire', [
-                                'note' => $defaultPackageExpired->note, 
+                                'note' => $defaultPackageExpired->$note,
                                 'url' => url('@' . Auth::user()->username . '/packages')
                                 ]) !!}',
                                 type: 'warning',
@@ -333,7 +334,7 @@
                             swal({
                                 title: '{{ __('headings.package_expiration_title') }}',
                                 html: '{!! __('messages.package_about_to_expire', [
-                                    'note' => $gotmPackageExpired->note, 
+                                    'note' => $gotmPackageExpired->$note,
                                     'url' => url('@' . Auth::user()->username . '/packages')
                                     ]) !!}',
                                     type: 'warning'

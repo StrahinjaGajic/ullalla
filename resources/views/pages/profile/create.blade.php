@@ -39,7 +39,7 @@
 							</div>
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.sex') }}*</label>
-								<select name="sex" class="form-control">
+								<select onclick="changeSex()" id="sex" name="sex" class="form-control">
 									<option value="female">{{ __('fields.female') }}</option>
 									<option value="transsexual">{{ __('fields.transsexual') }}</option>
 								</select>
@@ -186,7 +186,7 @@
 					<section data-step="1">
 						<div class="form-group">
 							<div class="image-preview-multiple">
-								<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+								<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
 								<div class="_list"></div>
 							</div>
 						</div>
@@ -436,7 +436,8 @@
 							<div class="col-xs-6">
 								@foreach($chunkedServices as $service)
 								<div class="form-group">
-									<label class="control control--checkbox" style="display: block;"><a>{{ $service->service_name }}</a>
+									@php ($var = 'user_type_name_'. config()->get('app.locale'))
+									<label class="control control--checkbox" style="display: block;"><a>{{ $service->$var }}</a>
 										<input type="checkbox" class="form-control" name="services[]" value="{{ $service->id }}" />
 										<div class="control__indicator"></div>
 									</label>
@@ -537,12 +538,13 @@
 									<th>{{ __('headings.level') }}</th>
 								</tr>
 							</thead>
+							@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
 							<tbody class="language-list">
 								@foreach($spokenLanguages->take(7) as $language)
 								<tr>
 									<td>
 										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-										{{ $language->spoken_language_name }}
+										{{ $language->$var }}
 									</td>
 									<td>
 										<div class="slider"></div>
@@ -556,7 +558,7 @@
 								<tr>
 									<td>
 										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-										{{ $language->spoken_language_name }}
+										{{ $language->$var }}
 									</td>
 									<td>
 										<div class="slider"></div>
@@ -730,6 +732,13 @@ $('.package_activation').each(function () {
 	});
 });
 });
+var choosenSex = "female";
+function changeSex(){
+	var select = document.getElementById("sex");
+	var choosenSex = e.options[select.selectedIndex].value;
+	console.log(choosenSex);
+}
+
 ////////// 2. UPLOAD CARE ////////
 // const widget = uploadcare.Widget('[role=uploadcare-uploader-videos]');
 // preview uploaded images function
@@ -1064,7 +1073,7 @@ $(function () {
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullalla',
+			name: 'Ullall?',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	

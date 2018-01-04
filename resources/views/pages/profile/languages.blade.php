@@ -31,12 +31,13 @@
 							<th>{{ __('headings.level') }}</th>
 						</tr>
 					</thead>
+					@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
 					<tbody class="language-list">
 						@foreach($spokenLanguages->take(7) as $language)
 						<tr>
 							<td>
 								<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-								{{ $language->spoken_language_name }}
+								{{ $language->$var }}
 							</td>
 							@php
 							$spokenLanguage = $user->spoken_languages()->where('spoken_language_id', $language->id)->first();
@@ -57,7 +58,7 @@
 						<tr>
 							<td>
 								<img src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-								{{ $language->spoken_language_name }}
+								{{ $language->$var }}
 							</td>
 							@php
 							$spokenLanguage = $user->spoken_languages()->where('spoken_language_id', $language->id)->first();

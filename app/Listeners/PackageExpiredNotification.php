@@ -36,8 +36,14 @@ class PackageExpiredNotification
         if (!$defaultPackageNotification) {
             $convertedExpiryDate = date('jS F Y', strtotime($event->user->package1_expiry_date));
             $notification = new Notification();
-            $notification->title = 'Default Package Expiration';
-            $notification->note = 'Your default package expires on ' . $convertedExpiryDate;
+            $notification->title_de = 'Default Package Expiration';
+            $notification->title_en = 'Default Package Expiration';
+            $notification->title_fr = 'Default Package Expiration';
+            $notification->title_it = 'Default Package Expiration';
+            $notification->note_de = 'Your default package expires on ' . $convertedExpiryDate;
+            $notification->note_en = 'Your default package expires on ' . $convertedExpiryDate;
+            $notification->note_fr = 'Your default package expires on ' . $convertedExpiryDate;
+            $notification->note_it = 'Your default package expires on ' . $convertedExpiryDate;
             $notification->notifiable_id = $event->user->id;
             $notification->notifiable_type = 'App\Models\User';
             $notification->save();

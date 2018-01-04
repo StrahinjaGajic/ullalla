@@ -185,9 +185,6 @@ class LocalController extends Controller
         $request->merge(['photos' => storeAndGetUploadCareFiles(request('photos'))]);
         $request->merge(['photos' => substr($request->photos, -2, 1)]);
         $request->merge(['photos' => (int) $request->photos]);
-        $this->validate($request, [
-            'photos' => 'numeric|min:4',
-        ]);
 
         $local->photo = storeAndGetUploadCareFiles(request('photo'));
         $local->videos = storeAndGetUploadCareFiles(request('video'));
@@ -273,7 +270,7 @@ class LocalController extends Controller
             $request->merge(['photos_'. $girl->id => $reqPhotos]);
             $this->validate($request, [
                 'nickname_'. $girl->id => 'required|min:4|max:20',
-                'photos_'. $girl->id => 'numeric|min:4',
+                'photos_'. $girl->id => 'numeric|min:4|max:9',
             ]);
             $nickname = 'nickname_'. $girl->id;
             $girl->nickname = $request->$nickname;
@@ -292,7 +289,7 @@ class LocalController extends Controller
         $request->merge(['newPhotos' => (int) $request->photos]);
         $this->validate($request, [
             'nickname' => 'required|min:4|max:20',
-            'newPhotos' => 'numeric|min:4',
+            'newPhotos' => 'numeric|min:4|max:9',
         ]);
         $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
         return redirect()->back()->with('success', __('messages.success_changes_saved'));

@@ -27,7 +27,7 @@
                 @endif
                 <div class="form-group">
                     <div class="image-preview-multiple">
-                        <input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                        <input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                         <div class="_list">
                             @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
                             <div class="_item">

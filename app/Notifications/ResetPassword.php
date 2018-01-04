@@ -44,7 +44,7 @@ class ResetPassword extends Notification
     {
         $url = url('password/reset', $this->token);
 
-        return (new MailMessage)->from('hello@ullala.com', 'Ullalla')
+        return (new MailMessage)->from('hello@ullala.com', 'Ullall?')
                                 ->action('Reset Password Request', $url)
                                 ->view('emails.passwordReset');
     }

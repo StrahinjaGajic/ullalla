@@ -39,7 +39,11 @@
 					@endif
 					@if($user->is_active_gotm_package)
 					<tr>
-						<td>{{ __('headings.gotm_package') }}</td>
+						@if($user->sex == 'transsexual')
+							<td>{{ __('headings.totm_package') }}</td>
+						@else
+							<td>{{ __('headings.gotm_package') }}</td>
+						@endif
 						<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
 						<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
 					</tr>
@@ -102,7 +106,11 @@
 
 			@if($showGotmPackages)
 			<div class="col-xs-12">
-				<h3>{{ __('headings.gotm_package') }}</h3>
+				@if($user->sex == 'transsexual')
+					<h3>{{ __('headings.totm_package') }}</h3>
+				@else
+					<h3>{{ __('headings.gotm_package') }}</h3>
+				@endif
 				<table class="table packages-table package-girl-month">
 					<thead>
 						<tr>
@@ -258,7 +266,7 @@
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullalla',
+			name: 'Ullall?',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	

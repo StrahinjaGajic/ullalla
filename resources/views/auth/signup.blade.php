@@ -17,8 +17,9 @@
                     {{-- <label for="user_type" class="col-3 col-form-label">{{ __('fields.type') }}</label> --}}
                     <div class="col-9">
                         <select name="user_type" id="user_type" class="form-control {{ $errors->has('user_type') ? ' form-control-error' : '' }}">
+                            @php ($var = 'user_type_name_'. config()->get('app.locale'))
                             @foreach ($userTypes as $userType)
-                            <option value="{{ $userType->id }}">{{ $userType->user_type_name }}</option>
+                            <option value="{{ $userType->id }}">{{ $userType->$var }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('user_type'))

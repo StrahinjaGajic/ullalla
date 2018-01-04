@@ -44,7 +44,8 @@
 						<ul>
 							<li>
 								@foreach ($chunkedServices as $service)
-								<label class="control control--checkbox"><a>{{ $service->service_name }}</a>
+									@php ($var = 'user_type_name_'. config()->get('app.locale'))
+								<label class="control control--checkbox"><a>{{ $service->$var }}</a>
 									<input type="checkbox" name="services[]" {{ in_array($service->id, $user->services->pluck('id')->toArray()) ? 'checked' : '' }} value="{{ $service->id }}">
 									<div class="control__indicator"></div>
 								</label>

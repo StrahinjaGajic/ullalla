@@ -302,10 +302,11 @@ function parseChunkedServices($user) {
         $user->services()->chunk(5, function ($services) {
             $html = '';
             $html .= '<tr>';
+            $var = 'service_name_'. config()->get('app.locale');
             foreach ($services as $service) {
                 $html .= '<td>
 				<i class="fa fa-check"></i>'
-                    . $service->service_name .
+                    . $service->$var .
                     '</td>';
             }
             $html .= '</tr>';

@@ -12,8 +12,8 @@ class HomeController extends Controller
 {
 	public function getIndex()
 	{
-		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->get();
-		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->get();
+		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
+		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
 
 		$user = Auth::user();
 		$defaultPackageExpired = null;
