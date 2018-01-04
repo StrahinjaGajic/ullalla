@@ -38,13 +38,8 @@
 								</select>
 							</div>
 							<div class="form-group">
-<<<<<<< HEAD
-								<label class="control-label">{{ __('fields.sex') }}*</label>
-								<select onclick="changeSex()" id="sex" name="sex" class="form-control">
-=======
 								<label class="control-label">{{ __('fields.sex') }} *</label>
-								<select name="sex" class="form-control">
->>>>>>> 653d6983d30dbb3593d91c8d257b4614efebb9a0
+								<select onclick="changeSex()" id="sex" name="sex" class="form-control">
 									<option value="female">{{ __('fields.female') }}</option>
 									<option value="transsexual">{{ __('fields.transsexual') }}</option>
 								</select>
@@ -625,7 +620,7 @@
 							</div>
 						</div>
 						<div class="col-xs-12">
-							<h3>{{ __('headings.gotm') }}</h3>
+							<h3 id="gotm-totm">{{ __('headings.gotm') }}</h3>
 							<div style="overflow-x: auto;">
 							<table class="table packages-table package-girl-month">
 								<thead>
@@ -749,9 +744,16 @@ $('.package_activation').each(function () {
 });
 var choosenSex = "female";
 function changeSex(){
+	var gotm = '{{ __('headings.gotm') }}';
+	var totm = '{{ __('headings.totm') }}';
 	var select = document.getElementById("sex");
-	var choosenSex = e.options[select.selectedIndex].value;
-	console.log(choosenSex);
+	var choosenSex = select.options[select.selectedIndex].value;
+	var h3 = document.getElementById("gotm-totm");
+	if(choosenSex == 'transsexual'){
+		h3.innerHTML = totm;
+	}else{
+		h3.innerHTML = gotm;
+	}
 }
 
 ////////// 2. UPLOAD CARE ////////
