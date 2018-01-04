@@ -156,6 +156,9 @@ keyframes square-spin {
         width: 230px;
     }
 }
+
+
+
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
     #city {
         width: 186px;
@@ -165,6 +168,22 @@ keyframes square-spin {
         width: 244px;
     }
 }
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+
+    
+        .containere1 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    #city {
+        width: 224px;
+    }
+}
+
+
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
 
 }

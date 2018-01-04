@@ -73,10 +73,45 @@ iPad 3
 **********/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
 /* Styles */
+        .home-4 .fas8-slider-content {
+    /* padding: 50px 0 50px 100px; */
+    padding: 0 0 0 110px;
+    text-align: center;
+    margin-right: 450px;
+    display: block;
+}
+    
+    .home-4 .layer-2-2 h2.title2, .home-4 .layer-1-2 h2.title2 {
+    font-size: 65px;
+    }
+    
+    .home-4 .fas7-slider-content {
+        padding: 0;
+        margin-left: 270px;
+    }
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-/* Styles */
+    .home-4 .fas8-slider-content {
+    padding: 0;
+    text-align: center;
+    margin-right: 200px;
+    display: block;
+}
+    
+    .home-4 .layer-2-2 h2.title2, .home-4 .layer-1-2 h2.title2 {
+    font-size: 35px;
+        margin: 0 0 20px;
+    }
+    
+    .title1 {
+        margin: 0 0 20px;
+    }
+    
+        .home-4 .fas7-slider-content {
+        padding: 0;
+        margin-left: 270px;
+    }
 }
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
