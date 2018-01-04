@@ -220,11 +220,30 @@ keyframes square-spin {
     .home-4 .fas8-slider-content {
         padding: 0!important;
         margin-right: 300px!important;
+        margin-top: 50px;
+    }
+    
+    .home-4 .fas7-slider-content {
+        margin-top: 50px;
     }
     
     
 }
 
+
+@media (max-height:375px) and (max-width:812px) {
+    .home-4 .fas8-slider-content {
+        margin-top: 0px;
+    }
+    
+    .home-4 .fas7-slider-content {
+        margin-top: 0px;
+    }
+    
+    #city {
+        width: 224px!important;
+    }
+}
 
 
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
