@@ -364,7 +364,7 @@ li.search-hover.home-1:hover .search { top: -7px;
 }    
 .header-area {background: #999 none repeat scroll 0 0;position: static;
 }
-.header-area.home-1 .logo-img {text-align: center;padding: 19px 0px;
+.header-area.home-1 .logo-img {text-align: center;
 }       
 .header-link-area ul.sub-menu {z-index: 33334444;
 }
@@ -774,4 +774,5 @@ li.search-hover.home-1:hover .search { top: 99%;
    
     
 }
- 
+
+     

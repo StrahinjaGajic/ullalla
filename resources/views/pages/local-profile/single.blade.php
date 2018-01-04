@@ -35,9 +35,17 @@
                                 <img id="is_image_large" class="expand" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}" alt="">
                             </a>
                             <div id="myModal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img01">
-                                <div id="caption"></div>
+								<span class="close">&times;</span>
+								<div class="modal-dialog modal-md">
+									
+									<div class="modal-content">
+									<img id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
+                                   <div class="prev-next">    
+                                    <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
+                                    <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+                                        </div>
+                                      </div>
+                                      </div> 
                             </div>
                         </div>
                         <div class="single-zoom-thumb">
@@ -219,5 +227,72 @@ span.onclick = function() {
         e.preventDefault();
         $('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
     });
+</script>
+
+
+<script>
+    
+    var modalImg = document.getElementById("img01");
+        
+        var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
+        
+        
+        function prev () {
+            var now = modalImg.getAttribute("src").substr(-19 , 1);
+            
+            if (now == 0) {
+                
+                var prev = all;
+            }
+            
+            else {
+                var prev = now - 1;
+            }
+            
+            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+             
+            
+            var src = src + "nth/"+prev+"/-/resize/490x560/";
+            
+            modalImg.setAttribute("src", src); 
+
+        }
+        
+        function next () {
+            
+            
+            var now = modalImg.getAttribute("src").substr(-19 , 1);
+            
+            now = parseInt(now);
+
+            
+            if (now == all) {
+                
+                var next = 0;
+            }
+            
+            else {
+                var next = now + 1;
+            }
+            
+            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+             
+            
+            var src = src + "nth/"+next+"/-/resize/490x560/";
+            
+            modalImg.setAttribute("src", src);   
+
+
+        }
+        
+    
+</script>
+
+
+
+<script>
+    $('.modal').click(function(e) {
+    if($(e.target).is('.modal'))  $(this).fadeOut(175);
+});
 </script>
 @stop

@@ -20,7 +20,7 @@
     <div class="col-sm-10 profile-info">
         {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/gallery/store', 'method' => 'PUT']) !!}
         <h3 style="margin-bottom: 40px;">{{ __('headings.gallery') }}</h3>
-        <div class="row">
+        <div class="row" style="margin-left: 1px;">
             <h1>{{ __('headings.logo') }}</h1>
             <div class="form-group">
                 <div class="image-preview">

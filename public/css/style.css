@@ -1409,6 +1409,7 @@ input[list] {
     top: 0;
     right: 30px;
     padding-left: 10px;
+    z-index: 5;
 }
 
 .single-zoom-thumb::after {
@@ -1969,7 +1970,7 @@ span.compare-icon {
     color: #3e3e3e;
     font-size: 12px;
     font-weight: 400;
-    margin: 0 0 40px;
+    margin: 0 0 20px;
     overflow: hidden;
     padding: 11px 20px;
     position: relative;
@@ -2164,6 +2165,10 @@ a.shop-name {
 .pro-deal-text.shop {
     margin-top: 10px;
     padding: 0;
+}
+
+.pac-container.pac-logo::after {
+    display: none;
 }
 
 
@@ -2499,8 +2504,8 @@ table.services-table td {
 
 a.geolocation-button {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 0px;
+    right: 0px;
     cursor: pointer;
 }
 
@@ -2552,3 +2557,44 @@ img.geolocation-image {
     -webkit-transform: scale(1.0);
   }
 }
+
+/*** MEDIA ***/
+
+@media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    p {
+        font-size: 12px;
+    }
+}
+
+
+
+@media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
+
+}
+@media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+
+}
+@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+}
+@media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
+
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

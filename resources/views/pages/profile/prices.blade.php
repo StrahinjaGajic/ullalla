@@ -25,14 +25,14 @@
             </div>
             {!! Form::model($user, ['url' => '@' . $user->username . '/prices/store', 'method' => 'put']) !!}
             <div class="price_section">
-                <div class="col-xs-3">
+                <div class="col-lg-3 col-xs-12">
                     <div class="form-group">
                         <label>{{ __('headings.duration') }}</label>
                         <input type="text" class="form-control" name="service_duration" style="margin-top: 0px;" />
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-lg-2 col-xs-12">
                     <div class="form-group">
                         <label>{{ __('fields.unit') }}</label>
                         <select name="service_price_unit" class="form-control">
@@ -43,14 +43,14 @@
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-lg-2 col-xs-12">
                     <div class="form-group">
                         <label>{{ __('headings.price') }}</label>
                         <input type="text" class="form-control" name="service_price" style="margin-top: 0px;" />
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-lg-2 col-xs-12">
                     <div class="form-group">
                         <label>{{ __('fields.currency') }}</label>
                         <select name="service_price_currency" class="form-control">
@@ -61,7 +61,7 @@
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-lg-2 col-xs-12">
                     <div class="form-group">
                         <label>{{ __('fields.type') }}</label>
                         <select name="price_type" id="price_type" class="form-control">
@@ -72,10 +72,12 @@
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-xs-12">
+                <div class="col-lg-2 col-xs-12">
                     <div class="form-group">
                         <input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
+                        <div class="save">
                         <button type="submit" class="add-new-price btn btn-default">{{ __('buttons.add_new_price') }}</button>
+                        </div>
                     </div>
                 </div>
             </div>

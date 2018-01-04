@@ -20,7 +20,7 @@
         <div class="col-sm-10 profile-info">
             {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
             <h3>{{ __('headings.gallery') }}</h3>
-            <div class="row">
+            <div class="row" style="margin-left:1px;">
                 <h4>{{ __('headings.photos') }}</h4>
                 @if(Session::has('success'))
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -47,7 +47,9 @@
                     @endif
                 </div>
             </div>
+            <div class="save">
             <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

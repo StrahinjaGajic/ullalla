@@ -20,6 +20,7 @@
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
 			@if($user->is_active_d_package || $user->is_active_gotm_package)
+			<div class="col-xs-12">
 			<h3>{{ __('headings.active_packages') }}</h3>
 			<table class="table">
 				<thead>
@@ -50,6 +51,7 @@
 					@endif
 				</tbody>
 			</table>
+			</div>
 			@endif
 			<div class="col-xs-12">
 				@if(Session::has('success'))
@@ -68,6 +70,7 @@
 				@if($errors->has('ullalla_package'))
 				<p class="has-error">{{ __('validation.default_package_required') }}</p>
 				@endif
+				
 				<table class="table packages-table">
 					<thead>
 						<tr>
@@ -141,7 +144,9 @@
 						@endforeach
 					</tbody>
 				</table>
+				<div class="save">
 				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				</div>
 			</div>
 			@endif
 			<input type="hidden" name="stripeToken" id="stripeToken">

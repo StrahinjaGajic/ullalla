@@ -1,8 +1,12 @@
-<header>
+<head>
+    <link rel="stylesheet" href="{{ asset('css/components/home_nav.css') }}">
+</head>
+  
+   <header>
     <header id="toTop">
         <div class="header-area home-4">
             <div class="container">
-                <div class="fixed"><a href="/"><img src="{{ asset('img/logo/logo.png') }}" alt=""></a></div>
+                <div class="fixed logo-img home-1"><a href="/"><img id="home_logo" src="{{ asset('img/logo/logo.png') }}" alt=""></a></div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="top-menu-area hidden-sm hidden-xs">

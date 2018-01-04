@@ -721,7 +721,7 @@ pre {
     z-index: 99;
 }
 
-input[type="text"] {
+input[type="text"], [type="password"], [type="email"] {
     font: 15px/24px "Lato", Arial, sans-serif;
     width: 100%;
     color: #4a6e78;
@@ -1014,9 +1014,7 @@ input[list] {
     min-width: 59px;
 }
 
-form{
-    margin-left: 15px;
-}
+
 
 .btn-default {
     color: white;
@@ -1342,3 +1340,160 @@ table.working-times-table .control--checkbox a,
 .skype-name {
     clear: both;
 }
+
+
+
+/*** MEDIA ***/
+
+@media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    .vertical-menu {
+        width: 100%;
+    }
+    
+    .save {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .profile-info {
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .input-select {
+        width: 270px;
+    }
+    
+    #about {
+        margin-right: 15px;
+    }
+    
+    .table > tbody > tr > td {
+        padding: 8px;
+    }
+    
+    .image-preview-multiple ._list {
+        text-align: center;
+    }
+    
+    #video {
+        width: 95%;
+        height: auto;
+        margin-top: 30px;
+    }
+    
+    .control {
+        margin-left: 0px;
+    }
+    
+    .table {
+        table-layout: fixed;
+        word-wrap: break-word;
+        font-size: 12px;
+    }
+    
+    .product-description-tab.custom-tab .nav > li > a {
+        font-size: 14px;
+    }
+    
+            #home_logo {
+        height: 81px!important;
+        width: 153px!important;
+    }
+    
+        .mobile-menu-area {
+    padding: 10px 0 35px;
+}
+}
+
+
+
+@media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
+
+}
+
+
+
+@media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+        .mobile-menu-area {
+    padding: 43px 0;
+}
+        .mobile-menu-area.home-4 {
+    padding: 35px 0 35px;
+}
+    #city {
+        width: 359px;
+    }
+    
+    .filters-reset {
+        text-align: center;
+    }
+    
+    .product-img a.a-img {
+        text-align: center;
+    }
+    
+    .vertical-menu {
+        width: 100%;
+    }
+    
+    .profile-info {
+        width: 100%;
+    }
+    
+    .save {
+        text-align: center;
+    }
+    
+    .control {
+        margin-left: 0px;
+    }
+    
+    #home_logo {
+        height: 81px!important;
+        width: 153px!important;
+    }
+    
+        .mobile-menu-area {
+    padding: 13px 0 35px;
+}
+}
+@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+}
+@media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
+
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

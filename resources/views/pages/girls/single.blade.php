@@ -36,9 +36,17 @@
 							<a href="#">
 								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
-									<span class="close">&times;</span>
-									<img class="modal-content" id="img01">
-									<div id="caption"></div>
+								<span class="close">&times;</span>
+								<div class="modal-dialog modal-md">
+									
+									<div class="modal-content">
+									<img id="img01" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}">
+                                   <div class="prev-next">    
+                                    <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
+                                    <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+                                        </div>
+                                      </div>
+                                      </div>      
 								</div>
 							</a>
 						</div>
@@ -219,7 +227,7 @@
 								</div>
 								@endif
 								<div class="tab-pane" id="girl-map">
-									<div id="map" style="width: 600px; height: 600px;"></div>
+									<div id="map" style="width: 100%; height: 450px;"></div>
 								</div>
 							</div>
 						</div>
@@ -315,7 +323,61 @@ var modal = document.getElementById('myModal');
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementsByClassName('expand')[0];
 
+        
 var modalImg = document.getElementById("img01");
+        
+        var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
+        
+        
+        function prev () {
+            var now = modalImg.getAttribute("src").substr(-19 , 1);
+            
+            if (now == 0) {
+                
+                var prev = all;
+            }
+            
+            else {
+                var prev = now - 1;
+            }
+            
+            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+             
+            
+            var src = src + "nth/"+prev+"/-/resize/490x560/";
+            
+            modalImg.setAttribute("src", src); 
+
+        }
+        
+        function next () {
+            
+            
+            var now = modalImg.getAttribute("src").substr(-19 , 1);
+            
+            now = parseInt(now);
+
+            
+            if (now == all) {
+                
+                var next = 0;
+            }
+            
+            else {
+                var next = now + 1;
+            }
+            
+            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+             
+            
+            var src = src + "nth/"+next+"/-/resize/490x560/";
+            
+            modalImg.setAttribute("src", src);   
+
+
+        }
+        
+        
 var captionText = document.getElementById("caption");
 img.onclick = function(){
 	modal.style.display = "block";
@@ -342,5 +404,13 @@ span.onclick = function() {
 		$('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
 	});
 </script>
+
+<script>
+    $('.modal').click(function(e) {
+    if($(e.target).is('.modal'))  $(this).fadeOut(175);
+});
+</script>
+
+
 
 @stop
