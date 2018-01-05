@@ -31,7 +31,7 @@
 							<th>{{ __('headings.level') }}</th>
 						</tr>
 					</thead>
-					@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
+					@php $var = 'spoken_language_name_'. config()->get('app.locale') @endphp
 					<tbody class="language-list">
 						@foreach($spokenLanguages->take(7) as $language)
 						<tr>

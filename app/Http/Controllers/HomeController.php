@@ -7,11 +7,23 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+Use Plivo;
 
 class HomeController extends Controller
 {
 	public function getIndex()
 	{
+
+
+//		$params = array(
+//			'src' => '+381603198250',
+//			'dst' => '+381621008770',
+//			'text' => 'Hello world!'
+//		);
+//
+//		$response = Plivo::sendSMS($params);
+//dd($response);
+
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
 
