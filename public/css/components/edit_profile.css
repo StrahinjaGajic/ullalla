@@ -1345,6 +1345,10 @@ table.working-times-table .control--checkbox a,
 
 /*** MEDIA ***/
 
+
+
+
+
 @media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     .vertical-menu {
         width: 100%;
@@ -1406,6 +1410,20 @@ table.working-times-table .control--checkbox a,
 }
 }
 
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+    .vertical-menu {
+        width: 100%;
+    }
+        .profile-info {
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    #city {
+        width: 359px;
+    }
+}
 
 
 @media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
@@ -1458,8 +1476,19 @@ table.working-times-table .control--checkbox a,
     padding: 13px 0 35px;
 }
 }
-@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 
+@media (max-width:850px) {
+    .vertical-menu {
+        width: 100%;
+    }
+    
+    .profile-info {
+        width: 100%;
+    }
+}
+
+@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    
 }
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
 
