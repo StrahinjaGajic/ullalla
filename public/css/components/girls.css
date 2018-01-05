@@ -463,6 +463,10 @@ keyframes square-spin {
 
 /*** MEDIA ***/
 /* Smartphones (portrait) ----------- */
+@media only screen and (min-width : 320px) and (max-width: 767px) {
+    
+}
+
 @media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     
     #city {
@@ -483,65 +487,25 @@ keyframes square-spin {
         font-size: 14px;
     }
     
-    .plyr audio, .plyr video {
-        width: 100%;
-        height: auto !important;
-        vertical-align: middle;
-        border-radius: inherit;
-    }
+.plyr audio, .plyr video {
+    width: 100%;
+    height: auto !important;
+    vertical-align: middle;
+    border-radius: inherit;
+}
     
-    audio, canvas, progress, video {
-        width: 100%;
-    }
-    
-    #home_logo {
+        #home_logo {
         height: 81px!important;
         width: 153px!important;
     }
     
-    .mobile-menu-area {
-        padding: 10px 0 35px;
+        .mobile-menu-area {
+    padding: 10px 0 35px;
 }
     
     .product-content-shop {
         text-align: center;
         padding-top: 20px;
-    }
-    
-    
-    
-}
-
-@media only screen and (min-width : 320px) and (max-width: 767px) {
-    
-    audio, canvas, progress, video {
-    width: 100%;
-}
-    
-    .modal-content {
-        width: 80%;
-    }
-    
-}
-
-
-/* iPhone 4 ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
-    .vertical-menu {
-        width: 100%;
-    }
-        .profile-info {
-        margin: 0 auto;
-        width: 100%;
-    }
-    
-    #city {
-        width: 359px;
-    }
-    
-    .mean-container .mean-nav ul li li a {
-        height: 13px;
-        padding: 10px 10% 15px 10%;
     }
 }
 
@@ -575,12 +539,7 @@ keyframes square-spin {
     }
     
 
-
 }
-
-
-
-
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 
 }

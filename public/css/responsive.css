@@ -194,7 +194,7 @@ li.search-hover.home-1:hover .search { top: -7px;
 }
 .mobile-menu-area.home-4 { padding: 35px 0 35px;
 }    
-.home-4 .fas8-slider-content,.home-4 .fas7-slider-content,.home-5 .fas9-slider-content,.home-5 .fas10-slider-content {display: block;}     
+.home-4 .fas8-slider-content,.home-4 .fas7-slider-content,.home-5 .fas9-slider-content,.home-5 .fas10-slider-content {display: none;}     
 .mainmenu.home-4 nav > ul > li > a { margin-left: 30px;
 }    
 .banner-area.home-4-2,.banner-area-2.home-4 {margin: 25px 0 0;
