@@ -212,7 +212,7 @@
 												@php 
 													$var = 'spoken_language_name_'. config()->get('app.locale'); 
 												@endphp
-												<td>{{ $spokenLanguage->spoken_language_name_en }}</td>
+												<td>{{ $spokenLanguage->spoken_language_name }}</td>
 												<td>
 													@for($level = 1; $level <= 5; $level++)
 													@if($level <= $spokenLanguage->pivot->language_level)
