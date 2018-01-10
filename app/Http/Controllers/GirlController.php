@@ -20,7 +20,8 @@ class GirlController extends Controller
 		$cantons = Canton::with('users')->get();
 
 		$orderBy = $request->order_by ? $request->order_by : null;
-		$show = $request->show ? $request->show : null;
+        $mode = $request->mode == 'list' ? 'list' : 'grid';
+		$show = $request->show ? $request->show : 9;
 		$radius = $request->radius ? $request->radius : null;
 
 		if ($radius && is_numeric($radius) && Session::has('lat') && Session::has('lng')) {
@@ -74,12 +75,12 @@ class GirlController extends Controller
 		if (Session::has('users')) {
 			$users = Session::pull('users');
 		} else {
-			$users = isset($show) ? $users->paginate($show) : $users->paginate(9);
+			$users = $users->paginate($show);
 		}
 
 		$request->flash();
 
-		return view('pages.girls.index', compact('services', 'users', 'cantons', 'spokenLanguages', 'pricesTypes', 'maxPrice'));
+		return view('pages.girls.index', compact('services', 'users', 'cantons', 'spokenLanguages', 'pricesTypes', 'maxPrice', 'mode'));
 	}
 
 	public function getGirl($nickname)

@@ -90,8 +90,13 @@
                             <div class="tab-bar">
                                 <div class="tab-bar-inner">
                                     <ul role="tablist" class="nav nav-tabs">
-                                        <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span></a></li>
-                                        <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span></a></li>
+                                        <li class="{{ $mode == 'grid' ? 'active' : '' }}">
+                                            <a title="Grid" href="{{ urldecode(route('locals', array_merge(request()->query(), ['mode' => 'grid']), false)) }}"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ $mode == 'list' ? 'active' : '' }}">
+                                            <a title="List" href="{{ urldecode(route('locals', array_merge(request()->query(), ['mode' => 'list']), false)) }}"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+                                            </a>
                                     </ul>
                                 </div>
                                 <div class="toolbar">
@@ -120,7 +125,7 @@
                             </div>
                             <div class="tab-content">
                                 @if ($locals->count())
-                                <div id="shop-product" class="tab-pane active">
+                                <div id="shop-product" class="tab-pane {{ $mode == 'grid' ? 'active' : '' }}">
                                     <div class="row">
                                         @foreach($locals as $local)
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -145,7 +150,7 @@
                                 </div>
                                 <div id="shop-list" class="tab-pane">
                                     @foreach($locals as $local)
-                                    <div class="single-shop single-product">
+                                    <div class="single-shop single-product {{ $mode == 'list' ? 'active' : '' }}">
                                         <div class="row">
                                             <div class="single-shop">
                                                 <div class="single-product">
@@ -181,8 +186,13 @@
                             <div class="tab-bar tab-bar-bottom">
                                 <div class="tab-bar-inner">
                                     <ul role="tablist" class="nav nav-tabs">
-                                        <li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span></a></li>
-                                        <li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span></a></li>
+                                        <li class="{{ $mode == 'grid' ? 'active' : '' }}">
+                                            <a title="Grid" href="{{ urldecode(route('locals', array_merge(request()->query(), ['mode' => 'grid']), false)) }}"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ $mode == 'list' ? 'active' : '' }}">
+                                            <a title="List" href="{{ urldecode(route('locals', array_merge(request()->query(), ['mode' => 'list']), false)) }}"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+                                            </a>
                                     </ul>
                                 </div>
                                 <div class="toolbar">
