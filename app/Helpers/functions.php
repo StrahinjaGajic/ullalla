@@ -227,7 +227,7 @@ function getContactFields() {
         'phone' => __('functions.phone'),
         'mobile' => __('functions.mobile'),
         'website' => __('functions.website'),
-        'contact_options' => [__('headings.available_apps') => 'contact_option_name'],
+        'contact_options' => ['available_apps' => 'contact_option_name'],
         'skype_name' => __('functions.skype_name'),
         'prefered_contact_option' => __('functions.prefered_contact_option'),
         'no_withheld_numbers' => __('functions.no_withheld_numbers'),
