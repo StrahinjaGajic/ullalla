@@ -210,7 +210,7 @@
 											@foreach($user->spoken_languages as $spokenLanguage)
 											<tr>
 												@php 
-													$var = 'spoken_language_name_'. config()->get('app.locale'); 
+													$var = 'spoken_language_name_'. config()->get('app.locale');
 												@endphp
 												<td>{{ $spokenLanguage->spoken_language_name }}</td>
 												<td>

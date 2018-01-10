@@ -88,4 +88,9 @@ return [
     'map'=> 'Map',
     'i_o_s_f'=> 'I Offer Services For',
 
+    #notifications
+    'local_default_package_expiration_title' => 'Local Default Package Expiration',
+    'default_package_expiration_title' => 'Default Package Expiration',
+    'gotm_package_expiration_title' => 'Girl of The Month Package Expiration',
+
 ];
