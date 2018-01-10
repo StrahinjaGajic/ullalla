@@ -25,7 +25,8 @@ class DownForMaintenance
             '109.122.99.8',
             '24.135.165.252',
             '212.41.97.214',
-            '77.243.25.10',
+            '77.243.22.147',
+            '212.41.121.52',
         ];
 
         if (app()->environment() == 'production' && !in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)) {

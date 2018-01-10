@@ -43,7 +43,7 @@
 									<li class="geolocation">
 										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" />
 										<a onclick="getLocation();" class="geolocation-button">
-                                            <button type="button" class="btn go"><div class="span">Go!</div></button>
+											<button type="button" class="btn go"><div class="span">Go!</div></button>
 										</a>
 									</li>
 									<li>
@@ -581,12 +581,12 @@
 	});
 </script>
 
-                            <script>
-                                $(document).ready(function(){
-                                    $(".go").click(function(){
-                                        $(".go").addClass("square-spin");
-                                        $(".span").addClass("square-spin");
-                                    });
-                                });
-                            </script>
+<script>
+	$(document).ready(function(){
+		$(".go").click(function(){
+			$(".go").addClass("square-spin");
+			$(".span").addClass("square-spin");
+		});
+	});
+</script>
 @stop
