@@ -635,5 +635,6 @@
         var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
         var maxFiles = '{{ __('validation.max_files') }}';
     </script>
+   
 @stop
 
