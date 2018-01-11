@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
 @section('content')
@@ -17,7 +18,7 @@
             {!! parseEditProfileMenu('contact') !!}
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::model($user, ['url' => '@' . $user->username . '/contact/store', 'method' => 'put']) !!}
+            {!! Form::model($user, ['url' => '@' . $user->username . '/contact/store', 'method' => 'put', 'id' => 'contactForm']) !!}
             <h3>{{ __('headings.contact') }}</h3>
             @if(Session::has('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -54,8 +55,8 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
-                        <input class="effect-16" type="text" placeholder="" name="mobile" value="{{ $user->mobile }}">
                         <label>{{ __('fields.mobile') }}*</label>
+                        <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $user->mobile }}" id="mobile">
                         <span class="focus-border"></span>
                     </div>
                 </div>
@@ -126,6 +127,15 @@
 @stop
 
 @section('perPageScripts')
+<script>
+    var utilAsset = '{{ asset('js/utils.js') }}';
+    var invalidUrl = '{{ __('validation.url_invalid') }}';
+</script>
+<script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+<script src="{{ asset('js/utils.js') }}"></script>
+<script src="{{ asset('js/formValidation.min.js') }}"></script>
+<script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/phoneValidation.js') }}"></script>
 <script>
     $(function () {
         $('input#skype_contact').on('click', function () {

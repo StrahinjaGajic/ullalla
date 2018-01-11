@@ -23,11 +23,14 @@ class HomeController extends Controller
 //		$response = Plivo::sendSMS($params);
 //dd($response);
 
+
+
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
 		$field = 'title_'. config()->get('app.locale');
 
 		$user = Auth::user();
+
 		$defaultPackageExpired = null;
 		if ($user) {
 			if ($user->package1_id) {

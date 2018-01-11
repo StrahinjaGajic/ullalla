@@ -77,6 +77,8 @@ class ProfileController extends Controller
             'mobile_phone' => 'required',
         ]);
 
+        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
+
         // define inputs
         $defaultPackageInput = request('ullalla_package')[0];
         $monthGirlPackageInput = request('ullalla_package_month_girl');
@@ -162,7 +164,7 @@ class ProfileController extends Controller
             $user->smoker = request('smoker');
             $user->alcohol = request('alcohol');
             $user->about_me = request('about_me');
-            $user->photos = storeAndGetUploadCareFiles(request('photos'));
+            $user->photos = $photosUrl ? request('photos') : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->email = request('email');
             $user->website = request('website');
@@ -323,7 +325,8 @@ class ProfileController extends Controller
     public function postGallery()
     {
         $user = Auth::user();
-        $user->photos = storeAndGetUploadCareFiles(request('photos'));
+        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
+        $user->photos = $photosUrl ? request('photos') : null;
         $user->videos = storeAndGetUploadCareFiles(request('video'));
         $user->save();
 

@@ -229,7 +229,7 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
-								<input type="text" class="form-control" name="mobile"/>
+								<input type="tel" class="form-control" name="mobile" id="mobile" />
 							</div>
 						</div>
 						<div id="options" class="col-xs-12">
@@ -677,6 +677,12 @@
 
 @section('perPageScripts')
 <!-- Form Validation -->
+<script>
+	var utilAsset = '{{ asset('js/utils.js') }}';
+    var invalidUrl = '{{ __('validation.url_invalid') }}';
+</script>
+<script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+<script src="{{ asset('js/utils.js') }}"></script>
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
@@ -1114,7 +1120,6 @@ $(function () {
 	var olderThan = '{{ __('validation.older_than_18') }}';
 	var stringLength = '{{ __('validation.string_length') }}';
 	var numericError = '{{ __('validation.numeric_error') }}';
-	var invalidUrl = '{{ __('validation.url_invalid') }}';
 	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
 	var maxFiles = '{{ __('validation.max_files') }}';
 </script>
