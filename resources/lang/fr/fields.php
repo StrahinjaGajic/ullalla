@@ -80,7 +80,7 @@ return [
     'f' => 'F',
     'g' => 'G',
     'black' => 'Black',
-    'brow' => 'Brow',
+    'brown' => 'Brow',
     'green' => 'Green',
     'blue' => 'Blue',
     'gray' => 'Gray',
@@ -97,7 +97,7 @@ return [
     'mobile_phone' => 'Mobile Phone',
 
 
-
+    'sms_notify' => 'Receive SMS notifications',
 
 
 ];

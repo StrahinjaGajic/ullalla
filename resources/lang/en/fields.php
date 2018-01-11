@@ -97,7 +97,7 @@ return [
     'mobile_phone' => 'Mobile Phone',
 
 
-
+    'sms_notify' => 'Receive SMS notifications',
 
 
 ];

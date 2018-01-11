@@ -147,6 +147,9 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        numeric: {
+                            message: requiredNumeric
                         }
                     }
                 },
@@ -154,6 +157,9 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        numeric: {
+                            message: requiredNumeric
                         }
                     }
                 },

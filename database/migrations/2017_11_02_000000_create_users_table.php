@@ -48,6 +48,7 @@ class CreateUsersTable extends Migration
             $table->string('videos')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
+            $table->boolean('sms_notifications')->default(false);
             $table->string('website')->nullable();
             $table->string('prefered_contact_option')->nullable();
             $table->string('skype_name')->nullable();

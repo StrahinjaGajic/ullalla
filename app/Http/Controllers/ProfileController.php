@@ -71,9 +71,10 @@ class ProfileController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'nickname' => 'required',
-            'height' => 'required',
-            'weight' => 'required',
+            'height' => 'required|numeric',
+            'weight' => 'required|numeric',
             'about_me' => 'required',
+            'mobile_phone' => 'required',
         ]);
 
         // define inputs
@@ -167,6 +168,7 @@ class ProfileController extends Controller
             $user->website = request('website');
             $user->phone = request('phone');
             $user->mobile = request('mobile');
+            $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->prefered_contact_option = request('prefered_contact_option');
             $user->skype_name = request('skype_name');
             $user->no_withheld_numbers = request('no_withheld_numbers') ? '1' : '0';
@@ -341,11 +343,13 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
+            'mobile' => 'required',
             'skype_name' => 'required_with:contact_options.3,on'
         ], ['required_with' => __('validation.skype_required')]);
 
         $user->phone = request('phone');
         $user->mobile = request('mobile');
+        $user->sms_notifications = request('sms_notifications') ? '1' : '0';
         $user->website = request('website');
         $user->prefered_contact_option = request('prefered_contact_option');
         $user->skype_name = request('contact_options') && in_array('3', request('contact_options')) ? request('skype_name') : NULL;

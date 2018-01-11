@@ -42,7 +42,7 @@ function getAnswers() {
 }
 
 function getTypes() {
-    return [__('functions.asian'), __('functions.black'), __('functions.european'), __('functions.latina'), __('functions.india'), __('functions.arabian'), __('functions.mixed'), __('functions.other')];
+    return [__('functions.asian'), __('functions.black'), __('functions.european'), __('functions.latina'), __('functions.indian'), __('functions.arabian'), __('functions.mixed'), __('functions.other')];
 }
 
 function getFigures() {

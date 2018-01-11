@@ -49,10 +49,22 @@ class DeactivateUser extends Command
         $gotmPackageUsers = User::where('is_active_gotm_package', '1')->whereDate('package2_expiry_date', '<=', Carbon::now())->get();
         $defaultPackageLocals = Local::where('is_active_d_package', '1')->whereDate('package1_expiry_date', '<=', Carbon::now())->get();
 
+        $params = array(
+            'src' => '+38160319825',
+            'dst' => '+381603198250',
+            'text' => 'Hello world!'
+        );
+
+        Plivo::sendSMS($params);
+
         foreach ($defaultPackageUsers as $user) {
             $user->is_active_d_package = 0;
             $user->save();
-            Mail::to($user->email)->send(new DefaultPackageExpiredMail($user));
+            if ($user->sms_notifications == 1) {
+
+            } else {
+                Mail::to($user->email)->send(new DefaultPackageExpiredMail($user));
+            }
         }
 
         foreach ($gotmPackageUsers as $user) {
