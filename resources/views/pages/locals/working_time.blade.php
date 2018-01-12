@@ -178,9 +178,9 @@
 		var fromHrs = firstRow.find('select[name="time_from[1]"]').val();
 		var fromMin = firstRow.find('select[name="time_from_m[1]"]').val();
 		
-		// $.each(rows, function () {
+		$.each(rows, function () {
 			
-		// }):
+		}):
 	});
 </script>
 @stop
