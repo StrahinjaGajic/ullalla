@@ -590,41 +590,41 @@
     </script>
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    {{--<script>--}}
-        {{--let stripe = StripeCheckout.configure({--}}
-            {{--key: '{{ config('services.stripe.key') }}',--}}
-            {{--image: '{{ asset('img/logo.png') }}',--}}
-            {{--locale: 'auto',--}}
-            {{--token: function (token) {--}}
-                {{--var stripeEmail = $('#stripeEmail');--}}
-                {{--var stripeToken = $('#stripeToken');--}}
-                {{--stripeEmail.val(token.email);--}}
-                {{--stripeToken.val(token.id);--}}
-                {{--// submit the form--}}
-                {{--var username = '{{ $local->username }}';--}}
-                {{--var url = getUrl('/locals/@' + username + '/store');--}}
-                {{--console.log(url);--}}
-                {{--var token = $('input[name="_token"]').val();--}}
-                {{--var form = $('#profileForm');--}}
-                {{--var data = form.serialize();--}}
-                {{--// fire ajax post request--}}
-                {{--$.post(url, data)--}}
-                        {{--.done(function (data) {--}}
-                            {{--window.location.href = getUrl("");--}}
-                        {{--})--}}
-                        {{--.fail(function(data, textStatus) {--}}
-                            {{--$('.default-packages-section').find('.help-block').text(data.responseJSON.status);--}}
-                        {{--});--}}
-            {{--}--}}
-        {{--});--}}
-        {{--$('#profileForm').on('submit', function (e) {--}}
-            {{--stripe.open({--}}
-                {{--name: 'Ullall?',--}}
-                {{--description: '{{ $local->email }}',--}}
-            {{--});--}}
-            {{--e.preventDefault();--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        let stripe = StripeCheckout.configure({
+            key: '{{ config('services.stripe.key') }}',
+            image: '{{ asset('img/logo.png') }}',
+            locale: 'auto',
+            token: function (token) {
+                var stripeEmail = $('#stripeEmail');
+                var stripeToken = $('#stripeToken');
+                stripeEmail.val(token.email);
+                stripeToken.val(token.id);
+                // submit the form
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                console.log(url);
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+        $('#profileForm').on('submit', function (e) {
+            stripe.open({
+                name: 'Ullall?',
+                description: '{{ $local->email }}',
+            });
+            e.preventDefault();
+        });
+    </script>
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
