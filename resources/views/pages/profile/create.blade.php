@@ -446,7 +446,7 @@
 						</div>
 						<div class="service-list">
 							<h3>{{ __('headings.service_list') }}</h3>
-							@foreach ($services->chunk(19) as $chunkedServices)
+							@foreach ($services->chunk(33) as $chunkedServices)
 							<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
 								@foreach($chunkedServices as $service)
 								<div class="form-group">
@@ -535,7 +535,7 @@
 										<td>{{ $price->service_duration }}</td>
 										<td>{{ $price->service_price }}</td>
 										<td>
-											<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price" onclick="return confirm('Are you sure?');">
+											<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
 												<span class="glyphicon glyphicon-trash"></span>
 											</a>
 										</td>
@@ -914,8 +914,6 @@ $(function () {
 	            var deleteButton = $('<a></a>', {
 	            	href: location.protocol + '//' + location.host + '/ajax/delete_price/' + data.newPriceID,
 	            	class: 'text-danger delete-price'
-	            }).on('click', function() {
-	            	return confirm('Are You Sure?');
 	            }).append(glyphiconSpan).appendTo(td3);
 
 	            row.append(td, td1, td2, td3).appendTo(tBody);
@@ -939,21 +937,25 @@ $(function () {
 $(function () {
 	$(".price-table-container").on("click", "a.delete-price", function(e) {
 		e.preventDefault();
-		var that = $(this);
-		var url = that.attr('href');
-		var priceID = url.split('/').pop();
-		$.ajax({
-			url: url,
-			type: 'get',
-			data: {price_id: priceID},
-			success: function (data) {
-				var tBody = that.closest('tbody');
-				that.closest('tr').remove();
-				if (tBody.children().length == 0) {
-					tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
-				}
-			}
-		});
+        var that = $(this);
+        var url = that.attr('href');
+        var priceID = url.split('/').pop();
+        if (confirm('{{ __('global.are_you_sure') }}')) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: {price_id: priceID},
+                success: function (data) {
+                    var tBody = that.closest('tbody');
+                    that.closest('tr').remove();
+                    if (tBody.children().length == 0) {
+                        tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
 	});
 });
 </script>
