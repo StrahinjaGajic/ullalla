@@ -151,9 +151,9 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div id="shop-list" class="tab-pane">
+                                    <div id="shop-list" class="tab-pane {{ $mode == 'list' ? 'active' : '' }}">
                                         @foreach($locals as $local)
-                                        <div class="single-shop single-product {{ $mode == 'list' ? 'active' : '' }}">
+                                        <div class="single-shop single-product">
                                             <div class="row">
                                                 <div class="single-shop">
                                                     <div class="single-product">
