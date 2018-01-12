@@ -17,7 +17,7 @@
 		</div>
 		<div class="col-sm-10 profile-info">
 			@if(Session::has('success'))
-				<div class="alert alert-success">{{ Session::get('success') }}</div>
+			<div class="alert alert-success">{{ Session::get('success') }}</div>
 			@endif
 			{!! Form::model($user, ['url' => '@' . $user->username . '/services/store', 'method' => 'put']) !!}
 			<h3>{{ __('headings.service_offered_for') }}:</h3>
@@ -38,13 +38,15 @@
 			</div>
 			<h3>{{ __('headings.service_list') }}</h3>
 			<div class="row">
-				@foreach ($services->chunk(13) as $chunkedServices)
+				@foreach ($services->chunk(22) as $chunkedServices)
 				<div class="col-sm-4">
 					<div class="layout-list">
 						<ul>
 							<li>
 								@foreach ($chunkedServices as $service)
-									@php ($var = 'service_name_'. config()->get('app.locale'))
+								@php 
+									$var = 'service_name_'. config()->get('app.locale');
+								@endphp
 								<label class="control control--checkbox"><a>{{ $service->$var }}</a>
 									<input type="checkbox" name="services[]" {{ in_array($service->id, $user->services->pluck('id')->toArray()) ? 'checked' : '' }} value="{{ $service->id }}">
 									<div class="control__indicator"></div>
@@ -57,7 +59,7 @@
 				@endforeach
 			</div>
 			<div class="save">
-			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			</div>
 			{!! Form::close() !!}
 		</div>

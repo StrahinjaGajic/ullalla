@@ -28,6 +28,7 @@ class HomeController extends Controller
 		$field = 'title_'. config()->get('app.locale');
 
 		$user = Auth::user();
+
 		$defaultPackageExpired = null;
 		if ($user) {
 			if ($user->package1_id) {

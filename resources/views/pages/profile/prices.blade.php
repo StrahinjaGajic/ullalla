@@ -20,7 +20,7 @@
             <div class="col-sm-12">
                 <h2>{{ __('headings.prices') }}</h2>
                 @if(Session::has('success'))
-                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
             {!! Form::model($user, ['url' => '@' . $user->username . '/prices/store', 'method' => 'put']) !!}
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
                         <div class="save">
-                        <button type="submit" class="add-new-price btn btn-default">{{ __('buttons.add_new_price') }}</button>
+                            <button type="submit" class="add-new-price btn btn-default">{{ __('buttons.add_new_price') }}</button>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                             <td>{{ $price->service_duration . ' ' . $price->service_price_unit }}</td>
                             <td>{{ $price->service_price . ' ' . strtoupper($price->service_price_currency) }}</td>
                             <td>
-                                <a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price" onclick="return confirm('{{ __('global.are_you_sure') }}');">
+                                <a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
@@ -124,7 +124,7 @@
         var priceType = $('select[name="price_type"]').val();
         var servicePriceUnit = $('select[name="service_price_unit"]').val();
         var servicePriceCurrency = $('select[name="service_price_currency"]').val();
-        var token = $(this).siblings('input').val();
+        var token = $(this).closest('div').siblings('input').val();
         $.ajax({
             url: location.protocol + '//' + location.host + '/ajax/add_new_price',
             type: 'post',
@@ -197,18 +197,22 @@ $(function () {
         var that = $(this);
         var url = that.attr('href');
         var priceID = url.split('/').pop();
-        $.ajax({
-            url: url,
-            type: 'get',
-            data: {price_id: priceID},
-            success: function (data) {
-                var tBody = that.closest('tbody');
-                that.closest('tr').remove();
-                if (tBody.children().length == 0) {
-                    tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+        if (confirm('{{ __('global.are_you_sure') }}')) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: {price_id: priceID},
+                success: function (data) {
+                    var tBody = that.closest('tbody');
+                    that.closest('tr').remove();
+                    if (tBody.children().length == 0) {
+                        tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            return false;
+        }
     });
 });
 </script>

@@ -29,6 +29,16 @@ function storeAndGetUploadCareFiles($file, $dbObject = null) {
     return $imageFile;
 }
 
+function sendPlivoMessage($src, $dst, $text) {
+    $params = array(
+        'src' => $src,
+        'dst' => $dst,
+        'text' => $text
+    );
+    // dd($params);
+    return \Plivo::sendSMS($params);
+}
+
 function getSexes() {
     return [__('functions.male'), __('functions.female'), __('functions.transsexual')];
 }
@@ -206,15 +216,15 @@ function parseSingleUserData($fields, $user) {
         $value = $user->$key;
         if ($value) {
             $html .= '<tr>
-			<td>' . $field . ':</td>
-			<td>';
+            <td>' . $field . ':</td>
+            <td>';
             if ($field == __('fields.nationality')) {
                 $html .= \App\Models\Country::where('id', $value)->value('citizenship');
             } else {
                 $html .= ucfirst($value);
             }
             $html .= '</td>
-			</tr>';
+            </tr>';
         }
     }
 
@@ -242,14 +252,14 @@ function parseSingleContactData($fields, $user) {
             if (is_array($field) && $value->count()) {
                 $keyInsideOfArray = key($field);
                 $html .= '<tr>
-				<td>' . $keyInsideOfArray . ':</td>
-				<td>';
+                <td>' . $keyInsideOfArray . ':</td>
+                <td>';
                 $html .= getDataAndCutLastCharacter($value, $field[$keyInsideOfArray]);
                 $html .= '</td></tr>';
             } else {
                 $html .= '<tr>
-				<td>' . $field . ':</td>
-				<td>';
+                <td>' . $field . ':</td>
+                <td>';
                 if (array_key_exists($value, getPreferedOptions())) {
                     $html .= getPreferedOptions()[$value];
                 } else {
@@ -282,8 +292,8 @@ function parseWorkplaceDate($fields, $user) {
     foreach ($fields as $key => $field) {
         if ($user->$key) {
             $html .= '<tr>
-			<td>' . $field . ':</td>
-			<td>';
+            <td>' . $field . ':</td>
+            <td>';
             $value = $user->$key;
             $explodedValue = explode('|', $value);
             if (isset($explodedValue[1])) {
@@ -305,9 +315,9 @@ function parseChunkedServices($user) {
             $var = 'service_name_'. config()->get('app.locale');
             foreach ($services as $service) {
                 $html .= '<td>
-				<i class="fa fa-check"></i>'
-                    . $service->$var .
-                    '</td>';
+                <i class="fa fa-check"></i>'
+                . $service->$var .
+                '</td>';
             }
             $html .= '</tr>';
             echo $html;

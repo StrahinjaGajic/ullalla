@@ -25,12 +25,15 @@
 					$workingTime = isJson($local->working_time) ? json_decode($local->working_time) : $local->working_time;
 					?>
 					<div class="form-group">
-						<div id="available_24_7">                    {{--PROVERITI AVAILABLE 24/7,MOGUCE DA JE VREDNOST IZ BAZE--}}
+						<div id="available_24_7" class="pull-left">                    {{--PROVERITI AVAILABLE 24/7,MOGUCE DA JE VREDNOST IZ BAZE--}}
 							<label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
 								<input type="checkbox" name="available_24_7" {{ stringHasString('Available 24/7', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
 							</label>
 						</div>
+						<div class="pull-right">
+                            <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
+                        </div>
 						<table class="table working-times-table">
 							<thead>
 								<tr>
@@ -167,5 +170,17 @@
 
 	});
 
+	$('#apply_to_all').on('click', function (e) {
+		e.preventDefault();
+		var workingTimesTable = $('.working-times-table');
+		var firstRow = workingTimesTable.find('tbody tr:first-child');
+		var rows = workingTimesTable.find('tbody tr');
+		var fromHrs = firstRow.find('select[name="time_from[1]"]').val();
+		var fromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+		
+		// $.each(rows, function () {
+			
+		// }):
+	});
 </script>
 @stop

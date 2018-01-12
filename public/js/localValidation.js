@@ -1,5 +1,26 @@
 $(function() {
     $('#profileForm')
+        .find('[name="mobile"]')
+            .intlTelInput({
+                initialCountry: 'auto',
+                geoIpLookup: function(callback) {
+                    var mobileInput = document.getElementById('mobile'),
+                        currentValue = mobileInput.value;
+                        mobileInput.value = '';
+                    $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "";
+                        callback(countryCode);
+                        setTimeout(function() {
+                            mobileInput.value = currentValue;
+                        }, 10);
+                    });
+                },
+                utilsScript: utilAsset,
+                autoPlaceholder: true,
+                separateDialCode: true,
+                preferredCountries: ['ch']
+            });
+    $('#profileForm')
         .steps({
             headerTag: 'h2',
             bodyTag: 'section',

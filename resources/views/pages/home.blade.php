@@ -236,6 +236,7 @@
 @php ($title = 'title_'. config()->get('app.locale'))
 @php ($note = 'note_'. config()->get('app.locale'))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 @if(Session::has('account_created_elite'))
     <script>
         swal(
@@ -356,7 +357,7 @@
                                 });
                             </script>
 
-                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
+                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize&sensor=true"></script>
 
                             <script>
                                 var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';

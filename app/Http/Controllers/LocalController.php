@@ -47,7 +47,8 @@ class LocalController extends Controller
             'street' => 'required|max:40',
             'city' => 'required|max:30',
             'zip' => 'required|max:10',
-            'phone' => 'required|max:20',
+            'phone' => 'required_without:mobile|max:20',
+            'mobile' => 'required_without:phone|max:20',
         ]);
 
         // get working time
@@ -152,9 +153,10 @@ class LocalController extends Controller
             'street' => 'required|max:40',
             'city' => 'required|max:30',
             'zip' => 'required|max:10',
-            'web' => 'required',
-            'phone' => 'required|max:20',
-        ]);
+            'phone' => 'required_without:mobile|max:20',
+            'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
+        ], ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
+        );
 
         $local = Auth::guard('local')->user();
         $local->username = request('username');
@@ -170,6 +172,8 @@ class LocalController extends Controller
         $local->zip = $request->zip;
         $local->web = $request->web;
         $local->phone = $request->phone;
+        $local->mobile = $request->mobile;
+        $local->sms_notifications = request('sms_notifications') ? '1' : '0';
 
         $local->save();
 

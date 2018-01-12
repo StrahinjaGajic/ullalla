@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
 @section('content')
@@ -147,6 +148,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.body_hair') }}</label>
 								<select name="body_hair" class="form-control">
+									<option value=""></option>
 									<option value="shaved">{{ __('fields.shaved') }}</option>
 									<option value="hairy">{{ __('fields.hairy') }}</option>
 									<option value="partial">{{ __('fields.partial') }}</option>
@@ -155,7 +157,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.intimate') }}</label>
 								<select name="intimate" class="form-control">
-									<option value=""></option>
 									<option value="shaved">{{ __('fields.shaved') }}</option>
 									<option value="hairy">{{ __('fields.hairy') }}</option>
 									<option value="partial">{{ __('fields.partial') }}</option>
@@ -229,7 +230,7 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
-								<input type="text" class="form-control" name="mobile"/>
+								<input type="tel" class="form-control" name="mobile" id="mobile" />
 							</div>
 						</div>
 						<div id="options" class="col-xs-12">
@@ -446,7 +447,7 @@
 						</div>
 						<div class="service-list">
 							<h3>{{ __('headings.service_list') }}</h3>
-							@foreach ($services->chunk(19) as $chunkedServices)
+							@foreach ($services->chunk(33) as $chunkedServices)
 							<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
 								@foreach($chunkedServices as $service)
 								<div class="form-group">
@@ -535,7 +536,7 @@
 										<td>{{ $price->service_duration }}</td>
 										<td>{{ $price->service_price }}</td>
 										<td>
-											<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price" onclick="return confirm('Are you sure?');">
+											<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
 												<span class="glyphicon glyphicon-trash"></span>
 											</a>
 										</td>
@@ -677,6 +678,12 @@
 
 @section('perPageScripts')
 <!-- Form Validation -->
+<script>
+	var utilAsset = '{{ asset('js/utils.js') }}';
+    var invalidUrl = '{{ __('validation.url_invalid') }}';
+</script>
+<script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+<script src="{{ asset('js/utils.js') }}"></script>
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
@@ -696,7 +703,6 @@ $(window).on('load',function(){
 		min: 0,
 		max: 5,
 		slide: function( event, ui ) {
-			console.log(ui.value);
 			$(this).next('input.spoken-language-input').val(ui.value);
 		}
 	});
@@ -793,7 +799,6 @@ function minDimensions(width, height) {
 	return function(fileInfo) {
 		var imageInfo = fileInfo.originalImageInfo;
 		if (imageInfo !== null) {
-			console.log();
 			if (imageInfo.width < width || imageInfo.height < height) {
 				throw new Error('{{ __('messages.min_dimensions') }}');
 			}
@@ -910,8 +915,6 @@ $(function () {
 	            var deleteButton = $('<a></a>', {
 	            	href: location.protocol + '//' + location.host + '/ajax/delete_price/' + data.newPriceID,
 	            	class: 'text-danger delete-price'
-	            }).on('click', function() {
-	            	return confirm('Are You Sure?');
 	            }).append(glyphiconSpan).appendTo(td3);
 
 	            row.append(td, td1, td2, td3).appendTo(tBody);
@@ -935,21 +938,25 @@ $(function () {
 $(function () {
 	$(".price-table-container").on("click", "a.delete-price", function(e) {
 		e.preventDefault();
-		var that = $(this);
-		var url = that.attr('href');
-		var priceID = url.split('/').pop();
-		$.ajax({
-			url: url,
-			type: 'get',
-			data: {price_id: priceID},
-			success: function (data) {
-				var tBody = that.closest('tbody');
-				that.closest('tr').remove();
-				if (tBody.children().length == 0) {
-					tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
-				}
-			}
-		});
+        var that = $(this);
+        var url = that.attr('href');
+        var priceID = url.split('/').pop();
+        if (confirm('{{ __('global.are_you_sure') }}')) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: {price_id: priceID},
+                success: function (data) {
+                    var tBody = that.closest('tbody');
+                    that.closest('tr').remove();
+                    if (tBody.children().length == 0) {
+                        tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
 	});
 });
 </script>
@@ -1099,7 +1106,7 @@ $(function () {
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullall?',
+			name: 'Ullallà',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	
@@ -1109,12 +1116,10 @@ $(function () {
 <!-- Validation variables -->
 <script type="text/javascript">
 	var requiredField = '{{ __('validation.required_field') }}';
-	var requiredNumeric = '{{ __('validation.numeric') }}';
 	var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
 	var olderThan = '{{ __('validation.older_than_18') }}';
 	var stringLength = '{{ __('validation.string_length') }}';
 	var numericError = '{{ __('validation.numeric_error') }}';
-	var invalidUrl = '{{ __('validation.url_invalid') }}';
 	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
 	var maxFiles = '{{ __('validation.max_files') }}';
 </script>

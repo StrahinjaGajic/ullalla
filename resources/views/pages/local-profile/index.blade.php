@@ -69,8 +69,11 @@
                                     <li>
                                         <?php $num = 1; ?>
                                         @foreach($types as $type)
+                                        @php 
+                                            $var = 'name_'. config()->get('app.locale');
+                                        @endphp
                                         <label class="control control--checkbox">
-                                            <a href="{{ urldecode(route('locals', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type->name }}
+                                            <a href="{{ urldecode(route('locals', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type->$var }}
                                                 <span>({{ \App\Models\Local::payed()->where('local_type_id', $type->id)->count() }})</span>
                                             </a>
                                             <input id="check_type_{{ $type->id }}" type="checkbox" name="types[]" value="{{ $type->id }}" {{ request('types') && in_array($type->id, request('types')) ? 'checked' : '' }}/>
@@ -148,9 +151,9 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div id="shop-list" class="tab-pane">
+                                    <div id="shop-list" class="tab-pane {{ $mode == 'list' ? 'active' : '' }}">
                                         @foreach($locals as $local)
-                                        <div class="single-shop single-product {{ $mode == 'list' ? 'active' : '' }}">
+                                        <div class="single-shop single-product">
                                             <div class="row">
                                                 <div class="single-shop">
                                                     <div class="single-product">
@@ -235,7 +238,8 @@
     </div>
     @stop
     @section('perPageScripts')
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize&sensor=true"></script>
     <script>
         var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
         $('#radius-ranger').slider({
