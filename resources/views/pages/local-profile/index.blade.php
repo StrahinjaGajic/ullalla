@@ -69,8 +69,11 @@
                                     <li>
                                         <?php $num = 1; ?>
                                         @foreach($types as $type)
+                                        @php 
+                                            $var = 'name_'. config()->get('app.locale');
+                                        @endphp
                                         <label class="control control--checkbox">
-                                            <a href="{{ urldecode(route('locals', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type->name }}
+                                            <a href="{{ urldecode(route('locals', getUrlWithFilters(request('types'), request()->query() , $num, 'types', $type), false)) }}">{{ $type->$var }}
                                                 <span>({{ \App\Models\Local::payed()->where('local_type_id', $type->id)->count() }})</span>
                                             </a>
                                             <input id="check_type_{{ $type->id }}" type="checkbox" name="types[]" value="{{ $type->id }}" {{ request('types') && in_array($type->id, request('types')) ? 'checked' : '' }}/>
