@@ -352,10 +352,9 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
-            'mobile' => 'required_with:sms_notifications,on',
+            'mobile' => 'required',
             'skype_name' => 'required_with:contact_options.3,on'
         ], [
-            'mobile.required_with' => __('validation.mobile_required_with_sms_checked'),
             'skype_name.required_with' => __('validation.skype_required'),
         ]);
 
