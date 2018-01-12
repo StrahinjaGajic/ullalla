@@ -40,8 +40,8 @@ return [
 
 	# working time
 	'available_24_7' => 'Available 24/7',
-	'show_as_night_escort' => 'Show As Night Escort',
-	'night_escort' => 'Night Escort',
+	'show_as_night_escort' => 'Also Available For Escort Services',
+	'night_escort' => 'Escort Services',
 	'mark_all' => 'Mark All',
 
 	# workplace

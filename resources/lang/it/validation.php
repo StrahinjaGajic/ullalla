@@ -105,6 +105,28 @@ return [
         ],
     ],
 
+
+    'skype_required' => 'Skype name is required',
+    'choose_package' => 'Please, choose the package',
+
+    /* Javascript Validation */
+    'max_files' => 'You must select at least 4 files',
+    'required_field' => 'This field is required',
+    'default_package_required' => 'Default package is required',
+    'url_invalid' => 'URL is not valid',
+    'numeric_error' => 'This field must be numeric',
+    'string_length' => 'This field must not exceed 200 characters',
+    'older_than_18' => 'You must be at least 18 years old',
+    'alpha_numerical' => 'The first name can only contain alphabetical characters',
+
+    /* Upload care validation */
+    'file_too_large' => 'File is too large',
+    'file_too_large_title' => 'Maximum size error',
+    'file_type' => 'Incorrect file type',
+    'file_type_title' => 'File Type Error.',
+    'min_photo_dimensions' => 'Minimum dimension of a photo should be 490x560',
+    'min_dimensions_title' => 'Minimum dimensions error',
+
     /*
     |--------------------------------------------------------------------------
     | Pasirinktiniai patvirtinimo atributai

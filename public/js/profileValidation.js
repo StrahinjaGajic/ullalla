@@ -201,7 +201,7 @@ $(document).ready(function() {
                             message: requiredField
                         },
                         numeric: {
-                            message: requiredNumeric
+                            message: numericError
                         }
                     }
                 },
@@ -211,7 +211,35 @@ $(document).ready(function() {
                             message: requiredField
                         },
                         numeric: {
-                            message: requiredNumeric
+                            message: numericError
+                        }
+                    }
+                },
+                sex_orientation: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                alcohol: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                smoker: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                intimate: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
                         }
                     }
                 },

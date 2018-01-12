@@ -45,7 +45,7 @@ class LocalProfileController extends Controller
 
         $request->flash();
 
-        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types'));
+        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types', 'mode'));
     }
 
     public function getLocal($username)

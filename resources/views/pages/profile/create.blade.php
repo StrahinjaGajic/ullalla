@@ -155,7 +155,6 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.intimate') }}</label>
 								<select name="intimate" class="form-control">
-									<option value=""></option>
 									<option value="shaved">{{ __('fields.shaved') }}</option>
 									<option value="hairy">{{ __('fields.hairy') }}</option>
 									<option value="partial">{{ __('fields.partial') }}</option>
@@ -1115,7 +1114,6 @@ $(function () {
 <!-- Validation variables -->
 <script type="text/javascript">
 	var requiredField = '{{ __('validation.required_field') }}';
-	var requiredNumeric = '{{ __('validation.numeric') }}';
 	var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
 	var olderThan = '{{ __('validation.older_than_18') }}';
 	var stringLength = '{{ __('validation.string_length') }}';
