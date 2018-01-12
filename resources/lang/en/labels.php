@@ -27,6 +27,7 @@ return [
     'web' => 'Web',
     'zip' => 'Zip',
     'available_24_7' => 'Available 24/7',
+    'apply_to_all' => 'Apply To All',
     'mark_all' => 'Mark All',
     'about_us' => 'About Us',
     'local_type' => 'Local Type',

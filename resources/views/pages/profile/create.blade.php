@@ -4,6 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
 @section('content')

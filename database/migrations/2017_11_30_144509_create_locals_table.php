@@ -26,6 +26,8 @@ class CreateLocalsTable extends Migration
             $table->string('city')->nullable();
             $table->string('web')->nullable();
             $table->string('phone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->boolean('sms_notifications')->default(false);
             $table->text('about_me')->nullable();
             $table->string('photo')->nullable();
             $table->string('photos')->nullable();
