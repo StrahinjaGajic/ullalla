@@ -58,6 +58,9 @@
                         <label>{{ __('fields.mobile') }}*</label>
                         <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $user->mobile }}" id="mobile">
                         <span class="focus-border"></span>
+                        @if($errors->has('mobile'))
+                        <div class="has-error">{{ $errors->first('mobile') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>

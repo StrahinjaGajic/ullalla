@@ -140,7 +140,6 @@ $(document).ready(function() {
                                 var isValid = value === '' || $field.intlTelInput('isValidNumber'),
                                     err     = $field.intlTelInput('getValidationError'),
                                     message = null;
-                                    console.log(isValid);
                                 switch (err) {
                                     case intlTelInputUtils.validationError.INVALID_COUNTRY_CODE:
                                         message = 'The country code is not valid';

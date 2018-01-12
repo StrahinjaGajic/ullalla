@@ -119,7 +119,8 @@ class DeactivateUser extends Command
             foreach (getDaysForExpiryLocal($user->package1_duration) as $day) {
                 if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
                     // send mail
-                    $aboutToExpire = '';email_expired_package
+                    // email_expired_package
+                    $aboutToExpire = '';
                     Mail::to($user->email)->send(new LocalDefaultPackageExpiredMail($user, $aboutToExpire));
                 }
             }

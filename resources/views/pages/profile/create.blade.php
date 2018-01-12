@@ -147,6 +147,7 @@
 							<div class="form-group">
 								<label class="control-label">{{ __('fields.body_hair') }}</label>
 								<select name="body_hair" class="form-control">
+									<option value=""></option>
 									<option value="shaved">{{ __('fields.shaved') }}</option>
 									<option value="hairy">{{ __('fields.hairy') }}</option>
 									<option value="partial">{{ __('fields.partial') }}</option>
@@ -701,7 +702,6 @@ $(window).on('load',function(){
 		min: 0,
 		max: 5,
 		slide: function( event, ui ) {
-			console.log(ui.value);
 			$(this).next('input.spoken-language-input').val(ui.value);
 		}
 	});
@@ -798,7 +798,6 @@ function minDimensions(width, height) {
 	return function(fileInfo) {
 		var imageInfo = fileInfo.originalImageInfo;
 		if (imageInfo !== null) {
-			console.log();
 			if (imageInfo.width < width || imageInfo.height < height) {
 				throw new Error('{{ __('messages.min_dimensions') }}');
 			}
@@ -1104,7 +1103,7 @@ $(function () {
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullall?',
+			name: 'Ullallà',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	

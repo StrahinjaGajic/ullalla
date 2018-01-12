@@ -38,7 +38,7 @@
 			</div>
 			<h3>{{ __('headings.service_list') }}</h3>
 			<div class="row">
-				@foreach ($services->chunk(13) as $chunkedServices)
+				@foreach ($services->chunk(22) as $chunkedServices)
 				<div class="col-sm-4">
 					<div class="layout-list">
 						<ul>

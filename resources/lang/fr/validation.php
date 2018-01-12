@@ -107,6 +107,7 @@ return [
 
     'skype_required' => 'Skype name is required',
     'choose_package' => 'Please, choose the package',
+    'mobile_required_with_sms_checked' => 'This field is required when sms notifications are turned on',
 
     /* Javascript Validation */
     'max_files' => 'You must select at least 4 files',
