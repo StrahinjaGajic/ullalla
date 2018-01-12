@@ -19,31 +19,31 @@ class LocalPackageSeeder extends Seeder
         $package->save();
 
         $package = new LocalPackage;
-        $package->name = 'Start 1-5 Girls';
+        $package->name = 'Start 1-5';
         $package->month_price = '2';
         $package->year_price = '24';
         $package->save();
 
         $package = new LocalPackage;
-        $package->name = 'Business 6-10 Girls';
+        $package->name = 'Business 6-10';
         $package->month_price = '3';
         $package->year_price = '36';
         $package->save();
 
         $package = new LocalPackage;
-        $package->name = 'Pro 11-20 Girls';
+        $package->name = 'Pro 11-20';
         $package->month_price = '4';
         $package->year_price = '48';
         $package->save();
 
         $package = new LocalPackage;
-        $package->name = 'VIP 21-40 Girls';
+        $package->name = 'VIP 21-40';
         $package->month_price = '4';
         $package->year_price = '48';
         $package->save();
 
         $package = new LocalPackage;
-        $package->name = 'ELITE 41+ Girls';
+        $package->name = 'ELITE 41+';
         $package->month_price = '4';
         $package->year_price = '48';
         $package->save();

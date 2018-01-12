@@ -194,5 +194,4 @@ return [
     'girl' => 'girl',
     'trans' => 'trans',
     'local' => 'local',
-
 ];

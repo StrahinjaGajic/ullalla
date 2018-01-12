@@ -276,17 +276,21 @@
                                                 <?php $counter = 1; ?>
                                                 @foreach ($packages as $package)
                                                     <tr>
-                                                        <td>{{ $package->name }}</td>
-                                                        <td>
-                                                            <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-                                                                <option value="month">{{ __('tables.month') }}</option>
-                                                                <option value="year">{{ __('tables.year') }}</option>
-                                                            </select>
-                                                        </td>
-                                                        <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-                                                        <td>
-                                                            <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-                                                        </td>
+                                                        @if($package->id == 6)
+                                                            <td colspan="4"><p>More Girls?</p></td>
+                                                        @else
+                                                            <td>{{ $package->name. ' ' }}{{ ($package->id != 1) ? __('functions.girls') : '' }}</td>
+                                                            <td>
+                                                                <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+                                                                    <option value="month">{{ __('tables.month') }}</option>
+                                                                    <option value="year">{{ __('tables.year') }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
+                                                            <td>
+                                                                <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             <label class="control control--checkbox">
                                                                 <input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
@@ -590,41 +594,58 @@
     </script>
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    {{--<script>--}}
-        {{--let stripe = StripeCheckout.configure({--}}
-            {{--key: '{{ config('services.stripe.key') }}',--}}
-            {{--image: '{{ asset('img/logo.png') }}',--}}
-            {{--locale: 'auto',--}}
-            {{--token: function (token) {--}}
-                {{--var stripeEmail = $('#stripeEmail');--}}
-                {{--var stripeToken = $('#stripeToken');--}}
-                {{--stripeEmail.val(token.email);--}}
-                {{--stripeToken.val(token.id);--}}
-                {{--// submit the form--}}
-                {{--var username = '{{ $local->username }}';--}}
-                {{--var url = getUrl('/locals/@' + username + '/store');--}}
-                {{--console.log(url);--}}
-                {{--var token = $('input[name="_token"]').val();--}}
-                {{--var form = $('#profileForm');--}}
-                {{--var data = form.serialize();--}}
-                {{--// fire ajax post request--}}
-                {{--$.post(url, data)--}}
-                        {{--.done(function (data) {--}}
-                            {{--window.location.href = getUrl("");--}}
-                        {{--})--}}
-                        {{--.fail(function(data, textStatus) {--}}
-                            {{--$('.default-packages-section').find('.help-block').text(data.responseJSON.status);--}}
-                        {{--});--}}
-            {{--}--}}
-        {{--});--}}
-        {{--$('#profileForm').on('submit', function (e) {--}}
-            {{--stripe.open({--}}
-                {{--name: 'Ullall?',--}}
-                {{--description: '{{ $local->email }}',--}}
-            {{--});--}}
-            {{--e.preventDefault();--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        let stripe = StripeCheckout.configure({
+            key: '{{ config('services.stripe.key') }}',
+            image: '{{ asset('img/logo.png') }}',
+            locale: 'auto',
+            token: function (token) {
+                var stripeEmail = $('#stripeEmail');
+                var stripeToken = $('#stripeToken');
+                stripeEmail.val(token.email);
+                stripeToken.val(token.id);
+                // submit the form
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                console.log(url);
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+        $('#profileForm').on('submit', function (e) {
+            var packageId = document.querySelector('input[name="ullalla_package[]"]:checked').value;
+            if(packageId != 6) {
+                stripe.open({
+                    name: 'Ullall?',
+                    description: '{{ $local->email }}',
+                });
+                e.preventDefault();
+            }else{
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+    </script>
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
