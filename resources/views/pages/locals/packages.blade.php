@@ -72,17 +72,21 @@
 					<tbody>
 					@foreach ($packages as $package)
 						<tr>
-							<td>{{ $package->name }}</td>
-							<td>
-								<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-									<option value="month">{{ __('tables.month') }}</option>
-									<option value="year">{{ __('tables.year') }}</option>
-								</select>
-							</td>
-							<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-							<td>
-								<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation">
-							</td>
+							@if($package->id == 6)
+								<td colspan="4"><p>More Girls?</p></td>
+							@else
+								<td>{{ $package->name }}</td>
+								<td>
+									<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+										<option value="month">{{ __('tables.month') }}</option>
+										<option value="year">{{ __('tables.year') }}</option>
+									</select>
+								</td>
+								<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
+								<td>
+									<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation">
+								</td>
+							@endif
 							<td>
 								<label class="control control--checkbox">
 									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
@@ -196,12 +200,29 @@
 			});
 		}
 	});
+
 	$('#profileForm').on('submit', function (e) {
-		stripe.open({
-			name: 'Ullalla',
-			description: '{{ $user->email }}',
-		});
-		e.preventDefault();
+		if(packageId != 6) {
+			stripe.open({
+				name: 'Ullall?',
+				description: '{{ $user->email }}',
+			});
+			e.preventDefault();
+		}else{
+			var username = '{{ $user->username }}';
+			var url = getUrl('/locals/@' + username + '/packages/store');
+			var token = $('input[name="_token"]').val();
+			var form = $('#profileForm');
+			var data = form.serialize();
+			// fire ajax post request
+			$.post(url, data)
+				.done(function (data) {
+					window.location.href = getUrl("/signin");
+				})
+				.fail(function(data, textStatus) {
+					$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+				});
+		}
 	});
 </script>
 @stop

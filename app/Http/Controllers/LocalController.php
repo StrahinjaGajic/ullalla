@@ -133,8 +133,8 @@ class LocalController extends Controller
             }
             Session::flash('account_created', __('messages.account_created'));
         }else{
-            Session::flash('account_created_elite', __('messages.account_created_elite'));
             Auth::guard('local')->logout();
+            Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
     }
 
@@ -345,23 +345,26 @@ class LocalController extends Controller
                 // get default package obj and activation date input
                 $defaultPackage = LocalPackage::find($defaultPackageInput);
                 if ($defaultPackage) {
-                    $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
-                    // format default packages dates with carbon
-                    $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-                    $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                    if(request('package_duration')[$defaultPackage->id] == 'month'){
-                        $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
-                    }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
-                        $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                    if($defaultPackage->id != 6) {
+                        $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
+                        // format default packages dates with carbon
+                        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
+                        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+                        if (request('package_duration')[$defaultPackage->id] == 'month') {
+                            $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+                        } elseif (request('package_duration')[$defaultPackage->id] == 'year') {
+                            $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                        }
+                        $price = request('package_duration')[$defaultPackage->id] . '_price';
+                        $totalAmount += (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
+                        $user->package1_id = $defaultPackage->id;
+                        $user->is_active_d_package = 1;
+                        $user->package1_duration = request('package_duration')[$defaultPackage->id];
+                        $user->package1_activation_date = $defaultPackageActivationDate;
+                        $user->package1_expiry_date = $defaultPackageExpiryDate;
+                    }else{
+                        $user->package1_id = null;
                     }
-                    $price = request('package_duration')[$defaultPackage->id]. '_price';
-                    $totalAmount += (int) filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
-
-                    $user->package1_id = $defaultPackage->id;
-                    $user->is_active_d_package = 1;
-                    $user->package1_duration = request('package_duration')[$defaultPackage->id];
-                    $user->package1_activation_date = $defaultPackageActivationDate;
-                    $user->package1_expiry_date = $defaultPackageExpiryDate;
                     $user->save();
                 }
             } else {
@@ -373,27 +376,32 @@ class LocalController extends Controller
             }
         }
 
-        try {
-            $customer = Customer::create([
-                'email' => request('stripeEmail'),
-                'source' => request('stripeToken'),
-            ]);
-            $user->stripe_id = $customer->id;
-            $user->stripe_amount = $totalAmount;
-            $user->save();
+        if(request('ullalla_package')[0] != 6) {
+            try {
+                $customer = Customer::create([
+                    'email' => request('stripeEmail'),
+                    'source' => request('stripeToken'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->stripe_amount = $totalAmount;
+                $user->save();
 
-            Charge::create([
-                'customer' => $user->stripe_id,
-                'amount' => $totalAmount * 100,
-                'currency' => 'chf',
-            ]);
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $totalAmount * 100,
+                    'currency' => 'chf',
+                ]);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            Session::flash('success', __('messages.success_changes_saved'));
+        }else{
+            Auth::guard('local')->logout();
+            Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
-
-        Session::flash('success', __('messages.success_changes_saved'));
     }
 }
