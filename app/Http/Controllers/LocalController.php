@@ -134,6 +134,7 @@ class LocalController extends Controller
             Session::flash('account_created', __('messages.account_created'));
         }else{
             Session::flash('account_created_elite', __('messages.account_created_elite'));
+            Auth::guard('local')->logout();
         }
     }
 

@@ -2,6 +2,7 @@
 
 return [
     'error_activate_account' => 'Please activate your account',
+    'error_wait_admin' => 'Please wait admin',
     'error_default_package_expired' => 'Please, upgrade your account.',
     'error_gotm_package_expired' => 'Your girl of the month package has expired. <p>Click <a href=":url">HERE</a> to upgrade your account.</p>',
     // 'default_package_about_to_expire' => 'Default package is about to expire.',
