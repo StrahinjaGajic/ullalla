@@ -43,20 +43,18 @@ class DownForMaintenance
                         Auth::logout();
                         return redirect()->back()->with('error', __('messages.error_activate_account'));
                     }
-
                     return redirect('/');
                 }
             }
 
 
-            if ($request->path() != 'polarna_kobra') {
-                return redirect()->route('countdown');
-            } else {
+
+            if ($request->path() != 'polarna_kobra') {                
+                return redirect('/home');
+            } elseif($request->path() == 'polarna_kobra') {
                 return redirect()->route('tempLogin');
             }
-
         }
-
 
         // if (app()->environment() != 'production') {
         //     if (!Auth::guard('local')->user()) {                            

@@ -236,6 +236,10 @@ class AuthController extends Controller
 
 	public function countdown()
 	{
-		return view('countdown_timer');
+		if (!Auth::check()) {
+			return view('countdown_timer');
+		} else {
+			return redirect('/');
+		}
 	}
 }
