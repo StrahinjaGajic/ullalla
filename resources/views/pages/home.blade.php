@@ -237,15 +237,6 @@
 @php ($note = 'note_'. config()->get('app.locale'))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-@if(Session::has('account_created_elite'))
-    <script>
-        swal(
-        '{{ __('headings.account_created_title') }}',
-        '{{ Session::get('account_created_elite') }}',
-        'success'
-        );
-    </script>
-@endif
 @if(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
 <script>
     swal({
