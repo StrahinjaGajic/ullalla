@@ -30,7 +30,7 @@
 }    
     .fixed {
         position: unset!important;
-/*        height: 89px;*/
+        height: 89px!important;
     }
     
 }
