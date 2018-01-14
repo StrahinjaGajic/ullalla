@@ -14,6 +14,10 @@ class HomeController extends Controller
 	public function getIndex()
 	{
 
+		if (!Auth::check()) {
+			return view('countdown_timer');
+		}
+
 //		$params = array(
 //			'src' => '+381603198250',
 //			'dst' => '+381621008770',

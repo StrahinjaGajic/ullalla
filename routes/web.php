@@ -152,5 +152,5 @@ Route::post('get_guest_data', 'SessionController@storeGuestData');
 
 Route::post('/signin', 'Auth\AuthController@postSignin');
 
-Route::get('/', 'Auth\AuthController@countdown')->name('countdown');
+// Route::get('/', 'Auth\AuthController@countdown')->name('countdown');
 Route::get('/polarna_kobra', 'GirlController@tempLogin')->name('tempLogin');
