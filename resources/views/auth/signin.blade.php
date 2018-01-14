@@ -44,3 +44,15 @@
     </div>
 </div>
 @stop
+
+@section('perPageScripts')
+    @if(Session::has('account_created_elite'))
+        <script>
+            swal(
+                    '{{ __('headings.account_created_title') }}',
+                    '{{ Session::get('account_created_elite') }}',
+                    'success'
+            );
+        </script>
+    @endif
+@stop

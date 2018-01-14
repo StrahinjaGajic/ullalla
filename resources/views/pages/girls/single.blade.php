@@ -127,8 +127,8 @@
 								@if($user->services()->count())
 								<div class="tab-pane" id="girl-services">
 									@if($user->service_options()->count())
-									<h4><strong>{{ __('headings.i_o_s_f') }}: </strong></h4>
-									<h5>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name') }}</h5>
+									<h4 style="display: inline-block; margin-right: 10px;"><strong>{{ __('headings.i_o_s_f') }}:</strong></h4>
+									<span><strong>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name') }}</strong></span>
 									@endif
 									<table class="table services-table">{{ parseChunkedServices($user) }}</table>
 								</div>
@@ -210,7 +210,7 @@
 											@foreach($user->spoken_languages as $spokenLanguage)
 											<tr>
 												@php 
-													$var = 'spoken_language_name_'. config()->get('app.locale'); 
+													$var = 'spoken_language_name_'. config()->get('app.locale');
 												@endphp
 												<td>{{ $spokenLanguage->spoken_language_name }}</td>
 												<td>

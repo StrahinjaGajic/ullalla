@@ -94,7 +94,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Thailand';
+        $spokenLanguage->spoken_language_name_de = 'Thai';
         $spokenLanguage->spoken_language_code = 'th';
         $spokenLanguage->save();
 

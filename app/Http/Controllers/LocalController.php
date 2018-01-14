@@ -41,13 +41,14 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|max:25',
             'street' => 'required|max:40',
             'city' => 'required|max:30',
             'zip' => 'required|max:10',
-            'web' => 'required',
-            'phone' => 'required|max:20',
+            'phone' => 'required_without:mobile|max:20',
+            'mobile' => 'required_without:phone|max:20',
         ]);
 
         // get working time
@@ -60,19 +61,20 @@ class LocalController extends Controller
             $request->time_to_m
         );
 
-        $defaultPackageInput = request('ullalla_package')[0];
-        $defaultPackage = LocalPackage::findOrFail($defaultPackageInput);
-        $defaultPackageActivationDateInput = request('default_package_activation_date')[$defaultPackage->id];
-        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-        if(request('package_duration')[$defaultPackage->id] == 'month'){
-            $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
-        }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
-            $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+        if(request('ullalla_package')[0] != 6) {
+            $defaultPackageInput = request('ullalla_package')[0];
+            $defaultPackage = LocalPackage::findOrFail($defaultPackageInput);
+            $defaultPackageActivationDateInput = request('default_package_activation_date')[$defaultPackage->id];
+            $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
+            $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+            if (request('package_duration')[$defaultPackage->id] == 'month') {
+                $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+            } elseif (request('package_duration')[$defaultPackage->id] == 'year') {
+                $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+            }
+            $price = request('package_duration')[$defaultPackage->id] . '_price';
+            $totalAmount = (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
         }
-        $price = request('package_duration')[$defaultPackage->id]. '_price';
-        $totalAmount = (int) filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
-
         try {
             $user = Auth::guard('local')->user();
             $user->name = request('name');
@@ -91,43 +93,49 @@ class LocalController extends Controller
             $user->club_wellness_id = setClubInfo('wellness', request('wellness'), request('wellness-free'));
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
             $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));
-            $user->package1_id = $defaultPackage->id;
-            $user->is_active_d_package = 1;
-            $user->package1_duration = request('package_duration')[$defaultPackage->id];
-            $user->package1_activation_date = $defaultPackageActivationDate;
-            $user->package1_expiry_date = $defaultPackageExpiryDate;
+            if(request('ullalla_package')[0] != 6) {
+                $user->package1_id = $defaultPackage->id;
+                $user->is_active_d_package = 1;
+                $user->package1_duration = request('package_duration')[$defaultPackage->id];
+                $user->package1_activation_date = $defaultPackageActivationDate;
+                $user->package1_expiry_date = $defaultPackageExpiryDate;
+            }
             $user->save();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ]);
         }
-        try {
-            // create a customer
-            $customer = Customer::create([
-                'email' => request('stripeEmail'),
-                'source' => request('stripeToken'),
-            ]);
-            $user->stripe_id = $customer->id;
-            $user->stripe_amount = $totalAmount;
-            $user->save();
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
-        }
+        if(request('ullalla_package')[0] != 6) {
+            try {
+                // create a customer
+                $customer = Customer::create([
+                    'email' => request('stripeEmail'),
+                    'source' => request('stripeToken'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->stripe_amount = $totalAmount;
+                $user->save();
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
 
-        try {
-            Charge::create([
-                'customer' => $user->stripe_id,
-                'amount' => $user->stripe_amount,
-                'currency' => 'chf',
-            ]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            try {
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $user->stripe_amount,
+                    'currency' => 'chf',
+                ]);
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+            Session::flash('account_created', __('messages.account_created'));
+        }else{
+            Auth::guard('local')->logout();
+            Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
-
-        Session::flash('account_created', __('messages.account_created'));
     }
 
     public function getContact()
@@ -146,9 +154,10 @@ class LocalController extends Controller
             'street' => 'required|max:40',
             'city' => 'required|max:30',
             'zip' => 'required|max:10',
-            'web' => 'required',
-            'phone' => 'required|max:20',
-        ]);
+            'phone' => 'required_without:mobile|max:20',
+            'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
+        ], ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
+        );
 
         $local = Auth::guard('local')->user();
         $local->username = request('username');
@@ -164,6 +173,8 @@ class LocalController extends Controller
         $local->zip = $request->zip;
         $local->web = $request->web;
         $local->phone = $request->phone;
+        $local->mobile = $request->mobile;
+        $local->sms_notifications = request('sms_notifications') ? '1' : '0';
 
         $local->save();
 
@@ -334,23 +345,26 @@ class LocalController extends Controller
                 // get default package obj and activation date input
                 $defaultPackage = LocalPackage::find($defaultPackageInput);
                 if ($defaultPackage) {
-                    $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
-                    // format default packages dates with carbon
-                    $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-                    $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                    if(request('package_duration')[$defaultPackage->id] == 'month'){
-                        $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
-                    }elseif(request('package_duration')[$defaultPackage->id] == 'year'){
-                        $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                    if($defaultPackage->id != 6) {
+                        $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
+                        // format default packages dates with carbon
+                        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
+                        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+                        if (request('package_duration')[$defaultPackage->id] == 'month') {
+                            $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+                        } elseif (request('package_duration')[$defaultPackage->id] == 'year') {
+                            $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                        }
+                        $price = request('package_duration')[$defaultPackage->id] . '_price';
+                        $totalAmount += (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
+                        $user->package1_id = $defaultPackage->id;
+                        $user->is_active_d_package = 1;
+                        $user->package1_duration = request('package_duration')[$defaultPackage->id];
+                        $user->package1_activation_date = $defaultPackageActivationDate;
+                        $user->package1_expiry_date = $defaultPackageExpiryDate;
+                    }else{
+                        $user->package1_id = null;
                     }
-                    $price = request('package_duration')[$defaultPackage->id]. '_price';
-                    $totalAmount += (int) filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
-
-                    $user->package1_id = $defaultPackage->id;
-                    $user->is_active_d_package = 1;
-                    $user->package1_duration = request('package_duration')[$defaultPackage->id];
-                    $user->package1_activation_date = $defaultPackageActivationDate;
-                    $user->package1_expiry_date = $defaultPackageExpiryDate;
                     $user->save();
                 }
             } else {
@@ -362,27 +376,32 @@ class LocalController extends Controller
             }
         }
 
-        try {
-            $customer = Customer::create([
-                'email' => request('stripeEmail'),
-                'source' => request('stripeToken'),
-            ]);
-            $user->stripe_id = $customer->id;
-            $user->stripe_amount = $totalAmount;
-            $user->save();
+        if(request('ullalla_package')[0] != 6) {
+            try {
+                $customer = Customer::create([
+                    'email' => request('stripeEmail'),
+                    'source' => request('stripeToken'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->stripe_amount = $totalAmount;
+                $user->save();
 
-            Charge::create([
-                'customer' => $user->stripe_id,
-                'amount' => $totalAmount * 100,
-                'currency' => 'chf',
-            ]);
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $totalAmount * 100,
+                    'currency' => 'chf',
+                ]);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            Session::flash('success', __('messages.success_changes_saved'));
+        }else{
+            Auth::guard('local')->logout();
+            Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
-
-        Session::flash('success', __('messages.success_changes_saved'));
     }
 }

@@ -71,10 +71,19 @@ class ProfileController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'nickname' => 'required',
-            'height' => 'required',
-            'weight' => 'required',
-            'about_me' => 'required',
+            'age' => 'required|numeric',
+            'height' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'sex' => 'required',
+            'sex_orientation' => 'required',
+            'intimate' => 'required',
+            'alcohol' => 'required',
+            'smoker' => 'required',
+            'about_me' => 'required|max:200',
+            'mobile' => 'required',
         ]);
+
+        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
 
         // define inputs
         $defaultPackageInput = request('ullalla_package')[0];
@@ -119,14 +128,14 @@ class ProfileController extends Controller
 
         $incallType = null;
         $outcallType = null;
-
         $incallOption = request('incall_option');
         $outcallOption = request('outcall_option');
+
         if ($incallOption) {
             if ($incallOption != 'define_yourself') {
                 $incallType = array_search_reverse($incallOption, getIncallOptions());
             } elseif (request('incall_define_yourself')) {
-                $incallType = request('incall_define_yourself');
+                $incallType = 'define_yourself' . '|' . request('incall_define_yourself');
             }
         }
 
@@ -134,7 +143,7 @@ class ProfileController extends Controller
             if ($outcallOption != 'define_yourself') {
                 $outcallType = array_search_reverse($outcallOption, getOutcallOptions());
             } elseif(request('outcall_define_yourself')) {
-                $outcallType = request('outcall_define_yourself');
+                $outcallType = 'define_yourself' . '|' . request('outcall_define_yourself');
             }
         }
 
@@ -161,12 +170,13 @@ class ProfileController extends Controller
             $user->smoker = request('smoker');
             $user->alcohol = request('alcohol');
             $user->about_me = request('about_me');
-            $user->photos = storeAndGetUploadCareFiles(request('photos'));
+            $user->photos = $photosUrl ? request('photos') : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->email = request('email');
             $user->website = request('website');
             $user->phone = request('phone');
             $user->mobile = request('mobile');
+            $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->prefered_contact_option = request('prefered_contact_option');
             $user->skype_name = request('skype_name');
             $user->no_withheld_numbers = request('no_withheld_numbers') ? '1' : '0';
@@ -174,7 +184,7 @@ class ProfileController extends Controller
             $user->city = request('city');
             $user->zip_code = request('zip_code');
             $user->address = request('address');
-            $user->club_name = request('address');
+            $user->club_name = request('club_name');
             $user->incall_type = $incallType;
             $user->outcall_type = $outcallType;
             $user->working_time = $workingTime;
@@ -321,7 +331,8 @@ class ProfileController extends Controller
     public function postGallery()
     {
         $user = Auth::user();
-        $user->photos = storeAndGetUploadCareFiles(request('photos'));
+        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
+        $user->photos = $photosUrl ? request('photos') : null;
         $user->videos = storeAndGetUploadCareFiles(request('video'));
         $user->save();
 
@@ -341,11 +352,15 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
+            'mobile' => 'required',
             'skype_name' => 'required_with:contact_options.3,on'
-        ], ['required_with' => __('validation.skype_required')]);
+        ], [
+            'skype_name.required_with' => __('validation.skype_required'),
+        ]);
 
         $user->phone = request('phone');
         $user->mobile = request('mobile');
+        $user->sms_notifications = request('sms_notifications') ? '1' : '0';
         $user->website = request('website');
         $user->prefered_contact_option = request('prefered_contact_option');
         $user->skype_name = request('contact_options') && in_array('3', request('contact_options')) ? request('skype_name') : NULL;
@@ -478,7 +493,6 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-
         // define languages input
         $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });
 
@@ -486,7 +500,6 @@ class ProfileController extends Controller
         $levels = array_map(function($languageLevel) {
             return ['language_level' => $languageLevel];
         }, $spokenLanguages);
-
 
         // get combined data
         $syncData = array_combine(array_keys($spokenLanguages), $levels);

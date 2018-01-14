@@ -230,12 +230,12 @@
 							<div class="tab-bar">
 								<div class="tab-bar-inner">
 									<ul role="tablist" class="nav nav-tabs">
-										<li class="active">
-											<a title="Grid" data-toggle="tab" href="#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+										<li class="{{ $mode == 'grid' ? 'active' : '' }}">
+											<a title="Grid" href="{{ urldecode(route('private', array_merge(request()->query(), ['mode' => 'grid']), false)) }}"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
 											</a>
 										</li>
-										<li>
-											<a  title="List" data-toggle="tab" href="#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+										<li class="{{ $mode == 'list' ? 'active' : '' }}">
+											<a title="List" href="{{ urldecode(route('private', array_merge(request()->query(), ['mode' => 'list']), false)) }}"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
 											</a>
 										</li>
 									</ul>
@@ -269,7 +269,7 @@
 									<a href="{{ url('private') }}" class="btn btn-default">{{ __('buttons.reset_filters') }}</a>
 								</div>
 								@if ($users->count())
-								<div id="shop-product" class="tab-pane active">
+								<div id="shop-product" class="tab-pane {{ $mode == 'grid' ? 'active' : '' }}">
 									<div class="row">
 										@foreach($users as $user)
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -292,7 +292,7 @@
 										@endforeach
 									</div>
 								</div>
-								<div id="shop-list" class="tab-pane">
+								<div id="shop-list" class="tab-pane {{ $mode == 'list' ? 'active' : '' }}">
 									@foreach($users as $user)
 									<div class="single-shop single-product">
 										<div class="row">
@@ -330,8 +330,14 @@
 							<div class="tab-bar tab-bar-bottom">
 								<div class="tab-bar-inner">
 									<ul role="tablist" class="nav nav-tabs">
-										<li class="active"><a title="Grid" data-toggle="tab" href="shop.html#shop-product"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span></a></li>
-										<li><a  title="List" data-toggle="tab" href="shop.html#shop-list"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span></a></li>
+										<li class="{{ $mode == 'grid' ? 'active' : '' }}">
+											<a title="Grid" href="{{ urldecode(route('private', array_merge(request()->query(), ['mode' => 'grid']), false)) }}"><i class="fa fa-th-large"></i><span class="grid" title="Grid">{{ __('buttons.grid') }}</span>
+											</a>
+										</li>
+										<li class="{{ $mode == 'list' ? 'active' : '' }}">
+											<a title="List" href="{{ urldecode(route('private', array_merge(request()->query(), ['mode' => 'list']), false)) }}"><i class="fa fa-list"></i><span class="list">{{ __('buttons.list') }}</span>
+											</a>
+										</li>
 									</ul>
 								</div>
 								<div class="toolbar">
@@ -375,7 +381,8 @@
 @stop
 
 @section('perPageScripts')
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize&sensor=true"></script>
 <script>
 	var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
 	$('#radius-ranger').slider({
@@ -560,7 +567,7 @@
 	}
 </script>
 
-<script>
+{{-- <script>
 	var tabList = $('ul[role="tablist"]');
 	tabList.find('a').on('click', function () {
 		var title = $(this).attr('title');
@@ -579,7 +586,7 @@
 		anchorsNotThisTitle.closest('li.active').removeClass('active');
 		anchorsThisTitle.closest('li:not(.active)').addClass('active');
 	});
-</script>
+</script> --}}
 
 <script>
 	$(document).ready(function(){

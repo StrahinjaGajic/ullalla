@@ -48,8 +48,8 @@ return [
     'active_packages' => 'Active Packages',
     'activation_date' => 'Activation Date',
     'expiry_date' => 'Expiry Date',
-    'default_package' => 'Default Package',
-    'default_packages' => 'Default Packages',
+    'default_package' => 'Basic Package',
+    'default_packages' => 'Basic Packages',
     'gotm_package' => 'Girl of The Month Package',
     'totm_package' => 'Tran of The Month Package',
     'name' => 'Name',
@@ -89,4 +89,8 @@ return [
     'map'=> 'Map',
     'i_o_s_f'=> 'I Offer Services For',
 
+    #notifications
+    'local_default_package_expiration_title' => 'Local Basic Package Expiration',
+    'default_package_expiration_title' => 'Basic Package Expiration',
+    'gotm_package_expiration_title' => 'Girl of The Month Package Expiration',
 ];

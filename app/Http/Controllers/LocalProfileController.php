@@ -15,7 +15,8 @@ class LocalProfileController extends Controller
         $types = LocalType::all();
 
         $orderBy = $request->order_by ? $request->order_by : null;
-        $show = $request->show ? $request->show : null;
+        $mode = $request->mode == 'list' ? 'list' : 'grid';
+        $show = $request->show ? $request->show : 9;
         $radius = $request->radius ? $request->radius : null;
 
         if ($radius && is_numeric($radius) && Session::has('lat') && Session::has('lng')) {
@@ -39,12 +40,12 @@ class LocalProfileController extends Controller
         if (Session::has('locals')) {
             $locals = Session::pull('locals');
         } else {
-            $locals = isset($show) ? $locals->paginate($show) : $locals->paginate(9);
+            $locals = $locals->paginate($show);
         }
 
         $request->flash();
 
-        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types'));
+        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types', 'mode'));
     }
 
     public function getLocal($username)

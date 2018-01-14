@@ -4,6 +4,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
 @section('content')
@@ -15,7 +16,7 @@
                         {!! Form::open(['url' => 'locals/@' . $local->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
                         <h2>{{ __('headings.contact') }}</h2>
                         <section data-step="0">
-                            <div class="col-xs-6">
+                            <div class="col-xs-8">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
                                     <input type="text" class="form-control" name="name" />
@@ -25,11 +26,15 @@
                                     <input type="text" class="form-control" name="phone" />
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label">{{ __('fields.mobile') }}</label>
+                                    <input type="text" class="form-control" name="mobile" />
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label">{{ __('labels.web') }}</label>
                                     <input type="text" class="form-control" name="web" />
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.street') }}</label>
                                     <input type="text" class="form-control" name="street" />
@@ -69,6 +74,12 @@
                                 <div class="form-group">
                                     <div id="available_24_7">
                                         <label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
+                                            <input type="checkbox" name="available_24_7">
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div id="apply_to_all" class="">
+                                        <label class="control control--checkbox"><a>{{ __('labels.apply_to_all') }}</a>
                                             <input type="checkbox" name="available_24_7">
                                             <div class="control__indicator"></div>
                                         </label>
@@ -276,17 +287,21 @@
                                                 <?php $counter = 1; ?>
                                                 @foreach ($packages as $package)
                                                     <tr>
-                                                        <td>{{ $package->name }}</td>
-                                                        <td>
-                                                            <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-                                                                <option value="month">{{ __('tables.month') }}</option>
-                                                                <option value="year">{{ __('tables.year') }}</option>
-                                                            </select>
-                                                        </td>
-                                                        <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-                                                        <td>
-                                                            <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-                                                        </td>
+                                                        @if($package->id == 6)
+                                                            <td colspan="4"><p>More Girls?</p></td>
+                                                        @else
+                                                            <td>{{ $package->name. ' ' }}{{ ($package->id != 1) ? __('functions.girls') : '' }}</td>
+                                                            <td>
+                                                                <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+                                                                    <option value="month">{{ __('tables.month') }}</option>
+                                                                    <option value="year">{{ __('tables.year') }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
+                                                            <td>
+                                                                <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             <label class="control control--checkbox">
                                                                 <input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
@@ -315,8 +330,13 @@
 
     @section('perPageScripts')
 
-
-            <!-- Form Validation -->
+    <!-- Form Validation -->
+    <script>
+        var utilAsset = '{{ asset('js/utils.js') }}';
+        var invalidUrl = '{{ __('validation.url_invalid') }}';
+    </script>
+    <script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+    <script src="{{ asset('js/utils.js') }}"></script>
     <script src="{{ asset('js/formValidation.min.js') }}"></script>
     <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
@@ -325,7 +345,6 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script>
-
 
         function changePrice(id, month, year){
             var price = $('#selectDur_' + id + ' :selected').val();
@@ -343,21 +362,19 @@
             $('#create_profile_modal').modal('show');
         });
         $(function () {
-// disabled modal closing on outside click and escape
+
             $('#create_profile_modal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
-// make modal content scrolablle
+
             $('#profileForm').find('.content').addClass('is-scrollable');
-// initially set default value to empty
+
             $('#date_of_birth').val('');
-// get new start and end year
             var start = new Date();
             start.setFullYear(start.getFullYear());
             var end = new Date();
             end.setFullYear(end.getFullYear() + 1);
-// implement datarange picker on package activation input
             $('.package_month_girl_activation').each(function () {
                 $(this).daterangepicker({
                     singleDatePicker: true,
@@ -370,7 +387,6 @@
                     },
                 });;
             });
-// implement datarange picker on package activation input
             $('.package_activation').each(function () {
                 $(this).daterangepicker({
                     singleDatePicker: true,
@@ -590,41 +606,58 @@
     </script>
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    {{--<script>--}}
-        {{--let stripe = StripeCheckout.configure({--}}
-            {{--key: '{{ config('services.stripe.key') }}',--}}
-            {{--image: '{{ asset('img/logo.png') }}',--}}
-            {{--locale: 'auto',--}}
-            {{--token: function (token) {--}}
-                {{--var stripeEmail = $('#stripeEmail');--}}
-                {{--var stripeToken = $('#stripeToken');--}}
-                {{--stripeEmail.val(token.email);--}}
-                {{--stripeToken.val(token.id);--}}
-                {{--// submit the form--}}
-                {{--var username = '{{ $local->username }}';--}}
-                {{--var url = getUrl('/locals/@' + username + '/store');--}}
-                {{--console.log(url);--}}
-                {{--var token = $('input[name="_token"]').val();--}}
-                {{--var form = $('#profileForm');--}}
-                {{--var data = form.serialize();--}}
-                {{--// fire ajax post request--}}
-                {{--$.post(url, data)--}}
-                        {{--.done(function (data) {--}}
-                            {{--window.location.href = getUrl("");--}}
-                        {{--})--}}
-                        {{--.fail(function(data, textStatus) {--}}
-                            {{--$('.default-packages-section').find('.help-block').text(data.responseJSON.status);--}}
-                        {{--});--}}
-            {{--}--}}
-        {{--});--}}
-        {{--$('#profileForm').on('submit', function (e) {--}}
-            {{--stripe.open({--}}
-                {{--name: 'Ullall?',--}}
-                {{--description: '{{ $local->email }}',--}}
-            {{--});--}}
-            {{--e.preventDefault();--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        let stripe = StripeCheckout.configure({
+            key: '{{ config('services.stripe.key') }}',
+            image: '{{ asset('img/logo.png') }}',
+            locale: 'auto',
+            token: function (token) {
+                var stripeEmail = $('#stripeEmail');
+                var stripeToken = $('#stripeToken');
+                stripeEmail.val(token.email);
+                stripeToken.val(token.id);
+                // submit the form
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                console.log(url);
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+        $('#profileForm').on('submit', function (e) {
+            var packageId = document.querySelector('input[name="ullalla_package[]"]:checked').value;
+            if(packageId != 6) {
+                stripe.open({
+                    name: 'Ullall?',
+                    description: '{{ $local->email }}',
+                });
+                e.preventDefault();
+            }else{
+                var username = '{{ $local->username }}';
+                var url = getUrl('/locals/@' + username + '/store');
+                var token = $('input[name="_token"]').val();
+                var form = $('#profileForm');
+                var data = form.serialize();
+                // fire ajax post request
+                $.post(url, data)
+                        .done(function (data) {
+                            window.location.href = getUrl("/signin");
+                        })
+                        .fail(function(data, textStatus) {
+                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                        });
+            }
+        });
+    </script>
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';

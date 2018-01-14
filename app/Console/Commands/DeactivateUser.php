@@ -52,13 +52,21 @@ class DeactivateUser extends Command
         foreach ($defaultPackageUsers as $user) {
             $user->is_active_d_package = 0;
             $user->save();
-            Mail::to($user->email)->send(new DefaultPackageExpiredMail($user));
+            if ($user->sms_notifications == 1) {
+                sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_expired_package') . ' ' . url('@' . $user->username . '/packages'));
+            } else {
+                Mail::to($user->email)->send(new DefaultPackageExpiredMail($user));
+            }
         }
 
         foreach ($gotmPackageUsers as $user) {
             $user->is_active_gotm_package = 0;
             $user->save();
-            Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user));
+            if ($user->sms_notifications == 1) {
+                sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expired_package') . ' ' . url('@' . $user->username . '/packages'));
+            } else {
+                Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user));
+            }
         }
 
         foreach ($defaultPackageLocals as $user) {
@@ -66,6 +74,7 @@ class DeactivateUser extends Command
             $user->save();
             Mail::to($user->email)->send(new LocalDefaultPackageExpiredMail($user));
         }
+        
         $defaultPackageAboutToExpireUsers = User::where('is_active_d_package', '1')->whereDate('package1_expiry_date', '>', Carbon::now())->get();
         $gotmPackageAboutToExpireUsers = User::where('is_active_gotm_package', '1')->whereDate('package2_expiry_date', '>', Carbon::now())->get();
         $localDefaultPackageAboutToExpireUsers = Local::where('is_active_d_package', '1')->whereDate('package1_expiry_date', '>', Carbon::now())->get();
@@ -79,7 +88,11 @@ class DeactivateUser extends Command
                 if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
                     // send mail
                     $aboutToExpire = '';
-                    Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
+                    if ($user->sms_notifications == 1) {
+                        sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                    } else {
+                        Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
+                    }
                 }
             }
         }
@@ -91,7 +104,11 @@ class DeactivateUser extends Command
                 if ($carbonNowFormated == $package2ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
                     // send mail
                     $aboutToExpire = '';
-                    Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
+                    if ($user->sms_notifications == 1) {
+                        sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                    } else {
+                        Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
+                    }
                 }
             }
         }
@@ -102,6 +119,7 @@ class DeactivateUser extends Command
             foreach (getDaysForExpiryLocal($user->package1_duration) as $day) {
                 if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
                     // send mail
+                    // email_expired_package
                     $aboutToExpire = '';
                     Mail::to($user->email)->send(new LocalDefaultPackageExpiredMail($user, $aboutToExpire));
                 }

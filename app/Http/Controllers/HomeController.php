@@ -14,7 +14,6 @@ class HomeController extends Controller
 	public function getIndex()
 	{
 
-
 //		$params = array(
 //			'src' => '+381603198250',
 //			'dst' => '+381621008770',
@@ -26,8 +25,10 @@ class HomeController extends Controller
 
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
+		$field = 'title_'. config()->get('app.locale');
 
 		$user = Auth::user();
+
 		$defaultPackageExpired = null;
 		if ($user) {
 			if ($user->package1_id) {
@@ -35,7 +36,7 @@ class HomeController extends Controller
 				$defaultPackageExpired = DB::table('users')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
 				->where('users.id', $user->id)
-				->where('notifications.title', 'Default Package Expiration')
+				->where('notifications.' . $field, __('headings.default_package_expiration_title'))
 				->whereBetween('users.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
 
@@ -45,7 +46,7 @@ class HomeController extends Controller
 				$gotmPackageExpired = DB::table('users')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
 				->where('users.id', $user->id)
-				->where('notifications.title', 'Girl of The Month Package Expiration')
+				->where('notifications.' . $field, __('headings.gotm_package_expiration_title'))
 				->whereBetween('users.package2_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
 		}
@@ -57,7 +58,7 @@ class HomeController extends Controller
 				$localDefaultPackageExpired = DB::table('users')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
 				->where('users.id', $user->id)
-				->where('notifications.title', 'Local Default Package Expiration')
+				->where('notifications.' . $field, __('headings.local_default_package_expiration_title'))
 				->whereBetween('users.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
 		}
