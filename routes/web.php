@@ -1,5 +1,9 @@
 <?php
-# LANGUAGE CONTROLLER
+
+
+
+Route::group(['middleware' => 'maintenance'], function () {
+	# LANGUAGE CONTROLLER
 Route::get('change_language/{language}', 'LanguageController@changeLanguage');
 
 # Password Reset Controller
@@ -12,7 +16,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', 'HomeController@getIndex');
 # AUTH CONTROLLER
 Route::get('/signin', 'Auth\AuthController@getSignin');
-Route::post('/signin', 'Auth\AuthController@postSignin');
 Route::get('/signup', 'Auth\AuthController@getSignup');
 Route::post('/signup', 'Auth\AuthController@postSignup');
 Route::get('/signout', 'Auth\AuthController@getSignout');
@@ -144,3 +147,10 @@ Route::post('get_guest_data', 'SessionController@storeGuestData');
 
 
 
+
+});
+
+Route::post('/signin', 'Auth\AuthController@postSignin');
+
+Route::get('/', 'Auth\AuthController@countdown')->name('countdown');
+Route::get('/polarna_kobra', 'GirlController@tempLogin')->name('tempLogin');

@@ -233,4 +233,9 @@ class AuthController extends Controller
 		}
 		return redirect()->action('Auth\AuthController@getSignin')->with('error', __('messages.error_somethings_wrong'));
 	}
+
+	public function countdown()
+	{
+		return view('countdown_timer');
+	}
 }

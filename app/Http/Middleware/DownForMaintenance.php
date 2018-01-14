@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Auth;
+use Cookie;
 use Session;
 use Closure;
 use App\Models\User;
@@ -27,11 +28,35 @@ class DownForMaintenance
             '212.41.97.214',
             '77.243.22.147',
             '212.41.121.52',
+            '192.168.10.1',
         ];
 
-        if (app()->environment() == 'production' && !in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)) {
-            return 'Temporarily Down For Maintenance';
+        $user = auth()->check();
+
+
+        // app()->environment() == 'production' && !in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)
+        if (!$user) {
+            if ($request->isMethod('post')) {
+                if (Auth::attempt($request->only(['username', 'password']))) {
+                    $user = Auth::user();
+                    if ($user->activated == '0') {
+                        Auth::logout();
+                        return redirect()->back()->with('error', __('messages.error_activate_account'));
+                    }
+
+                    return redirect('/');
+                }
+            }
+
+
+            if ($request->path() != 'polarna_kobra') {
+                return redirect()->route('countdown');
+            } else {
+                return redirect()->route('tempLogin');
+            }
+
         }
+
 
         // if (app()->environment() != 'production') {
         //     if (!Auth::guard('local')->user()) {                            
@@ -40,6 +65,8 @@ class DownForMaintenance
         //         return 'down';
         //     }
         // }
+
+
 
         return $response;
     }

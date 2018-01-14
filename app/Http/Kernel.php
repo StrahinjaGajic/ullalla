@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+
     ];
 
     /**
@@ -28,7 +29,6 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\DownForMaintenance::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LanguageChooser::class,
+            // \App\Http\Middleware\DownForMaintenance::class,
         ],
 
         'api' => [
@@ -52,7 +53,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
+    protected $routeMiddleware = [        
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -63,6 +64,7 @@ class Kernel extends HttpKernel
         'has_package' => \App\Http\Middleware\CheckIfHasPackage::class,
         'not_has_package' => \App\Http\Middleware\CheckIfNotHasPackage::class,
         'package.expiry' => \App\Http\Middleware\RedirectIfPackageExpired::class,
+        'maintenance' => \App\Http\Middleware\DownForMaintenance::class,
         // 'approved' => \App\Http\Middleware\CheckIfApproved::class,
     ];
 }
