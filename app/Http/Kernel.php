@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'not_has_package' => \App\Http\Middleware\CheckIfNotHasPackage::class,
         'package.expiry' => \App\Http\Middleware\RedirectIfPackageExpired::class,
         'maintenance' => \App\Http\Middleware\DownForMaintenance::class,
+        'front.auth' => \App\Http\Middleware\FrontAuth::class,
         // 'approved' => \App\Http\Middleware\CheckIfApproved::class,
     ];
 }

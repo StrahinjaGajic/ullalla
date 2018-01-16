@@ -4,7 +4,7 @@
             <div class="col-md-4 col-md-offset-4 center">
                 <div class="card">
                     <div class="card-block">
-                        {!! Form::open(['url' => 'signin', 'id' => 'sign_in_form']) !!}
+                        {!! Form::open(['url' => 'polarna_kobra', 'id' => 'sign_in_form']) !!}
                         <div class="form-group {{ $errors->has('username') ? 'has-danger' : '' }}">
                             <label for="username" class="col-2 col-form-label"></label>
                             <div class="col-6">

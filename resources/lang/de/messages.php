@@ -39,4 +39,7 @@ return [
     'error' => 'error',
     'min_dimensions' => 'Min Dimensions',
 
+    'account_already_activated' => 'Account already activated',
+    
+
 ];

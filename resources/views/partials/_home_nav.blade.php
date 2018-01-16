@@ -31,7 +31,7 @@
                                             @if($user && $user->package1_id)
                                                 @if(Auth::guard('local')->user())
                                                     <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
-                                                    <li><a href="{{ url('locals/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                                    <li><a href="{{ url('locals/' . $user->username) }}">{{ __('buttons.preview_profile') }}</a></li>
                                                 @elseif(Auth::user())
                                                     <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                                     <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
@@ -88,7 +88,7 @@
                                             @if($user && $user->package1_id)
                                                    @if(Auth::guard('local')->user())
                                                        <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
-                                                       <li><a href="{{ url('locals/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                                       <li><a href="{{ url('locals/' . $user->username) }}">{{ __('buttons.preview_profile') }}</a></li>
                                                    @elseif(Auth::user())
                                                        <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                                        <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>

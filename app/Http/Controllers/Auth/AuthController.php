@@ -153,10 +153,10 @@ class AuthController extends Controller
 				Auth::guard('local')->logout();
 				return redirect()->back()->with('error', __('messages.error_activate_account'));
 			}
-			if ($local->name != "" && $local->package1_id == null) {
-				Auth::guard('local')->logout();
-				return redirect()->back()->with('error', __('messages.error_wait_admin'));
-			}
+			// if ($local->name != "" && $local->package1_id == null) {
+			// 	Auth::guard('local')->logout();
+			// 	return redirect()->back()->with('error', __('messages.error_wait_admin'));
+			// }
 			if ($local->package1_id) {
 
 				// get expiry dates from db

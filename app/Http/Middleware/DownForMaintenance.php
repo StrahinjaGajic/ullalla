@@ -33,27 +33,10 @@ class DownForMaintenance
 
         $user = auth()->check();
 
-
-        // app()->environment() == 'production' && !in_array($_SERVER['REMOTE_ADDR'], $ipAddresses)
-        if (!$user) {
-            if ($request->isMethod('post')) {
-                if (Auth::attempt($request->only(['username', 'password']))) {
-                    $user = Auth::user();
-                    if ($user->activated == '0') {
-                        Auth::logout();
-                        return redirect()->back()->with('error', __('messages.error_activate_account'));
-                    }
-                    return redirect('/');
-                }
-            }
-
-
-
-            if ($request->path() != 'polarna_kobra') {                
-                return redirect('/home');
-            } elseif($request->path() == 'polarna_kobra') {
-                return redirect()->route('tempLogin');
-            }
+        if (Cookie::get('temp_login') == true) {
+            return $next($request);
+        } else {
+            return redirect('/home');
         }
 
         // if (app()->environment() != 'production') {
@@ -63,8 +46,6 @@ class DownForMaintenance
         //         return 'down';
         //     }
         // }
-
-
 
         return $response;
     }

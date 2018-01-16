@@ -1,8 +1,28 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Cookie;
 
+Route::get('/polarna_kobra', function() { // remove in production
+    return view('testprotection');
+})->name('temp_login');
 
-Route::group(['middleware' => 'maintenance'], function () {
+Route::post('/polarna_kobra', function() { // remove in production
+    $_username = 'milan';
+    $_password = 'vejn123123';
+
+    $username = Request::input('username');
+    $password = Request::input('password');
+
+    if (($username == $_username) && ($password == $_password)) {
+        Cookie::queue(Cookie::make('temp_login', true, 3600));
+        return redirect('/');
+    } else {
+        echo "Wrong username or password";
+    }
+});
+
+Route::group(['middleware' => 'maintenance'], function () { // remove in production
 	# LANGUAGE CONTROLLER
 Route::get('change_language/{language}', 'LanguageController@changeLanguage');
 
@@ -13,9 +33,12 @@ Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetFor
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 # HOME CONTROLLER
-Route::get('/', 'HomeController@getIndex');
+Route::middleware(['web', 'front.auth'])->group( function () { // remove in productions
+	Route::get('/', 'HomeController@getIndex');
+});
 # AUTH CONTROLLER
 Route::get('/signin', 'Auth\AuthController@getSignin');
+Route::post('/signin', 'Auth\AuthController@postSignin');
 Route::get('/signup', 'Auth\AuthController@getSignup');
 Route::post('/signup', 'Auth\AuthController@postSignup');
 Route::get('/signout', 'Auth\AuthController@getSignout');
@@ -144,13 +167,7 @@ Route::get('faq', 'FaqController@getIndex');
 # SEARCH CONTROLLER
 Route::get('search', 'SearchController@getQuickSeachResults');
 Route::post('get_guest_data', 'SessionController@storeGuestData');
-
-
-
-
 });
-
-Route::post('/signin', 'Auth\AuthController@postSignin');
 
 Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
 Route::get('/polarna_kobra', 'GirlController@tempLogin')->name('tempLogin');
