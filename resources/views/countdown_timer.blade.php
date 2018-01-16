@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-    <h1>Countdown Clock</h1>
+    <h1>Online In</h1>
     <div id="clockdiv">
         <div>
             <span class="days"></span>
@@ -108,7 +108,8 @@
             var timeinterval = setInterval(updateClock, 1000);
         }
 
-        var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+        var deadline = new Date(Date.parse('2018-02-01'));
+            console.log(deadline);
         initializeClock('clockdiv', deadline);
     </script>
 </body>
