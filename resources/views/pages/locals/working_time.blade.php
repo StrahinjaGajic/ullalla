@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Working Time')
+@section('title', __('headings.working_time'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -175,12 +175,20 @@
 		var workingTimesTable = $('.working-times-table');
 		var firstRow = workingTimesTable.find('tbody tr:first-child');
 		var rows = workingTimesTable.find('tbody tr');
-		var fromHrs = firstRow.find('select[name="time_from[1]"]').val();
-		var fromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+		var firstRowFromHrs = firstRow.find('select[name="time_from[1]"]').val();
+		var firstRowFromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+		var firstRowToHrs = firstRow.find('select[name="time_to[1]"]').val();
+		var firstRowToMin = firstRow.find('select[name="time_to_m[1]"]').val();
 		
-		$.each(rows, function () {
-			
-		}):
+		$.each(rows, function (index, field) {
+			var reindex = index + 1;
+
+			$(field).find('select[name="time_from[' + reindex + ']"]').val(firstRowFromHrs);
+			$(field).find('select[name="time_from_m[' + reindex + ']"]').val(firstRowFromMin);
+
+			$(field).find('select[name="time_to[' + reindex + ']"]').val(firstRowToHrs);
+			$(field).find('select[name="time_to_m[' + reindex + ']"]').val(firstRowToMin);
+		});
 	});
 </script>
 @stop

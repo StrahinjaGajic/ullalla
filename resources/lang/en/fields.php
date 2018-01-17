@@ -99,5 +99,7 @@ return [
 
     'sms_notify' => 'Receive SMS notifications',
 
-
+    'days' => 'Day|Days',
+    'hours' => 'Hour|Hours',
+    'minutes' => 'Minute|Minutes',
 ];

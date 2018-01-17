@@ -17,8 +17,7 @@ function storeAndGetUploadCareFiles($file, $dbObject = null) {
         if (strpos($file, '~') !== false) {
             // is multiple
             $group = app()->uploadcare->getGroup($file);
-            $group->store();
-            $imageFile = $group->getUrl();
+            $imageFile = $group->store();
         } else {
             // is single
             $file = app()->uploadcare->getFile($file);

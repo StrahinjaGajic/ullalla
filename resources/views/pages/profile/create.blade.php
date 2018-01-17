@@ -14,414 +14,615 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-					<h2>{{ __('headings.bio') }}</h2>
-					<section data-step="0">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.first_name') }} *</label>
-								<input type="text" class="form-control" name="first_name" />
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.last_name') }} *</label>
-								<input type="text" class="form-control" name="last_name" />
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.nickname') }} *</label>
-								<input type="text" class="form-control" name="nickname" />
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.nationality') }}</label>
-								<select name="nationality_id" class="form-control">
-									<option value=""></option>
-									@foreach ($countries as $country)
-									<option value="{{ $country->id }}">{{ $country->citizenship }}</option>
-									@endforeach
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.sex') }} *</label>
-								<select onclick="changeSex()" id="sex" name="sex" class="form-control">
-									<option value="female">{{ __('fields.female') }}</option>
-									<option value="transsexual">{{ __('fields.transsexual') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.sex_orientation') }}</label>
-								<select name="sex_orientation" class="form-control">
-									<option value="heterosexual">{{ __('fields.heterosexual') }}</option>
-									<option value="bisexual">{{ __('fields.bisexual') }}</option>
-									<option value="homosexual">{{ __('fields.homosexual') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.height') }} *</label>
-								<input type="text" class="form-control" name="height" />
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.weight') }} *</label>
-								<input type="text" class="form-control" name="weight" />
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.type') }}</label>
-								<select name="ancestry" class="form-control">
-									<option value=""></option>
-									@foreach(getTypes() as $type)
-									<option value="{{ $type }}">{{ ucfirst($type) }}</option>
-									@endforeach
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.figure') }}</label>
-								<select name="figure" class="form-control">
-									<option value=""></option>
-									<option value="normal">{{ __('fields.normal') }}</option>
-									<option value="slim">{{ __('fields.slim') }}</option>
-									<option value="athletic">{{ __('fields.athletic') }}</option>
-									<option value="chubby">{{ __('fields.chubby') }}</option>
-									<option value="other">{{ __('fields.other') }}</option>
-								</select>
-							</div>
-						</div>
-						
-						
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.age') }} *</label>
-								<select name="age" id="age" class="form-control">
-									@for ($age=18; $age <= 60 ; $age++) 
-									<option value="{{ $age }}">{{ $age }}</option>
-									@endfor
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.breast_size') }}</label>
-								<select name="breast_size" class="form-control">
-									<option value=""></option>
-									<option value="a">{{ __('fields.a') }}</option>
-									<option value="b">{{ __('fields.b') }}</option>
-									<option value="c">{{ __('fields.c') }}</option>
-									<option value="d">{{ __('fields.d') }}</option>
-									<option value="E">{{ __('fields.e') }}</option>
-									<option value="F">{{ __('fields.f') }}</option>
-									<option value="G">{{ __('fields.g') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.eye_color') }}</label>
-								<select name="eye_color" class="form-control">
-									<option value=""></option>
-									<option value="black">{{ __('fields.black') }}</option>
-									<option value="Brown">{{ __('fields.brown') }}</option>
-									<option value="green">{{ __('fields.green') }}</option>
-									<option value="blue">{{ __('fields.blue') }}</option>
-									<option value="gray">{{ __('fields.gray') }}</option>
-									<option value="other">{{ __('fields.other') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.hair_color') }}</label>
-								<select name="hair_color" class="form-control">
-									<option value=""></option>
-									<option value="black">{{ __('fields.black') }}</option>
-									<option value="brunette">{{ __('fields.brunette') }}</option>
-									<option value="blond">{{ __('fields.blond') }}</option>
-									<option value="red">{{ __('fields.red') }}</option>
-									<option value="other">{{ __('fields.other') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.tattoos') }}</label>
-								<select name="tattoos" class="form-control">
-									<option value=""></option>
-									<option value="yes">{{ __('labels.yes') }}</option>
-									<option value="no">{{ __('labels.no') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.piercings') }}</label>
-								<select name="piercings" class="form-control">
-									<option value=""></option>
-									<option value="yes">{{ __('labels.yes') }}</option>
-									<option value="no">{{ __('labels.no') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.body_hair') }}</label>
-								<select name="body_hair" class="form-control">
-									<option value=""></option>
-									<option value="shaved">{{ __('fields.shaved') }}</option>
-									<option value="hairy">{{ __('fields.hairy') }}</option>
-									<option value="partial">{{ __('fields.partial') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.intimate') }}</label>
-								<select name="intimate" class="form-control">
-									<option value="shaved">{{ __('fields.shaved') }}</option>
-									<option value="hairy">{{ __('fields.hairy') }}</option>
-									<option value="partial">{{ __('fields.partial') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.smoker') }}</label>
-								<select name="smoker" class="form-control">
-									<option value="yes">{{ __('labels.yes') }}</option>
-									<option value="no">{{ __('labels.no') }}</option>
-									<option value="occasionally">{{ __('fields.occasionally') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.alcohol') }}</label>
-								<select name="alcohol" class="form-control">
-									<option value="yes">{{ __('labels.yes') }}</option>
-									<option value="no">{{ __('labels.no') }}</option>
-									<option value="occasionally">{{ __('fields.occasionally') }}</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('headings.about_me') }} *</label>
-								<textarea name="about_me" class="form-control"></textarea>
-							</div>
-						</div>
-					</section>
-					
-					<h2>{{ __('headings.gallery') }}</h2>
-					<section data-step="1">
-						<div class="form-group">
-							<div class="image-preview-multiple">
-								<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-								<div class="_list"></div>
-							</div>
-						</div>
-						<div class="form-group upload-video">
-							<input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
-						</div>
-					</section>
-					<h2>{{ __('headings.contact') }}</h2>
-					<section data-step="2">
-						<div class="col-xs-12">
-							<div class="form-group">
-								<label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
-									<input type="checkbox" name="sms_notifications">
-									<div class="control__indicator"></div>
-								</label>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.email') }}</label>
-								<input type="text" class="form-control" name="email" value="{{ $user->email }}" />
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.website_url') }}</label>
-								<input type="text" class="form-control" name="website"/>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.telephone') }}</label>
-								<input type="text" class="form-control" name="phone"/>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
-								<input type="tel" class="form-control" name="mobile" id="mobile" />
-							</div>
-						</div>
-						<div id="options" class="col-xs-12">
-							<div class="col-lg-6 col-xs-12" style="">
+					<ul class="nav nav-pills">
+						<li class="active"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
+						<li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
+						<li><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
+						<li><a href="#workplace-tab" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
+						<li><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
+						<li><a href="#services-tab" data-toggle="tab">{{ __('headings.services') }}</a></li>
+						<li><a href="#prices-tab" data-toggle="tab">{{ __('headings.prices') }}</a></li>
+						<li><a href="#languages-tab" data-toggle="tab">{{ __('headings.languages') }}</a></li>
+						<li><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
+					</ul>
+					<div class="tab-content">
+						<section class="tab-pane active" id="bio-tab">
+							<div class="col-xs-6">
 								<div class="form-group">
-									<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
-									@foreach($contactOptions as $contactOption)
-									<label class="control control--checkbox apps"><a>{!! $contactOption->icon !!} {{ ucfirst($contactOption->contact_option_name) }}</a>
-										<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
+									<label class="control-label">{{ __('fields.first_name') }} *</label>
+									<input type="text" class="form-control" name="first_name" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.last_name') }} *</label>
+									<input type="text" class="form-control" name="last_name" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.nickname') }} *</label>
+									<input type="text" class="form-control" name="nickname" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.nationality') }}</label>
+									<select name="nationality_id" class="form-control">
+										<option value=""></option>
+										@foreach ($countries as $country)
+										<option value="{{ $country->id }}">{{ $country->citizenship }}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.sex') }} *</label>
+									<select onclick="changeSex()" id="sex" name="sex" class="form-control">
+										<option value="female">{{ __('fields.female') }}</option>
+										<option value="transsexual">{{ __('fields.transsexual') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.sex_orientation') }}</label>
+									<select name="sex_orientation" class="form-control">
+										<option value="heterosexual">{{ __('fields.heterosexual') }}</option>
+										<option value="bisexual">{{ __('fields.bisexual') }}</option>
+										<option value="homosexual">{{ __('fields.homosexual') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.height') }} *</label>
+									<input type="text" class="form-control" name="height" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.weight') }} *</label>
+									<input type="text" class="form-control" name="weight" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.type') }}</label>
+									<select name="ancestry" class="form-control">
+										<option value=""></option>
+										@foreach(getTypes() as $type)
+										<option value="{{ $type }}">{{ ucfirst($type) }}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.figure') }}</label>
+									<select name="figure" class="form-control">
+										<option value=""></option>
+										<option value="normal">{{ __('fields.normal') }}</option>
+										<option value="slim">{{ __('fields.slim') }}</option>
+										<option value="athletic">{{ __('fields.athletic') }}</option>
+										<option value="chubby">{{ __('fields.chubby') }}</option>
+										<option value="other">{{ __('fields.other') }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.age') }} *</label>
+									<select name="age" id="age" class="form-control">
+										@for ($age=18; $age <= 60 ; $age++) 
+										<option value="{{ $age }}">{{ $age }}</option>
+										@endfor
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.breast_size') }}</label>
+									<select name="breast_size" class="form-control">
+										<option value=""></option>
+										<option value="a">{{ __('fields.a') }}</option>
+										<option value="b">{{ __('fields.b') }}</option>
+										<option value="c">{{ __('fields.c') }}</option>
+										<option value="d">{{ __('fields.d') }}</option>
+										<option value="E">{{ __('fields.e') }}</option>
+										<option value="F">{{ __('fields.f') }}</option>
+										<option value="G">{{ __('fields.g') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.eye_color') }}</label>
+									<select name="eye_color" class="form-control">
+										<option value=""></option>
+										<option value="black">{{ __('fields.black') }}</option>
+										<option value="Brown">{{ __('fields.brown') }}</option>
+										<option value="green">{{ __('fields.green') }}</option>
+										<option value="blue">{{ __('fields.blue') }}</option>
+										<option value="gray">{{ __('fields.gray') }}</option>
+										<option value="other">{{ __('fields.other') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.hair_color') }}</label>
+									<select name="hair_color" class="form-control">
+										<option value=""></option>
+										<option value="black">{{ __('fields.black') }}</option>
+										<option value="brunette">{{ __('fields.brunette') }}</option>
+										<option value="blond">{{ __('fields.blond') }}</option>
+										<option value="red">{{ __('fields.red') }}</option>
+										<option value="other">{{ __('fields.other') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.tattoos') }}</label>
+									<select name="tattoos" class="form-control">
+										<option value=""></option>
+										<option value="yes">{{ __('labels.yes') }}</option>
+										<option value="no">{{ __('labels.no') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.piercings') }}</label>
+									<select name="piercings" class="form-control">
+										<option value=""></option>
+										<option value="yes">{{ __('labels.yes') }}</option>
+										<option value="no">{{ __('labels.no') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.body_hair') }}</label>
+									<select name="body_hair" class="form-control">
+										<option value=""></option>
+										<option value="shaved">{{ __('fields.shaved') }}</option>
+										<option value="hairy">{{ __('fields.hairy') }}</option>
+										<option value="partial">{{ __('fields.partial') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.intimate') }}</label>
+									<select name="intimate" class="form-control">
+										<option value="shaved">{{ __('fields.shaved') }}</option>
+										<option value="hairy">{{ __('fields.hairy') }}</option>
+										<option value="partial">{{ __('fields.partial') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.smoker') }}</label>
+									<select name="smoker" class="form-control">
+										<option value="yes">{{ __('labels.yes') }}</option>
+										<option value="no">{{ __('labels.no') }}</option>
+										<option value="occasionally">{{ __('fields.occasionally') }}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.alcohol') }}</label>
+									<select name="alcohol" class="form-control">
+										<option value="yes">{{ __('labels.yes') }}</option>
+										<option value="no">{{ __('labels.no') }}</option>
+										<option value="occasionally">{{ __('fields.occasionally') }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="form-group">
+									<label class="control-label">{{ __('headings.about_me') }} *</label>
+									<textarea name="about_me" class="form-control"></textarea>
+								</div>
+							</div>
+						</section>
+
+						<section class="tab-pane" id="gallery-tab">
+							<div class="form-group">
+								<div class="image-preview-multiple">
+									<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+									<div class="_list"></div>
+								</div>
+							</div>
+							<div class="form-group upload-video">
+								<input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+							</div>
+						</section>
+
+						<section class="tab-pane" id="contact-tab">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
+										<input type="checkbox" name="sms_notifications">
 										<div class="control__indicator"></div>
 									</label>
-									@endforeach
 								</div>
-
-								<div class="col skype-name" style="display: none;">
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.email') }}</label>
+									<input type="text" class="form-control" name="email" value="{{ $user->email }}" />
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.website_url') }}</label>
+									<input type="text" class="form-control" name="website"/>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.telephone') }}</label>
+									<input type="text" class="form-control" name="phone"/>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
+									<input type="tel" class="form-control" name="mobile" id="mobile" />
+								</div>
+							</div>
+							<div id="options" class="col-xs-12">
+								<div class="col-lg-6 col-xs-12" style="">
 									<div class="form-group">
-										<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
+										<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
+										@foreach($contactOptions as $contactOption)
+										<label class="control control--checkbox apps"><a>{!! $contactOption->icon !!} {{ ucfirst($contactOption->contact_option_name) }}</a>
+											<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
+											<div class="control__indicator"></div>
+										</label>
+										@endforeach
+									</div>
+									<div class="col skype-name" style="display: none;">
+										<div class="form-group">
+											<input type="text" name="skype_name" placeholder="Skype Name" class="form-control">
+										</div>
 									</div>
 								</div>
-
+								<div class="col-lg-6 col-xs-12">
+									<div class="form-group">
+										<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
+										@foreach(getPreferedOptions() as $key => $preferedOption)
+										<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+											<label style="margin-right: 20px;">
+												<input type="radio" name="prefered_contact_option" value="{{ $key }}" style="display: inline-block;">
+												{{ $preferedOption }}
+											</label>
+										</div>	
+										@endforeach
+										<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+											<label class="control control--checkbox" style="margin-right: 20px; margin-left:0px;">
+												<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>{{ __('fields.no_withheld_numbers') }}</a>
+												<div class="control__indicator"></div>
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
+						</section>
 
-
-
+						<section class="tab-pane" id="workplace-tab">
 							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
-									<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
-									@foreach(getPreferedOptions() as $key => $preferedOption)
-									<div class="col-xs-6" style="padding: 0px; margin: 0px;">
-										<label style="margin-right: 20px;">
-											<input type="radio" name="prefered_contact_option" value="{{ $key }}" style="display: inline-block;">
-											{{ $preferedOption }}
+									<label class="control-label">{{ __('fields.canton') }}</label>
+									<select name="canton" class="form-control">
+										<option value=""></option>
+										@foreach($cantons as $canton)
+										<option value="{{ $canton->id }}">{{ $canton->canton_name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-4 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.city') }}</label>
+									<input type="text" class="form-control" name="city"/>
+								</div>
+							</div>
+							<div class="col-lg-2 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.zip_code') }}</label>
+									<input type="text" class="form-control" name="zip_code"/>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.address') }}</label>
+									<input type="text" class="form-control" name="address"/>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">{{ __('fields.club_name') }}</label>
+									<input type="text" class="form-control" name="club_name"/>
+								</div>
+							</div>
+							<h3 style="padding-left: 15px;">{{ __('headings.available_for') }}:</h3>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control control--checkbox apps">
+										<input type="checkbox" name="incall" value="1" id="incall_availability"><a>{{ __('fields.incall') }}</a>
+										<div class="control__indicator"></div>
+									</label>
+									<div class="incall-options" style="display: none;">
+										@foreach(getIncallOptions() as $key => $incallOption)
+										<label style="margin-left: 30px; display: block;">
+											<input type="radio" name="incall_option" value="{{ $key }}" id="{{ $key == 'define_yourself' ? 'incall_define_yourself' : '' }}" style="display: inline-block;">
+											{{ $incallOption }}
 										</label>
-									</div>	
-									@endforeach
-									<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+										@endforeach
+										<input type="text" name="incall_define_yourself" style="display: none; margin-left: 45px;">
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label class="control control--checkbox apps">
+										<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>{{ __('fields.outcall') }}</a>
+										<div class="control__indicator"></div>
+									</label>
+									<div class="outcall-options" style="display: none;">
+										@foreach(getOutcallOptions() as $key => $outcallOption)
+										<label style="margin-left: 30px; display: block;">
+											<input type="radio" name="outcall_option" value="{{ $key }}" id="{{ $key == 'define_yourself' ? 'outcall_define_yourself' : '' }}" style="display: inline-block;">
+											{{ $outcallOption }}
+										</label>
+										@endforeach
+										<input type="text" name="outcall_define_yourself" style="display: none; margin-left: 45px;">
+									</div>
+								</div>
+							</div>
+						</section>
 
-										<label class="control control--checkbox" style="margin-right: 20px; margin-left:0px;">
-											<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>{{ __('fields.no_withheld_numbers') }}</a>
+						<section class="tab-pane" id="working-hours-tab">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<div id="available_24_7" class="pull-left">
+										<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
+											<input type="checkbox" name="available_24_7">
+											<div class="control__indicator"></div>
+										</label>
+										<label class="control control--checkbox working-times-disabled"><a>{{ __('fields.show_as_night_escort') }}</a>
+											<input type="checkbox" name="available_24_7_night_escort" value="1" disabled="">
 											<div class="control__indicator"></div>
 										</label>
 									</div>
+									<div class="pull-right">
+										<button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
+									</div>
+									<div> <!-- style="overflow-x: auto;" -->
+										<table class="table working-times-table">
+											<thead>
+												<tr>
+													<th>
+														<label class="control control--checkbox"><a>{{ __('fields.mark_all') }}</a>
+															<input type="checkbox" id="select_all_days">
+															<div class="control__indicator"></div>
+														</label>
+													</th>
+													<th>{{ __('headings.from') }}</th>
+													<th>{{ __('headings.to') }}</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php $counter = 1; ?>
+												@foreach(getDaysOfTheWeek() as $dayOfTheWeek)
+												<tr class="working-times-disabled">
+													<td>
+														<label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
+															<input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
+															<div class="control__indicator"></div>
+														</label>
+													</td>
+													<td>
+														<select name="time_from[{{ $counter }}]" class="form-control" disabled="">
+															@foreach(getHoursList() as $hour)
+															<option value="{{ $hour }}">{{ $hour }}</option>
+															@endforeach
+														</select>
+														<span>{{ __('global.hrs') }}</span>
+														<select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
+															@foreach(getMinutesList() as $minute)
+															<option value="{{ $minute }}">{{ $minute }}</option>
+															@endforeach
+														</select>
+														<span>{{ __('global.min') }}</span>
+													</td>
+													<td>
+														<select name="time_to[{{ $counter }}]" class="form-control" disabled="">
+															@foreach(getHoursList() as $hour)
+															<option value="{{ $hour }}">{{ $hour }}</option>
+															@endforeach
+														</select>
+														<span>{{ __('global.hrs') }}</span>
+														<select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
+															@foreach(getMinutesList() as $minute)
+															<option value="{{ $minute }}">{{ $minute }}</option>
+															@endforeach
+														</select>
+														<span>{{ __('global.min') }}</span>
+													</td>
+													<td>
+														<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>
+															<input type="checkbox" name="night_escorts[{{ $counter }}]" value="{{ $counter }}" disabled="">
+															<div class="control__indicator"></div>
+														</label>
+													</td>
+												</tr>
+												<?php $counter++; ?>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
+						</section>
 
-
-						</div>
-					</section>
-					<h2>{{ __('headings.workplace') }}</h2>
-					<section data-step="3">
-						<div class="col-lg-6 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.canton') }}</label>
-								<select name="canton" class="form-control">
-									<option value=""></option>
-									@foreach($cantons as $canton)
-									<option value="{{ $canton->id }}">{{ $canton->canton_name }}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-4 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.city') }}</label>
-								<input type="text" class="form-control" name="city"/>
-							</div>
-						</div>
-						<div class="col-lg-2 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.zip_code') }}</label>
-								<input type="text" class="form-control" name="zip_code"/>
-							</div>
-						</div>
-						<div class="col-lg-6 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.address') }}</label>
-								<input type="text" class="form-control" name="address"/>
-							</div>
-						</div>
-						<div class="col-lg-6 col-xs-12">
-							<div class="form-group">
-								<label class="control-label">{{ __('fields.club_name') }}</label>
-								<input type="text" class="form-control" name="club_name"/>
-							</div>
-						</div>
-						<h3 style="padding-left: 15px;">{{ __('headings.available_for') }}:</h3>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control control--checkbox apps">
-									<input type="checkbox" name="incall" value="1" id="incall_availability"><a>{{ __('fields.incall') }}</a>
+						<section class="tab-pane services-section" id="services-tab">
+							<h3>{{ __('headings.service_offered_for') }}:</h3>
+							<div class="col-lg-12 col-sm-12 col-xs-9" style="margin-bottom:20px;">
+								@foreach($serviceOptions as $serviceOption)
+								<label class="control control--checkbox"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
+									<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
 									<div class="control__indicator"></div>
 								</label>
-								<div class="incall-options" style="display: none;">
-									@foreach(getIncallOptions() as $key => $incallOption)
-									<label style="margin-left: 30px; display: block;">
-										<input type="radio" name="incall_option" value="{{ $key }}" id="{{ $key == 'define_yourself' ? 'incall_define_yourself' : '' }}" style="display: inline-block;">
-										{{ $incallOption }}
-									</label>
+								@endforeach
+							</div>
+							<div class="service-list">
+								<h3>{{ __('headings.service_list') }}</h3>
+								@foreach ($services->chunk(33) as $chunkedServices)
+								<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
+									@foreach($chunkedServices as $service)
+									<div class="form-group">
+										@php 
+										$var = 'service_name_' . config()->get('app.locale');
+										@endphp
+										<label class="control control--checkbox" style="display: block;"><a>{{ $service->$var }}</a>
+											<input type="checkbox" class="form-control" name="services[]" value="{{ $service->id }}" />
+											<div class="control__indicator"></div>
+										</label>
+									</div>
 									@endforeach
-									<input type="text" name="incall_define_yourself" style="display: none; margin-left: 45px;">
+								</div>
+								@endforeach
+							</div>
+						</section>
+
+						<section class="tab-pane" id="prices-tab">
+							<div class="price_section">
+								<div class="col-lg-3 col-xs-12">
+									<div class="form-group">
+										<label class="control-label">{{ __('headings.duration') }}</label>
+										<input type="text" class="form-control" name="service_duration"/>
+										<div class="help-block"></div>
+									</div>
+								</div>
+								<div class="col-lg-2 col-xs-12">
+									<div class="form-group">
+										<label class="control-label">{{ __('fields.unit') }}</label>
+										<select name="service_price_unit" class="form-control">
+											@foreach(getUnits() as $unit)
+											<option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
+											@endforeach
+										</select>
+										<div class="help-block"></div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-xs-12">
+									<div class="form-group">
+										<label class="control-label">{{ __('headings.price') }}</label>
+										<input type="text" class="form-control" name="service_price"/>
+										<div class="help-block"></div>
+									</div>
+								</div>
+								<div class="col-lg-2 col-xs-12">
+									<div class="form-group">
+										<label class="control-label">{{ __('fields.currency') }}</label>
+										<select name="service_price_currency" class="form-control">
+											@foreach(getCurrencies() as $currency)
+											<option value="{{ $currency }}">{{ strtoupper($currency) }}</option>
+											@endforeach
+										</select>
+										<div class="help-block"></div>
+									</div>
+								</div>
+								<div class="col-lg-2 col-xs-12">
+									<div class="form-group">
+										<label class="control-label">{{ __('fields.type') }}</label>
+										<select name="price_type" id="price_type" class="form-control">
+											@foreach(getPriceTypes() as $priceType)
+											<option value="{{ $priceType }}">{{ ucfirst($priceType) }}</option>
+											@endforeach
+										</select>
+										<div class="help-block"></div>
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
+									<button type="submit" class="add-new-price">{{ __('buttons.add_new_price') }}</button>
 								</div>
 							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label class="control control--checkbox apps">
-									<input type="checkbox" name="outcall" value="1" id="outcall_availability"><a>{{ __('fields.outcall') }}</a>
-									<div class="control__indicator"></div>
-								</label>
-								<div class="outcall-options" style="display: none;">
-									@foreach(getOutcallOptions() as $key => $outcallOption)
-									<label style="margin-left: 30px; display: block;">
-										<input type="radio" name="outcall_option" value="{{ $key }}" id="{{ $key == 'define_yourself' ? 'outcall_define_yourself' : '' }}" style="display: inline-block;">
-										{{ $outcallOption }}
-									</label>
-									@endforeach
-									<input type="text" name="outcall_define_yourself" style="display: none; margin-left: 45px;">
-								</div>
+							<div class="col-xs-12 price-table-container">
+								<table class="{{ $prices->count() == 0 ? 'is-hidden' : '' }}">
+									<thead>
+										<tr>
+											<th>{{ __('fields.type') }}</th>
+											<th>{{ __('headings.duration') }}</th>
+											<th>{{ __('headings.price') }}</th>
+											<th>{{ __('headings.remove') }}</th>
+										</tr>
+									</thead>
+									<tbody id="prices_body">
+										@foreach ($prices as $price)
+										<tr>
+											<td>{{ $price->price_type }}</td>
+											<td>{{ $price->service_duration }} {{ trans_choice('fields.' . $price->service_price_unit, $price->service_duration) }}</td>
+											<td>{{ $price->service_price }} {{ $price->service_price_currency }}</td>
+											<td>
+												<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
+													<span class="glyphicon glyphicon-trash"></span>
+												</a>
+											</td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
-						</div>
-					</section>
-					<h2>{{ __('headings.working_hours') }}</h2>
-					<section data-step="4">
-						<div class="col-xs-12">
-							<div class="form-group">
-								<div id="available_24_7">
-									<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
-										<input type="checkbox" name="available_24_7">
-										<div class="control__indicator"></div>
-									</label>
-									<label class="control control--checkbox working-times-disabled"><a>{{ __('fields.show_as_night_escort') }}</a>
-										<input type="checkbox" name="available_24_7_night_escort" value="1" disabled="">
-										<div class="control__indicator"></div>
-									</label>
+						</section>
+
+						<section class="tab-pane" id="languages-tab">
+							<table class="table language-table">
+								<thead>
+									<tr>
+										<th>{{ __('headings.language') }}</th>
+										<th>{{ __('headings.level') }}</th>
+									</tr>
+								</thead>
+								@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
+								<tbody class="language-list">
+									@foreach($spokenLanguages->take(7) as $language)
+									<tr>
+										<td>
+											<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
+											{{ $language->$var }}
+										</td>
+										<td>
+											<div class="slider"></div>
+											<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->spoken_language_code }}]" value="">
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+								<tbody class="language-list" style="display: none;">
+									@foreach($spokenLanguages->splice(7) as $language)
+									<tr>
+										<td>
+											<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
+											{{ $language->$var }}
+										</td>
+										<td>
+											<div class="slider"></div>
+											<input type="hidden" name="spoken_language[{{ $language->spoken_language_code }}]" value="0">
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+							<div class="show-more text-center">
+								<a href="#" class="btn btn-default">{{ __('buttons.show_more') }}</a>
+							</div>
+						</section>
+
+						<section class="tab-pane" id="packages-tab">
+							<div class="col-xs-12 default-packages-section" id="default-packages-section">
+								<h3>{{ __('headings.default_packages') }}</h3>
+								<div class="has-error">
+									<div id="alertPackageMessage" class="help-block"></div>
 								</div>
 								<div style="overflow-x: auto;">
-									<table class="table working-times-table">
+									<table class="table packages-table">
 										<thead>
 											<tr>
-												<th>
-													<label class="control control--checkbox"><a>{{ __('fields.mark_all') }}</a>
-														<input type="checkbox" id="select_all_days">
-														<div class="control__indicator"></div>
-													</label>
-												</th>
-												<th>{{ __('headings.from') }}</th>
-												<th>{{ __('headings.to') }}</th>
+												<th>{{ __('headings.name') }}</th>
+												<th>{{ __('headings.duration') }}</th>
+												<th>{{ __('headings.price') }}</th>
+												<th>{{ __('headings.activation_date') }}</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php $counter = 1; ?>
-											@foreach(getDaysOfTheWeek() as $dayOfTheWeek)
-											<tr class="working-times-disabled">
+											@foreach ($packages as $package)
+											<tr>
+												<td>{{ $package->package_name }}</td>
+												<td>{{ $package->package_duration }}</td>
+												<td>{{ $package->package_price }}</td>
 												<td>
-													<label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
-														<input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
-														<div class="control__indicator"></div>
-													</label>
+													<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
 												</td>
 												<td>
-													<select name="time_from[{{ $counter }}]" class="form-control" disabled="">
-														@foreach(getHoursList() as $hour)
-														<option value="{{ $hour }}">{{ $hour }}</option>
-														@endforeach
-													</select>
-													<span>{{ __('global.hrs') }}</span>
-													<select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
-														@foreach(getMinutesList() as $minute)
-														<option value="{{ $minute }}">{{ $minute }}</option>
-														@endforeach
-													</select>
-													<span>{{ __('global.min') }}</span>
-												</td>
-												<td>
-													<select name="time_to[{{ $counter }}]" class="form-control" disabled="">
-														@foreach(getHoursList() as $hour)
-														<option value="{{ $hour }}">{{ $hour }}</option>
-														@endforeach
-													</select>
-													<span>{{ __('global.hrs') }}</span>
-													<select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
-														@foreach(getMinutesList() as $minute)
-														<option value="{{ $minute }}">{{ $minute }}</option>
-														@endforeach
-													</select>
-													<span>{{ __('global.min') }}</span>
-												</td>
-												<td>
-													<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>
-														<input type="checkbox" name="night_escorts[{{ $counter }}]" value="{{ $counter }}" disabled="">
+													<label class="control control--checkbox">
+														<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
 														<div class="control__indicator"></div>
 													</label>
 												</td>
@@ -432,240 +633,48 @@
 									</table>
 								</div>
 							</div>
-						</div>
-					</section>
-					<h2>{{ __('headings.services') }}</h2>
-					<section data-step="5" class="services-section">
-						<h3>{{ __('headings.service_offered_for') }}:</h3>
-						<div class="col-lg-12 col-sm-12 col-xs-9" style="margin-bottom:20px;">
-							@foreach($serviceOptions as $serviceOption)
-							<label class="control control--checkbox"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
-								<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
-								<div class="control__indicator"></div>
-							</label>
-							@endforeach
-						</div>
-						<div class="service-list">
-							<h3>{{ __('headings.service_list') }}</h3>
-							@foreach ($services->chunk(33) as $chunkedServices)
-							<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
-								@foreach($chunkedServices as $service)
-								<div class="form-group">
-									@php 
-									$var = 'service_name_' . config()->get('app.locale');
-									@endphp
-									<label class="control control--checkbox" style="display: block;"><a>{{ $service->$var }}</a>
-										<input type="checkbox" class="form-control" name="services[]" value="{{ $service->id }}" />
-										<div class="control__indicator"></div>
-									</label>
-								</div>
-								@endforeach
-							</div>
-							@endforeach
-						</div>
-					</section>
-					<h2>{{ __('headings.prices') }}</h2>
-					<section data-step="6">
-						<div class="price_section">
-							<div class="col-lg-3 col-xs-12">
-								<div class="form-group">
-									<label class="control-label">{{ __('headings.duration') }}</label>
-									<input type="text" class="form-control" name="service_duration"/>
-									<div class="help-block"></div>
-								</div>
-							</div>
-							<div class="col-lg-2 col-xs-12">
-								<div class="form-group">
-									<label class="control-label">{{ __('fields.unit') }}</label>
-									<select name="service_price_unit" class="form-control">
-										@foreach(getUnits() as $unit)
-										<option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
-										@endforeach
-									</select>
-									<div class="help-block"></div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-xs-12">
-								<div class="form-group">
-									<label class="control-label">{{ __('headings.price') }}</label>
-									<input type="text" class="form-control" name="service_price"/>
-									<div class="help-block"></div>
-								</div>
-							</div>
-							<div class="col-lg-2 col-xs-12">
-								<div class="form-group">
-									<label class="control-label">{{ __('fields.currency') }}</label>
-									<select name="service_price_currency" class="form-control">
-										@foreach(getCurrencies() as $currency)
-										<option value="{{ $currency }}">{{ strtoupper($currency) }}</option>
-										@endforeach
-									</select>
-									<div class="help-block"></div>
-								</div>
-							</div>
-							<div class="col-lg-2 col-xs-12">
-								<div class="form-group">
-									<label class="control-label">{{ __('fields.type') }}</label>
-									<select name="price_type" id="price_type" class="form-control">
-										@foreach(getPriceTypes() as $priceType)
-										<option value="{{ $priceType }}">{{ ucfirst($priceType) }}</option>
-										@endforeach
-									</select>
-									<div class="help-block"></div>
-								</div>
-							</div>
 							<div class="col-xs-12">
-								<input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
-								<button type="submit" class="add-new-price">{{ __('buttons.add_new_price') }}</button>
+								<h3 id="gotm-totm">{{ __('headings.gotm') }}</h3>
+								<div style="overflow-x: auto;">
+									<table class="table packages-table package-girl-month">
+										<thead>
+											<tr>
+												<th>{{ __('headings.name') }}</th>
+												<th>{{ __('headings.duration') }}</th>
+												<th>{{ __('headings.price') }}</th>
+												<th>{{ __('headings.activation_date') }}</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach ($packages->take(3) as $package)
+											<tr>
+												<td>{{ $package->package_name }}</td>
+												<td>{{ $package->package_duration }}</td>
+												<td>{{ $package->package_price }}</td>
+												<td>
+													<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+												</td>
+												<td>
+													<label class="control control--checkbox">
+														<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+														<div class="control__indicator"></div>
+													</label>
+												</td>
+											</tr>
+											<?php $counter++; ?>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-12 price-table-container">
-							<table class="{{ $prices->count() == 0 ? 'is-hidden' : '' }}">
-								<thead>
-									<tr>
-										<th>{{ __('fields.type') }}</th>
-										<th>{{ __('headings.duration') }}</th>
-										<th>{{ __('headings.price') }}</th>
-										<th>{{ __('headings.remove') }}</th>
-									</tr>
-								</thead>
-								<tbody id="prices_body">
-									@foreach ($prices as $price)
-									<tr>
-										<td>{{ $price->price_type }}</td>
-										<td>{{ $price->service_duration }}</td>
-										<td>{{ $price->service_price }}</td>
-										<td>
-											<a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
-												<span class="glyphicon glyphicon-trash"></span>
-											</a>
-										</td>
-									</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div>
-					</section>
-					<h2>{{ __('headings.languages') }}</h2>
-					<section data-step="7">
-						<table class="table language-table">
-							<thead>
-								<tr>
-									<th>{{ __('headings.language') }}</th>
-									<th>{{ __('headings.level') }}</th>
-								</tr>
-							</thead>
-							@php ($var = 'spoken_language_name_'. config()->get('app.locale'))
-							<tbody class="language-list">
-								@foreach($spokenLanguages->take(7) as $language)
-								<tr>
-									<td>
-										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-										{{ $language->$var }}
-									</td>
-									<td>
-										<div class="slider"></div>
-										<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->spoken_language_code }}]" value="">
-									</td>
-								</tr>
-								@endforeach
-							</tbody>
-							<tbody class="language-list" style="display: none;">
-								@foreach($spokenLanguages->splice(7) as $language)
-								<tr>
-									<td>
-										<img style="margin-bottom:1px;" src="{{ asset('flags/4x3/' . $language->spoken_language_code . '.svg') }}" alt="" height="20" width="30">
-										{{ $language->$var }}
-									</td>
-									<td>
-										<div class="slider"></div>
-										<input type="hidden" name="spoken_language[{{ $language->spoken_language_code }}]" value="0">
-									</td>
-								</tr>
-								@endforeach
-							</tbody>
-						</table>
-						<div class="show-more text-center">
-							<a href="#" class="btn btn-default">{{ __('buttons.show_more') }}</a>
-						</div>
-					</section>
-					<h2>{{ __('headings.packages') }}</h2>
-					<section data-step="8">
-						<div class="col-xs-12 default-packages-section" id="default-packages-section">
-							<h3>{{ __('headings.default_packages') }}</h3>
-							<div class="has-error">
-								<div id="alertPackageMessage" class="help-block"></div>
-							</div>
-							<div style="overflow-x: auto;">
-								<table class="table packages-table">
-									<thead>
-										<tr>
-											<th>{{ __('headings.name') }}</th>
-											<th>{{ __('headings.duration') }}</th>
-											<th>{{ __('headings.price') }}</th>
-											<th>{{ __('headings.activation_date') }}</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $counter = 1; ?>
-										@foreach ($packages as $package)
-										<tr>
-											<td>{{ $package->package_name }}</td>
-											<td>{{ $package->package_duration }}</td>
-											<td>{{ $package->package_price }}</td>
-											<td>
-												<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-											</td>
-											<td>
-												<label class="control control--checkbox">
-													<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-													<div class="control__indicator"></div>
-												</label>
-											</td>
-										</tr>
-										<?php $counter++; ?>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<h3 id="gotm-totm">{{ __('headings.gotm') }}</h3>
-							<div style="overflow-x: auto;">
-								<table class="table packages-table package-girl-month">
-									<thead>
-										<tr>
-											<th>{{ __('headings.name') }}</th>
-											<th>{{ __('headings.duration') }}</th>
-											<th>{{ __('headings.price') }}</th>
-											<th>{{ __('headings.activation_date') }}</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach ($packages->take(3) as $package)
-										<tr>
-											<td>{{ $package->package_name }}</td>
-											<td>{{ $package->package_duration }}</td>
-											<td>{{ $package->package_price }}</td>
-											<td>
-												<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
-											</td>
-											<td>
-												<label class="control control--checkbox">
-													<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
-													<div class="control__indicator"></div>
-												</label>
-											</td>
-										</tr>
-										<?php $counter++; ?>
-										@endforeach
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</section>
+						</section>
+						<!-- Previous/Next buttons -->
+						<ul class="pager wizard">
+							<li class="previous"><a href="javascript: void(0);">Previous</a></li>
+							<li class="next"><a href="javascript: void(0);">Next</a></li>
+						</ul>
+					</div>
 					<input type="hidden" name="stripeToken" id="stripeToken">
 					<input type="hidden" name="stripeEmail" id="stripeEmail">
 					{!! Form::close() !!}
@@ -680,14 +689,14 @@
 <!-- Form Validation -->
 <script>
 	var utilAsset = '{{ asset('js/utils.js') }}';
-    var invalidUrl = '{{ __('validation.url_invalid') }}';
+	var invalidUrl = '{{ __('validation.url_invalid') }}';
 </script>
 <script src="{{ asset('js/intlTelInput.min.js') }}"></script>
 <script src="{{ asset('js/utils.js') }}"></script>
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery.steps.min.js') }}"></script>
-<script src="{{ asset('js/profileValidation.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{ asset('js/profileValidation.js?ver=' . str_random('10')) }}"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -938,25 +947,25 @@ $(function () {
 $(function () {
 	$(".price-table-container").on("click", "a.delete-price", function(e) {
 		e.preventDefault();
-        var that = $(this);
-        var url = that.attr('href');
-        var priceID = url.split('/').pop();
-        if (confirm('{{ __('global.are_you_sure') }}')) {
-            $.ajax({
-                url: url,
-                type: 'get',
-                data: {price_id: priceID},
-                success: function (data) {
-                    var tBody = that.closest('tbody');
-                    that.closest('tr').remove();
-                    if (tBody.children().length == 0) {
-                        tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
+		var that = $(this);
+		var url = that.attr('href');
+		var priceID = url.split('/').pop();
+		if (confirm('{{ __('global.are_you_sure') }}')) {
+			$.ajax({
+				url: url,
+				type: 'get',
+				data: {price_id: priceID},
+				success: function (data) {
+					var tBody = that.closest('tbody');
+					that.closest('tr').remove();
+					if (tBody.children().length == 0) {
+						tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
 	});
 });
 </script>
@@ -1110,6 +1119,29 @@ $(function () {
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	
+	});
+</script>
+
+<script>
+	$('#apply_to_all').on('click', function (e) {
+		e.preventDefault();
+		var workingTimesTable = $('.working-times-table');
+		var firstRow = workingTimesTable.find('tbody tr:first-child');
+		var rows = workingTimesTable.find('tbody tr');
+		var firstRowFromHrs = firstRow.find('select[name="time_from[1]"]').val();
+		var firstRowFromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+		var firstRowToHrs = firstRow.find('select[name="time_to[1]"]').val();
+		var firstRowToMin = firstRow.find('select[name="time_to_m[1]"]').val();
+		
+		$.each(rows, function (index, field) {
+			var reindex = index + 1;
+
+			$(field).find('select[name="time_from[' + reindex + ']"]').val(firstRowFromHrs);
+			$(field).find('select[name="time_from_m[' + reindex + ']"]').val(firstRowFromMin);
+
+			$(field).find('select[name="time_to[' + reindex + ']"]').val(firstRowToHrs);
+			$(field).find('select[name="time_to_m[' + reindex + ']"]').val(firstRowToMin);
+		});
 	});
 </script>
 

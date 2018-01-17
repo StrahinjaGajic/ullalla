@@ -703,7 +703,7 @@ class ProfileController extends Controller
                     'serviceDuration' => $price->service_duration,
                     'servicePrice' => $price->service_price,
                     'priceType' => $price->price_type,
-                    'servicePriceUnit' => $price->service_price_unit,
+                    'servicePriceUnit' => trans_choice('fields.' . $price->service_price_unit, $price->service_duration),
                     'servicePriceCurrency' => $price->service_price_currency,
                 ]);
             } else {
@@ -718,11 +718,14 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // insert new price
+        dd($request->price_id);
+
+        // find price
         $price = Price::where([
             ['id', $request->price_id],
             ['user_id', $user->id]
         ])->first();
+
 
         if ($price) {
             $price->delete();

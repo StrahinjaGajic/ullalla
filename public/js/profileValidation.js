@@ -21,46 +21,6 @@ $(document).ready(function() {
                 preferredCountries: ['ch']
             });
     $('#profileForm')
-        .steps({
-            headerTag: 'h2',
-            bodyTag: 'section',
-            // Triggered when clicking the Previous/Next buttons
-            onStepChanging: function(e, currentIndex, newIndex) {
-                var fv = $('#profileForm').data('formValidation'), // FormValidation instance
-                // The current step container
-                    $container = $('#profileForm').find('section[data-step="' + currentIndex +'"]');
-
-                // Validate the container
-                fv.validateContainer($container);
-
-                var isValidStep = fv.isValidContainer($container);
-                if (isValidStep === false || isValidStep === null) {
-                    // Do not jump to the next step
-                    return false;
-                }
-
-                return true;
-            },
-            // Triggered when clicking the Finish button
-            onFinishing: function(e, currentIndex) {
-                var fv         = $('#profileForm').data('formValidation'),
-                    $container = $('#profileForm').find('section[data-step="' + currentIndex +'"]');
-
-                // Validate the last step container
-                fv.validateContainer($container);
-
-                var isValidStep = fv.isValidContainer($container);
-                if (isValidStep === false || isValidStep === null) {
-                    return false;
-                }
-
-                return true;
-            },
-            onFinished: function(e, currentIndex) {
-                $('#profileForm').find('.actions li').attr('aria-disabled', true);
-                $('#profileForm').formValidation('defaultSubmit');
-            }
-        })
         .formValidation({
             framework: 'bootstrap',
             icon: {
@@ -264,4 +224,53 @@ $(document).ready(function() {
                 }
             }
         })
+        .bootstrapWizard({
+            tabClass: 'nav nav-pills',
+            onTabClick: function(tab, navigation, index) {
+                return validateTab(index);
+            },
+            onNext: function(tab, navigation, index) {
+                var numTabs    = $('#profileForm').find('.tab-pane').length,
+                    isValidTab = validateTab(index - 1);
+                if (!isValidTab) {
+                    return false;
+                }
+
+                if (index === numTabs) {
+                    // Trigger the last tab
+                    $('#profileForm').formValidation('defaultSubmit');
+                }
+
+                return true;
+            },
+            onPrevious: function(tab, navigation, index) {
+                return validateTab(index + 1);
+            },
+            onTabShow: function(tab, navigation, index) {
+                // Update the label of Next button when we are at the last tab
+                var numTabs = $('#profileForm').find('.tab-pane').length;
+                $('#profileForm')
+                    .find('.next')
+                        .removeClass('disabled')    // Enable the Next button
+                        .find('a')
+                        .html(index === numTabs - 1 ? 'Finish' : 'Next');
+            }
+        });
+
+    function validateTab(index) {
+        var fv   = $('#profileForm').data('formValidation'), // FormValidation instance
+            // The current tab
+            $tab = $('#profileForm').find('.tab-pane').eq(index);
+
+        // Validate the container
+        fv.validateContainer($tab);
+
+        var isValidStep = fv.isValidContainer($tab);
+        if (isValidStep === false || isValidStep === null) {
+            // Do not jump to the target tab
+            return false;
+        }
+
+        return true;
+    }
 });

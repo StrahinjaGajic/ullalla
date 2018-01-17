@@ -28,7 +28,7 @@
 					$workingTime = isJson($user->working_time) ? json_decode($user->working_time) : $user->working_time;
 					?>
 					<div class="form-group">
-						<div id="available_24_7">
+						<div id="available_24_7" class="pull-left">
 							<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
 								<input type="checkbox" name="available_24_7" {{ stringHasString('Available 24/7', $workingTime) ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
@@ -38,6 +38,9 @@
 								<div class="control__indicator"></div>
 							</label>
 						</div>
+						<div class="pull-right">
+                            <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
+                        </div>
 						<table class="table working-times-table">
 							<thead>
 								<tr>
@@ -177,7 +180,27 @@
 				workingTimesBodyRows.find('input').attr('disabled', false).prop('checked', false);
 			}
 		});
+	});
 
+	$('#apply_to_all').on('click', function (e) {
+		e.preventDefault();
+		var workingTimesTable = $('.working-times-table');
+		var firstRow = workingTimesTable.find('tbody tr:first-child');
+		var rows = workingTimesTable.find('tbody tr');
+		var firstRowFromHrs = firstRow.find('select[name="time_from[1]"]').val();
+		var firstRowFromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+		var firstRowToHrs = firstRow.find('select[name="time_to[1]"]').val();
+		var firstRowToMin = firstRow.find('select[name="time_to_m[1]"]').val();
+		
+		$.each(rows, function (index, field) {
+			var reindex = index + 1;
+
+			$(field).find('select[name="time_from[' + reindex + ']"]').val(firstRowFromHrs);
+			$(field).find('select[name="time_from_m[' + reindex + ']"]').val(firstRowFromMin);
+
+			$(field).find('select[name="time_to[' + reindex + ']"]').val(firstRowToHrs);
+			$(field).find('select[name="time_to_m[' + reindex + ']"]').val(firstRowToMin);
+		});
 	});
 
 </script>
