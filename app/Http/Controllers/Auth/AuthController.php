@@ -44,6 +44,7 @@ class AuthController extends Controller
 			$user->email = $request->email;
 			$user->password = bcrypt($request->password);
 			$user->user_type_id = $request->user_type;
+			$user->activated = 1; // remove in production
 			$user->save();
 		}
 		// create a new local
@@ -52,6 +53,7 @@ class AuthController extends Controller
 			$user->username = $request->username;
 			$user->email = $request->email;
 			$user->password = bcrypt($request->password);
+			$user->activated = 1; // remove in production
 			$user->save();
 		}
 
