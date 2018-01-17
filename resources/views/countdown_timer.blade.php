@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="../img/favicon.png">
     <title>Ullallà</title>
     <style>
         body,
@@ -15,7 +16,7 @@
     }
         
         .wrapper {
-            background: url('../img/bglogo.jpg') center no-repeat;
+            background: url('../img/bgtest.jpg') center no-repeat;
             background-size: cover;
             height: 100%;
             width: 100%;
