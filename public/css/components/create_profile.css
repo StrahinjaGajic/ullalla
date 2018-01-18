@@ -1,21 +1,76 @@
  /****** Form Validation Profile Style ******/
 
+/*
  .wizard > .steps > ul > li {
      width: 33%;
  }
+*/
+
+.nav-pills {
+    width: 100%;
+    padding: 0!important;
+}
+
+.pad-right {
+    padding-right: 0px!important;
+}
+
+.pad-left {
+    padding-left: 0px!important;
+}
+
+.nav-pills > li {
+    margin: 0!important;
+    width: 33.3%;
+   
+}
+
+.nav-pills > li > a {
+    color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.nav-pills > li > a:hover {
+    background: 0 0;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background: #f26522;
+}
 
  .wizard .content {
      min-height: 100px;
  }
 
- .wizard .content > .body {
+ .tab-content {
      width: 100%;
      height: auto;
      padding: 15px;
      position: relative;
      border: 1px solid #eee;
      border-radius: 5px;
+     margin-top: 5px;
  }
+
+
+.next {
+    float: right;
+}
+
+#gallery-tab {
+    padding: 6px;
+}
+
+.table > tbody > tr > td {
+    padding: 7px;
+}
+
+#languages-tab {
+    margin-bottom: 19px;
+}
 
  /******* Sign In Page ********/
 
@@ -23,6 +78,8 @@
  .section-signup {
      margin-top: 50px;
  }
+
+
 
  /********** Create Profile Modal ***********/
 
@@ -52,7 +109,14 @@
  }
 
  .section-create-profile input.form-control {
-     margin-bottom: 0px !important;
+     margin-bottom: 0!important;
+     border: 1px solid #eee;
+     border-radius: 4px;
+     padding-left: 10px;
+ }
+
+ .section-create-profile input.form-control {
+     
  }
 
  .section-create-profile textarea.form-control {
@@ -60,6 +124,16 @@
      height: 200px;
      border: 1px solid #eee;
  }
+
+.control-label {
+    color: white;
+}
+
+.table-responsive {
+    border: none;
+    overflow-x: unset;
+}
+
 
  .uploadcare--widget__button_type_open {
      width: 125px;
@@ -178,7 +252,9 @@
 
 .package_month_girl_activation {
     text-align: center;
-font-size: 14px !important;
+    font-size: 14px !important;
+    background: 0 0;
+     border: none;
 }
 
 .package_month_girl_activation:hover {
@@ -205,13 +281,24 @@ font-size: 14px !important;
      background: 0 0;
      color: white;
      cursor: pointer;
+     border-color: #eee;
  }
 
- .btn-default:active,
- .btn-default:focus {
-     background: 0 0;
-     color: white;
+.btn-default:focus, .btn-default.focus{
+     background: 0 0!important;
+     color: white!important;
+     border-color: #eee!important;
+    box-shadow: none;
  }
+
+.tab-bar-inner .nav > li > a:hover, .nav > li > a:focus {
+    background: 0 0;
+}
+
+.btn-default:active:hover {
+    color: white!important;
+    background: 0 0!important!;
+}
 
  .uploadcare--menu__items {
      background: #222;
@@ -344,6 +431,8 @@ border: none;
  .package_activation {
      text-align: center;
      font-size: 14px!important;
+     background: 0 0;
+     border: none;
  }
 
  .package_activation:hover {
@@ -440,6 +529,7 @@ border: none;
 
  .has-error .help-block {
      color: #ed6c63 !important;
+     text-align: left;
  }
 
  .has-error .form-control {
@@ -467,7 +557,7 @@ border: none;
  }
 
  .col-xs-12 {
-     margin-bottom: 20px;
+/*     margin-bottom: 20px;*/
  }
 
  #options {
@@ -557,9 +647,10 @@ border: none;
 /*** MEDIA ***/
 
 @media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-    .wizard > .steps > ul > li {
+    .nav-pills > li {
     width: 100%;
     font-size: 10px;
+    padding: 5px 0 5px 0!important;
 }
     .wizard > .steps {
         margin-left: 2px;
@@ -600,7 +691,7 @@ border: none;
     
     .control--checkbox {
         margin-bottom: 15px;
-        height: 49px;
+        height: 10px;
     }
     
     .table {
@@ -611,6 +702,22 @@ border: none;
         margin: 0 auto;
         margin-bottom: 50px;
     }
+    
+    .control-label {
+        margin-bottom: 0px;
+        margin-top: 10px;
+    }
+    
+    ul.pager {
+        padding-top: 15px!important;
+    }
+    
+    .control__indicator {
+        top: 1px;
+    }
+    
+
+
 }
 
 /* iPhone 4 ----------- */
@@ -676,11 +783,15 @@ border: none;
     }
     
     .form-control {
-        width: 100%!important;
+       
     }
     
     .col-xs-9 {
         width: 100%;
+    }
+    
+        .control {
+        margin-left:25px;
     }
 
 }

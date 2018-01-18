@@ -15,19 +15,19 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 					<ul class="nav nav-pills">
-						<li class="active"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
+						<li class="active pad-left"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
 						<li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
-						<li><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
-						<li><a href="#workplace-tab" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
+						<li class="pad-right"><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
+						<li class="pad-left"><a href="#workplace-tab" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
 						<li><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
-						<li><a href="#services-tab" data-toggle="tab">{{ __('headings.services') }}</a></li>
-						<li><a href="#prices-tab" data-toggle="tab">{{ __('headings.prices') }}</a></li>
+						<li class="pad-right"><a href="#services-tab" data-toggle="tab">{{ __('headings.services') }}</a></li>
+						<li class="pad-left"><a href="#prices-tab" data-toggle="tab">{{ __('headings.prices') }}</a></li>
 						<li><a href="#languages-tab" data-toggle="tab">{{ __('headings.languages') }}</a></li>
-						<li><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
+						<li class="pad-right"><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
 					</ul>
 					<div class="tab-content">
 						<section class="tab-pane active" id="bio-tab">
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.first_name') }} *</label>
 									<input type="text" class="form-control" name="first_name" />
@@ -93,7 +93,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.age') }} *</label>
 									<select name="age" id="age" class="form-control">
@@ -217,32 +217,32 @@
 									</label>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.email') }}</label>
 									<input type="text" class="form-control" name="email" value="{{ $user->email }}" />
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.website_url') }}</label>
 									<input type="text" class="form-control" name="website"/>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.telephone') }}</label>
 									<input type="text" class="form-control" name="phone"/>
 								</div>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
 									<input type="tel" class="form-control" name="mobile" id="mobile" />
 								</div>
 							</div>
 							<div id="options" class="col-xs-12">
-								<div class="col-lg-6 col-xs-12" style="">
+								<div class="col-lg-6 col-xs-12" style="padding-left:0;">
 									<div class="form-group">
 										<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 										@foreach($contactOptions as $contactOption)
@@ -369,7 +369,7 @@
 									<div class="pull-right">
 										<button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
 									</div>
-									<div> <!-- style="overflow-x: auto;" -->
+									<div class="table-responsive"> <!-- style="overflow-x: auto;" -->
 										<table class="table working-times-table">
 											<thead>
 												<tr>
@@ -451,7 +451,7 @@
 							<div class="service-list">
 								<h3>{{ __('headings.service_list') }}</h3>
 								@foreach ($services->chunk(33) as $chunkedServices)
-								<div class="col-lg-6 col-xs-12" style="margin-bottom: 0px;">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 0px;">
 									@foreach($chunkedServices as $service)
 									<div class="form-group">
 										@php 
@@ -671,8 +671,16 @@
 						</section>
 						<!-- Previous/Next buttons -->
 						<ul class="pager wizard">
-							<li class="previous"><a href="javascript: void(0);">Previous</a></li>
-							<li class="next"><a href="javascript: void(0);">Next</a></li>
+						<div class="col-xs-12">
+						<div class="col-xs-6" style="padding:0;">
+						    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+						</div>
+						<div class="col-xs-6" style="padding:0;">
+						    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+						</div>
+							
+							
+							</div>
 						</ul>
 					</div>
 					<input type="hidden" name="stripeToken" id="stripeToken">

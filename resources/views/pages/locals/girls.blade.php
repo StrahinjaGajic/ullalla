@@ -17,7 +17,9 @@
         </div>
         <div class="col-sm-10 profile-info">
             <button id="showModal" type="submit" class="btn btn-default">Add Girl</button><br><br>
-            <h3 style="margin: 0;">Girls</h3>
+            @if($local->girls()->count() > 0)
+                <h3 style="margin: 0;">Girls</h3>
+            @endif
             {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/girls/store', 'method' => 'put']) !!}
             @foreach($local->girls as $girl)
             <div class="col-3 input-effect {{ $errors->has('nickname') ? 'has-error' : ''  }}">
@@ -49,7 +51,9 @@
             <span class="help-block">{{ $errors->first('photos_'. $girl->id ) }}</span>
             @endif
             @endforeach
-            <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+            @if($local->girls()->count() > 0)
+                <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+            @endif
             {!! Form::close() !!}
         </div>
     </div>
@@ -72,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="image-preview-multiple">
-                                    <input type="hidden" role="uploadcare-uploader" name="newPhotos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                                    <input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
                             </div>

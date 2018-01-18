@@ -98,17 +98,17 @@
                     </div>
                     
                     <div class="region geolocation">
-                            <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control">
-                            <a onclick="getLocation();" class="geolocation-button">
-                                <button type="button" class="btn go"><div class="span">Go!</div></button> 
-                            </a>
-                            
-                            <div class="help-block">
-                                @if($errors->has('city'))
-                                {{ $errors->first('city') }}
-                                @endif
-                            </div>
-                    
+                        <input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control">
+                        <a onclick="getLocation();" class="geolocation-button">
+                            <button type="button" class="btn go"><div class="span">Go!</div></button> 
+                        </a>
+
+                        <div class="help-block">
+                            @if($errors->has('city'))
+                            {{ $errors->first('city') }}
+                            @endif
+                        </div>
+
                         <div class="form-group">
                             <label for="amount">{{ __('fields.radius') }}:</label>
                             <div class="location-inputs">
@@ -381,8 +381,8 @@
                                         {'country': ['ch']});       
 
                                     autocomplete.addListener('place_changed', function() {
-                                        $('.geolocation-image').hide();
-                                        $('.spinner').show();
+                                        $(".go").addClass("square-spin");
+                                        $(".span").addClass("square-spin");
                                         var place = autocomplete.getPlace();
                                         var lat = place.geometry.location.lat();
                                         var lng = place.geometry.location.lng();
@@ -392,12 +392,12 @@
                                             type: 'post',
                                             data: {lat: lat, lng: lng, address: address, _token: token},
                                             success: function (data) {
-                                                $('.spinner').hide();
-                                                $('.geolocation-image').show();
+                                                $(".go").removeClass("square-spin");
+                                                $(".span").removeClass("square-spin");
                                             },
                                             error: function () {
-                                                $('.spinner').hide();
-                                                $('.geolocation-image').show();
+                                                $(".go").removeClass("square-spin");
+                                                $(".span").removeClass("square-spin");
                                             }
                                         });
                                     });                  
@@ -428,8 +428,8 @@
                                                             $('.geolocation-image').show();
                                                         },
                                                         error: function () {
-                                                            $('.spinner').hide();
-                                                            $('.geolocation-image').show();
+                                                            $(".go").removeClass("square-spin");
+                                                            $(".span").removeClass("square-spin");
                                                         }
                                                     });
                                                 }
@@ -454,13 +454,13 @@
                                     }
                                 });
                             </script>
-                            <script>
+                            {{-- <script>
                                 $(document).ready(function(){
                                     $(".go").click(function(){
                                         $(".go").addClass("square-spin");
                                         $(".span").addClass("square-spin");
                                     });
                                 });
-                            </script>
+                            </script> --}}
 
-                        @stop
+                            @stop

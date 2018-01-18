@@ -28,7 +28,7 @@
 .tabcontrol ul > li
 {
     display: block;
-    padding: 0;
+    padding: 5px;
 }
 
 /* Accessibility */
