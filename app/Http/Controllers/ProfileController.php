@@ -681,7 +681,6 @@ class ProfileController extends Controller
             'service_price_currency' => 'required',
         ]);
 
-
         $user = Auth::user();
 
         if ($request->ajax()) {
@@ -718,31 +717,18 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        dd($request->price_id);
-
         // find price
         $price = Price::where([
             ['id', $request->price_id],
             ['user_id', $user->id]
-        ])->first();
+        ])->delete();
 
-
-        if ($price) {
-            $price->delete();
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => true,
-                ]);
-            } else {
-                return redirect()->back();
-            }
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+            ]);
         } else {
-            if ($request->ajax()) {
-                return response(__('messages.error_somethings_wrong'), 500)
-                ->header('Content-Type', 'json/application');
-            } else {
-                return redirect()->action('ProfileController@getCreate', ['@username' => $user->username]);
-            }
+            return redirect()->back();
         }
     }
 }

@@ -874,6 +874,7 @@ $(function () {
 	// add new price
 	$('button.add-new-price').on('click', function (e) {
 		e.preventDefault();
+		$(this).attr('disabled', true);
 		var serviceDuration = $('input[name="service_duration"]').val();
 		var servicePrice = $('input[name="service_price"]').val();
 		var priceType = $('select[name="price_type"]').val();
@@ -931,6 +932,7 @@ $(function () {
 	            if (table.hasClass('is-hidden')) {
 	            	table.removeClass('is-hidden').addClass('is-active-table');
 	            }
+				$(this).attr('disabled', false);	            
 	        } else {
 	            // print the errors
 	            $.each(errors, function (key, val) {
@@ -938,6 +940,7 @@ $(function () {
 	            	input.closest('div.form-group').addClass('has-error');
 	            	input.next().text(val);
 	            });
+	            $(this).attr('disabled', false);
 	        }
 	    }
 	});
@@ -956,10 +959,12 @@ $(function () {
 				type: 'get',
 				data: {price_id: priceID},
 				success: function (data) {
-					var tBody = that.closest('tbody');
-					that.closest('tr').remove();
-					if (tBody.children().length == 0) {
-						tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+					if (data.success === true) {
+						var tBody = that.closest('tbody');
+						that.closest('tr').remove();
+						if (tBody.children().length == 0) {
+							tBody.parent('table').removeClass('is-active-table').addClass('is-hidden');
+						}
 					}
 				}
 			});
