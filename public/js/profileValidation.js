@@ -30,178 +30,178 @@ $(document).ready(function() {
             },
             excluded: [':disabled', ':hidden'],
             fields: {
-                // first_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //     }
-                // },
-                // last_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //         regexp: {
-                //             regexp: /^[a-zA-Z\s]+$/,
-                //             message: alphaNumeric
-                //         }
-                //     }
-                // },
-                // nickname: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //     }
-                // },
-                // sex: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // age: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //         between: {
-                //             min: 18,
-                //             max: 60,
-                //             message: olderThan
-                //         }
-                //     }
-                // },
+                first_name: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z\s]+$/,
+                            message: alphaNumeric
+                        }
+                    }
+                },
+                nickname: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                    }
+                },
+                sex: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                age: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                        between: {
+                            min: 18,
+                            max: 60,
+                            message: olderThan
+                        }
+                    }
+                },
 
-                // about_me: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //         stringLength: {
-                //             max: 200,
-                //             message: stringLength
-                //         }
-                //     }
-                // },
-                // phone: {
-                //     validators: {
-                //         numeric: {
-                //             message: numericError
-                //         }
-                //     }
-                // },
-                // mobile: {
-                //     validators: {
-                //         callback: {
-                //             callback: function(value, validator, $field) {
-                //                 var isValid = value === '' || $field.intlTelInput('isValidNumber'),
-                //                     err     = $field.intlTelInput('getValidationError'),
-                //                     message = null;
-                //                 switch (err) {
-                //                     case intlTelInputUtils.validationError.INVALID_COUNTRY_CODE:
-                //                         message = 'The country code is not valid';
-                //                         break;
+                about_me: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                        stringLength: {
+                            max: 200,
+                            message: stringLength
+                        }
+                    }
+                },
+                phone: {
+                    validators: {
+                        numeric: {
+                            message: numericError
+                        }
+                    }
+                },
+                mobile: {
+                    validators: {
+                        callback: {
+                            callback: function(value, validator, $field) {
+                                var isValid = value === '' || $field.intlTelInput('isValidNumber'),
+                                    err     = $field.intlTelInput('getValidationError'),
+                                    message = null;
+                                switch (err) {
+                                    case intlTelInputUtils.validationError.INVALID_COUNTRY_CODE:
+                                        message = 'The country code is not valid';
+                                        break;
 
-                //                     case intlTelInputUtils.validationError.TOO_SHORT:
-                //                         message = 'The phone number is too short';
-                //                         break;
+                                    case intlTelInputUtils.validationError.TOO_SHORT:
+                                        message = 'The phone number is too short';
+                                        break;
 
-                //                     case intlTelInputUtils.validationError.TOO_LONG:
-                //                         message = 'The phone number is too long';
-                //                         break;
+                                    case intlTelInputUtils.validationError.TOO_LONG:
+                                        message = 'The phone number is too long';
+                                        break;
 
-                //                     case intlTelInputUtils.validationError.NOT_A_NUMBER:
-                //                         message = 'The value is not a number';
-                //                         break;
+                                    case intlTelInputUtils.validationError.NOT_A_NUMBER:
+                                        message = 'The value is not a number';
+                                        break;
 
-                //                     default:
-                //                         message = 'The phone number is not valid';
-                //                         break;
-                //                 }
+                                    default:
+                                        message = 'The phone number is not valid';
+                                        break;
+                                }
 
-                //                 return {
-                //                     valid: isValid,
-                //                     message: message
-                //                 };
-                //             }
-                //         },
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // email: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // skype_name: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // website: {
-                //     validators: {
-                //         uri: {
-                //             message: invalidUrl
-                //         }
-                //     }
-                // },
-                // height: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //         numeric: {
-                //             message: numericError
-                //         }
-                //     }
-                // },
-                // weight: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         },
-                //         numeric: {
-                //             message: numericError
-                //         }
-                //     }
-                // },
-                // sex_orientation: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // alcohol: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // smoker: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
-                // intimate: {
-                //     validators: {
-                //         notEmpty: {
-                //             message: requiredField
-                //         }
-                //     }
-                // },
+                                return {
+                                    valid: isValid,
+                                    message: message
+                                };
+                            }
+                        },
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                skype_name: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                website: {
+                    validators: {
+                        uri: {
+                            message: invalidUrl
+                        }
+                    }
+                },
+                height: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                        numeric: {
+                            message: numericError
+                        }
+                    }
+                },
+                weight: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        },
+                        numeric: {
+                            message: numericError
+                        }
+                    }
+                },
+                sex_orientation: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                alcohol: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                smoker: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
+                intimate: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
+                        }
+                    }
+                },
                 'ullalla_package[]': {
                     err: '#alertPackageMessage',
                     validators: {
@@ -210,18 +210,18 @@ $(document).ready(function() {
                         }
                     }
                 },
-                // photos: {
-                //     excluded: false,
-                //     validators: {
-                //         callback: {
-                //             message: maxFiles,
-                //             callback: function(value, validator, $field) {
-                //                 var numOfFiles = $field.closest('.image-preview-multiple').find('._list ._item').length;
-                //                 return (numOfFiles != null && numOfFiles != 0);
-                //             }
-                //         }
-                //     }
-                // }
+                photos: {
+                    excluded: false,
+                    validators: {
+                        callback: {
+                            message: maxFiles,
+                            callback: function(value, validator, $field) {
+                                var numOfFiles = $field.closest('.image-preview-multiple').find('._list ._item').length;
+                                return (numOfFiles != null && numOfFiles != 0);
+                            }
+                        }
+                    }
+                }
             }
         })
         .bootstrapWizard({
