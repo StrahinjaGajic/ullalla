@@ -329,7 +329,6 @@
     @stop
 
     @section('perPageScripts')
-
     <!-- Form Validation -->
     <script>
         var utilAsset = '{{ asset('js/utils.js') }}';
@@ -637,7 +636,7 @@
             var packageId = document.querySelector('input[name="ullalla_package[]"]:checked').value;
             if(packageId != 6) {
                 stripe.open({
-                    name: 'Ullall?',
+                    name: 'Ullallà',
                     description: '{{ $local->email }}',
                 });
                 e.preventDefault();

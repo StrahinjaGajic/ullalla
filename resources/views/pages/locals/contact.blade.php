@@ -65,12 +65,12 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="col-3 input-effect {{ $errors->has('re-password') ? 'has-error' : ''  }}">
-                                <input class="effect-16" type="password" placeholder="" name="re-password">
+                            <div class="col-3 input-effect {{ $errors->has('confirm_password') ? 'has-error' : ''  }}">
+                                <input class="effect-16" type="password" placeholder="" name="confirm_password">
                                 <label>{{ __('labels.confirm_password') }}</label>
                                 <span class="focus-border"></span>
-                                @if ($errors->has('re-password'))
-                                <span class="help-block">{{ $errors->first('re-password') }}</span>
+                                @if ($errors->has('confirm_password'))
+                                <span class="help-block">{{ $errors->first('confirm_password') }}</span>
                                 @endif
                             </div>
                         </div>

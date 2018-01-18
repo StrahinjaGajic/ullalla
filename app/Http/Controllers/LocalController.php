@@ -41,7 +41,6 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required|max:25',
             'street' => 'required|max:40',
@@ -149,7 +148,7 @@ class LocalController extends Controller
         $this->validate($request, [
             'username' => 'required|min:4|max:20',
             'email' => 'required|email|max:40',
-            're-password' => 'required_with:password|same:password',
+            'confirm_password' => 'required_with:password|same:password',
             'name' => 'required|max:25',
             'street' => 'required|max:40',
             'city' => 'required|max:30',
@@ -157,7 +156,7 @@ class LocalController extends Controller
             'phone' => 'required_without:mobile|max:20',
             'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
         ], ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
-        );
+    );
 
         $local = Auth::guard('local')->user();
         $local->username = request('username');
@@ -183,21 +182,25 @@ class LocalController extends Controller
 
     public function getGallery()
     {
-
         $local = Auth::guard('local')->user();
-
         return view('pages.locals.gallery', compact('local'));
     }
 
     public function postGallery(Request $request)
     {
         $local = Auth::guard('local')->user();
-        $local->photos = storeAndGetUploadCareFiles(request('photos'));
-        $request->merge(['photos' => storeAndGetUploadCareFiles(request('photos'))]);
-        $request->merge(['photos' => substr($request->photos, -2, 1)]);
-        $request->merge(['photos' => (int) $request->photos]);
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
+
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
+
+        $this->validate($request, [
+            'photos' => 'numeric|min:4|max:9',
+        ]);
 
         $local->photo = storeAndGetUploadCareFiles(request('photo'));
+        $local->photos = $uploadedPhotos ? $inputPhotos : null;
         $local->videos = storeAndGetUploadCareFiles(request('video'));
         $local->save();
 
@@ -207,7 +210,6 @@ class LocalController extends Controller
     public function getWorkingTimes()
     {
         $local = Auth::guard('local')->user();
-
         return view('pages.locals.working_time', compact('local'));
     }
 
@@ -274,20 +276,25 @@ class LocalController extends Controller
     public function postGirls(Request $request)
     {
         $local = Auth::guard('local')->user();
-        foreach($local->girls as $girl){
 
-            $photos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
-            $reqPhotos = (int) substr($photos, -2, 1);
-            $request->merge(['photos_'. $girl->id => $reqPhotos]);
+        foreach($local->girls as $girl) {
+            $uploadedPhotos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
+            $inputPhotos = request('photos_'. $girl->id);
+
+            // get the number of photos
+            $request->merge(['photos_'. $girl->id => (int) substr($inputPhotos, -2, 1)]);
+
             $this->validate($request, [
                 'nickname_'. $girl->id => 'required|min:4|max:20',
                 'photos_'. $girl->id => 'numeric|min:4|max:9',
             ]);
+
             $nickname = 'nickname_'. $girl->id;
             $girl->nickname = $request->$nickname;
-            $girl->photos = $photos;
+            $girl->photos = $inputPhotos;
             $girl->save();
         }
+
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
@@ -295,14 +302,19 @@ class LocalController extends Controller
     {
         $local = Auth::guard('local')->user();
         $photos = storeAndGetUploadCareFiles(request('newPhotos'));
-        $request->merge(['newPhotos' => storeAndGetUploadCareFiles(request('newPhotos'))]);
-        $request->merge(['newPhotos' => substr($request->photos, -2, 1)]);
-        $request->merge(['newPhotos' => (int) $request->photos]);
+        $inputPhotos = request('newPhotos');
+        $request->merge(['newPhotos' => $inputPhotos]);
+        $request->merge(['newPhotos' => substr($request->newPhotos, -2, 1)]);
+        $request->merge(['newPhotos' => (int) $request->newPhotos]);
         $this->validate($request, [
             'nickname' => 'required|min:4|max:20',
             'newPhotos' => 'numeric|min:4|max:9',
         ]);
-        $local->girls()->create(['nickname' => $request->nickname, 'photos' => $photos, 'local_id' => $local->id]);
+        $local->girls()->create([
+            'nickname' => $request->nickname, 
+            'photos' => $photos ? $inputPhotos : null,
+            'local_id' => $local->id
+        ]);
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
