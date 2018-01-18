@@ -454,13 +454,13 @@
                                     }
                                 });
                             </script>
-                            {{-- <script>
+                            <script>
                                 $(document).ready(function(){
                                     $(".go").click(function(){
                                         $(".go").addClass("square-spin");
                                         $(".span").addClass("square-spin");
                                     });
                                 });
-                            </script> --}}
+                            </script>
 
                             @stop
