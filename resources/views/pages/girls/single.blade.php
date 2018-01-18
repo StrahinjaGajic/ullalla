@@ -149,7 +149,7 @@
 											@foreach ($user->prices->sortBy('price_type') as $price)
 											<tr>
 												<td>{{ ucfirst($price->price_type) }}</td>
-												<td>{{ $price->service_duration . ' ' . $price->service_price_unit }}</td>
+												<td>{{ $price->service_duration . ' ' . trans_choice('fields.' . $price->service_price_unit, $price->service_duration) }}</td>
 												<td>{{ $price->service_price . ' ' . strtoupper($price->service_price_currency) }}</td>
 											</tr>
 											@endforeach
