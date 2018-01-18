@@ -328,11 +328,20 @@ class ProfileController extends Controller
         return view('pages.profile.gallery', compact('user'));
     }
 
-    public function postGallery()
+    public function postGallery(Request $request)
     {
         $user = Auth::user();
-        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
-        $user->photos = $photosUrl ? request('photos') : null;
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
+
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
+
+        $this->validate($request, [
+            'photos' => 'numeric|min:4|max:9',
+        ]);
+
+        $user->photos = $uploadedPhotos ? $inputPhotos : null;
         $user->videos = storeAndGetUploadCareFiles(request('video'));
         $user->save();
 

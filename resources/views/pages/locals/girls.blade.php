@@ -7,9 +7,6 @@
 @stop
 
 @section('content')
-<div class="shop-header-banner">
-    <span><img src="img/banner/profil-banner.jpg" alt=""></span>
-</div>
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
@@ -33,7 +30,7 @@
             <label>{{ __('headings.photos') }}</label>
             <div class="form-group">
                 <div class="image-preview-multiple">
-                    <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                    <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                     <script>
                         const widget_{{ $girl->id }} = uploadcare.Widget('[role=uploadcare-uploader_{{ $girl->id }}]')
                         widget_{{ $girl->id }}.value('{{ $girl->photos }}')

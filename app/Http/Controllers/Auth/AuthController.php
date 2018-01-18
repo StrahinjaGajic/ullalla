@@ -14,11 +14,11 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Mail\ActivationMail;
 use App\Events\PackageExpired;
-use App\Events\LocalDefaultPackageExpired;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
 use App\Http\Controllers\Controller;
 use App\Mail\DefaultPackageExpiredMail;
+use App\Events\LocalDefaultPackageExpired;
 use App\Events\MonthOfTheGirlPackageExpired;
 use App\Mail\GirlOfTheMonthPackageExpiredMail;
 
