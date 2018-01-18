@@ -416,7 +416,6 @@
                         });
                     });
                 }
-                // $('#profileForm').formValidation('revalidateField', 'photos');
             });
         }
 
@@ -575,23 +574,18 @@
     </script>
     <script>
         /////////// 5. SHOW FREE / WITH COST   ////////////
-
         function showWellness(){
             document.getElementById('wellness-show').classList.remove("hidden");
         }
-
         function hideWellness(){
             document.getElementById('wellness-show').className += ' hidden';
         }
-
         function showFood(){
             document.getElementById('food-show').classList.remove("hidden");
         }
-
         function hideFood(){
             document.getElementById('food-show').className += ' hidden';
         }
-
     </script>
     <script>
         function uncheckEntrance(){
@@ -624,12 +618,12 @@
                 var data = form.serialize();
                 // fire ajax post request
                 $.post(url, data)
-                        .done(function (data) {
-                            window.location.href = getUrl("");
-                        })
-                        .fail(function(data, textStatus) {
-                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                        });
+                    .done(function (data) {
+                        window.location.href = getUrl("");
+                    })
+                    .fail(function(data, textStatus) {
+                        $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                    });
             }
         });
         $('#profileForm').on('submit', function (e) {
@@ -657,6 +651,30 @@
             }
         });
     </script>
+
+    <script>
+        $('#apply_to_all').on('click', function (e) {
+            e.preventDefault();
+            var workingTimesTable = $('.working-times-table');
+            var firstRow = workingTimesTable.find('tbody tr:first-child');
+            var rows = workingTimesTable.find('tbody tr');
+            var firstRowFromHrs = firstRow.find('select[name="time_from[1]"]').val();
+            var firstRowFromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+            var firstRowToHrs = firstRow.find('select[name="time_to[1]"]').val();
+            var firstRowToMin = firstRow.find('select[name="time_to_m[1]"]').val();
+            
+            $.each(rows, function (index, field) {
+                var reindex = index + 1;
+
+                $(field).find('select[name="time_from[' + reindex + ']"]').val(firstRowFromHrs);
+                $(field).find('select[name="time_from_m[' + reindex + ']"]').val(firstRowFromMin);
+
+                $(field).find('select[name="time_to[' + reindex + ']"]').val(firstRowToHrs);
+                $(field).find('select[name="time_to_m[' + reindex + ']"]').val(firstRowToMin);
+            });
+        });
+    </script>
+
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
