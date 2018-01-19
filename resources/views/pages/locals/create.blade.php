@@ -24,6 +24,14 @@
                     </ul>
                     <div class="tab-content">
                         <section class="tab-pane active" id="contact-tab">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
+                                        <input type="checkbox" name="sms_notifications">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                            </div>
                             <div class="col-xs-8">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
@@ -35,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('fields.mobile') }}</label>
-                                    <input type="text" class="form-control" name="mobile" id="mobile"/>
+                                    <input type="text" class="form-control mobile-phone" name="mobile" id="mobile"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.web') }}</label>
@@ -102,11 +110,8 @@
                                             <div class="control__indicator"></div>
                                         </label>
                                     </div>
-                                    <div id="apply_to_all" class="pull-right">
-                                        <label class="control control--checkbox"><a>{{ __('labels.apply_to_all') }}</a>
-                                            <input type="checkbox" name="available_24_7">
-                                            <div class="control__indicator"></div>
-                                        </label>
+                                    <div class="pull-right">
+                                        <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
                                     </div>
                                     <table class="table working-times-table">
                                         <thead>
