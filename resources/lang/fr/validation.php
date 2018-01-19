@@ -118,6 +118,7 @@ return [
     'string_length' => 'This field must not exceed 200 characters',
     'older_than_18' => 'You must be at least 18 years old',
     'alpha_numerical' => 'The first name can only contain alphabetical characters',
+    'max_str_length' => 'This field must not exceed :max characters',
 
     /* Upload care validation */
     'file_too_large' => 'File is too large',

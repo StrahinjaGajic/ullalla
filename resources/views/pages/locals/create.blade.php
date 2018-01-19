@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="image-preview-multiple">
-                                    <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                                    <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" data-multiple-max="9" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
                             </div>
@@ -364,7 +364,7 @@
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{ asset('js/localValidation.js') }}"></script>s
+<script src="{{ asset('js/localValidation.js?ver=' . str_random(10)) }}"></script>s
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -644,7 +644,7 @@
                 // fire ajax post request
                 $.post(url, data)
                 .done(function (data) {
-                    window.location.href = getUrl("");
+                    window.location.href = getUrl();
                 })
                 .fail(function(data, textStatus) {
                     $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
@@ -659,7 +659,7 @@
                     description: '{{ $local->email }}',
                 });
                 e.preventDefault();
-            }else{
+            } else {
                 var username = '{{ $local->username }}';
                 var url = getUrl('/locals/@' + username + '/store');
                 var token = $('input[name="_token"]').val();
@@ -709,6 +709,9 @@
         var invalidUrl = '{{ __('validation.url_invalid') }}';
         var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
         var maxFiles = '{{ __('validation.max_files') }}';
+        var maxStrLength10 = '{{ __('validation.max_str_length', ['max' => 10]) }}';
+        var maxStrLength20 = '{{ __('validation.max_str_length', ['max' => 20]) }}';
+        var maxStrLength30 = '{{ __('validation.max_str_length', ['max' => 30]) }}';
     </script>
 
     @stop

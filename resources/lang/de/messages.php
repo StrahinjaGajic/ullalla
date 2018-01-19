@@ -14,7 +14,7 @@ return [
     'success_changes_saved' => 'Changes successfully saved.',
     'info_account_not_approved' => 'Your account is not yet approved. Please wait until we verify your profile.',
     'account_created' => 'Profile successfully created. You may start using your account now.',
-    'account_created_elite' => 'Profile successfully created. Admin contact you in 48 hours.',
+    'account_created_elite' => 'Profile successfully created. Admin will contact you within 48 hours. Thank you for your patience.',
 
     'package_about_to_expire' => ':note. <p>Click <a href=":url">HERE</a> to upgrade your account</p>',
     'session_expired' => 'Session Expired',

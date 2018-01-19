@@ -21,6 +21,6 @@ class ContactController extends Controller
             'title' => 'required',
             'message' => 'required',
         ]);
-        Mail::to('ullalla@ullalla.com')->send(new Contact($request));
+        Mail::to('info@ullalla.ch')->send(new Contact($request));
     }
 }

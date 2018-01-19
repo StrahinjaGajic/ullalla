@@ -22,7 +22,7 @@ Route::post('/polarna_kobra', function() { // remove in production
     }
 });
 
-Route::group(['middleware' => 'maintenance'], function () { // remove in production
+// Route::group(['middleware' => 'maintenance'], function () { // remove in production
 	# LANGUAGE CONTROLLER
 Route::get('change_language/{language}', 'LanguageController@changeLanguage');
 
@@ -33,9 +33,9 @@ Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetFor
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 # HOME CONTROLLER
-Route::middleware(['web', 'front.auth'])->group( function () { // remove in productions
+// Route::middleware(['web', 'front.auth'])->group( function () { // remove in productions
 	Route::get('/', 'HomeController@getIndex');
-});
+// });
 # AUTH CONTROLLER
 Route::get('/signin', 'Auth\AuthController@getSignin');
 Route::post('/signin', 'Auth\AuthController@postSignin');
@@ -167,7 +167,7 @@ Route::get('faq', 'FaqController@getIndex');
 # SEARCH CONTROLLER
 Route::get('search', 'SearchController@getQuickSeachResults');
 Route::post('get_guest_data', 'SessionController@storeGuestData');
-});
+// });
 
-Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
-Route::get('/polarna_kobra', 'GirlController@tempLogin')->name('tempLogin');
+// Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
+// Route::get('/polarna_kobra', 'GirlController@tempLogin')->name('tempLogin');

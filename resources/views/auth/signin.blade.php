@@ -1,5 +1,11 @@
-@extends('layouts.app') @section('title', 'Sign In') @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/sign_in.css') }}"> @stop @section('content')
+@extends('layouts.app') @section('title', 'Sign In') 
+
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('css/components/sign_in.css') }}">
+@stop
+
+@section('content')
 <div class="<wrapper></wrapper> section-signin">
     <div class="container">
         <div class="row">
@@ -46,13 +52,17 @@
 @stop
 
 @section('perPageScripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
     @if(Session::has('account_created_elite'))
         <script>
             swal(
-                    '{{ __('headings.account_created_title') }}',
-                    '{{ Session::get('account_created_elite') }}',
-                    'success'
+                '{{ __('headings.account_created_title') }}',
+                '{{ Session::get('account_created_elite') }}',
+                'success'
             );
         </script>
+        @php
+            Session::forget('account_created_elite');
+        @endphp
     @endif
 @stop
