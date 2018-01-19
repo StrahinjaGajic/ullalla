@@ -27,10 +27,11 @@ class MonthOfTheGirlPackageExpiredNotification
      */
     public function handle(MonthOfTheGirlPackageExpired $event)
     {
+        $var = 'title_'. config()->get('app.locale');
         $girlOfTheMonthNotification = Notification::where([
             ['notifiable_type', '=', 'App\Models\User'],
             ['notifiable_id', '=', $event->user->id],
-            ['title', '=', 'Girl of The Month Package Expiration'],
+            [$var, '=', 'Girl of The Month Package Expiration'],
         ])->first();
 
         if (!$girlOfTheMonthNotification) {

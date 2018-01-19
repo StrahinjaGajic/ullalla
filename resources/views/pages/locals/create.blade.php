@@ -3,19 +3,35 @@
 @section('title', 'Create Local')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
 @section('content')
-    <div class="wrapper section-create-profile">
-        <div id="create_profile_modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        {!! Form::open(['url' => 'locals/@' . $local->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-                        <h2>{{ __('headings.contact') }}</h2>
-                        <section data-step="0">
+<div class="wrapper section-create-profile">
+    <div id="create_profile_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {!! Form::open(['url' => 'locals/@' . $local->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
+                        <li><a href="#about-us-tab" data-toggle="tab">{{ __('headings.about_us') }}</a></li>
+                        <li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
+                        <li><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
+                        <li><a href="#club-info-tab" data-toggle="tab">{{ __('headings.club_info') }}</a></li>
+                        <li><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <section class="tab-pane active" id="contact-tab">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
+                                        <input type="checkbox" name="sms_notifications">
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                            </div>
                             <div class="col-xs-8">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
@@ -27,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('fields.mobile') }}</label>
-                                    <input type="text" class="form-control" name="mobile" />
+                                    <input type="text" class="form-control mobile-phone" name="mobile" id="mobile"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.web') }}</label>
@@ -49,8 +65,24 @@
                                 </div>
                             </div>
                         </section>
-                        <h2>{{ __('headings.gallery') }}</h2>
-                        <section data-step="1">
+
+                        <section class="tab-pane" id="about-us-tab">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">{{ __('labels.about_us') }}</label><br>
+                                    <textarea name="about_me" style="width: 100%; height: 250px;"></textarea>
+                                    <label class="control-label">{{ __('labels.local_type') }}</label><br>
+                                    <select name="local_type_id">
+                                        @php ($var = 'name_'. config()->get('app.locale'))
+                                        @foreach($types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->$var }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="tab-pane" id="gallery-tab">
                             <div class="form-group">
                                 <div class="image-preview">
                                     <input type="hidden" role="uploadcare-uploader" name="logo" data-crop="490x560 minimum" data-images-only="">
@@ -68,39 +100,36 @@
                                 <video id="video" width="320" height="240" loop style="display: block;"></video>
                             </div>
                         </section>
-                        <h2>{{ __('headings.working_hours') }}</h2>
-                        <section data-step="2">
+
+                        <section class="tab-pane" id="working-hours-tab">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <div id="available_24_7">
+                                    <div id="available_24_7" class="pull-left">
                                         <label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
                                             <input type="checkbox" name="available_24_7">
                                             <div class="control__indicator"></div>
                                         </label>
                                     </div>
-                                    <div id="apply_to_all" class="">
-                                        <label class="control control--checkbox"><a>{{ __('labels.apply_to_all') }}</a>
-                                            <input type="checkbox" name="available_24_7">
-                                            <div class="control__indicator"></div>
-                                        </label>
+                                    <div class="pull-right">
+                                        <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
                                     </div>
                                     <table class="table working-times-table">
                                         <thead>
-                                        <tr>
-                                            <th>
-                                                <label class="control control--checkbox"><a>{{ __('labels.mark_all') }}</a>
-                                                    <input type="checkbox" id="select_all_days">
-                                                    <div class="control__indicator"></div>
-                                                </label>
-                                            </th>
-                                            <th>{{ __('buttons.from') }}</th>
-                                            <th>{{ __('buttons.to') }}</th>
-                                            <th></th>
-                                        </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="control control--checkbox"><a>{{ __('labels.mark_all') }}</a>
+                                                        <input type="checkbox" id="select_all_days">
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </th>
+                                                <th>{{ __('buttons.from') }}</th>
+                                                <th>{{ __('buttons.to') }}</th>
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $counter = 1; ?>
-                                        @foreach(getDaysOfTheWeek() as $dayOfTheWeek)
+                                            <?php $counter = 1; ?>
+                                            @foreach(getDaysOfTheWeek() as $dayOfTheWeek)
                                             <tr class="working-times-disabled">
                                                 <td>
                                                     <label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
@@ -111,13 +140,13 @@
                                                 <td>
                                                     <select name="time_from[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getHoursList() as $hour)
-                                                            <option value="{{ $hour }}">{{ $hour }}</option>
+                                                        <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span>{{ __('global.hrs') }}</span>
                                                     <select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getMinutesList() as $minute)
-                                                            <option value="{{ $minute }}">{{ $minute }}</option>
+                                                        <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span>{{ __('global.min') }}</span>
@@ -125,43 +154,27 @@
                                                 <td>
                                                     <select name="time_to[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getHoursList() as $hour)
-                                                            <option value="{{ $hour }}">{{ $hour }}</option>
+                                                        <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span>{{ __('global.hrs') }}</span>
                                                     <select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
                                                         @foreach(getMinutesList() as $minute)
-                                                            <option value="{{ $minute }}">{{ $minute }}</option>
+                                                        <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span>{{ __('global.min') }}</span>
                                                 </td>
                                             </tr>
                                             <?php $counter++; ?>
-                                        @endforeach
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </section>
-                        <h2>{{ __('headings.about_us') }}</h2>
-                        <section data-step="3">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label class="control-label">{{ __('labels.about_us') }}</label><br>
-                                    <textarea name="about_me" style="width:100%;height:250px;"></textarea>
-                                    <label class="control-label">{{ __('labels.local_type') }}</label><br>
-                                    <select name="local_type_id">
-                                        @php ($var = 'name_'. config()->get('app.locale'))
-                                        @foreach($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->$var }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </section>
-                        <h2>{{ __('headings.club_info') }}</h2>
-                        <section data-step="4">
+
+                        <section class="tab-pane" id="club-info-tab">
                             <div class="col-xs-12">
                                 <div class="form-group club-info">
                                     <div class="row">
@@ -263,8 +276,8 @@
                                 </div>
                             </div>
                         </section>
-                        <h2>{{ __('headings.packages') }}</h2>
-                        <section data-step="5">
+
+                        <section class="tab-pane" id="packages-tab">
                             <div class="col-xs-12">
                                 <div class="form-group club-info">
                                     <div class="row">
@@ -275,32 +288,32 @@
                                             </div>
                                             <table class="table packages-table">
                                                 <thead>
-                                                <tr>
-                                                    <th>{{ __('headings.name') }}</th>
-                                                    <th>{{ __('headings.duration') }}</th>
-                                                    <th>{{ __('headings.price') }}</th>
-                                                    <th>{{ __('headings.activation_date') }}</th>
-                                                    <th></th>
-                                                </tr>
+                                                    <tr>
+                                                        <th>{{ __('headings.name') }}</th>
+                                                        <th>{{ __('headings.duration') }}</th>
+                                                        <th>{{ __('headings.price') }}</th>
+                                                        <th>{{ __('headings.activation_date') }}</th>
+                                                        <th></th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $counter = 1; ?>
-                                                @foreach ($packages as $package)
+                                                    <?php $counter = 1; ?>
+                                                    @foreach ($packages as $package)
                                                     <tr>
                                                         @if($package->id == 6)
-                                                            <td colspan="4"><p>More Girls?</p></td>
+                                                        <td colspan="4"><p>More Girls?</p></td>
                                                         @else
-                                                            <td>{{ $package->name. ' ' }}{{ ($package->id != 1) ? __('functions.girls') : '' }}</td>
-                                                            <td>
-                                                                <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-                                                                    <option value="month">{{ __('tables.month') }}</option>
-                                                                    <option value="year">{{ __('tables.year') }}</option>
-                                                                </select>
-                                                            </td>
-                                                            <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-                                                            <td>
-                                                                <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-                                                            </td>
+                                                        <td>{{ $package->name. ' ' }}{{ ($package->id != 1) ? __('functions.girls') : '' }}</td>
+                                                        <td>
+                                                            <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+                                                                <option value="month">{{ __('tables.month') }}</option>
+                                                                <option value="year">{{ __('tables.year') }}</option>
+                                                            </select>
+                                                        </td>
+                                                        <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
+                                                        <td>
+                                                            <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+                                                        </td>
                                                         @endif
                                                         <td>
                                                             <label class="control control--checkbox">
@@ -310,7 +323,7 @@
                                                         </td>
                                                     </tr>
                                                     <?php $counter++; ?>
-                                                @endforeach
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -318,42 +331,54 @@
                                 </div>
                             </div>
                         </section>
-                        <input type="hidden" name="stripeToken" id="stripeToken">
-                        <input type="hidden" name="stripeEmail" id="stripeEmail">
-                        {!! Form::close() !!}
+                        <!-- Previous/Next buttons -->
+                        <ul class="pager wizard">
+                            <div class="col-xs-12">
+                                <div class="col-xs-6" style="padding:0;">
+                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+                                </div>
+                                <div class="col-xs-6" style="padding:0;">
+                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+                                </div>
+                            </div>
+                        </ul>
                     </div>
+                    <input type="hidden" name="stripeToken" id="stripeToken">
+                    <input type="hidden" name="stripeEmail" id="stripeEmail">
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-    @stop
+</div>
+@stop
 
-    @section('perPageScripts')
-    <!-- Form Validation -->
-    <script>
-        var utilAsset = '{{ asset('js/utils.js') }}';
-        var invalidUrl = '{{ __('validation.url_invalid') }}';
-    </script>
-    <script src="{{ asset('js/intlTelInput.min.js') }}"></script>
-    <script src="{{ asset('js/utils.js') }}"></script>
-    <script src="{{ asset('js/formValidation.min.js') }}"></script>
-    <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('js/localValidation.js') }}"></script>s
-    <!-- Include Date Range Picker -->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <script>
+@section('perPageScripts')
+<!-- Form Validation -->
+<script>
+    var utilAsset = '{{ asset('js/utils.js') }}';
+    var invalidUrl = '{{ __('validation.url_invalid') }}';
+</script>
+<script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+<script src="{{ asset('js/utils.js') }}"></script>
+<script src="{{ asset('js/formValidation.min.js') }}"></script>
+<script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{ asset('js/localValidation.js') }}"></script>s
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script>
 
-        function changePrice(id, month, year){
-            var price = $('#selectDur_' + id + ' :selected').val();
-            if(price == 'month'){
-                price = month;
-            }else if(price == 'year'){
-                price = year;
-            }
-            $('#price_' + id).text(price);
+    function changePrice(id, month, year){
+        var price = $('#selectDur_' + id + ' :selected').val();
+        if(price == 'month'){
+            price = month;
+        }else if(price == 'year'){
+            price = year;
         }
+        $('#price_' + id).text(price);
+    }
 
         ////////// 1. MODAL, DATERANGE PICKER, ////////
         // show modal on page load
@@ -410,13 +435,12 @@
                         $.each(arguments, function(i, fileInfo) {
                             var src = fileInfo.cdnUrl;
                             list.append(
-                                    $('<div/>', {'class': '_item'}).append(
-                                            [$('<img/>', {src: src})])
-                            );
+                                $('<div/>', {'class': '_item'}).append(
+                                    [$('<img/>', {src: src})])
+                                );
                         });
                     });
                 }
-                // $('#profileForm').formValidation('revalidateField', 'photos');
             });
         }
 
@@ -462,9 +486,9 @@
             // preview images initialization
             $('.image-preview-multiple').each(function() {
                 installWidgetPreviewMultiple(
-                        uploadcare.MultipleWidget($(this).children('input')),
-                        $(this).children('._list')
-                );
+                    uploadcare.MultipleWidget($(this).children('input')),
+                    $(this).children('._list')
+                    );
             });
 
             $('[role=uploadcare-uploader]').each(function() {
@@ -534,18 +558,18 @@
                 var that = $(this);
                 if (that.prop('checked')) {
                     that.closest('label')
-                            .next('label')
-                            .removeClass('working-times-disabled')
-                            .find('input')
-                            .attr('disabled', false);
+                    .next('label')
+                    .removeClass('working-times-disabled')
+                    .find('input')
+                    .attr('disabled', false);
                     $('table.working-times-table').addClass('working-times-disabled').find('select, input').attr('disabled', true);
                 } else {
                     that.closest('label')
-                            .next('label')
-                            .addClass('working-times-disabled')
-                            .find('input')
-                            .attr('disabled', true)
-                            .prop('checked', false);
+                    .next('label')
+                    .addClass('working-times-disabled')
+                    .find('input')
+                    .attr('disabled', true)
+                    .prop('checked', false);
 
                     selectAllDays.attr('disabled', false);
                     $('table.working-times-table').removeClass('working-times-disabled');
@@ -575,23 +599,18 @@
     </script>
     <script>
         /////////// 5. SHOW FREE / WITH COST   ////////////
-
         function showWellness(){
             document.getElementById('wellness-show').classList.remove("hidden");
         }
-
         function hideWellness(){
             document.getElementById('wellness-show').className += ' hidden';
         }
-
         function showFood(){
             document.getElementById('food-show').classList.remove("hidden");
         }
-
         function hideFood(){
             document.getElementById('food-show').className += ' hidden';
         }
-
     </script>
     <script>
         function uncheckEntrance(){
@@ -624,12 +643,12 @@
                 var data = form.serialize();
                 // fire ajax post request
                 $.post(url, data)
-                        .done(function (data) {
-                            window.location.href = getUrl("");
-                        })
-                        .fail(function(data, textStatus) {
-                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                        });
+                .done(function (data) {
+                    window.location.href = getUrl("");
+                })
+                .fail(function(data, textStatus) {
+                    $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                });
             }
         });
         $('#profileForm').on('submit', function (e) {
@@ -648,15 +667,39 @@
                 var data = form.serialize();
                 // fire ajax post request
                 $.post(url, data)
-                        .done(function (data) {
-                            window.location.href = getUrl("/signin");
-                        })
-                        .fail(function(data, textStatus) {
-                            $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                        });
+                .done(function (data) {
+                    window.location.href = getUrl("/signin");
+                })
+                .fail(function(data, textStatus) {
+                    $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                });
             }
         });
     </script>
+
+    <script>
+        $('#apply_to_all').on('click', function (e) {
+            e.preventDefault();
+            var workingTimesTable = $('.working-times-table');
+            var firstRow = workingTimesTable.find('tbody tr:first-child');
+            var rows = workingTimesTable.find('tbody tr');
+            var firstRowFromHrs = firstRow.find('select[name="time_from[1]"]').val();
+            var firstRowFromMin = firstRow.find('select[name="time_from_m[1]"]').val();
+            var firstRowToHrs = firstRow.find('select[name="time_to[1]"]').val();
+            var firstRowToMin = firstRow.find('select[name="time_to_m[1]"]').val();
+            
+            $.each(rows, function (index, field) {
+                var reindex = index + 1;
+
+                $(field).find('select[name="time_from[' + reindex + ']"]').val(firstRowFromHrs);
+                $(field).find('select[name="time_from_m[' + reindex + ']"]').val(firstRowFromMin);
+
+                $(field).find('select[name="time_to[' + reindex + ']"]').val(firstRowToHrs);
+                $(field).find('select[name="time_to_m[' + reindex + ']"]').val(firstRowToMin);
+            });
+        });
+    </script>
+
     <script type="text/javascript">
         var requiredField = '{{ __('validation.required_field') }}';
         var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
@@ -667,6 +710,6 @@
         var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
         var maxFiles = '{{ __('validation.max_files') }}';
     </script>
-   
-@stop
+
+    @stop
 

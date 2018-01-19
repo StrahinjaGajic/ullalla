@@ -424,8 +424,8 @@
                                                         type: 'post',
                                                         data: {lat: lat, lng: lng, address: address, _token: token},
                                                         success: function (data) {
-                                                            $('.spinner').hide();
-                                                            $('.geolocation-image').show();
+                                                            $(".go").removeClass("square-spin");
+                                                            $(".span").removeClass("square-spin");
                                                         },
                                                         error: function () {
                                                             $(".go").removeClass("square-spin");
@@ -454,13 +454,13 @@
                                     }
                                 });
                             </script>
-                            {{-- <script>
+                            <script>
                                 $(document).ready(function(){
                                     $(".go").click(function(){
                                         $(".go").addClass("square-spin");
                                         $(".span").addClass("square-spin");
                                     });
                                 });
-                            </script> --}}
+                            </script>
 
                             @stop

@@ -8,9 +8,6 @@
 @stop
 
 @section('content')
-<div class="shop-header-banner">
-    <span><img src="img/banner/profil-banner.jpg" alt=""></span>
-</div>
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
@@ -116,6 +113,7 @@
                                 @endif
                             </div>
                         </div>
+<!--
                         <div class="col-sm-6">
                             <div class="col-3 input-effect {{ $errors->has('mobile') ? 'has-error' : ''  }}">
                                 <input class="effect-16" type="tel" id="mobile" placeholder="" name="mobile" value="{{ $local->mobile }}">
@@ -126,6 +124,17 @@
                                 @endif
                             </div>
                         </div>
+-->
+                 <div class="col-sm-6">
+                    <div class="col-3 input-effect">
+                        <label>{{ __('fields.mobile') }}*</label>
+                        <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $local->mobile }}" id="mobile">
+                        <span class="focus-border"></span>
+                        @if($errors->has('mobile'))
+                        <div class="has-error">{{ $errors->first('mobile') }}</div>
+                        @endif
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>

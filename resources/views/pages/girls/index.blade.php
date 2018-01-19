@@ -8,9 +8,6 @@
 
 @section('content')
 <div class="wrapper section-girls">
-	<div class="shop-header-banner">
-		<span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
-	</div>
 	<div class="single-product-menu">
 		<div class="container">
 			<div class="row">
@@ -41,12 +38,12 @@
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
 									<li class="geolocation">
-										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" />
+										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" >
 										<a onclick="getLocation();" class="geolocation-button">
-											<button type="button" class="btn go"><div class="span">Go!</div></button>
+											<button type="button" class="btn go" style="margin-right:10px;"><div class="span">Go!</div></button>
 										</a>
 									</li>
-									<li>
+									<li style="padding:10px 0px 10px 17px;">
 										<label for="amount">{{ __('fields.radius') }}:</label>
 										<div class="location-inputs">
 											<input type="hidden" name="radius" value="{{ old('radius') }}">

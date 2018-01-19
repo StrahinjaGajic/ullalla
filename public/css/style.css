@@ -2173,7 +2173,7 @@ a.shop-name {
 
 
 .control {
-    display: inline-block;
+    display: block;
     position: relative;
     padding-left: 30px;
     margin-left: 30px;

@@ -25,6 +25,28 @@ pre {
     font-size: 11px;
 }
 
+.girls_preview {
+    padding-left: 12px;
+    padding-top: 17px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.shop-layout {
+    padding-top: 17px;
+}
+
+.heading_photos {
+    color: #424242 !important;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.layout-title a {
+    border-bottom: 1px solid #ebebeb;
+    padding: 12px!important;
+}
+
 /*.container {
     width: 100%;
     padding: 25px 25px 0 25px;

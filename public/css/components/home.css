@@ -55,7 +55,7 @@ input.form-control {
 }
 
 #city {
-    width: 270px;
+    width: 280px;
 }
 
 
@@ -241,7 +241,7 @@ keyframes square-spin {
     }
     
     #city {
-        width: 224px!important;
+        width: 242px!important;
     }
 }
 

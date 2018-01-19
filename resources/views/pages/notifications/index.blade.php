@@ -7,9 +7,6 @@
 @stop
 
 @section('content')
-<div class="shop-header-banner">
-	<span><img src="img/banner/profil-banner.jpg" alt=""></span>
-</div>
 <div class="container">
 	<ul>
 		@foreach($user->notifications as $notification)

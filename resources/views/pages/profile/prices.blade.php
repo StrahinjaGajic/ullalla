@@ -7,10 +7,6 @@
 @stop
 
 @section('content')
-<div class="shop-header-banner">
-    <span><img src="img/banner/profil-banner.jpg" alt=""></span>
-</div>
-
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">

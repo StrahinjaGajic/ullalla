@@ -7,9 +7,6 @@
 
 @section('content')
 <div class="wrapper section-single-girl">
-    <div class="shop-header-banner">
-        <span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
-    </div>
     <div class="single-product-menu">
         <div class="container">
             <div class="row">

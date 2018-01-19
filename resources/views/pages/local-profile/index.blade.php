@@ -8,9 +8,6 @@
 
 @section('content')
 <div class="wrapper section-girls">
-    <div class="shop-header-banner">
-        <span><img src="{{ url('img/banner/profil-banner.jpg') }}" alt=""></span>
-    </div>
     <div class="single-product-menu">
         <div class="container">
             <div class="row">
@@ -46,7 +43,7 @@
                                             <button type="button" class="btn go"><div class="span">Go!</div></button>
                                         </a>
                                     </li>
-                                    <li style="margin: 10px 0;">
+                                    <li style="margin: 10px 0; padding-left:17px;">
                                         <label for="amount">{{ __('fields.radius') }}:</label>
                                         <div class="location-inputs">
                                             <input type="hidden" name="radius" value="{{ old('radius') }}">
@@ -77,7 +74,7 @@
                                                 <span>({{ \App\Models\Local::payed()->where('local_type_id', $type->id)->count() }})</span>
                                             </a>
                                             <input id="check_type_{{ $type->id }}" type="checkbox" name="types[]" value="{{ $type->id }}" {{ request('types') && in_array($type->id, request('types')) ? 'checked' : '' }}/>
-                                            <div class="control__indicator"></div>
+                                            <div class="control__indicator top"></div>
                                         </label>
                                         <?php $num++; ?>
                                         @endforeach

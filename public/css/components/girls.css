@@ -13,7 +13,10 @@
 }
 
 
-
+.geolocation {
+    position: relative;
+    padding-left: 17px;
+}
 
 
 
@@ -87,7 +90,7 @@ i {
     font-size: 14px;
     font-weight: 400;
     line-height: 40px;
-    padding: 0 30px;
+    padding: 0 21px;
 }
 
 .btn-default:hover {
@@ -140,7 +143,7 @@ border-radius: inherit;
 }
 
 #city {
-    width: 202px;
+    width: 186px;
 }
 
 .go {
@@ -150,6 +153,7 @@ border-radius: inherit;
     box-shadow: none;
     color: #7d7d7d;
     content: "Go!";
+    margin-right: 10px;
 }
 
 .go:hover {
@@ -284,6 +288,10 @@ keyframes square-spin {
     margin-top: 15px;
 }
 
+button, html [type=button], [type=reset], [type=submit] {
+    -webkit-appearance:none;
+}
+
 .modal-footer {
     border: none;
     margin: 0 auto;
@@ -399,7 +407,9 @@ keyframes square-spin {
     text-transform: uppercase;
 }
 
-
+.top {
+    top: 7px!important;
+}
 
 .headerDropdown .rotateCaret {
     animation-name: rotateCaret;
@@ -466,7 +476,7 @@ keyframes square-spin {
 @media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     
     #city {
-        width: 210px;
+        width: 194px;
     }
     
     .sorter .sort-by {
@@ -558,7 +568,7 @@ keyframes square-spin {
     padding: 35px 0 35px;
 }
     #city {
-        width: 359px;
+        width: 344px;
     }
     
     .filters-reset {

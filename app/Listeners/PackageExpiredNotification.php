@@ -27,19 +27,20 @@ class PackageExpiredNotification
      */
     public function handle(PackageExpired $event)
     {
+        $var = 'title_'. config()->get('app.locale');
         $defaultPackageNotification = Notification::where([
             ['notifiable_type', '=', 'App\Models\User'],
             ['notifiable_id', '=', $event->user->id],
-            ['title', '=', 'Default Package Expiration'],
+            [$var, '=', 'Basic Package Expiration'],
         ])->first();
         
         if (!$defaultPackageNotification) {
             $convertedExpiryDate = date('jS F Y', strtotime($event->user->package1_expiry_date));
             $notification = new Notification();
-            $notification->title_de = 'Default Package Expiration';
-            $notification->title_en = 'Default Package Expiration';
-            $notification->title_fr = 'Default Package Expiration';
-            $notification->title_it = 'Default Package Expiration';
+            $notification->title_de = 'Basic Package Expiration';
+            $notification->title_en = 'Basic Package Expiration';
+            $notification->title_fr = 'Basic Package Expiration';
+            $notification->title_it = 'Basic Package Expiration';
             $notification->note_de = 'Your default package expires on ' . $convertedExpiryDate;
             $notification->note_en = 'Your default package expires on ' . $convertedExpiryDate;
             $notification->note_fr = 'Your default package expires on ' . $convertedExpiryDate;

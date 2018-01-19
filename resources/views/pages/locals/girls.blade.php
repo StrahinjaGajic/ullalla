@@ -4,12 +4,10 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ url('css/components/girls.css') }}">
 @stop
 
 @section('content')
-<div class="shop-header-banner">
-    <span><img src="img/banner/profil-banner.jpg" alt=""></span>
-</div>
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
@@ -18,10 +16,11 @@
         <div class="col-sm-10 profile-info">
             <button id="showModal" type="submit" class="btn btn-default">Add Girl</button><br><br>
             @if($local->girls()->count() > 0)
-                <h3 style="margin: 0;">Girls</h3>
+                <h3 style="margin: 0; font-size:34px;">Girls</h3>
             @endif
             {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/girls/store', 'method' => 'put']) !!}
             @foreach($local->girls as $girl)
+<!--
             <div class="col-3 input-effect {{ $errors->has('nickname') ? 'has-error' : ''  }}">
                 <input class="effect-16" type="text" placeholder="" name="nickname_{{ $girl->id }}" value="{{ $girl->nickname }}">
                 <label>{{ __('fields.nickname') }}</label>
@@ -30,10 +29,21 @@
                 <span class="help-block">{{ $errors->first('nickname_'. $girl->id ) }}</span>
                 @endif
             </div>
-            <label>{{ __('headings.photos') }}</label>
-            <div class="form-group">
+-->
+           	<div class="shop-layout headerDropdown">
+				<div class="layout-title">
+				    <div class="layout-title toggle_arrow">
+                        <a>Example Nickname <i class="fa fa-caret-right"></i></a>
+				    </div>
+				</div>
+            <div class="layout-list" style="{{ !request('price_from') && !request('price_to') ? 'display: none;' : '' }}">
+                
+            <div class="form-group girls_preview">
                 <div class="image-preview-multiple">
+                   <label class="heading_photos">{{ __('headings.photos') }}</label>
+                   <br>
                     <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                    <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                     <script>
                         const widget_{{ $girl->id }} = uploadcare.Widget('[role=uploadcare-uploader_{{ $girl->id }}]')
                         widget_{{ $girl->id }}.value('{{ $girl->photos }}')
@@ -46,7 +56,9 @@
                         @endfor
                     </div>
                 </div>
-            </div>
+            </div>  
+							</div>
+				</div>
             @if ($errors->has('photos_'. $girl->id))
             <span class="help-block">{{ $errors->first('photos_'. $girl->id ) }}</span>
             @endif
@@ -246,4 +258,18 @@
         var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
         var maxFiles = '{{ __('validation.max_files') }}';
     </script>
+    
+    <script>
+	$('.control__indicator').on('click', function () {
+		window.location.href = $(this).closest('label').find('a').attr('href');
+	});
+</script>
+    
+    <script>
+	$(".toggle_arrow").on("click", function() {
+		var that = $(this);
+		that.closest('.shop-layout').find('.layout-list').toggle('fast');
+		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+	});
+</script>
     @stop
