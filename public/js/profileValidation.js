@@ -252,7 +252,7 @@ $(document).ready(function() {
                 $('#profileForm')
                     .find('.next')
                         .removeClass('disabled')    // Enable the Next button
-                        .find('a')
+                        .find('button')
                         .html(index === numTabs - 1 ? 'Finish' : 'Next');
             }
         });

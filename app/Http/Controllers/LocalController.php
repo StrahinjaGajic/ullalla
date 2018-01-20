@@ -41,14 +41,21 @@ class LocalController extends Controller
 
     public function postCreate(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:25',
-            'street' => 'required|max:40',
-            'city' => 'required|max:30',
-            'zip' => 'required|max:10',
-            'phone' => 'required_without:mobile|max:20',
-            'mobile' => 'required_without:phone|max:20',
-        ]);
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
+
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
+
+        // $this->validate($request, [
+        //     'name' => 'required|max:30',
+        //     'street' => 'required|max:30',
+        //     'city' => 'required|max:30',
+        //     'zip' => 'required|max:10',
+        //     'phone' => 'required|max:20',
+        //     'mobile' => 'required_with:sms_notifications,on|max:20',
+        //     'photos' => 'numeric|min:4|max:9',
+        // ]);
 
         // get working time
         $workingTime = getWorkingTime(
@@ -74,7 +81,8 @@ class LocalController extends Controller
             $price = request('package_duration')[$defaultPackage->id] . '_price';
             $totalAmount = (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
         }
-        try {
+
+        try {                        
             $user = Auth::guard('local')->user();
             $user->name = request('name');
             $user->phone = request('phone');
@@ -85,14 +93,14 @@ class LocalController extends Controller
             $user->about_me = request('about_me');
             $user->local_type_id = request('local_type_id');
             $user->photo = storeAndGetUploadCareFiles(request('logo'));
-            $user->photos = storeAndGetUploadCareFiles(request('photos'));
+            $user->photos = $uploadedPhotos ? $inputPhotos : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->working_time = $workingTime;
             $user->club_entrance_id = setClubInfo('entrance', request('entrance'), request('entrance-free'));
             $user->club_wellness_id = setClubInfo('wellness', request('wellness'), request('wellness-free'));
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
-            $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));
-            if(request('ullalla_package')[0] != 6) {
+            $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));            
+            if(request('ullalla_package')[0] != 6) {                
                 $user->package1_id = $defaultPackage->id;
                 $user->is_active_d_package = 1;
                 $user->package1_duration = request('package_duration')[$defaultPackage->id];
@@ -105,6 +113,7 @@ class LocalController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+
         if(request('ullalla_package')[0] != 6) {
             try {
                 // create a customer
@@ -131,9 +140,10 @@ class LocalController extends Controller
                 return redirect()->back()->with('error', $e->getMessage());
             }
             Session::flash('account_created', __('messages.account_created'));
-        }else{
+        } else {
             Auth::guard('local')->logout();
-            Session::flash('account_created_elite', __('messages.account_created_elite'));
+            Session::put('account_created_elite', __('messages.account_created_elite'));
+            Session::save();
         }
     }
 

@@ -34,6 +34,10 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        stringLength: {
+                            message: maxStrLength30,
+                            max: 30
                         }
                     }
                 },
@@ -44,6 +48,10 @@ $(function() {
                         },
                         notEmpty: {
                             message: requiredField
+                        },
+                        stringLength: {
+                            message: maxStrLength20,
+                            max: 20
                         }
                     }
                 },
@@ -105,6 +113,10 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        stringLength: {
+                            message: maxStrLength30,
+                            max: 30
                         }
                     }
                 },
@@ -112,6 +124,10 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        stringLength: {
+                            message: maxStrLength10,
+                            max: 10
                         }
                     }
                 },
@@ -119,6 +135,10 @@ $(function() {
                     validators: {
                         notEmpty: {
                             message: requiredField
+                        },
+                        stringLength: {
+                            message: maxStrLength30,
+                            max: 30
                         }
                     }
                 },
@@ -145,7 +165,7 @@ $(function() {
             }
         })
 .on('change', '[name="sms_notifications"]', function(e) {
-    $('#profileForm').formValidation('revalidateField', 'mobile')
+    $('#profileForm').formValidation('revalidateField', 'mobile');
 })
 .bootstrapWizard({
     tabClass: 'nav nav-pills',
@@ -175,7 +195,7 @@ $(function() {
                 $('#profileForm')
                 .find('.next')
                         .removeClass('disabled')    // Enable the Next button
-                        .find('a')
+                        .find('button')
                         .html(index === numTabs - 1 ? 'Finish' : 'Next');
                     }
                 });
