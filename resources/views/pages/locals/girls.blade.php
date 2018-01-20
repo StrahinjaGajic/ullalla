@@ -76,10 +76,10 @@
             <div class="modal-content">
                 <div class="modal-body">
                     {!! Form::open(['url' => 'locals/@' . $local->username . '/girls/create', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-                    <h2>{{ __('headings.add_girl') }}</h2>
+                    <h2>Add Girl</h2>
                     <section data-step="0">
                         <div class="col-xs-12">
-                            <div class="form-group">
+                            <div class="form-group modal_form">
                                 <label class="control-label">{{ __('fields.nickname') }}*</label>
                                 <input type="text" class="form-control" name="nickname" />
                                 @if ($errors->has('nickname'))

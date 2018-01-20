@@ -73,7 +73,7 @@
 												<span>({{ $canton->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="canton[]" value="{{ $canton->id }}" {{ request('canton') && in_array($canton->id, request('canton')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
+											<div class="control__indicator top"></div>
 										</label>
 										<?php $num++; ?>
 										@endforeach
@@ -89,7 +89,7 @@
 							</div>
 							<div class="layout-list" style="{{ !request('price_from') && !request('price_to') ? 'display: none;' : '' }}">
 								<ul>
-									<li>
+									<li style="padding:10px 0px 10px 17px;">
 										<label for="amount">{{ __('fields.price_range') }}:</label>
 										<div class="price-inputs">
 											<input type="hidden" name="price_from" value="{{ old('price_from') }}">
@@ -120,7 +120,7 @@
 												<span>({{ $service->users()->payed()->count() }})</span>
 											</a>
 											<input type="checkbox" name="services[]" value="{{ $service->id }}" {{ request('services') && in_array($service->id, request('services')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
+											<div class="control__indicator top"></div>
 										</label>
 										<?php $num++; ?>
 										@endforeach
@@ -144,7 +144,7 @@
 												<span>({{ \App\Models\User::payed()->where('type', strtolower($type))->count() }})</span>
 											</a>
 											<input type="checkbox" name="types[]" value="{{ $type }}" {{ request('types') && in_array($type, request('types')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
+											<div class="control__indicator top"></div>
 										</label>
 										<?php $num++; ?>
 										@endforeach
@@ -169,7 +169,7 @@
 												<span>({{ \App\Models\User::payed()->whereBetween('age', [$startAge, $endAge])->count() }})</span>
 											</a>
 											<input type="checkbox" name="age[]" value="18" {{ request('age') && in_array(makeStringFromFilterYears($startAge, $endAge), request('age')) ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
+											<div class="control__indicator top"></div>
 										</label>
 									</li>
 									<?php $num++; ?>
@@ -212,7 +212,7 @@
 												<span>({{ \App\Models\User::payed()->whereNotNull($priceType . '_type')->count() }})</span>
 											</a>
 											<input type="radio" name="price_type" value="{{ $priceType }}" {{ request('price_type') && $priceType == request('price_type') ? 'checked' : '' }}/>
-											<div class="control__indicator"></div>
+											<div class="control__indicator top"></div>
 										</label>
 										@endforeach
 									</li>

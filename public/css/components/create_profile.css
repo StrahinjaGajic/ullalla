@@ -55,6 +55,32 @@
      margin-top: 5px;
  }
 
+.about_tab {
+    background: 0 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.about_select {
+    width: 11%;
+    background: 0 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: none;
+    color: white;
+}
+
+#selectDur_1,
+#selectDur_2,
+#selectDur_3,
+#selectDur_4 {
+    background: 0 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: none;
+    color: white; 
+}
 
 .next {
     float: right;
@@ -127,6 +153,7 @@
 
 .control-label {
     color: white;
+    margin-bottom: 5px!important;
 }
 
 .table-responsive {
@@ -530,6 +557,7 @@ border: none;
  .has-error .help-block {
      color: #ed6c63 !important;
      text-align: left;
+     margin-left: 10px;
  }
 
  .has-error .form-control {
@@ -792,7 +820,7 @@ border: none;
     
         .control {
         margin-left:25px;
-    }
+    }    
 
 }
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 

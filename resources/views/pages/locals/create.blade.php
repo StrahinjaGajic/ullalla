@@ -15,12 +15,12 @@
                 <div class="modal-body">
                     {!! Form::open(['url' => 'locals/@' . $local->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
+                        <li class="active pad-left"><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
                         <li><a href="#about-us-tab" data-toggle="tab">{{ __('headings.about_us') }}</a></li>
-                        <li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
-                        <li><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
+                        <li class="pad-right"><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
+                        <li class="pad-left"><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
                         <li><a href="#club-info-tab" data-toggle="tab">{{ __('headings.club_info') }}</a></li>
-                        <li><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
+                        <li class="pad-right"><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
                     </ul>
                     <div class="tab-content">
                         <section class="tab-pane active" id="contact-tab">
@@ -32,13 +32,13 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-xs-8">
+                            <div class="col-xs-6">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
                                     <input type="text" class="form-control" name="name" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">{{ __('labels.phone') }}</label>
+                                    <label class="control-label">{{ __('labels.phone') }}*</label>
                                     <input type="text" class="form-control" name="phone" />
                                 </div>
                                 <div class="form-group">
@@ -50,17 +50,17 @@
                                     <input type="text" class="form-control" name="web" />
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label class="control-label">{{ __('labels.street') }}</label>
+                                    <label class="control-label">{{ __('labels.street') }}*</label>
                                     <input type="text" class="form-control" name="street" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">{{ __('labels.zip') }}</label>
+                                    <label class="control-label">{{ __('labels.zip') }}*</label>
                                     <input type="text" class="form-control" name="zip" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">{{ __('labels.city') }}</label>
+                                    <label class="control-label">{{ __('labels.city') }}*</label>
                                     <input type="text" class="form-control" name="city" />
                                 </div>
                             </div>
@@ -70,9 +70,9 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.about_us') }}</label><br>
-                                    <textarea name="about_me" style="width: 100%; height: 250px;"></textarea>
+                                    <textarea class="about_tab" name="about_me" style="width: 100%; height: 250px;"></textarea>
                                     <label class="control-label">{{ __('labels.local_type') }}</label><br>
-                                    <select name="local_type_id">
+                                    <select class="about_select" name="local_type_id">
                                         @php ($var = 'name_'. config()->get('app.locale'))
                                         @foreach($types as $type)
                                         <option value="{{ $type->id }}">{{ $type->$var }}</option>
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="image-preview-multiple">
+                                <div class="image-preview-multiple" style="margin-left:10px;">
                                     <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
