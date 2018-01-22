@@ -13,11 +13,10 @@
 }
 
 
-.geolocation {
+.geo {
     position: relative;
     padding-left: 17px;
 }
-
 
 
 
@@ -113,11 +112,12 @@ i {
     margin: 0 auto;
 }
 
-.plyr audio, .plyr video {
+.plyr audio,
+.plyr video {
     width: 100%;
-height: 550px!important;
-vertical-align: middle;
-border-radius: inherit;
+    height: 550px!important;
+    vertical-align: middle;
+    border-radius: inherit;
 }
 
 
@@ -167,51 +167,51 @@ border-radius: inherit;
 .square-spin {
     animation-name: square-spin;
     animation-fill-mode: both;
-    animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;  
+    animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
 }
 
 
 @-webkit-keyframes square-spin {
     25% {
         -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
-                transform: perspective(100px) rotateX(180deg) rotateY(0);
+        transform: perspective(100px) rotateX(180deg) rotateY(0);
     }
-    
+
     50% {
         -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
-                transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+        transform: perspective(100px) rotateX(180deg) rotateY(180deg);
     }
-    
+
     75% {
         -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
-                transform: perspective(100px) rotateX(0) rotateY(180deg);
+        transform: perspective(100px) rotateX(0) rotateY(180deg);
     }
-    
+
     100% {
         -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
-                transform: perspective(100px) rotateX(0) rotateY(0);
+        transform: perspective(100px) rotateX(0) rotateY(0);
     }
 }
 
 keyframes square-spin {
     25% {
         -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
-                transform: perspective(100px) rotateX(180deg) rotateY(0);
+        transform: perspective(100px) rotateX(180deg) rotateY(0);
     }
-    
+
     50% {
         -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
-                transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+        transform: perspective(100px) rotateX(180deg) rotateY(180deg);
     }
-    
+
     75% {
         -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
-                transform: perspective(100px) rotateX(0) rotateY(180deg);
+        transform: perspective(100px) rotateX(0) rotateY(180deg);
     }
-    
+
     100% {
         -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
-                transform: perspective(100px) rotateX(0) rotateY(0);
+        transform: perspective(100px) rotateX(0) rotateY(0);
     }
 }
 
@@ -324,11 +324,11 @@ keyframes square-spin {
 }
 
 .modal_form {
-        padding-left: 10px;
+    padding-left: 10px;
     padding-right: 15px;
 }
 
-.uploadcare--widget__button_type_open:hover{
+.uploadcare--widget__button_type_open:hover {
     cursor: pointer;
 }
 
@@ -336,8 +336,11 @@ keyframes square-spin {
     margin-top: 15px;
 }
 
-button, html [type=button], [type=reset], [type=submit] {
-    -webkit-appearance:none;
+button,
+html [type=button],
+[type=reset],
+[type=submit] {
+    -webkit-appearance: none;
 }
 
 .modal-footer {
@@ -346,8 +349,8 @@ button, html [type=button], [type=reset], [type=submit] {
 }
 
 .glyphicon.glyphicon-chevron-left,
-.glyphicon.glyphicon-chevron-right{
- font-size: 30px;
+.glyphicon.glyphicon-chevron-right {
+    font-size: 30px;
     color: #ddd;
 }
 
@@ -522,83 +525,101 @@ button, html [type=button], [type=reset], [type=submit] {
 
 
 /*** MEDIA ***/
+
 /* Smartphones (portrait) ----------- */
-@media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-    
+
+@media (min-width:320px) and (max-width: 479px) {
+    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     #city {
-        width: 194px;
+        width: 193.5px;
     }
-    
+
     .sorter .sort-by {
-    float: none;
-}
+        float: none;
+    }
     .tab-bar .tab-bar-inner {
-    margin-right: 15px;
-}
+        margin-right: 15px;
+    }
     .filters-reset {
         text-align: center;
     }
-    
-        .product-description-tab.custom-tab .nav > li > a {
+
+    .product-description-tab.custom-tab .nav > li > a {
         font-size: 14px;
     }
-    
-    .plyr audio, .plyr video {
+
+    .plyr audio,
+    .plyr video {
         width: 100%;
         height: auto !important;
         vertical-align: middle;
         border-radius: inherit;
     }
-    
-    audio, canvas, progress, video {
+
+    audio,
+    canvas,
+    progress,
+    video {
         width: 100%;
     }
-    
+
     #home_logo {
         height: 81px!important;
         width: 153px!important;
     }
-    
+
     .mobile-menu-area {
         padding: 10px 0 35px;
-}
-    
+    }
+
     .product-content-shop {
-        text-align: center;
+        text-align: center!important;
         padding-top: 20px;
     }
-    
-    
-    
+
+
+
 }
 
-@media only screen and (min-width : 320px) and (max-width: 767px) {
-    
-    audio, canvas, progress, video {
-    width: 100%;
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+
+   
+
+
+
 }
-    
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+    audio,
+    canvas,
+    progress,
+    video {
+        width: 100%;
+    }
+
     .modal-content {
         width: 80%;
     }
-    
+
 }
 
 
 /* iPhone 4 ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
     .vertical-menu {
         width: 100%;
     }
-        .profile-info {
+    .profile-info {
         margin: 0 auto;
         width: 100%;
     }
-    
+
     #city {
         width: 359px;
     }
-    
+
     .mean-container .mean-nav ul li li a {
         height: 13px;
         padding: 10px 10% 15px 10%;
@@ -607,65 +628,172 @@ button, html [type=button], [type=reset], [type=submit] {
 
 
 
-@media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
-    
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+    /* Styles */
 }
-@media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-    .mobile-menu-area {
-    padding: 13px 0 35px;
-}
-        .mobile-menu-area.home-4 {
-    padding: 35px 0 35px;
-}
+
+
+/* iPhone 5 & 5S in landscape */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) { 
+
     #city {
         width: 344px;
     }
     
+        #home_logo {
+        height: 81px;
+        width: 153px;
+    }
+    
+    .mobile-menu-area {
+        padding: 35px 0 35px;
+    }
+
+}
+
+
+/* iPhone 6 in landscape */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : landscape) { 
+
+    #city {
+        width: 343.5px!important;
+    }
+    
+}
+
+
+
+
+/* iPhone 6 Plus in landscape */
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) { 
+
+    #city {
+        width: 343.5px!important;
+    }
+
+}
+
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+    #city {
+        width: 136px;
+    }
+}
+
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+      #city {
+          width: 136px;
+      }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+
+}
+
+
+/* iPhone X landsacpe mode*/
+@media only screen 
+and (device-width : 375px) 
+and (device-height : 812px) 
+and (device-pixel-ratio : 3)
+and (orientation : landscape) {
+    
+   #city {
+        width: 144px;
+    }
+}
+
+
+
+
+
+@media (min-width:480px) and (max-width:599px) {
+    /* smartphones, Android phones, landscape iPhone */
+}
+
+@media (min-width:600px) and (max-width:800px) {
+    /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+    .mobile-menu-area {
+        padding: 13px 0 35px;
+    }
+    .mobile-menu-area.home-4 {
+        padding: 35px 0 35px;
+    }
+    #city {
+        width: 143.5px;
+    }
+    
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        margin-top: 0px;
+    }
+
     .filters-reset {
         text-align: center;
     }
-    
+
     .product-img a.a-img {
         text-align: center;
     }
-    
+
     #home_logo {
         height: 81px!important;
         width: 153px!important;
     }
+
+
+
+}
+
+
+
+
+@media (min-width:801px) and (max-width: 1024px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+  
     
-
-
+        .ui-state-default, .ui-widget-content .ui-state-default {
+        margin-top: 0px;
+    }
 }
 
-
-
-
-@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-
-}
-@media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
-
-}
-@media (min-width:1281px) { /* hi-res laptops and desktops */ 
-
+@media (min-width:1025px) and (max-width: 1280px) {
+    /* big landscape tablets, laptops, and desktops */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
+}

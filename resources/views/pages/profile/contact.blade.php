@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="col-3 input-effect">
-                        <label>{{ __('fields.mobile') }}*</label>
+                        <label style="color:#aaa;">{{ __('fields.mobile') }}*</label>
                         <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $user->mobile }}" id="mobile">
                         <span class="focus-border"></span>
                         @if($errors->has('mobile'))

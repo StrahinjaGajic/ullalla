@@ -557,7 +557,7 @@ border: none;
  .has-error .help-block {
      color: #ed6c63 !important;
      text-align: left;
-     margin-left: 10px;
+     margin-left: 10px!important;
  }
 
  .has-error .form-control {
@@ -741,9 +741,40 @@ border: none;
     }
     
     .control__indicator {
-        top: 1px;
+        top: 0px;
     }
     
+    .available {
+        top: 2px!important;
+    }
+    
+    .service_list {
+        top: 2px;
+    }
+    
+        .wid {
+        width: 100%!important;
+    }
+    
+    .add-new-price {
+        margin-top: 30px;
+    }
+    
+    .image-preview-multiple {
+        margin-left: 0!important;
+    }
+    
+    .prefer {
+        padding-left: 0px!important;
+    }
+    
+    .sie {
+        margin-bottom: 20px;
+    }
+    
+        .stretch {
+        width: 100%!important;
+    }
 
 
 }
@@ -776,11 +807,75 @@ border: none;
         width: 100%;
     }
     
-    .wizard > .steps > ul > li {
-        width: 100%;
-        font-size: 10px;
+
+    
+
+    
+}
+
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+    .section-create-profile .modal.in .modal-dialog {
+         margin-top: 150px !important;
+         width: 500px;
+         overflow-y: initial !important;
+ }
+    
+    .nav-pills > li {
+    width: 100%;
+    font-size: 10px;
+    padding: 5px 0 5px 0!important;
+}
+    
+                .image-preview-multiple {
+        margin-left: 0!important;
     }
     
+    .services_5 {
+        width: 100%!important;
+    }
+    
+    
+    
+    
+    
+    .wizard a {
+        font-size: 12px;
+    }
+    
+    .service_list {
+        top: 2px;
+    }
+    
+    .days {
+        top: 0px;
+    }
+    
+    .form-control {
+        padding-left: 10px;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+      .services_5 {
+        width: 100%!important;
+    }
+    
+      .wizard a {
+        font-size: 12px;
+    }
+    
+        .services_control {
+        margin-left: 4px;
+    }
+    
+    .services_label {
+        margin-left: 4px;
+    }
+    
+      .service_list {
+        top: 3px;
+    }
 }
 
 
@@ -790,6 +885,8 @@ border: none;
         margin: 0 auto;
         margin-bottom: 50px;
     }
+    
+    
 
 }
 @media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
@@ -805,32 +902,99 @@ border: none;
          background: 0 0;
  }
     
-        .modal-dialog {
+    .modal-dialog {
         margin: 0 auto;
         margin-bottom: 50px;
     }
     
     .form-control {
-       
+    
     }
     
     .col-xs-9 {
         width: 100%;
     }
     
+/*
         .control {
         margin-left:25px;
-    }    
+    }   
+*/
+    .services_control {
+        display: inline;
+        margin-left: 28px;
+    }
+    
+    .prefer {
+        padding-left: 0px;
+    }
+    
+            .image-preview-multiple {
+        margin-left: 0!important;
+    }
+    
+/*
+        .table.working-times-table .form-control {
+        width: 100%!important;
+    }
+*/
+    
+    .wizard a{
+        font-size: 13px;
+    }
+    
+    .days {
+        top: 0px!important;
+    }
+    
+    
 
 }
+
+@media (min-width:801px) {
+            .image-preview-multiple {
+        margin-left: 0!important;
+    }
+    
+}
+
+
+
+
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+        .prefer {
+        padding-left: 0px!important;
+    }
+
+    
+    
+
 
 }
+
+@media (min-width:641px) and (max-width:1023px) {
+        .hrs {
+        width: 80%!important;
+    }
+    
+}
+
+@media (max-width:736px) {
+    .hrs {
+        width: auto!important;
+    }
+}
+
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
 
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
-
+    
+        .image-preview-multiple {
+        margin-left: 0!important;
+    }
+    
+    
 }
 
 

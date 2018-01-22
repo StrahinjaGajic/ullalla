@@ -37,7 +37,7 @@
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
-									<li class="geolocation">
+									<li class="geolocation geo">
 										<input name="city" id="city" placeholder="{{ __('fields.city') }}" class="form-control" value="{{ Session::has('address') ? Session::get('address') : '' }}" >
 										<a onclick="getLocation();" class="geolocation-button">
 											<button type="button" class="btn go" style="margin-right:10px;"><div class="span">Go!</div></button>

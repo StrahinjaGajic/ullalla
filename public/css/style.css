@@ -2428,6 +2428,7 @@ input {
 
 .has-error .help-block {
     color: #ed6c63 !important;
+    margin-left: 10px!important;
 }
 
 .has-error .form-control {
@@ -2594,6 +2595,13 @@ img.geolocation-image {
         padding: 0;
         margin-left: 270px;
     }
+    
+    .services_control {
+        display: inline;
+    }
+        .image-preview-multiple {
+        margin-left: 0!important;
+    }
 }
 
 
@@ -2620,6 +2628,15 @@ img.geolocation-image {
         padding: 0;
         margin-left: 270px;
     }
+    
+    .services_control  {
+        display: inline;
+    }
+    
+    .image-preview-multiple {
+        margin-left: 0!important;
+    }
+    
 }
 
 
@@ -2638,7 +2655,9 @@ img.geolocation-image {
 
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
-
+    .services_control {
+        display: inline;
+    }
 }
 
 

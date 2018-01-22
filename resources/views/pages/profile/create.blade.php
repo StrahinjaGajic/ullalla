@@ -27,7 +27,7 @@
 					</ul>
 					<div class="tab-content">
 						<section class="tab-pane active" id="bio-tab">
-							<div class="col-lg-6 col-xs-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.first_name') }} *</label>
 									<input type="text" class="form-control" name="first_name" />
@@ -93,7 +93,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-lg-6 col-xs-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.age') }} *</label>
 									<select name="age" id="age" class="form-control">
@@ -198,7 +198,7 @@
 
 						<section class="tab-pane" id="gallery-tab">
 							<div class="form-group">
-								<div class="image-preview-multiple">
+								<div class="image-preview-multiple" style="margin-left:10px;">
 									<input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
 									<div class="_list"></div>
 								</div>
@@ -209,11 +209,11 @@
 						</section>
 
 						<section class="tab-pane" id="contact-tab">
-							<div class="col-xs-12">
+							<div class="col-xs-12 sie">
 								<div class="form-group">
 									<label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
 										<input type="checkbox" name="sms_notifications">
-										<div class="control__indicator"></div>
+										<div class="control__indicator service_list"></div>
 									</label>
 								</div>
 							</div>
@@ -242,13 +242,13 @@
 								</div>
 							</div>
 							<div id="options" class="col-xs-12">
-								<div class="col-lg-6 col-xs-12" style="padding-left:0;">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stretch" style="padding-left:0;">
 									<div class="form-group">
 										<label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
 										@foreach($contactOptions as $contactOption)
 										<label class="control control--checkbox apps"><a>{!! $contactOption->icon !!} {{ ucfirst($contactOption->contact_option_name) }}</a>
 											<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
-											<div class="control__indicator"></div>
+											<div class="control__indicator service_list"></div>
 										</label>
 										@endforeach
 									</div>
@@ -258,21 +258,21 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-6 col-xs-12">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prefer stretch">
 									<div class="form-group">
 										<label class="control-label" style="display: block; text-align: left;">{{ __('headings.i_prefer') }}</label>
 										@foreach(getPreferedOptions() as $key => $preferedOption)
-										<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding: 0px; margin: 0px;">
 											<label style="margin-right: 20px;">
 												<input type="radio" name="prefered_contact_option" value="{{ $key }}" style="display: inline-block;">
 												{{ $preferedOption }}
 											</label>
 										</div>	
 										@endforeach
-										<div class="col-xs-6" style="padding: 0px; margin: 0px;">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding: 0px; margin: 0px;">
 											<label class="control control--checkbox" style="margin-right: 20px; margin-left:0px;">
 												<input type="checkbox" name="no_withheld_numbers" value="1" style="display: inline-block;"><a>{{ __('fields.no_withheld_numbers') }}</a>
-												<div class="control__indicator"></div>
+												<div class="control__indicator service_list"></div>
 											</label>
 										</div>
 									</div>
@@ -316,6 +316,8 @@
 									<input type="text" class="form-control" name="club_name"/>
 								</div>
 							</div>
+							
+							<div class="col-xs-12" style="margin-top: 15px;">
 							<h3 style="padding-left: 15px;">{{ __('headings.available_for') }}:</h3>
 							<div class="col-xs-6">
 								<div class="form-group">
@@ -351,6 +353,7 @@
 									</div>
 								</div>
 							</div>
+                            </div>
 						</section>
 
 						<section class="tab-pane" id="working-hours-tab">
@@ -359,11 +362,11 @@
 									<div id="available_24_7" class="pull-left">
 										<label class="control control--checkbox"><a>{{ __('fields.available_24_7') }}</a>
 											<input type="checkbox" name="available_24_7">
-											<div class="control__indicator"></div>
+											<div class="control__indicator available"></div>
 										</label>
 										<label class="control control--checkbox working-times-disabled"><a>{{ __('fields.show_as_night_escort') }}</a>
 											<input type="checkbox" name="available_24_7_night_escort" value="1" disabled="">
-											<div class="control__indicator"></div>
+											<div class="control__indicator available"></div>
 										</label>
 									</div>
 									<div class="pull-right">
@@ -391,17 +394,17 @@
 													<td>
 														<label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
 															<input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
-															<div class="control__indicator"></div>
+															<div class="control__indicator days"></div>
 														</label>
 													</td>
 													<td>
-														<select name="time_from[{{ $counter }}]" class="form-control" disabled="">
+														<select name="time_from[{{ $counter }}]" class="form-control hrs" disabled="">
 															@foreach(getHoursList() as $hour)
 															<option value="{{ $hour }}">{{ $hour }}</option>
 															@endforeach
 														</select>
 														<span>{{ __('global.hrs') }}</span>
-														<select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
+														<select name="time_from_m[{{ $counter }}]" class="form-control hrs" disabled="">
 															@foreach(getMinutesList() as $minute)
 															<option value="{{ $minute }}">{{ $minute }}</option>
 															@endforeach
@@ -409,13 +412,13 @@
 														<span>{{ __('global.min') }}</span>
 													</td>
 													<td>
-														<select name="time_to[{{ $counter }}]" class="form-control" disabled="">
+														<select name="time_to[{{ $counter }}]" class="form-control hrs" disabled="">
 															@foreach(getHoursList() as $hour)
 															<option value="{{ $hour }}">{{ $hour }}</option>
 															@endforeach
 														</select>
 														<span>{{ __('global.hrs') }}</span>
-														<select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
+														<select name="time_to_m[{{ $counter }}]" class="form-control hrs" disabled="">
 															@foreach(getMinutesList() as $minute)
 															<option value="{{ $minute }}">{{ $minute }}</option>
 															@endforeach
@@ -425,7 +428,7 @@
 													<td>
 														<label class="control control--checkbox"><a>{{ __('fields.night_escort') }}</a>
 															<input type="checkbox" name="night_escorts[{{ $counter }}]" value="{{ $counter }}" disabled="">
-															<div class="control__indicator"></div>
+															<div class="control__indicator days"></div>
 														</label>
 													</td>
 												</tr>
@@ -440,26 +443,26 @@
 
 						<section class="tab-pane services-section" id="services-tab">
 							<h3>{{ __('headings.service_offered_for') }}:</h3>
-							<div class="col-lg-12 col-sm-12 col-xs-9" style="margin-bottom:20px;">
+							<div class="col-lg-12 col-sm-12 col-xs-12 services_5" style="margin-bottom:20px;">
 								@foreach($serviceOptions as $serviceOption)
-								<label class="control control--checkbox"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
+								<label class="control control--checkbox services_control"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
 									<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
-									<div class="control__indicator"></div>
+									<div class="control__indicator service_list"></div>
 								</label>
 								@endforeach
 							</div>
 							<div class="service-list">
 								<h3>{{ __('headings.service_list') }}</h3>
 								@foreach ($services->chunk(33) as $chunkedServices)
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 0px;">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 wid" style="margin-bottom: 0px;">
 									@foreach($chunkedServices as $service)
 									<div class="form-group">
 										@php 
 										$var = 'service_name_' . config()->get('app.locale');
 										@endphp
-										<label class="control control--checkbox" style="display: block;"><a>{{ $service->$var }}</a>
+										<label class="control control--checkbox services_label" style="display: block;"><a>{{ $service->$var }}</a>
 											<input type="checkbox" class="form-control" name="services[]" value="{{ $service->id }}" />
-											<div class="control__indicator"></div>
+											<div class="control__indicator service_list"></div>
 										</label>
 									</div>
 									@endforeach
