@@ -92,7 +92,7 @@
                         @foreach ($user->prices as $price)
                         <tr>
                             <td>{{ ucfirst($price->price_type) }}</td>
-                            <td>{{ $price->service_duration . ' ' . $price->service_price_unit }}</td>
+                            <td>{{ $price->service_duration }} {{ ucfirst(trans_choice('fields.' . $price->service_price_unit, $price->service_duration)) }}</td>
                             <td>{{ $price->service_price . ' ' . strtoupper($price->service_price_currency) }}</td>
                             <td>
                                 <a href="{{ url('ajax/delete_price/' . $price->id) }}" class="text-danger delete-price">
