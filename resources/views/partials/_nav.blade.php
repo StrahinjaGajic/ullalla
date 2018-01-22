@@ -34,6 +34,7 @@
                                     @elseif(Auth::user())
                                     <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                     <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                    <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
                                     @endif
                                     @endif
                                     @if($user && !$user->package1_id)
@@ -91,6 +92,7 @@
                                        @elseif(Auth::user())
                                        <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                        <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                      <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>                                        
                                        @endif
                                        @endif
                                        @if($user && !$user->package1_id)

@@ -40,5 +40,7 @@ return [
     'file_type' => 'File Type',
     'error' => 'error',
     'min_dimensions' => 'Min Dimensions',
-
+    
+    #blackbook
+    'success_blackbook_entry' => 'A new black book entry was successfully made',
 ];

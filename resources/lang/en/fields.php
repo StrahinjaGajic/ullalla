@@ -102,4 +102,14 @@ return [
     'days' => 'Day|Days',
     'hours' => 'Hour|Hours',
     'minutes' => 'Minute|Minutes',
+
+    #blackbook
+    'date' => 'Date',
+    'photo' => 'Photo',
+    'client_name' => 'Client Name',
+    'client_phone' => 'Client Phone',
+    'description' => 'Description',
+    
+
+
 ];

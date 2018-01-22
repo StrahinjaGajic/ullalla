@@ -159,7 +159,6 @@
 
 
         ////////// 2. UPLOAD CARE ////////
-
         // preview uploaded images function
         function installWidgetPreviewMultiple(widget, list) {
             widget.onChange(function(fileGroup) {
@@ -168,8 +167,6 @@
                     $.when.apply(null, fileGroup.files()).done(function() {
                         $.each(arguments, function(i, fileInfo) {
                             var src = fileInfo.cdnUrl;
-                            console.log(src);
-
                             list.append(
                                 $('<div/>', {'class': '_item'}).append(
                                     [$('<img/>', {src: src, style: "width: 250px; height: 200px;"})])

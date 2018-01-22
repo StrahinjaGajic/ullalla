@@ -93,4 +93,7 @@ return [
     'local_default_package_expiration_title' => 'Local Basic Package Expiration',
     'default_package_expiration_title' => 'Basic Package Expiration',
     'gotm_package_expiration_title' => 'Girl of The Month Package Expiration',
+
+    #black book
+    'blackbook' => 'Black Book',
 ];

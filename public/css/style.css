@@ -2662,7 +2662,19 @@ img.geolocation-image {
 
 
 
-
+.image-tooltip {
+    text-decoration: none;
+    position: relative;
+}
+.image-tooltip span {
+    display: none;
+}
+.image-tooltip:hover span {
+    display: block;
+    position: fixed;
+    overflow: hidden;
+    z-index: 1;
+}
 
 
 

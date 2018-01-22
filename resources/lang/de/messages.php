@@ -43,5 +43,6 @@ return [
 
     'account_already_activated' => 'Account already activated',
     
-
+    #blackbook
+    'success_blackbook_entry' => 'A new black book entry was successfully made',
 ];

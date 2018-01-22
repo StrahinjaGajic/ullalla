@@ -144,6 +144,10 @@ Route::middleware(['roles'])->group(function () {
 	]);
 });
 
+# BLACK BOOK CONTROLLER
+Route::get('private/blackbook', 'BlackbookController@getIndex');
+Route::post('private/blackbook/store', 'BlackbookController@postBlackbook');
+
 # GIRL CONTROLLER
 Route::get('private', [
 	'as' => 'private',

@@ -813,6 +813,7 @@ function installWidgetPreviewMultiple(widget, list) {
 setInterval(function(){
 	$('#profileForm').formValidation('revalidateField', 'photos');
 },500);
+
 function minDimensions(width, height) {
 	return function(fileInfo) {
 		var imageInfo = fileInfo.originalImageInfo;
@@ -832,6 +833,7 @@ function maxFileSize(size) {
 		}
 	}
 }
+
 // file type limit
 function fileTypeLimit(types) {
 	types = types.split(' ');

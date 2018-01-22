@@ -40,16 +40,17 @@ class HomeController extends Controller
 				$defaultPackageExpired = DB::table('users')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
 				->where('users.id', $user->id)
+				->whereNull('users.scheduled_default_package')
 				->where('notifications.' . $field, __('headings.default_package_expiration_title'))
 				->whereBetween('users.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
-
 
 			if ($user->package2_id) {
 				$expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id)[0]);
 				$gotmPackageExpired = DB::table('users')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
 				->where('users.id', $user->id)
+				->whereNull('users.scheduled_gotm_package')
 				->where('notifications.' . $field, __('headings.gotm_package_expiration_title'))
 				->whereBetween('users.package2_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
@@ -59,11 +60,12 @@ class HomeController extends Controller
 		if ($user) {
 			if ($user->package1_duration) {
 				$expiryDatePackage = getPackageExpiryDate(getDaysForExpiryLocal($user->package1_duration)[0]);
-				$localDefaultPackageExpired = DB::table('users')
+				$localDefaultPackageExpired = DB::table('locals')
 				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
-				->where('users.id', $user->id)
+				->where('locals.id', $user->id)
+				->whereNull('locals.scheduled_default_package')
 				->where('notifications.' . $field, __('headings.local_default_package_expiration_title'))
-				->whereBetween('users.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
+				->whereBetween('locals.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
 		}
 

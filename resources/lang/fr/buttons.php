@@ -61,4 +61,7 @@ return [
 
     #contact
     'submit'=> 'Submit',
+    
+    #black book
+    'entry' => 'Make an entry',
 ];

@@ -175,6 +175,11 @@ return [
         'photos'                => 'Photos',
         'photos_1'              => 'Photos',
         'nickname_1'            => 'Nickname',
+
+        'client_name'            => 'Client Name',
+        'client_phone'           => 'Client Phone',
+        'client_photo'           => 'Photo',
+        'description'            => 'Description',        
     ],
 
 ];

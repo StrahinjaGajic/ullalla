@@ -11,7 +11,16 @@
 <link rel="stylesheet" href="{{ asset('css/jquery.steps.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+<link rel="stylesheet" href="{{ asset('css/meanmenu.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/nivo-slider.css') }}">
+<link rel="stylesheet" href="{{ asset('css/preview.css') }}">
+<link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
+<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.bxslider.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css?ver=' . str_random(10)) }}">
+<link rel="stylesheet" href="{{ asset('css/responsive.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="{{ url('css/jquery-ui.css') }}">
 @yield('styles')
 <link href="/css/flag-icon.min.css" rel="stylesheet">

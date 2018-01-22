@@ -200,7 +200,7 @@
 	$('#profileForm').on('submit', function (e) {
 		if(packageId != 6) {
 			stripe.open({
-				name: 'Ullall?',
+				name: 'Ullallà',
 				description: '{{ $user->email }}',
 			});
 			e.preventDefault();

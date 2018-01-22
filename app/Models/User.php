@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Price');
     }
 
+    public function blackbooks()
+    {
+        return $this->hasMany('App\Models\BlackBook');
+    }
+
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role', 'user_role');
