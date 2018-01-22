@@ -67,11 +67,17 @@ class ProfileController extends Controller
 
     public function postCreate(Request $request)
     {
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
+
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
+
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
             'nickname' => 'required',
-            'age' => 'required|numeric',
+            'age' => 'required|numeric|older_than:18',
             'height' => 'required|numeric',
             'weight' => 'required|numeric',
             'sex' => 'required',
@@ -80,10 +86,15 @@ class ProfileController extends Controller
             'alcohol' => 'required',
             'smoker' => 'required',
             'about_me' => 'required|max:200',
-            'mobile' => 'required',
+            'photos' => 'numeric|min:4|max:9',
+            'mobile' => 'required|numeric|max:20',
+            'phone' => 'required|numeric|max:20',
+            'email' => 'required|email',
+            'skype_name' => 'required_with:contact_options.3,on',
+            'website' => 'url',
+        ], [
+            'skype_name.required_with' => __('validation.skype_required'),
         ]);
-
-        $photosUrl = storeAndGetUploadCareFiles(request('photos'));
 
         // define inputs
         $defaultPackageInput = request('ullalla_package')[0];
@@ -170,7 +181,7 @@ class ProfileController extends Controller
             $user->smoker = request('smoker');
             $user->alcohol = request('alcohol');
             $user->about_me = request('about_me');
-            $user->photos = $photosUrl ? request('photos') : null;
+            $user->photos = $uploadedPhotos ? $inputPhotos : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->email = request('email');
             $user->website = request('website');

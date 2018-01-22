@@ -615,8 +615,8 @@
 											@foreach ($packages as $package)
 											<tr>
 												<td>{{ $package->package_name }}</td>
-												<td>{{ $package->package_duration }}</td>
-												<td>{{ $package->package_price }}</td>
+												<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+												<td>{{ $package->package_price }} CHF</td>
 												<td>
 													<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
 												</td>
@@ -650,8 +650,8 @@
 											@foreach ($packages->take(3) as $package)
 											<tr>
 												<td>{{ $package->package_name }}</td>
-												<td>{{ $package->package_duration }}</td>
-												<td>{{ $package->package_price }}</td>
+												<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+												<td>{{ $package->package_price }} CHF</td>
 												<td>
 													<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
 												</td>

@@ -47,15 +47,15 @@ class LocalController extends Controller
         // get the number of photos
         $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
-        // $this->validate($request, [
-        //     'name' => 'required|max:30',
-        //     'street' => 'required|max:30',
-        //     'city' => 'required|max:30',
-        //     'zip' => 'required|max:10',
-        //     'phone' => 'required|max:20',
-        //     'mobile' => 'required_with:sms_notifications,on|max:20',
-        //     'photos' => 'numeric|min:4|max:9',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required|max:30',
+            'street' => 'required|max:30',
+            'city' => 'required|max:30',
+            'zip' => 'required|max:10',
+            'phone' => 'required|max:20',
+            'mobile' => 'required_with:sms_notifications,on|max:20',
+            'photos' => 'numeric|min:4|max:9',
+        ]);
 
         // get working time
         $workingTime = getWorkingTime(
