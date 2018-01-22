@@ -587,17 +587,30 @@ class ProfileController extends Controller
                     if ($monthGirlPackage) {
                         $monthGirlActivationDateInput = $monthGirlActivationDateInput[$monthGirlPackage->id];
                         // format dates with carbon
-                        $carbonDate = Carbon::parse($monthGirlActivationDateInput);
-                        $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                        $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
+                        $currentExpiryDateParsed = Carbon::parse($user->package2_expiry_date);
+                        $activationDateInputParsed = Carbon::parse($monthGirlActivationDateInput);
+                        $monthGirlActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+                        $monthGirlExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
 
                         $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 
-                        $user->package2_id = $monthGirlPackage->id;
-                        $user->is_active_gotm_package = 1;
-                        $user->package2_activation_date = $monthGirlActivationDate;
-                        $user->package2_expiry_date = $monthGirlExpiryDate;
-                        $user->save();
+                        // check if we should schedule the package or not
+                        if (Carbon::now() <= $currentExpiryDateParsed) {
+                            $string = $monthGirlPackage->id . '&|' . $monthGirlActivationDate . '&|' . $monthGirlExpiryDate . '&|' . $totalAmount;
+                            $user->scheduled_gotm_package = $string;
+                            $user->save();
+
+                            Session::flash('success', __('messages.scheduled_gotm_package'));
+
+                            return response()->json([
+                                'success' => true
+                            ]);
+                        } else {
+                            $user->package2_id = $monthGirlPackage->id;
+                            $user->is_active_gotm_package = 1;
+                            $user->package2_activation_date = $monthGirlActivationDate;
+                            $user->package2_expiry_date = $monthGirlExpiryDate;
+                        }
                     }
                 }
             } else {
@@ -621,18 +634,32 @@ class ProfileController extends Controller
                 $defaultPackage = Package::find($defaultPackageInput);
                 if ($defaultPackage) {
                     $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
+                    $currentExpiryDateParsed = Carbon::parse($user->package1_expiry_date);
+                    $activationDateInputParsed = Carbon::parse($defaultPackageActivationDateInput);
+
                     // format default packages dates with carbon
-                    $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-                    $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                    $defaultPackageExpiryDate = $carbonDate->addDays(daysToAddToExpiry($defaultPackage->id))->format('Y-m-d H:i:s');
+                    $defaultPackageActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+                    $defaultPackageExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($defaultPackage->id))->format('Y-m-d H:i:s');
 
                     $totalAmount += (int) filter_var($defaultPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 
-                    $user->package1_id = $defaultPackage->id;
-                    $user->is_active_d_package = 1;
-                    $user->package1_activation_date = $defaultPackageActivationDate;
-                    $user->package1_expiry_date = $defaultPackageExpiryDate;
+                    // check if we should schedule the package or not
+                    if (Carbon::now() <= $currentExpiryDateParsed) {
+                        $string = $defaultPackage->id . '&|' . $defaultPackageActivationDate . '&|' . $defaultPackageExpiryDate . '&|' . $totalAmount;
+                        $user->scheduled_default_package = $string;
+                        $user->save();
 
+                        Session::flash('success', __('messages.scheduled_default_package'));
+
+                        return response()->json([
+                            'success' => true
+                        ]);
+                    } else {
+                        $user->package1_id = $defaultPackage->id;
+                        $user->is_active_d_package = 1;
+                        $user->package1_activation_date = $defaultPackageActivationDate;
+                        $user->package1_expiry_date = $defaultPackageExpiryDate;
+                    }                    
                 }
 
                 if ($monthGirlActivationDateInput) {
@@ -644,16 +671,30 @@ class ProfileController extends Controller
                         if ($monthGirlPackage) {
                             $monthGirlActivationDateInput = $monthGirlActivationDateInput[$monthGirlPackage->id];
                             // format dates with carbon
-                            $carbonDate = Carbon::parse($monthGirlActivationDateInput);
-                            $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                            $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
+                            $currentExpiryDateParsed = Carbon::parse($user->package2_expiry_date);
+                            $activationDateInputParsed = Carbon::parse($monthGirlActivationDateInput);
+                            $monthGirlActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+                            $monthGirlExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
 
                             $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
 
-                            $user->package2_id = $monthGirlPackage->id;
-                            $user->is_active_gotm_package = 1;
-                            $user->package2_activation_date = $monthGirlActivationDate;
-                            $user->package2_expiry_date = $monthGirlExpiryDate;
+                            // check if we should schedule the package or not
+                            if (Carbon::now() <= $currentExpiryDateParsed) {
+                                $string = $monthGirlPackage->id . '&|' . $monthGirlActivationDate . '&|' . $monthGirlExpiryDate . '&|' . $totalAmount;
+                                $user->scheduled_gotm_package = $string;
+                                $user->save();
+
+                                Session::flash('success', __('messages.scheduled_gotm_package'));
+
+                                return response()->json([
+                                    'success' => true
+                                ]);
+                            } else {
+                                $user->package2_id = $monthGirlPackage->id;
+                                $user->is_active_gotm_package = 1;
+                                $user->package2_activation_date = $monthGirlActivationDate;
+                                $user->package2_expiry_date = $monthGirlExpiryDate;
+                            }
                         }
                     }
                 }
@@ -666,7 +707,6 @@ class ProfileController extends Controller
                     ]
                 ]);
             }
-
         }
 
         try {

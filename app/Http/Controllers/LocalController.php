@@ -363,28 +363,45 @@ class LocalController extends Controller
             if ($validator->passes()) {
                 // get default package input
                 $defaultPackageInput = request('ullalla_package')[0];
-
                 // get default package obj and activation date input
                 $defaultPackage = LocalPackage::find($defaultPackageInput);
                 if ($defaultPackage) {
                     if($defaultPackage->id != 6) {
                         $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
                         // format default packages dates with carbon
-                        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-                        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
+                        $currentExpiryDateParsed = Carbon::parse($user->package1_expiry_date);
+                        $activationDateInputParsed = Carbon::parse($defaultPackageActivationDateInput);
+                        $defaultPackageActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+
                         if (request('package_duration')[$defaultPackage->id] == 'month') {
-                            $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
+                            $defaultPackageExpiryDate = $activationDateInputParsed->addMonths(1)->format('Y-m-d H:i:s');
                         } elseif (request('package_duration')[$defaultPackage->id] == 'year') {
-                            $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
+                            $defaultPackageExpiryDate = $activationDateInputParsed->addYears(1)->format('Y-m-d H:i:s');
                         }
+
                         $price = request('package_duration')[$defaultPackage->id] . '_price';
+                        $duration = request('package_duration')[$defaultPackage->id];
                         $totalAmount += (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
-                        $user->package1_id = $defaultPackage->id;
-                        $user->is_active_d_package = 1;
-                        $user->package1_duration = request('package_duration')[$defaultPackage->id];
-                        $user->package1_activation_date = $defaultPackageActivationDate;
-                        $user->package1_expiry_date = $defaultPackageExpiryDate;
-                    }else{
+
+                        // check if we should schedule the package or not
+                        if (Carbon::now() <= $currentExpiryDateParsed) {
+                            $string = $defaultPackage->id . '&|' . $duration . '&|' . $defaultPackageActivationDate . '&|' . $defaultPackageExpiryDate . '&|' . $totalAmount;
+                            $user->scheduled_default_package = $string;
+                            $user->save();
+
+                            Session::flash('success', __('messages.scheduled_default_package'));
+
+                            return response()->json([
+                                'success' => true
+                            ]);
+                        } else {
+                            $user->package1_id = $defaultPackage->id;
+                            $user->is_active_d_package = 1;
+                            $user->package1_duration = $duration;
+                            $user->package1_activation_date = $defaultPackageActivationDate;
+                            $user->package1_expiry_date = $defaultPackageExpiryDate;
+                        }
+                    } else {
                         $user->package1_id = null;
                     }
                     $user->save();

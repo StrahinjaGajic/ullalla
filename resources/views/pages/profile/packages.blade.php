@@ -246,9 +246,7 @@
 			.done(function (response, textStatus) {
 				var errors = response.errors;
 				if (errors) {
-
 				    //proveriti da li je greska u navodnicima !!!
-
 					if (typeof errors.default_package_error !== 'undefined') {
 						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
 					} else if (typeof errors.month_girl_package_error !== 'undefined') {
@@ -267,7 +265,7 @@
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullall?',
+			name: 'Ullalla',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	
