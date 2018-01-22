@@ -705,6 +705,7 @@ border: none;
     
     .form-control {
         font-size: 12px;
+        padding-left: 10px;
     }
     
     .help-block {
@@ -784,7 +785,7 @@ border: none;
     
         .section-create-profile .modal.in .modal-dialog {
          margin-top: 150px !important;
-         width: 445px;
+         width: 445px!important;
          overflow-y: initial !important;
  }
 
@@ -812,6 +813,9 @@ border: none;
 
     
 }
+
+
+
 
 /* iPhone 5 ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
@@ -851,6 +855,8 @@ border: none;
         top: 0px;
     }
     
+    
+    
     .form-control {
         padding-left: 10px;
     }
@@ -875,6 +881,14 @@ border: none;
     
       .service_list {
         top: 3px;
+    }
+    
+    .via {
+        margin-bottom: 20px!important;
+    }
+    
+    .about_select {
+        width: 34%;
     }
 }
 

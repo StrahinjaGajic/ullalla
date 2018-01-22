@@ -24,15 +24,15 @@
                     </ul>
                     <div class="tab-content">
                         <section class="tab-pane active" id="contact-tab">
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 via">
                                 <div class="form-group">
                                     <label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
                                         <input type="checkbox" name="sms_notifications">
-                                        <div class="control__indicator"></div>
+                                        <div class="control__indicator service_list"></div>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-lg-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
                                     <input type="text" class="form-control" name="name" />
@@ -50,7 +50,7 @@
                                     <input type="text" class="form-control" name="web" />
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-lg-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.street') }}*</label>
                                     <input type="text" class="form-control" name="street" />
@@ -105,7 +105,6 @@
 
                         <section class="tab-pane" id="working-hours-tab">
                             <div class="col-xs-12">
-                                <div class="form-group">
                                     <div id="available_24_7" class="pull-left">
                                         <label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
                                             <input type="checkbox" name="available_24_7">
@@ -115,6 +114,7 @@
                                     <div class="pull-right">
                                         <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
                                     </div>
+                                    <div style="overflow-x: auto;">
                                     <table class="table working-times-table">
                                         <thead>
                                             <tr>
@@ -172,8 +172,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
-                            </div>
+                            
                         </section>
 
                         <section class="tab-pane" id="club-info-tab">
