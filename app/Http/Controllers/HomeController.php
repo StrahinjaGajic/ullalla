@@ -61,7 +61,7 @@ class HomeController extends Controller
 			if ($user->package1_duration) {
 				$expiryDatePackage = getPackageExpiryDate(getDaysForExpiryLocal($user->package1_duration)[0]);
 				$localDefaultPackageExpired = DB::table('locals')
-				->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
+				->leftJoin('notifications', 'locals.id', '=', 'notifications.notifiable_id')
 				->where('locals.id', $user->id)
 				->whereNull('locals.scheduled_default_package')
 				->where('notifications.' . $field, __('headings.local_default_package_expiration_title'))
