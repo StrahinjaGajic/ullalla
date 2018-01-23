@@ -32,7 +32,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.name') }}*</label>
                                     <input type="text" class="form-control" name="name" />
@@ -50,7 +50,7 @@
                                     <input type="text" class="form-control" name="web" />
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.street') }}*</label>
                                     <input type="text" class="form-control" name="street" />
@@ -90,9 +90,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="image-preview-multiple" style="margin-left:10px;">
+                                <div class="image-preview-multiple club_image_preview" style="margin-left:10px;">
                                     <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                                <div class="image-preview-multiple">
+                                <div class="image-preview-multiple club_image_preview">
                                     <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" data-multiple-max="9" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
@@ -108,20 +108,20 @@
                                     <div id="available_24_7" class="pull-left">
                                         <label class="control control--checkbox"><a>{{ __('labels.available_24_7') }}</a>
                                             <input type="checkbox" name="available_24_7">
-                                            <div class="control__indicator"></div>
+                                            <div class="control__indicator club_available"></div>
                                         </label>
                                     </div>
                                     <div class="pull-right">
                                         <button class="btn btn-default" id="apply_to_all">{{ __('labels.apply_to_all') }}</button>
                                     </div>
-                                    <div style="overflow-x: auto;">
+                                    <div style="overflow-x: auto; width:100%;">
                                     <table class="table working-times-table">
                                         <thead>
                                             <tr>
                                                 <th>
                                                     <label class="control control--checkbox"><a>{{ __('labels.mark_all') }}</a>
                                                         <input type="checkbox" id="select_all_days">
-                                                        <div class="control__indicator"></div>
+                                                        <div class="control__indicator club_days"></div>
                                                     </label>
                                                 </th>
                                                 <th>{{ __('buttons.from') }}</th>
@@ -136,36 +136,36 @@
                                                 <td>
                                                     <label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
                                                         <input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
-                                                        <div class="control__indicator"></div>
+                                                        <div class="control__indicator club_days"></div>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <select name="time_from[{{ $counter }}]" class="form-control" disabled="">
+                                                    <select name="time_from [{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getHoursList() as $hour)
                                                         <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>{{ __('global.hrs') }}</span>
-                                                    <select name="time_from_m[{{ $counter }}]" class="form-control" disabled="">
+                                                    <span class="club_hrs">{{ __('global.hrs') }}</span>
+                                                    <select name="time_from_m [{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                         <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>{{ __('global.min') }}</span>
+                                                    <span class="club_min">{{ __('global.min') }}</span>
                                                 </td>
                                                 <td>
-                                                    <select name="time_to[{{ $counter }}]" class="form-control" disabled="">
+                                                    <select name="time_to [{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getHoursList() as $hour)
                                                         <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>{{ __('global.hrs') }}</span>
-                                                    <select name="time_to_m[{{ $counter }}]" class="form-control" disabled="">
+                                                    <span class="club_hrs">{{ __('global.hrs') }}</span>
+                                                    <select name="time_to_m [{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                         <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span>{{ __('global.min') }}</span>
+                                                    <span class="club_min">{{ __('global.min') }}</span>
                                                 </td>
                                             </tr>
                                             <?php $counter++; ?>
@@ -182,98 +182,145 @@
                                 <div class="form-group club-info">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">{{ __('labels.entrance') }}</label>
+                                            <label class="control-label club_info_label">{{ __('labels.entrance') }}</label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.n_a') }}
                                             <input type="radio" id="entrance-na" onclick="uncheckEntranceFree()" name="entrance" value="1" checked>
-                                            <label class="control-label">{{ __('labels.n_a') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.free') }}
                                             <input type="radio" id="entrance-free" onclick="uncheckEntrance()" name="entrance-free" value="1">
-                                            <label class="control-label">{{ __('labels.free') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.with_cost') }}
                                             <input type="radio" id="entrance-cost" onclick="uncheckEntrance()" name="entrance-free" value="2">
-                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">{{ __('labels.wellness') }}</label>
+                                            <label class="control-label club_info_label">{{ __('labels.wellness') }}</label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.n_a') }}
                                             <input type="radio" name="wellness" value="1" onclick="hideWellness()" checked>
-                                            <label class="control-label">{{ __('labels.n_a') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.yes') }}
                                             <input type="radio" name="wellness" value="2" onclick="showWellness()">
-                                            <label class="control-label">{{ __('labels.yes') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.no') }}
                                             <input type="radio" name="wellness" value="3" onclick="hideWellness()">
-                                            <label class="control-label">{{ __('labels.no') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="row hidden" id="wellness-show">
                                         <div class="col-md-3">
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.free') }}
                                             <input type="radio" name="wellness-free" value="1">
-                                            <label class="control-label">{{ __('labels.free') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.with_cost') }}
                                             <input type="radio" name="wellness-free" value="2">
-                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">{{ __('labels.food_and_drinks') }}</label>
+                                            <label class="control-label club_info_label">{{ __('labels.food_and_drinks') }}</label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.n_a') }}
                                             <input type="radio" name="food" value="1" onclick="hideFood()" checked>
-                                            <label class="control-label">{{ __('labels.n_a') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.yes') }}
                                             <input type="radio" name="food" value="2" onclick="showFood()">
-                                            <label class="control-label">{{ __('labels.yes') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.no') }}
                                             <input type="radio" name="food" value="3" onclick="hideFood()">
-                                            <label class="control-label">{{ __('labels.no') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="row hidden" id="food-show">
                                         <div class="col-md-3">
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.free') }}
                                             <input type="radio" name="food-free" value="1">
-                                            <label class="control-label">{{ __('labels.free') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.with_cost') }}
                                             <input type="radio" name="food-free" value="2">
-                                            <label class="control-label">{{ __('labels.with_cost') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label">{{ __('labels.outdoor_area') }}</label>
+                                            <label class="control-label club_info_label">{{ __('labels.outdoor_area') }}</label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.n_a') }}
                                             <input type="radio" name="outdoor" value="1" checked>
-                                            <label class="control-label">{{ __('labels.n_a') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.yes') }}
                                             <input type="radio" name="outdoor" value="2">
-                                            <label class="control-label">{{ __('labels.yes') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                         <div class="col-md-3">
+                                            
+                                            <label class="control control--checkbox club_info_checkbox">{{ __('labels.no') }}
                                             <input type="radio" name="outdoor" value="3">
-                                            <label class="control-label">{{ __('labels.no') }}</label>
+                                            <div class="control__indicator"></div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -289,6 +336,7 @@
                                             <div class="has-error">
                                                 <div id="alertPackageMessage" class="help-block"></div>
                                             </div>
+                                            <div style="overflow-x:auto;">
                                             <table class="table packages-table">
                                                 <thead>
                                                     <tr>
@@ -329,6 +377,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -60,6 +60,8 @@
     border: 1px solid #eee;
     border-radius: 5px;
     box-shadow: none;
+    color: white;
+    padding: 10px 10px;
 }
 
 .about_select {
@@ -840,9 +842,6 @@ border: none;
     }
     
     
-    
-    
-    
     .wizard a {
         font-size: 12px;
     }
@@ -855,12 +854,42 @@ border: none;
         top: 0px;
     }
     
-    
-    
     .form-control {
         padding-left: 10px;
     }
+    
+    .about_select {
+        width: 19%;
+    }
+    
+    .club_select {
+        width: 70%!important;
+    }
+    
+    .club_days {
+        top: 0px;
+    }
+    
+    .club_available {
+        top: 1px;
+    }
+    
+    .club_hrs,
+    .club_min {
+        margin-left: 10px;
+    }
+    
+    .club_info_checkbox{
+        margin-left: 1px;
+    }
 }
+
+
+
+
+
+
+
 
 @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
       .services_5 {
@@ -890,7 +919,132 @@ border: none;
     .about_select {
         width: 34%;
     }
+    
+    .club_hrs,
+    .club_min {
+        margin: 0 auto!important;
+    }
+    
+    .club_info_checkbox {
+        margin-left: 1px!important;
+    }
 }
+
+
+
+/* iPhone 6 in portrait */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+
+    .wizard a {
+        font-size: 12px;
+    }
+
+    .about_select {
+        width: 28%;
+    }
+    
+    .club_hrs,
+    .club_min {
+        margin: 0 auto!important;
+    }
+    
+    .club_info_checkbox {
+        margin-left: 1px!important;
+    }
+
+
+}
+
+/* iPhone 6 in landscape */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : landscape) { 
+
+    .club_select {
+        width: 80%!important;
+    }
+    
+
+}
+
+
+/* iPhone 6 Plus in landscape */
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) { 
+
+    .about_select {
+        width: 14%;
+    }
+    
+    .club_info_checkbox {
+        margin-left: 1px!important;
+    }
+
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) { 
+    .club_info_checkbox{
+        margin-left: 1px!important; 
+    }
+
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+    .club_info_label{
+        padding-top: 0px!important; 
+    }
+
+}
+
+
+
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    .club_info_label{
+        padding-top: 0px!important; 
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+ .club_info_label{
+        padding-top: 0px!important; 
+    }
+}
+
 
 
 @media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
