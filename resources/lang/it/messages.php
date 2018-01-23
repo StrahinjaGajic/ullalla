@@ -25,6 +25,8 @@ return [
 
     'email_gotm_expire_warning_package' => 'Your Girl of The Month package is about to expire. In order to renew your package please click on the following link',
     'email_gotm_expired_package' => 'Your Girl of The Month package has expired. In order to renew your package please click on the following link',
+    'email_lotm_expire_warning_package' => 'Your Local of The Month package is about to expire. In order to renew your package please click on the following link',
+    'email_lotm_expired_package' => 'Your Local of The Month package has expired. In order to renew your package please click on the following link',
 
     'email_local_expire_warning_package' => 'Your Girl of The Month package is about to expire. In order to renew your package please click on the following link',
     'email_local_expired_package' => 'Your Girl of The Month package has expired. In order to renew your package please click on the following link',

@@ -45,7 +45,12 @@ class CreateLocalsTable extends Migration
             $table->string('package1_duration');
             $table->timestamp('package1_activation_date')->nullable();
             $table->timestamp('package1_expiry_date')->nullable();
+            $table->integer('package2_id')->unsigned()->nullable();
+            $table->boolean('is_active_gotm_package')->default(false);
+            $table->timestamp('package2_activation_date')->nullable();
+            $table->timestamp('package2_expiry_date')->nullable();
             $table->string('scheduled_default_package')->nullable();
+            $table->string('scheduled_gotm_package')->nullable();
             $table->string('stripe_id')->nullable();
             $table->string('stripe_amount')->nullable();
             $table->rememberToken();

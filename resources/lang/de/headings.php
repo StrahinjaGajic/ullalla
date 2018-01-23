@@ -6,6 +6,7 @@ return [
 	'quick_search' => 'Quick Search',
 	'gotm' => 'Girls Of The Month',
 	'totm' => 'Trans Of The Month',
+    'lotm' => 'Locals Of The Month',
 	'default_error_title' => 'Oops...',
     'info_account_not_approved_title' => 'Account not approved',
     'good_job_title' => 'Good job!',
