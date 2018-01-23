@@ -33,7 +33,7 @@
 							<div class="_list">
 								@for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
 								<div class="_item">
-									<img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/250x200/' }}">
+									<img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/185x211/' }}">
 								</div>
 								@endfor
 							</div>
@@ -185,7 +185,7 @@
         					var src = fileInfo.cdnUrl;
         					list.append(
         						$('<div/>', {'class': '_item'}).append(
-        							[$('<img/>', {src: src, style: "width: 250px; height: 200px;"})])
+        							[$('<img/>', {src: src})])
         						);
         				});
         			});

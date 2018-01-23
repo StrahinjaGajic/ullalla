@@ -1,45 +1,5 @@
 $(function() {
     $('#profileForm')
-        .steps({
-            headerTag: 'h2',
-            bodyTag: 'section',
-            // Triggered when clicking the Previous/Next buttons
-            onStepChanging: function(e, currentIndex, newIndex) {
-                var fv = $('#profileForm').data('formValidation'), // FormValidation instance
-                // The current step container
-                    $container = $('#profileForm').find('section[data-step="' + currentIndex +'"]');
-
-                // Validate the container
-                fv.validateContainer($container);
-
-                var isValidStep = fv.isValidContainer($container);
-                if (isValidStep === false || isValidStep === null) {
-                    // Do not jump to the next step
-                    return false;
-                }
-
-                return true;
-            },
-            // Triggered when clicking the Finish button
-            onFinishing: function(e, currentIndex) {
-                var fv         = $('#profileForm').data('formValidation'),
-                    $container = $('#profileForm').find('section[data-step="' + currentIndex +'"]');
-
-                // Validate the last step container
-                fv.validateContainer($container);
-
-                var isValidStep = fv.isValidContainer($container);
-                if (isValidStep === false || isValidStep === null) {
-                    return false;
-                }
-
-                return true;
-            },
-            onFinished: function(e, currentIndex) {
-                $('#profileForm').find('.actions li').attr('aria-disabled', true);
-                $('#profileForm').formValidation('defaultSubmit');
-            }
-        })
         .formValidation({
             framework: 'bootstrap',
             icon: {

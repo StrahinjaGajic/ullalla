@@ -33,25 +33,23 @@
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow">
-                        <a>Example Nickname <i class="fa fa-caret-right"></i></a>
+                        <a>{{ $girl->nickname }} <i class="fa fa-caret-right"></i></a>
                     </div>
                 </div>
                 <div class="layout-list">
-
                     <div class="form-group girls_preview">
                         <div class="image-preview-multiple">
-                         <label class="heading_photos">{{ __('headings.photos') }}</label>
-                         <br>
-                         <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                         <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                         <script>
+                           <label class="heading_photos">{{ __('headings.photos') }}</label>
+                           <br>
+                           <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                           <script>
                             const widget_{{ $girl->id }} = uploadcare.Widget('[role=uploadcare-uploader_{{ $girl->id }}]')
                             widget_{{ $girl->id }}.value('{{ $girl->photos }}')
                         </script>
                         <div class="_list">
                             @for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
                             <div class="_item">
-                                <img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/250x200/' }}">
+                                <img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/185x211/' }}">
                             </div>
                             @endfor
                         </div>
@@ -169,7 +167,7 @@
                             var src = fileInfo.cdnUrl;
                             list.append(
                                 $('<div/>', {'class': '_item'}).append(
-                                    [$('<img/>', {src: src, style: "width: 250px; height: 200px;"})])
+                                    [$('<img/>', {src: src})])
                                 );
                         });
                     });
@@ -257,16 +255,16 @@
     </script>
     
     <script>
-       $('.control__indicator').on('click', function () {
-          window.location.href = $(this).closest('label').find('a').attr('href');
-      });
-  </script>
-
-  <script>
-   $(".toggle_arrow").on("click", function() {
-      var that = $(this);
-      that.closest('.shop-layout').find('.layout-list').toggle('fast');
-      that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+     $('.control__indicator').on('click', function () {
+      window.location.href = $(this).closest('label').find('a').attr('href');
   });
+</script>
+
+<script>
+ $(".toggle_arrow").on("click", function() {
+  var that = $(this);
+  that.closest('.shop-layout').find('.layout-list').toggle('fast');
+  that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+});
 </script>
 @stop
