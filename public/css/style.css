@@ -2676,10 +2676,9 @@ img.geolocation-image {
     z-index: 1;
 }
 
-
-
-
-
+.daterangepicker {
+    z-index: 1111111 !important;
+}
 
 
 

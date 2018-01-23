@@ -36,7 +36,7 @@
 					one: '{{ __('buttons.upload_videos') }}'
 				},
 				images: {
-					one: '{{ __('buttons.upload_logo') }}',
+					one: '{{ __('buttons.upload_photo') }}',
 					other: '{{ __('buttons.upload_photos') }}'
 				}
 			}

@@ -110,4 +110,10 @@ return [
     'client_phone' => 'Client Phone',
     'description' => 'Description',
 
+    #news/events
+    'title' => 'Title',
+    'duration' => 'Duration',
+    'venue' => 'Venue',
+    'prepared_flyer' => 'Already have a prepared flyer?',
+    
 ];	

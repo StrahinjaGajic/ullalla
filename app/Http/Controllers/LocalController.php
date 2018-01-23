@@ -335,20 +335,25 @@ class LocalController extends Controller
     public function postCreateGirls(Request $request)
     {
         $local = Auth::guard('local')->user();
+
         $photos = storeAndGetUploadCareFiles(request('newPhotos'));
         $inputPhotos = request('newPhotos');
+
         $request->merge(['newPhotos' => $inputPhotos]);
         $request->merge(['newPhotos' => substr($request->newPhotos, -2, 1)]);
         $request->merge(['newPhotos' => (int) $request->newPhotos]);
+
         $this->validate($request, [
             'nickname' => 'required|min:4|max:20',
             'newPhotos' => 'numeric|min:4|max:9',
         ]);
+
         $local->girls()->create([
             'nickname' => $request->nickname, 
             'photos' => $photos ? $inputPhotos : null,
             'local_id' => $local->id
         ]);
+
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
@@ -635,21 +640,80 @@ class LocalController extends Controller
     public function getNewsAndEvents()
     {
         $local = Auth::guard('local')->user();
-
         return view('pages.locals.news_events', compact('local', 'news', 'events'));
     }
 
     public function postNews(Request $request)
     {
-        $showNewsModal = false;
+        // if ($request->news_flyer == 'on') {
+        //     $validator = Validator::make($request->all(), [
+        //         'news_photo' => 'required',
+        //     ]);
+        // } else {
+        //     $validator = Validator::make($request->all(), [
+        //         'news_title' => 'required',
+        //         'news_duration' => 'required',
+        //         'news_description' => 'required',
+        //         'news_photo' => 'required',
+        //     ]);
+        // }
 
-        return redirect()->back();
+        $explodedNewsDuration = explode(' - ', $request->news_duration);
+        $from = Carbon::createFromFormat('d/m/Y', $explodedNewsDuration[0]);
+        $to = Carbon::createFromFormat('d/m/Y', $explodedNewsDuration[1]);
+        $newsDuration = $to->diffInDays($from);
+
+        if ($validator->passes()) {
+            $news = new News;
+            $news->news_title = $request->news_title;
+            $news->news_duration = $newsDuration;
+            $news->news_description = $request->news_description;
+            $news->news_photo = storeAndGetUploadCareFiles($request->news_photo);
+
+            // $user->news()->save($news);
+        } else {
+            Session::flash('showNewsModal', true);
+        }
+
+        return redirect()->back()->withErrors($validator->getMessageBag());
     }
 
     public function postEvents(Request $request)
     {
-        $showEventsModal = false;
+        if ($request->events_flyer == 'on') {
+            $validator = Validator::make($request->all(), [
+                'events_photo' => 'required',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'events_title' => 'required',
+                'events_venue' => 'required',
+                'events_date' => 'required',
+                'events_duration' => 'required',
+                'events_description' => 'required',
+                'events_photo' => 'required',
+            ]);
+        }
 
-        return redirect()->back();
+        $explodedEventsDuration = explode(' - ', $request->events_duration);
+        $from = Carbon::createFromFormat('d/m/Y', $explodedEventsDuration[0]);
+        $to = Carbon::createFromFormat('d/m/Y', $explodedEventsDuration[1]);
+        $eventDuration = $to->diffInDays($from);
+
+        if ($validator->passes()) {
+            $event = new Events;
+            $event->events_title = $request->events_title;
+            $event->events_venue = $request->events_venue;
+            $event->events_date = $request->events_date;
+            $event->events_duration = $eventDuration;
+            $event->events_description = $request->events_description;
+            $event->events_photo = storeAndGetUploadCareFiles($request->events_photo);
+            
+            // $user->events()->save($event);
+        } else {
+            Session::flash('showEventsModal', true);
+        }
+
+        return redirect()->back()->withErrors($validator->getMessageBag());
     }
 }

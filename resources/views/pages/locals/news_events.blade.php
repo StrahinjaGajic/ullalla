@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Girls')
+@section('title', __('functions.news_and_events'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -14,73 +14,107 @@
 			{!! parseEditLocalProfileMenu('news_and_events') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			<button id="showModal" type="submit" class="btn btn-default">Make News Entry</button><br><br>
-			<button id="showModal2" type="submit" class="btn btn-default">Create an Event</button><br><br>
+			<div class="btn-wrapper">
+				<button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
+				<button id="showModal2" type="submit" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
+			</div>
+			
 			@if($local->news()->count() > 0)
-			<h3 style="margin: 0; font-size:34px;">Girls</h3>
-			@endif
-			@foreach($local->girls as $girl)
 			<div class="shop-layout headerDropdown">
 				<div class="layout-title">
 					<div class="layout-title toggle_arrow">
-						<a>Example Nickname <i class="fa fa-caret-right"></i></a>
+						<a>{{ __('headings.news') }} <i class="fa fa-caret-down"></i></a>
 					</div>
 				</div>
 				<div class="layout-list">
 					<div class="form-group girls_preview">
-						<div class="image-preview-multiple">
-							<label class="heading_photos">{{ __('headings.photos') }}</label>
-							<div class="_list">
-								@for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
-								<div class="_item">
-									<img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/185x211/' }}">
-								</div>
-								@endfor
-							</div>
-						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>{{ __('fields.date') }}</th>
+									<th>{{ __('fields.photo') }}</th>
+									<th>{{ __('fields.title') }}</th>
+									<th>{{ __('fields.duration') }}</th>
+									<th>{{ __('headings.expiry_date') }}</th>
+								</tr>
+							</thead>
+							<tbody id="prices_body">
+								@foreach($local->news as $news)
+								<tr>
+									<td>{{ date('d-m-Y', strtotime($news->date)) }}</td>
+									<td>
+										@if ($news->news_photo)
+										<div class="image-tooltip">
+											<img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($news->news_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='news image'/>
+											<span>
+												<img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($news->news_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='news image'/>
+											</span>
+										</div>
+										@endif
+									</td>
+									<td>{{ $news->news_title }}</td>
+									<td>{{ $news->news_duration }}</td>
+									<td>{{ $news->news_duration }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
 					</div>  
 				</div>
 			</div>
-			@if ($errors->has('photos_'. $girl->id))
-			<span class="help-block">{{ $errors->first('photos_'. $girl->id ) }}</span>
 			@endif
-			@endforeach
-			@if($local->girls()->count() > 0)
-			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+
+			@if($local->events()->count() > 0)
+			<div class="shop-layout headerDropdown">
+				<div class="layout-title">
+					<div class="layout-title toggle_arrow">
+						<a>{{ __('headings.events') }} <i class="fa fa-caret-down"></i></a>
+					</div>
+				</div>
+				<div class="layout-list">
+					<div class="form-group girls_preview">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>{{ __('fields.date') }}</th>
+									<th>{{ __('fields.photo') }}</th>
+									<th>{{ __('fields.title') }}</th>
+									<th>{{ __('fields.venue') }}</th>
+									<th>{{ __('fields.duration') }}</th>
+									<th>{{ __('headings.expiry_date') }}</th>
+								</tr>
+							</thead>
+							<tbody id="prices_body">
+								@foreach($local->events as $event)
+								<tr>
+									<td>{{ date('d-m-Y', strtotime($event->date)) }}</td>
+									<td>
+										@if ($event->events_photo)
+										<div class="image-tooltip">
+											<img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($event->events_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='event image'/>
+											<span>
+												<img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($event->events_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='event image'/>
+											</span>
+										</div>
+										@endif
+									</td>
+									<td>{{ $event->events_title }}</td>
+									<td>{{ $event->events_venue }}</td>
+									<td>{{ $event->events_duration }}</td>
+									<td>{{ $event->events_duration }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>  
+				</div>
+			</div>
 			@endif
 		</div>
 	</div>
 </div>
+
 <div class="wrapper section-create-profile">
-	<!-- Events modal -->
-	<div id="events_modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					{!! Form::open(['url' => 'locals/@' . $local->username . '/events/store', 'class' => 'form-horizontal wizard']) !!}
-						<div class="col-xs-12">
-							<div class="form-group modal_form">
-								<label class="control-label">{{ __('fields.nickname') }}*</label>
-								<input type="text" class="form-control" name="nickname" />
-								@if ($errors->has('nickname'))
-								<span class="help-block">{{ $errors->first('nickname') }}</span>
-								@endif
-							</div>
-							<div class="form-group">
-								<div class="image-preview-multiple">
-									<input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-									<div class="_list"></div>
-								</div>
-							</div>
-							@if ($errors->has('newPhotos'))
-							<span class="help-block">{{ $errors->first('newPhotos') }}</span>
-							@endif
-						</div>
-					{!! Form::close() !!}
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- News modal -->
 	<div id="news_modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -88,22 +122,109 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => 'locals/@' . $local->username . '/news/store', 'class' => 'form-horizontal wizard']) !!}
 					<div class="col-xs-12">
-						<div class="form-group modal_form">
-							<label class="control-label">{{ __('fields.nickname') }}*</label>
-							<input type="text" class="form-control" name="nickname" />
-							@if ($errors->has('nickname'))
-							<span class="help-block">{{ $errors->first('nickname') }}</span>
-							@endif
-						</div>
 						<div class="form-group">
-							<div class="image-preview-multiple">
-								<input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-								<div class="_list"></div>
+							<label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
+								<input type="checkbox" name="news_flyer" class="prepared_flyer" {{ old('news_flyer') ? 'checked' : '' }}>
+								<div class="control__indicator"></div>
+							</label>
+						</div>
+						<div class="flyerless-fields">
+							<div class="form-group {{ $errors->has('news_title') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.title') }}*</label>
+								<input type="text" class="form-control" name="news_title" value="{{ old('news_title') }}" />
+								@if ($errors->has('news_title'))
+								<span class="help-block">{{ $errors->first('news_title') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('news_duration') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.duration') }}*</label>
+								<input type="text" class="form-control" name="news_duration" value="{{ old('news_duration') }}"/>
+								@if ($errors->has('news_duration'))
+								<span class="help-block">{{ $errors->first('news_duration') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('news_description') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.description') }}*</label>
+								<textarea name="news_description" cols="30" rows="10">{{ old('news_description') }}</textarea>
+								@if ($errors->has('news_description'))
+								<span class="help-block">{{ $errors->first('news_description') }}</span>
+								@endif
 							</div>
 						</div>
-						@if ($errors->has('newPhotos'))
-						<span class="help-block">{{ $errors->first('newPhotos') }}</span>
-						@endif
+						<div class="form-group {{ $errors->has('news_photo') ? 'has-error' : '' }}">
+							<div class="image-preview-multiple">
+								<input type="hidden" name="news_photo" data-crop="490x560 minimum" data-images-only="">
+								@if ($errors->has('news_photo'))
+								<span class="help-block">{{ $errors->first('news_photo') }}</span>
+								@endif
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
+					</div>
+					{!! Form::close() !!}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Events modal -->
+	<div id="events_modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					{!! Form::open(['url' => 'locals/@' . $local->username . '/events/store', 'class' => 'form-horizontal wizard']) !!}
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
+								<input type="checkbox" name="events_flyer" class="prepared_flyer" {{ old('events_flyer') ? 'checked' : '' }}>
+								<div class="control__indicator"></div>
+							</label>
+						</div>
+						<div class="flyerless-fields">
+							<div class="form-group {{ $errors->has('events_title') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.title') }}*</label>
+								<input type="text" class="form-control" name="events_title" value="{{ old('events_title') }}" />
+								@if ($errors->has('events_title'))
+								<span class="help-block">{{ $errors->first('events_title') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('events_venue') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.venue') }}*</label>
+								<input type="text" class="form-control" name="events_venue" value="{{ old('events_venue') }}"/>
+								@if ($errors->has('events_venue'))
+								<span class="help-block">{{ $errors->first('events_venue') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('events_date') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.date') }}*</label>
+								<input type="text" class="form-control" name="events_date" value="{{ old('events_date') }}"/>
+								@if ($errors->has('events_date'))
+								<span class="help-block">{{ $errors->first('events_date') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.duration') }}*</label>
+								<input type="text" class="form-control" name="events_duration" value="{{ old('events_duration') }}"/>
+								@if ($errors->has('events_duration'))
+								<span class="help-block">{{ $errors->first('events_duration') }}</span>
+								@endif
+							</div>
+							<div class="form-group {{ $errors->has('events_description') ? 'has-error' : '' }}">
+								<label class="control-label">{{ __('fields.description') }}*</label>
+								<textarea name="events_description" cols="30" rows="10">{{ old('events_description') }}</textarea>
+								@if ($errors->has('events_description'))
+								<span class="help-block">{{ $errors->first('events_description') }}</span>
+								@endif
+							</div>
+						</div>
+						<div class="form-group {{ $errors->has('events_photo') ? 'has-error' : '' }}">
+							<div class="image-preview-multiple">
+								<input type="hidden" name="events_photo" data-crop="490x560 minimum" data-images-only="">
+								@if ($errors->has('events_photo'))
+								<span class="help-block">{{ $errors->first('events_photo') }}</span>
+								@endif
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
 					</div>
 					{!! Form::close() !!}
 				</div>
@@ -112,177 +233,134 @@
 	</div>
 </div>
 @stop
+
 @section('perPageScripts')
-{{-- @if($showEventsMoodal === true)
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
+@if(Session::has('showNewsModal'))
+<script>
+	$('#news_modal').modal('show');
+</script>
+@endif
+
+@if(Session::has('showEventsModal'))
 <script>
 	$('#events_modal').modal('show');
 </script>
 @endif
 
-@if($showNewsMoodal === true)
 <script>
-	$('#news_modal').modal('show');
+    ////////// 1. MODAL, DATERANGE PICKER, ////////
+    $("#showModal").on('click',function(){
+    	$('#news_modal').modal('show');
+    });
+    $("#showModal2").on('click',function(){
+    	$('#events_modal').modal('show');
+    });
+
+    $(function () {
+    	var start = new Date();
+    	start.setFullYear(start.getFullYear());
+    	var end = new Date();
+    	end.setFullYear(end.getFullYear() + 1);
+
+    	$('input[name="events_duration"]').daterangepicker({
+    		minDate: start,
+    		locale: {
+    			format: 'DD/MM/YYYY'
+    		}
+    	});
+
+    	$('input[name="events_date"]').daterangepicker({
+    		timePicker: true,
+    		timePicker24Hour: true,
+    		timePickerIncrement: 15,
+    		minDate: start,
+    		locale: {
+    			format: 'DD/MM/YYYY H:mm'
+    		}
+    	});
+
+    	$('input[name="news_duration"]').daterangepicker({
+    		minDate: start,
+    		locale: {
+    			format: 'DD/MM/YYYY'
+    		}
+    	});
+    });
+
+    ////////// 2. UPLOAD CARE ////////
+    function minDimensions(width, height) {
+    	return function(fileInfo) {
+    		var imageInfo = fileInfo.originalImageInfo;
+    		if (imageInfo !== null) {
+    			if (imageInfo.width < width || imageInfo.height < height) {
+    				throw new Error('{{ __('messages.dimensions') }}');
+    			}
+    		}
+    	};
+    }
+
+    function maxFileSize(size) {
+    	return function (fileInfo) {
+    		if (fileInfo.size !== null && fileInfo.size > size) {
+    			throw new Error('{{ __('messages.file_maximum_size') }}');
+    		}
+    	}
+    }
+
+    $(function() {
+    	const eventWidget = uploadcare.Widget('[name=events_photo]')
+    	const newsWidget = uploadcare.Widget('[name=news_photo]')
+    	eventWidget.validators.push(minDimensions(490, 560));
+    	eventWidget.validators.push(maxFileSize(20000000));
+    	newsWidget.validators.push(minDimensions(490, 560));
+    	newsWidget.validators.push(maxFileSize(20000000));
+    });
+
 </script>
-@endif --}}
+<script type="text/javascript">
+	var requiredField = '{{ __('validation.required_field') }}';
+	var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
+	var olderThan = '{{ __('validation.older_than_18') }}';
+	var stringLength = '{{ __('validation.string_length') }}';
+	var numericError = '{{ __('validation.numeric_error') }}';
+	var invalidUrl = '{{ __('validation.url_invalid') }}';
+	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
+	var maxFiles = '{{ __('validation.max_files') }}';
+</script>
 
-<script src="{{ asset('js/formValidation.min.js') }}"></script>
-<script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <script>
-        ////////// 1. MODAL, DATERANGE PICKER, ////////
-        // show modal on page load
-        $("#showModal").on('click',function(){
-        	$('#events_modal').modal('show');
-        });
-        $("#showModal2").on('click',function(){
-        	$('#news_modal').modal('show');
-        });
+	$('.control__indicator').on('click', function () {
+		window.location.href = $(this).closest('label').find('a').attr('href');
+	});
+</script>
 
-        $(function () {
-        	$('#profileForm').find('.content').addClass('is-scrollable');
-        	$('#date_of_birth').val('');
-        	var start = new Date();
-        	start.setFullYear(start.getFullYear());
-        	var end = new Date();
-        	end.setFullYear(end.getFullYear() + 1);
-        	$('.package_month_girl_activation').each(function () {
-        		$(this).daterangepicker({
-        			singleDatePicker: true,
-        			timepicker: false,
-        			showDropdowns: true,
-        			minDate: start,
-        			maxDate: end,
-        			locale: {
-        				format: 'DD-MM-YYYY'
-        			},
-        		});;
-        	});
-        	$('.package_activation').each(function () {
-        		$(this).daterangepicker({
-        			singleDatePicker: true,
-        			timepicker: false,
-        			showDropdowns: true,
-        			minDate: start,
-        			maxDate: end,
-        			locale: {
-        				format: 'DD-MM-YYYY'
-        			},
-        		});
-        	});
-        });
+<script>
+	$(".toggle_arrow").on("click", function() {
+		var that = $(this);
+		that.closest('.shop-layout').find('.layout-list').toggle('fast');
+		that.parent().find(".fa-caret-down").toggleClass("rotateCaretBack");
+	});
+</script>
 
+<script>
+	var tooltips = document.querySelectorAll('.image-tooltip span');
+	window.onmousemove = function (e) {
+		var x = (e.clientX + 20) + 'px',
+		y = (e.clientY + 20) + 'px';
+		for (var i = 0; i < tooltips.length; i++) {
+			tooltips[i].style.top = y;
+			tooltips[i].style.left = x;
+		}
+	};
+</script>
 
-        ////////// 2. UPLOAD CARE ////////
-        // preview uploaded images function
-        function installWidgetPreviewMultiple(widget, list) {
-        	widget.onChange(function(fileGroup) {
-        		list.empty();
-        		if (fileGroup) {
-        			$.when.apply(null, fileGroup.files()).done(function() {
-        				$.each(arguments, function(i, fileInfo) {
-        					var src = fileInfo.cdnUrl;
-        					list.append(
-        						$('<div/>', {'class': '_item'}).append(
-        							[$('<img/>', {src: src})])
-        						);
-        				});
-        			});
-        		}
-        	});
-        }
-
-        function minDimensions(width, height) {
-        	return function(fileInfo) {
-        		var imageInfo = fileInfo.originalImageInfo;
-        		if (imageInfo !== null) {
-        			console.log();
-        			if (imageInfo.width < width || imageInfo.height < height) {
-        				throw new Error('{{ __('messages.dimensions') }}');
-        			}
-        		}
-        	};
-        }
-
-        // file maximum size
-        function maxFileSize(size) {
-        	return function (fileInfo) {
-        		if (fileInfo.size !== null && fileInfo.size > size) {
-        			throw new Error('{{ __('messages.file_maximum_size') }}');
-        		}
-        	}
-        }
-
-        // file type limit
-        function fileTypeLimit(types) {
-        	types = types.split(' ');
-        	return function(fileInfo) {
-        		if (fileInfo.name === null) {
-        			return;
-        		}
-        		var extension = fileInfo.name.split('.').pop();
-        		if (types.indexOf(extension) == -1) {
-        			throw new Error('{{ __('messages.file_type') }}');
-        		}
-        	};
-        }
-
-        $(function() {
-            // preview images initialization
-            $('.image-preview-multiple').each(function() {
-            	installWidgetPreviewMultiple(
-            		uploadcare.MultipleWidget($(this).children('input')),
-            		$(this).children('._list')
-            		);
-            });
-
-            $('[role=uploadcare-uploader]').each(function() {
-            	var widget = uploadcare.Widget(this);
-            	widget.validators.push(minDimensions(490, 560));
-            });
-
-            var video = document.getElementById('video');
-            var source = document.createElement('source');
-            var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
-            widget.value('{{ $local->videos }}')
-            widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));
-            widget.validators.push(maxFileSize(20000000));
-            // preview single video
-            widget.onUploadComplete(function (fileInfo) {
-            	source.setAttribute('src', fileInfo.cdnUrl);
-            	video.appendChild(source);
-                // video.play();
-            });
-            // remove video element
-            $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
-            	$('.upload-video').find('#video').remove();
-            });
-        });
-
-    </script>
-    <script type="text/javascript">
-    	var requiredField = '{{ __('validation.required_field') }}';
-    	var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
-    	var olderThan = '{{ __('validation.older_than_18') }}';
-    	var stringLength = '{{ __('validation.string_length') }}';
-    	var numericError = '{{ __('validation.numeric_error') }}';
-    	var invalidUrl = '{{ __('validation.url_invalid') }}';
-    	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
-    	var maxFiles = '{{ __('validation.max_files') }}';
-    </script>
-    
-    <script>
-    	$('.control__indicator').on('click', function () {
-    		window.location.href = $(this).closest('label').find('a').attr('href');
-    	});
-    </script>
-    
-    <script>
-    	$(".toggle_arrow").on("click", function() {
-    		var that = $(this);
-    		that.closest('.shop-layout').find('.layout-list').toggle('fast');
-    		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
-    	});
-    </script>
-    @stop
+<script>
+	$('.prepared_flyer').on('click', function () {
+		$(this).closest('.modal-body').find('.flyerless-fields').toggle();
+	});
+</script>
+@stop

@@ -17,7 +17,6 @@ class CreateNewsTable extends Migration
             $table->increments('id');
             $table->integer('local_id')->unsigned()->nullable();
             $table->string('news_title')->nullable();
-            $table->timestamp('news_date')->nullable();
             $table->integer('news_duration')->nullable();
             $table->integer('news_total_amount')->nullable();
             $table->string('news_photo')->nullable();

@@ -98,4 +98,8 @@ return [
 
     #black book
     'blackbook' => 'Black Book',
+
+    #events/news
+    'events' => 'Events',
+    'news' => 'News',
 ];
