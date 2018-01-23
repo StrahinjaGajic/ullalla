@@ -15,7 +15,7 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('local_id')->unsigned()->nullable();
             $table->string('news_title')->nullable();
             $table->timestamp('news_date')->nullable();
             $table->integer('news_duration')->nullable();
@@ -24,7 +24,7 @@ class CreateNewsTable extends Migration
             $table->text('news_description')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');
         });
     }
 

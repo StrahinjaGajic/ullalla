@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('local_id')->unsigned()->nullable();
             $table->string('events_title')->nullable();
             $table->string('events_venue')->nullable();
             $table->integer('events_duration')->nullable();
@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->timestamp('events_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');
         });
     }
 
