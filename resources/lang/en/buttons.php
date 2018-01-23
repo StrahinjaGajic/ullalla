@@ -5,6 +5,7 @@ return [
 	'upload_videos' => 'Upload Video',
 	'upload_photos' => 'Upload Photos',
 	'upload_logo' => 'Upload Logo',
+	'upload_photo' => 'Upload Photo',
 	'back' => 'Back',
 
 	# home
@@ -64,4 +65,8 @@ return [
 
     #black book
     'entry' => 'Make an entry',
+
+    #news/events
+    'news_entry' => 'Make News Entry',
+    'events_entry' => 'Create an Event',
 ];

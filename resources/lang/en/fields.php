@@ -111,5 +111,10 @@ return [
     'description' => 'Description',
     
 
-
+    #news/events
+    'title' => 'Title',
+    'duration' => 'Duration',
+    'venue' => 'Venue',
+    'prepared_flyer' => 'Already have a prepared flyer?',
+    
 ];
