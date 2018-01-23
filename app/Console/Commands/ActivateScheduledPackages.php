@@ -43,13 +43,13 @@ class ActivateScheduledPackages extends Command
         $usersThatHavePendingGotmPackages = User::whereNotNull('scheduled_gotm_package')->get();
 
         $localsThatHavePendingDefaultPackages = Local::whereNotNull('scheduled_default_package')->get();
+        $localsThatHavePendingGotmPackages = User::whereNotNull('scheduled_gotm_package')->get();
 
         foreach ($usersThatHavePendingDefaultPackages as $user) {
             $scheduledData = explode('&|', $user->scheduled_default_package);
             $packageID = $scheduledData[0];
             $activationDate = $scheduledData[1];
             $expiryDate = $scheduledData[2];
-            $totalAmount = $scheduledData[3];
 
             if (Carbon::parse($user->package1_expiry_date)->isToday()) {
                 $user->package1_id = $packageID;
@@ -66,9 +66,8 @@ class ActivateScheduledPackages extends Command
             $packageID = $scheduledData[0];
             $activationDate = $scheduledData[1];
             $expiryDate = $scheduledData[2];
-            $totalAmount = $scheduledData[3];
 
-            if (Carbon::parse($user->package1_expiry_date)->isToday()) {
+            if (Carbon::parse($user->package2_expiry_date)->isToday()) {
                 $user->package2_id = $packageID;
                 $user->is_active_gotm_package = 1;
                 $user->package2_activation_date = $activationDate;
@@ -78,13 +77,12 @@ class ActivateScheduledPackages extends Command
             }
         }
 
-        foreach ($usersThatHavePendingDefaultPackages as $user) {
+        foreach ($localsThatHavePendingDefaultPackages as $user) {
             $scheduledData = explode('&|', $user->scheduled_default_package);
             $packageID = $scheduledData[0];
             $duration = $scheduledData[1];
             $activationDate = $scheduledData[2];
             $expiryDate = $scheduledData[3];
-            $totalAmount = $scheduledData[4];
 
             if (Carbon::parse($user->package1_expiry_date)->isToday()) {
                 $user->package1_id = $packageID;
@@ -93,6 +91,22 @@ class ActivateScheduledPackages extends Command
                 $user->package1_activation_date = $activationDate;
                 $user->package1_expiry_date = $expiryDate;
                 $user->scheduled_default_package = NULL;
+                $user->save();
+            }
+        }
+
+        foreach ($localsThatHavePendingGotmPackages as $user) {
+            $scheduledData = explode('&|', $user->scheduled_gotm_package);
+            $packageID = $scheduledData[0];
+            $activationDate = $scheduledData[1];
+            $expiryDate = $scheduledData[2];
+
+            if (Carbon::parse($user->package2_expiry_date)->isToday()) {
+                $user->package2_id = $packageID;
+                $user->is_active_gotm_package = 1;
+                $user->package2_activation_date = $activationDate;
+                $user->package2_expiry_date = $expiryDate;
+                $user->scheduled_gotm_package = NULL;
                 $user->save();
             }
         }
