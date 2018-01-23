@@ -485,14 +485,14 @@ class LocalController extends Controller
 
     public function postNews(Request $request)
     {
-        
+        $showNewsModal = false;
 
         return redirect()->back();
     }
 
     public function postEvents(Request $request)
     {
-        
+        $showEventsModal = false;
 
         return redirect()->back();
     }
