@@ -113,6 +113,10 @@ Route::put('locals/@{username}/girls/create', 'LocalController@postCreateGirls')
 Route::get('locals/@{username}/packages', 'LocalController@getPackages');
 Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');
 
+Route::get('locals/@{username}/news_and_events', 'LocalController@getNewsAndEvents');
+Route::post('locals/@{username}/news/store', 'LocalController@postNews');
+Route::post('locals/@{username}/events/store', 'LocalController@postEvents');
+
 # LOCAL PROFILE CONTROLLER
 Route::get('locals/{username}', 'LocalProfileController@getLocal');
 Route::get('locals', [
