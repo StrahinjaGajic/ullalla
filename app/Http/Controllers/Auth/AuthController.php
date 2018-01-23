@@ -110,24 +110,15 @@ class AuthController extends Controller
 				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
 				$package2ExpiryDate = $package2ExpiryDateCarbonParsed->format('Y-m-d');
 
-				// carbon now formated
-				$carbonNowFormated = Carbon::now()->format('Y-m-d');
-
 				// deactivate packages if it they are expired
-				if ($user->package2_id) {
-					if (Carbon::now() >= $package2ExpiryDate) {
-						$user->is_active_gotm_package = 0;
-						$user->save();
-						if (Carbon::now() < $package1ExpiryDate) {
-							$url = url('@' . $user->username . '/packages');
-							Session::flash('gotm_expired_package_info',
-								__('messages.error_gotm_package_expired', ['url' => $url]));
-						}
+				if ($user->package2_id && $user->is_active_gotm_package == 0) {
+					if ($user->is_active_d_package == 1) {
+						$url = url('@' . $user->username . '/packages');
+						Session::flash('gotm_expired_package_info',
+							__('messages.error_gotm_package_expired', ['url' => $url]));
 					}
 				}
-				if (Carbon::now() >= $package1ExpiryDate) {
-					$user->is_active_d_package = 0;
-					$user->save();
+				if ($user->is_active_d_package == 0) {
 					return redirect()->action('ProfileController@getPackages', ['username' => $user->username])
 					->with('expired_package_info', __('messages.error_default_package_expired'));
 				}
@@ -137,7 +128,6 @@ class AuthController extends Controller
 					event(new PackageExpired($user));
 					Session::flash('defaultGirlPackageExpired', __('messages.default_package_about_to_expire'));
 				}
-				
 				if ($firstDateForGotmPackageExpiryNotification !== null && $package2ExpiryDate < $firstDateForGotmPackageExpiryNotification) {
 					event(new MonthOfTheGirlPackageExpired($user));
 					Session::flash('gotmPackageExpired', __('messages.gotm_package_about_to_expire'));
@@ -227,7 +217,7 @@ class AuthController extends Controller
 				$local->activated = '1';
 				$local->save();
 				redirect()->action('Auth\AuthController@getSignin')->with('success',
-                    __('messages.account_activated'));
+					__('messages.account_activated'));
 
 				return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.account_activated'));
 			}
