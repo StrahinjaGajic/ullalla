@@ -84,7 +84,20 @@ class LocalController extends Controller
             }
             $price = request('package_duration')[$defaultPackage->id] . '_price';
             $totalAmount = (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
+
+            $monthGirlPackageInput = request('ullalla_package_month_girl');
+            if ($monthGirlPackageInput) {
+                $monthGirlPackage = Package::findOrFail($monthGirlPackageInput[0]);
+                $monthGirlActivationDateInput = request('month_girl_package_activation_date')[$monthGirlPackage->id];
+                // format dates with carbon
+                $carbonDate = Carbon::parse($monthGirlActivationDateInput);
+                $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
+                $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
+                $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
+            }
         }
+
+
 
         try {                        
             $user = Auth::guard('local')->user();
@@ -110,6 +123,13 @@ class LocalController extends Controller
                 $user->package1_duration = request('package_duration')[$defaultPackage->id];
                 $user->package1_activation_date = $defaultPackageActivationDate;
                 $user->package1_expiry_date = $defaultPackageExpiryDate;
+
+                if (isset($monthGirlPackage)) {
+                    $user->package2_id = $monthGirlPackage->id;
+                    $user->is_active_gotm_package = 1;
+                    $user->package2_activation_date = $monthGirlActivationDate;
+                    $user->package2_expiry_date = $monthGirlExpiryDate;
+                }
             }
             $user->save();
         } catch (\Exception $e) {
@@ -338,13 +358,21 @@ class LocalController extends Controller
         $packages = LocalPackage::all();
 
         $showDefaultPackages = false;
+        $showGotmPackages = false;
+        $dayFromWhichGotmPackagesShouldBeShown = null;
 
         $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiryLocal($user->package1_duration)[0])->format('Y-m-d');
+        if ($user->package2_id) {
+            $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
+        }
 
         if (Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
             $showDefaultPackages = true;
         }
-        return view('pages.locals.packages', compact('user', 'packages', 'showDefaultPackages'));
+        if (Carbon::now() >= $dayFromWhichGotmPackagesShouldBeShown) {
+            $showGotmPackages = true;
+        }
+        return view('pages.locals.packages', compact('user', 'packages', 'showDefaultPackages', 'showGotmPackages'));
     }
 
     /**
