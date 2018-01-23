@@ -53,6 +53,7 @@ return [
     'default_packages' => 'Basic Packages',
     'gotm_package' => 'Girl of The Month Package',
     'totm_package' => 'Tran of The Month Package',
+    'lotm_package' => 'Local of The Month Package',
     'name' => 'Name',
     'duration' => 'Duration',
     'price' => 'Price',

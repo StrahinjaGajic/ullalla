@@ -15,8 +15,8 @@
 		</div>
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
-		
-			@if($user->is_active_d_package)
+
+			@if($user->is_active_d_package || $user->is_active_gotm_package)
 			<div class="col-xs-12">
 			<h3>{{ __('headings.active_packages') }}</h3>
 			
@@ -29,11 +29,20 @@
 					</tr>
 				</thead>	
 				<tbody>
-					<tr>
-						<td>{{ __('headings.default_package') }}</td>
-						<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
-						<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
-					</tr>
+					@if($user->is_active_d_package)
+						<tr>
+							<td>{{ __('headings.default_package') }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
+						</tr>
+					@endif
+					@if($user->is_active_gotm_package)
+						<tr>
+							<td>{{ __('headings.lotm_package') }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
+						</tr>
+					@endif
 				</tbody>
 			</table>
 		</div>
@@ -45,8 +54,9 @@
 				@endif
 				<div class="packages-errors"></div>
 			</div>
-			@if($showDefaultPackages)
+			@if($showDefaultPackages || $showGotmPackages)
 			{!! Form::model($user, ['url' => 'locals/@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+			@if($showDefaultPackages)
 			<div class="col-xs-12 default-packages-section" id="default-packages-section">
 				<h3>{{ __('headings.default_packages') }}</h3>
 				<div class="has-error">
@@ -95,6 +105,46 @@
 				</table>
 				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			</div>
+			@endif
+
+			@if($showGotmPackages)
+			<div class="col-xs-12">
+				<h3>{{ __('headings.lotm_package') }}</h3>
+				<table class="table packages-table package-girl-month">
+					<thead>
+					<tr>
+						<th>{{ __('headings.name') }}</th>
+						<th>{{ __('headings.duration') }}</th>
+						<th>{{ __('headings.price') }}</th>
+						<th>{{ __('headings.activation_date') }}</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach ($girlPackages->take(3) as $package)
+						<tr>
+							<td>{{ $package->package_name }}</td>
+							<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+							<td>{{ $package->package_price_local }} CHF</td>
+							<td>
+								<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+							</td>
+							<td>
+								<label class="control control--checkbox">
+									<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+									<div class="control__indicator"></div>
+								</label>
+							</td>
+						</tr>
+						<?php $counter++; ?>
+					@endforeach
+					</tbody>
+				</table>
+				<div class="save">
+					<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				</div>
+			</div>
+			@endif
 			<input type="hidden" name="stripeToken" id="stripeToken">
 			<input type="hidden" name="stripeEmail" id="stripeEmail">
 			{!! Form::close() !!}
@@ -133,6 +183,8 @@
 
 
 	// get new start and end year
+	var start = new Date();
+	start.setFullYear(start.getFullYear());
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
 
@@ -140,7 +192,25 @@
 	defaultPackageStartDate = new Date(defaultPackageStartDate[0].date);
 	defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
 
+	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
+
+	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}') : start;
+	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : gotmPackageStartDate;
+	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
+
 	$(function () {
+		$('.package_month_girl_activation').each(function () {
+			$(this).daterangepicker({
+				singleDatePicker: true,
+				timepicker: false,
+				showDropdowns: true,
+				minDate: gotmPackageStartDate,
+				maxDate: end,
+				locale: {
+					format: 'DD-MM-YYYY'
+				},
+			});;
+		});
 		// implement datarange picker on package activation input
 		$('.package_activation').each(function () {
 			$(this).daterangepicker({
@@ -153,6 +223,14 @@
 					format: 'DD-MM-YYYY'
 				},
 			});
+		});
+	});
+</script>
+
+<script>
+	$(function () {
+		$("input.gotm_checkbox:checkbox").on('change', function() {
+			$('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
 		});
 	});
 </script>
