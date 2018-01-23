@@ -333,6 +333,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xs-12">
+                                <h3 id="gotm-totm">{{ __('headings.lotm') }}</h3>
+                                <div style="overflow-x: auto;">
+                                    <table class="table packages-table package-girl-month">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ __('headings.name') }}</th>
+                                            <th>{{ __('headings.duration') }}</th>
+                                            <th>{{ __('headings.price') }}</th>
+                                            <th>{{ __('headings.activation_date') }}</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($girlPackages->take(3) as $package)
+                                            <tr>
+                                                <td>{{ $package->package_name }}</td>
+                                                <td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+                                                <td>{{ $package->package_price_local }} CHF</td>
+                                                <td>
+                                                    <input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+                                                </td>
+                                                <td>
+                                                    <label class="control control--checkbox">
+                                                        <input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <?php $counter++; ?>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </section>
                         <!-- Previous/Next buttons -->
                         <ul class="pager wizard">
@@ -716,6 +751,16 @@
         var maxStrLength20 = '{{ __('validation.max_str_length', ['max' => 20]) }}';
         var maxStrLength30 = '{{ __('validation.max_str_length', ['max' => 30]) }}';
     </script>
+
+
+<script>
+    // my checkbox act like a radio button
+    $(function () {
+        $("input.gotm_checkbox:checkbox").on('change', function() {
+            $('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
+        });
+    });
+</script>
 
     @stop
 

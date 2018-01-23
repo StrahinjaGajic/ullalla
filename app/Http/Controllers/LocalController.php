@@ -9,6 +9,7 @@ use Session;
 use Validator;
 use Carbon\Carbon;
 use App\Models\LocalType;
+use App\Models\Package;
 use App\Models\LocalPackage;
 use Stripe\{Charge, Customer};
 
@@ -35,8 +36,9 @@ class LocalController extends Controller
     {
         $local = Auth::guard('local')->user();
         $packages = LocalPackage::all();
+        $girlPackages = Package::all();
         $types = LocalType::all();
-        return view('pages.locals.create', compact('local', 'types', 'packages'));
+        return view('pages.locals.create', compact('local', 'types', 'packages', 'girlPackages'));
     }
 
     public function postCreate(Request $request)
