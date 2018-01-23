@@ -175,6 +175,7 @@ return [
     'prices' => 'Prices',
     'packages' => 'Packages',
     'banners' => 'Banners',
+    'news_and_events' => 'News/Events',
 
 
     #getLoclasOrderBy

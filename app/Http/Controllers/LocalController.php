@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Session;
 use Validator;
 use Carbon\Carbon;
+use App\Models\News;
+use App\Models\Events;
 use App\Models\LocalType;
 use App\Models\LocalPackage;
+use Illuminate\Http\Request;
 use Stripe\{Charge, Customer};
 
 class LocalController extends Controller
@@ -442,5 +444,27 @@ class LocalController extends Controller
             Auth::guard('local')->logout();
             Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
+    }
+
+    public function getNewsAndEvents()
+    {
+        $news = News::latest()->get();
+        $events = Events::latest()->get();
+
+        return view('pages.locals.news_and_events', compact('news', 'events'));
+    }
+
+    public function postNews(Request $request)
+    {
+        
+
+        return redirect()->back();
+    }
+
+    public function postEvents(Request $request)
+    {
+        
+
+        return redirect()->back();
     }
 }

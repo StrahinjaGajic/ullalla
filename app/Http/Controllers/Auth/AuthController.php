@@ -155,9 +155,7 @@ class AuthController extends Controller
 				$package1ExpiryDateCarbonParsed = Carbon::parse($local->package1_expiry_date);
 				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
 
-				if (Carbon::now() >= $package1ExpiryDate) {
-					$local->is_active_d_package = 0;
-					$local->save();
+				if ($local->is_active_d_package == 0) {
 					return redirect()->action('LocalController@getPackages', ['username' => $local->username])
 					->with('expired_package_info', __('messages.error_default_package_expired'));
 				}

@@ -540,6 +540,7 @@ function getEditLocalProfilePages() {
         'club_info' => __('functions.club_info'),
         'girls' => __('functions.girls'),
         'packages' => __('functions.packages'),
+        'news_and_events' => __('functions.news_and_events'),
     ];
 }
 
