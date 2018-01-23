@@ -634,22 +634,21 @@ class LocalController extends Controller
 
     public function getNewsAndEvents()
     {
-        $news = News::latest()->get();
-        $events = Events::latest()->get();
+        $local = Auth::guard('local')->user();
 
-        return view('pages.locals.news_and_events', compact('news', 'events'));
+        return view('pages.locals.news_events', compact('local', 'news', 'events'));
     }
 
     public function postNews(Request $request)
     {
-        
+        $showNewsModal = false;
 
         return redirect()->back();
     }
 
     public function postEvents(Request $request)
     {
-        
+        $showEventsModal = false;
 
         return redirect()->back();
     }

@@ -74,6 +74,16 @@ class Local extends Authenticatable
         return $this->hasMany('App\Models\LocalGirl');
     }
 
+    public function news()
+    {
+        return $this->hasMany('App\Models\News');
+    }
+
+    public function events()
+    {
+        return $this->hasMany('App\Models\Events');
+    }
+
     public function package()
     {
         return $this->belongsTo('App\Models\LocalPackages');
