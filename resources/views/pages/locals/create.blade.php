@@ -321,7 +321,7 @@
                                                         <td>
                                                             <label class="control control--checkbox">
                                                                 <input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-                                                                <div class="control__indicator"></div>
+                                                                <div class="control__indicator" onclick="{{ ($package->id == 6) ? 'hideLotm()' : 'showLotm()' }}"></div>
                                                             </label>
                                                         </td>
                                                     </tr>
@@ -333,7 +333,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
+                            <div id="lotm" class="col-xs-12">
                                 <h3 id="gotm-totm">{{ __('headings.lotm') }}</h3>
                                 <div style="overflow-x: auto;">
                                     <table class="table packages-table package-girl-month">
@@ -760,6 +760,15 @@
             $('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
         });
     });
+
+
+    function hideLotm() {
+        console.log('aaaaaa');
+        document.getElementById('lotm').style.display = "none";
+    }
+    function showLotm() {
+        document.getElementById('lotm').style.display = "block";
+    }
 </script>
 
     @stop
