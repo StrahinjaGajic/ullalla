@@ -37,10 +37,10 @@
                 <div class="layout-list">
                     <div class="form-group girls_preview">
                         <div class="image-preview-multiple">
-                         <label class="heading_photos">{{ __('headings.photos') }}</label>
-                         <br>
-                         <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                         <script>
+                           <label class="heading_photos">{{ __('headings.photos') }}</label>
+                           <br>
+                           <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                           <script>
                             const widget_{{ $girl->id }} = uploadcare.Widget('[role=uploadcare-uploader_{{ $girl->id }}]')
                             widget_{{ $girl->id }}.value('{{ $girl->photos }}')
                         </script>
@@ -73,28 +73,26 @@
                 <div class="modal-body">
                     {!! Form::open(['url' => 'locals/@' . $local->username . '/girls/create', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
                     <h2>Add Girl</h2>
-                    <section data-step="0">
-                        <div class="col-xs-12">
-                            <div class="form-group modal_form">
-                                <label class="control-label">{{ __('fields.nickname') }}*</label>
-                                <input type="text" class="form-control" name="nickname" />
-                                @if ($errors->has('nickname'))
-                                <span class="help-block">{{ $errors->first('nickname') }}</span>
+                    <div class="col-xs-12">
+                        <div class="form-group modal_form">
+                            <label class="control-label">{{ __('fields.nickname') }}*</label>
+                            <input type="text" class="form-control" name="nickname" />
+                            @if ($errors->has('nickname'))
+                            <span class="help-block">{{ $errors->first('nickname') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <div class="image-preview-multiple">
+                                <input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                                <div class="_list"></div>
+                                @if ($errors->has('newPhotos'))
+                                <span class="help-block">{{ $errors->first('newPhotos') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <div class="image-preview-multiple">
-                                    <input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                                    <div class="_list"></div>
-                                    @if ($errors->has('newPhotos'))
-                                    <span class="help-block">{{ $errors->first('newPhotos') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            
                         </div>
-                    </section>
+                    </div>
                     {!! Form::close() !!}
+                    <button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
                 </div>
             </div>
         </div>
@@ -252,16 +250,16 @@
     </script>
     
     <script>
-       $('.control__indicator').on('click', function () {
+        $('.control__indicator').on('click', function () {
           window.location.href = $(this).closest('label').find('a').attr('href');
       });
   </script>
 
   <script>
-   $(".toggle_arrow").on("click", function() {
-      var that = $(this);
-      that.closest('.shop-layout').find('.layout-list').toggle('fast');
-      that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
-  });
+    $(".toggle_arrow").on("click", function() {
+        var that = $(this);
+        that.closest('.shop-layout').find('.layout-list').toggle('fast');
+        that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+    });
 </script>
 @stop

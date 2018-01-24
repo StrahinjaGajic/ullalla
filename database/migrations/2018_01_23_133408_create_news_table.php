@@ -17,10 +17,11 @@ class CreateNewsTable extends Migration
             $table->increments('id');
             $table->integer('local_id')->unsigned()->nullable();
             $table->string('news_title')->nullable();
-            $table->integer('news_duration')->nullable();
             $table->integer('news_total_amount')->nullable();
             $table->string('news_photo')->nullable();
             $table->text('news_description')->nullable();
+            $table->timestamp('news_activation_date')->nullable();
+            $table->timestamp('news_expiry_date')->nullable();
             $table->timestamps();
 
             $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');

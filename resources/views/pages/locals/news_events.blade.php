@@ -18,7 +18,11 @@
 				<button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
 				<button id="showModal2" type="submit" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
 			</div>
-			
+			<div class="col-xs-12">
+				@if(Session::has('success'))
+				<div class="alert alert-success">{{ Session::get('success') }}</div>
+				@endif
+			</div>
 			@if($local->news()->count() > 0)
 			<div class="shop-layout headerDropdown">
 				<div class="layout-title">
@@ -31,17 +35,15 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>{{ __('fields.date') }}</th>
 									<th>{{ __('fields.photo') }}</th>
 									<th>{{ __('fields.title') }}</th>
-									<th>{{ __('fields.duration') }}</th>
+									<th>{{ __('headings.activation_date') }}</th>
 									<th>{{ __('headings.expiry_date') }}</th>
 								</tr>
 							</thead>
 							<tbody id="prices_body">
 								@foreach($local->news as $news)
 								<tr>
-									<td>{{ date('d-m-Y', strtotime($news->date)) }}</td>
 									<td>
 										@if ($news->news_photo)
 										<div class="image-tooltip">
@@ -53,8 +55,8 @@
 										@endif
 									</td>
 									<td>{{ $news->news_title }}</td>
-									<td>{{ $news->news_duration }}</td>
-									<td>{{ $news->news_duration }}</td>
+									<td>{{ date('d-m-Y', strtotime($news->news_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($news->news_expiry_date)) }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -80,14 +82,14 @@
 									<th>{{ __('fields.photo') }}</th>
 									<th>{{ __('fields.title') }}</th>
 									<th>{{ __('fields.venue') }}</th>
-									<th>{{ __('fields.duration') }}</th>
+									<th>{{ __('headings.activation_date') }}</th>
 									<th>{{ __('headings.expiry_date') }}</th>
 								</tr>
 							</thead>
 							<tbody id="prices_body">
 								@foreach($local->events as $event)
 								<tr>
-									<td>{{ date('d-m-Y', strtotime($event->date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($event->events_date)) }}</td>
 									<td>
 										@if ($event->events_photo)
 										<div class="image-tooltip">
@@ -100,8 +102,8 @@
 									</td>
 									<td>{{ $event->events_title }}</td>
 									<td>{{ $event->events_venue }}</td>
-									<td>{{ $event->events_duration }}</td>
-									<td>{{ $event->events_duration }}</td>
+									<td>{{ date('d-m-Y', strtotime($event->events_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($event->events_expiry_date)) }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -120,7 +122,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					{!! Form::open(['url' => 'locals/@' . $local->username . '/news/store', 'class' => 'form-horizontal wizard']) !!}
+					{!! Form::open(['url' => 'locals/@' . $local->username . '/news/store', 'class' => 'form-horizontal wizard', 'id' => 'newsForm']) !!}
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
@@ -136,13 +138,16 @@
 								<span class="help-block">{{ $errors->first('news_title') }}</span>
 								@endif
 							</div>
-							<div class="form-group {{ $errors->has('news_duration') ? 'has-error' : '' }}">
-								<label class="control-label">{{ __('fields.duration') }}*</label>
-								<input type="text" class="form-control" name="news_duration" value="{{ old('news_duration') }}"/>
-								@if ($errors->has('news_duration'))
-								<span class="help-block">{{ $errors->first('news_duration') }}</span>
-								@endif
-							</div>
+						</div>
+						<div class="form-group {{ $errors->has('news_duration') ? 'has-error' : '' }}">
+							<label class="control-label">{{ __('fields.duration') }}*</label>
+							<input type="text" class="form-control events_duration" name="news_duration" value="{{ old('news_duration') }}"/>
+							<input type="hidden" name="duration"/>
+							@if ($errors->has('news_duration'))
+							<span class="help-block">{{ $errors->first('news_duration') }}</span>
+							@endif
+						</div>
+						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('news_description') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.description') }}*</label>
 								<textarea name="news_description" cols="30" rows="10">{{ old('news_description') }}</textarea>
@@ -150,6 +155,16 @@
 								<span class="help-block">{{ $errors->first('news_description') }}</span>
 								@endif
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">{{ __('fields.price_per_day') }}</label>
+							<input type="text" disabled="" class="form-control events_price" value="{{ number_format(getEventPrice(true), 2) }}">
+							<span class="currency-holder">CHF</span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">{{ __('fields.total') }}</label>
+							<input type="text" disabled="" class="form-control events_total" value="{{ number_format(getEventPrice(), 2) }}">
+							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group {{ $errors->has('news_photo') ? 'has-error' : '' }}">
 							<div class="image-preview-multiple">
@@ -161,6 +176,8 @@
 						</div>
 						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
 					</div>
+					<input type="hidden" name="stripeTokenNews" id="stripeTokenNews">
+					<input type="hidden" name="stripeEmailNews" id="stripeEmailNews">
 					{!! Form::close() !!}
 				</div>
 			</div>
@@ -171,7 +188,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					{!! Form::open(['url' => 'locals/@' . $local->username . '/events/store', 'class' => 'form-horizontal wizard']) !!}
+					{!! Form::open(['url' => 'locals/@' . $local->username . '/events/store', 'class' => 'form-horizontal wizard', 'id' => 'eventForm']) !!}
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
@@ -201,13 +218,16 @@
 								<span class="help-block">{{ $errors->first('events_date') }}</span>
 								@endif
 							</div>
-							<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
-								<label class="control-label">{{ __('fields.duration') }}*</label>
-								<input type="text" class="form-control" name="events_duration" value="{{ old('events_duration') }}"/>
-								@if ($errors->has('events_duration'))
-								<span class="help-block">{{ $errors->first('events_duration') }}</span>
-								@endif
-							</div>
+						</div>
+						<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
+							<label class="control-label">{{ __('fields.duration') }}*</label>
+							<input type="text" class="form-control events_duration" name="events_duration" value=""/>
+							<input type="hidden" name="duration"/>
+							@if ($errors->has('events_duration'))
+							<span class="help-block">{{ $errors->first('events_duration') }}</span>
+							@endif
+						</div>
+						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('events_description') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.description') }}*</label>
 								<textarea name="events_description" cols="30" rows="10">{{ old('events_description') }}</textarea>
@@ -215,6 +235,16 @@
 								<span class="help-block">{{ $errors->first('events_description') }}</span>
 								@endif
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">{{ __('fields.price_per_day') }}</label>
+							<input type="text" disabled="" class="form-control events_price" value="{{ number_format(getEventPrice(true), 2) }}">
+							<span class="currency-holder">CHF</span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">{{ __('fields.total') }}</label>
+							<input type="text" disabled="" class="form-control events_total" value="{{ number_format(getEventPrice(), 2) }}">
+							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group {{ $errors->has('events_photo') ? 'has-error' : '' }}">
 							<div class="image-preview-multiple">
@@ -226,6 +256,8 @@
 						</div>
 						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
 					</div>
+					<input type="hidden" name="stripeTokenEvent" id="stripeTokenEvent">
+					<input type="hidden" name="stripeEmailEvent" id="stripeEmailEvent">
 					{!! Form::close() !!}
 				</div>
 			</div>
@@ -238,6 +270,7 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
 
 @if(Session::has('showNewsModal'))
 <script>
@@ -261,13 +294,12 @@
     });
 
     $(function () {
-    	var start = new Date();
-    	start.setFullYear(start.getFullYear());
-    	var end = new Date();
-    	end.setFullYear(end.getFullYear() + 1);
+    	var start = moment(new Date()).format('DD/MM/YYYY H:mm');
+    	var end = moment(start, 'DD/MM/YYYY H:mm').add('1', 'years').format('DD/MM/YYYY H:mm');
 
     	$('input[name="events_duration"]').daterangepicker({
     		minDate: start,
+    		maxDate: end,
     		locale: {
     			format: 'DD/MM/YYYY'
     		}
@@ -278,6 +310,7 @@
     		timePicker24Hour: true,
     		timePickerIncrement: 15,
     		minDate: start,
+    		maxDate: end,
     		locale: {
     			format: 'DD/MM/YYYY H:mm'
     		}
@@ -285,6 +318,7 @@
 
     	$('input[name="news_duration"]').daterangepicker({
     		minDate: start,
+    		maxDate: end,
     		locale: {
     			format: 'DD/MM/YYYY'
     		}
@@ -321,22 +355,6 @@
     });
 
 </script>
-<script type="text/javascript">
-	var requiredField = '{{ __('validation.required_field') }}';
-	var alphaNumeric = '{{ __('validation.alpha_numerical') }}';
-	var olderThan = '{{ __('validation.older_than_18') }}';
-	var stringLength = '{{ __('validation.string_length') }}';
-	var numericError = '{{ __('validation.numeric_error') }}';
-	var invalidUrl = '{{ __('validation.url_invalid') }}';
-	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
-	var maxFiles = '{{ __('validation.max_files') }}';
-</script>
-
-<script>
-	$('.control__indicator').on('click', function () {
-		window.location.href = $(this).closest('label').find('a').attr('href');
-	});
-</script>
 
 <script>
 	$(".toggle_arrow").on("click", function() {
@@ -359,8 +377,148 @@
 </script>
 
 <script>
+	var eventPricePerDay = parseFloat('{{ getEventPrice(true) }}');
+	var eventPrice = parseFloat('{{ getEventPrice() }}');
+
 	$('.prepared_flyer').on('click', function () {
-		$(this).closest('.modal-body').find('.flyerless-fields').toggle();
+		var modalBody = $(this).closest('.modal-body');
+		var flyerlessDiv = modalBody.find('.flyerless-fields');
+		var totalEl = modalBody.find('.events_total');
+
+		flyerlessDiv.toggle();
+
+		var diffInDays = parseFloat(modalBody.find('input[name="duration"]').val());
+
+		if (flyerlessDiv.is(':hidden')) {
+			var flyerlessEventPrice = parseFloat('{{ getEventPrice(false, false) }}');
+
+			if (diffInDays > 0) {
+				var totalWithFlyer = flyerlessEventPrice + (eventPricePerDay * diffInDays);
+				totalEl.val(totalWithFlyer.toFixed(2));
+			} else {
+				totalEl.val(flyerlessEventPrice.toFixed(2));
+			}
+
+		} else {
+			var eventPrice = parseFloat('{{ getEventPrice(false, true) }}');
+
+			if (diffInDays > 0) {
+				var totalWithoutFlyer = eventPrice + (eventPricePerDay * diffInDays);
+				totalEl.val(totalWithoutFlyer.toFixed(2));
+			} else {
+				totalEl.val(eventPrice.toFixed(2));
+			}
+		}
+	});
+
+	$('.events_duration').on('change', function () {
+		var that = $(this);
+		var thatVal = that.val();
+		var modalBody = that.closest('.modal-body');
+		var totalEl = modalBody.find('.events_total');
+		var flyerlessDiv = modalBody.find('.flyerless-fields');
+
+		var exploadedThatVal = thatVal.split(' - ');
+		var from = moment(exploadedThatVal[0], 'DD/MM/YYYY');
+		var to = moment(exploadedThatVal[1], 'DD/MM/YYYY');
+		var diffInDays = to.diff(from, 'days');
+
+		var total = eventPrice + (eventPricePerDay * diffInDays);
+		totalEl.val(total.toFixed(2));
+		that.next().val(diffInDays);
+
+		if (!modalBody.is(':hidden')) {
+			if (flyerlessDiv.is(':hidden')) {
+				var flyerlessEventPrice = parseFloat('{{ getEventPrice(false, false) }}');
+				if (diffInDays > 0) {
+					var totalWithFlyer = flyerlessEventPrice + (eventPricePerDay * diffInDays);
+					totalEl.val(totalWithFlyer.toFixed(2));
+				} else {
+					totalEl.val(flyerlessEventPrice.toFixed(2));
+				}
+			} else {
+				var eventPrice = parseFloat('{{ getEventPrice(false, true) }}');
+				if (diffInDays > 0) {
+					var totalWithoutFlyer = eventPrice + (eventPricePerDay * diffInDays);
+					totalEl.val(totalWithoutFlyer.toFixed(2));
+				} else {
+					totalEl.val(eventPrice.toFixed(2));
+				}
+			}
+		} else {
+			totalEl.val(parseFloat('{{ getEventPrice(false, true) }}').toFixed(2));
+		}
+	});
+</script>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+	let stripeNews = StripeCheckout.configure({
+		key: '{{ config('services.stripe.key') }}',
+		image: '{{ asset('img/logo.png') }}',
+		locale: 'auto',
+		token: function (token) {
+			var stripeEmail = $('#stripeEmailNews');
+			var stripeToken = $('#stripeTokenNews');
+			stripeEmail.val(token.email);
+			stripeToken.val(token.id);
+			// submit the form
+			var username = '{{ $local->username }}';
+			var url = getUrl('/locals/@' + username + '/news/store');
+			var form = $('#newsForm');
+			var token = form.find('input[name="_token"]').val();
+			var data = form.serialize();
+			// fire ajax post request
+			$.post(url, data)
+			.done(function (data) {
+				window.location.href = getUrl('locals/@' + username + '/news_and_events');
+			})
+			.fail(function(data, textStatus) {
+				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+			});
+		}
+	});
+	$('#newsForm').on('submit', function (e) {
+		stripeNews.open({
+			name: 'Ullallà',
+			description: '{{ $local->email }}',
+		});
+		e.preventDefault();	
+	});
+</script>
+
+<script>
+	let stripeEvent = StripeCheckout.configure({
+		key: '{{ config('services.stripe.key') }}',
+		image: '{{ asset('img/logo.png') }}',
+		locale: 'auto',
+		token: function (token) {
+			var stripeEmail = $('#stripeEmailEvent');
+			var stripeToken = $('#stripeTokenEvent');
+			stripeEmail.val(token.email);
+			stripeToken.val(token.id);
+			// submit the form
+			var username = '{{ $local->username }}';
+			var url = getUrl('/locals/@' + username + '/events/store');
+			var form = $('#eventForm');
+			var token = form.find('input[name="_token"]').val();
+			var data = form.serialize();
+			// fire ajax post request
+			$.post(url, data)
+			.done(function (data) {
+				window.location.href = getUrl('locals/@' + username + '/news_and_events');
+			})
+			.fail(function(data, textStatus) {
+				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+			});
+		}
+	});
+	$('#eventForm').on('submit', function (e) {
+		stripeEvent.open({
+			name: 'Ullallà',
+			description: '{{ $local->email }}',
+		});
+		e.preventDefault();	
 	});
 </script>
 @stop
