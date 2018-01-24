@@ -47,4 +47,8 @@ return [
 
     #blackbook
     'success_blackbook_entry' => 'A new black book entry was successfully made',
+
+    #news/events
+    'event_added' => 'You have successfully added an event',
+    'news_added' => 'You have successfully made a news entry',
 ];

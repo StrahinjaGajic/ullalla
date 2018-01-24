@@ -18,11 +18,12 @@ class CreateEventsTable extends Migration
             $table->integer('local_id')->unsigned()->nullable();
             $table->string('events_title')->nullable();
             $table->string('events_venue')->nullable();
-            $table->integer('events_duration')->nullable();
             $table->integer('events_total_amount')->nullable();
             $table->string('events_photo')->nullable();
             $table->text('events_description')->nullable();
             $table->timestamp('events_date')->nullable();
+            $table->timestamp('events_activation_date')->nullable();
+            $table->timestamp('events_expiry_date')->nullable();
             $table->timestamps();
 
             $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');

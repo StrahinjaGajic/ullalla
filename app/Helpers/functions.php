@@ -637,8 +637,14 @@ function getNavUris() {
     return ['/', 'signin', 'signup'];
 }
 
-function getBeforeCharacter($needle, $haystack) {
-    return substr($haystack, 0, strpos($haystack, $needle));
-};
+// news and events
+function getEventPrice($perDay = false, $flyerless = true)
+{
+    if ($perDay === true) {
+        return 1;
+    } else {
+        return $flyerless === true ? 10 : 5;
+    }
+}
 
 ?>
