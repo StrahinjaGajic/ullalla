@@ -15,8 +15,12 @@
 		</div>
 		<div class="col-sm-10 profile-info">
 			<div class="btn-wrapper">
+				@if($local->news()->count() < 3)
 				<button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
+				@endif
+				@if($local->events()->count() < 3)
 				<button id="showModal2" type="submit" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
+				@endif
 			</div>
 			<div class="col-xs-12">
 				@if(Session::has('success'))
@@ -134,26 +138,20 @@
 							<div class="form-group {{ $errors->has('news_title') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.title') }}*</label>
 								<input type="text" class="form-control" name="news_title" value="{{ old('news_title') }}" />
-								@if ($errors->has('news_title'))
-								<span class="help-block">{{ $errors->first('news_title') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('news_title') ? $errors->first('news_title') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group {{ $errors->has('news_duration') ? 'has-error' : '' }}">
 							<label class="control-label">{{ __('fields.duration') }}*</label>
 							<input type="text" class="form-control events_duration" name="news_duration" value="{{ old('news_duration') }}"/>
 							<input type="hidden" name="duration"/>
-							@if ($errors->has('news_duration'))
-							<span class="help-block">{{ $errors->first('news_duration') }}</span>
-							@endif
+							<span class="help-block">{{ $errors->has('news_duration') ? $errors->first('news_duration') : '' }}</span>
 						</div>
 						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('news_description') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.description') }}*</label>
 								<textarea name="news_description" cols="30" rows="10">{{ old('news_description') }}</textarea>
-								@if ($errors->has('news_description'))
-								<span class="help-block">{{ $errors->first('news_description') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('news_description') ? $errors->first('news_description') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -169,9 +167,7 @@
 						<div class="form-group {{ $errors->has('news_photo') ? 'has-error' : '' }}">
 							<div class="image-preview-multiple">
 								<input type="hidden" name="news_photo" data-crop="490x560 minimum" data-images-only="">
-								@if ($errors->has('news_photo'))
-								<span class="help-block">{{ $errors->first('news_photo') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('news_photo') ? $errors->first('news_photo') : '' }}</span>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
@@ -200,40 +196,30 @@
 							<div class="form-group {{ $errors->has('events_title') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.title') }}*</label>
 								<input type="text" class="form-control" name="events_title" value="{{ old('events_title') }}" />
-								@if ($errors->has('events_title'))
-								<span class="help-block">{{ $errors->first('events_title') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('events_title') ? $errors->first('events_title') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_venue') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.venue') }}*</label>
 								<input type="text" class="form-control" name="events_venue" value="{{ old('events_venue') }}"/>
-								@if ($errors->has('events_venue'))
-								<span class="help-block">{{ $errors->first('events_venue') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('events_venue') ? $errors->first('events_venue') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_date') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.date') }}*</label>
 								<input type="text" class="form-control" name="events_date" value="{{ old('events_date') }}"/>
-								@if ($errors->has('events_date'))
-								<span class="help-block">{{ $errors->first('events_date') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('events_date') ? $errors->first('events_date') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
 							<label class="control-label">{{ __('fields.duration') }}*</label>
 							<input type="text" class="form-control events_duration" name="events_duration" value=""/>
 							<input type="hidden" name="duration"/>
-							@if ($errors->has('events_duration'))
-							<span class="help-block">{{ $errors->first('events_duration') }}</span>
-							@endif
+							<span class="help-block">{{ $errors->has('events_duration') ? $errors->first('events_duration') : '' }}</span>
 						</div>
 						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('events_description') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.description') }}*</label>
 								<textarea name="events_description" cols="30" rows="10">{{ old('events_description') }}</textarea>
-								@if ($errors->has('events_description'))
-								<span class="help-block">{{ $errors->first('events_description') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('events_description') ? $errors->first('events_description') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -249,9 +235,7 @@
 						<div class="form-group {{ $errors->has('events_photo') ? 'has-error' : '' }}">
 							<div class="image-preview-multiple">
 								<input type="hidden" name="events_photo" data-crop="490x560 minimum" data-images-only="">
-								@if ($errors->has('events_photo'))
-								<span class="help-block">{{ $errors->first('events_photo') }}</span>
-								@endif
+								<span class="help-block">{{ $errors->has('events_photo') ? $errors->first('events_photo') : '' }}</span>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
@@ -471,7 +455,18 @@
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
-				window.location.href = getUrl('locals/@' + username + '/news_and_events');
+				var errors = data.errors;
+				$('.form-group').removeClass('has-error');
+				$('.help-block').text('');
+				if (errors) {
+					$.each(errors, function (index, value) {
+						var errorField = $('[name="' + index + '"]');
+						errorField.siblings('.help-block').text(value);
+						errorField.closest('.form-group').addClass('has-error');
+					});
+				} else {
+					window.location.href = getUrl('/locals/@' + username + '/news_and_events');
+				}
 			})
 			.fail(function(data, textStatus) {
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
@@ -506,7 +501,18 @@
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
-				window.location.href = getUrl('locals/@' + username + '/news_and_events');
+				var errors = data.errors;
+				$('.form-group').removeClass('has-error');
+				$('.help-block').text('');
+				if (errors) {
+					$.each(errors, function (index, value) {
+						var errorField = $('[name="' + index + '"]');
+						errorField.siblings('.help-block').text(value);
+						errorField.closest('.form-group').addClass('has-error');
+					});
+				} else {
+					window.location.href = getUrl('/locals/@' + username + '/news_and_events');
+				}
 			})
 			.fail(function(data, textStatus) {
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);

@@ -647,6 +647,10 @@ class LocalController extends Controller
     {
         $user = Auth::guard('local')->user();
 
+        if ($user->news()->count() >= 3) {
+            return redirect()->back();
+        }
+
         if ($request->news_flyer == 'on') {
             $validator = Validator::make($request->all(), [
                 'news_photo' => 'required',
@@ -702,13 +706,19 @@ class LocalController extends Controller
 
         } else {
             Session::flash('showNewsModal', true);
-            return redirect()->back()->withErrors($validator->getMessageBag());
+            return response()->json([
+                'errors' => $validator->getMessageBag()
+            ]);
         }
     }
 
     public function postEvents(Request $request)
     {
         $user = Auth::guard('local')->user();
+
+        if ($user->events()->count() >= 3) {
+            return redirect()->back();
+        }
 
         if ($request->events_flyer == 'on') {
             $validator = Validator::make($request->all(), [
@@ -768,8 +778,9 @@ class LocalController extends Controller
             Session::flash('success', __('messages.event_added'));
 
         } else {
-            Session::flash('showEventsModal', true);
-            return redirect()->back()->withErrors($validator->getMessageBag());
+            return response()->json([
+                'errors' => $validator->getMessageBag()
+            ]);
         }
     }
 }
