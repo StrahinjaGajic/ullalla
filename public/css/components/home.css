@@ -409,7 +409,7 @@ and (orientation : landscape) {
     margin-right: 0px;
 }
     
-    #city {
+    input#city {
         width: 235px!important;
     }
 }
@@ -420,14 +420,14 @@ and (orientation : landscape) {
 
 @media (max-height:375px) and (max-width:812px) {
     .home-4 .fas8-slider-content {
-        margin-top: 0px;
+        margin-top: 0px!important;
     }
     
     .home-4 .fas7-slider-content {
-        margin-top: 0px;
+        margin-top: 0px!important;
     }
     
- 
+    }
 
 
 @media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 

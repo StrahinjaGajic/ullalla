@@ -77,14 +77,20 @@ and (orientation : portrait) {
 
     .home-4 .fas7-slider-content {
         padding-top: 6px!important;
+        margin-top: 0px!important;
     }
 
     .home-4 .fas8-slider-content {
         padding-top: 6px!important;
+        margin-top: 0px!important;
     }
     
     .fixed {
         height: 115px!important;
+    }
+    
+    #city {
+        width: 235px!important;
     }
 }
 
@@ -109,6 +115,59 @@ and (orientation : landscape) {
     .fixed {
         height: 89px!important;
     }
+
+}
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+      .containere1 {
+        margin-left: 45px!important;
+        margin-right: 41px!important;
+    }
+      
+      .button4 {
+          width: 290px;
+      }
+      
+     
+      
+      .fixed {
+          text-align: center;
+          padding-top: 25px;
+      }
+      
+      .mainmenu.home-4 {
+        text-align: center;
+    }
+      
+      .home-4 .fas7-slider-content {
+          padding-top: 40px!important;
+      }
+      
+      .home-4 .fas8-slider-content {
+          padding-top: 40px!important;
+          margin-right: 300px!important;
+      }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
 
 }
 

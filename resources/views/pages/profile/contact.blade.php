@@ -63,17 +63,26 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
+                       
                         <label class="control-label" style="display: block; text-align: left;">{{ __('headings.available_apps') }}</label>
+                        
                         @foreach($contactOptions as $contactOption)
+                        
                         <label class="control control--checkbox" style="margin-right: 20px;"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
+                           <img src="{{ asset('img/' . $contactOption->contact_option_name . '.png') }}" alt="">
                             <input 
                             type="checkbox" 
                             name="contact_options[{{ $contactOption->id }}]" 
                             value="{{ $contactOption->id }}" 
                             id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}" 
                             {{ $user->contact_options()->where('contact_option_id', $contactOption->id)->value('contact_option_id') ? 'checked' : '' }}>
-                            <div class="control__indicator"></div>
+                            
+                            <div class="control__indicator">
+                                
+                            </div>
+                            
                         </label>
+                        
                         @endforeach
                     </div>
                 </div>
