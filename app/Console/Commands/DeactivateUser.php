@@ -11,6 +11,7 @@ use Illuminate\Console\Command;
 use App\Mail\DefaultPackageExpiredMail;
 use App\Mail\GirlOfTheMonthPackageExpiredMail;
 use App\Mail\LocalDefaultPackageExpiredMail;
+use App\Mail\LocalOfTheMonthPackageExpiredMail;
 
 class DeactivateUser extends Command
 {
@@ -148,7 +149,7 @@ class DeactivateUser extends Command
                     if ($user->sms_notifications == 1) {
                         sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
                     } else {
-                        Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
+                        Mail::to($user->email)->send(new LocalOfTheMonthPackageExpiredMail($user, $aboutToExpire));
                     }
                 }
             }

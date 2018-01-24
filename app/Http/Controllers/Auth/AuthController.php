@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\DefaultPackageExpiredMail;
 use App\Events\LocalDefaultPackageExpired;
 use App\Events\MonthOfTheGirlPackageExpired;
+use App\Events\MonthOfTheLocalPackageExpired;
 use App\Mail\GirlOfTheMonthPackageExpiredMail;
 
 class AuthController extends Controller
@@ -153,22 +154,40 @@ class AuthController extends Controller
 
 				// get expiry dates from db
 				$package1ExpiryDateCarbonParsed = Carbon::parse($local->package1_expiry_date);
+				$package2ExpiryDateCarbonParsed = Carbon::parse($local->package2_expiry_date);
 				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
+				$package2ExpiryDate = $package2ExpiryDateCarbonParsed->format('Y-m-d');
 
 				if ($local->is_active_d_package == 0) {
 					return redirect()->action('LocalController@getPackages', ['username' => $local->username])
 					->with('expired_package_info', __('messages.error_default_package_expired'));
 				}
 
+				// deactivate packages if it they are expired
+				if ($local->package2_id && $local->is_active_gotm_package == 0) {
+					if ($local->is_active_d_package == 1) {
+						$url = url('locals/@' . $local->username . '/packages');
+						Session::flash('lotm_expired_package_info',
+							__('messages.error_lotm_package_expired', ['url' => $url]));
+					}
+				}
 				$daysForExpiryDefaultPackage = getDaysForExpiryLocal($local->package1_duration);
-
-				// get expiry date days before expiration
 				$firstDateForDefaultPackageExpiryNotification = getPackageExpiryDate($daysForExpiryDefaultPackage[0]);
 
 				// package expiry notifications
 				if ($package1ExpiryDate < $firstDateForDefaultPackageExpiryNotification) {
 					event(new LocalDefaultPackageExpired($local));
 					Session::flash('localDefaultPackageExpired', __('messages.default_package_about_to_expire'));
+				}
+
+				if ($local->package2_id) {
+					$daysForExpiryGotmPackage = getDaysForExpiry($local->package2_id);
+					$firstDateForGotmPackageExpiryNotification = getPackageExpiryDate($daysForExpiryGotmPackage[0]);
+
+					if ($firstDateForGotmPackageExpiryNotification !== null && $package2ExpiryDate < $firstDateForGotmPackageExpiryNotification) {
+						event(new MonthOfTheLocalPackageExpired($local));
+						Session::flash('lotmPackageExpired', __('messages.gotm_package_about_to_expire'));
+					}
 				}
 
 				return redirect('/');
