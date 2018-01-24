@@ -704,7 +704,6 @@ class LocalController extends Controller
             Session::flash('showNewsModal', true);
             return redirect()->back()->withErrors($validator->getMessageBag());
         }
-
     }
 
     public function postEvents(Request $request)
