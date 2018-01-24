@@ -4,14 +4,15 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/blackbook.css') }}">
 @stop
 
 @section('content')
 <div class="container theme-cactus">
     <div class="row">
-        <div class="col-sm-10 profile-info">
+        <div class="col-sm-12 profile-info blackbook-profile-info">
             <div class="col-sm-12">
-                <h2>{{ __('headings.blackbook') }}</h2>
+                <h3>{{ __('headings.blackbook') }}</h3>
                 <div class="action-header no-print">
                     <button class="btn btn-default" data-toggle="modal" data-target="#blackbook_modal">{{ __('buttons.entry') }}</button>
                 </div>
@@ -61,41 +62,41 @@
         <div id="blackbook_modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content blackbook_modal">
+                    <div class="modal-header blackbook_modal_header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Make a blackbook entry</h4>
                     </div>
                     <div class="modal-body">
                         {!! Form::open(['url' => 'private/blackbook/store', 'class' => 'form-horizontal']) !!}
                         <div class="col-sm-6">
-                            <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
-                                <label class="control-label">{{ __('fields.date') }}:</label>
-                                <input type="text" class="form-control" name="date" id="datepicker">
+                            <div class="form-group mar-right {{ $errors->has('date') ? 'has-error' : '' }}">
+                                <label class="control-label">{{ __('fields.date') }}</label>
+                                <input type="text" class="form-control blackbook_input" name="date" id="datepicker">
                                 @if ($errors->has('date'))
                                 <span class="help-block">{{ $errors->first('date') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label">City:</label>
-                                <input type="text" class="form-control" name="city">
+                            <div class="form-group mar-left">
+                                <label class="control-label">City</label>
+                                <input type="text" class="form-control blackbook_input" name="city">
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group" {{ $errors->has('client_name') ? 'has-error' : '' }}>
-                                <label class="control-label">{{ __('fields.client_name') }}:</label>
-                                <input type="text" class="form-control" name="client_name">
+                            <div class="form-group mar-right {{ $errors->has('client_name') ? 'has-error' : '' }}">
+                                <label class="control-label">{{ __('fields.client_name') }}*</label>
+                                <input type="text" class="form-control blackbook_input" name="client_name">
                                 @if ($errors->has('client_name'))
                                 <span class="help-block">{{ $errors->first('client_name') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group {{ $errors->has('client_phone') ? 'has-error' : '' }}">
-                                <label class="control-label">{{ __('fields.client_phone') }}:</label>
-                                <input type="text" class="form-control" name="client_phone">
+                            <div class="form-group mar-left {{ $errors->has('client_phone') ? 'has-error' : '' }}">
+                                <label class="control-label">{{ __('fields.client_phone') }}*</label>
+                                <input type="text" class="form-control blackbook_input" name="client_phone">
                                 @if ($errors->has('client_phone'))
                                 <span class="help-block">{{ $errors->first('client_phone') }}</span>
                                 @endif
@@ -103,8 +104,8 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                <label class="control-label">{{ __('fields.description') }}:</label>
-                                <textarea name="description""></textarea>
+                                <label class="control-label">{{ __('fields.description') }}*</label>
+                                <textarea class="blackbook_textarea" name="description""></textarea>
                                 @if ($errors->has('description'))
                                 <span class="help-block">{{ $errors->first('description') }}</span>
                                 @endif
@@ -123,8 +124,8 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('buttons.close') }}</button>
+                    <div class="modal-footer blackbook_modal_footer">
+                        <button type="button" class="btn btn-default blackbook_close" data-dismiss="modal">{{ __('buttons.close') }}</button>
                     </div>
                 </div>
             </div>

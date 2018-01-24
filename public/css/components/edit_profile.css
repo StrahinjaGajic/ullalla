@@ -911,12 +911,6 @@ input:focus {
     background: #7b7b7b;
 }
 
-.select {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 15px;
-    width: 100%;
-}
 
 .select select {
     display: inline-block;
@@ -1118,6 +1112,10 @@ h3 {
     color: #4a6e78 !important;
     margin-top: 20px;
     width: 75%;
+}
+
+.blackbook-profile-info {
+    width: 100%;
 }
 
 

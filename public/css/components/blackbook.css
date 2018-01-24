@@ -1,0 +1,79 @@
+.image-tooltip {
+    display: inline;
+}
+
+.img-responsive {
+    display: unset;
+}
+
+.blackbook_modal {
+    background: #222;
+}
+
+.blackbook_input {
+    color: white;
+    background: 0 0;
+    border: 1px solid #eee!important;
+    border-radius: 5px!important;
+    padding-left: 10px;
+}
+
+
+.blackbook_input[type="text"], [type="password"], [type="email"] {
+    color: white;
+}
+
+.mar-right {
+    margin-right: 0px!important;
+}
+
+.mar-left {
+    margin-left: 0px!important;
+}
+
+.blackbook_textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    background: 0 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.pull-right {
+    margin-top: 0px!important;
+    background: 0 0!important;
+}
+
+.select {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.blackbook_modal_header {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 30px 0;
+}
+
+.blackbook_close {
+    margin-top: 15px!important;
+    background: 0 0!important;
+}
+
+.blackbook_modal_footer {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 15px 0;
+}
+
+.help-block {
+    text-align: unset;
+    color: #ed6c63 !important;
+    margin-left: 10px!important;
+}

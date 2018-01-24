@@ -20,7 +20,6 @@
             @endif
             {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/girls/store', 'method' => 'put']) !!}
             @foreach($local->girls as $girl)
-
 {{--             <div class="col-3 input-effect {{ $errors->has('nickname') ? 'has-error' : ''  }}">
                 <input class="effect-16" type="text" placeholder="" name="nickname_{{ $girl->id }}" value="{{ $girl->nickname }}">
                 <label>{{ __('fields.nickname') }}</label>
@@ -29,7 +28,6 @@
                 <span class="help-block">{{ $errors->first('nickname_'. $girl->id ) }}</span>
                 @endif
             </div> --}}
-
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow">
@@ -39,10 +37,10 @@
                 <div class="layout-list">
                     <div class="form-group girls_preview">
                         <div class="image-preview-multiple">
-                           <label class="heading_photos">{{ __('headings.photos') }}</label>
-                           <br>
-                           <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                           <script>
+                         <label class="heading_photos">{{ __('headings.photos') }}</label>
+                         <br>
+                         <input type="hidden" role="uploadcare-uploader_{{ $girl->id }}" name="photos_{{ $girl->id }}" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                         <script>
                             const widget_{{ $girl->id }} = uploadcare.Widget('[role=uploadcare-uploader_{{ $girl->id }}]')
                             widget_{{ $girl->id }}.value('{{ $girl->photos }}')
                         </script>
@@ -88,11 +86,12 @@
                                 <div class="image-preview-multiple">
                                     <input type="hidden" role="uploadcare-uploader" name="newPhotos" data-multiple-min="4" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
+                                    @if ($errors->has('newPhotos'))
+                                    <span class="help-block">{{ $errors->first('newPhotos') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                            @if ($errors->has('newPhotos'))
-                            <span class="help-block">{{ $errors->first('newPhotos') }}</span>
-                            @endif
+                            
                         </div>
                     </section>
                     {!! Form::close() !!}
@@ -110,9 +109,7 @@
 @endif
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('js/girlValidation.js') }}"></script>
-<script src="{{ asset('js/billing.js') }}"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -255,16 +252,16 @@
     </script>
     
     <script>
-     $('.control__indicator').on('click', function () {
-      window.location.href = $(this).closest('label').find('a').attr('href');
-  });
-</script>
+       $('.control__indicator').on('click', function () {
+          window.location.href = $(this).closest('label').find('a').attr('href');
+      });
+  </script>
 
-<script>
- $(".toggle_arrow").on("click", function() {
-  var that = $(this);
-  that.closest('.shop-layout').find('.layout-list').toggle('fast');
-  that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
-});
+  <script>
+   $(".toggle_arrow").on("click", function() {
+      var that = $(this);
+      that.closest('.shop-layout').find('.layout-list').toggle('fast');
+      that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+  });
 </script>
 @stop

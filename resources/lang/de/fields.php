@@ -103,10 +103,17 @@ return [
     'hours' => 'Hour|Hours',
     'minutes' => 'Minute|Minutes',
 
-        #blackbook
+   	#blackbook
     'date' => 'Date',
     'photo' => 'Photo',
     'client_name' => 'Client Name',
     'client_phone' => 'Client Phone',
     'description' => 'Description',
+
+    #news/events
+    'title' => 'Title',
+    'duration' => 'Duration',
+    'venue' => 'Venue',
+    'prepared_flyer' => 'Already have a prepared flyer?',
+    
 ];
