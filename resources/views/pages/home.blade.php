@@ -240,29 +240,92 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-@if(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
+@if(Session::has('account_created'))
     <script>
-    swal({
-        title: '{{ __('headings.package_expiration_title') }}',
-        confirmButtonText: '{{ __('buttons.close') }}',
-        html: '{!! __('messages.package_about_to_expire', [
+        swal(
+                '{{ __('headings.account_created_title') }}',
+                '{{ Session::get('account_created') }}',
+                'success'
+        );
+    </script>
+@endif
+
+@if((Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired) && Session::has('lotm_expired_package_info'))
+    <script>
+        swal.queue([{
+            title: '{{ __('headings.package_expiration_title') }}',
+            confirmButtonText: '{{ __('buttons.close') }}',
+            html: '{!! __('messages.package_about_to_expire', [
             'note' => $localDefaultPackageExpired->$note,
             'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
             ]) !!}',
             type: 'warning',
-        });
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+            return swal({
+                title: '{{ __('headings.default_error_title') }}',
+                html: '{!! Session::get('lotm_expired_package_info') !!}',
+                type: 'warning'
+            })
+        }
+        }]);
+    </script>
+@elseif(Session::has('lotm_expired_package_info'))
+    <script>
+        swal(
+                '{{ __('headings.default_error_title') }}',
+                '{!! Session::get('lotm_expired_package_info') !!}',
+                'warning'
+        );
+    </script>
+@elseif((Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired) && (Session::has('lotmPackageExpired') && $lotmPackageExpired))
+    <script>
+        swal.queue([{
+            title: '{{ __('headings.package_expiration_title') }}',
+            confirmButtonText: '{{ __('buttons.close') }}',
+            html: '{!! __('messages.package_about_to_expire', [
+            'note' => $localDefaultPackageExpired->$note,
+            'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+            ]) !!}',
+            type: 'warning',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+            return swal({
+                title: '{{ __('headings.package_expiration_title') }}',
+                html: '{!! __('messages.package_about_to_expire', [
+                        'note' => $lotmPackageExpired->$note,
+                        'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+                        ]) !!}',
+                type: 'warning'
+            })
+        }
+        }]);
+    </script>
+@elseif(Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired)
+    <script>
+    swal({
+    title: '{{ __('headings.package_expiration_title') }}',
+    confirmButtonText: '{{ __('buttons.close') }}',
+    html: '{!! __('messages.package_about_to_expire', [
+            'note' => $localDefaultPackageExpired->$note,
+            'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+            ]) !!}',
+    type: 'warning',
+    });
+    </script>
+@elseif(Session::has('lotmPackageExpired') && $lotmPackageExpired)
+    <script>
+        swal({
+            title: '{{ __('headings.package_expiration_title') }}',
+            html: '{!! __('messages.package_about_to_expire', [
+                        'note' => $lotmPackageExpired->$note,
+                        'url' => url('locals/@' . Auth::guard('local')->user()->username . '/packages')
+                        ]) !!}',
+            type: 'warning'
+        })
     </script>
 @endif
 
-@if(Session::has('account_created'))
-    <script>
-    swal(
-        '{{ __('headings.account_created_title') }}',
-        '{{ Session::get('account_created') }}',
-        'success'
-        );
-    </script>
-@endif
 
 @if((Session::has('defaultGirlPackageExpired') && $defaultPackageExpired) && Session::has('gotm_expired_package_info'))
     <script>
