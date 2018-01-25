@@ -1251,9 +1251,10 @@ h3 {
     border-radius: 5px!important;
 }
 
-input[type="text"], [type="password"], [type="email"] {
-    color: white;
+.news_form_control {
+    color: white!important;
 }
+
 
 .news_textarea {
     width: 100%;
@@ -1283,6 +1284,7 @@ color: #222!important;
 
 .flyer {
     margin-left: 5px;
+    color: #f26522;
 }
 
 .range_inputs {

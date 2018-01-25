@@ -197,23 +197,23 @@
 						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('events_title') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.title') }}*</label>
-								<input type="text" class="form-control" name="events_title" value="{{ old('events_title') }}" />
+								<input type="text" class="form-control news_form_control" name="events_title" value="{{ old('events_title') }}" />
 								<span class="help-block">{{ $errors->has('events_title') ? $errors->first('events_title') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_venue') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.venue') }}*</label>
-								<input type="text" class="form-control" name="events_venue" value="{{ old('events_venue') }}"/>
+								<input type="text" class="form-control news_form_control" name="events_venue" value="{{ old('events_venue') }}"/>
 								<span class="help-block">{{ $errors->has('events_venue') ? $errors->first('events_venue') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_date') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.date') }}*</label>
-								<input type="text" class="form-control" name="events_date" value="{{ old('events_date') }}"/>
+								<input type="text" class="form-control news_form_control" name="events_date" value="{{ old('events_date') }}"/>
 								<span class="help-block">{{ $errors->has('events_date') ? $errors->first('events_date') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
 							<label class="control-label">{{ __('fields.duration') }}*</label>
-							<input type="text" class="form-control events_duration" name="events_duration" value=""/>
+							<input type="text" class="form-control events_duration news_form_control" name="events_duration" value=""/>
 							<input type="hidden" name="duration"/>
 							<span class="help-block">{{ $errors->has('events_duration') ? $errors->first('events_duration') : '' }}</span>
 						</div>
@@ -226,12 +226,12 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">{{ __('fields.price_per_day') }}</label>
-							<input type="text" disabled="" class="form-control events_price news_disabled" value="{{ number_format(getEventPrice(true), 2) }}">
+							<input type="text" disabled="" class="form-control events_price news_disabled news_form_control" value="{{ number_format(getEventPrice(true), 2) }}">
 							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">{{ __('fields.total') }}</label>
-							<input type="text" disabled="" class="form-control events_total news_disabled" value="{{ number_format(getEventPrice(), 2) }}">
+							<input type="text" disabled="" class="form-control events_total news_disabled news_form_control" value="{{ number_format(getEventPrice(), 2) }}">
 							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group {{ $errors->has('events_photo') ? 'has-error' : '' }}">
