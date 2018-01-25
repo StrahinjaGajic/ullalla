@@ -249,6 +249,7 @@
 										<label class="control control--checkbox apps"><a>{!! $contactOption->icon !!} {{ ucfirst($contactOption->contact_option_name) }}</a>
 											<input type="checkbox" name="contact_options[]" value="{{ $contactOption->id }}" id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}">
 											<div class="control__indicator service_list"></div>
+											<img src="{{ asset('img/' . $contactOption->contact_option_name . '.png') }}" alt="">
 										</label>
 										@endforeach
 									</div>

@@ -22,7 +22,8 @@
             </div>
             @if($blackbooks->count() > 0)
             <div class="col-xs-12 price-table-container" style="margin-top: 30px;">
-                <table class="table">
+               <div style="overflow-x:auto;">
+                <table class="table blackbook_table">
                     <thead>
                         <tr>
                             <th>{{ __('fields.date') }}</th>
@@ -56,6 +57,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
             @endif
         </div>
@@ -112,7 +114,7 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('photo') ? 'has-error' : '' }}">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-3">
                                 <input type="hidden" name="photo" class="pull-left" role="uploadcare-uploader" data-crop="1:1" data-images-only="">
                                 @if ($errors->has('photo'))
                                 <span class="help-block">{{ $errors->first('photo') }}</span>

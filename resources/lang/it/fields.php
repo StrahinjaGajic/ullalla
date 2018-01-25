@@ -115,4 +115,7 @@ return [
     'duration' => 'Duration',
     'venue' => 'Venue',
     'prepared_flyer' => 'Already have a prepared flyer?',
+    'price_per_day' => 'Price per day',
+    'total' => 'Total',
+    
 ];

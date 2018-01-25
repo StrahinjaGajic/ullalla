@@ -72,8 +72,73 @@
     padding: 15px 0;
 }
 
+.blackbook_table {
+    table-layout: unset;
+}
+
 .help-block {
     text-align: unset;
     color: #ed6c63 !important;
     margin-left: 10px!important;
 }
+
+button.close {
+    color: white;
+}
+
+button.close:hover{
+    color: white;
+}
+
+
+/* MEDIA */
+
+/* iPhone 6 in portrait */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+    
+    .mar-left {
+        margin-left: -15px!important;
+    }
+    
+    .mar-right {
+        margin-right: -15px!important;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

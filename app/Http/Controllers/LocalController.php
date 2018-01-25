@@ -643,43 +643,83 @@ class LocalController extends Controller
         return view('pages.locals.news_events', compact('local', 'news', 'events'));
     }
 
-    public function postNews(Request $request)
+    public function postNews(Request $request, $username)
     {
-        // if ($request->news_flyer == 'on') {
-        //     $validator = Validator::make($request->all(), [
-        //         'news_photo' => 'required',
-        //     ]);
-        // } else {
-        //     $validator = Validator::make($request->all(), [
-        //         'news_title' => 'required',
-        //         'news_duration' => 'required',
-        //         'news_description' => 'required',
-        //         'news_photo' => 'required',
-        //     ]);
-        // }
+        $user = Auth::guard('local')->user();
+
+        if ($user->news()->count() >= 3) {
+            return redirect()->back();
+        }
+
+        if ($request->news_flyer == 'on') {
+            $validator = Validator::make($request->all(), [
+                'news_photo' => 'required',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'news_title' => 'required',
+                'news_duration' => 'required',
+                'news_description' => 'required',
+                'news_photo' => 'required',
+            ]);
+        }
 
         $explodedNewsDuration = explode(' - ', $request->news_duration);
         $from = Carbon::createFromFormat('d/m/Y', $explodedNewsDuration[0]);
         $to = Carbon::createFromFormat('d/m/Y', $explodedNewsDuration[1]);
         $newsDuration = $to->diffInDays($from);
 
+        $total = getEventPrice() + (getEventPrice(true) * $newsDuration);
+
         if ($validator->passes()) {
+
             $news = new News;
             $news->news_title = $request->news_title;
-            $news->news_duration = $newsDuration;
             $news->news_description = $request->news_description;
+            $news->news_total_amount = $total;
+            $news->news_activation_date = $from->format('Y-m-d');
+            $news->news_expiry_date = $to->format('Y-m-d');
             $news->news_photo = storeAndGetUploadCareFiles($request->news_photo);
 
-            // $user->news()->save($news);
+            $user->news()->save($news);
+
+            try {
+                $customer = Customer::create([
+                    'email' => request('stripeEmailNews'),
+                    'source' => request('stripeTokenNews'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->save();
+
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $total * 100,
+                    'currency' => 'chf',
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            Session::flash('success', __('messages.news_added'));
+
         } else {
             Session::flash('showNewsModal', true);
+            return response()->json([
+                'errors' => $validator->getMessageBag()
+            ]);
         }
-
-        return redirect()->back()->withErrors($validator->getMessageBag());
     }
 
     public function postEvents(Request $request)
     {
+        $user = Auth::guard('local')->user();
+
+        if ($user->events()->count() >= 3) {
+            return redirect()->back();
+        }
+
         if ($request->events_flyer == 'on') {
             $validator = Validator::make($request->all(), [
                 'events_photo' => 'required',
@@ -700,20 +740,47 @@ class LocalController extends Controller
         $to = Carbon::createFromFormat('d/m/Y', $explodedEventsDuration[1]);
         $eventDuration = $to->diffInDays($from);
 
+        $total = getEventPrice() + (getEventPrice(true) * $eventDuration);
+
         if ($validator->passes()) {
+
             $event = new Events;
             $event->events_title = $request->events_title;
             $event->events_venue = $request->events_venue;
             $event->events_date = $request->events_date;
-            $event->events_duration = $eventDuration;
             $event->events_description = $request->events_description;
+            $event->events_total_amount = $total;
+            $event->events_activation_date = $from->format('Y-m-d');
+            $event->events_expiry_date = $to->format('Y-m-d');
             $event->events_photo = storeAndGetUploadCareFiles($request->events_photo);
             
-            // $user->events()->save($event);
-        } else {
-            Session::flash('showEventsModal', true);
-        }
+            $user->events()->save($event);
 
-        return redirect()->back()->withErrors($validator->getMessageBag());
+            try {
+                $customer = Customer::create([
+                    'email' => request('stripeEmailEvent'),
+                    'source' => request('stripeTokenEvent'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->save();
+
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $total * 100,
+                    'currency' => 'chf',
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            Session::flash('success', __('messages.event_added'));
+
+        } else {
+            return response()->json([
+                'errors' => $validator->getMessageBag()
+            ]);
+        }
     }
 }
