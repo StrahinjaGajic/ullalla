@@ -53,7 +53,7 @@ class HomeController extends Controller
 
 		$user = Auth::guard('local')->user();
 		if ($user) {
-			if ($user->package1_duration) {
+			if ($user->package1_id) {
 				$expiryDatePackage = getPackageExpiryDate(getDaysForExpiryLocal($user->package1_duration)[0]);
 				$localDefaultPackageExpired = DB::table('locals')
 				->leftJoin('notifications', 'locals.id', '=', 'notifications.notifiable_id')
@@ -62,8 +62,18 @@ class HomeController extends Controller
 				->where('notifications.' . $field, __('headings.local_default_package_expiration_title'))
 				->whereBetween('locals.package1_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
 			}
+
+			if ($user->package2_id) {
+				$expiryDatePackage = getPackageExpiryDate(getDaysForExpiry($user->package2_id)[0]);
+				$lotmPackageExpired = DB::table('users')
+					->leftJoin('notifications', 'users.id', '=', 'notifications.notifiable_id')
+					->where('users.id', $user->id)
+					->whereNull('users.scheduled_gotm_package')
+					->where('notifications.' . $field, __('headings.lotm_package_expiration_title'))
+					->whereBetween('users.package2_expiry_date', [Carbon::now(), $expiryDatePackage])->first();
+			}
 		}
 
-		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm'));
+		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'lotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm'));
 	}
 }
