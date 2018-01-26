@@ -812,7 +812,6 @@
 
 
     function hideLotm() {
-        console.log('aaaaaa');
         document.getElementById('lotm').style.display = "none";
     }
     function showLotm() {

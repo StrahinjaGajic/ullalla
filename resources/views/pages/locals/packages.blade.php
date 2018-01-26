@@ -96,55 +96,52 @@
 							<td>
 								<label class="control control--checkbox">
 									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-									<div class="control__indicator"></div>
+									<div class="control__indicator" onclick="{{ ($package->id == 6) ? 'hideLotm()' : 'showLotm()' }}"></div>
 								</label>
 							</td>
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
-				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 			</div>
 			@endif
-
 			@if($showGotmPackages)
-			<div class="col-xs-12">
-				<h3>{{ __('headings.lotm_package') }}</h3>
-				<table class="table packages-table package-girl-month">
-					<thead>
-					<tr>
-						<th>{{ __('headings.name') }}</th>
-						<th>{{ __('headings.duration') }}</th>
-						<th>{{ __('headings.price') }}</th>
-						<th>{{ __('headings.activation_date') }}</th>
-						<th></th>
-					</tr>
-					</thead>
-					<tbody>
-					@foreach ($girlPackages->take(3) as $package)
+				<div id="lotm" class="col-xs-12">
+					<h3>{{ __('headings.lotm_package') }}</h3>
+					<table class="table packages-table package-girl-month">
+						<thead>
 						<tr>
-							<td>{{ $package->package_name }}</td>
-							<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-							<td>{{ $package->package_price_local }} CHF</td>
-							<td>
-								<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
-							</td>
-							<td>
-								<label class="control control--checkbox">
-									<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
-									<div class="control__indicator"></div>
-								</label>
-							</td>
+							<th>{{ __('headings.name') }}</th>
+							<th>{{ __('headings.duration') }}</th>
+							<th>{{ __('headings.price') }}</th>
+							<th>{{ __('headings.activation_date') }}</th>
+							<th></th>
 						</tr>
-						<?php $counter++; ?>
-					@endforeach
-					</tbody>
-				</table>
-				<div class="save">
-					<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+						</thead>
+						<tbody>
+						@foreach ($girlPackages->take(3) as $package)
+							<tr>
+								<td>{{ $package->package_name }}</td>
+								<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+								<td>{{ $package->package_price_local }} CHF</td>
+								<td>
+									<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+								</td>
+								<td>
+									<label class="control control--checkbox">
+										<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+										<div class="control__indicator"></div>
+									</label>
+								</td>
+							</tr>
+							<?php $counter++; ?>
+						@endforeach
+						</tbody>
+					</table>
 				</div>
-			</div>
 			@endif
+			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+
 			<input type="hidden" name="stripeToken" id="stripeToken">
 			<input type="hidden" name="stripeEmail" id="stripeEmail">
 			{!! Form::close() !!}
@@ -276,6 +273,7 @@
 	});
 
 	$('#profileForm').on('submit', function (e) {
+		var packageId = document.querySelector('input[name="ullalla_package[]"]:checked').value;
 		if(packageId != 6) {
 			stripe.open({
 				name: 'Ullallà',
@@ -298,5 +296,12 @@
 				});
 		}
 	});
+
+	function hideLotm() {
+		document.getElementById('lotm').style.display = "none";
+	}
+	function showLotm() {
+		document.getElementById('lotm').style.display = "block";
+	}
 </script>
 @stop
