@@ -55,7 +55,7 @@ input.form-control {
 }
 
 #city {
-    width: 280px;
+    width: 232px;
 }
 
 
@@ -193,8 +193,8 @@ keyframes square-spin {
 
     
         .containere1 {
-        margin-left: 0px;
-        margin-right: 0px;
+       margin: 0 auto;
+            width: 282px;
     }
     
     #city {
@@ -388,6 +388,8 @@ and (orientation : landscape) {
           padding-top: 40px!important;
           margin-right: 300px!important;
       }
+      
+   
 }
 
 /* Landscape */
@@ -409,9 +411,11 @@ and (orientation : landscape) {
     margin-right: 0px;
 }
     
+/*
     input#city {
         width: 235px!important;
     }
+*/
 }
 
 

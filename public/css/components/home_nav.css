@@ -90,7 +90,7 @@ and (orientation : portrait) {
     }
     
     #city {
-        width: 235px!important;
+/*        width: 235px!important;*/
     }
 }
 
@@ -184,7 +184,7 @@ and (orientation : landscape) {
 /* Styles */
 
     #city {
-        width: 267px;
+        width: 234px;
     }
 
 }
@@ -201,12 +201,11 @@ and (orientation : landscape) {
     
     .containere1 {
         width: 290px;
-        margin-left: 0px;
-        margin-right: 0px;
+        margin: 0 auto;
     }
     
     #city {
-        width: 232px;
+        width: 242.5px;
     }
 }
 /**********
