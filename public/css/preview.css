@@ -121,7 +121,7 @@ Supports Thumbs: true
   opacity:0.3;
 }
 .preview-1.ho_4 .nivo-directionNav a.nivo-prevNav::after {
-  content: "";
+  content: "\f104";
   color:#fff;
 }
 .preview-1.ho_4 .nivo-directionNav a.nivo-nextNav::before {

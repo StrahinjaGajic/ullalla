@@ -55,7 +55,7 @@ input.form-control {
 }
 
 #city {
-    width: 232px;
+    width: 231px;
 }
 
 
@@ -74,6 +74,18 @@ input.form-control {
     transition-duration: 0.2s;
     border-color: #f26522;
     cursor: pointer;
+}
+
+.small_banner {
+    margin: 10px 0 20px 0!important;
+}
+
+.left_set {
+    padding-left: 0px;
+}
+
+.right_set {
+    padding-right: 0px;
 }
 
 .square-spin {
@@ -142,6 +154,13 @@ keyframes square-spin {
     
     #city {
         width: 210px;
+    }
+}
+
+
+@media only screen (min-device-height:343px) and (max-device-width:425) and (orientation:portrait) {
+    .containere1{
+        margin: 0 auto;
     }
 }
 
@@ -226,6 +245,14 @@ keyframes square-spin {
     #city {
         width: 233px;
     }
+    
+    .left_set {
+        padding-left: 15px;
+    }
+    
+    .right_set {
+        padding-right: 15px;
+    }
 }
 
 
@@ -233,7 +260,15 @@ keyframes square-spin {
 
 @media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
     #city {
-        width: 232.5px!important;
+        width: 232px!important;
+    }
+    
+        .left_set {
+        padding-left: 15px;
+    }
+    
+    .right_set {
+        padding-right: 15px;
     }
 }
 
@@ -246,7 +281,15 @@ and (min-device-width : 320px)
 and (max-device-width : 568px) 
 and (orientation : portrait) { 
     #city{
-        width: 233px;
+        width: 232px;
+    }
+    
+        .left_set {
+        padding-left: 15px;
+    }
+    
+    .right_set {
+        padding-right: 15px;
     }
 
 }
@@ -255,7 +298,17 @@ and (orientation : portrait) {
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 568px) 
-and (orientation : landscape) { /* STYLES GO HERE */}
+and (orientation : landscape) {
+    
+    
+        .left_set {
+        padding-left: 15px;
+    }
+    
+    .right_set {
+        padding-right: 15px;
+    }
+}
 
 
 
@@ -312,7 +365,15 @@ and (orientation : landscape) {
     margin-left: 67px!important;
     margin-right: 63px!important;
 }
-
+    
+        .left_set {
+        padding-left: 15px;
+    }
+    
+    .right_set {
+        padding-right: 15px;
+    }
+}
 
 
 /* iPad in portrait */
@@ -357,6 +418,10 @@ and (orientation : landscape) {
     
     .mainmenu.home-4 {
         text-align: center;
+    }
+    
+    .fixed {
+        height: 35px!important;
     }
 }
 
@@ -417,6 +482,32 @@ and (orientation : landscape) {
 }
 
 
+@media only screen and (min-device-height:343px) and (max-device-width:1024px) and (orientation:landscape) {
+    .containere1 {
+        margin: 0 auto!important;
+        width: 282px!important;
+    }
+    
+    #city {
+        width: 233px!important;
+    }
+}
+
+
+@media only screen and (min-device-height:343px) and (max-device-width:768px) and (orientation:landscape) {
+        .containere1 {
+        margin: 0 auto!important;
+        width: 282px!important;
+    }
+    
+      #city {
+        width: 233px!important;
+    }
+    
+    .fixed {
+        height: 89px!important;
+    }
+}
 
 
 
@@ -432,6 +523,8 @@ and (orientation : landscape) {
     }
 */
 }
+
+
 
 
 

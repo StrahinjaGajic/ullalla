@@ -133,7 +133,7 @@
             {!! Form::close() !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
-                    <a class="right-banner" href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                    <a class="right-banner" href="/#"></a>
                 </div>
             </div>
         </div>
@@ -215,41 +215,41 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 left_set">
                     <div class="single-banner home-3">
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 right_set">
                     <div class="single-banner home-3">
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
