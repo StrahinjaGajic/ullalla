@@ -33,9 +33,9 @@
                             </a>
                             <div id="myModal" class="modal">
 								<span class="close">&times;</span>
-								<div class="modal-dialog modal-md">
+								<div class="modal-dialog modal-md club_modal_dialog">
 									
-									<div class="modal-content">
+									<div class="modal-content club_modal_content">
 									<img id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
                                    <div class="prev-next">    
                                     <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>

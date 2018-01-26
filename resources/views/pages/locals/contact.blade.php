@@ -126,7 +126,7 @@
                         </div>
 -->
                  <div class="col-sm-6">
-                    <div class="col-3 input-effect">
+                    <div class="col-3 input-effect" style="margin:3px auto;">
                         <label>{{ __('fields.mobile') }}*</label>
                         <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $local->mobile }}" id="mobile">
                         <span class="focus-border"></span>

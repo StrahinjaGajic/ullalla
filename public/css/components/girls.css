@@ -630,9 +630,25 @@ html [type=button],
 
 
 
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
-    /* Styles */
+
+
+/* iPhone 5 & 5S in portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) { 
+    
+    .club_modal_content {
+        margin-left: 30px;
+        padding-top: 100px;
+    }
+    
+    .club_modal_dialog {
+        margin-left: 0px;
+    }
+
 }
+
 
 
 /* iPhone 5 & 5S in landscape */
@@ -657,6 +673,24 @@ and (orientation : landscape) {
 }
 
 
+
+/* iPhone 6 in portrait */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+
+    .club_modal_dialog {
+    margin-left: 20px;
+    padding-top: 60px;
+}
+    
+}
+
+
+
+
+
 /* iPhone 6 in landscape */
 @media only screen 
 and (min-device-width : 375px) 
@@ -669,6 +703,19 @@ and (orientation : landscape) {
     
 }
 
+
+/* iPhone 6 Plus in portrait */
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : portrait) { 
+
+        .club_modal_dialog {
+    margin-left: 30px;
+    padding-top: 60px;
+}
+
+}
 
 
 
@@ -685,6 +732,18 @@ and (orientation : landscape) {
 }
 
 
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) { 
+
+    .club_modal_dialog {
+        padding-top: 200px;
+    }
+}
+
+
 
 /* iPad in landscape */
 @media only screen 
@@ -693,6 +752,10 @@ and (max-device-width : 1024px)
 and (orientation : landscape) {
     #city {
         width: 136px;
+    }
+    
+    .club_modal_dialog {
+        padding-top: 70px;
     }
 }
 
@@ -714,6 +777,10 @@ and (orientation : landscape) {
       #city {
           width: 136px;
       }
+      
+      .club_modal_dialog {
+          padding-top: 300px;
+      }
 }
 
 /* Landscape */
@@ -722,7 +789,9 @@ and (orientation : landscape) {
   and (max-device-width: 1366px) 
   and (orientation: landscape) 
   and (-webkit-min-device-pixel-ratio: 1.5) {
-
+  .club_modal_dialog {
+          padding-top: 200px;
+      }
 }
 
 

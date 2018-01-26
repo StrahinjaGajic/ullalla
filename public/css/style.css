@@ -1393,6 +1393,11 @@ input[list] {
 }
 
 
+.close {
+    display: none;
+}
+
+
 .single-product-menu {
     margin-top: 20px;
 }
