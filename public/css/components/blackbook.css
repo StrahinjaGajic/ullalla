@@ -93,12 +93,10 @@ button.close:hover{
 
 /* MEDIA */
 
-/* iPhone 6 in portrait */
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px) 
-and (orientation : portrait) { 
-    
+
+/* iPhone 4/4S (portrait mode) */
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
     .mar-left {
         margin-left: -15px!important;
     }
@@ -106,10 +104,131 @@ and (orientation : portrait) {
     .mar-right {
         margin-right: -15px!important;
     }
+    
+    .modal_submit_button {
+        text-align: center;
+    }
+    
+    .pull-right {
+        margin-top: 30px!important;
+    }
+    
+    .modal_upload_button {
+        text-align: center;
+    }
+}
+
+
+/* iPhone 4/4S (landscape mode) */
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)
+{
+    .mar-left {
+        margin-left: -15px!important;
+    }
+    
+    .mar-right {
+        margin-right: -15px!important;
+    }
+    
+    .modal_upload_button {
+        width: 50%!important;
+    }
+}
+
+
+
+
+
+
+/* iPhone 5 & 5S in portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+    and (orientation : portrait) { 
+
+     .mar-left {
+        margin-left: -15px!important;
+    }
+    
+    .mar-right {
+        margin-right: -15px!important;
+    }
+        
+            .modal_submit_button {
+        text-align: center;
+    }
+    
+    .pull-right {
+        margin-top: 30px!important;
+    }
+    
+    .modal_upload_button {
+        text-align: center;
+    }
 
 }
 
 
+
+
+
+
+
+/* iPhone 5 & 5S in landscape */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) { 
+
+     .mar-left {
+        margin-left: -15px!important;
+    }
+    
+    .mar-right {
+        margin-right: -15px!important;
+    }
+    
+        .modal_upload_button {
+        width: 50%!important;
+    }
+}
+
+
+
+
+/* iPhone 6 in portrait */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+    
+
+
+}
+
+
+
+/* iPhone 6 Plus in landscape */
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) { 
+
+     .mar-left {
+        margin-left: -15px!important;
+    }
+    
+    .mar-right {
+        margin-right: -15px!important;
+    }
+    
+    .modal_upload_button {
+        width: 50%!important;
+    }
+
+
+}
 
 
 
