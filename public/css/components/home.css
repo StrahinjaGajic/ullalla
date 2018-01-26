@@ -155,9 +155,6 @@ keyframes square-spin {
         width: 290px;
     }
     
-    #city {
-        width: 230px;
-    }
 }
 
 
@@ -173,18 +170,11 @@ keyframes square-spin {
 }
 
 
+
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
 
-    
-/*
-        .containere1 {
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-    
-*/
     #city {
-        width: 186px;
+        width: 242.5px;
     }
 
 }
@@ -198,7 +188,7 @@ keyframes square-spin {
     }
     
     #city {
-        width: 224px;
+        width: 234px;
     }
     
     .button4 {
@@ -230,6 +220,46 @@ keyframes square-spin {
     
 }
 
+/* iPhone 4/4S (portrait mode) */
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
+    #city {
+        width: 233px;
+    }
+}
+
+
+/* iPhone 4/4S (landscape mode) */
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+    #city {
+        width: 232.5px!important;
+    }
+}
+
+
+
+
+/* iPhone 5 & 5S in portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) { 
+    #city{
+        width: 233px;
+    }
+
+}
+
+/* iPhone 5 & 5S in landscape */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) { /* STYLES GO HERE */}
+
+
+
+
 
 
 /* iPhone 6 in portrait */
@@ -239,7 +269,7 @@ and (max-device-width : 667px)
 and (orientation : portrait) { 
     
     #city {
-        width: 222px!important;
+        width: 232.5px!important;
     }
     
 }
@@ -250,11 +280,7 @@ and (orientation : portrait) {
 and (min-device-width : 375px) 
 and (max-device-width : 667px) 
 and (orientation : landscape) { 
-    
-    #city {
-        width: 242px!important;
-    }
-    
+
 }
 
 
@@ -265,7 +291,7 @@ and (max-device-width : 736px)
 and (orientation : portrait) {
     
     #city {
-        width: 223px!important;
+        width: 233px!important;
     }
     
     
@@ -277,9 +303,9 @@ and (orientation : portrait) {
 and (min-device-width : 414px) 
 and (max-device-width : 736px) 
 and (orientation : landscape) {
-    
+
     #city {
-        width: 242.5px!important;
+        width: 233px;
     }
     
     .containere1 {
@@ -287,20 +313,6 @@ and (orientation : landscape) {
     margin-right: 63px!important;
 }
 
-
-/* iPhone X landsacpe mode*/
-/*
-@media only screen 
-and (device-width : 375px) 
-and (device-height : 812px) 
-and (device-pixel-ratio : 3)
-and (orientation : landscape) {
-    
-   #city {
-        width: 235px!important;
-    }
-}
-*/
 
 
 /* iPad in portrait */
@@ -319,6 +331,9 @@ and (orientation : portrait) {
     
    
 }
+    
+
+
 
 
 /* iPad in landscape */
