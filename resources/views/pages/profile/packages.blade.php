@@ -17,46 +17,88 @@
 		<div class="col-sm-10 profile-info">
 			@if($user->is_active_d_package || $user->is_active_gotm_package)
 			<div class="col-xs-12">
-			<h3>{{ __('headings.active_packages') }}</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>{{ __('fields.type') }}</th>
-						<th>{{ __('headings.activation_date') }}</th>
-						<th>{{ __('headings.expiry_date') }}</th>
-					</tr>
-				</thead>	
-				<tbody>
-					@if($user->is_active_d_package)
-					<tr>
-						<td>{{ __('headings.default_package') }}</td>
-						<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
-						<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
-					</tr>
-					@endif
-					@if($user->is_active_gotm_package)
-					<tr>
-						@if($user->sex == 'transsexual')
-							<td>{{ __('headings.totm_package') }}</td>
-						@else
-							<td>{{ __('headings.gotm_package') }}</td>
+				<h3>{{ __('headings.active_packages') }}</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>{{ __('fields.type') }}</th>
+							<th>{{ __('headings.activation_date') }}</th>
+							<th>{{ __('headings.expiry_date') }}</th>
+						</tr>
+					</thead>	
+					<tbody>
+						@if($user->is_active_d_package)
+						<tr>
+							<td>{{ __('headings.default_package') }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
+						</tr>
 						@endif
-						<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
-						<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
-					</tr>
-					@endif
-				</tbody>
-			</table>
+						@if($user->is_active_gotm_package)
+						<tr>
+							@if($user->sex == 'transsexual')
+							<td>{{ __('headings.totm_package') }}</td>
+							@else
+							<td>{{ __('headings.gotm_package') }}</td>
+							@endif
+							<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
+							<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
+						</tr>
+						@endif
+					</tbody>
+				</table>
 			</div>
 			@endif
+
+			<div class="col-xs-12">
+				<h3>{{ __('headings.scheduled_packages') }}</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>{{ __('fields.type') }}</th>
+							<th>{{ __('headings.activation_date') }}</th>
+							<th>{{ __('headings.expiry_date') }}</th>
+						</tr>
+					</thead>	
+					<tbody>
+						@if($scheduledDefaultPackage)
+						@php
+							$scheduledDefaultPackage = explode('&|', $scheduledDefaultPackage);
+						@endphp
+						<tr>
+							<td>{{ __('headings.default_package') }}</td>
+							<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[1])) }}</td>
+							<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[2])) }}</td>
+						</tr>
+						@endif
+						@if($scheduledGotmPackage)
+						@php
+							$scheduledGotmPackage = explode('&|', $scheduledGotmPackage);
+						@endphp
+						<tr>
+							@if($user->sex == 'transsexual')
+							<td>{{ __('headings.totm_package') }}</td>
+							@else
+							<td>{{ __('headings.gotm_package') }}</td>
+							@endif
+							<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[1])) }}</td>
+							<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[2])) }}</td>
+						</tr>
+						@endif
+					</tbody>
+				</table>
+			</div>
+
 			<div class="col-xs-12">
 				@if(Session::has('success'))
 				<div class="alert alert-success">{{ Session::get('success') }}</div>
 				@endif
 				<div class="packages-errors"></div>
 			</div>
+
 			@if($showDefaultPackages || $showGotmPackages)
 			{!! Form::model($user, ['url' => '@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+
 			@if($showDefaultPackages)
 			<div class="col-xs-12 default-packages-section" id="default-packages-section">
 				<h3>{{ __('headings.default_packages') }}</h3>
@@ -106,9 +148,9 @@
 			@if($showGotmPackages)
 			<div class="col-xs-12">
 				@if($user->sex == 'transsexual')
-					<h3>{{ __('headings.totm_package') }}</h3>
+				<h3>{{ __('headings.totm_package') }}</h3>
 				@else
-					<h3>{{ __('headings.gotm_package') }}</h3>
+				<h3>{{ __('headings.gotm_package') }}</h3>
 				@endif
 				<table class="table packages-table package-girl-month">
 					<thead>
@@ -141,7 +183,7 @@
 					</tbody>
 				</table>
 				<div class="save">
-				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+					<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
 				</div>
 			</div>
 			@endif
@@ -228,7 +270,7 @@
 <script>
 	let stripe = StripeCheckout.configure({
 		key: '{{ config('services.stripe.key') }}',
-		image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+		image: '{{ asset('img/logo.png') }}',
 		locale: 'auto',
 		token: function (token) {
 			var stripeEmail = $('#stripeEmail');
@@ -247,13 +289,13 @@
 				var errors = response.errors;
 				if (errors) {
 				    //proveriti da li je greska u navodnicima !!!
-					if (typeof errors.default_package_error !== 'undefined') {
-						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
-					} else if (typeof errors.month_girl_package_error !== 'undefined') {
-						$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
-					} else {
-						window.location.href = getUrl('/@' + username  + '/packages');
-					}
+				    if (typeof errors.default_package_error !== 'undefined') {
+				    	$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
+				    } else if (typeof errors.month_girl_package_error !== 'undefined') {
+				    	$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
+				    } else {
+				    	window.location.href = getUrl('/@' + username  + '/packages');
+				    }
 				} else {
 					window.location.href = getUrl('/@' + username  + '/packages');
 				}
@@ -265,7 +307,7 @@
 	});
 	$('#profileForm').on('submit', function (e) {
 		stripe.open({
-			name: 'Ullalla',
+			name: 'Ullallà',
 			description: '{{ $user->email }}',
 		});
 		e.preventDefault();	

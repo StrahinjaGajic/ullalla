@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\DeactivateUser',
+        'App\Console\Commands\ActivateScheduledPackages',
     ];
 
     /**

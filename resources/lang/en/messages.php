@@ -51,4 +51,6 @@ return [
     #news/events
     'event_added' => 'You have successfully added an event',
     'news_added' => 'You have successfully made a news entry',
+    'banner_requested_success' => 'You have successfully made a banner request',
+    
 ];

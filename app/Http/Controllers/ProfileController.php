@@ -545,19 +545,31 @@ class ProfileController extends Controller
         $showGotmPackages = false;
         $dayFromWhichGotmPackagesShouldBeShown = null;
 
+        $scheduledDefaultPackage = $user->scheduled_default_package;
+        $scheduledGotmPackage = $user->scheduled_gotm_package;
+
         $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
         if ($user->package2_id) {
             $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
         }
 
-        if (Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
+        if ($scheduledDefaultPackage === null && Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
             $showDefaultPackages = true;
         }
-        if (Carbon::now() >= $dayFromWhichGotmPackagesShouldBeShown) {
+        
+        if ($scheduledGotmPackage === null && Carbon::now() >= $dayFromWhichGotmPackagesShouldBeShown) {
             $showGotmPackages = true;
-        }
+        } 
 
-        return view('pages.profile.packages', compact('user', 'packages', 'showDefaultPackages', 'showGotmPackages'));
+        return view('pages.profile.packages', 
+            compact(
+                'user', 
+                'packages', 
+                'showDefaultPackages', 
+                'showGotmPackages', 
+                'scheduledDefaultPackage', 
+                'scheduledGotmPackage'
+            ));
     }
 
     /**
@@ -729,6 +741,75 @@ class ProfileController extends Controller
         }
 
         Session::flash('success', __('messages.success_changes_saved'));
+    }
+
+    public function getBanners()
+    {
+        $user = Auth::user();
+        return view('pages.profile.banners', compact('user'));
+    }
+
+    public function postBanners()
+    {
+        $user = Auth::user();
+
+        if ($user->banners()->count() >= 1) {
+            return redirect()->back();
+        }
+
+        if ($request->banner_flyer == 'on') {
+            $validator = Validator::make($request->all(), [
+                'news_photo' => 'required',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'news_title' => 'required',
+                'news_duration' => 'required',
+                'news_description' => 'required',
+                'news_photo' => 'required',
+            ]);
+        }
+
+        if ($validator->passes()) {
+
+            $news = new News;
+            $news->news_title = $request->news_title;
+            $news->news_description = $request->news_description;
+            $news->news_total_amount = $total;
+            $news->news_activation_date = $from->format('Y-m-d');
+            $news->news_expiry_date = $to->format('Y-m-d');
+            $news->news_photo = storeAndGetUploadCareFiles($request->news_photo);
+
+            $user->banners()->save($news);
+
+            try {
+                $customer = Customer::create([
+                    'email' => request('stripeEmail'),
+                    'source' => request('stripeToken'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->save();
+
+                Charge::create([
+                    'customer' => $user->stripe_id,
+                    'amount' => $total * 100,
+                    'currency' => 'chf',
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            Session::flash('success', __('messages.banner_requested_success'));
+
+        } else {
+            return response()->json([
+                'errors' => $validator->getMessageBag()
+            ]);
+        }
+
+        return redirect()->back();
     }
 
     public function postNewPrice(Request $request)
