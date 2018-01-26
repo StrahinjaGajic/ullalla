@@ -55,7 +55,7 @@ class DeactivateUser extends Command
             $user->is_active_d_package = 0;
             $user->save();
             if ($user->sms_notifications == 1) {
-                sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_expired_package') . ' ' . url('@' . $user->username . '/packages'));
+                sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_expired_package') . ' ' . url('@' . $user->username . '/packages'));
             } else {
                 Mail::to($user->email)->send(new DefaultPackageExpiredMail($user));
             }
@@ -65,7 +65,7 @@ class DeactivateUser extends Command
             $user->is_active_gotm_package = 0;
             $user->save();
             if ($user->sms_notifications == 1) {
-                sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expired_package') . ' ' . url('@' . $user->username . '/packages'));
+                sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_gotm_expired_package') . ' ' . url('@' . $user->username . '/packages'));
             } else {
                 Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user));
             }
@@ -81,7 +81,7 @@ class DeactivateUser extends Command
             $user->is_active_gotm_package = 0;
             $user->save();
             if ($user->sms_notifications == 1) {
-                sendPlivoMessage('+38160319825', $user->mobile, __('messages.lmail_gotm_expired_package') . ' ' . url('@' . $user->username . '/packages'));
+                sendPlivoMessage('+381603198250', $user->mobile, __('messages.lmail_gotm_expired_package') . ' ' . url('@' . $user->username . '/packages'));
             } else {
                 Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user));
             }
@@ -102,7 +102,7 @@ class DeactivateUser extends Command
                     // send mail
                     $aboutToExpire = '';
                     if ($user->sms_notifications == 1) {
-                        sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                        sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
                     } else {
                         Mail::to($user->email)->send(new DefaultPackageExpiredMail($user, $aboutToExpire));
                     }
@@ -118,7 +118,7 @@ class DeactivateUser extends Command
                     // send mail
                     $aboutToExpire = '';
                     if ($user->sms_notifications == 1) {
-                        sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                        sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
                     } else {
                         Mail::to($user->email)->send(new GirlOfTheMonthPackageExpiredMail($user, $aboutToExpire));
                     }
@@ -132,9 +132,12 @@ class DeactivateUser extends Command
             foreach (getDaysForExpiryLocal($user->package1_duration) as $day) {
                 if ($carbonNowFormated == $package1ExpiryDateCarbonParsed->subDays($day)->format('Y-m-d')) {
                     // send mail
-                    // email_expired_package
                     $aboutToExpire = '';
-                    Mail::to($user->email)->send(new LocalDefaultPackageExpiredMail($user, $aboutToExpire));
+                    if ($user->sms_notifications == 1) {
+                        sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                    } else {
+                        Mail::to($user->email)->send(new LocalDefaultPackageExpiredMail($user, $aboutToExpire));
+                    }
                 }
             }
         }
@@ -147,7 +150,7 @@ class DeactivateUser extends Command
                     // send mail
                     $aboutToExpire = '';
                     if ($user->sms_notifications == 1) {
-                        sendPlivoMessage('+38160319825', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
+                        sendPlivoMessage('+381603198250', $user->mobile, __('messages.email_gotm_expire_warning_package') . ' ' . url('@' . $user->username . '/packages'));
                     } else {
                         Mail::to($user->email)->send(new LocalOfTheMonthPackageExpiredMail($user, $aboutToExpire));
                     }

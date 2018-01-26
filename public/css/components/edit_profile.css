@@ -1229,6 +1229,111 @@ h3 {
     line-height: 40px;
 }
 
+.image-tooltip {
+    display: inline;
+}
+
+.img-responsive {
+    display: unset;
+}
+
+.modal-content {
+    background: #222!important;
+}
+
+.modal-body {
+    color: white;
+}
+
+.form-control {
+    background: 0 0;
+    border: 1px solid #eee!important;
+    border-radius: 5px!important;
+}
+
+.news_form_control {
+    color: white!important;
+}
+
+
+.news_textarea {
+    width: 100%;
+    background: 0 0;
+    border: 1px solid #eee;
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: white;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.news_disabled {
+    color: #222!important;
+    
+}
+
+.news_disabled::placeholder {
+   text-align: right;
+color: #222!important;
+}
+
+.section-create-profile .uploadcare--widget {
+    margin-left: 0px!important;
+    margin-top: 0px!important;
+}
+
+.flyer {
+    margin-left: 5px;
+    color: #f26522;
+}
+
+.range_inputs {
+    height: 291px;
+}
+
+.btn-success {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccd3e1;
+    border-radius: 4px;
+    color: #484848;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 0 21px;
+    display: block;
+    margin-top: 0px;
+    width: 143.45px;
+    height: 42px;
+}
+
+.btn-success:hover {
+    background: #f26522;
+    color: white;
+    border: 1px solid #f26522;
+    transition: all 0.3s ease 0s;
+}
+
+.btn-success[disabled]:hover {
+       background: #f26522;
+    color: white;
+    border: 1px solid #f26522;
+    transition: all 0.3s ease 0s; 
+}
+
+.cancelBtn {
+    position: absolute;
+    bottom: 7px;
+}
+
+#showModal2 {
+    padding: 0 17px;
+}
+
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #f26522;
+}
 
 /***** Languages *****/
 
@@ -1462,6 +1567,47 @@ table.working-times-table .control--checkbox a,
 }
 
 
+
+/* iPhone 5 & 5S in portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) { 
+    .cancelBtn {
+        position: unset;
+        bottom: unset;
+    }
+    
+    .applyBtn {
+        display: inline;
+    }
+    
+    .range_inputs {
+   height: unset;
+        text-align: center;
+}
+    
+    .pull-right {
+        float: unset!important;
+        margin-top: 30px!important;
+    }
+    
+    .image-preview-multiple {
+        text-align: center;
+    }
+    
+    .flyer {
+        font-size: 11px;
+    }
+    
+    .table {
+        table-layout: unset;
+    }
+}
+   
+}
+
+
 /* iPhone 5 & 5S in landscape */
 @media only screen 
 and (min-device-width : 320px) 
@@ -1470,6 +1616,37 @@ and (orientation : landscape) {
 
     .table > tbody > tr > td {
         padding: 8px!important;
+    }
+}
+
+/* iPhone 6 in portrait */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+
+    
+    .cancelBtn {
+        position: unset;
+        bottom: unset;
+    }
+    
+    .applyBtn {
+        display: inline;
+    }
+    
+    .range_inputs {
+   height: unset;
+        text-align: center;
+}
+    
+    .pull-right {
+        float: unset!important;
+        margin-top: 30px!important;
+    }
+    
+    .image-preview-multiple {
+        text-align: center;
     }
 }
 
@@ -1483,6 +1660,24 @@ and (orientation : landscape) {
  .table > tbody > tr > td {
         padding: 8px!important;
     }
+    
+    .cancelBtn {
+        position: unset;
+        bottom: unset;
+        display: inline;
+        margin-top: 0px;
+        float: right;
+    }
+    
+    .applyBtn {
+        display: inline;
+        
+    }
+    
+    .range_inputs {
+   height: unset;
+        width: 565px;
+}
 }
 
 

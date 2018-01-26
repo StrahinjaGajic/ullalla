@@ -4,7 +4,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
-<link rel="stylesheet" href="{{ asset('css/components/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/home.css?ver=' . str_random(10)) }}">
 @stop
 
 <section class="slider-area home-4">
@@ -73,7 +73,7 @@
     <div class="container">
         <div class="row">
             {!! Form::open(['url' => 'search', 'method' => 'get']) !!}
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" style="height: 100%; margin-bottom: 30px;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height: 100%; margin-bottom: 30px;">
                 <span class="search"><h3 id="search_heading">{{ __('headings.quick_search') }}</h3></span>
                 <div class="containere">
                     <div class="checkbox-tile-group">
@@ -131,9 +131,9 @@
                 <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
-                    <a class="right-banner" href="/#"><!-- <span><img src="/img/banner/banner-13.jpg" alt="" /></span> --></a>
+                    <a class="right-banner" href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                 </div>
             </div>
         </div>
@@ -215,21 +215,50 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="single-banner">
-                        <a class="last-banner" href="">
-                            <span>
-                                <img src="/img/banner/fullwide-banner-4.jpg" alt="">
-                            </span>
-                        </a>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-banner home-3">
+                        <div class="sb-wrapper">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                        </div>
+                        <div class="sb-wrapper">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-banner home-3">
+                        <div class="sb-wrapper">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                        </div>
+                        <div class="sb-wrapper">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="map"></div>
-
 @stop
 
 @section('perPageScripts')
@@ -243,9 +272,9 @@
 @if(Session::has('account_created'))
     <script>
         swal(
-                '{{ __('headings.account_created_title') }}',
-                '{{ Session::get('account_created') }}',
-                'success'
+            '{{ __('headings.account_created_title') }}',
+            '{{ Session::get('account_created') }}',
+            'success'
         );
     </script>
 @endif
@@ -273,9 +302,9 @@
 @elseif(Session::has('lotm_expired_package_info'))
     <script>
         swal(
-                '{{ __('headings.default_error_title') }}',
-                '{!! Session::get('lotm_expired_package_info') !!}',
-                'warning'
+            '{{ __('headings.default_error_title') }}',
+            '{!! Session::get('lotm_expired_package_info') !!}',
+            'warning'
         );
     </script>
 @elseif((Session::has('localDefaultPackageExpired') && $localDefaultPackageExpired) && (Session::has('lotmPackageExpired') && $lotmPackageExpired))
@@ -525,5 +554,4 @@
         });
     });
 </script>
-
 @stop

@@ -33,7 +33,7 @@
 					<div class="left-sidebar">
 						<div class="shop-layout headerDropdown">
 							<div class="layout-title toggle_arrow">
-								<a>{{ __('fields.location') }} <i class="fa fa-caret-right"></i></a>
+								<a>{{ __('fields.location') }} <i class="fa fa-caret-down"></i></a>
 							</div>
 							<div class="layout-list"{{--  style="{{ !request('radius') ? 'display: none;' : '' }}" --}}>
 								<ul>
@@ -495,6 +495,7 @@
 		var that = $(this);
 		that.closest('.shop-layout').find('.layout-list').toggle('fast');
 		that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+        that.parent().find(".fa-caret-down").toggleClass("rotateCaretBack");
 	});
 </script>
 

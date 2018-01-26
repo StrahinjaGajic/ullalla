@@ -47,6 +47,7 @@ return [
 
     # packages
     'active_packages' => 'Active Packages',
+    'scheduled_packages' => 'Scheduled Packages',
     'activation_date' => 'Activation Date',
     'expiry_date' => 'Expiry Date',
     'default_package' => 'Default Package',

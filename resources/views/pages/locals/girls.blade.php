@@ -31,7 +31,7 @@
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow">
-                        <a>{{ $girl->nickname }} <i class="fa fa-caret-right"></i></a>
+                        <a>{{ $girl->nickname }} <i class="fa fa-caret-down"></i></a>
                     </div>
                 </div>
                 <div class="layout-list">
@@ -259,7 +259,7 @@
     $(".toggle_arrow").on("click", function() {
         var that = $(this);
         that.closest('.shop-layout').find('.layout-list').toggle('fast');
-        that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+        that.parent().find(".fa-caret-down").toggleClass("rotateCaretBack");
     });
 </script>
 @stop

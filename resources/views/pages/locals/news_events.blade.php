@@ -79,6 +79,7 @@
 				</div>
 				<div class="layout-list">
 					<div class="form-group girls_preview">
+					<div style="overflow-x:auto;">
 						<table class="table">
 							<thead>
 								<tr>
@@ -112,6 +113,7 @@
 								@endforeach
 							</tbody>
 						</table>
+						</div>
 					</div>  
 				</div>
 			</div>
@@ -187,7 +189,7 @@
 					{!! Form::open(['url' => 'locals/@' . $local->username . '/events/store', 'class' => 'form-horizontal wizard', 'id' => 'eventForm']) !!}
 					<div class="col-xs-12">
 						<div class="form-group">
-							<label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
+							<label class="control control--checkbox" style="margin-left:0px;"><a class="flyer">{{ __('fields.prepared_flyer') }}</a>
 								<input type="checkbox" name="events_flyer" class="prepared_flyer" {{ old('events_flyer') ? 'checked' : '' }}>
 								<div class="control__indicator"></div>
 							</label>
@@ -195,50 +197,53 @@
 						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('events_title') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.title') }}*</label>
-								<input type="text" class="form-control" name="events_title" value="{{ old('events_title') }}" />
+								<input type="text" class="form-control news_form_control" name="events_title" value="{{ old('events_title') }}" />
 								<span class="help-block">{{ $errors->has('events_title') ? $errors->first('events_title') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_venue') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.venue') }}*</label>
-								<input type="text" class="form-control" name="events_venue" value="{{ old('events_venue') }}"/>
+								<input type="text" class="form-control news_form_control" name="events_venue" value="{{ old('events_venue') }}"/>
 								<span class="help-block">{{ $errors->has('events_venue') ? $errors->first('events_venue') : '' }}</span>
 							</div>
 							<div class="form-group {{ $errors->has('events_date') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.date') }}*</label>
-								<input type="text" class="form-control" name="events_date" value="{{ old('events_date') }}"/>
+								<input type="text" class="form-control news_form_control" name="events_date" value="{{ old('events_date') }}"/>
 								<span class="help-block">{{ $errors->has('events_date') ? $errors->first('events_date') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group {{ $errors->has('events_duration') ? 'has-error' : '' }}">
 							<label class="control-label">{{ __('fields.duration') }}*</label>
-							<input type="text" class="form-control events_duration" name="events_duration" value=""/>
+							<input type="text" class="form-control events_duration news_form_control" name="events_duration" value=""/>
 							<input type="hidden" name="duration"/>
 							<span class="help-block">{{ $errors->has('events_duration') ? $errors->first('events_duration') : '' }}</span>
 						</div>
 						<div class="flyerless-fields">
 							<div class="form-group {{ $errors->has('events_description') ? 'has-error' : '' }}">
 								<label class="control-label">{{ __('fields.description') }}*</label>
-								<textarea name="events_description" cols="30" rows="10">{{ old('events_description') }}</textarea>
+								<textarea class="news_textarea" name="events_description" cols="30" rows="10">{{ old('events_description') }}</textarea>
 								<span class="help-block">{{ $errors->has('events_description') ? $errors->first('events_description') : '' }}</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">{{ __('fields.price_per_day') }}</label>
-							<input type="text" disabled="" class="form-control events_price" value="{{ number_format(getEventPrice(true), 2) }}">
+							<input type="text" disabled="" class="form-control events_price news_disabled news_form_control" value="{{ number_format(getEventPrice(true), 2) }}">
 							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group">
 							<label class="control-label">{{ __('fields.total') }}</label>
-							<input type="text" disabled="" class="form-control events_total" value="{{ number_format(getEventPrice(), 2) }}">
+							<input type="text" disabled="" class="form-control events_total news_disabled news_form_control" value="{{ number_format(getEventPrice(), 2) }}">
 							<span class="currency-holder">CHF</span>
 						</div>
 						<div class="form-group {{ $errors->has('events_photo') ? 'has-error' : '' }}">
 							<div class="image-preview-multiple">
 								<input type="hidden" name="events_photo" data-crop="490x560 minimum" data-images-only="">
+								
+								<button type="submit" style="margin-top:0px;" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
 								<span class="help-block">{{ $errors->has('events_photo') ? $errors->first('events_photo') : '' }}</span>
 							</div>
+							
 						</div>
-						<button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
+						
 					</div>
 					<input type="hidden" name="stripeTokenEvent" id="stripeTokenEvent">
 					<input type="hidden" name="stripeEmailEvent" id="stripeEmailEvent">
@@ -255,6 +260,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
+
 
 @if(Session::has('showNewsModal'))
 <script>
