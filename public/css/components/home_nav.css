@@ -79,7 +79,24 @@ and (max-device-width : 1024px)
 and (orientation : portrait) { 
 
     .fixed {
-        height: 140px!important;
+        height: 150px!important;
+    }
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+
+    
+    .mainmenu.home-4 {
+        text-align: right;
+    }
+    
+    .fixed {
+        height: 35px!important;
     }
 }
 
@@ -156,10 +173,7 @@ and (orientation : landscape) {
   and (max-device-width: 1366px) 
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 1.5) {
-      .containere1 {
-        margin-left: 45px!important;
-        margin-right: 41px!important;
-    }
+
       
       .button4 {
           width: 290px;

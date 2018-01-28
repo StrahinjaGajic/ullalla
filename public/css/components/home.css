@@ -55,7 +55,7 @@ input.form-control {
 }
 
 #city {
-    width: 231px;
+    width: 232.5px;
 }
 
 
@@ -152,9 +152,7 @@ keyframes square-spin {
         margin-right: 0px;
     }
     
-    #city {
-        width: 210px;
-    }
+
 }
 
 
@@ -179,9 +177,7 @@ keyframes square-spin {
 
 
 @media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-    #city {
-        width: 186px;
-    }
+
     
     .button4 {
         width: 244px;
@@ -192,9 +188,6 @@ keyframes square-spin {
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
 
-    #city {
-        width: 242.5px;
-    }
 
 }
 
@@ -206,9 +199,7 @@ keyframes square-spin {
             width: 282px;
     }
     
-    #city {
-        width: 234px;
-    }
+
     
     .button4 {
         width: 282px;
@@ -239,14 +230,14 @@ keyframes square-spin {
     
 }
 
-/* iPhone 4/4S (portrait mode) */
 
-@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
-    #city {
-        width: 233px;
-    }
+/* iPhone 2G-4S in portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : portrait) {
     
-    .left_set {
+        .left_set {
         padding-left: 15px;
     }
     
@@ -256,12 +247,12 @@ keyframes square-spin {
 }
 
 
-/* iPhone 4/4S (landscape mode) */
 
-@media only screen and (min-device-width: 320px) and (max-device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
-    #city {
-        width: 232px!important;
-    }
+/* iPhone 2G-4S in landscape */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : landscape) {
     
         .left_set {
         padding-left: 15px;
@@ -269,6 +260,10 @@ keyframes square-spin {
     
     .right_set {
         padding-right: 15px;
+    }
+    
+    #city {
+        width: 232.5px!important;
     }
 }
 
@@ -280,9 +275,7 @@ keyframes square-spin {
 and (min-device-width : 320px) 
 and (max-device-width : 568px) 
 and (orientation : portrait) { 
-    #city{
-        width: 232px;
-    }
+
     
         .left_set {
         padding-left: 15px;
@@ -290,6 +283,14 @@ and (orientation : portrait) {
     
     .right_set {
         padding-right: 15px;
+    }
+    
+    .button4 {
+        width: 280px;
+    }
+    
+    .single-banner a {
+        width: 104%;
     }
 
 }
@@ -300,6 +301,10 @@ and (min-device-width : 320px)
 and (max-device-width : 568px) 
 and (orientation : landscape) {
     
+    #city {
+        width: 232.5px!important;
+    }
+
     
         .left_set {
         padding-left: 15px;
@@ -321,9 +326,7 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (orientation : portrait) { 
     
-    #city {
-        width: 232.5px!important;
-    }
+
     
 }
 
@@ -333,7 +336,11 @@ and (orientation : portrait) {
 and (min-device-width : 375px) 
 and (max-device-width : 667px) 
 and (orientation : landscape) { 
-
+    
+    #city {
+        width: 242.5px;
+    }
+    
 }
 
 
@@ -343,9 +350,7 @@ and (min-device-width : 414px)
 and (max-device-width : 736px) 
 and (orientation : portrait) {
     
-    #city {
-        width: 233px!important;
-    }
+   
     
     
 }
@@ -357,21 +362,22 @@ and (min-device-width : 414px)
 and (max-device-width : 736px) 
 and (orientation : landscape) {
 
-    #city {
-        width: 233px;
-    }
     
     .containere1 {
     margin-left: 67px!important;
     margin-right: 63px!important;
 }
     
-        .left_set {
+    .left_set {
         padding-left: 15px;
     }
     
     .right_set {
         padding-right: 15px;
+    }
+    
+     #city {
+        width: 242.5px;
     }
 }
 
@@ -382,12 +388,13 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) 
 and (orientation : portrait) { 
 
-    #city {
-        width: 243px!important;
-    }
 
     .fixed {
-        height: 140px!important;
+        position: unset!important;
+    }
+    
+    #city {
+        width: 242.5px;
     }
     
    
@@ -403,9 +410,7 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) 
 and (orientation : landscape) { 
 
-    #city {
-        width: 241px!important;
-    }
+
     
     .containere1 {
         margin-left: 45px;
@@ -422,6 +427,10 @@ and (orientation : landscape) {
     
     .fixed {
         height: 35px!important;
+    }
+    
+    #city {
+        width: 234.5px;
     }
 }
 
@@ -441,8 +450,7 @@ and (orientation : landscape) {
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 1.5) {
       .containere1 {
-        margin-left: 45px!important;
-        margin-right: 41px!important;
+     
     }
       
       .button4 {
@@ -457,7 +465,7 @@ and (orientation : landscape) {
       }
       
       .mainmenu.home-4 {
-        text-align: center;
+        text-align: right!important;
     }
       
       .home-4 .fas7-slider-content {
@@ -468,6 +476,12 @@ and (orientation : landscape) {
           padding-top: 40px!important;
           margin-right: 300px!important;
       }
+      
+        .fixed {
+        position: absolute!important;
+           
+    }
+    
       
    
 }
@@ -487,13 +501,11 @@ and (orientation : landscape) {
         margin: 0 auto!important;
         width: 282px!important;
     }
-    
-    #city {
-        width: 233px!important;
-    }
+
 }
 
 
+/*
 @media only screen and (min-device-height:343px) and (max-device-width:768px) and (orientation:landscape) {
         .containere1 {
         margin: 0 auto!important;
@@ -508,6 +520,7 @@ and (orientation : landscape) {
         height: 89px!important;
     }
 }
+*/
 
 
 
@@ -517,11 +530,7 @@ and (orientation : landscape) {
     margin-right: 0px;
 }
     
-/*
-    input#city {
-        width: 235px!important;
-    }
-*/
+
 }
 
 
