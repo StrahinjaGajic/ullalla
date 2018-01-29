@@ -125,10 +125,10 @@
                                 @endif
                             </div>
                         </div>
+                                        <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
                     </div>
                 </div>
                 {{ csrf_field() }}
-                <div style="width: 101%; text-align: center; margin-top: 14px;"><button type="submit" class="button3 button4">{{ __('buttons.search') }}</button></div>
             </div>
             {!! Form::close() !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -215,41 +215,41 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 left_set">
                     <div class="single-banner home-3">
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 right_set">
                     <div class="single-banner home-3">
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>
                         <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
                                 <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                             </div>
                         </div>

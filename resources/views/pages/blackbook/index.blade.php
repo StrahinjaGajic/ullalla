@@ -114,13 +114,13 @@
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('photo') ? 'has-error' : '' }}">
-                            <div class="col-sm-6 col-xs-3">
+                            <div class="col-sm-6 col-xs-12 modal_upload_button">
                                 <input type="hidden" name="photo" class="pull-left" role="uploadcare-uploader" data-crop="1:1" data-images-only="">
                                 @if ($errors->has('photo'))
                                 <span class="help-block">{{ $errors->first('photo') }}</span>
                                 @endif
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 modal_submit_button">
                                 <button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
                             </div>
                         </div>
