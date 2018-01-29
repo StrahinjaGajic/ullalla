@@ -86,13 +86,14 @@
                             </div>
                         </div>
                         @endforeach
-                        <div class="help-block">
+
+                    </div>
+                </div>
+                        <div class="help-block home_help_block">
                             @if($errors->has('type'))
                             {{ $errors->first('type') }}
                             @endif
                         </div>
-                    </div>
-                </div>
                 <div class="containere1">
                     <div class="region">
                     </div>
@@ -103,7 +104,7 @@
                             <button type="button" class="btn go"><div class="span">Go!</div></button> 
                         </a>
 
-                        <div class="help-block">
+                        <div class="help-block" style="color:red;">
                             @if($errors->has('city'))
                             {{ $errors->first('city') }}
                             @endif
