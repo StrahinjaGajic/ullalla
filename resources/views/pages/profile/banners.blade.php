@@ -19,7 +19,7 @@
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
-            @if($user->banners()->count() > 0)
+            @if($user->banners()->count() > 20)
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow">
@@ -65,15 +65,23 @@
             {!! Form::open(['url' => '@' . $user->username . '/banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
             <div class="col-xs-12">
                 <div class="form-group">
-                    <label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
-                        <input type="checkbox" name="news_flyer" class="prepared_flyer" {{ old('news_flyer') ? 'checked' : '' }}>
+                    <label class="control control--checkbox"><a>{{ __('fields.prepared_banner') }}</a>
+                        <input type="checkbox" name="banner_flyer" class="prepared_flyer" {{ old('banner_flyer') ? 'checked' : '' }}>
                         <div class="control__indicator"></div>
                     </label>
                 </div>
 
-                <table class="table">
+                <div class="form-group {{ $errors->has('banner_duration') ? 'has-error' : '' }}">
+                    <label class="control-label">{{ __('fields.duration') }}*</label>
+                    <input type="text" class="form-control events_duration" name="banner_duration" value="{{ old('banner_duration') }}"/>
+                    <input type="hidden" name="duration"/>
+                    <span class="help-block">{{ $errors->has('banner_duration') ? $errors->first('banner_duration') : '' }}</span>
+                </div>
+
+                <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th></th>
                             <th></th>
                             @foreach($pages as $page)
                             <th>{{ $page->page_name }}</th>
@@ -84,14 +92,49 @@
                     <tbody>
                         @foreach($bannerSizes as $size)
                         <tr>
-                            <td>{{ $size->banner_size_name }}</td>
+                            <td>
+                                <span style="display: block;">{{ $size->banner_size_name }}</span>
+                                <span>{{ $size->banner_size_price }} CHF</span>
+                            </td>
+                            <td>
+                                <table class="table">
+                                    <tr>
+                                        <td>D</td>
+                                    </tr>
+                                    <tr>
+                                        <td>W</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M</td>
+                                    </tr>
+                                </table>
+                            </td>
                             @foreach($pages as $page)
                             <td>
                                 @php 
                                 $price = $size->pages()->where('banner_size_id', $size->id)->where('page_id', $page->id)->first();
                                 @endphp
-                                <span>{{ $price ? $price->pivot->price_with_banner : '' }}</span>
-                                <span>{{ $price ? $price->pivot->price_without_banner : '' }}</span>
+                                {{ $price ? $price->pivot->banner_price : '' }}
+                                @if($price)
+                                <div class="form-group">
+                                    <label class="control control--checkbox"><a>{{ $price ? $price->pivot->price_per_day : '' }}</a>
+                                        <input type="checkbox" name="price_per_day[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_day') ? 'checked' : '' }}>
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control control--checkbox"><a>{{ $price ? $price->pivot->price_per_week : '' }}</a>
+                                        <input type="checkbox" name="price_per_week[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_week') ? 'checked' : '' }}>
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control control--checkbox"><a>{{ $price ? $price->pivot->price_per_month : '' }}</a>
+                                        <input type="checkbox" name="price_per_month[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_month') ? 'checked' : '' }}>
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                                @endif
                             </td>
                             @endforeach
                         </tr>
@@ -104,23 +147,12 @@
                     <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" />
                     <span class="help-block">{{ $errors->has('banner_url') ? $errors->first('banner_url') : '' }}</span>
                 </div>
-                <div class="form-group {{ $errors->has('banner_duration') ? 'has-error' : '' }}">
-                    <label class="control-label">{{ __('fields.duration') }}*</label>
-                    <input type="text" class="form-control events_duration" name="banner_duration" value="{{ old('banner_duration') }}"/>
-                    <input type="hidden" name="duration"/>
-                    <span class="help-block">{{ $errors->has('banner_duration') ? $errors->first('banner_duration') : '' }}</span>
-                </div>
                 <div class="flyerless-fields">
                     <div class="form-group {{ $errors->has('banner_description') ? 'has-error' : '' }}">
                         <label class="control-label">{{ __('fields.description') }}*</label>
                         <textarea name="banner_description">{{ old('banner_description') }}</textarea>
                         <span class="help-block">{{ $errors->has('banner_description') ? $errors->first('banner_description') : '' }}</span>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">{{ __('fields.price_per_day') }}</label>
-                    <input type="text" disabled="" class="form-control events_price" value="{{ number_format(getEventPrice(true), 2) }}">
-                    <span class="currency-holder">CHF</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">{{ __('fields.total') }}</label>
@@ -327,9 +359,9 @@
 
 <script>
     $(function () {
-        $("input.pages_checkbox:checkbox").on('change', function() {
+        $("input.price_per_duration:checkbox").on('change', function() {
             var that = $(this);
-            $('input.pages_checkbox:checkbox').not(this).prop('checked', false);
+            $(this).closest('td').find('input.price_per_duration:checkbox').not(this).prop('checked', false);
         });
     });
 </script>

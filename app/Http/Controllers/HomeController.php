@@ -6,6 +6,8 @@ use DB;
 use Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Banner;
+use App\Models\BannerPage;
 use Illuminate\Http\Request;
 Use Plivo;
 
@@ -21,6 +23,8 @@ class HomeController extends Controller
 //
 //		$response = Plivo::sendSMS($params);
 //dd($response);
+
+		$banners = BannerPage::where('page_id', 1)->get();
 
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
@@ -74,8 +78,6 @@ class HomeController extends Controller
 			}
 		}
 
-		
-
-		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'lotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm'));
+		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'lotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm', 'banners'));
 	}
 }

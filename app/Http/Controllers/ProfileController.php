@@ -10,16 +10,19 @@ use Validator;
 use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\Price;
+use App\Models\Banner;
 use App\Models\Canton;
 use App\Models\Service;
 use App\Models\Country;
 use App\Models\Package;
 use App\Models\BannerSize;
+use App\Models\BannerPage;
 use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
 use App\Models\ContactOption;
 use App\Models\ServiceOption;
 use App\Models\SpokenLanguage;
+use App\Models\PageBannerSize;
 use Stripe\{Charge, Customer};
 
 class ProfileController extends Controller
@@ -525,6 +528,7 @@ class ProfileController extends Controller
 
         // get combined data
         $syncData = array_combine(array_keys($spokenLanguages), $levels);
+
         // sync data and save
         $user->spoken_languages()->sync($syncData);
 
@@ -754,12 +758,29 @@ class ProfileController extends Controller
         return view('pages.profile.banners', compact('user', 'pages', 'bannerSizes'));
     }
 
-    public function postBanners()
+    public function postBanners(Request $request)
     {
         $user = Auth::user();
 
-        if ($user->banners()->count() >= 1) {
-            return redirect()->back();
+        // if ($user->banners()->count() >= 1) {
+        //     return redirect()->back();
+        // }
+
+        $data = getBannerTotalAmountAndDataToSync($request);
+
+        $banner = new Banner;
+        $banner->banner_total_amount = $data['total'];
+        $banner->user_id = $user->id;
+        $banner->save();
+
+        foreach ($data['syncedData'] as $pageId => $sizes) {
+            foreach ($sizes as $size) {
+                $bannerPage = new BannerPage;
+                $bannerPage->banner_id = $banner->id;
+                $bannerPage->page_id = $pageId;
+                $bannerPage->banner_size_id = $size['banner_size_id'];
+                $bannerPage->save();
+            }
         }
 
         if ($request->banner_flyer == 'on') {

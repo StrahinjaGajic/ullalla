@@ -647,4 +647,30 @@ function getEventPrice($perDay = false, $flyerless = true)
     }
 }
 
+function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_day', $total = 0, $sync = []) {
+
+    $array = $request->$pricePerTime;
+
+    if (count($array) > 0) {
+        foreach ($array as $pageId => $sizes) {
+            foreach ($sizes as $sizeId => $value) {
+                $price = App\Models\PageBannerSize::where([
+                    ['page_id', $pageId],
+                    ['banner_size_id', $sizeId],
+                ])->value($pricePerTime);
+                $sync[$pageId][] = ['banner_size_id' => $sizeId];
+                $total += $price;
+            }
+        }
+    }
+
+    if ($pricePerTime == 'price_per_day') {
+        return getBannerTotalAmountAndDataToSync($request, 'price_per_week', $total, $sync);
+    } elseif ($pricePerTime == 'price_per_week') {
+        return getBannerTotalAmountAndDataToSync($request, 'price_per_month', $total, $sync);
+    }
+
+    return ['total' => $total, 'syncedData' => $sync];
+}
+
 ?>

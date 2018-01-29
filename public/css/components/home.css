@@ -76,8 +76,12 @@ input.form-control {
     cursor: pointer;
 }
 
-.small_banner {
+/*.small_banner {
     margin: 10px 0 20px 0!important;
+}*/
+
+.small_banner {
+    margin: 0px !important;
 }
 
 .left_set {

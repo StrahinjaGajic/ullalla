@@ -16,6 +16,7 @@ class CreateBannerSizesTable extends Migration
         Schema::create('banner_sizes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('banner_size_name');
+            $table->integer('banner_size_price');
         });
     }
 

@@ -85,7 +85,7 @@ Route::get('@{username}/languages', 'ProfileController@getLanguages');
 Route::put('@{username}/languages/store', 'ProfileController@postLanguages');
 
 Route::get('@{username}/banners', 'ProfileController@getBanners');
-Route::put('@{username}/banners/store', 'ProfileController@postBanners');
+Route::post('@{username}/banners/store', 'ProfileController@postBanners');
 
 # LOCAL CONTROLLER
 Route::get('locals/@{username}/create', 'LocalController@getCreate');

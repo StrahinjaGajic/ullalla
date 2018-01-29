@@ -118,5 +118,9 @@ return [
     'prepared_flyer' => 'Already have a prepared flyer?',
     'price_per_day' => 'Price per day',
     'total' => 'Total',
-  	  
+  	 
+    #banners
+    'prepared_banner' => 'Already have a prepared banner?',
+    'url' => 'Url',
+    
 ];

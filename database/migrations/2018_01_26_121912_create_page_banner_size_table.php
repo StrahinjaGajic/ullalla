@@ -17,8 +17,10 @@ class CreatePageBannerSizeTable extends Migration
             $table->increments('id');
             $table->integer('page_id')->unsigned();
             $table->integer('banner_size_id')->unsigned();
-            $table->integer('price_with_banner')->unsigned();
-            $table->integer('price_without_banner')->unsigned();
+            $table->integer('banner_price')->unsigned();
+            $table->integer('price_per_day')->unsigned();
+            $table->integer('price_per_week')->unsigned();
+            $table->integer('price_per_month')->unsigned();
 
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
             $table->foreign('banner_size_id')->references('id')->on('banner_sizes')->onDelete('cascade');

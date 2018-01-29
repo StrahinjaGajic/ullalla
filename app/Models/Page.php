@@ -10,11 +10,11 @@ class Page extends Model
 
     public function banner_sizes()
     {
-        return $this->belongsToMany('App\Models\BannerSize', 'page_banner_size')->withPivot('price_without_banner', 'price_with_banner');
+        return $this->belongsToMany('App\Models\BannerSize', 'page_banner_size')->withPivot('price_per_day', 'price_per_week', 'price_per_month');
     }
 
     public function banners()
     {
-        return $this->belongsToMany('App\Models\Banner', 'page_banner');
+        return $this->belongsToMany('App\Models\Banner', 'banner_page', 'banner_id', 'page_id', 'banner_size_id');
     }
 }
