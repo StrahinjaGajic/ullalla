@@ -1200,7 +1200,7 @@ div.fixed {
 }
 
 .containere {
-    padding-bottom: 28px;
+    padding-bottom: 16px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
