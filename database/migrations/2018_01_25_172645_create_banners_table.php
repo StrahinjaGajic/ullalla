@@ -15,7 +15,16 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->string('banner_url')->nullable();
+            $table->string('user_photo')->nullable();
+            $table->string('banner_photo')->nullable();
+            $table->timestamp('banner_activation_date');
+            $table->timestamp('banner_expiry_date');
+            $table->integer('banner_total_amount');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

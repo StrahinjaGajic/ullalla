@@ -74,6 +74,8 @@ class HomeController extends Controller
 			}
 		}
 
+		
+
 		return view('pages.home', compact('defaultPackageExpired', 'gotmPackageExpired', 'lotmPackageExpired', 'localDefaultPackageExpired', 'gotm', 'totm'));
 	}
 }

@@ -8,11 +8,13 @@ use Session;
 use DateTime;
 use Validator;
 use Carbon\Carbon;
+use App\Models\Page;
 use App\Models\Price;
 use App\Models\Canton;
 use App\Models\Service;
 use App\Models\Country;
 use App\Models\Package;
+use App\Models\BannerSize;
 use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
 use App\Models\ContactOption;
@@ -746,7 +748,10 @@ class ProfileController extends Controller
     public function getBanners()
     {
         $user = Auth::user();
-        return view('pages.profile.banners', compact('user'));
+        $pages = Page::with('banner_sizes')->get();
+        $bannerSizes = BannerSize::with('pages')->get();
+
+        return view('pages.profile.banners', compact('user', 'pages', 'bannerSizes'));
     }
 
     public function postBanners()

@@ -133,7 +133,7 @@
             {!! Form::close() !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
-                    <a class="right-banner" href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                    <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
                 </div>
             </div>
         </div>

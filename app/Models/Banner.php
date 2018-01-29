@@ -15,4 +15,9 @@ class Banner extends Model
 	{
 		return $this->belongsTo('App\Models\User');
 	}
+
+	public function pages()
+	{
+		return $this->belongsToMany('App\Models\Page', 'page_banner');
+	}
 }

@@ -11,7 +11,7 @@
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
-            {!! parseEditLocalProfileMenu('banners') !!}
+            {!! parseEditProfileMenu('banners') !!}
         </div>
         <div class="col-sm-10 profile-info">
             <div class="col-xs-12">
@@ -23,7 +23,7 @@
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow">
-                        <a>{{ __('headings.news') }} <i class="fa fa-caret-down"></i></a>
+                        <a>{{ __('headings.banners') }} <i class="fa fa-caret-down"></i></a>
                     </div>
                 </div>
                 <div class="layout-list">
@@ -32,27 +32,27 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('fields.photo') }}</th>
-                                    <th>{{ __('fields.title') }}</th>
+                                    <th>{{ __('fields.url') }}</th>
                                     <th>{{ __('headings.activation_date') }}</th>
                                     <th>{{ __('headings.expiry_date') }}</th>
                                 </tr>
                             </thead>
                             <tbody id="prices_body">
-                                @foreach($user->banners as $news)
+                                @foreach($user->banners as $banner)
                                 <tr>
                                     <td>
-                                        @if ($news->news_photo)
+                                        @if ($banner->banner_photo)
                                         <div class="image-tooltip">
-                                            <img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($news->news_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='news image'/>
+                                            <img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='news image'/>
                                             <span>
-                                                <img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($news->news_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='news image'/>
+                                                <img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='news image'/>
                                             </span>
                                         </div>
                                         @endif
                                     </td>
-                                    <td>{{ $news->news_title }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($news->news_activation_date)) }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($news->news_expiry_date)) }}</td>
+                                    <td>{{ $news->banner_url }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($banner->banner_activation_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($banner->banner_expiry_date)) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -61,12 +61,86 @@
                 </div>
             </div>
             @endif
+
+            {!! Form::open(['url' => '@' . $user->username . '/banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label class="control control--checkbox"><a>{{ __('fields.prepared_flyer') }}</a>
+                        <input type="checkbox" name="news_flyer" class="prepared_flyer" {{ old('news_flyer') ? 'checked' : '' }}>
+                        <div class="control__indicator"></div>
+                    </label>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            @foreach($pages as $page)
+                            <th>{{ $page->page_name }}</th>
+                            @endforeach
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($bannerSizes as $size)
+                        <tr>
+                            <td>{{ $size->banner_size_name }}</td>
+                            @foreach($pages as $page)
+                            <td>
+                                @php 
+                                $price = $size->pages()->where('banner_size_id', $size->id)->where('page_id', $page->id)->first();
+                                @endphp
+                                <span>{{ $price ? $price->pivot->price_with_banner : '' }}</span>
+                                <span>{{ $price ? $price->pivot->price_without_banner : '' }}</span>
+                            </td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
+                    <label class="control-label">{{ __('fields.url') }}*</label>
+                    <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" />
+                    <span class="help-block">{{ $errors->has('banner_url') ? $errors->first('banner_url') : '' }}</span>
+                </div>
+                <div class="form-group {{ $errors->has('banner_duration') ? 'has-error' : '' }}">
+                    <label class="control-label">{{ __('fields.duration') }}*</label>
+                    <input type="text" class="form-control events_duration" name="banner_duration" value="{{ old('banner_duration') }}"/>
+                    <input type="hidden" name="duration"/>
+                    <span class="help-block">{{ $errors->has('banner_duration') ? $errors->first('banner_duration') : '' }}</span>
+                </div>
+                <div class="flyerless-fields">
+                    <div class="form-group {{ $errors->has('banner_description') ? 'has-error' : '' }}">
+                        <label class="control-label">{{ __('fields.description') }}*</label>
+                        <textarea name="banner_description">{{ old('banner_description') }}</textarea>
+                        <span class="help-block">{{ $errors->has('banner_description') ? $errors->first('banner_description') : '' }}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{ __('fields.price_per_day') }}</label>
+                    <input type="text" disabled="" class="form-control events_price" value="{{ number_format(getEventPrice(true), 2) }}">
+                    <span class="currency-holder">CHF</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{ __('fields.total') }}</label>
+                    <input type="text" disabled="" class="form-control events_total" value="{{ number_format(getEventPrice(), 2) }}">
+                    <span class="currency-holder">CHF</span>
+                </div>
+                <div class="form-group {{ $errors->has('banner_photo') ? 'has-error' : '' }}">
+                    <div class="image-preview-multiple">
+                        <input type="hidden" name="banner_photo" data-crop="490x560 minimum" data-images-only="">
+                        <span class="help-block">{{ $errors->has('banner_photo') ? $errors->first('banner_photo') : '' }}</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
+                <input type="hidden" name="stripeToken" id="stripeToken">
+                <input type="hidden" name="stripeEmail" id="stripeEmail">
+                {!! Form::close() !!}
+            </div>
+
         </div>
     </div>
-</div>
-
-<div class="wrapper section-create-profile">
-    
 </div>
 @stop
 
@@ -82,26 +156,7 @@
         var start = moment(new Date()).format('DD/MM/YYYY H:mm');
         var end = moment(start, 'DD/MM/YYYY H:mm').add('1', 'years').format('DD/MM/YYYY H:mm');
 
-        $('input[name="events_duration"]').daterangepicker({
-            minDate: start,
-            maxDate: end,
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-        });
-
-        $('input[name="events_date"]').daterangepicker({
-            timePicker: true,
-            timePicker24Hour: true,
-            timePickerIncrement: 15,
-            minDate: start,
-            maxDate: end,
-            locale: {
-                format: 'DD/MM/YYYY H:mm'
-            }
-        });
-
-        $('input[name="news_duration"]').daterangepicker({
+        $('input[name="banner_duration"]').daterangepicker({
             minDate: start,
             maxDate: end,
             locale: {
@@ -131,12 +186,9 @@
     }
 
     $(function() {
-        const eventWidget = uploadcare.Widget('[name=events_photo]')
-        const newsWidget = uploadcare.Widget('[name=news_photo]')
-        eventWidget.validators.push(minDimensions(490, 560));
-        eventWidget.validators.push(maxFileSize(20000000));
-        newsWidget.validators.push(minDimensions(490, 560));
-        newsWidget.validators.push(maxFileSize(20000000));
+        const bannerWidget = uploadcare.Widget('[name=banner_photo]')
+        bannerWidget.validators.push(minDimensions(490, 560));
+        bannerWidget.validators.push(maxFileSize(20000000));
     });
 
 </script>
@@ -164,15 +216,15 @@
 <script>
     var eventPricePerDay = parseFloat('{{ getEventPrice(true) }}');
     var eventPrice = parseFloat('{{ getEventPrice() }}');
+    var form = $('#bannerForm');
 
     $('.prepared_flyer').on('click', function () {
-        var modalBody = $(this).closest('.modal-body');
-        var flyerlessDiv = modalBody.find('.flyerless-fields');
-        var totalEl = modalBody.find('.events_total');
+        var flyerlessDiv = form.find('.flyerless-fields');
+        var totalEl = form.find('.events_total');
 
         flyerlessDiv.toggle();
 
-        var diffInDays = parseFloat(modalBody.find('input[name="duration"]').val());
+        var diffInDays = parseFloat(form.find('input[name="duration"]').val());
 
         if (flyerlessDiv.is(':hidden')) {
             var flyerlessEventPrice = parseFloat('{{ getEventPrice(false, false) }}');
@@ -199,9 +251,8 @@
     $('.events_duration').on('change', function () {
         var that = $(this);
         var thatVal = that.val();
-        var modalBody = that.closest('.modal-body');
-        var totalEl = modalBody.find('.events_total');
-        var flyerlessDiv = modalBody.find('.flyerless-fields');
+        var totalEl = form.find('.events_total');
+        var flyerlessDiv = form.find('.flyerless-fields');
 
         var exploadedThatVal = thatVal.split(' - ');
         var from = moment(exploadedThatVal[0], 'DD/MM/YYYY');
@@ -212,26 +263,22 @@
         totalEl.val(total.toFixed(2));
         that.next().val(diffInDays);
 
-        if (!modalBody.is(':hidden')) {
-            if (flyerlessDiv.is(':hidden')) {
-                var flyerlessEventPrice = parseFloat('{{ getEventPrice(false, false) }}');
-                if (diffInDays > 0) {
-                    var totalWithFlyer = flyerlessEventPrice + (eventPricePerDay * diffInDays);
-                    totalEl.val(totalWithFlyer.toFixed(2));
-                } else {
-                    totalEl.val(flyerlessEventPrice.toFixed(2));
-                }
+        if (flyerlessDiv.is(':hidden')) {
+            var flyerlessEventPrice = parseFloat('{{ getEventPrice(false, false) }}');
+            if (diffInDays > 0) {
+                var totalWithFlyer = flyerlessEventPrice + (eventPricePerDay * diffInDays);
+                totalEl.val(totalWithFlyer.toFixed(2));
             } else {
-                var eventPrice = parseFloat('{{ getEventPrice(false, true) }}');
-                if (diffInDays > 0) {
-                    var totalWithoutFlyer = eventPrice + (eventPricePerDay * diffInDays);
-                    totalEl.val(totalWithoutFlyer.toFixed(2));
-                } else {
-                    totalEl.val(eventPrice.toFixed(2));
-                }
+                totalEl.val(flyerlessEventPrice.toFixed(2));
             }
         } else {
-            totalEl.val(parseFloat('{{ getEventPrice(false, true) }}').toFixed(2));
+            var eventPrice = parseFloat('{{ getEventPrice(false, true) }}');
+            if (diffInDays > 0) {
+                var totalWithoutFlyer = eventPrice + (eventPricePerDay * diffInDays);
+                totalEl.val(totalWithoutFlyer.toFixed(2));
+            } else {
+                totalEl.val(eventPrice.toFixed(2));
+            }
         }
     });
 </script>
@@ -249,9 +296,9 @@
             stripeToken.val(token.id);
             // submit the form
             var username = '{{ $user->username }}';
-            var url = getUrl('/@' + username + '/packages/store');
+            var url = getUrl('/@' + username + '/banners/store');
             var token = $('input[name="_token"]').val();
-            var form = $('#profileForm');
+            var form = $('#bannerForm');
             var data = form.serialize();
             // fire ajax post request
             $.post(url, data)
@@ -275,6 +322,15 @@
             description: '{{ $user->email }}',
         });
         e.preventDefault(); 
+    });
+</script>
+
+<script>
+    $(function () {
+        $("input.pages_checkbox:checkbox").on('change', function() {
+            var that = $(this);
+            $('input.pages_checkbox:checkbox').not(this).prop('checked', false);
+        });
     });
 </script>
 
