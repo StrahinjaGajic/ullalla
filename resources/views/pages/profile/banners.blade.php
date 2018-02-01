@@ -78,6 +78,11 @@
                     <span class="help-block">{{ $errors->has('banner_duration') ? $errors->first('banner_duration') : '' }}</span>
                 </div> --}}
 
+                <div class="help-block banner-error" style="color: red;">
+                    @if($errors->has('price_per_day') || $errors->has('price_per_week') || $errors->has('price_per_month'))
+                        Please choose at least one banner
+                    @endif
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -375,15 +380,24 @@
             $.post(url, data)
             .done(function (response, textStatus) {
                 var errors = response.errors;
+                $('.form-group').removeClass('has-error');
+                $('.help-block').text('');
                 if (errors) {
-                    //proveriti da li je greska u navodnicima !!!
                     console.log(errors);
+                    $.each(errors, function (index, value) {
+                        var errorField = $('[name="' + index + '"]');
+                        errorField.siblings('.help-block').text(value);
+                        errorField.closest('.form-group').addClass('has-error');
+                        if (index == 'price_per_day' || index == 'price_per_week' || index == 'price_per_month') {
+                            $('.banner-error').text('Please choose at least one banner');
+                        }
+                    });
                 } else {
                     window.location.href = getUrl('/@' + username  + '/banners');
                 }
             })
             .fail(function(data, textStatus) {
-                $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+                $('.banner-error').text(data.responseJSON.status);
             });
         }
     });
@@ -407,7 +421,6 @@
             var bannerPrice = parseFloat(closestTr.find('span.banner-price').text());
             var pricePerTimeMultipleDurationEl = closestTd.find('.pmd');
             var pricePerTimeMultipleDuration = pricePerTimeMultipleDurationEl.attr('value');
-            console.log(pricePerTimeMultipleDuration);
             // var pricePerTime = formGroup.find('.price-per-time-holder span:first-child').text();
             // var duration = formGroup.find('.modal').find('input[type="text"]').val();
 

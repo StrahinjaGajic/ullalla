@@ -176,6 +176,8 @@ return [
     'packages' => 'Packages',
     'banners' => 'Banners',
     'news_and_events' => 'News/Events',
+    'add_card' => 'Add Card',
+    
 
     #getLoclasOrderBy
     'username_asc' => 'Username',

@@ -763,48 +763,66 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $data = getBannerTotalAmountAndDataToSync($request);
+        $total = $data['total'];
 
-        dd($data['total']);
+        $perDay = 'price_per_week, price_per_month';
+        $perMonth = 'price_per_day, price_per_week';
+        $perWeek = 'price_per_day, price_per_month';
 
-        $banner = new Banner;
-        $banner->banner_total_amount = $data['total'];
-        $banner->user_id = $user->id;
-        $banner->save();
-
-        foreach ($data['syncedData'] as $pageId => $sizes) {
-            foreach ($sizes as $size) {
-                $bannerPage = new BannerPage;
-                $bannerPage->banner_id = $banner->id;
-                $bannerPage->page_id = $pageId;
-                $bannerPage->banner_size_id = $size['banner_size_id'];
-                $bannerPage->save();
+        $field = '';
+        foreach ($request->all() as $field => $value) {
+            if (strpos($field, 'price_per') !== false) {
+                $field = $field;
+                break;
             }
+        }
+
+        // get price per time input, check it and define validation rules to use them later in validator
+        if ($field == 'price_per_day') {
+            $perDay = 'price_per_day, price_per_month';
+        } elseif ($field == 'price_per_week') {
+            $perDay = 'price_per_week, price_per_day';
+            $perMonth = 'price_per_week, price_per_month';
+        } elseif ($field == 'price_per_month') {
+            $perDay = 'price_per_month, price_per_day';
+            $perMonth = 'price_per_month, price_per_week';
         }
 
         if ($request->banner_flyer == 'on') {
             $validator = Validator::make($request->all(), [
-                'news_photo' => 'required',
+                'price_per_day' => 'required_without_all:' . $perMonth,
+                'price_per_week' => 'required_without_all:' . $perDay,
+                'price_per_month' => 'required_without_all:' . $perDay,
+                'banner_photo' => 'required',
+                'banner_url' => 'required',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'news_title' => 'required',
-                'news_duration' => 'required',
-                'news_description' => 'required',
-                'news_photo' => 'required',
+                'price_per_day' => 'required_without_all:' . $perMonth,
+                'price_per_week' => 'required_without_all:' . $perDay,
+                'price_per_month' => 'required_without_all:' . $perDay,
+                'banner_description' => 'required',
+                'banner_photo' => 'required',
+                'banner_url' => 'required',
             ]);
         }
 
         if ($validator->passes()) {
 
-            $news = new News;
-            $news->news_title = $request->news_title;
-            $news->news_description = $request->news_description;
-            $news->news_total_amount = $total;
-            $news->news_activation_date = $from->format('Y-m-d');
-            $news->news_expiry_date = $to->format('Y-m-d');
-            $news->news_photo = storeAndGetUploadCareFiles($request->news_photo);
+            $banner = new Banner;
+            $banner->banner_total_amount = $total;
+            $banner->user_id = $user->id;
+            $banner->save();
 
-            $user->banners()->save($news);
+            foreach ($data['syncedData'] as $pageId => $sizes) {
+                foreach ($sizes as $size) {
+                    $bannerPage = new BannerPage;
+                    $bannerPage->banner_id = $banner->id;
+                    $bannerPage->page_id = $pageId;
+                    $bannerPage->banner_size_id = $size['banner_size_id'];
+                    $bannerPage->save();
+                }
+            }
 
             try {
                 $customer = Customer::create([
@@ -876,6 +894,51 @@ class ProfileController extends Controller
                 ]);
             }
         }
+    }
+
+    public function getCard()
+    {   
+        $user = Auth::user();
+        return view('pages.profile.add_card', compact('user'));
+    }
+
+    public function postCard()
+    {   
+        $user = Auth::user();
+
+        try {
+            $customer = Customer::retrieve($user->stripe_id); // stored in your application
+            $customer->email = $user->email; // obtained with Checkout
+            $customer->source = request('stripeToken'); // obtained with Checkout
+            $customer->save();
+
+            // if (!$customer) {
+            //     $customer = Customer::create([
+            //       "email" => "paying.user@example.com",
+            //       "source" => request('stripeToken'),
+            //   ]);
+            // }
+
+            // Charge::create([
+            //     'customer' => $customer->id,
+            //     'amount' => 2000,
+            //     'currency' => 'usd',
+            // ]);
+
+            Session::flash('success', 'Your card details have been updated!');
+
+            return response()->json([
+                'customer' => $customer
+            ]);
+        } catch(\Error\Card $e) {
+
+            // Use the variable $error to save any errors
+            // To be displayed to the customer later in the page
+            $body = $e->getJsonBody();
+            $err  = $body['error'];
+            $error = $err['message'];
+        }
+        $user = Auth::user();
     }
 
     public function deletePrice(Request $request)

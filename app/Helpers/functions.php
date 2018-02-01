@@ -385,7 +385,8 @@ function getEditProfilePages() {
         'working_time' => __('functions.working_time'),
         'prices' => __('functions.prices'),
         'packages' => __('functions.packages'),
-        'banners' => __('functions.banners')
+        'banners' => __('functions.banners'),
+        'add_card' => __('functions.add_card')
     ];
 }
 
@@ -647,14 +648,16 @@ function getEventPrice($perDay = false, $flyerless = true)
     }
 }
 
-function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_day', $total = 0, $sync = []) {
+function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_day', $total = 0, $sync = [], $sizesToCheck = [], $neverDone = true) {
 
     $array = $request->$pricePerTime;
+    $sizeId = '1';
+    $checkIfTimeIsMentioned[$sizeId] = [];
 
     if (count($array) > 0) {
         foreach ($array as $pageId => $sizes) {
             foreach ($sizes as $sizeId => $value) {
-                $sizeIDs[] = $sizeId;
+                $checkIfTimeIsMentioned[$sizeId][] = $sizeId;
                 $pageBannerSize = App\Models\PageBannerSize::where([
                     ['page_id', $pageId],
                     ['banner_size_id', $sizeId],
@@ -662,18 +665,21 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
                 $bannerSize = App\Models\BannerSize::find($sizeId);
                 $sync[$pageId][] = ['banner_size_id' => $sizeId];
                 $subTotal = $pageBannerSize->$pricePerTime * $request->banner_duration[$pricePerTime][$pageId][$sizeId];
-                if (array_count_values($sizeIDs)[$sizeId] == 1) {
+                if ($neverDone === true && !in_array($sizeId, $sizesToCheck)) {
                     $subTotal += $bannerSize->banner_size_price;
                 }
                 $total += $subTotal;
             }
+            $neverDone = count($checkIfTimeIsMentioned[$sizeId]) > 0 ? false : true;
         }
     }
 
+    $sizeIds = array_keys($checkIfTimeIsMentioned);
+
     if ($pricePerTime == 'price_per_day') {
-        return getBannerTotalAmountAndDataToSync($request, 'price_per_week', $total, $sync);
+        return getBannerTotalAmountAndDataToSync($request, 'price_per_week', $total, $sync, $sizeIds);
     } elseif ($pricePerTime == 'price_per_week') {
-        return getBannerTotalAmountAndDataToSync($request, 'price_per_month', $total, $sync);
+        return getBannerTotalAmountAndDataToSync($request, 'price_per_month', $total, $sync, $sizeIds);
     }
 
     return ['total' => $total, 'syncedData' => $sync];
