@@ -762,11 +762,9 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // if ($user->banners()->count() >= 1) {
-        //     return redirect()->back();
-        // }
-
         $data = getBannerTotalAmountAndDataToSync($request);
+
+        dd($data['total']);
 
         $banner = new Banner;
         $banner->banner_total_amount = $data['total'];

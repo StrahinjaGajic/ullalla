@@ -654,12 +654,18 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
     if (count($array) > 0) {
         foreach ($array as $pageId => $sizes) {
             foreach ($sizes as $sizeId => $value) {
-                $price = App\Models\PageBannerSize::where([
+                $sizeIDs[] = $sizeId;
+                $pageBannerSize = App\Models\PageBannerSize::where([
                     ['page_id', $pageId],
                     ['banner_size_id', $sizeId],
-                ])->value($pricePerTime);
+                ])->first();
+                $bannerSize = App\Models\BannerSize::find($sizeId);
                 $sync[$pageId][] = ['banner_size_id' => $sizeId];
-                $total += $price;
+                $subTotal = $pageBannerSize->$pricePerTime * $request->banner_duration[$pricePerTime][$pageId][$sizeId];
+                if (array_count_values($sizeIDs)[$sizeId] == 1) {
+                    $subTotal += $bannerSize->banner_size_price;
+                }
+                $total += $subTotal;
             }
         }
     }

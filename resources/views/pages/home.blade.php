@@ -13,56 +13,12 @@
             <div class="col-lg-12 col-xs-12">
                 <div class="bend niceties preview-1 ho_4">
                     <div id="ensign-nivoslider" class="slides">
-                        <img src="/img/sliders/S-7.jpg" alt="" title="#slider-direction-1"  />
-                        <img src="/img/sliders/S-8.jpg" alt="" title="#slider-direction-2"  />
-                    </div>
-                    <div id="slider-direction-1" class="t-cn slider-direction slider-one">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 text-right">
-                                    <div class="fas7-slider-content">
-                                        <div class="layer-1-1">
-                                            <h5 class="title1">{{ __('headings.this_banner_is') }}</h5>
-                                        </div>
-                                        <div class="layer-1-2">
-                                            <h2 class="title2">
-                                                <span class="fashion-1"><span class="fas-for">1170x</span><span class="fas-man">390</span></span>
-                                            </h2>
-                                        </div>
-                                        <div class="layer-1-3">
-                                            <p class="title3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <br>eiusmod tempor incididunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <div class="layer-1-4">
-                                            <a class="shop-n" href="/">{{ __('global.shop_now') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="slider-direction-2" class="slider-direction slider-two">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 text-left">
-                                    <div class="fas8-slider-content">
-                                        <div class="layer-2-1">
-                                            <h5 class="title1">{{ __('headings.this_one_is_also') }}</h5>
-                                        </div>
-                                        <div class="layer-2-2">
-                                            <h2 class="title2">
-                                                <span class="fashion-1">1170x390</span>
-                                            </h2>
-                                        </div>
-                                        <div class="layer-2-3">
-                                            <p class="title3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do<br> eiusmod tempor incididunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud.</p>
-                                        </div>
-                                        <div class="layer-2-4">
-                                            <a class="shop-n" href="/">{{ __('global.go_now') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($bigBanners as $banner)
+                            @php
+                                $singleBanner = App\Models\Banner::find($banner->banner_id);
+                            @endphp
+                            <img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(1140, 360)->getUrl() }}" alt="">
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -86,14 +42,13 @@
                             </div>
                         </div>
                         @endforeach
-
                     </div>
                 </div>
-                        <div class="help-block home_help_block">
-                            @if($errors->has('type'))
-                            {{ $errors->first('type') }}
-                            @endif
-                        </div>
+                <div class="help-block home_help_block">
+                    @if($errors->has('type'))
+                    {{ $errors->first('type') }}
+                    @endif
+                </div>
                 <div class="containere1">
                     <div class="region">
                     </div>
@@ -136,7 +91,10 @@
             {!! Form::close() !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
-                    <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
+                    @php
+                        $singleBanner = App\Models\Banner::find($mediumBanner->banner_id);
+                    @endphp
+                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(555, 330)->getUrl() }}" alt="" /></span></a>
                 </div>
             </div>
         </div>
@@ -218,46 +176,50 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 left_set">
-                    <div class="single-banner home-3">
-                        <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                        </div>
-                        <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
+                @foreach($verticalBanners->chunk(2) as $banners)
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-banner home-3">
+                            @foreach($banners as $banner)
+                                @php
+                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                @endphp
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
+                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 330)->getUrl() }}" alt="" /></span></a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 right_set">
-                    <div class="single-banner home-3">
-                        <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                        </div>
-                        <div class="sb-wrapper">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                <a href="/#"><span><img src="/img/banner/banner-13.jpg" alt="" /></span></a>
-                            </div>
+                @endforeach
+
+                @foreach($quarterBanners->chunk(2) as $banners)
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-banner home-3">
+                            @foreach($banners as $banner)
+                                @php
+                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                @endphp
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
+                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 165)->getUrl() }}" alt="" /></span></a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
+                @endforeach
+
+                @foreach($horizontalBanners->chunk(1) as $banners)
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-banner home-3">
+                            @foreach($banners as $banner)
+                                @php
+                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                @endphp
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 small_banner">
+                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(585, 165)->getUrl() }}" alt="" /></span></a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
