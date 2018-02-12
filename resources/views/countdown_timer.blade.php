@@ -139,7 +139,7 @@
             var timeinterval = setInterval(updateClock, 1000);
         }
 
-        var deadline = new Date(Date.parse('2018-02-01'));
+        var deadline = new Date(Date.parse('2018-03-01'));
             console.log(deadline);
         initializeClock('clockdiv', deadline);
     </script>

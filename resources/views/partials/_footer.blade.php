@@ -27,7 +27,7 @@
                 
             </div>
         </div>
-        <p>© MPSoft 2017. All Rights Reserved.</p>
+        <p>© MPSoft 2018. All Rights Reserved.</p>
     </div>
 </section>
 @include('partials._scripts')

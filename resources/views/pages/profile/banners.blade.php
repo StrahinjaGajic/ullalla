@@ -530,6 +530,15 @@
 
         that.closest('.form-group').find('input:checkbox').prop('checked', true);
     });
-</script>
 
+    // set price to zero if user chooses option to upload his own banner
+    $('.prepared_flyer').on('click', function () {
+        var that = $(this);
+        if (that.is(':checked')) {
+            $('.banner-price').text('0.00');
+        } else {
+            $('.banner-price').text('0.00');
+        }
+    });
+</script>
 @stop

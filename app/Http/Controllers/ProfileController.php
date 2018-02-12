@@ -825,12 +825,16 @@ class ProfileController extends Controller
             }
 
             try {
-                $customer = Customer::create([
-                    'email' => request('stripeEmail'),
-                    'source' => request('stripeToken'),
-                ]);
-                $user->stripe_id = $customer->id;
-                $user->save();
+                $customer = Customer::retrieve($user->stripe_id);
+
+                if (!$customer) {
+                    $customer = Customer::create([
+                        "email" => request('stripeEmail'),
+                        "source" => request('stripeToken'),
+                    ]);
+                    $user->stripe_id = $customer->id;
+                    $user->save();
+                }
 
                 Charge::create([
                     'customer' => $user->stripe_id,

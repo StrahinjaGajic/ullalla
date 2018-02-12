@@ -16,14 +16,14 @@ class FrontAuth
      */
     public function handle($request, Closure $next, $guard = 'web')
     {
-        if (Auth::guard($guard)->guest()){
-            if ($request->ajax() || $request->wantsJson()) {
+
+        if (Auth::guard('local')->guest() && Auth::guard('web')->guest()) {            
+            if ($request->ajax() || $request->wantsJson()) {                
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('/signin');
             }
         }
-
         return $next($request);
     }
 }

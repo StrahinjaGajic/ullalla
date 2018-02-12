@@ -43,7 +43,7 @@ class ActivateScheduledPackages extends Command
         $usersThatHavePendingGotmPackages = User::whereNotNull('scheduled_gotm_package')->get();
 
         $localsThatHavePendingDefaultPackages = Local::whereNotNull('scheduled_default_package')->get();
-        $localsThatHavePendingGotmPackages = User::whereNotNull('scheduled_gotm_package')->get();
+        $localsThatHavePendingGotmPackages = Local::whereNotNull('scheduled_gotm_package')->get();
 
         foreach ($usersThatHavePendingDefaultPackages as $user) {
             $scheduledData = explode('&|', $user->scheduled_default_package);

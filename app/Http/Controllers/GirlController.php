@@ -113,9 +113,4 @@ class GirlController extends Controller
 			]);
 		}
 	}
-
-	public function tempLogin()
-	{
-		return view('temp_login');
-	}
 }

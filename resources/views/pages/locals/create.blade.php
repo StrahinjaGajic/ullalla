@@ -91,8 +91,6 @@
                             </div>
                             <div class="form-group">
                                 <div class="image-preview-multiple club_image_preview" style="margin-left:10px;">
-                                    <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
-                                <div class="image-preview-multiple club_image_preview">
                                     <input type="hidden" role="uploadcare-uploader" data-multiple-min="4" data-multiple-max="9" name="photos" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                                     <div class="_list"></div>
                                 </div>
@@ -471,6 +469,8 @@
         // show modal on page load
         $(window).on('load',function(){
             $('#create_profile_modal').modal('show');
+            // change text of a button to upload logo
+            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('Upload Logo');
         });
         $(function () {
 
@@ -512,7 +512,6 @@
             });
         });
         ////////// 2. UPLOAD CARE ////////
-        // const widget = uploadcare.Widget('[role=uploadcare-uploader-videos]');
         // preview uploaded images function
         function installWidgetPreviewMultiple(widget, list) {
             widget.onChange(function(fileGroup) {
@@ -592,33 +591,11 @@
             widget.onUploadComplete(function (fileInfo) {
                 source.setAttribute('src', fileInfo.cdnUrl);
                 video.appendChild(source);
-                // video.play();
             });
             // remove video element
             $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
                 $('.upload-video').find('#video').remove();
             });
-
-            // 	<input type="hidden" role="uploadcare-uploader" name="video" data-multiple="true"/>
-            // <div id="preview"></div>
-            // preview multiple videos
-            // var preview = document.getElementById('preview');
-            // var widget = uploadcare.MultipleWidget('[role=uploadcare-uploader]');
-            // widget.onDialogOpen(function (dialog) {
-            // 	dialog.fileColl.onAnyDone(function (file) {
-            // 		file.done(function (fileInfo) {
-            // 			var video = document.createElement('video');
-            // 			video.width = 320;
-            // 			video.height = 240;
-            // 			video.loop = true;
-            // 			var source = document.createElement('source');
-            // 			source.setAttribute('src', fileInfo.cdnUrl);
-            // 			video.appendChild(source);
-            // 			preview.appendChild(video);
-            //     			// video.play();
-            //     		})
-            // 	})
-            // })
         });
     </script>
 
@@ -819,5 +796,5 @@
     }
 </script>
 
-    @stop
+@stop
 
