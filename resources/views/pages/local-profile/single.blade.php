@@ -155,7 +155,7 @@
                                 @foreach($local->girls as $girl)
                                 <h3>{{ $girl->nickname }}</h3>
                                 @for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
-                                <img src="{{ $local->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+                                <img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
                                 @endfor
                                 <br><br>
                                 @endforeach
