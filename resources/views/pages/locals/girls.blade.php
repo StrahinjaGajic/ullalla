@@ -91,8 +91,8 @@
                             </div>
                         </div>
                     </div>
-                    {!! Form::close() !!}
                     <button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
