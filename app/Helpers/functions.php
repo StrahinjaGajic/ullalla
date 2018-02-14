@@ -658,18 +658,25 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
         foreach ($array as $pageId => $sizes) {
             foreach ($sizes as $sizeId => $value) {
                 $checkIfTimeIsMentioned[$sizeId][] = $sizeId;
+
                 $pageBannerSize = App\Models\PageBannerSize::where([
                     ['page_id', $pageId],
                     ['banner_size_id', $sizeId],
                 ])->first();
+
                 $bannerSize = App\Models\BannerSize::find($sizeId);
                 $sync[$pageId][] = ['banner_size_id' => $sizeId];
                 $subTotal = $pageBannerSize->$pricePerTime * $request->banner_duration[$pricePerTime][$pageId][$sizeId];
-                if ($neverDone === true && !in_array($sizeId, $sizesToCheck)) {
-                    $subTotal += $bannerSize->banner_size_price;
+
+                if ($request->banner_flyer != 'on') {
+                    if ($neverDone === true && !in_array($sizeId, $sizesToCheck)) {
+                        $subTotal += $bannerSize->banner_size_price;
+                    }
                 }
+                
                 $total += $subTotal;
             }
+
             $neverDone = count($checkIfTimeIsMentioned[$sizeId]) > 0 ? false : true;
         }
     }

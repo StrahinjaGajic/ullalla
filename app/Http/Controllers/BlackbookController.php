@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class BlackbookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getIndex()
     {
     	$blackbooks = BlackBook::orderBy('date')->orderBy('created_at')->get();

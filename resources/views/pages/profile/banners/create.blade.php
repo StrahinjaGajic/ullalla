@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('functions.news_and_events'))
+@section('title', __('functions.banners'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
@@ -14,73 +14,19 @@
             {!! parseEditProfileMenu('banners') !!}
         </div>
         <div class="col-sm-10 profile-info">
-            <div class="col-xs-12">
-                @if(Session::has('success'))
-                <div class="alert alert-success">{{ Session::get('success') }}</div>
-                @endif
-            </div>
-            @if($user->banners()->count() > 20)
-            <div class="shop-layout headerDropdown">
-                <div class="layout-title">
-                    <div class="layout-title toggle_arrow">
-                        <a>{{ __('headings.banners') }} <i class="fa fa-caret-down"></i></a>
-                    </div>
-                </div>
-                <div class="layout-list">
-                    <div class="form-group girls_preview">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('fields.photo') }}</th>
-                                    <th>{{ __('fields.url') }}</th>
-                                    <th>{{ __('headings.activation_date') }}</th>
-                                    <th>{{ __('headings.expiry_date') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody id="prices_body">
-                                @foreach($user->banners as $banner)
-                                <tr>
-                                    <td>
-                                        @if ($banner->banner_photo)
-                                        <div class="image-tooltip">
-                                            <img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='news image'/>
-                                            <span>
-                                                <img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='news image'/>
-                                            </span>
-                                        </div>
-                                        @endif
-                                    </td>
-                                    <td>{{ $news->banner_url }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($banner->banner_activation_date)) }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($banner->banner_expiry_date)) }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>  
-                </div>
-            </div>
-            @endif
-
             {!! Form::open(['url' => '@' . $user->username . '/banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
             <div class="col-xs-12">
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
                     <label class="control control--checkbox"><a>{{ __('fields.prepared_banner') }}</a>
-                        <input type="checkbox" name="banner_flyer" class="prepared_flyer" {{ old('banner_flyer') ? 'checked' : '' }}>
+                        <input type="checkbox" name="banner_flyer" class="prepared_flyer" {{ old('banner_flyer') ? 'checked' : '' }} autocomplete="off">
                         <div class="control__indicator"></div>
                     </label>
                 </div>
-
-                {{-- <div class="form-group {{ $errors->has('banner_duration') ? 'has-error' : '' }}">
-                    <label class="control-label">{{ __('fields.duration') }}*</label>
-                    <input type="text" class="form-control events_duration" name="banner_duration" value="{{ old('banner_duration') }}"/>
-                    <input type="hidden" name="duration"/>
-                    <span class="help-block">{{ $errors->has('banner_duration') ? $errors->first('banner_duration') : '' }}</span>
-                </div> --}}
-
                 <div class="help-block banner-error" style="color: red;">
                     @if($errors->has('price_per_day') || $errors->has('price_per_week') || $errors->has('price_per_month'))
                         Please choose at least one banner
+                    @elseif($errors->has('stripe_error'))
+                        {{ $errors->first() }}
                     @endif
                 </div>
                 <table class="table table-bordered">
@@ -96,7 +42,7 @@
                     </thead>
                     <tbody>
                         @foreach($bannerSizes as $size)
-                        <tr>
+                        <tr class="banner-size">
                             <td class="banner-price-td">
                                 <span style="display: block;">{{ $size->banner_size_name }}</span>
                                 <span class="banner-price">{{ number_format($size->banner_size_price, 2) }}</span>
@@ -127,29 +73,29 @@
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_day : '' }}</span>
                                         </div>
-                                        <input type="checkbox" name="price_per_day[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_day') ? 'checked' : '' }} data-toggle="modal" data-target="#price_per_day{{ $size->id }}{{ $page->id }}">
+                                        <input type="checkbox" name="price_per_day[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" data-toggle="modal" data-target="#price_per_day{{ $size->id }}{{ $page->id }}" autocomplete="off">
                                         <div class="control__indicator"></div>
                                     </label>
                                     <div class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" id="price_per_day{{ $size->id }}{{ $page->id }}">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title"></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            Please enter for how many days you would like your banner
-                                            <input type="text" name="banner_duration[price_per_day][{{ $page->id }}][{{ $size->id }}]">
-                                            <span class="help-block" style="color: red;"></span>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                            <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
-                                          </div>
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Please enter for how many days you would like your banner
+                                                    <input type="text" name="banner_duration[price_per_day][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off">
+                                                    <span class="help-block" style="color: red;"></span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
+                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -157,28 +103,28 @@
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_week : '' }}</span>
                                         </div>
-                                        <input type="checkbox" name="price_per_week[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_week') ? 'checked' : '' }} data-toggle="modal" data-target="#price_per_week{{ $size->id }}{{ $page->id }}">
+                                        <input type="checkbox" name="price_per_week[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_week') ? 'checked' : '' }} data-toggle="modal" data-target="#price_per_week{{ $size->id }}{{ $page->id }}" autocomplete="off">
                                         <div class="control__indicator"></div>
                                     </label>
                                     <div class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" id="price_per_week{{ $size->id }}{{ $page->id }}">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            Please enter for how many weeks you would like your banner
-                                            <input type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]">
-                                            <span class="help-block" style="color: red;"></span>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                            <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
-                                          </div>
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Please enter for how many weeks you would like your banner
+                                                    <input type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]" autocomplete="off">
+                                                    <span class="help-block" style="color: red;"></span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
+                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -186,28 +132,28 @@
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_month : '' }}</span>
                                         </div>
-                                        <input type="checkbox" name="price_per_month[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_month') ? 'checked' : '' }} data-toggle="modal" data-target="#price_per_month{{ $size->id }}{{ $page->id }}">
+                                        <input type="checkbox" name="price_per_month[{{ $page->id }}][{{ $size->id }}]" class="price_per_duration" {{ old('price_per_month') ? 'checked' : '' }} data-toggle="modal" data-target="#price_per_month{{ $size->id }}{{ $page->id }}" autocomplete="off">
                                         <div class="control__indicator"></div>
                                     </label>
                                     <div class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" id="price_per_month{{ $size->id }}{{ $page->id }}">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            Please enter for how many months you would like your banner
-                                            <input type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]">
-                                            <span class="help-block" style="color: red;"></span>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                            <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
-                                          </div>
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Please enter for how many months you would like your banner
+                                                    <input type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]" autocomplete="off">
+                                                    <span class="help-block" style="color: red;"></span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
+                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
                                 </div>
                                 @endif
@@ -232,7 +178,7 @@
 
                 <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
                     <label class="control-label">{{ __('fields.url') }}*</label>
-                    <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" />
+                    <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" autocomplete="off"/>
                     <span class="help-block">{{ $errors->has('banner_url') ? $errors->first('banner_url') : '' }}</span>
                 </div>
                 <div class="flyerless-fields">
@@ -244,7 +190,7 @@
                 </div>
                 <div class="form-group {{ $errors->has('banner_photo') ? 'has-error' : '' }}">
                     <div class="image-preview-multiple">
-                        <input type="hidden" name="banner_photo" data-crop="490x560 minimum" data-images-only="">
+                        <input type="hidden" name="banner_photo" data-crop="490x560 minimum" data-images-only="" autocomplete="off">
                         <span class="help-block">{{ $errors->has('banner_photo') ? $errors->first('banner_photo') : '' }}</span>
                     </div>
                 </div>
@@ -253,7 +199,13 @@
                 <input type="hidden" name="stripeEmail" id="stripeEmail">
                 {!! Form::close() !!}
             </div>
-
+        </div>
+    </div>
+</div>
+<div id="loading" class="is-hidden">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="loading-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     </div>
 </div>
@@ -355,7 +307,7 @@
         console.log('asdas');
         var totalEl = form.find('.events_total');
         var flyerlessDiv = form.find('.flyerless-fields');
-     
+
     });
 </script>
 
@@ -370,44 +322,68 @@
             var stripeToken = $('#stripeToken');
             stripeEmail.val(token.email);
             stripeToken.val(token.id);
+
             // submit the form
             var username = '{{ $user->username }}';
             var url = getUrl('/@' + username + '/banners/store');
             var token = $('input[name="_token"]').val();
             var form = $('#bannerForm');
             var data = form.serialize();
+
+            // add loading class
+            $('#loading').removeClass('is-hidden');
+
             // fire ajax post request
             $.post(url, data)
             .done(function (response, textStatus) {
-                var errors = response.errors;
-                $('.form-group').removeClass('has-error');
-                $('.help-block').text('');
-                if (errors) {
-                    console.log(errors);
-                    $.each(errors, function (index, value) {
-                        var errorField = $('[name="' + index + '"]');
-                        errorField.siblings('.help-block').text(value);
-                        errorField.closest('.form-group').addClass('has-error');
-                        if (index == 'price_per_day' || index == 'price_per_week' || index == 'price_per_month') {
-                            $('.banner-error').text('Please choose at least one banner');
-                        }
-                    });
-                } else {
-                    window.location.href = getUrl('/@' + username  + '/banners');
-                }
-            })
+                    // remove errors and hide loading class
+                    $('.form-group').removeClass('has-error');
+                    $('.banner-error').removeClass('has-error');
+                    $('.help-block').text('');
+                    $('#loading').addClass('is-hidden');
+
+                    var errors = response.errors;
+                    if (errors) {
+                        $.each(errors, function (index, value) {
+                            var errorField = $('[name="' + index + '"]');
+                            errorField.siblings('.help-block').text(value);
+                            errorField.closest('.form-group').addClass('has-error');
+                            if (index == 'price_per_day' || index == 'price_per_week' || index == 'price_per_month') {
+                                $('.banner-error').addClass('has-error');
+                                $('.banner-error').text('Please choose at least one banner');
+                            }
+                        });
+
+                        $('html, body').animate({
+                            scrollTop: ($('.has-error').first().offset().top - 30)
+                        }, 1500);
+                    } else {
+                        window.location.href = getUrl('/@' + username  + '/banners');
+                    }
+                })
             .fail(function(data, textStatus) {
-                $('.banner-error').text(data.responseJSON.status);
+                // remove loading spinner
+                $('#loading').addClass('is-hidden');
+
+                // display the error
+                var bannerErrorEl = $('.banner-error');
+                bannerErrorEl.text(data.responseJSON.status);
+
+                $('html, body').animate({
+                    scrollTop: (bannerErrorEl.offset().top - 30)
+                }, 1500);
             });
         }
     });
-    $('#bannersForm').on('submit', function (e) {
-        stripe.open({
-            name: 'Ullallà',
-            description: '{{ $user->email }}',
+    @if(!$user->stripe_id)
+        $('#bannerForm').on('submit', function (e) {
+            stripe.open({
+                name: 'Ullallà',
+                description: '{{ $user->email }}',
+            });
+            e.preventDefault(); 
         });
-        e.preventDefault(); 
-    });
+    @endif
 </script>
 
 <script>
@@ -421,10 +397,6 @@
             var bannerPrice = parseFloat(closestTr.find('span.banner-price').text());
             var pricePerTimeMultipleDurationEl = closestTd.find('.pmd');
             var pricePerTimeMultipleDuration = pricePerTimeMultipleDurationEl.attr('value');
-            // var pricePerTime = formGroup.find('.price-per-time-holder span:first-child').text();
-            // var duration = formGroup.find('.modal').find('input[type="text"]').val();
-
-            // var pricePerTimeMultipleDuration = parseFloat(pricePerTime) * parseFloat(duration);
 
             var pricePerSizeEl = closestTr.find('.total-per-size span:first-child');
             var totalEl = $('.total-banners').find('span:first-child');
@@ -534,11 +506,58 @@
     // set price to zero if user chooses option to upload his own banner
     $('.prepared_flyer').on('click', function () {
         var that = $(this);
+
         if (that.is(':checked')) {
-            $('.banner-price').text('0.00');
+            var bannerSizesPriceArray = [];
+
+            $.each($('tr.banner-size'), function (index, value) {
+                var that = $(this);
+                bannerPriceTd = that.find('.banner-price-td');
+                bannerPrice = bannerPriceTd.find('span.banner-price');
+                bannerPriceVal = parseFloat(bannerPrice.text());
+                totalPerSize = that.find('td.total-per-size span:first-child');
+                totalPerSizeVal = parseFloat(totalPerSize.text());
+                totalBanners = $('td.total-banners span:first-child');
+                totalBannersVal = parseFloat(totalBanners.text());
+
+                bannerSizesPriceArray.push(bannerPriceVal);
+
+                if (totalPerSizeVal > 0 && totalPerSizeVal >= bannerPriceVal) {
+                    var totalPerSizeNewVal = totalPerSizeVal - bannerPriceVal;
+                    totalPerSize.text(totalPerSizeNewVal.toFixed(2));
+                }
+
+                bannerPrice.text('0.00');
+            });
+
+            // set the session for the banner size prices
+            localStorage.setItem('bannerSizesPrices', JSON.stringify(bannerSizesPriceArray));
         } else {
-            $('.banner-price').text('0.00');
+            // get the session for the banner size prices
+            var bannerSizesPriceArray = JSON.parse(localStorage.getItem('bannerSizesPrices'));
+
+            $.each($('tr.banner-size'), function (index, value) {
+                var that = $(this);
+                bannerPriceTd = that.find('.banner-price-td');
+                bannerPrice = bannerPriceTd.find('span.banner-price');
+                    bannerPriceVal = bannerSizesPriceArray[index]; // difference
+                    totalPerSize = that.find('td.total-per-size span:first-child');
+                    totalPerSizeVal = parseFloat(totalPerSize.text());
+                    totalBanners = $('td.total-banners span:first-child');
+                    totalBannersVal = parseFloat(totalBanners.text());
+
+                    if (totalPerSizeVal > 0 && totalPerSizeVal >= bannerPriceVal) {
+                    var totalPerSizeNewVal = totalPerSizeVal + bannerPriceVal; // diferrence in minuts
+                    totalPerSize.text(totalPerSizeNewVal.toFixed(2));
+                }
+
+                bannerPrice.text(bannerPriceVal.toFixed(2)); //difference in value
+            });
+
+            // set the session for the banner size prices to an empty array once everything is done
+            localStorage.setItem('bannerSizesPrices', JSON.stringify([]));
         }
+        // localStorage.setItem('banners', $("html").html());
     });
 </script>
 @stop

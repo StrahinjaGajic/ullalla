@@ -69,7 +69,7 @@
                         @foreach($contactOptions as $contactOption)
                         
                         <label class="control control--checkbox" style="margin-right: 20px;"><a>{{ ucfirst($contactOption->contact_option_name) }}</a>
-                           <img src="{{ asset('img/' . $contactOption->contact_option_name . '.png') }}" alt="">
+                            <img src="{{ asset('img/' . $contactOption->contact_option_name . '.png') }}" alt="">
                             <input 
                             type="checkbox" 
                             name="contact_options[{{ $contactOption->id }}]" 

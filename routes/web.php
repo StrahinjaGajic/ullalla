@@ -85,6 +85,7 @@ Route::get('@{username}/languages', 'ProfileController@getLanguages');
 Route::put('@{username}/languages/store', 'ProfileController@postLanguages');
 
 Route::get('@{username}/banners', 'ProfileController@getBanners');
+Route::get('@{username}/banners/create', 'ProfileController@getCreateBanners');
 Route::post('@{username}/banners/store', 'ProfileController@postBanners');
 
 Route::get('@{username}/add_card', 'ProfileController@getCard');

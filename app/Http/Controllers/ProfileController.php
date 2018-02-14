@@ -752,10 +752,17 @@ class ProfileController extends Controller
     public function getBanners()
     {
         $user = Auth::user();
+
+        return view('pages.profile.banners.index', compact('user', 'pages', 'bannerSizes'));
+    }
+
+    public function getCreateBanners()
+    {
+        $user = Auth::user();
         $pages = Page::with('banner_sizes')->get();
         $bannerSizes = BannerSize::with('pages')->get();
 
-        return view('pages.profile.banners', compact('user', 'pages', 'bannerSizes'));
+        return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes'));
     }
 
     public function postBanners(Request $request)
@@ -811,6 +818,8 @@ class ProfileController extends Controller
 
             $banner = new Banner;
             $banner->banner_total_amount = $total;
+            $banner->banner_url = $request->banner_url;
+            $banner->banner_photo = $request->banner_photo;
             $banner->user_id = $user->id;
             $banner->save();
 
@@ -842,20 +851,26 @@ class ProfileController extends Controller
                     'currency' => 'chf',
                 ]);
             } catch (\Exception $e) {
-                return response()->json([
-                    'status' => $e->getMessage()
-                ], 422);
+                if ($request->ajax()) {
+                    return response()->json([
+                        'status' => $e->getMessage()
+                    ], 422);
+                }
+
+                return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
             }
 
             Session::flash('success', __('messages.banner_requested_success'));
 
         } else {
-            return response()->json([
-                'errors' => $validator->getMessageBag()
-            ]);
-        }
+            if ($request->ajax()) {
+                return response()->json([
+                    'errors' => $validator->getMessageBag()
+                ]);
+            }
 
-        return redirect()->back();
+            return redirect()->back()->withErrors($validator->getMessageBag());
+        }
     }
 
     public function postNewPrice(Request $request)
@@ -916,24 +931,13 @@ class ProfileController extends Controller
             $customer->source = request('stripeToken'); // obtained with Checkout
             $customer->save();
 
-            // if (!$customer) {
-            //     $customer = Customer::create([
-            //       "email" => "paying.user@example.com",
-            //       "source" => request('stripeToken'),
-            //   ]);
-            // }
-
-            // Charge::create([
-            //     'customer' => $customer->id,
-            //     'amount' => 2000,
-            //     'currency' => 'usd',
-            // ]);
-
             Session::flash('success', 'Your card details have been updated!');
 
-            return response()->json([
-                'customer' => $customer
-            ]);
+            return redirect()->back();
+
+            // return response()->json([
+            //     'customer' => $customer
+            // ]);
         } catch(\Error\Card $e) {
 
             // Use the variable $error to save any errors

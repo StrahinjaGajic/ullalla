@@ -19,57 +19,13 @@
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
-            @if($user->banners()->count() > 20)
-            <div class="shop-layout headerDropdown">
-                <div class="layout-title">
-                    <div class="layout-title toggle_arrow">
-                        <a>{{ __('headings.banners') }} <i class="fa fa-caret-down"></i></a>
-                    </div>
-                </div>
-                <div class="layout-list">
-                    <div class="form-group girls_preview">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('fields.photo') }}</th>
-                                    <th>{{ __('fields.url') }}</th>
-                                    <th>{{ __('headings.activation_date') }}</th>
-                                    <th>{{ __('headings.expiry_date') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody id="prices_body">
-                                @foreach($user->banners as $banner)
-                                <tr>
-                                    <td>
-                                        @if ($banner->banner_photo)
-                                        <div class="image-tooltip">
-                                            <img class='img-responsive img-align-center index-product-image' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 50)->getUrl() }}' alt='news image'/>
-                                            <span>
-                                                <img class='img-responsive img-align-center' src='{{ app()->uploadcare->getFile($news->banner_photo)->op('quality/best')->op('progressive/yes')->resize('', 150)->getUrl() }}' alt='news image'/>
-                                            </span>
-                                        </div>
-                                        @endif
-                                    </td>
-                                    <td>{{ $news->banner_url }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($banner->banner_activation_date)) }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($banner->banner_expiry_date)) }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>  
-                </div>
-            </div>
-            @endif
-
             {!! Form::open(['url' => '@' . $user->username . '/card/store', 'class' => 'form-horizontal wizard', 'id' => 'cardForm']) !!}
             <div class="col-xs-12">
-                <button type="submit" class="btn btn-default pull-left">{{ __('buttons.submit') }}</button>
+                <button type="submit" class="btn btn-default pull-left">Add Card</button>
                 <input type="hidden" name="stripeToken" id="stripeToken">
                 <input type="hidden" name="stripeEmail" id="stripeEmail">
                 {!! Form::close() !!}
             </div>
-
         </div>
     </div>
 </div>

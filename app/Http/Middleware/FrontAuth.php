@@ -17,7 +17,7 @@ class FrontAuth
     public function handle($request, Closure $next, $guard = 'web')
     {
 
-        if (Auth::guard('local')->guest() && Auth::guard('web')->guest()) {            
+        if (Auth::guard('local')->guest() && Auth::guard('web')->guest()) {
             if ($request->ajax() || $request->wantsJson()) {                
                 return response('Unauthorized.', 401);
             } else {
