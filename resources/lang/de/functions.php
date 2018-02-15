@@ -104,7 +104,7 @@ return [
 
     #getLanguages
     'de' => 'Deutsch',
-    'fr' => 'Français',
+    'fr' => 'Francais',
     'it' => 'Italiano',
     'en' => 'English',
 
