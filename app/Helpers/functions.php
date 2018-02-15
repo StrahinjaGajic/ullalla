@@ -220,7 +220,11 @@ function parseSingleUserData($fields, $user) {
             if ($field == __('fields.nationality')) {
                 $html .= \App\Models\Country::where('id', $value)->value('citizenship');
             } else {
-                $html .= ucfirst($value);
+                if (strpos($value, 'http') === false) {
+                    $html .= ucfirst($value);
+                } else {
+                    $html .= $value;
+                }
             }
             $html .= '</td>
             </tr>';

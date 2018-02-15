@@ -208,7 +208,7 @@ class LocalController extends Controller
         $local->street = $request->street;
         $local->city = $request->city;
         $local->zip = $request->zip;
-        $local->web = $request->web;
+        $local->website = $request->web;
         $local->phone = $request->phone;
         $local->mobile = $request->mobile;
         $local->sms_notifications = request('sms_notifications') ? '1' : '0';
