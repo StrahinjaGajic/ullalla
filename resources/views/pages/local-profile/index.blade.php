@@ -143,21 +143,20 @@
                                                 <div class="single-product">
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                         <div class="product-img">
-                                                            <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/' }}" alt="" />
-                                                                </a>
+                                                            <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/' }}" alt="" /></a>
                                                         </div>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <div class="product-content-shop" style="text-align:center; padding-top:20px;">
-                                                                <h2><a class="shop-name">{{ $local->name }}</a></h2>
-                                                                <div class="pro-deal-text-shop">
-                                                                    <p>{{ Str::words($local->about_me, 40) }}</p>
-                                                                </div>
-                                                                <a href="{{ url('locals/' . $local->name) }}">
-                                                                    <div class="product-cart">
-                                                                        <button class="button">{{ __('buttons.view_profile') }}</button>
-                                                                    </div>
-                                                                </a>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <div class="product-content-shop">
+                                                            <h2><a class="shop-name">{{ $local->name }}</a></h2>
+                                                            <div class="pro-deal-text-shop">
+                                                                <p>{{ Str::words($local->about_me, 40) }}</p>
                                                             </div>
+                                                            <a href="{{ url('locals/' . $local->name) }}">
+                                                                <div class="product-cart">
+                                                                    <button class="button">{{ __('buttons.view_profile') }}</button>
+                                                                </div>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
