@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    @if($totm->count() > 0)
+    @if($gotm->count() > 0)
     <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -152,7 +152,7 @@
             </div>
             <div class="row">
                 <div class="featured-product-carousel single-indicator">
-                    @foreach($gotm as $user)
+                    @foreach($totm as $user)
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <div class="single-product">
                             <div class="product-img">
