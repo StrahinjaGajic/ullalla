@@ -394,7 +394,7 @@ function getEditProfilePages() {
     ];
 }
 
-function parseEditProfileMenu($currentPage, $girl_id) {
+function parseEditProfileMenu($currentPage, $girl_id = null) {
     $html = '';
 
     if ($girl_id) {
