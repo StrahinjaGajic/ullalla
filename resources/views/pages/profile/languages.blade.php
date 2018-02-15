@@ -20,7 +20,7 @@
 						{{ session()->get('success') }}
 					</div>
 				@endif
-				{!! Form::model($user, ['url' => '@' . $user->username . '/languages/store', 'method' => 'put']) !!}
+				{!! Form::model($user, ['url' => 'private/' . $user->id . '/languages/store', 'method' => 'put']) !!}
 				<table class="table language-table">
 					<thead>
 						<tr>

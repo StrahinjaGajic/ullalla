@@ -24,24 +24,24 @@
                                     <li><a href="{{ url('locals') }}">{{ __('buttons.locals') }}</a></li>
                                     <li><a href="{{ url('private') }}">{{ __('buttons.private') }}</a></li>
                                     @if(!Auth::check() && !Auth::guard('local')->check())
-                                    <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
-                                    <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
+                                      <li><a href="{{ url('signin') }}">{{ __('buttons.login') }}</a></li>
+                                      <li><a href="{{ url('signup') }}">{{ __('buttons.register') }}</a></li>
                                     @else
                                     @if($user && $user->package1_id)
-                                    @if(Auth::guard('local')->user())
-                                    <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
-                                    <li><a href="{{ url('locals/' . $user->username) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                    @elseif(Auth::user())
-                                    <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
-                                    <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                    <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
-                                    @endif
+                                      @if(Auth::guard('local')->user())
+                                          <li><a href="{{ url('locals/@' . $user->username . '/contact') }}">{{ __('buttons.settings') }}</a></li>
+                                          <li><a href="{{ url('locals/' . $user->username) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                        @elseif(Auth::user())
+                                          <li><a href="{{ url('private/' . $user->id . '/bio') }}">{{ __('buttons.settings') }}</a></li>
+                                          <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                          <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
+                                      @endif
                                     @endif
                                     @if($user && !$user->package1_id)
                                     @if(Auth::guard('local')->user())
                                     <li><a href="{{ url('locals/@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                     @elseif(Auth::user())
-                                    <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
+                                    <li><a href="{{ url('private/' . $user->id . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                     @endif
                                     @endif
                                     <li><a href="{{ url('signout') }}">{{ __('buttons.logout') }}</a></li>
@@ -91,7 +91,7 @@
                                        <li><a href="{{ url('locals/' . $user->username) }}">{{ __('buttons.preview_profile') }}</a></li>
                                        @elseif(Auth::user())
                                        <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
-                                       <li><a href="{{ url('private/' . $user->nickname) }}">{{ __('buttons.preview_profile') }}</a></li>
+                                       <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
                                       <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>                                        
                                        @endif
                                        @endif
@@ -99,7 +99,7 @@
                                        @if(Auth::guard('local')->user())
                                        <li><a href="{{ url('locals/@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                        @elseif(Auth::user())
-                                       <li><a href="{{ url('@' . $user->username . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
+                                       <li><a href="{{ url('private/' . $user->id . '/create') }}">{{ __('buttons.create_profile') }}</a></li>
                                        @endif
                                        @endif
                                        <li><a href="{{ url('signout') }}">{{ __('buttons.logout') }}</a></li>

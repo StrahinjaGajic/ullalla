@@ -17,7 +17,7 @@
 			@if(Session::has('success'))
 			<div class="alert alert-success">{{ Session::get('success') }}</div>
 			@endif
-			{!! Form::model($user, ['url' => '@' . $user->username . '/bio/store', 'method' => 'put']) !!}
+			{!! Form::model($user, ['url' => 'private/' . $user->id . '/bio/store', 'method' => 'put']) !!}
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="row">

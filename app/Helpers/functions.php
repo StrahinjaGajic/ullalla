@@ -393,7 +393,7 @@ function getEditProfilePages() {
 function parseEditProfileMenu($currentPage) {
     $html = '';
     foreach (getEditProfilePages() as $href => $pageTitle) {
-        $path = url('@' . Auth::user()->username . '/' . $href);
+        $path = url('private/' . Auth::user()->id . '/' . $href);
         $active = $href == $currentPage ? 'active' : '';
         $html .= '<a href=' . $path . ' class=' . $active . '>' . $pageTitle . '</a>';
     }
@@ -542,6 +542,8 @@ function getEditLocalProfilePages() {
         'girls' => __('functions.girls'),
         'packages' => __('functions.packages'),
         'news_and_events' => __('functions.news_and_events'),
+        'banners' => __('functions.banners'),
+        'add_card' => __('functions.add_card'),
     ];
 }
 

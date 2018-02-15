@@ -19,7 +19,7 @@
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
-            {!! Form::model($user, ['url' => '@' . $user->username . '/prices/store', 'method' => 'put']) !!}
+            {!! Form::model($user, ['url' => 'prices/' . $user->id . '/store', 'method' => 'put']) !!}
             <div class="price_section">
                 <div class="col-lg-3 col-xs-12">
                     <div class="form-group">

@@ -11,10 +11,14 @@
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
-            {!! parseEditProfileMenu('banners') !!}
+            @if(Auth::guard('local')->check())
+                {!! parseEditLocalProfileMenu('banners') !!}
+            @else
+                {!! parseEditProfileMenu('banners') !!}
+            @endif
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::open(['url' => '@' . $user->username . '/banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
+            {!! Form::open(['url' => 'banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
             <div class="col-xs-12">
                 <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
                     <label class="control control--checkbox"><a>{{ __('fields.prepared_banner') }}</a>
@@ -35,7 +39,7 @@
                             <th></th>
                             <th></th>
                             @foreach($pages as $page)
-                            <th>{{ $page->page_name }}</th>
+                                <th>{{ $page->page_name }}</th>
                             @endforeach
                             <th>Total</th>
                         </tr>
@@ -51,20 +55,20 @@
                             <td>
                                 <table class="table">
                                     <tr>
-                                        <td>D</td>
+                                        <td>Price Per Day</td>
                                     </tr>
                                     <tr>
-                                        <td>W</td>
+                                        <td>Price Per Week</td>
                                     </tr>
                                     <tr>
-                                        <td>M</td>
+                                        <td>Price Per Month</td>
                                     </tr>
                                 </table>
                             </td>
                             @foreach($pages as $page)
                             <td>
                                 @php 
-                                $price = $size->pages()->where('banner_size_id', $size->id)->where('page_id', $page->id)->first();
+                                    $price = $size->pages()->where('banner_size_id', $size->id)->where('page_id', $page->id)->first();
                                 @endphp
                                 {{ $price ? $price->pivot->banner_price : '' }}
                                 @if($price)
@@ -324,8 +328,7 @@
             stripeToken.val(token.id);
 
             // submit the form
-            var username = '{{ $user->username }}';
-            var url = getUrl('/@' + username + '/banners/store');
+            var url = getUrl('/banners/store');
             var token = $('input[name="_token"]').val();
             var form = $('#bannerForm');
             var data = form.serialize();
@@ -358,7 +361,8 @@
                             scrollTop: ($('.has-error').first().offset().top - 30)
                         }, 1500);
                     } else {
-                        window.location.href = getUrl('/@' + username  + '/banners');
+                        var redirectUrl = '{{ Auth::guard('local')->check() ? url('locals/@' . $user->username . '/banners') : url('private/' . $user->id . '/banners') }}';
+                        window.location.href = redirectUrl;
                     }
                 })
             .fail(function(data, textStatus) {
@@ -530,6 +534,19 @@
                 bannerPrice.text('0.00');
             });
 
+            var total = 0;
+            var totalPerSizeAll = $('#bannerForm').find('td.total-per-size');
+            $.each(totalPerSizeAll, function (index, field) {
+                var elVal = parseFloat($(field).find('span:first-child').text());
+                if (isNaN(elVal)) {
+                    return true;
+                } else {
+                    total += elVal;
+                }
+            });
+
+            totalBanners.text(total.toFixed(2));
+
             // set the session for the banner size prices
             localStorage.setItem('bannerSizesPrices', JSON.stringify(bannerSizesPriceArray));
         } else {
@@ -554,10 +571,22 @@
                 bannerPrice.text(bannerPriceVal.toFixed(2)); //difference in value
             });
 
+            var total = 0;
+            var totalPerSizeAll = $('#bannerForm').find('td.total-per-size');
+            $.each(totalPerSizeAll, function (index, field) {
+                var elVal = parseFloat($(field).find('span:first-child').text());
+                if (isNaN(elVal)) {
+                    return true;
+                } else {
+                    total += elVal;
+                }
+            });
+
+            totalBanners.text(total.toFixed(2));
+
             // set the session for the banner size prices to an empty array once everything is done
             localStorage.setItem('bannerSizesPrices', JSON.stringify([]));
         }
-        // localStorage.setItem('banners', $("html").html());
     });
 </script>
 @stop

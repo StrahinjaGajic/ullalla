@@ -7,12 +7,18 @@ use Auth;
 use Session;
 use Validator;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\News;
 use App\Models\Events;
-use App\Models\LocalType;
+use App\Models\Country;
 use App\Models\Package;
+use App\Models\Service;
+use App\Models\LocalType;
 use App\Models\LocalPackage;
+use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
+use App\Models\ServiceOption;
+use App\Models\SpokenLanguage;
 use Stripe\{Charge, Customer};
 
 class LocalController extends Controller
@@ -96,8 +102,6 @@ class LocalController extends Controller
                 $totalAmount += (int) filter_var($monthGirlPackage->package_price_local, FILTER_SANITIZE_NUMBER_INT);
             }
         }
-
-
 
         try {                        
             $user = Auth::guard('local')->user();
@@ -304,57 +308,97 @@ class LocalController extends Controller
     public function getGirls()
     {
         $local = Auth::guard('local')->user();
-        return view('pages.locals.girls', compact('local'));
+
+        $services = Service::all();
+        $countries = Country::all();
+        $spokenLanguages = SpokenLanguage::all();
+        $serviceOptions = ServiceOption::all();
+
+        return view('pages.locals.girls', compact('local', 'countries', 'services', 'spokenLanguages', 'serviceOptions'));
     }
 
-    public function postGirls(Request $request)
+    public function postCreateGirl(Request $request)
     {
         $local = Auth::guard('local')->user();
 
-        foreach($local->girls as $girl) {
-            $uploadedPhotos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
-            $inputPhotos = request('photos_'. $girl->id);
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
 
-            // get the number of photos
-            $request->merge(['photos_'. $girl->id => (int) substr($inputPhotos, -2, 1)]);
-
-            $this->validate($request, [
-                'nickname_'. $girl->id => 'required|min:4|max:20',
-                'photos_'. $girl->id => 'numeric|min:4|max:9',
-            ]);
-
-            $nickname = 'nickname_'. $girl->id;
-            $girl->nickname = $request->$nickname;
-            $girl->photos = $inputPhotos;
-            $girl->save();
-        }
-
-        return redirect()->back()->with('success', __('messages.success_changes_saved'));
-    }
-
-    public function postCreateGirls(Request $request)
-    {
-        $local = Auth::guard('local')->user();
-
-        $photos = storeAndGetUploadCareFiles(request('newPhotos'));
-        $inputPhotos = request('newPhotos');
-
-        $request->merge(['newPhotos' => $inputPhotos]);
-        $request->merge(['newPhotos' => substr($request->newPhotos, -2, 1)]);
-        $request->merge(['newPhotos' => (int) $request->newPhotos]);
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
         $this->validate($request, [
-            'nickname' => 'required|min:4|max:20',
-            'newPhotos' => 'numeric|min:4|max:9',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'nickname' => 'required',
+            'age' => ['required', 'numeric', new OlderThanRule],
+            'height' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'sex' => 'required',
+            'sex_orientation' => 'required',
+            'intimate' => 'required',
+            'alcohol' => 'required',
+            'smoker' => 'required',
+            'about_me' => 'required|max:200',
+            'photos' => 'numeric|min:4|max:9',
         ]);
 
-        $local->girls()->create([
-            'nickname' => $request->nickname, 
-            'photos' => $photos ? $inputPhotos : null,
-            'local_id' => $local->id
-        ]);
+        try {
+            $user = new User;
+            $user->username = 'konjina';
+            $user->email = 'random@random.com';
+            $user->user_type_id = 1;
+            $user->first_name = request('first_name');
+            $user->last_name = request('last_name');
+            $user->nickname = request('nickname');
+            $user->age = request('age');
+            $user->country_id = request('nationality_id');
+            $user->sex = request('sex');
+            $user->sex_orientation = request('sex_orientation');
+            $user->height = request('height');
+            $user->weight = request('weight');
+            $user->type = request('type');
+            $user->figure = request('figure');
+            $user->breast_size = request('breast_size');
+            $user->eye_color = request('eye_color');
+            $user->hair_color = request('hair_color');
+            $user->tattoos = request('tattoos');
+            $user->piercings = request('piercings');
+            $user->body_hair = request('body_hair');
+            $user->intimate = request('intimate');
+            $user->smoker = request('smoker');
+            $user->alcohol = request('alcohol');
+            $user->about_me = request('about_me');
+            $user->photos = $uploadedPhotos ? $inputPhotos : null;
+            $user->videos = storeAndGetUploadCareFiles(request('video'));
+            
+            $user->save();
 
-        return redirect()->back()->with('success', __('messages.success_changes_saved'));
+            // define languages input
+            $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });
+
+            // define levels
+            $levels = array_map(function($languageLevel) {
+                return ['language_level' => $languageLevel];
+            }, $spokenLanguages);
+            // get combined data
+            $syncData = array_combine(array_keys($spokenLanguages), $levels);
+
+            // sync services to the user
+            $user->services()->sync(request('services'));
+            $user->spoken_languages()->sync($syncData);
+
+            $local->users()->save($user);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        Session::flash('account_created', __('messages.account_created'));
+
+        return redirect()->back();
     }
 
     public function getPackages()

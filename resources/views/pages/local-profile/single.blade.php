@@ -61,7 +61,7 @@
                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="product-details shop-review single-pro-zoom">
                         <div class="product-name">
-                            <h3><a>{{ $local->username }}</a></h3>
+                            <h3><a>{{ $local->name }}</a></h3>
                         </div>
                         <div class="product-reveiw">
                             <p>{{ Str::words($local->about_me, 40) }}</p>
@@ -91,7 +91,7 @@
                             <li><a href="#girl-workinghours" data-toggle="tab">{{ __('buttons.work_time') }}</a></li>
                             @endif
                             <li><a href="#girl-clubinfo" data-toggle="tab">{{ __('buttons.club_info') }}</a></li>
-                            @if(count($local->girls) > 0)
+                            @if(count($local->users) > 0)
                             <li><a href="#girl-girls" data-toggle="tab">{{ __('buttons.girls') }}</a></li>
                             @endif
                             @if($local->videos)
@@ -152,10 +152,10 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="girl-girls">
-                                @foreach($local->girls as $girl)
-                                <h3>{{ $girl->nickname }}</h3>
-                                @for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
-                                <img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+                                @foreach($local->users as $user)
+                                <h3>{{ $user->nickname }}</h3>
+                                @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
+                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
                                 @endfor
                                 <br><br>
                                 @endforeach

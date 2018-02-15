@@ -13,7 +13,7 @@
             {!! parseEditProfileMenu('gallery') !!}
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
+            {!! Form::model($user, ['url' => 'private/' . $user->id . '/gallery/store', 'method' => 'PUT']) !!}
             <h3>{{ __('headings.gallery') }}</h3>
             <div class="row" style="margin-left:1px;">
                 <h4>{{ __('headings.photos') }}</h4>

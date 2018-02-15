@@ -69,9 +69,9 @@ class Local extends Authenticatable
         return $this->belongsTo('App\Models\LocalType');
     }
 
-    public function girls()
+    public function users()
     {
-        return $this->hasMany('App\Models\LocalGirl');
+        return $this->hasMany('App\Models\User');
     }
 
     public function news()
@@ -86,7 +86,12 @@ class Local extends Authenticatable
 
     public function banners()
     {
-        return $this->hasMany('App\Models\Banner');
+        return $this->morphMany('App\Models\Banner', 'bannerable');
+    }
+
+    public function norifications()
+    {
+        return $this->morphMany('App\Models\Notifications', 'notifiable');
     }
 
     public function package()

@@ -8,36 +8,32 @@ use Session;
 use DateTime;
 use Validator;
 use Carbon\Carbon;
-use App\Models\Page;
+use App\Models\User;
 use App\Models\Price;
-use App\Models\Banner;
 use App\Models\Canton;
 use App\Models\Service;
 use App\Models\Country;
 use App\Models\Package;
-use App\Models\BannerSize;
-use App\Models\BannerPage;
 use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
 use App\Models\ContactOption;
 use App\Models\ServiceOption;
 use App\Models\SpokenLanguage;
-use App\Models\PageBannerSize;
 use Stripe\{Charge, Customer};
 
 class ProfileController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('package.expiry', ['except' => ['getPackages', 'postPackages', 'getCreate', 'postCreate', 'postNewPrice', 'deletePrice']]);
+        $this->middleware('auth:web,local');
+
         $this->middleware('has_package', [
             'only' => [
                 'getCreate',
                 'postCreate'
             ]
         ]);
+
         $this->middleware('package.expiry', [
             'except' => [
                 'getPackages',
@@ -53,6 +49,7 @@ class ProfileController extends Controller
                 'getCreate', 'postCreate', 'postNewPrice', 'deletePrice'
             ]
         ]);
+
     }
 
     public function getCreate()
@@ -273,13 +270,13 @@ class ProfileController extends Controller
         Session::flash('account_created', __('messages.account_created'));
     }
 
-    public function getBio()
+    public function getBio($username, $private_id = null)
     {
         $cantons = Canton::all();
         $packages = Package::all();
         $services = Service::all();
-        $countries = Country::all();
-        $user = Auth::user();
+        $countries = Country::all();        
+        $user = $private_id ? User::findOrFail($private_id) : Auth::user();
 
         return view('pages.profile.bio', compact('packages', 'cantons', 'countries', 'services', 'user'));
     }
@@ -749,130 +746,6 @@ class ProfileController extends Controller
         Session::flash('success', __('messages.success_changes_saved'));
     }
 
-    public function getBanners()
-    {
-        $user = Auth::user();
-
-        return view('pages.profile.banners.index', compact('user', 'pages', 'bannerSizes'));
-    }
-
-    public function getCreateBanners()
-    {
-        $user = Auth::user();
-        $pages = Page::with('banner_sizes')->get();
-        $bannerSizes = BannerSize::with('pages')->get();
-
-        return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes'));
-    }
-
-    public function postBanners(Request $request)
-    {
-        $user = Auth::user();
-
-        $data = getBannerTotalAmountAndDataToSync($request);
-        $total = $data['total'];
-
-        $perDay = 'price_per_week, price_per_month';
-        $perMonth = 'price_per_day, price_per_week';
-        $perWeek = 'price_per_day, price_per_month';
-
-        $field = '';
-        foreach ($request->all() as $field => $value) {
-            if (strpos($field, 'price_per') !== false) {
-                $field = $field;
-                break;
-            }
-        }
-
-        // get price per time input, check it and define validation rules to use them later in validator
-        if ($field == 'price_per_day') {
-            $perDay = 'price_per_day, price_per_month';
-        } elseif ($field == 'price_per_week') {
-            $perDay = 'price_per_week, price_per_day';
-            $perMonth = 'price_per_week, price_per_month';
-        } elseif ($field == 'price_per_month') {
-            $perDay = 'price_per_month, price_per_day';
-            $perMonth = 'price_per_month, price_per_week';
-        }
-
-        if ($request->banner_flyer == 'on') {
-            $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
-                'banner_description' => 'required',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        }
-
-        if ($validator->passes()) {
-
-            $banner = new Banner;
-            $banner->banner_total_amount = $total;
-            $banner->banner_url = $request->banner_url;
-            $banner->banner_photo = $request->banner_photo;
-            $banner->user_id = $user->id;
-            $banner->save();
-
-            foreach ($data['syncedData'] as $pageId => $sizes) {
-                foreach ($sizes as $size) {
-                    $bannerPage = new BannerPage;
-                    $bannerPage->banner_id = $banner->id;
-                    $bannerPage->page_id = $pageId;
-                    $bannerPage->banner_size_id = $size['banner_size_id'];
-                    $bannerPage->save();
-                }
-            }
-
-            try {
-                $customer = Customer::retrieve($user->stripe_id);
-
-                if (!$customer) {
-                    $customer = Customer::create([
-                        "email" => request('stripeEmail'),
-                        "source" => request('stripeToken'),
-                    ]);
-                    $user->stripe_id = $customer->id;
-                    $user->save();
-                }
-
-                Charge::create([
-                    'customer' => $user->stripe_id,
-                    'amount' => $total * 100,
-                    'currency' => 'chf',
-                ]);
-            } catch (\Exception $e) {
-                if ($request->ajax()) {
-                    return response()->json([
-                        'status' => $e->getMessage()
-                    ], 422);
-                }
-
-                return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
-            }
-
-            Session::flash('success', __('messages.banner_requested_success'));
-
-        } else {
-            if ($request->ajax()) {
-                return response()->json([
-                    'errors' => $validator->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($validator->getMessageBag());
-        }
-    }
-
     public function postNewPrice(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -913,40 +786,6 @@ class ProfileController extends Controller
                 ]);
             }
         }
-    }
-
-    public function getCard()
-    {   
-        $user = Auth::user();
-        return view('pages.profile.add_card', compact('user'));
-    }
-
-    public function postCard()
-    {   
-        $user = Auth::user();
-
-        try {
-            $customer = Customer::retrieve($user->stripe_id); // stored in your application
-            $customer->email = $user->email; // obtained with Checkout
-            $customer->source = request('stripeToken'); // obtained with Checkout
-            $customer->save();
-
-            Session::flash('success', 'Your card details have been updated!');
-
-            return redirect()->back();
-
-            // return response()->json([
-            //     'customer' => $customer
-            // ]);
-        } catch(\Error\Card $e) {
-
-            // Use the variable $error to save any errors
-            // To be displayed to the customer later in the page
-            $body = $e->getJsonBody();
-            $err  = $body['error'];
-            $error = $err['message'];
-        }
-        $user = Auth::user();
     }
 
     public function deletePrice(Request $request)

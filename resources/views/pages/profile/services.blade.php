@@ -16,7 +16,7 @@
 			@if(Session::has('success'))
 			<div class="alert alert-success">{{ Session::get('success') }}</div>
 			@endif
-			{!! Form::model($user, ['url' => '@' . $user->username . '/services/store', 'method' => 'put']) !!}
+			{!! Form::model($user, ['url' => 'private/' . $user->id . '/services/store', 'method' => 'put']) !!}
 			<h3>{{ __('headings.service_offered_for') }}:</h3>
 			<div class="row">
 				<div class="col-xs-12 choice">
@@ -26,6 +26,7 @@
 						<input 
 						type="checkbox" 
 						name="service_options[]" 
+						autocomplete="off" 
 						value="{{ $serviceOption->id }}"
 						{{ in_array($serviceOption->id, $user->service_options()->pluck('service_option_id')->toArray()) ? 'checked' : '' }}>
 						<div class="control__indicator"></div>
@@ -45,7 +46,11 @@
 									$var = 'service_name_'. config()->get('app.locale');
 								@endphp
 								<label class="control control--checkbox"><a>{{ $service->$var }}</a>
-									<input type="checkbox" name="services[]" {{ in_array($service->id, $user->services->pluck('id')->toArray()) ? 'checked' : '' }} value="{{ $service->id }}">
+									<input type="checkbox" 
+									name="services[]" 
+									{{ in_array($service->id, $user->services->pluck('id')->toArray()) ? 'checked' : '' }} 
+									value="{{ $service->id }}"
+									autocomplete="off">
 									<div class="control__indicator"></div>
 								</label>
 								@endforeach

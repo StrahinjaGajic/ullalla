@@ -13,7 +13,7 @@ use App\Models\SpokenLanguage;
 class GirlController extends Controller
 {
 	public function getIndex(Request $request)
-	{
+	{		
 		$services = Service::with('users')->get();
 		$spokenLanguages = SpokenLanguage::with('users')->get();
 		$maxPrice = \DB::table('prices')->max('service_price');
@@ -83,14 +83,9 @@ class GirlController extends Controller
 		return view('pages.girls.index', compact('services', 'users', 'cantons', 'spokenLanguages', 'pricesTypes', 'maxPrice', 'mode'));
 	}
 
-	public function getGirl($nickname)
+	public function getGirl($id)
 	{
-		$user = User::with('services', 'country', 'prices')->nickname($nickname)->first();
-
-		if (!$user) {
-			redirect()->url('/');
-		}
-
+		$user = User::with('services', 'country', 'prices')->findOrFail($id);
 		return view('pages.girls.single', compact('user'));
 	}
 

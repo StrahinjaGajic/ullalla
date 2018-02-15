@@ -13,7 +13,7 @@
 			{!! parseEditProfileMenu('workplace') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			{!! Form::model($user, ['url' => '@' . $user->username . '/workplace/store', 'method' => 'put']) !!}
+			{!! Form::model($user, ['url' => 'private/' . $user->id . 'workplace/store', 'method' => 'put']) !!}
 			<h3>{{ __('headings.workplace') }}</h3>
 			@if(Session::has('success'))
 			<div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -68,6 +68,7 @@
 							name="incall" 
 							value="1" 
 							id="incall_availability" 
+							autocomplete="off" 
 							{{ $user->incall_type ? 'checked' : '' }}>
 							<a>{{ __('fields.incall') }}</a>
 							<div class="control__indicator"></div>
@@ -79,6 +80,7 @@
 								type="radio" 
 								name="incall_option" 
 								value="{{ $key }}" 
+								autocomplete="off" 
 								id="{{ $key == 'define_yourself' ? 'incall_define_yourself' : '' }}" 
 								style="display: inline-block;"
 								{{ ($user->incall_type == $incallOption) || (explode('|', $user->incall_type)[0] == 'define_yourself') ? 'checked' : '' }}>
@@ -100,7 +102,8 @@
 							type="checkbox" 
 							name="outcall" 
 							value="1" 
-							id="outcall_availability"
+							id="outcall_availability" 
+							autocomplete="off" 
 							{{ $user->outcall_type ? 'checked' : '' }}>
 							<a>{{ __('fields.outcall') }}</a>
 							<div class="control__indicator"></div>
@@ -112,6 +115,7 @@
 								type="radio" 
 								name="outcall_option" 
 								value="{{ $key }}" 
+								autocomplete="off" 
 								id="{{ $key == 'define_yourself' ? 'outcall_define_yourself' : '' }}" 
 								style="display: inline-block;"
 								{{ ($user->outcall_type == $outcallOption) || (explode('|', $user->outcall_type)[0] == 'define_yourself') ? 'checked' : '' }}>

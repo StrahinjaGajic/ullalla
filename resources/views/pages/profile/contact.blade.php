@@ -14,7 +14,7 @@
             {!! parseEditProfileMenu('contact') !!}
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::model($user, ['url' => '@' . $user->username . '/contact/store', 'method' => 'put', 'id' => 'contactForm']) !!}
+            {!! Form::model($user, ['url' => 'private/' . $user->id . '/contact/store', 'method' => 'put', 'id' => 'contactForm']) !!}
             <h3>{{ __('headings.contact') }}</h3>
             @if(Session::has('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
                     <div>
                         <label class="control control--checkbox" style="margin-left: 0px;"><a>{{ __('fields.sms_notify') }}</a>
-                            <input type="checkbox" name="sms_notifications" {{ $user->sms_notifications ? 'checked' : '' }}>
+                            <input type="checkbox" name="sms_notifications" {{ $user->sms_notifications ? 'checked' : '' }} autocomplete="off" >
                             <div class="control__indicator"></div>
                         </label>
                     </div>
@@ -72,6 +72,7 @@
                             <img src="{{ asset('img/' . $contactOption->contact_option_name . '.png') }}" alt="">
                             <input 
                             type="checkbox" 
+                            autocomplete="off" 
                             name="contact_options[{{ $contactOption->id }}]" 
                             value="{{ $contactOption->id }}" 
                             id="{{ $contactOption->contact_option_name == 'skype' ? 'skype_contact' : '' }}" 
@@ -97,6 +98,7 @@
                                 name="prefered_contact_option" 
                                 value="{{ $key }}" 
                                 style="display: inline-block;"
+                                autocomplete="off"
                                 {{ $user->prefered_contact_option == $key ? 'checked' : '' }}>
                                 {{ $preferedOption }}
                             </label>
@@ -108,6 +110,7 @@
                                 type="checkbox" 
                                 name="no_withheld_numbers" 
                                 value="1" 
+                                autocomplete="off" 
                                 style="display: inline-block;" 
                                 {{ $user->no_withheld_numbers ? 'checked' : '' }}>
                                 <a>{{ __('fields.no_withheld_numbers') }}</a>

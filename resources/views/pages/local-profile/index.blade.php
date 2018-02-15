@@ -122,9 +122,9 @@
                                                         </a>
                                                 </div>
                                                 <div class="product-content">
-                                                    <a class="shop-name">{{ $local->username }}</a>
+                                                    <a class="shop-name">{{ $local->name }}</a>
                                                     <div class="pro-price"></div>
-                                                    <a href="{{ url('locals/' . $local->username) }}">
+                                                    <a href="{{ url('locals/' . $local->name) }}">
                                                         <div class="product-cart">
                                                             <button class="button">{{ __('buttons.view_profile') }}</button>
                                                         </div>
@@ -148,11 +148,11 @@
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             <div class="product-content-shop" style="text-align:center; padding-top:20px;">
-                                                                <h2><a class="shop-name">{{ $local->username }}</a></h2>
+                                                                <h2><a class="shop-name">{{ $local->name }}</a></h2>
                                                                 <div class="pro-deal-text-shop">
                                                                     <p>{{ Str::words($local->about_me, 40) }}</p>
                                                                 </div>
-                                                                <a href="{{ url('locals/' . $local->username) }}">
+                                                                <a href="{{ url('locals/' . $local->name) }}">
                                                                     <div class="product-cart">
                                                                         <button class="button">{{ __('buttons.view_profile') }}</button>
                                                                     </div>

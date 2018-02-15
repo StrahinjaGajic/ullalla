@@ -18,19 +18,14 @@
             <div class="alert alert-success">{{ Session::get('success') }}</div>
             @endif
             <div class="row">
-                {!! Form::model($user, ['url' => '@' . $user->username . '/about_me/store', 'method' => 'put']) !!}
+                {!! Form::model($user, ['url' => 'private/' . $user->id . '/about_me/store', 'method' => 'put']) !!}
                 <div id="about" class="form-group" style="margin-left:15px;">
                     <textarea class="form-control" rows="5" id="comment" name="about_me">{{ $user->about_me }}</textarea>
                     <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
                 </div>
-                
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
 </div>
 @stop
-
-
-
-
