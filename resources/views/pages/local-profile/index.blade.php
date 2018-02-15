@@ -124,7 +124,7 @@
                                                 <div class="product-content">
                                                     <a class="shop-name">{{ $local->name }}</a>
                                                     <div class="pro-price"></div>
-                                                    <a href="{{ url('locals/' . $local->name) }}">
+                                                    <a href="{{ url('locals/' . $local->username) }}">
                                                         <div class="product-cart">
                                                             <button class="button">{{ __('buttons.view_profile') }}</button>
                                                         </div>

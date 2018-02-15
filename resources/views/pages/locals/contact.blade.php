@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="col-3 input-effect {{ $errors->has('web') ? 'has-error' : ''  }}">
-                                <input class="effect-16" type="text" placeholder="" name="web" value="{{ $local->web }}">
+                                <input class="effect-16" type="text" placeholder="" name="web" value="{{ $local->website }}">
                                 <label>{{ __('labels.web') }}</label>
                                 <span class="focus-border"></span>
                                 @if ($errors->has('web'))
