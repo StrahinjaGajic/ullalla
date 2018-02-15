@@ -26,7 +26,14 @@ class LocalController extends Controller
     public function __construct()
     {
         $this->middleware('auth:local');
-        $this->middleware('package.expiry', ['except' => ['getPackages', 'postPackages', 'getCreate', 'postCreate']]);
+        $this->middleware('package.expiry', [
+            'except' => [
+                    'getPackages', 
+                    'postPackages', 
+                    'getCreate', 
+                    'postCreate'
+                ]
+            ]);
         $this->middleware('has_package', [
             'only' => [
                 'getCreate',
@@ -35,7 +42,8 @@ class LocalController extends Controller
         ]);
         $this->middleware('not_has_package', [
             'except' => [
-                'getCreate', 'postCreate'
+                'getCreate', 
+                'postCreate'
             ]
         ]);
     }
@@ -43,9 +51,11 @@ class LocalController extends Controller
     public function getCreate()
     {
         $local = Auth::guard('local')->user();
+
         $packages = LocalPackage::all();
         $girlPackages = Package::all();
         $types = LocalType::all();
+
         return view('pages.locals.create', compact('local', 'types', 'packages', 'girlPackages'));
     }
 
@@ -121,6 +131,7 @@ class LocalController extends Controller
             $user->club_wellness_id = setClubInfo('wellness', request('wellness'), request('wellness-free'));
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
             $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));            
+
             if(request('ullalla_package')[0] != 6) {                
                 $user->package1_id = $defaultPackage->id;
                 $user->is_active_d_package = 1;
@@ -135,7 +146,9 @@ class LocalController extends Controller
                     $user->package2_expiry_date = $monthGirlExpiryDate;
                 }
             }
+
             $user->save();
+
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -167,7 +180,9 @@ class LocalController extends Controller
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
+
             Session::flash('account_created', __('messages.account_created'));
+
         } else {
             Auth::guard('local')->logout();
             Session::put('account_created_elite', __('messages.account_created_elite'));
@@ -396,9 +411,7 @@ class LocalController extends Controller
             ]);
         }
 
-        Session::flash('account_created', __('messages.account_created'));
-
-        return redirect()->back();
+        return redirect()->back()->with('success', __('messages.girl_added_success'));
     }
 
     public function getPackages()
@@ -764,5 +777,13 @@ class LocalController extends Controller
                 'errors' => $validator->getMessageBag()
             ]);
         }
+    }
+
+    public function deleteGirl($username, $private_id)
+    {
+        $user = Auth::user()->users()->findOrFail($private_id);
+        $user->delete();
+
+        return redirect()->back()->with('success', __('messages.girl_removed_success'));
     }
 }

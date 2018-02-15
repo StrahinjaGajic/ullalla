@@ -302,7 +302,12 @@
             {!! parseEditLocalProfileMenu('girls') !!}
         </div>
         <div class="col-sm-10 profile-info">
-            <button id="showModal" type="submit" class="btn btn-default">Add Girl</button><br><br>
+            <div class="btn-wrapper">
+                <button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.add_girl') }}</button><br><br>
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
+            </div>
             @if($local->users()->count() > 0)
                 <h3 style="margin: 0; font-size:34px;">Girls</h3>
                 <div class="col-xs-12 price-table-container" style="margin-top: 30px;">
@@ -335,7 +340,10 @@
                                     <td>{{ $user->last_name }}</td>
                                     <td>
                                         <a href="{{ url('private/' . $user->id . '/bio') }}" class="btn btn-default">Edit</a>
-                                        <button class="btn btn-default">Delete</button>
+                                        <form action="{{ url('locals/@' . $local->username . '/girls/' . $user->id . '/delete') }}" method="post">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?');">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

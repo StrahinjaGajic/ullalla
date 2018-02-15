@@ -145,6 +145,8 @@ Route::get('locals/@{username}/news_and_events', 'LocalController@getNewsAndEven
 Route::post('locals/@{username}/news/store', 'LocalController@postNews');
 Route::post('locals/@{username}/events/store', 'LocalController@postEvents');
 
+Route::post('locals/@{username}/girls/{private_id?}/delete', 'LocalController@deleteGirl');
+
 # LOCAL PROFILE CONTROLLER
 Route::get('locals/{username}', 'LocalProfileController@getLocal');
 Route::get('locals', [
