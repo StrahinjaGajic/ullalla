@@ -1,5 +1,12 @@
-@extends('layouts.app') @section('title', 'Locals') @section('styles')
-<link rel="stylesheet" href="{{ url('css/components/girls.css') }}"> @stop @section('content')
+@extends('layouts.app') 
+
+@section('title', 'Locals') 
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}"> 
+@stop 
+
+@section('content')
 <div class="wrapper section-girls">
     <div class="single-product-menu">
         <div class="container">
