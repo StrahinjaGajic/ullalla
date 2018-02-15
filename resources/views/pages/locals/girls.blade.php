@@ -334,7 +334,7 @@
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>
-                                        <a href="{{ url('locals/@' . $local->username . '/girls/' . $user->id . '/edit/bio') }}" class="btn btn-default">Edit</a>
+                                        <a href="{{ url('private/' . $user->id . '/bio') }}" class="btn btn-default">Edit</a>
                                         <button class="btn btn-default">Delete</button>
                                     </td>
                                 </tr>

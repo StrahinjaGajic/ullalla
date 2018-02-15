@@ -10,7 +10,11 @@
 <div class="container theme-cactus">
 	<div class="row">
 		<div class="col-sm-2 vertical-menu">
-			{!! parseEditProfileMenu('services') !!}
+			@if(Auth::guard('local')->check())
+                {!! parseEditProfileMenu('services', $user->id) !!}
+            @else
+                {!! parseEditProfileMenu('services') !!}
+            @endif
 		</div>
 		<div class="col-sm-10 profile-info">
 			@if(Session::has('success'))

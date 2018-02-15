@@ -46,7 +46,10 @@ class ProfileController extends Controller
         ]);
         $this->middleware('not_has_package', [
             'except' => [
-                'getCreate', 'postCreate', 'postNewPrice', 'deletePrice'
+                'getCreate', 
+                'postCreate', 
+                'postNewPrice', 
+                'deletePrice'
             ]
         ]);
 
@@ -270,18 +273,23 @@ class ProfileController extends Controller
         Session::flash('account_created', __('messages.account_created'));
     }
 
-    public function getBio($username, $private_id = null)
+    public function getBio($private_id)
     {
         $cantons = Canton::all();
         $packages = Package::all();
         $services = Service::all();
-        $countries = Country::all();        
-        $user = $private_id ? User::findOrFail($private_id) : Auth::user();
+        $countries = Country::all();
+
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.bio', compact('packages', 'cantons', 'countries', 'services', 'user'));
     }
 
-    public function postBio(Request $request)
+    public function postBio(Request $request, $private_id)
     {
         $this->validate($request, [
             'nickname' => 'required',
@@ -291,7 +299,12 @@ class ProfileController extends Controller
             'age' => ['required', 'numeric', new OlderThanRule],
         ]);
 
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->nickname = $request->nickname;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -318,32 +331,51 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getAbout()
+    public function getAbout($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            Session::put('private_id', $private_id);
+            $user = Auth::guard('local')->user()->users()->findOrFail(Session::get('private_id'));
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.about', compact('user'));
     }
 
-    public function postAbout()
+    public function postAbout($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->about_me = request('about_me');
         $user->save();
 
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getGallery()
+    public function getGallery($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.gallery', compact('user'));
     }
 
-    public function postGallery(Request $request)
+    public function postGallery(Request $request, $private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
         $inputPhotos = request('photos');
 
@@ -396,18 +428,28 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getServices()
+    public function getServices($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $services = Service::all();
         $serviceOptions = ServiceOption::all();
 
         return view('pages.profile.services', compact('user', 'services', 'serviceOptions'));
     }
 
-    public function postServices()
+    public function postServices($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->services()->sync(request('services'));
         $user->service_options()->sync(request('service_options'));
 
@@ -503,17 +545,26 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getLanguages()
+    public function getLanguages($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $spokenLanguages = SpokenLanguage::all();
 
         return view('pages.profile.languages', compact('user', 'spokenLanguages'));
     }
 
-    public function postLanguages(Request $request)
+    public function postLanguages(Request $request, $private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         // define languages input
         $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });

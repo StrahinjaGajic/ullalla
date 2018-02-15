@@ -10,7 +10,11 @@
 <div class="container theme-cactus">
 	<div class="row">
 		<div class="col-sm-2 vertical-menu">
-			{!! parseEditProfileMenu('languages') !!}
+			@if(Auth::guard('local')->check())
+                {!! parseEditProfileMenu('languages', $user->id) !!}
+            @else
+                {!! parseEditProfileMenu('languages') !!}
+            @endif
 		</div>
 		<div class="col-sm-10 profile-info">
 			<h3>{{ __('headings.languages') }}</h3>
@@ -28,7 +32,9 @@
 							<th>{{ __('headings.level') }}</th>
 						</tr>
 					</thead>
-					@php $var = 'spoken_language_name_'. config()->get('app.locale') @endphp
+					@php 
+						$var = 'spoken_language_name_'. config()->get('app.locale');
+					@endphp
 					<tbody class="language-list">
 						@foreach($spokenLanguages->take(7) as $language)
 						<tr>
