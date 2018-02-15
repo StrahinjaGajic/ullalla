@@ -3,39 +3,39 @@
 return [
 
     #getSexes
-    'male' => 'male',
-    'female' => 'female',
-    'transsexual' => 'transsexual',
+    'male' => 'männlich',
+    'female' => 'weiblich',
+    'transsexual' => 'transsexuell',
 
 
     #getSexOrientations
-    'heterosexual' => 'heterosexual',
-    'bisexual' => 'bisexual',
-    'homosexual' => 'homosexual',
+    'heterosexual' => 'heterosexuell',
+    'bisexual' => 'bisexuell',
+    'homosexual' => 'homosexuell',
 
 
     #getAnswers
-    'yes' => 'yes',
-    'no' => 'no',
-    'occasionally' => 'occasionally',
+    'yes' => 'Ja',
+    'no' => 'Nein',
+    'occasionally' => 'Gelegentlich',
 
 
     #getTypes
-    'asian' => 'asian',
-    'black' => 'black',
-    'european' => 'european',
-    'latina' => 'latina',
-    'indian' => 'indian',
-    'arabian' => 'arabian',
-    'mixed' => 'mixed',
-    'other' => 'other',
+    'asian' => 'asiatisch',
+    'black' => 'afrikanisch',
+    'european' => 'europäisch',
+    'latina' => 'lateinamerikanisch',
+    'indian' => 'indisch',
+    'arabian' => 'arabisch',
+    'mixed' => 'mischling',
+    'other' => 'anderes',
 
 
     #getFigures
-    'athletic' => 'athletic',
-    'chubby' => 'chubby',
+    'athletic' => 'athletisch',
+    'chubby' => 'mollig',
     'normal' => 'normal',
-    'slim' => 'slim',
+    'slim' => 'dünn',
 
 
     #getBreastSizes
@@ -49,52 +49,52 @@ return [
 
 
     #getEyeColors
-    'brown' => 'brown',
-    'green' => 'green',
-    'blue' => 'blue',
-    'gray' => 'gray',
+    'brown' => 'braun',
+    'green' => 'grün',
+    'blue' => 'blau',
+    'gray' => 'grau',
 
 
     #getHairColors
     'brunette' => 'brunette',
     'blond' => 'blond',
-    'red' => 'red',
+    'red' => 'rothaarig',
 
 
     #getShaveOptions
-    'shaved' => 'shaved',
-    'partial' => 'partial',
-    'hairy' => 'hairy',
+    'shaved' => 'rasiert',
+    'partial' => 'teilrasiert',
+    'hairy' => 'behaart',
 
 
     #getUnits
-    'days' => 'days',
-    'hours' => 'hours',
-    'minutes' => 'minutes',
+    'days' => 'Tage',
+    'hours' => 'Stunden',
+    'minutes' => 'Minuten',
 
 
     #getPreferedOptions
-    'sms_and_call' => 'SMS And Call',
-    'sms_only' => 'SMS Only',
-    'call_only' => 'Call Only',
+    'sms_and_call' => 'SMS und Anruf',
+    'sms_only' => 'Nur SMS',
+    'call_only' => 'Nur Anruf',
 
 
     #getIncallOptions
-    'private_apartment' => 'Private Apartment',
+    'private_apartment' => 'Private Wohnung',
     'hotel' => 'Hotel',
     'club_studio' => 'Club/Studio',
-    'define_yourself' => 'Define Yourself',
+    'define_yourself' => 'Definieren Sie selbst',
 
 
     #getOutcallOptions
-    'home' => 'Home',
-    'home_and_hotel' => 'Home And Hotel',
+    'home' => 'zu Hause',
+    'home_and_hotel' => 'zu Hause und Hotel',
 
 
     #getCurrencies
-    'chf' => 'chf',
-    'eur' => 'eur',
-    'usd' => 'usd',
+    'chf' => 'CHF',
+    'eur' => 'EUR',
+    'usd' => 'USD',
 
 
     #getPriceTypes
@@ -103,52 +103,52 @@ return [
 
 
     #getLanguages
-    'de' => 'German',
-    'fr' => 'French',
-    'it' => 'Italian',
+    'de' => 'Deutsch',
+    'fr' => 'Français',
+    'it' => 'Italiano',
     'en' => 'English',
 
 
     #getDaysOfTheWeek
-    'monday' => 'Monday',
-    'tuesday' => 'Tuesday',
-    'wednesday' => 'Wednesday',
-    'thursday' => 'Thursday',
-    'friday' => 'Friday',
-    'saturday' => 'Saturday',
-    'sunday' => 'Sunday',
+    'monday' => 'Montag',
+    'tuesday' => 'Dienstag',
+    'wednesday' => 'Mittwoch',
+    'thursday' => 'Donnerstag',
+    'friday' => 'Freitag',
+    'saturday' => 'Samstag',
+    'sunday' => 'Sonntag',
 
 
     #getBioFields
-    'age' => 'Age',
-    'type' => 'Type',
-    'country_id' => 'Nationality',
-    'eye_color' => 'Eyes',
-    'hair_color' => 'Hair',
-    'height' => 'Height',
-    'weight' => 'Weight',
-    'breast_size' => 'Breast Size',
-    'intimate' => 'Intimate',
-    'smoker' => 'Smoker',
-    'alcohol' => 'Alcohol',
+    'age' => 'Alter',
+    'type' => 'Typ',
+    'country_id' => 'Nationalität',
+    'eye_color' => 'Augenfarbe',
+    'hair_color' => 'Haarfarbe',
+    'height' => 'Grösse',
+    'weight' => 'Gewicht',
+    'breast_size' => 'Körbchengrösse',
+    'intimate' => 'Intimrasur',
+    'smoker' => 'Raucher',
+    'alcohol' => 'Alkohol',
 
 
 
     #getContactFields
     'email' => 'Email',
-    'phone' => 'Phone',
-    'mobile' => 'Mobile Phone',
-    'website' => 'Website',
+    'phone' => 'Telefon',
+    'mobile' => 'Mobil',
+    'website' => 'Webseite',
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
     'skype_name' => 'Skype Name',
-    'prefered_contact_option' => 'I Prefer',
+    'prefered_contact_option' => 'Ich bevorzuge Kontakt über',
     'no_withheld_numbers' => 'Withheld Numbers',
 
 
     #getWorkplaceFields
     'club_name' => 'Club',
-    'city' => 'City',
-    'address' => 'Address',
+    'city' => 'Ort',
+    'address' => 'Adresse',
     'incall_type' => 'Incall',
     'outcall_type' => 'Outcall',
 
@@ -156,24 +156,24 @@ return [
 
     #getOrderBy
     'nickname_asc' => 'Nickname',
-    'created_at_desc' => 'Newest',
-    'created_at_asc' => 'Oldest',
-    'service_price_asc' => 'Price Ascending',
-    'service_price_desc' => 'Price Descending',
+    'created_at_desc' => 'Neueste',
+    'created_at_asc' => 'Älteste',
+    'service_price_asc' => 'Preise aufsteigend',
+    'service_price_desc' => 'Preise absteigend',
 
 
 
     #getEditProfilePages
     'bio' => 'Bio',
-    'about_me' => 'About Me',
-    'languages' => 'Languages',
-    'gallery' => 'Gallery',
-    'contact' => 'Contact',
+    'about_me' => 'Über mich',
+    'languages' => 'Sprachen',
+    'gallery' => 'Gallerie',
+    'contact' => 'Kontakt',
     'services' => 'Services',
-    'workplace' => 'Workplace',
-    'working_time' => 'Working Time',
-    'prices' => 'Prices',
-    'packages' => 'Packages',
+    'workplace' => 'Arbeitsort',
+    'working_time' => 'Arbeitszeit',
+    'prices' => 'Preise',
+    'packages' => 'Pakete',
     'banners' => 'Banners',
     'news_and_events' => 'News/Events',
     'add_card' => 'Add Card',
@@ -189,12 +189,12 @@ return [
 
 
     #getClubInfo
-    'yes_free' => 'Yes (Free)',
-    'yes_with_cost' => 'Yes (With cost)',
+    'yes_free' => 'Ja (gratis)',
+    'yes_with_cost' => 'Ja (zusätzliche Kosten)',
 
     #
-    'girl' => 'girl',
-    'trans' => 'trans',
-    'local' => 'local',
+    'girl' => 'Girl',
+    'trans' => 'Trans',
+    'local' => 'Lokal',
 
 ];

@@ -1,14 +1,14 @@
 <?php
 return [
     #locals-single
-    'entrance' => 'Entrance',
+    'entrance' => 'Eintritt',
     'wellness' => 'Wellness',
-    'food_and_drinks' => 'Food and Drinks',
-    'outdoor_area' => 'Outdoor Area',
+    'food_and_drinks' => 'Essen und Getränke',
+    'outdoor_area' => 'Aussenbereich',
 
     #locals
-    'month' => 'Month',
-    'year' => 'Year',
+    'month' => 'Monat',
+    'year' => 'Jahr',
 
 ];
 ?>

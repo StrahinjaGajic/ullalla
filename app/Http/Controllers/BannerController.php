@@ -144,9 +144,9 @@ class BannerController extends Controller
             }
 
             if ($local) {
-            	return redirect()->action('BannerController@getBanners', ['username' => $user->username]);
+            	return redirect()->route('local_banners', ['username' => $user->username]);
             } else {
-            	return redirect()->action('BannerController@getBanners');
+            	return redirect()->route('private_banners', ['private_id' => $user->id]);
             }
 
         } else {

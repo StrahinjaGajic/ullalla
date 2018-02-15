@@ -104,9 +104,9 @@ Route::group(['middleware' => 'forbid.locals'], function() {
 });
 
 # BANNER CONTROLLER
-Route::get('private/{private_id}/banners', 'BannerController@getBanners');
+Route::get('private/{private_id}/banners', 'BannerController@getBanners')->name('private_banners');
 Route::get('private/{private_id}/banners/create', 'BannerController@getCreateBanners');
-Route::get('locals/@{username}/banners', 'BannerController@getBanners');
+Route::get('locals/@{username}/banners', 'BannerController@getBanners')->name('local_banners');
 Route::get('locals/@{username}/banners/create', 'BannerController@getCreateBanners');
 Route::post('banners/store', 'BannerController@postBanners');
 

@@ -2,76 +2,76 @@
 
 
 return [
-	'girl' => 'Girl',
-	'local' => 'Local',
-	'city' => 'City',
+    'girl' => 'Girl',
+    'local' => 'Lokal',
+    'city' => 'Ort',
 
-	# edit profile
-	'nickname' => 'Nickname',
-	'first_name' => 'First Name',
-	'last_name' => 'Last Name',
-	'nationality' => 'Nationality',
-	'age' => 'Age',
-	'height' => 'Height',
-	'weight' => 'Weight',
-	'sex' => 'Sex',
-	'sex_orientation' => 'Sex Orientation',
-	'type' => 'Type',
-	'figure' => 'Figure',
-	'breast_size' => 'Breast Size',
-	'eye_color' => 'Eye Color',
-	'hair_color' => 'Hair Color',
-	'tattoos' => 'Tattoos',
-	'piercings' => 'Piercings',
-	'body_hair' => 'Body Hair',
-	'intimate' => 'Intimate',
-	'smoker' => 'Smoker',
-	'alcohol' => 'Alcohol',
+    # edit profile
+    'nickname' => 'Nickname',
+    'first_name' => 'Vorname',
+    'last_name' => 'Nachname',
+    'nationality' => 'Nationalität',
+    'age' => 'Alter',
+    'height' => 'Grösse',
+    'weight' => 'Gewicht',
+    'sex' => 'Geschlecht',
+    'sex_orientation' => 'Sexuelle Orientierung',
+    'type' => 'Typ',
+    'figure' => 'Figur',
+    'breast_size' => 'Körbchengrösse',
+    'eye_color' => 'Augenfarbe',
+    'hair_color' => 'Haarfarbe',
+    'tattoos' => 'Tattoos',
+    'piercings' => 'Piercings',
+    'body_hair' => 'Körperbehaarung',
+    'intimate' => 'Intimbehaarung',
+    'smoker' => 'Raucher',
+    'alcohol' => 'Alkohol',
 
-	'email' => 'Email',
-	'website' => 'Website',
-	'phone' => 'Phone Number',
-	'mobile' => 'Mobile Number',
-	'no_withheld_numbers' => 'No Withheld Numbers',
+    'email' => 'Email',
+    'website' => 'Webseite',
+    'phone' => 'Telefon',
+    'mobile' => 'Mobil',
+    'no_withheld_numbers' => 'Keine anonyme Nummern',
 
-	# prices
-	'unit' => 'Unit',
-	'currency' => 'Currency',
+    # prices
+    'unit' => 'Einheit',
+    'currency' => 'Währung',
 
-	# working time
-	'available_24_7' => 'Available 24/7',
-	'show_as_night_escort' => 'Also Available For Escort Services',
-	'night_escort' => 'Escort Services',
-	'mark_all' => 'Mark All',
+    # working time
+    'available_24_7' => 'Verfügbar 24/7',
+    'show_as_night_escort' => 'Als Escort anzeigen',
+    'night_escort' => 'Escort',
+    'mark_all' => 'Alles markieren',
 
-	# workplace
-	'canton' => 'Canton', 
-	'address' => 'Address',
-	'zip_code' => 'Zip Code',
-	'club_name' => 'Club Name',
-	'incall' => 'Incall',
-	'outcall' => 'Outcall',
+    # workplace
+    'canton' => 'Kanton',
+    'address' => 'Adresse',
+    'zip_code' => 'PLZ',
+    'club_name' => 'Club Name',
+    'incall' => 'Incall',
+    'outcall' => 'Outcall',
 
-	# private
-	'radius' => 'Radius',
-	'price_range' => 'Price Range',
-	'incall_outcall' => 'Incall/Outcall',
-	'location' => 'Location',
-	'service' => 'Service',
+    # private
+    'radius' => 'Radius',
+    'price_range' => 'Preisklasse',
+    'incall_outcall' => 'Incall/Outcall',
+    'location' => 'Ort',
+    'service' => 'Service',
 
     # locals
-    'male' => 'Male',
-    'female' => 'Female',
+    'male' => 'männlich',
+    'female' => 'weiblich',
 
     #profile
-    'transsexual' => 'Transsexual',
-    'heterosexual' => 'Heterosexual',
-    'bisexual' => 'Bisexual',
-    'homosexual' => 'Homosexual',
+    'transsexual' => 'Transsexuell',
+    'heterosexual' => 'Heterosexuell',
+    'bisexual' => 'Bisexuell',
+    'homosexual' => 'Homosexuell',
     'normal' => 'Normal',
-    'slim' => 'Slim',
-    'athletic' => 'Athletic',
-    'chubby' => 'Chubby',
+    'slim' => 'dünn',
+    'athletic' => 'athletisch',
+    'chubby' => 'mollig',
     'a' => 'A',
     'b' => 'B',
     'c' => 'C',
@@ -79,22 +79,22 @@ return [
     'e' => 'E',
     'f' => 'F',
     'g' => 'G',
-    'black' => 'Black',
-    'brown' => 'Brow',
-    'green' => 'Green',
-    'blue' => 'Blue',
-    'gray' => 'Gray',
-    'other' => 'Other',
+    'black' => 'Schwarz',
+    'brown' => 'Braun',
+    'green' => 'Grün',
+    'blue' => 'Blau',
+    'grey' => 'Grau',
+    'other' => 'Andere',
     'brunette' => 'Brunette',
     'blond' => 'Blond',
-    'red' => 'Red',
-    'shaved' => 'Shaved',
-    'hairy' => 'Hairy',
-    'partial' => 'Partial',
-    'occasionally' => 'Occasionally',
-    'website_url' => 'Website URL',
-    'telephone' => 'Telephone',
-    'mobile_phone' => 'Mobile Phone',
+    'red' => 'Rothaarig',
+    'shaved' => 'rasiert',
+    'hairy' => 'behaart',
+    'partial' => 'teilrasiert',
+    'occasionally' => 'gelegentlich',
+    'website_url' => 'Webseite',
+    'telephone' => 'Telefon',
+    'mobile_phone' => 'Mobil',
 
 
     'sms_notify' => 'Erhalten Sie Benachrichtigungen via SMS',
@@ -103,7 +103,7 @@ return [
     'hours' => 'Hour|Hours',
     'minutes' => 'Minute|Minutes',
 
-   	#blackbook
+    #blackbook
     'date' => 'Date',
     'photo' => 'Photo',
     'client_name' => 'Client Name',
@@ -117,9 +117,8 @@ return [
     'prepared_flyer' => 'Already have a prepared flyer?',
     'price_per_day' => 'Price per day',
     'total' => 'Total',
-    
-  	#banners
+
+    #banners
     'prepared_banner' => 'Already have a prepared banner?',
     'url' => 'Url',
-    
 ];

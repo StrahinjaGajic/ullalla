@@ -2,93 +2,94 @@
 
 
 return [
-	#home page
-	'quick_search' => 'Quick Search',
-	'gotm' => 'Girls Of The Month',
-	'totm' => 'Trans Of The Month',
+    #home page
+    'quick_search' => 'Schnellsuche',
+    'gotm' => 'Girl des Monats',
+    'totm' => 'Transe des Monats',
     'lotm' => 'Locals Of The Month',
-	'default_error_title' => 'Oops...',
-    'info_account_not_approved_title' => 'Account not approved',
+    'default_error_title' => 'Ein Fehler ist aufgetreten',
+    'info_account_not_approved_title' => 'Profil wurde noch nicht freigeschalten',
     'good_job_title' => 'Good job!',
-    'account_created_title' => 'Congratulations',
-    'package_expiration_title' => 'Package Expiration',
-    'this_banner_is' => 'This banner is',
-    'this_one_is_also' => 'This one is also',
+    'account_created_title' => 'Herzlichen Glückwunsch',
+    'package_expiration_title' => 'PaketPackage Expiration',
+    'this_banner_is' => 'Dieser Banner ist',
+    'this_one_is_also' => 'Dieser ist auch',
 
     # edit profile nav
-    'about_me' => 'About Me',
+    'about_me' => 'Über mich',
     'bio' => 'Bio',
-    'contact' => 'Contact',
-    'gallery' => 'Gallery',
+    'contact' => 'Kontakt',
+    'gallery' => 'Gallerie',
     'banners' => 'Banners',
-    'languages' => 'Languages',
-    'job_offers' => 'Job Offers',
-    'prices' => 'Prices',
-    'packages' => 'Packages',
+    'languages' => 'Sprachen',
+    'job_offers' => 'Jobangebote',
+    'prices' => 'Preise',
+    'packages' => 'Pakete',
     'services' => 'Services',
-    'working_time' => 'Working Time',
-    'workplace' => 'Workplace',
+    'working_time' => 'Arbeitszeit',
+    'workplace' => 'Arbeitsort',
 
     # bio
-	'personal_info' => 'Personal Info',
+    'personal_info' => 'Info',
 
     # contact
-    'i_prefer' => 'I Prefer',
-    'available_apps' => 'Available Apps',
-    'contact_info' => 'Contact Information',
+    'i_prefer' => 'Ich bevorzuge',
+    'available_apps' => 'Verfügbare Apps',
+    'contact_info' => 'Kontaktinformation',
 
     # gallery
-    'photos' => 'Photos',
+    'photos' => 'Bilder',
     'videos' => 'Videos',
 
     # languages
-    'language' => 'Language',
+    'language' => 'Sprache',
     'level' => 'Level',
 
     # packages
-    'active_packages' => 'Active Packages',
+    'active_packages' => 'Aktive Pakete',
     'scheduled_packages' => 'Scheduled Packages',
-    'activation_date' => 'Activation Date',
-    'expiry_date' => 'Expiry Date',
+    'activation_date' => 'Aktivierungsdatum',
+    'expiry_date' => 'Ablaufdatum',
     'default_package' => 'Default Package',
     'default_packages' => 'Default Packages',
-    'gotm_package' => 'Girl of The Month Package',
+    'gotm_package' => 'Girl des Monats Paket',
     'name' => 'Name',
-    'duration' => 'Duration',
-    'price' => 'Price',
+    'duration' => 'Dauer',
+    'price' => 'Preis',
 
     #prices
-    'remove' => 'Remove',
+    'remove' => 'löschen',
 
     # services
-    'service_offered_for' => 'Services Offered For',
-    'service_list' => 'Service List',
+    'service_offered_for' => 'Services angeboten für',
+    'service_list' => 'Serviceliste',
 
     # working time
-    'from' => 'From',
-    'to' => 'To',
+    'from' => 'von',
+    'to' => 'bis',
 
     # workplace
-    'available_for' => 'Available For',
+    'available_for' => 'Verfügbar für',
 
     # Private page
-    'search_filters' => 'Search Filters',
-    'no_users_found' => 'No Users Found',
+    'search_filters' => 'Suchfilter',
+    'no_users_found' => 'Keine User gefunden',
 
     # locals
-    'local_types' => 'Local Types',
+    'local_types' => 'Lokalart',
     'club_info' => 'Club Info',
-    'working_hours' => 'Working Hours',
-    'about_us' => 'About Us',
+    'working_hours' => 'Öffnungszeiten',
+    'about_us' => 'Über uns',
     'logo' => 'Logo',
-    'add_girl' => 'Add Girl',
+    'add_girl' => 'Girl hinzufügen',
 
     #locals-single
-    'local_type' => 'Local Type',
+    'local_type' => 'Lokaltyp',
 
     #girls
-    'map'=> 'Map',
-    'i_o_s_f'=> 'I Offer Services For',
+    'map'=> 'Karte',
+    'i_o_s_f'=> 'Ich biete Services für',
+
 
     #notifications
     'local_default_package_expiration_title' => 'Local Default Package Expiration',
