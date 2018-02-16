@@ -1170,6 +1170,8 @@ $(function () {
 	var numericError = '{{ __('validation.numeric_error') }}';
 	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
 	var maxFiles = '{{ __('validation.max_files') }}';
+	var buttonFinish = '{{ __('buttons.finish') }}';
+	var buttonNext = '{{ __('buttons.next')) }}';
 </script>
 @stop
 
