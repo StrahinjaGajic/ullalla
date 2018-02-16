@@ -777,7 +777,7 @@
         var maxStrLength20 = '{{ __('validation.max_str_length', ['max' => 20]) }}';
         var maxStrLength30 = '{{ __('validation.max_str_length', ['max' => 30]) }}';
         var buttonFinish = '{{ __('buttons.finish') }}';
-        var buttonNext = '{{ __('buttons.next')) }}';
+        var buttonNext = '{{ __('buttons.next') }}';
     </script>
 
 

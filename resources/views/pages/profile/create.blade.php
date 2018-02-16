@@ -1171,7 +1171,7 @@ $(function () {
 	var defaultPackageRequired = '{{ __('validation.default_package_required') }}';
 	var maxFiles = '{{ __('validation.max_files') }}';
 	var buttonFinish = '{{ __('buttons.finish') }}';
-	var buttonNext = '{{ __('buttons.next')) }}';
+	var buttonNext = '{{ __('buttons.next') }}';
 </script>
 @stop
 
