@@ -383,8 +383,8 @@ function getEditProfilePages() {
         'about_me' => __('functions.about_me'),
         'languages' => __('functions.languages'),
         'gallery' => __('functions.gallery'),
-        'contact' => __('functions.contact'),
         'services' => __('functions.services'),
+        'contact' => __('functions.contact'),
         'workplace' => __('functions.workplace'),
         'working_time' => __('functions.working_time'),
         'prices' => __('functions.prices'),
@@ -394,13 +394,22 @@ function getEditProfilePages() {
     ];
 }
 
-function parseEditProfileMenu($currentPage) {
+function parseEditProfileMenu($currentPage, $girl_id = null) {
     $html = '';
-    foreach (getEditProfilePages() as $href => $pageTitle) {
-        $path = url('private/' . Auth::user()->id . '/' . $href);
+
+    if ($girl_id) {
+        $pages = array_slice(getEditProfilePages(), 0, 5);
+    } else {
+        $pages = getEditProfilePages();
+    }
+
+    foreach ($pages as $href => $pageTitle) {
+        $user_id = $girl_id ? $girl_id : Auth::id();
+        $path = url('private/' . $user_id . '/' . $href);
         $active = $href == $currentPage ? 'active' : '';
         $html .= '<a href=' . $path . ' class=' . $active . '>' . $pageTitle . '</a>';
     }
+
     return $html;
 }
 

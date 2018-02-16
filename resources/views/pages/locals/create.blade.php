@@ -3,7 +3,7 @@
 @section('title', 'Create Local')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/create_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 

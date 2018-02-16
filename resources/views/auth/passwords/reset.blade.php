@@ -3,7 +3,7 @@
 @section('title', '| Reset Password')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/reset.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/reset.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')

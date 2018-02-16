@@ -2,7 +2,7 @@
 @section('title', 'Private')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/girls.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')

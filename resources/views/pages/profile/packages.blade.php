@@ -3,7 +3,7 @@
 @section('title', __('headings.packages'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
 @stop
 

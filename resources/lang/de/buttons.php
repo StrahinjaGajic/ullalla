@@ -76,4 +76,7 @@ return [
 
 	#banners
 	'add_banner' => 'Add Banner',
+	// nastavak
+	#local add girls
+    'add_girl' => 'Add Girl',
 ];

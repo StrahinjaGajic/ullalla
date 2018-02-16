@@ -56,4 +56,7 @@ return [
     #card
     'card_updated' => 'Your card details have been updated!',
     
+    # girls locals
+    'girl_removed_success' => 'Girl successfully removed',
+    'girl_added_success' => 'Girl successfully added',
 ];

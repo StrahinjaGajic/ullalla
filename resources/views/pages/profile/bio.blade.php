@@ -3,14 +3,18 @@
 @section('title', __('headings.bio'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
 <div class="container theme-cactus">
 	<div class="row">
 		<div class="col-sm-2 vertical-menu">
-			{!! parseEditProfileMenu('bio') !!}
+			@if(Auth::guard('local')->check())
+                {!! parseEditProfileMenu('bio', $user->id) !!}
+            @else
+                {!! parseEditProfileMenu('bio') !!}
+            @endif
 		</div>
 		<div class="col-sm-10 profile-info">
 			<h3>{{ __('headings.personal_info') }}</h3>

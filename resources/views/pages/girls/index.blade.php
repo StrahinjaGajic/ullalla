@@ -3,7 +3,7 @@
 @section('title', __('buttons.private'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ url('css/components/girls.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')

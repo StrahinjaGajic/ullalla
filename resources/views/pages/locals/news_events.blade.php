@@ -3,8 +3,8 @@
 @section('title', __('functions.news_and_events'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
-<link rel="stylesheet" href="{{ url('css/components/girls.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')

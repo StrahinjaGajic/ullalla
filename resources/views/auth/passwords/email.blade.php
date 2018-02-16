@@ -1,5 +1,12 @@
-@extends('layouts.app') @section('title', '| Forgot Password') @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/reset.css') }}"> @stop @section('content')
+@extends('layouts.app') 
+
+@section('title', '| Forgot Password') 
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/components/reset.css?ver=' . str_random(10)) }}"> 
+@stop 
+
+@section('content')
 <div class="wrapper">
     <div class="panel panel-default">
         <div class="panel-heading">

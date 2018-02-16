@@ -3,7 +3,7 @@
 @section('title', 'Sign Up')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/sign_in.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/sign_in.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
