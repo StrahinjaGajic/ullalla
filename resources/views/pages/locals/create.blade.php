@@ -449,7 +449,7 @@
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{ asset('js/localValidation.js?ver=' . str_random(10)) }}"></script>s
+<script src="{{ asset('js/localValidation.js?ver=' . str_random(10)) }}"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -776,6 +776,8 @@
         var maxStrLength10 = '{{ __('validation.max_str_length', ['max' => 10]) }}';
         var maxStrLength20 = '{{ __('validation.max_str_length', ['max' => 20]) }}';
         var maxStrLength30 = '{{ __('validation.max_str_length', ['max' => 30]) }}';
+        var buttonFinish = '{{ __('buttons.finish') }}';
+        var buttonNext = '{{ __('buttons.next')) }}';
     </script>
 
 

@@ -196,7 +196,7 @@ $(function() {
                 .find('.next')
                         .removeClass('disabled')    // Enable the Next button
                         .find('button')
-                        .html(index === numTabs - 1 ? __('buttons.finish') : __('buttons.next'));
+                        .html(index === numTabs - 1 ? buttonFinish : buttonNext;
                     }
                 });
 
