@@ -79,4 +79,9 @@ return [
 
 	#local add girls
     'add_girl' => 'Add Girl',
+
+	#create-profile
+	'next' => 'Next',
+	'finish' => 'Finish',
+	'previous' => 'Previous',
 ];

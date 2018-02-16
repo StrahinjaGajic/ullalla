@@ -420,10 +420,10 @@
                         <ul class="pager wizard">
                             <div class="col-xs-12">
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.previous') }}</button></li>
                                 </div>
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.next') }}</button></li>
                                 </div>
                             </div>
                         </ul>
