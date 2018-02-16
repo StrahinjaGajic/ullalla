@@ -45,7 +45,7 @@ return [
     'error' => 'error',
     'min_dimensions' => 'Min. Dimensionen',
 
-    'account_already_activated' => 'Profil bereits aktiviert'
+    'account_already_activated' => 'Profil bereits aktiviert',
 
     #blackbook
     'success_blackbook_entry' => 'Ein neuer Black Book Eintrag wurde erfolgreich erstellt.',
