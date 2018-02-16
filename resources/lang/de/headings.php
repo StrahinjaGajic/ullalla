@@ -6,7 +6,7 @@ return [
     'quick_search' => 'Schnellsuche',
     'gotm' => 'Girl des Monats',
     'totm' => 'Transe des Monats',
-    'lotm' => 'Locals Of The Month',
+    'lotm' => 'Lokale des Monats',
     'default_error_title' => 'Ein Fehler ist aufgetreten',
     'info_account_not_approved_title' => 'Profil wurde noch nicht freigeschalten',
     'good_job_title' => 'Good job!',
@@ -92,10 +92,10 @@ return [
 
 
     #notifications
-    'local_default_package_expiration_title' => 'Local Basic Package Expiration',
-    'default_package_expiration_title' => 'Basic Package Expiration',
-    'gotm_package_expiration_title' => 'Girl of The Month Package Expiration',
-    'lotm_package_expiration_title' => 'Local of The Month Package Expiration',
+    'local_default_package_expiration_title' => 'Lokal Basis-Paket Ablaufdatum',
+    'default_package_expiration_title' => 'Basis-Paket Ablauf',
+    'gotm_package_expiration_title' => 'Girl des Monats-Paket Ablauf',
+    'lotm_package_expiration_title' => 'Lokal des Monats-Paket Ablauf',
 
     #black book
     'blackbook' => 'Black Book',

@@ -27,7 +27,7 @@ return [
     'web' => 'Web',
     'zip' => 'PLZ',
     'available_24_7' => 'Verfügbar 24/7',
-    'apply_to_all' => 'Apply To All',
+    'apply_to_all' => 'Alles markieren',
     'mark_all' => 'Alles markieren',
     'about_us' => 'Über uns',
     'local_type' => 'Lokaltyp',

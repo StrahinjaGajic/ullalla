@@ -5,7 +5,7 @@ return [
 	'upload_videos' => 'Video hochladen',
 	'upload_photos' => 'Bild hochladen',
 	'upload_logo' => 'Logo hochladen',
-	'upload_photo' => '',
+	'upload_photo' => 'Foto hochladen',
 	'back' => 'Zurück',
 
 	# home
@@ -64,24 +64,24 @@ return [
 	'submit'=> 'Senden',
 
 	#black book
-	'entry' => '',
+	'entry' => 'Neue Eingabe einfügen',
 
 	#news/events
-	'news_entry' => '',
-	'events_entry' => '',
+    'news_entry' => 'News-Beitrag erstellen',
+    'events_entry' => 'Event erstellen',
 
 	#add card
-	'add_card' => 'Add Card',
-	'update_card' => 'Update Card',
+    'add_card' => 'Kreditkarte hinzufügen',
+    'update_card' => 'Kreditkarte aktualisieren',
 
 	#banners
-	'add_banner' => 'Add Banner',
+	'add_banner' => 'Banner hinzufügen',
 
 	#local add girls
-    'add_girl' => 'Add Girl',
+    'add_girl' => 'Girl hinzufügen',
 
 	#create-profile
-	'next' => 'Next',
-	'finish' => 'Finish',
-	'previous' => 'Previous',
+	'next' => 'nächste',
+	'finish' => 'beenden',
+	'previous' => 'vorherige',
 ];

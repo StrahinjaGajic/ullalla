@@ -97,28 +97,28 @@ return [
     'mobile_phone' => 'Mobil',
 
 
-    'sms_notify' => 'Erhalten Sie Benachrichtigungen via SMS',
+	'sms_notify' => 'Erhalten Sie Benachrichtigungen via SMS',
 
-    'days' => 'Day|Days',
-    'hours' => 'Hour|Hours',
-    'minutes' => 'Minute|Minutes',
+    'days' => 'Tag|Tage',
+    'hours' => 'Stunde|Stunden',
+    'minutes' => 'Minute|Minuten',
 
     #blackbook
-    'date' => 'Date',
-    'photo' => 'Photo',
-    'client_name' => 'Client Name',
-    'client_phone' => 'Client Phone',
-    'description' => 'Description',
+    'date' => 'Datum',
+    'photo' => 'Foto',
+    'client_name' => 'Name Kunde',
+    'client_phone' => 'Telefon Kunde',
+    'description' => 'Beschreibung',
 
     #news/events
-    'title' => 'Title',
-    'duration' => 'Duration',
-    'venue' => 'Venue',
-    'prepared_flyer' => 'Already have a prepared flyer?',
-    'price_per_day' => 'Price per day',
+    'title' => 'Titel',
+    'duration' => 'Dauer',
+    'venue' => 'Ort',
+    'prepared_flyer' => 'Haben Sie bereits eine Vorlage für Ihren Flyer?',
+    'price_per_day' => 'Preis pro Tag',
     'total' => 'Total',
 
     #banners
-    'prepared_banner' => 'Already have a prepared banner?',
+    'prepared_banner' => 'Haben Sie bereits eine Vorlage für Ihren Banner?',
     'url' => 'Url',
 ];

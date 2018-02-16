@@ -176,7 +176,7 @@ return [
     'packages' => 'Pakete',
     'banners' => 'Banners',
     'news_and_events' => 'News/Events',
-    'add_card' => 'Add Card',
+    'add_card' => 'Kreditkarte hinzufügen',
 
 
     #getLoclasOrderBy
@@ -184,7 +184,7 @@ return [
 
 
     #getEditLocalProfilePages
-    'club_info' => 'Club Info',
+    'club_info' => 'Lokal Info',
     'girls' => 'Girls',
 
 
@@ -198,7 +198,7 @@ return [
     'local' => 'Lokal',
 
     #add_card
-    'card_on_file' => 'Card on file',
+    'card_on_file' => 'Bestehende Kreditkarte',
 
     #working_times
     'Monday' => 'Montag',
