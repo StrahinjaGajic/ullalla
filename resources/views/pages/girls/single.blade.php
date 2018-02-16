@@ -178,7 +178,7 @@
 											<?php $workingTimes = json_decode($user->working_time); ?>
 											@foreach($workingTimes as $workingTime)
 											<tr>
-												<td>{{ explode('|', $workingTime)[0] }}</td>
+												<td>{{ __('functions.'. explode('|', $workingTime)[0]) }}</td>
 												<td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
 												<td>{{ explode('&', explode(' - ', explode('|', $workingTime)[1])[1])[0] }}</td>
 												<td>{{ isset(explode('&', explode(' - ', explode('|', $workingTime)[1])[1])[1]) ? __('fields.night_escort') : '' }}</td>

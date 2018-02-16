@@ -30,7 +30,7 @@ class ActivationMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@ullalla.com', 'Ullalla')
+        return $this->from('info@ullalla.ch', 'Ullallà')
                     ->view('emails.activation');
     }
 }

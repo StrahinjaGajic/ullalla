@@ -3,7 +3,7 @@ return [
     #locals-single
     'entrance' => 'Eintritt',
     'wellness' => 'Wellness',
-    'food_and_drinks' => 'Essen und Getränke',
+    'food_and_drinks' => 'Essen und GetrÃ¤nke',
     'outdoor_area' => 'Aussenbereich',
 
     #locals

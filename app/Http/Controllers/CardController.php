@@ -37,7 +37,7 @@ class CardController extends Controller
             $user->stripe_last4_digits = $last4;
             $user->save();
 
-            Session::flash('success', 'Your card details have been updated!');
+            Session::flash('success', __('messages.card_updated'));
             // return response()->json([
             //     'customer' => $customer
             // ]);

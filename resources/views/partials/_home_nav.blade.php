@@ -58,7 +58,7 @@
                                                 <li>
                                                     <a href="{{ url('change_language/' . $key) }}">
                                                         <img style="margin-bottom: 1px;" src="{{ asset('flags/4x3/' . $key . '.svg') }}" alt="" height="10" width="20">
-                                                        <span>{{ __('global.' . strtolower($language)) }}</span>
+                                                        <span>{{ $language }}</span>
                                                     </a>
                                                 </li>
                                                 @endforeach
@@ -113,7 +113,7 @@
                                                     <li>
                                                         <a href="{{ url('change_language/' . $key) }}">
                                                             <img src="{{ asset('flags/4x3/' . $key . '.svg') }}" alt="" height="10" width="20">
-                                                            <span>{{ __('global.' . strtolower($language)) }}</span>
+                                                            <span>{{ $language }}</span>
                                                         </a>
                                                     </li>
                                                     @endforeach

@@ -16,3 +16,9 @@
 <script src="/js/plugins.js"></script>
 <!-- Main -->
 <script src="/js/main.js"></script>
+<script>
+    $("[type='submit']").on("click", function (e) {
+        $(this).attr("disabled", true);
+        $(this).closest("form").submit()
+    });
+</script>

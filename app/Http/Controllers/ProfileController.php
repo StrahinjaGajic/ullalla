@@ -54,6 +54,7 @@ class ProfileController extends Controller
 
     public function getCreate()
     {
+        dd('aa');
         $user = Auth::user();
         $cantons = Canton::all();
         $packages = Package::all();

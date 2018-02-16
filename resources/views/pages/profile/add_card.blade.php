@@ -26,10 +26,10 @@
             {!! Form::open(['url' => 'card/store', 'class' => 'form-horizontal wizard', 'id' => 'cardForm']) !!}
             <div class="col-xs-12">
                 @if($user->stripe_last4_digits)
-                    <p>Card on file: **** **** **** {{ $user->stripe_last4_digits }}</p>
+                    <p>{{ __('functions.card_on_file') }}: **** **** **** {{ $user->stripe_last4_digits }}</p>
                 @endif
                 <div class="help-block card-error" style="color: red;"></div>
-                <button type="submit" class="btn btn-default pull-left">{{ $user->stripe_id ? 'Update Card' : 'Add Card' }}</button>
+                <button type="submit" class="btn btn-default pull-left">{{ $user->stripe_id ? __('buttons.update_card') : __('buttons.add_card') }}</button>
                 <input type="hidden" name="stripeToken" id="stripeToken">
                 <input type="hidden" name="stripeEmail" id="stripeEmail">
                 {!! Form::close() !!}

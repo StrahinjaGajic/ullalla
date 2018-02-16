@@ -10,20 +10,20 @@ return [
     'nickname' => 'Nickname',
     'first_name' => 'Vorname',
     'last_name' => 'Nachname',
-    'nationality' => 'Nationalität',
+    'nationality' => 'NationalitÃ¤t',
     'age' => 'Alter',
-    'height' => 'Grösse',
+    'height' => 'GrÃ¶sse',
     'weight' => 'Gewicht',
     'sex' => 'Geschlecht',
     'sex_orientation' => 'Sexuelle Orientierung',
     'type' => 'Typ',
     'figure' => 'Figur',
-    'breast_size' => 'Körbchengrösse',
+    'breast_size' => 'KÃ¶rbchengrÃ¶sse',
     'eye_color' => 'Augenfarbe',
     'hair_color' => 'Haarfarbe',
     'tattoos' => 'Tattoos',
     'piercings' => 'Piercings',
-    'body_hair' => 'Körperbehaarung',
+    'body_hair' => 'KÃ¶rperbehaarung',
     'intimate' => 'Intimbehaarung',
     'smoker' => 'Raucher',
     'alcohol' => 'Alkohol',
@@ -36,10 +36,10 @@ return [
 
     # prices
     'unit' => 'Einheit',
-    'currency' => 'Währung',
+    'currency' => 'WÃ¤hrung',
 
     # working time
-    'available_24_7' => 'Verfügbar 24/7',
+    'available_24_7' => 'VerfÃ¼gbar 24/7',
     'show_as_night_escort' => 'Als Escort anzeigen',
     'night_escort' => 'Escort',
     'mark_all' => 'Alles markieren',
@@ -60,7 +60,7 @@ return [
     'service' => 'Service',
 
     # locals
-    'male' => 'männlich',
+    'male' => 'mÃ¤nnlich',
     'female' => 'weiblich',
 
     #profile
@@ -69,7 +69,7 @@ return [
     'bisexual' => 'Bisexuell',
     'homosexual' => 'Homosexuell',
     'normal' => 'Normal',
-    'slim' => 'dünn',
+    'slim' => 'dÃ¼nn',
     'athletic' => 'athletisch',
     'chubby' => 'mollig',
     'a' => 'A',
@@ -81,7 +81,7 @@ return [
     'g' => 'G',
     'black' => 'Schwarz',
     'brown' => 'Braun',
-    'green' => 'Grün',
+    'green' => 'GrÃ¼n',
     'blue' => 'Blau',
     'grey' => 'Grau',
     'other' => 'Andere',

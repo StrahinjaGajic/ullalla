@@ -32,7 +32,7 @@ class LocalOfTheMonthPackageExpiredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@ullalla.com', 'Ullall?')
+        return $this->from('info@ullalla.ch', 'Ullallà')
             ->view('emails.lotm_package_expired_email');
     }
 }

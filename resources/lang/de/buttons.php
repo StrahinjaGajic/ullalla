@@ -6,7 +6,7 @@ return [
 	'upload_photos' => 'Bild hochladen',
 	'upload_logo' => 'Logo hochladen',
 	'upload_photo' => '',
-	'back' => 'Zurück',
+	'back' => 'ZurÃ¼ck',
 
 	# home
 	'view_profile' => 'Profil anzeigen',
@@ -15,7 +15,7 @@ return [
 
 
 	# footer links
-	'privacy_policy' => 'Datenschutzerklärung ',
+	'privacy_policy' => 'DatenschutzerklÃ¤rung ',
 	'contact_us' => 'Kontaktieren Sie uns',
 	'faq' => 'FAQ',
 
@@ -32,20 +32,20 @@ return [
 	'create_profile' => 'Profil erstellen',
 
 	# edit profile
-	'save_changes' => 'Änderungen speichern',
+	'save_changes' => 'Ã„nderungen speichern',
 	'show_more' => 'Mehr anzeigen',
 	'show_less' => 'Weniger anzeigen',
 
 	#prices
-	'add_new_price' => 'Neuen Preis hinzufügen',
+	'add_new_price' => 'Neuen Preis hinzufÃ¼gen',
 
 	# private links
-	'reset_filters' => 'Filter zurücksetzen',
+	'reset_filters' => 'Filter zurÃ¼cksetzen',
 	'grid' => 'Raster',
 	'list' => 'Liste',
 
 	#locals-single
-	'work_time' => 'Öffnungszeit',
+	'work_time' => 'Ã–ffnungszeit',
 	'club_info' => 'Club Info',
 	'girls' => 'Girls',
 	'video' => 'Video',
@@ -57,8 +57,8 @@ return [
 	'login' => 'Login',
 	'register' => 'Registrieren',
 	'logout' => 'Logout',
-	'approve' => 'bestätigen',
-	'rrl' => 'Passwort zurücksetzen',
+	'approve' => 'bestÃ¤tigen',
+	'rrl' => 'Passwort zurÃ¼cksetzen',
 
 	#contact
 	'submit'=> 'Senden',
@@ -69,4 +69,11 @@ return [
 	#news/events
 	'news_entry' => '',
 	'events_entry' => '',
+
+	#add card
+	'add_card' => 'Add Card',
+	'update_card' => 'Update Card',
+
+	#banners
+	'add_banner' => 'Add Banner',
 ];

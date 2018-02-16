@@ -32,7 +32,7 @@ class LocalDefaultPackageExpiredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@ullalla.com', 'Ullall?')
+        return $this->from('info@ullalla.ch', 'Ullallà')
             ->view('emails.local_default_package_expired_email');
     }
 }

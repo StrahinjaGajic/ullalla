@@ -3,7 +3,7 @@
 return [
 
     #getSexes
-    'male' => 'männlich',
+    'male' => 'mÃ¤nnlich',
     'female' => 'weiblich',
     'transsexual' => 'transsexuell',
 
@@ -23,7 +23,7 @@ return [
     #getTypes
     'asian' => 'asiatisch',
     'black' => 'afrikanisch',
-    'european' => 'europäisch',
+    'european' => 'europÃ¤isch',
     'latina' => 'lateinamerikanisch',
     'indian' => 'indisch',
     'arabian' => 'arabisch',
@@ -35,7 +35,7 @@ return [
     'athletic' => 'athletisch',
     'chubby' => 'mollig',
     'normal' => 'normal',
-    'slim' => 'dünn',
+    'slim' => 'dÃ¼nn',
 
 
     #getBreastSizes
@@ -50,7 +50,7 @@ return [
 
     #getEyeColors
     'brown' => 'braun',
-    'green' => 'grün',
+    'green' => 'grÃ¼n',
     'blue' => 'blau',
     'gray' => 'grau',
 
@@ -122,12 +122,12 @@ return [
     #getBioFields
     'age' => 'Alter',
     'type' => 'Typ',
-    'country_id' => 'Nationalität',
+    'country_id' => 'NationalitÃ¤t',
     'eye_color' => 'Augenfarbe',
     'hair_color' => 'Haarfarbe',
-    'height' => 'Grösse',
+    'height' => 'GrÃ¶sse',
     'weight' => 'Gewicht',
-    'breast_size' => 'Körbchengrösse',
+    'breast_size' => 'KÃ¶rbchengrÃ¶sse',
     'intimate' => 'Intimrasur',
     'smoker' => 'Raucher',
     'alcohol' => 'Alkohol',
@@ -141,7 +141,7 @@ return [
     'website' => 'Webseite',
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
     'skype_name' => 'Skype Name',
-    'prefered_contact_option' => 'Ich bevorzuge Kontakt über',
+    'prefered_contact_option' => 'Ich bevorzuge Kontakt Ã¼ber',
     'no_withheld_numbers' => 'Withheld Numbers',
 
 
@@ -157,7 +157,7 @@ return [
     #getOrderBy
     'nickname_asc' => 'Nickname',
     'created_at_desc' => 'Neueste',
-    'created_at_asc' => 'Älteste',
+    'created_at_asc' => 'Ã„lteste',
     'service_price_asc' => 'Preise aufsteigend',
     'service_price_desc' => 'Preise absteigend',
 
@@ -165,7 +165,7 @@ return [
 
     #getEditProfilePages
     'bio' => 'Bio',
-    'about_me' => 'Über mich',
+    'about_me' => 'Ãœber mich',
     'languages' => 'Sprachen',
     'gallery' => 'Gallerie',
     'contact' => 'Kontakt',
@@ -190,11 +190,23 @@ return [
 
     #getClubInfo
     'yes_free' => 'Ja (gratis)',
-    'yes_with_cost' => 'Ja (zusätzliche Kosten)',
+    'yes_with_cost' => 'Ja (zusÃ¤tzliche Kosten)',
 
     #
     'girl' => 'Girl',
     'trans' => 'Trans',
     'local' => 'Lokal',
+
+    #add_card
+    'card_on_file' => 'Card on file',
+
+    #working_times
+    'Monday' => 'Montag',
+    'Tuesday' => 'Dienstag',
+    'Wednesday' => 'Mittwoch',
+    'Thursday' => 'Donnerstag',
+    'Friday' => 'Freitag',
+    'Saturday' => 'Samstag',
+    'Sunday' => 'Sonntag',
 
 ];

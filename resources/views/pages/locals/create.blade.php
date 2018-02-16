@@ -470,7 +470,7 @@
         $(window).on('load',function(){
             $('#create_profile_modal').modal('show');
             // change text of a button to upload logo
-            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('Upload Logo');
+            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('{{ __('buttons.upload_logo') }}');
         });
         $(function () {
 

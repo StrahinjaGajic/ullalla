@@ -68,7 +68,7 @@
                         </div>
                         <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                             <tr>
-                                <td>{{ __('headings.local_type') }}</td>
+                                <td>{{ __('headings.local_type') }}:</td>
                                 @php ($var = 'name_'. config()->get('app.locale'))
                                 <td>{{ $local->local_type->$var }}</td>
                             </tr>
@@ -121,7 +121,7 @@
                                         <?php $workingTimes = json_decode($local->working_time); ?>
                                         @foreach($workingTimes as $workingTime)
                                         <tr>
-                                            <td>{{ explode('|', $workingTime)[0] }}</td>
+                                            <td>{{ __('functions.'. explode('|', $workingTime)[0]) }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[1] }}</td>
                                         </tr>

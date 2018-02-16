@@ -10,13 +10,13 @@ return [
     'default_error_title' => 'Ein Fehler ist aufgetreten',
     'info_account_not_approved_title' => 'Profil wurde noch nicht freigeschalten',
     'good_job_title' => 'Good job!',
-    'account_created_title' => 'Herzlichen Glückwunsch',
+    'account_created_title' => 'Herzlichen GlÃ¼ckwunsch',
     'package_expiration_title' => 'PaketPackage Expiration',
     'this_banner_is' => 'Dieser Banner ist',
     'this_one_is_also' => 'Dieser ist auch',
 
     # edit profile nav
-    'about_me' => 'Über mich',
+    'about_me' => 'Ãœber mich',
     'bio' => 'Bio',
     'contact' => 'Kontakt',
     'gallery' => 'Gallerie',
@@ -34,7 +34,7 @@ return [
 
     # contact
     'i_prefer' => 'Ich bevorzuge',
-    'available_apps' => 'Verfügbare Apps',
+    'available_apps' => 'VerfÃ¼gbare Apps',
     'contact_info' => 'Kontaktinformation',
 
     # gallery
@@ -50,18 +50,18 @@ return [
     'scheduled_packages' => 'Scheduled Packages',
     'activation_date' => 'Aktivierungsdatum',
     'expiry_date' => 'Ablaufdatum',
-    'default_package' => 'Default Package',
-    'default_packages' => 'Default Packages',
+    'default_package' => 'Basic Package',
+    'default_packages' => 'Basic Packages',
     'gotm_package' => 'Girl des Monats Paket',
     'name' => 'Name',
     'duration' => 'Dauer',
     'price' => 'Preis',
 
     #prices
-    'remove' => 'löschen',
+    'remove' => 'lÃ¶schen',
 
     # services
-    'service_offered_for' => 'Services angeboten für',
+    'service_offered_for' => 'Services angeboten fÃ¼r',
     'service_list' => 'Serviceliste',
 
     # working time
@@ -69,7 +69,7 @@ return [
     'to' => 'bis',
 
     # workplace
-    'available_for' => 'Verfügbar für',
+    'available_for' => 'VerfÃ¼gbar fÃ¼r',
 
     # Private page
     'search_filters' => 'Suchfilter',
@@ -78,22 +78,22 @@ return [
     # locals
     'local_types' => 'Lokalart',
     'club_info' => 'Club Info',
-    'working_hours' => 'Öffnungszeiten',
-    'about_us' => 'Über uns',
+    'working_hours' => 'Ã–ffnungszeiten',
+    'about_us' => 'Ãœber uns',
     'logo' => 'Logo',
-    'add_girl' => 'Girl hinzufügen',
+    'add_girl' => 'Girl hinzufÃ¼gen',
 
     #locals-single
     'local_type' => 'Lokaltyp',
 
     #girls
     'map'=> 'Karte',
-    'i_o_s_f'=> 'Ich biete Services für',
+    'i_o_s_f'=> 'Ich biete Services fÃ¼r',
 
 
     #notifications
-    'local_default_package_expiration_title' => 'Local Default Package Expiration',
-    'default_package_expiration_title' => 'Default Package Expiration',
+    'local_default_package_expiration_title' => 'Local Basic Package Expiration',
+    'default_package_expiration_title' => 'Basic Package Expiration',
     'gotm_package_expiration_title' => 'Girl of The Month Package Expiration',
     'lotm_package_expiration_title' => 'Local of The Month Package Expiration',
 

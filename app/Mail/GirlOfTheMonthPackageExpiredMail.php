@@ -32,7 +32,7 @@ class GirlOfTheMonthPackageExpiredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@ullalla.com', 'Ullall?')
+        return $this->from('info@ullalla.ch', 'Ullallà')
         ->view('emails.gotm_package_expired_email');
     }
 }

@@ -20,9 +20,9 @@
         <div class="col-sm-10 profile-info">
             <div class="btn-wrapper">
                 @if(Auth::guard('local')->check())
-                    <a href="{{ url('locals/@' . $user->username . '/banners/create') }}" class="btn btn-default">Add Banner</a>
+                    <a href="{{ url('locals/@' . $user->username . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
                 @else
-                    <a href="{{ url('private/' . $user->id . '/banners/create') }}" class="btn btn-default">Add Banner</a>
+                    <a href="{{ url('private/' . $user->id . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
                 @endif
             </div>
             <div class="btn-wrapper">

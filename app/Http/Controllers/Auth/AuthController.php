@@ -138,7 +138,7 @@ class AuthController extends Controller
 				// dd($diff->days);
 				return redirect('/');
 			} else {
-				return redirect()->action('ProfileController@getCreate', ['username' => $user->username]);
+				return redirect()->action('ProfileController@getCreate');
 			}
 		} elseif (Auth::guard('local')->attempt(['username' => $request->username, 'password' => $request->password])) {
 			$local = Auth::guard('local')->user();

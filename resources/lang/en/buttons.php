@@ -69,4 +69,11 @@ return [
     #news/events
     'news_entry' => 'Make News Entry',
     'events_entry' => 'Create an Event',
+
+    #add card
+    'add_card' => 'Add Card',
+    'update_card' => 'Update Card',
+
+	#banners
+	'add_banner' => 'Add Banner',
 ];
