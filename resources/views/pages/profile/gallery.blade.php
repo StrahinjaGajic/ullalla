@@ -3,17 +3,21 @@
 @section('title', __('headings.gallery'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
-            {!! parseEditProfileMenu('gallery') !!}
+            @if(Auth::guard('local')->check())
+                {!! parseEditProfileMenu('gallery', $user->id) !!}
+            @else
+                {!! parseEditProfileMenu('gallery') !!}
+            @endif
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::model($user, ['url' => '@' . $user->username . '/gallery/store', 'method' => 'PUT']) !!}
+            {!! Form::model($user, ['url' => 'private/' . $user->id . '/gallery/store', 'method' => 'PUT']) !!}
             <h3>{{ __('headings.gallery') }}</h3>
             <div class="row" style="margin-left:1px;">
                 <h4>{{ __('headings.photos') }}</h4>

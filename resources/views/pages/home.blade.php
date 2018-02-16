@@ -13,12 +13,14 @@
             <div class="col-lg-12 col-xs-12">
                 <div class="bend niceties preview-1 ho_4">
                     <div id="ensign-nivoslider" class="slides">
-                        @foreach($bigBanners as $banner)
-                            @php
-                                $singleBanner = App\Models\Banner::find($banner->banner_id);
-                            @endphp
-                            <img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(1140, 360)->getUrl() }}" alt="">
-                        @endforeach
+                        @if($bigBanners->count() > 0)
+                            @foreach($bigBanners as $banner)
+                                @php
+                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                @endphp
+                                <img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(1140, 360)->getUrl() }}" alt="">
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -91,15 +93,17 @@
             {!! Form::close() !!}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
-                    @php
-                        $singleBanner = App\Models\Banner::find($mediumBanner->banner_id);
-                    @endphp
+                    @if($mediumBanner)
+                        @php
+                            $singleBanner = App\Models\Banner::find($mediumBanner->banner_id);
+                        @endphp
+                    @endif
                     <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(555, 330)->getUrl() }}" alt="" /></span></a>
                 </div>
             </div>
         </div>
     </div>
-    @if($totm->count() > 0)
+    @if($gotm->count() > 0)
     <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -148,7 +152,7 @@
             </div>
             <div class="row">
                 <div class="featured-product-carousel single-indicator">
-                    @foreach($gotm as $user)
+                    @foreach($totm as $user)
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <div class="single-product">
                             <div class="product-img">
@@ -176,50 +180,56 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                @foreach($verticalBanners->chunk(2) as $banners)
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="single-banner home-3">
-                            @foreach($banners as $banner)
-                                @php
-                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                @endphp
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 330)->getUrl() }}" alt="" /></span></a>
-                                </div>
-                            @endforeach
+                @if($verticalBanners->count() > 0)
+                    @foreach($verticalBanners->chunk(2) as $banners)
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-banner home-3">
+                                @foreach($banners as $banner)
+                                    @php
+                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                    @endphp
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
+                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 330)->getUrl() }}" alt="" /></span></a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
 
-                @foreach($quarterBanners->chunk(2) as $banners)
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="single-banner home-3">
-                            @foreach($banners as $banner)
-                                @php
-                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                @endphp
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 165)->getUrl() }}" alt="" /></span></a>
-                                </div>
-                            @endforeach
+                @if($quarterBanners->count() > 0)
+                    @foreach($quarterBanners->chunk(2) as $banners)
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-banner home-3">
+                                @foreach($banners as $banner)
+                                    @php
+                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                    @endphp
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
+                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 165)->getUrl() }}" alt="" /></span></a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-
-                @foreach($horizontalBanners->chunk(1) as $banners)
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="single-banner home-3">
-                            @foreach($banners as $banner)
-                                @php
-                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                @endphp
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 small_banner">
-                                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(585, 165)->getUrl() }}" alt="" /></span></a>
-                                </div>
-                            @endforeach
+                    @endforeach
+                @endif
+                
+                @if($horizontalBanners->count() > 0)
+                    @foreach($horizontalBanners->chunk(1) as $banners)
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-banner home-3">
+                                @foreach($banners as $banner)
+                                    @php
+                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
+                                    @endphp
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 small_banner">
+                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(585, 165)->getUrl() }}" alt="" /></span></a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif 
             </div>
         </div>
     </div>
@@ -328,7 +338,7 @@
         confirmButtonText: '{{ __('buttons.close') }}',
         html: '{!! __('messages.package_about_to_expire', [
             'note' => $defaultPackageExpired->$note,
-            'url' => url('@' . Auth::user()->username . '/packages')
+            'url' => url('private/' . $user->id . '/packages')
             ]) !!}',
             type: 'warning',
             showLoaderOnConfirm: true,
@@ -356,7 +366,7 @@
         confirmButtonText: '{{ __('buttons.close') }}',
         html: '{!! __('messages.package_about_to_expire', [
             'note' => $defaultPackageExpired->$note,
-            'url' => url('@' . Auth::user()->username . '/packages')
+            'url' => url('private/' . $user->id . '/packages')
             ]) !!}',
             type: 'warning',
             showLoaderOnConfirm: true,
@@ -365,7 +375,7 @@
                     title: '{{ __('headings.package_expiration_title') }}',
                     html: '{!! __('messages.package_about_to_expire', [
                         'note' => $gotmPackageExpired->$note,
-                        'url' => url('@' . Auth::user()->username . '/packages')
+                        'url' => url('private/' . $user->id . '/packages')
                         ]) !!}',
                         type: 'warning'
                     })
@@ -379,7 +389,7 @@
         confirmButtonText: '{{ __('buttons.close') }}',
         html: '{!! __('messages.package_about_to_expire', [
             'note' => $defaultPackageExpired->$note,
-            'url' => url('@' . Auth::user()->username . '/packages')
+            'url' => url('private/' . $user->id . '/packages')
             ]) !!}',
             type: 'warning',
         });
@@ -390,7 +400,7 @@
         title: '{{ __('headings.package_expiration_title') }}',
         html: '{!! __('messages.package_about_to_expire', [
             'note' => $gotmPackageExpired->$note,
-            'url' => url('@' . Auth::user()->username . '/packages')
+            'url' => url('private/' . $user->id . '/packages')
             ]) !!}',
             type: 'warning'
         });

@@ -6,14 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
-	public function local()
+	public function bannerable()
 	{
-		return $this->belongsTo('App\Models\Local');
-	}
-
-	public function user()
-	{
-		return $this->belongsTo('App\Models\User');
+		return $this->morphTo();
 	}
 
 	public function pages()

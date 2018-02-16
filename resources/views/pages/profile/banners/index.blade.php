@@ -11,11 +11,19 @@
 <div class="container theme-cactus">
     <div class="row">
         <div class="col-sm-2 vertical-menu">
-            {!! parseEditProfileMenu('banners') !!}
+            @if(Auth::guard('local')->check())
+                {!! parseEditLocalProfileMenu('banners') !!}
+            @else
+                {!! parseEditProfileMenu('banners') !!}
+            @endif
         </div>
         <div class="col-sm-10 profile-info">
             <div class="btn-wrapper">
-                <a href="{{ url('@' . $user->username . '/banners/create') }}" class="btn btn-default">Add Banner</a>
+                @if(Auth::guard('local')->check())
+                    <a href="{{ url('locals/@' . $user->username . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
+                @else
+                    <a href="{{ url('private/' . $user->id . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
+                @endif
             </div>
             <div class="btn-wrapper">
                 @if(Session::has('success'))

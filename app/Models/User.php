@@ -71,12 +71,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Price');
     }
-
-    public function banners()
-    {
-        return $this->hasMany('App\Models\Banner');
-    }
-
+    
     public function blackbooks()
     {
         return $this->hasMany('App\Models\BlackBook');
@@ -181,6 +176,16 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->morphMany('App\Models\Notification', 'notifiable');
+    }
+
+    public function banners()
+    {
+        return $this->morphMany('App\Models\Banner', 'bannerable');
+    }
+
+    public function local()
+    {
+        return $this->belongsTo('App\Models\Local');
     }
 
     public function getPackageExpireAttribute($date)

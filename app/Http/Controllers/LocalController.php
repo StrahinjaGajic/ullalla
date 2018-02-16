@@ -7,12 +7,18 @@ use Auth;
 use Session;
 use Validator;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\News;
 use App\Models\Events;
-use App\Models\LocalType;
+use App\Models\Country;
 use App\Models\Package;
+use App\Models\Service;
+use App\Models\LocalType;
 use App\Models\LocalPackage;
+use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
+use App\Models\ServiceOption;
+use App\Models\SpokenLanguage;
 use Stripe\{Charge, Customer};
 
 class LocalController extends Controller
@@ -20,7 +26,14 @@ class LocalController extends Controller
     public function __construct()
     {
         $this->middleware('auth:local');
-        $this->middleware('package.expiry', ['except' => ['getPackages', 'postPackages', 'getCreate', 'postCreate']]);
+        $this->middleware('package.expiry', [
+            'except' => [
+                    'getPackages', 
+                    'postPackages', 
+                    'getCreate', 
+                    'postCreate'
+                ]
+            ]);
         $this->middleware('has_package', [
             'only' => [
                 'getCreate',
@@ -29,7 +42,8 @@ class LocalController extends Controller
         ]);
         $this->middleware('not_has_package', [
             'except' => [
-                'getCreate', 'postCreate'
+                'getCreate', 
+                'postCreate'
             ]
         ]);
     }
@@ -37,9 +51,11 @@ class LocalController extends Controller
     public function getCreate()
     {
         $local = Auth::guard('local')->user();
+
         $packages = LocalPackage::all();
         $girlPackages = Package::all();
         $types = LocalType::all();
+
         return view('pages.locals.create', compact('local', 'types', 'packages', 'girlPackages'));
     }
 
@@ -97,8 +113,6 @@ class LocalController extends Controller
             }
         }
 
-
-
         try {                        
             $user = Auth::guard('local')->user();
             $user->name = request('name');
@@ -117,6 +131,7 @@ class LocalController extends Controller
             $user->club_wellness_id = setClubInfo('wellness', request('wellness'), request('wellness-free'));
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
             $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));            
+
             if(request('ullalla_package')[0] != 6) {                
                 $user->package1_id = $defaultPackage->id;
                 $user->is_active_d_package = 1;
@@ -131,7 +146,9 @@ class LocalController extends Controller
                     $user->package2_expiry_date = $monthGirlExpiryDate;
                 }
             }
+
             $user->save();
+
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -163,7 +180,9 @@ class LocalController extends Controller
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
+
             Session::flash('account_created', __('messages.account_created'));
+
         } else {
             Auth::guard('local')->logout();
             Session::put('account_created_elite', __('messages.account_created_elite'));
@@ -204,7 +223,7 @@ class LocalController extends Controller
         $local->street = $request->street;
         $local->city = $request->city;
         $local->zip = $request->zip;
-        $local->web = $request->web;
+        $local->website = $request->web;
         $local->phone = $request->phone;
         $local->mobile = $request->mobile;
         $local->sms_notifications = request('sms_notifications') ? '1' : '0';
@@ -304,57 +323,95 @@ class LocalController extends Controller
     public function getGirls()
     {
         $local = Auth::guard('local')->user();
-        return view('pages.locals.girls', compact('local'));
+
+        $services = Service::all();
+        $countries = Country::all();
+        $spokenLanguages = SpokenLanguage::all();
+        $serviceOptions = ServiceOption::all();
+
+        return view('pages.locals.girls', compact('local', 'countries', 'services', 'spokenLanguages', 'serviceOptions'));
     }
 
-    public function postGirls(Request $request)
+    public function postCreateGirl(Request $request)
     {
         $local = Auth::guard('local')->user();
 
-        foreach($local->girls as $girl) {
-            $uploadedPhotos = storeAndGetUploadCareFiles(request('photos_'. $girl->id));
-            $inputPhotos = request('photos_'. $girl->id);
+        $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
+        $inputPhotos = request('photos');
 
-            // get the number of photos
-            $request->merge(['photos_'. $girl->id => (int) substr($inputPhotos, -2, 1)]);
-
-            $this->validate($request, [
-                'nickname_'. $girl->id => 'required|min:4|max:20',
-                'photos_'. $girl->id => 'numeric|min:4|max:9',
-            ]);
-
-            $nickname = 'nickname_'. $girl->id;
-            $girl->nickname = $request->$nickname;
-            $girl->photos = $inputPhotos;
-            $girl->save();
-        }
-
-        return redirect()->back()->with('success', __('messages.success_changes_saved'));
-    }
-
-    public function postCreateGirls(Request $request)
-    {
-        $local = Auth::guard('local')->user();
-
-        $photos = storeAndGetUploadCareFiles(request('newPhotos'));
-        $inputPhotos = request('newPhotos');
-
-        $request->merge(['newPhotos' => $inputPhotos]);
-        $request->merge(['newPhotos' => substr($request->newPhotos, -2, 1)]);
-        $request->merge(['newPhotos' => (int) $request->newPhotos]);
+        // get the number of photos
+        $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
         $this->validate($request, [
-            'nickname' => 'required|min:4|max:20',
-            'newPhotos' => 'numeric|min:4|max:9',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'nickname' => 'required',
+            'age' => ['required', 'numeric', new OlderThanRule],
+            'height' => 'required|numeric',
+            'weight' => 'required|numeric',
+            'sex' => 'required',
+            'sex_orientation' => 'required',
+            'intimate' => 'required',
+            'alcohol' => 'required',
+            'smoker' => 'required',
+            'about_me' => 'required|max:200',
+            'photos' => 'numeric|min:4|max:9',
         ]);
 
-        $local->girls()->create([
-            'nickname' => $request->nickname, 
-            'photos' => $photos ? $inputPhotos : null,
-            'local_id' => $local->id
-        ]);
+        try {
+            $user = new User;
+            $user->username = 'konjina';
+            $user->email = 'random@random.com';
+            $user->user_type_id = 1;
+            $user->first_name = request('first_name');
+            $user->last_name = request('last_name');
+            $user->nickname = request('nickname');
+            $user->age = request('age');
+            $user->country_id = request('nationality_id');
+            $user->sex = request('sex');
+            $user->sex_orientation = request('sex_orientation');
+            $user->height = request('height');
+            $user->weight = request('weight');
+            $user->type = request('type');
+            $user->figure = request('figure');
+            $user->breast_size = request('breast_size');
+            $user->eye_color = request('eye_color');
+            $user->hair_color = request('hair_color');
+            $user->tattoos = request('tattoos');
+            $user->piercings = request('piercings');
+            $user->body_hair = request('body_hair');
+            $user->intimate = request('intimate');
+            $user->smoker = request('smoker');
+            $user->alcohol = request('alcohol');
+            $user->about_me = request('about_me');
+            $user->photos = $uploadedPhotos ? $inputPhotos : null;
+            $user->videos = storeAndGetUploadCareFiles(request('video'));
+            
+            $user->save();
 
-        return redirect()->back()->with('success', __('messages.success_changes_saved'));
+            // define languages input
+            $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });
+
+            // define levels
+            $levels = array_map(function($languageLevel) {
+                return ['language_level' => $languageLevel];
+            }, $spokenLanguages);
+            // get combined data
+            $syncData = array_combine(array_keys($spokenLanguages), $levels);
+
+            // sync services to the user
+            $user->services()->sync(request('services'));
+            $user->spoken_languages()->sync($syncData);
+
+            $local->users()->save($user);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        return redirect()->back()->with('success', __('messages.girl_added_success'));
     }
 
     public function getPackages()
@@ -720,5 +777,13 @@ class LocalController extends Controller
                 'errors' => $validator->getMessageBag()
             ]);
         }
+    }
+
+    public function deleteGirl($username, $private_id)
+    {
+        $user = Auth::user()->users()->findOrFail($private_id);
+        $user->delete();
+
+        return redirect()->back()->with('success', __('messages.girl_removed_success'));
     }
 }

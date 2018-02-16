@@ -1,5 +1,4 @@
 <script src="/js/vendor/jquery-1.12.0.min.js"></script>
-<script src="/js/vue.js"></script>
 <script src="{{ asset('js/functions.js?ver=' . str_random(10)) }}"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
@@ -16,3 +15,9 @@
 <script src="/js/plugins.js"></script>
 <!-- Main -->
 <script src="/js/main.js"></script>
+<script>
+    $("[type='submit']").on("click", function (e) {
+        $(this).attr("disabled", true);
+        $(this).closest("form").submit()
+    });
+</script>

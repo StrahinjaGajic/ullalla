@@ -3,7 +3,7 @@
 @section('title', 'Create Local')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/create_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
@@ -420,10 +420,10 @@
                         <ul class="pager wizard">
                             <div class="col-xs-12">
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.previous') }}</button></li>
                                 </div>
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.next') }}</button></li>
                                 </div>
                             </div>
                         </ul>
@@ -470,7 +470,7 @@
         $(window).on('load',function(){
             $('#create_profile_modal').modal('show');
             // change text of a button to upload logo
-            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('Upload Logo');
+            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('{{ __('buttons.upload_logo') }}');
         });
         $(function () {
 

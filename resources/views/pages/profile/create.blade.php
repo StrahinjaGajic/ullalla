@@ -3,7 +3,7 @@
 @section('title', __('buttons.create_profile'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/create_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/create_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
@@ -13,7 +13,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
-					{!! Form::open(['url' => '@' . $user->username . '/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+					{!! Form::open(['url' => 'private/'.$user->id.'/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 					<ul class="nav nav-pills">
 						<li class="active pad-left"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
 						<li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
@@ -572,7 +572,7 @@
 										</td>
 										<td>
 											<div class="slider"></div>
-											<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->spoken_language_code }}]" value="">
+											<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->id }}]">
 										</td>
 									</tr>
 									@endforeach
@@ -586,7 +586,7 @@
 										</td>
 										<td>
 											<div class="slider"></div>
-											<input type="hidden" name="spoken_language[{{ $language->spoken_language_code }}]" value="0">
+											<input type="hidden" class="spoken-language-input" name="spoken_language[{{ $language->id }}]">
 										</td>
 									</tr>
 									@endforeach
@@ -677,10 +677,10 @@
 						<ul class="pager wizard">
 							<div class="col-xs-12">
 								<div class="col-xs-6" style="padding:0;">
-									<li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+									<li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.previous') }}</button></li>
 								</div>
 								<div class="col-xs-6" style="padding:0;">
-									<li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+									<li class="next"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.next') }}</button></li>
 								</div>
 							</div>
 						</ul>
@@ -1115,8 +1115,7 @@ $(function () {
 			stripeEmail.val(token.email);
 			stripeToken.val(token.id);
 			// submit the form
-			var username = '{{ $user->username }}';
-			var url = getUrl('/@' + username + '/store');
+			var url = getUrl('/private/' + {{ $user->id }} + '/store');
 			var token = $('input[name="_token"]').val();
 			var form = $('#profileForm');
 			var data = form.serialize();

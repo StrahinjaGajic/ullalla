@@ -196,4 +196,16 @@ return [
     'girl' => 'girl',
     'trans' => 'trans',
     'local' => 'local',
+
+    #add_card
+    'card_on_file' => 'Card on file',
+
+    #working_times
+    'Monday' => 'Monday',
+    'Tuesday' => 'Tuesday',
+    'Wednesday' => 'Wednesday',
+    'Thursday' => 'Thursday',
+    'Friday' => 'Friday',
+    'Saturday' => 'Saturday',
+    'Sunday' => 'Sunday',
 ];

@@ -3,7 +3,7 @@
 @section('title', __('headings.packages'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
 @stop
 
@@ -97,7 +97,7 @@
 			</div>
 
 			@if($showDefaultPackages || $showGotmPackages)
-			{!! Form::model($user, ['url' => '@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+			{!! Form::model($user, ['url' => 'private/' . $user->id . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 
 			@if($showDefaultPackages)
 			<div class="col-xs-12 default-packages-section" id="default-packages-section">
@@ -278,8 +278,8 @@
 			stripeEmail.val(token.email);
 			stripeToken.val(token.id);
 			// submit the form
-			var username = '{{ $user->username }}';
-			var url = getUrl('/@' + username + '/packages/store');
+			var currentUser = '{{ $user->id }}';
+			var url = getUrl('/private/' + currentUser + '/packages/store');
 			var token = $('input[name="_token"]').val();
 			var form = $('#profileForm');
 			var data = form.serialize();
@@ -294,10 +294,10 @@
 				    } else if (typeof errors.month_girl_package_error !== 'undefined') {
 				    	$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 				    } else {
-				    	window.location.href = getUrl('/@' + username  + '/packages');
+				    	window.location.href = getUrl('/private/' + currentUser + '/packages');
 				    }
 				} else {
-					window.location.href = getUrl('/@' + username  + '/packages');
+					window.location.href = getUrl('/private/' + currentUser + '/packages');
 				}
 			})
 			.fail(function(data, textStatus) {

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'package.expiry' => \App\Http\Middleware\RedirectIfPackageExpired::class,
         'maintenance' => \App\Http\Middleware\DownForMaintenance::class,
         'front.auth' => \App\Http\Middleware\FrontAuth::class,
+        'forbid.locals' => \App\Http\Middleware\ForbidLocalsToAccessPrivateProfiles::class,
         // 'approved' => \App\Http\Middleware\CheckIfApproved::class,
     ];
 }

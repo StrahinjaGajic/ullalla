@@ -3,7 +3,7 @@
 @section('title', 'Contact')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 @stop
 
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="col-3 input-effect {{ $errors->has('web') ? 'has-error' : ''  }}">
-                                <input class="effect-16" type="text" placeholder="" name="web" value="{{ $local->web }}">
+                                <input class="effect-16" type="text" placeholder="" name="web" value="{{ $local->website }}">
                                 <label>{{ __('labels.web') }}</label>
                                 <span class="focus-border"></span>
                                 @if ($errors->has('web'))

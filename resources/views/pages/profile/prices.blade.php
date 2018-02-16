@@ -3,7 +3,7 @@
 @section('title', __('headings.prices'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
-            {!! Form::model($user, ['url' => '@' . $user->username . '/prices/store', 'method' => 'put']) !!}
+            {!! Form::model($user, ['url' => 'prices/' . $user->id . '/store', 'method' => 'put']) !!}
             <div class="price_section">
                 <div class="col-lg-3 col-xs-12">
                     <div class="form-group">

@@ -3,7 +3,7 @@
 @section('title', __('buttons.private'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ url('css/components/girls.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
@@ -278,7 +278,7 @@
 												<div class="product-content">
 													<a class="shop-name">{{ $user->nickname }}</a>
 													<div class="pro-price"></div>
-													<a href="{{ url('private/' . $user->nickname) }}">
+													<a href="{{ url('private/' . $user->id) }}">
 														<div class="product-cart">
 															<button class="button">{{ __('buttons.view_profile') }}</button>
 														</div>
@@ -307,7 +307,7 @@
 															<div class="pro-deal-text-shop">
 																<p>{{ Str::words($user->about_me, 40) }}</p>
 															</div>
-															<a href="{{ url('private/' . $user->nickname) }}">
+															<a href="{{ url('private/' . $user->id) }}">
 																<div class="product-cart">
 																	<button class="button">{{ __('buttons.view_profile') }}</button>
 																</div>

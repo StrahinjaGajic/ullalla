@@ -3,14 +3,18 @@
 @section('title', __('headings.languages'))
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
 <div class="container theme-cactus">
 	<div class="row">
 		<div class="col-sm-2 vertical-menu">
-			{!! parseEditProfileMenu('languages') !!}
+			@if(Auth::guard('local')->check())
+                {!! parseEditProfileMenu('languages', $user->id) !!}
+            @else
+                {!! parseEditProfileMenu('languages') !!}
+            @endif
 		</div>
 		<div class="col-sm-10 profile-info">
 			<h3>{{ __('headings.languages') }}</h3>
@@ -20,7 +24,7 @@
 						{{ session()->get('success') }}
 					</div>
 				@endif
-				{!! Form::model($user, ['url' => '@' . $user->username . '/languages/store', 'method' => 'put']) !!}
+				{!! Form::model($user, ['url' => 'private/' . $user->id . '/languages/store', 'method' => 'put']) !!}
 				<table class="table language-table">
 					<thead>
 						<tr>
@@ -28,7 +32,9 @@
 							<th>{{ __('headings.level') }}</th>
 						</tr>
 					</thead>
-					@php $var = 'spoken_language_name_'. config()->get('app.locale') @endphp
+					@php 
+						$var = 'spoken_language_name_'. config()->get('app.locale');
+					@endphp
 					<tbody class="language-list">
 						@foreach($spokenLanguages->take(7) as $language)
 						<tr>

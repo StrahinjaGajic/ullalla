@@ -52,5 +52,11 @@ return [
     'event_added' => 'You have successfully added an event',
     'news_added' => 'You have successfully made a news entry',
     'banner_requested_success' => 'You have successfully made a banner request',
-    
+
+    #card
+    'card_updated' => 'Your card details have been updated!',
+
+    # girls locals
+    'girl_removed_success' => 'Girl successfully removed',
+    'girl_added_success' => 'Girl successfully added',
 ];

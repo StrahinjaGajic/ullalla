@@ -2,7 +2,7 @@
 @section('title', 'Private')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/components/girls.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 @stop
 
 @section('content')
@@ -61,14 +61,14 @@
                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <div class="product-details shop-review single-pro-zoom">
                         <div class="product-name">
-                            <h3><a>{{ $local->username }}</a></h3>
+                            <h3><a>{{ $local->name }}</a></h3>
                         </div>
                         <div class="product-reveiw">
                             <p>{{ Str::words($local->about_me, 40) }}</p>
                         </div>
                         <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                             <tr>
-                                <td>{{ __('headings.local_type') }}</td>
+                                <td>{{ __('headings.local_type') }}:</td>
                                 @php ($var = 'name_'. config()->get('app.locale'))
                                 <td>{{ $local->local_type->$var }}</td>
                             </tr>
@@ -91,7 +91,7 @@
                             <li><a href="#girl-workinghours" data-toggle="tab">{{ __('buttons.work_time') }}</a></li>
                             @endif
                             <li><a href="#girl-clubinfo" data-toggle="tab">{{ __('buttons.club_info') }}</a></li>
-                            @if(count($local->girls) > 0)
+                            @if(count($local->users) > 0)
                             <li><a href="#girl-girls" data-toggle="tab">{{ __('buttons.girls') }}</a></li>
                             @endif
                             @if($local->videos)
@@ -121,7 +121,7 @@
                                         <?php $workingTimes = json_decode($local->working_time); ?>
                                         @foreach($workingTimes as $workingTime)
                                         <tr>
-                                            <td>{{ explode('|', $workingTime)[0] }}</td>
+                                            <td>{{ __('functions.'. explode('|', $workingTime)[0]) }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[1] }}</td>
                                         </tr>
@@ -152,10 +152,10 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="girl-girls">
-                                @foreach($local->girls as $girl)
-                                <h3>{{ $girl->nickname }}</h3>
-                                @for ($i = 0; $i < substr($girl->photos, -2, 1); $i++)
-                                <img src="{{ $girl->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+                                @foreach($local->users as $user)
+                                <h3>{{ $user->nickname }}</h3>
+                                @for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
+                                <img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
                                 @endfor
                                 <br><br>
                                 @endforeach

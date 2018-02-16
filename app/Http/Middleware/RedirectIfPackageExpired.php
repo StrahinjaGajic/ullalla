@@ -18,7 +18,7 @@ class RedirectIfPackageExpired
     public function handle($request, Closure $next)
     {
         if(Auth::guard('local')->user()){
-            $user = Auth::user();
+            $user = Auth::guard('local')->user();
             $package1ExpiryDate = Carbon::parse($user->package1_expiry_date)->format('Y-m-d');
             if ($user->is_active_d_package == 0) {
                 return redirect()->action('LocalController@getPackages', ['username' => $user->username])

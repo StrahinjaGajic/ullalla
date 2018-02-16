@@ -18,7 +18,6 @@ class CreateBannerPageMigration extends Migration
             $table->integer('banner_id')->unsigned();
             $table->integer('page_id')->unsigned();
             $table->integer('banner_size_id')->unsigned();
-            $table->timestamps();
 
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
             $table->foreign('banner_id')->references('id')->on('banners')->onDelete('cascade');

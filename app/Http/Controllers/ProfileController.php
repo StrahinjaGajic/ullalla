@@ -8,36 +8,32 @@ use Session;
 use DateTime;
 use Validator;
 use Carbon\Carbon;
-use App\Models\Page;
+use App\Models\User;
 use App\Models\Price;
-use App\Models\Banner;
 use App\Models\Canton;
 use App\Models\Service;
 use App\Models\Country;
 use App\Models\Package;
-use App\Models\BannerSize;
-use App\Models\BannerPage;
 use App\Rules\OlderThanRule;
 use Illuminate\Http\Request;
 use App\Models\ContactOption;
 use App\Models\ServiceOption;
 use App\Models\SpokenLanguage;
-use App\Models\PageBannerSize;
 use Stripe\{Charge, Customer};
 
 class ProfileController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('package.expiry', ['except' => ['getPackages', 'postPackages', 'getCreate', 'postCreate', 'postNewPrice', 'deletePrice']]);
+        $this->middleware('auth:web,local');
+
         $this->middleware('has_package', [
             'only' => [
                 'getCreate',
                 'postCreate'
             ]
         ]);
+
         $this->middleware('package.expiry', [
             'except' => [
                 'getPackages',
@@ -50,9 +46,13 @@ class ProfileController extends Controller
         ]);
         $this->middleware('not_has_package', [
             'except' => [
-                'getCreate', 'postCreate', 'postNewPrice', 'deletePrice'
+                'getCreate', 
+                'postCreate', 
+                'postNewPrice', 
+                'deletePrice'
             ]
         ]);
+
     }
 
     public function getCreate()
@@ -273,18 +273,23 @@ class ProfileController extends Controller
         Session::flash('account_created', __('messages.account_created'));
     }
 
-    public function getBio()
+    public function getBio($private_id)
     {
         $cantons = Canton::all();
         $packages = Package::all();
         $services = Service::all();
         $countries = Country::all();
-        $user = Auth::user();
+
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.bio', compact('packages', 'cantons', 'countries', 'services', 'user'));
     }
 
-    public function postBio(Request $request)
+    public function postBio(Request $request, $private_id)
     {
         $this->validate($request, [
             'nickname' => 'required',
@@ -294,7 +299,12 @@ class ProfileController extends Controller
             'age' => ['required', 'numeric', new OlderThanRule],
         ]);
 
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->nickname = $request->nickname;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -321,32 +331,51 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getAbout()
+    public function getAbout($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            Session::put('private_id', $private_id);
+            $user = Auth::guard('local')->user()->users()->findOrFail(Session::get('private_id'));
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.about', compact('user'));
     }
 
-    public function postAbout()
+    public function postAbout($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->about_me = request('about_me');
         $user->save();
 
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getGallery()
+    public function getGallery($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         return view('pages.profile.gallery', compact('user'));
     }
 
-    public function postGallery(Request $request)
+    public function postGallery(Request $request, $private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
         $inputPhotos = request('photos');
 
@@ -399,18 +428,28 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getServices()
+    public function getServices($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $services = Service::all();
         $serviceOptions = ServiceOption::all();
 
         return view('pages.profile.services', compact('user', 'services', 'serviceOptions'));
     }
 
-    public function postServices()
+    public function postServices($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $user->services()->sync(request('services'));
         $user->service_options()->sync(request('service_options'));
 
@@ -506,17 +545,26 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', __('messages.success_changes_saved'));
     }
 
-    public function getLanguages()
+    public function getLanguages($private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
+
         $spokenLanguages = SpokenLanguage::all();
 
         return view('pages.profile.languages', compact('user', 'spokenLanguages'));
     }
 
-    public function postLanguages(Request $request)
+    public function postLanguages(Request $request, $private_id)
     {
-        $user = Auth::user();
+        if (Auth::guard('local')->check()) {
+            $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
+        } else {
+            $user = Auth::user();
+        }
 
         // define languages input
         $spokenLanguages = array_filter(request('spoken_language'), function($value) { return $value != '0' && $value != null; });
@@ -749,130 +797,6 @@ class ProfileController extends Controller
         Session::flash('success', __('messages.success_changes_saved'));
     }
 
-    public function getBanners()
-    {
-        $user = Auth::user();
-
-        return view('pages.profile.banners.index', compact('user', 'pages', 'bannerSizes'));
-    }
-
-    public function getCreateBanners()
-    {
-        $user = Auth::user();
-        $pages = Page::with('banner_sizes')->get();
-        $bannerSizes = BannerSize::with('pages')->get();
-
-        return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes'));
-    }
-
-    public function postBanners(Request $request)
-    {
-        $user = Auth::user();
-
-        $data = getBannerTotalAmountAndDataToSync($request);
-        $total = $data['total'];
-
-        $perDay = 'price_per_week, price_per_month';
-        $perMonth = 'price_per_day, price_per_week';
-        $perWeek = 'price_per_day, price_per_month';
-
-        $field = '';
-        foreach ($request->all() as $field => $value) {
-            if (strpos($field, 'price_per') !== false) {
-                $field = $field;
-                break;
-            }
-        }
-
-        // get price per time input, check it and define validation rules to use them later in validator
-        if ($field == 'price_per_day') {
-            $perDay = 'price_per_day, price_per_month';
-        } elseif ($field == 'price_per_week') {
-            $perDay = 'price_per_week, price_per_day';
-            $perMonth = 'price_per_week, price_per_month';
-        } elseif ($field == 'price_per_month') {
-            $perDay = 'price_per_month, price_per_day';
-            $perMonth = 'price_per_month, price_per_week';
-        }
-
-        if ($request->banner_flyer == 'on') {
-            $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
-                'banner_description' => 'required',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        }
-
-        if ($validator->passes()) {
-
-            $banner = new Banner;
-            $banner->banner_total_amount = $total;
-            $banner->banner_url = $request->banner_url;
-            $banner->banner_photo = $request->banner_photo;
-            $banner->user_id = $user->id;
-            $banner->save();
-
-            foreach ($data['syncedData'] as $pageId => $sizes) {
-                foreach ($sizes as $size) {
-                    $bannerPage = new BannerPage;
-                    $bannerPage->banner_id = $banner->id;
-                    $bannerPage->page_id = $pageId;
-                    $bannerPage->banner_size_id = $size['banner_size_id'];
-                    $bannerPage->save();
-                }
-            }
-
-            try {
-                $customer = Customer::retrieve($user->stripe_id);
-
-                if (!$customer) {
-                    $customer = Customer::create([
-                        "email" => request('stripeEmail'),
-                        "source" => request('stripeToken'),
-                    ]);
-                    $user->stripe_id = $customer->id;
-                    $user->save();
-                }
-
-                Charge::create([
-                    'customer' => $user->stripe_id,
-                    'amount' => $total * 100,
-                    'currency' => 'chf',
-                ]);
-            } catch (\Exception $e) {
-                if ($request->ajax()) {
-                    return response()->json([
-                        'status' => $e->getMessage()
-                    ], 422);
-                }
-
-                return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
-            }
-
-            Session::flash('success', __('messages.banner_requested_success'));
-
-        } else {
-            if ($request->ajax()) {
-                return response()->json([
-                    'errors' => $validator->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($validator->getMessageBag());
-        }
-    }
-
     public function postNewPrice(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -913,40 +837,6 @@ class ProfileController extends Controller
                 ]);
             }
         }
-    }
-
-    public function getCard()
-    {   
-        $user = Auth::user();
-        return view('pages.profile.add_card', compact('user'));
-    }
-
-    public function postCard()
-    {   
-        $user = Auth::user();
-
-        try {
-            $customer = Customer::retrieve($user->stripe_id); // stored in your application
-            $customer->email = $user->email; // obtained with Checkout
-            $customer->source = request('stripeToken'); // obtained with Checkout
-            $customer->save();
-
-            Session::flash('success', 'Your card details have been updated!');
-
-            return redirect()->back();
-
-            // return response()->json([
-            //     'customer' => $customer
-            // ]);
-        } catch(\Error\Card $e) {
-
-            // Use the variable $error to save any errors
-            // To be displayed to the customer later in the page
-            $body = $e->getJsonBody();
-            $err  = $body['error'];
-            $error = $err['message'];
-        }
-        $user = Auth::user();
     }
 
     public function deletePrice(Request $request)

@@ -2,71 +2,86 @@
 
 return [
 	#header
-	'upload_videos' => 'Upload Video',
-	'upload_photos' => 'Upload Photos',
-	'upload_logo' => 'Upload Logo',
-	'upload_photo' => 'Upload Photo',
-	'back' => 'Back',
+	'upload_videos' => 'Video hochladen',
+	'upload_photos' => 'Bild hochladen',
+	'upload_logo' => 'Logo hochladen',
+	'upload_photo' => 'Foto hochladen',
+	'back' => 'Zurück',
 
 	# home
-	'view_profile' => 'View Profile',
-	'close' => 'Close',
-	'search' => 'Search',
+	'view_profile' => 'Profil anzeigen',
+	'close' => 'Schliessen',
+	'search' => 'Suchen',
 
 
 	# footer links
-	'privacy_policy' => 'Privacy Policy',
-	'contact_us' => 'Contact Us',
+	'privacy_policy' => 'Datenschutzerklärung ',
+	'contact_us' => 'Kontaktieren Sie uns',
 	'faq' => 'FAQ',
 
 	#nav links
 	'home' => 'Home',
-	'locals' => 'Locals',
+	'locals' => 'Lokale',
 	'private' => 'Private',
 	'signin' => 'Login',
-	'signup' => 'Register',
+	'signup' => 'Registrieren',
 	'signout' => 'Logout',
-	'preview_profile' => 'Preview Profile',
-	'profile' => 'Preview Profile',
-	'settings' => 'Settings',
-	'create_profile' => 'Create Profile',
+	'preview_profile' => 'Profilvorschau',
+	'profile' => 'Profil',
+	'settings' => 'Einstellungen',
+	'create_profile' => 'Profil erstellen',
 
 	# edit profile
-	'save_changes' => 'Save Changes',
-	'show_more' => 'Show More',
-	'show_less' => 'Show Less',
+	'save_changes' => 'Änderungen speichern',
+	'show_more' => 'Mehr anzeigen',
+	'show_less' => 'Weniger anzeigen',
 
 	#prices
-	'add_new_price' => 'Add New Price',
+	'add_new_price' => 'Neuen Preis hinzufügen',
 
 	# private links
-	'reset_filters' => 'Reset Filters',
-	'grid' => 'Grid',
-	'list' => 'List',
+	'reset_filters' => 'Filter zurücksetzen',
+	'grid' => 'Raster',
+	'list' => 'Liste',
 
-    #locals-single
-    'work_time' => 'Work Time',
-    'club_info' => 'Club Info',
-    'girls' => 'Girls',
-    'video' => 'Video',
-    'day' => 'Day',
-    'from' => 'From',
-    'to' => 'To',
+	#locals-single
+	'work_time' => 'Öffnungszeit',
+	'club_info' => 'Club Info',
+	'girls' => 'Girls',
+	'video' => 'Video',
+	'day' => 'Tag',
+	'from' => 'Von',
+	'to' => 'bis',
 
-    #auth
-    'login' => 'Log In',
-    'register' => 'Register',
-    'logout' => 'Log Out',
-    'approve' => 'Approve',
-    'rrl' => 'Request Reset Link',
+	#auth
+	'login' => 'Login',
+	'register' => 'Registrieren',
+	'logout' => 'Logout',
+	'approve' => 'bestätigen',
+	'rrl' => 'Passwort zurücksetzen',
 
-    #contact
-    'submit'=> 'Submit',
+	#contact
+	'submit'=> 'Senden',
 
-    #black book
-    'entry' => 'Make an entry',
+	#black book
+	'entry' => 'Neue Eingabe einfügen',
 
-    #news/events
-    'news_entry' => 'Make News Entry',
-    'events_entry' => 'Create an Event',
+	#news/events
+    'news_entry' => 'News-Beitrag erstellen',
+    'events_entry' => 'Event erstellen',
+
+	#add card
+    'add_card' => 'Kreditkarte hinzufügen',
+    'update_card' => 'Kreditkarte aktualisieren',
+
+	#banners
+	'add_banner' => 'Banner hinzufügen',
+
+	#local add girls
+    'add_girl' => 'Girl hinzufügen',
+
+	#create-profile
+	'next' => 'nächste',
+	'finish' => 'beenden',
+	'previous' => 'vorherige',
 ];

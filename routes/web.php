@@ -46,50 +46,75 @@ Route::get('/signout', 'Auth\AuthController@getSignout');
 # USER ACTIVATION
 Route::get('user/activation/{token}', 'Auth\AuthController@userActivation');
 
+
+# GIRL CONTROLLER
+Route::get('private', [
+	'as' => 'private',
+	'uses' => 'GirlController@getIndex'
+]);
+
+# BLACK BOOK CONTROLLER
+Route::get('private/blackbook', 'BlackbookController@getIndex');
+Route::post('private/blackbook/store', 'BlackbookController@postBlackbook');
+
+Route::get('private/{id}', 'GirlController@getGirl');
+Route::get('get_price_ranges', 'GirlController@getPriceRanges');
+Route::get('get_radius', 'GirlController@getRadius');
+Route::get('get_local_radius', 'LocalProfileController@getLocalRadius');
+
 # PROFILE CONTROLLER
-Route::get('@{username}/create', 'ProfileController@getCreate');
-Route::put('@{username}/store', 'ProfileController@postCreate');
-Route::post('ajax/add_new_price', 'ProfileController@postNewPrice');
-Route::get('ajax/delete_price/{price_id}', 'ProfileController@deletePrice');
 # update profile separately one by one
-Route::get('@{username}/bio', 'ProfileController@getBio');
-Route::put('@{username}/bio/store', 'ProfileController@postBio');
+Route::group(['middleware' => 'forbid.locals'], function() {
+	Route::get('private/{private_id}/create', 'ProfileController@getCreate');
+	Route::put('private/{private_id}/store', 'ProfileController@postCreate');
+	Route::post('ajax/add_new_price', 'ProfileController@postNewPrice');
+	Route::get('ajax/delete_price/{price_id}', 'ProfileController@deletePrice');
 
-Route::get('@{username}/about_me', 'ProfileController@getAbout');
-Route::put('@{username}/about_me/store', 'ProfileController@postAbout');
+	Route::get('private/{private_id}/contact', 'ProfileController@getContact');
+	Route::put('private/{private_id}/contact/store', 'ProfileController@postContact');
 
-Route::get('@{username}/gallery', 'ProfileController@getGallery');
-Route::put('@{username}/gallery/store', 'ProfileController@postGallery');
+	Route::get('private/{private_id}/workplace', 'ProfileController@getWorkplace');
+	Route::put('private/{private_id}/workplace/store', 'ProfileController@postWorkplace');
 
-Route::get('@{username}/contact', 'ProfileController@getContact');
-Route::put('@{username}/contact/store', 'ProfileController@postContact');
+	Route::get('private/{private_id}/working_time', 'ProfileController@getWorkingTimes');
+	Route::put('private/{private_id}/working_time/store', 'ProfileController@postWorkingTimes');
 
-Route::get('@{username}/services', 'ProfileController@getServices');
-Route::put('@{username}/services/store', 'ProfileController@postServices');
+	Route::get('private/{private_id}/job_offers', 'ProfileController@getJobOffers');
+	Route::put('private/{private_id}/job_offers/store', 'ProfileController@postJobOffers');
 
-Route::get('@{username}/workplace', 'ProfileController@getWorkplace');
-Route::put('@{username}/workplace/store', 'ProfileController@postWorkplace');
+	Route::get('private/{private_id}/prices', 'ProfileController@getPrices');
 
-Route::get('@{username}/working_time', 'ProfileController@getWorkingTimes');
-Route::put('@{username}/working_time/store', 'ProfileController@postWorkingTimes');
+	Route::get('private/{private_id}/packages', 'ProfileController@getPackages');
+	Route::put('private/{private_id}/packages/store', 'ProfileController@postPackages');
+});
 
-Route::get('@{username}/job_offers', 'ProfileController@getJobOffers');
-Route::put('@{username}/job_offers/store', 'ProfileController@postJobOffers');
+// these routes can be accessed by locals only if they have a user with specified private_id
+Route::get('private/{private_id}/bio', 'ProfileController@getBio');
+Route::put('private/{private_id}/bio/store', 'ProfileController@postBio');
 
-Route::get('@{username}/prices', 'ProfileController@getPrices');
+Route::get('private/{private_id}/about_me', 'ProfileController@getAbout');
+Route::put('private/{private_id}/about_me/store', 'ProfileController@postAbout');
 
-Route::get('@{username}/packages', 'ProfileController@getPackages');
-Route::put('@{username}/packages/store', 'ProfileController@postPackages');
+Route::get('private/{private_id}/gallery', 'ProfileController@getGallery');
+Route::put('private/{private_id}/gallery/store', 'ProfileController@postGallery');
 
-Route::get('@{username}/languages', 'ProfileController@getLanguages');
-Route::put('@{username}/languages/store', 'ProfileController@postLanguages');
+Route::get('private/{private_id}/services', 'ProfileController@getServices');
+Route::put('private/{private_id}/services/store', 'ProfileController@postServices');
 
-Route::get('@{username}/banners', 'ProfileController@getBanners');
-Route::get('@{username}/banners/create', 'ProfileController@getCreateBanners');
-Route::post('@{username}/banners/store', 'ProfileController@postBanners');
+Route::get('private/{private_id}/languages', 'ProfileController@getLanguages');
+Route::put('private/{private_id}/languages/store', 'ProfileController@postLanguages');
 
-Route::get('@{username}/add_card', 'ProfileController@getCard');
-Route::post('@{username}/add_card/store', 'ProfileController@postCard');
+# BANNER CONTROLLER
+Route::get('private/{private_id}/banners', 'BannerController@getBanners')->name('private_banners');
+Route::get('private/{private_id}/banners/create', 'BannerController@getCreateBanners');
+Route::get('locals/@{username}/banners', 'BannerController@getBanners')->name('local_banners');
+Route::get('locals/@{username}/banners/create', 'BannerController@getCreateBanners');
+Route::post('banners/store', 'BannerController@postBanners');
+
+# CARD CONTROLLER
+Route::get('private/{private_id}/add_card', 'CardController@getCard');
+Route::get('locals/@{username}/add_card', 'CardController@getCard');
+Route::post('card/store', 'CardController@postCard');
 
 # LOCAL CONTROLLER
 Route::get('locals/@{username}/create', 'LocalController@getCreate');
@@ -111,8 +136,7 @@ Route::get('locals/@{username}/club_info', 'LocalController@getClubInfo');
 Route::put('locals/@{username}/club_info/store', 'LocalController@postClubInfo');
 
 Route::get('locals/@{username}/girls', 'LocalController@getGirls');
-Route::put('locals/@{username}/girls/store', 'LocalController@postGirls');
-Route::put('locals/@{username}/girls/create', 'LocalController@postCreateGirls');
+Route::post('locals/@{username}/girls/store', 'LocalController@postCreateGirl');
 
 Route::get('locals/@{username}/packages', 'LocalController@getPackages');
 Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');
@@ -120,6 +144,8 @@ Route::put('locals/@{username}/packages/store', 'LocalController@postPackages');
 Route::get('locals/@{username}/news_and_events', 'LocalController@getNewsAndEvents');
 Route::post('locals/@{username}/news/store', 'LocalController@postNews');
 Route::post('locals/@{username}/events/store', 'LocalController@postEvents');
+
+Route::post('locals/@{username}/girls/{private_id?}/delete', 'LocalController@deleteGirl');
 
 # LOCAL PROFILE CONTROLLER
 Route::get('locals/{username}', 'LocalProfileController@getLocal');
@@ -151,20 +177,6 @@ Route::middleware(['roles'])->group(function () {
 		'roles' => ['Admin']
 	]);
 });
-
-# BLACK BOOK CONTROLLER
-Route::get('private/blackbook', 'BlackbookController@getIndex');
-Route::post('private/blackbook/store', 'BlackbookController@postBlackbook');
-
-# GIRL CONTROLLER
-Route::get('private', [
-	'as' => 'private',
-	'uses' => 'GirlController@getIndex'
-]);
-Route::get('private/{nickname}', 'GirlController@getGirl');
-Route::get('get_price_ranges', 'GirlController@getPriceRanges');
-Route::get('get_radius', 'GirlController@getRadius');
-Route::get('get_local_radius', 'LocalProfileController@getLocalRadius');
 
 #NOTIFICATION CONTROLLER
 Route::get('@{username}/notifications', 'NotificationController@getIndex');

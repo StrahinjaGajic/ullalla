@@ -69,4 +69,8 @@ return [
     #news/events
     'news_entry' => 'Make News Entry',
     'events_entry' => 'Create an Event',
+
+   	// nastavak
+	#local add girls
+    'add_girl' => 'Add Girl',
 ];
