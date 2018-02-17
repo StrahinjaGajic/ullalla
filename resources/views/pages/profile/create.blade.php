@@ -1134,7 +1134,7 @@ $(function () {
 			name: 'Ullallà',
 			description: '{{ $user->email }}',
 		});
-		e.preventDefault();	
+		e.preventDefault();
 	});
 </script>
 
