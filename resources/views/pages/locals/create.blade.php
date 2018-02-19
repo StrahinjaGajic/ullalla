@@ -751,6 +751,7 @@
                 $('.help-block').text('');
 
                 // fire ajax post request
+                $.post(url, data)
                 .done(function (data) {
                     $('#loading').addClass('is-hidden');
                     window.location.href = getUrl();
