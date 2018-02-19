@@ -178,7 +178,7 @@ class LocalController extends Controller
                     'currency' => 'chf',
                 ]);
             } catch (\Exception $e) {
-                DB::rollback()
+                DB::rollback();
 
                 return response()->json([
                     'status' => $e->getMessage()

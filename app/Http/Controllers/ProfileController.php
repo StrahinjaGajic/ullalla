@@ -643,46 +643,16 @@ class ProfileController extends Controller
             ]);
             // check if validator passed or not
             if ($validator->passes()) {
-                $monthGirlPackageInput = request('ullalla_package_month_girl');
-                if ($monthGirlPackageInput) {
-                    // get package
-                    $monthGirlPackage = Package::find($monthGirlPackageInput[0]);
-                    // get activation date and expiry date
-                    if ($monthGirlPackage) {
-                        $monthGirlActivationDateInput = $monthGirlActivationDateInput[$monthGirlPackage->id];
-                        // format dates with carbon
-                        $currentExpiryDateParsed = Carbon::parse($user->package2_expiry_date);
-                        $activationDateInputParsed = Carbon::parse($monthGirlActivationDateInput);
-                        $monthGirlActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
-                        $monthGirlExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
-
-                        $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
-
-                        // check if we should schedule the package or not
-                        if (Carbon::now() <= $currentExpiryDateParsed) {
-                            $string = $monthGirlPackage->id . '&|' . $monthGirlActivationDate . '&|' . $monthGirlExpiryDate . '&|' . $totalAmount;
-                            $user->scheduled_gotm_package = $string;
-                            $user->save();
-
-                            Session::flash('success', __('messages.scheduled_gotm_package'));
-
-                            return response()->json([
-                                'success' => true
-                            ]);
-                        } else {
-                            $user->package2_id = $monthGirlPackage->id;
-                            $user->is_active_gotm_package = 1;
-                            $user->package2_activation_date = $monthGirlActivationDate;
-                            $user->package2_expiry_date = $monthGirlExpiryDate;
-                        }
-                    }
-                }
+                //
+                $user = User::insertPackage($request, $user, $defaultPackageActivationDateInput, true);
             } else {
-                return response()->json([
-                    'errors' => [
-                        'month_girl_package_error' => $validator->getMessageBag()
-                    ]
-                ]);
+                if ($request->ajax()) {
+                    return response()->json([
+                        'errors' => $validator->getMessageBag()
+                    ]);
+                }
+
+                return redirect()->back()->withErrors($validator->getMessageBag());
             }
         } elseif ($defaultPackageActivationDateInput) {
             // validate
@@ -691,95 +661,37 @@ class ProfileController extends Controller
             ]);
 
             if ($validator->passes()) {
-                // get default package input
-                $defaultPackageInput = request('ullalla_package')[0];
-
-                // get default package obj and activation date input
-                $defaultPackage = Package::find($defaultPackageInput);
-                if ($defaultPackage) {
-                    $defaultPackageActivationDateInput = $defaultPackageActivationDateInput[$defaultPackage->id];
-                    $currentExpiryDateParsed = Carbon::parse($user->package1_expiry_date);
-                    $activationDateInputParsed = Carbon::parse($defaultPackageActivationDateInput);
-
-                    // format default packages dates with carbon
-                    $defaultPackageActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
-                    $defaultPackageExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($defaultPackage->id))->format('Y-m-d H:i:s');
-
-                    $totalAmount += (int) filter_var($defaultPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
-
-                    // check if we should schedule the package or not
-                    if (Carbon::now() <= $currentExpiryDateParsed) {
-                        $string = $defaultPackage->id . '&|' . $defaultPackageActivationDate . '&|' . $defaultPackageExpiryDate . '&|' . $totalAmount;
-                        $user->scheduled_default_package = $string;
-                        $user->save();
-
-                        Session::flash('success', __('messages.scheduled_default_package'));
-
-                        return response()->json([
-                            'success' => true
-                        ]);
-                    } else {
-                        $user->package1_id = $defaultPackage->id;
-                        $user->is_active_d_package = 1;
-                        $user->package1_activation_date = $defaultPackageActivationDate;
-                        $user->package1_expiry_date = $defaultPackageExpiryDate;
-                    }                    
-                }
+                
+                $user = User::insertPackage($request, $user, $monthGirlActivationDateInput);
 
                 if ($monthGirlActivationDateInput) {
-                    $monthGirlPackageInput = request('ullalla_package_month_girl');
-                    if ($monthGirlPackageInput) {
-                        // get package
-                        $monthGirlPackage = Package::find($monthGirlPackageInput[0]);
-                        // get activation date and expiry date
-                        if ($monthGirlPackage) {
-                            $monthGirlActivationDateInput = $monthGirlActivationDateInput[$monthGirlPackage->id];
-                            // format dates with carbon
-                            $currentExpiryDateParsed = Carbon::parse($user->package2_expiry_date);
-                            $activationDateInputParsed = Carbon::parse($monthGirlActivationDateInput);
-                            $monthGirlActivationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
-                            $monthGirlExpiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
-
-                            $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
-
-                            // check if we should schedule the package or not
-                            if (Carbon::now() <= $currentExpiryDateParsed) {
-                                $string = $monthGirlPackage->id . '&|' . $monthGirlActivationDate . '&|' . $monthGirlExpiryDate . '&|' . $totalAmount;
-                                $user->scheduled_gotm_package = $string;
-                                $user->save();
-
-                                Session::flash('success', __('messages.scheduled_gotm_package'));
-
-                                return response()->json([
-                                    'success' => true
-                                ]);
-                            } else {
-                                $user->package2_id = $monthGirlPackage->id;
-                                $user->is_active_gotm_package = 1;
-                                $user->package2_activation_date = $monthGirlActivationDate;
-                                $user->package2_expiry_date = $monthGirlExpiryDate;
-                            }
-                        }
-                    }
+                    $user = User::insertPackage($request, $user, $monthGirlActivationDateInput, true);
                 }
 
-                $user->save();
+                Session::flash('success', __('messages.scheduled_gotm_package'));
+
             } else {
-                return response()->json([
-                    'errors' => [
-                        'default_package_error' => $validator->getMessageBag()
-                    ]
-                ]);
+                if ($request->ajax()) {
+                    return response()->json([
+                        'errors' => $validator->getMessageBag()
+                    ]);
+                }
+
+                return redirect()->back()->withErrors($validator->getMessageBag());
             }
         }
 
         try {
-            $customer = Customer::create([
-                'email' => request('stripeEmail'),
-                'source' => request('stripeToken'),
-            ]);
-            $user->stripe_id = $customer->id;
-            $user->save();
+            $customer = Customer::retrieve($user->stripe_id);
+
+            if (!$customer) {
+                $customer = Customer::create([
+                    "email" => request('stripeEmail'),
+                    "source" => request('stripeToken'),
+                ]);
+                $user->stripe_id = $customer->id;
+                $user->save();
+            }
 
             Charge::create([
                 'customer' => $user->stripe_id,
@@ -787,10 +699,18 @@ class ProfileController extends Controller
                 'currency' => 'chf',
             ]);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
+            DB::rollback();
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
+            }
+
+            return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
         }
+
+        DB::commit();
 
         Session::flash('success', __('messages.success_changes_saved'));
     }
