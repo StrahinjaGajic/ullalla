@@ -631,8 +631,10 @@ class ProfileController extends Controller
     public function postPackages(Request $request)
     {
         $user = Auth::user();
-
+        $defaultPackageData = ['needCharge' => false, 'totalAmount' => 0];
+        $gotmPackageData = ['needCharge' => false, 'totalAmount' => 0];
         $totalAmount = 0;
+
         $defaultPackageActivationDateInput = request('default_package_activation_date');
         $monthGirlActivationDateInput = request('month_girl_package_activation_date');
 
@@ -643,8 +645,14 @@ class ProfileController extends Controller
             ]);
             // check if validator passed or not
             if ($validator->passes()) {
-                //
-                $user = User::insertPackage($request, $user, $defaultPackageActivationDateInput, true);
+                // insert default package
+                $gotmPackageData = User::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                if ($gotmPackageData['scheduled'] === true) {
+                    // only default package scheduled
+                    return redirect()->back()->with('success_scheduled', __('messages.scheduled_gotm_package'));
+                }
+
+                // continue to with payment
             } else {
                 if ($request->ajax()) {
                     return response()->json([
@@ -661,14 +669,28 @@ class ProfileController extends Controller
             ]);
 
             if ($validator->passes()) {
-                
-                $user = User::insertPackage($request, $user, $monthGirlActivationDateInput);
-
+                // insert default package
+                $defaultPackageData = User::insertPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
+                // insert gotm package
                 if ($monthGirlActivationDateInput) {
-                    $user = User::insertPackage($request, $user, $monthGirlActivationDateInput, true);
+                    $gotmPackageData = User::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                    if ($gotmPackageData['scheduled'] && !$defaultPackageData['scheduled']) {
+                        // only gotm package scheduled
+                        Session::flash('success_scheduled', __('messages.scheduled_gotm_package'));                        
+                    } elseif ($gotmPackageData['scheduled'] && $defaultPackageData['scheduled']) {
+                        // both packages scheduled
+                        return redirect()->back()->with('success_scheduled', __('messages.scheduled_packages'));
+                    }
                 }
 
-                Session::flash('success', __('messages.scheduled_gotm_package'));
+                if ($defaultPackageData['scheduled']) {
+                        Session::flash('success_scheduled', __('messages.scheduled_default_package'));
+                    if (!$gotmPackageData['needCharge']) {
+                        return redirect()->back();
+                    }
+                }
+
+                // continue to with payment
 
             } else {
                 if ($request->ajax()) {
@@ -695,7 +717,7 @@ class ProfileController extends Controller
 
             Charge::create([
                 'customer' => $user->stripe_id,
-                'amount' => $totalAmount * 100,
+                'amount' => ($defaultPackageData['totalAmount'] + $gotmPackageData['totalAmount']) * 100,
                 'currency' => 'chf',
             ]);
         } catch (\Exception $e) {
@@ -712,7 +734,16 @@ class ProfileController extends Controller
 
         DB::commit();
 
-        Session::flash('success', __('messages.success_changes_saved'));
+        if ($defaultPackageData['needCharge']) {
+            if ($gotmPackageData['needCharge']) {
+                Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
+            }
+            Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
+        } else if ($gotmPackageData['needCharge']) {
+            Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
+        }
+
+        return redirect()->back();
     }
 
     public function postNewPrice(Request $request)

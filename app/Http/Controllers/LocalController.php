@@ -456,7 +456,6 @@ class LocalController extends Controller
         $defaultPackageActivationDateInput = request('default_package_activation_date');
         $monthGirlActivationDateInput = request('month_girl_package_activation_date');
 
-
         if ($monthGirlActivationDateInput && !$defaultPackageActivationDateInput) {
             // validate
             $validator = Validator::make($request->all(), [

@@ -15,142 +15,155 @@
 		</div>
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
-			@if($user->is_active_d_package || $user->is_active_gotm_package)
 			<div class="col-xs-12">
-				<h3>{{ __('headings.active_packages') }}</h3>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>{{ __('fields.type') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th>{{ __('headings.expiry_date') }}</th>
-						</tr>
-					</thead>	
-					<tbody>
-						@if($user->is_active_d_package)
-						<tr>
-							<td>{{ __('headings.default_package') }}</td>
-							<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
-							<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
-						</tr>
-						@endif
-						@if($user->is_active_gotm_package)
-						<tr>
-							@if($user->sex == 'transsexual')
-							<td>{{ __('headings.totm_package') }}</td>
-							@else
-							<td>{{ __('headings.gotm_package') }}</td>
-							@endif
-							<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
-							<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
-						</tr>
-						@endif
-					</tbody>
-				</table>
-			</div>
-			@endif
-
-			<div class="col-xs-12">
-				<h3>{{ __('headings.scheduled_packages') }}</h3>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>{{ __('fields.type') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th>{{ __('headings.expiry_date') }}</th>
-						</tr>
-					</thead>	
-					<tbody>
-						@if($scheduledDefaultPackage)
-						@php
-							$scheduledDefaultPackage = explode('&|', $scheduledDefaultPackage);
-						@endphp
-						<tr>
-							<td>{{ __('headings.default_package') }}</td>
-							<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[1])) }}</td>
-							<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[2])) }}</td>
-						</tr>
-						@endif
-						@if($scheduledGotmPackage)
-						@php
-							$scheduledGotmPackage = explode('&|', $scheduledGotmPackage);
-						@endphp
-						<tr>
-							@if($user->sex == 'transsexual')
-							<td>{{ __('headings.totm_package') }}</td>
-							@else
-							<td>{{ __('headings.gotm_package') }}</td>
-							@endif
-							<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[1])) }}</td>
-							<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[2])) }}</td>
-						</tr>
-						@endif
-					</tbody>
-				</table>
-			</div>
-
-			<div class="col-xs-12">
-				@if(Session::has('success'))
-				<div class="alert alert-success">{{ Session::get('success') }}</div>
+				@if(Session::has('success_scheduled'))
+					<div class="alert alert-success">{{ Session::get('success_scheduled') }}</div>
 				@endif
+				@if(Session::has('success_d_package_updated'))
+					<div class="alert alert-success">{{ Session::get('success_d_package_updated') }}</div>
+				@endif
+				@if(Session::has('success_gotm_package_updated'))
+					<div class="alert alert-success">{{ Session::get('success_gotm_package_updated') }}</div>
+				@endif
+				
 				<div class="packages-errors"></div>
 			</div>
+
+			@if($user->is_active_d_package || $user->is_active_gotm_package)
+				<div class="col-xs-12">
+					<h3>{{ __('headings.active_packages') }}</h3>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>{{ __('fields.type') }}</th>
+								<th>{{ __('headings.activation_date') }}</th>
+								<th>{{ __('headings.expiry_date') }}</th>
+							</tr>
+						</thead>	
+						<tbody>
+							@if($user->is_active_d_package)
+								<tr>
+									<td>{{ __('headings.default_package') }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
+								</tr>
+							@endif
+							@if($user->is_active_gotm_package)
+								<tr>
+									@if($user->sex == 'transsexual')
+										<td>{{ __('headings.totm_package') }}</td>
+									@else
+										<td>{{ __('headings.gotm_package') }}</td>
+									@endif
+									<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
+								</tr>
+							@endif
+						</tbody>
+					</table>
+				</div>
+			@endif
+
+			@if($scheduledDefaultPackage || $scheduledGotmPackage)
+				<div class="col-xs-12">
+					<h3>{{ __('headings.scheduled_packages') }}</h3>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>{{ __('fields.type') }}</th>
+								<th>{{ __('headings.activation_date') }}</th>
+								<th>{{ __('headings.expiry_date') }}</th>
+							</tr>
+						</thead>	
+						<tbody>
+							@if($scheduledDefaultPackage)
+								@php
+									$scheduledDefaultPackage = explode('&|', $scheduledDefaultPackage);
+								@endphp
+								<tr>
+									<td>{{ __('headings.default_package') }}</td>
+									<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[1])) }}</td>
+									<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[2])) }}</td>
+								</tr>
+								@endif
+								@if($scheduledGotmPackage)
+								@php
+									$scheduledGotmPackage = explode('&|', $scheduledGotmPackage);
+								@endphp
+								<tr>
+									@if($user->sex == 'transsexual')
+										<td>{{ __('headings.totm_package') }}</td>
+									@else
+										<td>{{ __('headings.gotm_package') }}</td>
+									@endif
+									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[1])) }}</td>
+									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[2])) }}</td>
+								</tr>
+							@endif
+						</tbody>
+					</table>
+				</div>
+			@endif
 
 			@if($showDefaultPackages || $showGotmPackages)
 			{!! Form::model($user, ['url' => 'private/' . $user->id . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 
 			@if($showDefaultPackages)
-			<div class="col-xs-12 default-packages-section" id="default-packages-section">
-				<h3>{{ __('headings.default_packages') }}</h3>
-				<div class="has-error">
-					<div id="alertPackageMessage" class="help-block"></div>
+				<div class="col-xs-12 default-packages-section" id="default-packages-section">
+					<h3>{{ __('headings.default_packages') }}</h3>
+					<div class="has-error">
+						<div id="alertPackageMessage" class="help-block">
+							@if($errors->has('stripe_error'))
+                    			{{ $errors->first() }}
+                			@endif
+            			</div>
+					</div>
+					@if($errors->has('ullalla_package'))
+						<p class="has-error">{{ __('validation.default_package_required') }}</p>
+					@endif
+					
+					<table class="table packages-table">
+						<thead>
+							<tr>
+								<th>{{ __('headings.name') }}</th>
+								<th>{{ __('headings.duration') }}</th>
+								<th>{{ __('headings.price') }}</th>
+								<th>{{ __('headings.activation_date') }}</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($packages as $package)
+							<tr>
+								<td>{{ $package->package_name }}</td>
+								<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+								<td>{{ $package->package_price }} CHF</td>
+								<td>
+									<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+								</td>
+								<td>
+									<label class="control control--checkbox">
+										<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+										<div class="control__indicator"></div>
+									</label>
+								</td>
+							</tr>
+							<?php $counter++; ?>
+							@endforeach
+						</tbody>
+					</table>
+					@if(!$showGotmPackages)
+						<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+					@endif
 				</div>
-				@if($errors->has('ullalla_package'))
-				<p class="has-error">{{ __('validation.default_package_required') }}</p>
-				@endif
-				
-				<table class="table packages-table">
-					<thead>
-						<tr>
-							<th>{{ __('headings.name') }}</th>
-							<th>{{ __('headings.duration') }}</th>
-							<th>{{ __('headings.price') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($packages as $package)
-						<tr>
-							<td>{{ $package->package_name }}</td>
-							<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-							<td>{{ $package->package_price }} CHF</td>
-							<td>
-								<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-							</td>
-							<td>
-								<label class="control control--checkbox">
-									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-									<div class="control__indicator"></div>
-								</label>
-							</td>
-						</tr>
-						<?php $counter++; ?>
-						@endforeach
-					</tbody>
-				</table>
-				@if(!$showGotmPackages)
-				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
-				@endif
-			</div>
 			@endif
 
 			@if($showGotmPackages)
 			<div class="col-xs-12">
 				@if($user->sex == 'transsexual')
-				<h3>{{ __('headings.totm_package') }}</h3>
+					<h3>{{ __('headings.totm_package') }}</h3>
 				@else
-				<h3>{{ __('headings.gotm_package') }}</h3>
+					<h3>{{ __('headings.gotm_package') }}</h3>
 				@endif
 				<table class="table packages-table package-girl-month">
 					<thead>
@@ -193,6 +206,13 @@
 			@endif
 		</div>
 	</div>
+</div>
+<div id="loading" class="is-hidden">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="loading-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
 </div>
 @stop
 
@@ -283,6 +303,10 @@
 			var token = $('input[name="_token"]').val();
 			var form = $('#profileForm');
 			var data = form.serialize();
+
+			// add loading class
+            $('#loading').removeClass('is-hidden');
+            
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (response, textStatus) {
@@ -305,12 +329,17 @@
 			});
 		}
 	});
-	$('#profileForm').on('submit', function (e) {
-		stripe.open({
-			name: 'Ullallà',
-			description: '{{ $user->email }}',
+	@if(!$user->stripe_last4_digits && 
+		(Carbon\Carbon::now() > Carbon\Carbon::parse($user->package1_expiry_date) || 
+			Carbon\Carbon::now() > Carbon\Carbon::parse($user->package2_expiry_date)
+		))
+		$('#profileForm').on('submit', function (e) {
+			stripe.open({
+				name: 'Ullallà',
+				description: '{{ $user->email }}',
+			});
+			e.preventDefault();	
 		});
-		e.preventDefault();	
-	});
+	@endif
 </script>
 @stop

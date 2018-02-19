@@ -274,7 +274,7 @@ class User extends Authenticatable
         return $query;
     }
 
-    public function insertGotmPackage($request, $user, $activationDateInput, $gotm = false)
+    public static function insertPackage($request, $user, $activationDateInput, $totalAmount, $gotm = false)
     {
         if ($gotm) {
             $packageInput = $request->ullalla_package_month_girl[0];
@@ -299,7 +299,7 @@ class User extends Authenticatable
             if ($package) {
                 $activationDateInput = $activationDateInput[$package->id];
                 // format dates with carbon
-                $currentExpiryDateParsed = Carbon::parse($user->package2_expiry_date);
+                $currentExpiryDateParsed = Carbon::parse($user->$expiryDateColumn);
                 $activationDateInputParsed = Carbon::parse($activationDateInput);
                 $activationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
                 $expiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($package->id))->format('Y-m-d H:i:s');
@@ -309,19 +309,23 @@ class User extends Authenticatable
                 // check if we should schedule the package or not
                 if (Carbon::now() <= $currentExpiryDateParsed) {
                     $string = $package->id . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
-                    $user->scheduled_gotm_package = $string;
+                    $user->$scheduledColumn = $string;
                     $user->save();
+
+                    return ['needCharge' => false, 'scheduled' => true, 'totalAmount' => $totalAmount];
                 } else {
-                    DB::beginTransaction();
+                    if (DB::transactionLevel() != 1) {
+                        DB::beginTransaction();
+                    }
 
                     try {
+                        // $user->canton_id = 'asdas';
                         $user->$packageColumn = $package->id;
                         $user->$activeColumn = 1;
-                        $user->$activationDateColumn = $monthGirlActivationDate;
-                        $user->$expiryDateColumn = $monthGirlExpiryDate;
+                        $user->$activationDateColumn = $activationDate;
+                        $user->$expiryDateColumn = $expiryDate;
                         $user->save();
 
-                        return $user;
                     } catch (Exception $e) {
                         DB::rollback();
 
@@ -329,6 +333,8 @@ class User extends Authenticatable
                             'status' => 'Something went wrong'
                         ], 422);
                     }
+
+                    return ['needCharge' => true, 'scheduled' => false, 'totalAmount' => $totalAmount];
                 }
             }
         }
