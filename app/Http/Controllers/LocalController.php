@@ -169,7 +169,7 @@ class LocalController extends Controller
                 
                 $user->stripe_id = $customer->id;
                 $user->stripe_last4_digits = $customer->sources->data[0]->last4;
-                $user->stripe_amount = $totalAmount;
+                $user->stripe_amount = $totalAmount * 100;
                 $user->save();
 
                 Charge::create([
