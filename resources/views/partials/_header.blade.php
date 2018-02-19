@@ -27,6 +27,7 @@
 <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
+	UPLOADCARE_LOCALE = '{{ app()->getLocale() }}';
 	UPLOADCARE_LIVE = false;
 	UPLOADCARE_CLEARABLE = true;
 	UPLOADCARE_LOCALE_TRANSLATIONS = {

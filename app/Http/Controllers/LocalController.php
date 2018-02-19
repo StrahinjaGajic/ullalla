@@ -113,6 +113,8 @@ class LocalController extends Controller
             }
         }
 
+        DB::beginTransaction();
+
         try {                        
             $user = Auth::guard('local')->user();
             $user->name = request('name');
@@ -150,36 +152,40 @@ class LocalController extends Controller
             $user->save();
 
         } catch (\Exception $e) {
+            DB::rollback();
+
             return response()->json([
-                'error' => $e->getMessage()
-            ]);
+                'status' => 'There was a problem creating your profile.'
+            ], 422);
         }
 
-        if(request('ullalla_package')[0] != 6) {
+        if (request('ullalla_package')[0] != 6) {
             try {
                 // create a customer
                 $customer = Customer::create([
                     'email' => request('stripeEmail'),
                     'source' => request('stripeToken'),
                 ]);
+                
                 $user->stripe_id = $customer->id;
+                $user->stripe_last4_digits = $customer->sources->data[0]->last4;
                 $user->stripe_amount = $totalAmount;
                 $user->save();
-            } catch (\Exception $e) {
-                return response()->json([
-                    'status' => $e->getMessage()
-                ], 422);
-            }
 
-            try {
                 Charge::create([
                     'customer' => $user->stripe_id,
                     'amount' => $user->stripe_amount,
                     'currency' => 'chf',
                 ]);
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', $e->getMessage());
+                DB::rollback()
+
+                return response()->json([
+                    'status' => $e->getMessage()
+                ], 422);
             }
+
+            DB::commit();
 
             Session::flash('account_created', __('messages.account_created'));
 

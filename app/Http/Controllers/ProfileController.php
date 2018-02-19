@@ -90,7 +90,7 @@ class ProfileController extends Controller
 //            'intimate' => 'required',
 //            'alcohol' => 'required',
 //            'smoker' => 'required',
-//            'about_me' => 'required|max:200',
+//            'about_me' => 'required',
 //            'photos' => 'numeric|min:4|max:9',
 //            'mobile' => 'required|numeric|max:20',
 //            'phone' => 'required|numeric|max:20',
@@ -163,6 +163,8 @@ class ProfileController extends Controller
             }
         }
 
+        DB::beginTransaction();
+
         try {
             $user = Auth::user();
             $user->first_name = request('first_name');
@@ -189,7 +191,7 @@ class ProfileController extends Controller
             $user->photos = $uploadedPhotos ? $inputPhotos : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->email = request('email');
-            $user->website = request('website');
+            $user->website = NULL;
             $user->phone = request('phone');
             $user->mobile = request('mobile');
             $user->sms_notifications = request('sms_notifications') ? '1' : '0';
@@ -232,9 +234,11 @@ class ProfileController extends Controller
             $user->spoken_languages()->sync($syncData);
 
         } catch (\Exception $e) {
+            DB::rollback();
+
             return response()->json([
-                'error' => $e->getMessage()
-            ]);
+                'status' => 'There was a problem creating your profile.'
+            ], 422);
         }
 
         // stripe
@@ -246,29 +250,23 @@ class ProfileController extends Controller
             ]);
             $user->stripe_id = $customer->id;
             $user->stripe_amount = $totalAmount;
+            $user->stripe_last4_digits = $customer->sources->data[0]->last4;
             $user->save();
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
-        }
 
-        try {
             Charge::create([
                 'customer' => $user->stripe_id,
                 'amount' => $user->stripe_amount,
                 'currency' => 'chf',
             ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            DB::rollback();
+
+            return response()->json([
+                'status' => $e->getMessage()
+            ], 422);
         }
 
-        //     return true;
-        // });
-
-        // if ($result !== true) {
-        //     return redirect('/')->with('error', 'There was an error');
-        // }
+        DB::commit();
 
         Session::flash('account_created', __('messages.account_created'));
     }

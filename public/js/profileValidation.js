@@ -81,7 +81,7 @@ $(document).ready(function() {
                             message: requiredField
                         },
                         stringLength: {
-                            max: 200,
+                            max: 2000,
                             message: stringLength
                         }
                     }

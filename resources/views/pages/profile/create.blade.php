@@ -692,6 +692,13 @@
 			</div>
 		</div>
 	</div>
+	<div id="loading" class="is-hidden">
+	    <div id="loading-center">
+	        <div id="loading-center-absolute">
+	            <div class="loading-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+	        </div>
+	    </div>
+	</div>
 </div>
 @stop
 
@@ -1119,12 +1126,21 @@ $(function () {
 			var token = $('input[name="_token"]').val();
 			var form = $('#profileForm');
 			var data = form.serialize();
+
+			// add loading class
+			$('#create_profile_modal').modal('hide');
+            $('#loading').removeClass('is-hidden');
+            $('.help-block').text('');
+
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (data) {
+				$('#loading').addClass('is-hidden');
 				window.location.href = getUrl();
 			})
 			.fail(function(data, textStatus) {
+				$('#loading').addClass('is-hidden');
+				$('#create_profile_modal').modal('show');
 				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
 			});
 		}
