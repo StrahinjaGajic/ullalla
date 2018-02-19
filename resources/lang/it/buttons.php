@@ -2,75 +2,86 @@
 
 return [
 	#header
-	'upload_videos' => 'Upload Video',
-	'upload_photos' => 'Upload Photos',
-	'upload_logo' => 'Upload Logo',
-	'upload_photo' => 'Upload Photo',
-	'back' => 'Back',
+	'upload_videos' => 'Carica Video',
+	'upload_photos' => 'Carica Foto',
+	'upload_logo' => 'Carica Logo',
+	'upload_photo' => 'Carica foto',
+	'back' => 'Indietro',
 
 	# home
-	'view_profile' => 'View Profile',
-	'close' => 'Close',
-	'search' => 'Search',
+	'view_profile' => 'Vedi profilo',
+	'close' => 'Chiudi',
+	'search' => 'Cerca',
 
 
 	# footer links
 	'privacy_policy' => 'Privacy Policy',
-	'contact_us' => 'Contact Us',
-	'faq' => 'FAQ',
+	'contact_us' => 'Contatti',
+	'faq' => 'Domande frequenti',
 
 	#nav links
 	'home' => 'Home',
-	'locals' => 'Locals',
-	'private' => 'Private',
-	'signin' => 'Login',
-	'signup' => 'Register',
-	'signout' => 'Logout',
-	'preview_profile' => 'Preview Profile',
-	'profile' => 'Preview Profile',
-	'settings' => 'Settings',
-	'create_profile' => 'Create Profile',
+	'locals' => 'Locali',
+	'private' => 'Privati',
+	'signin' => 'Accedi',
+	'signup' => 'Registrati',
+	'signout' => 'Esci',
+	'preview_profile' => 'Anteprima profilo',
+	'profile' => 'Profilo',
+	'settings' => 'Impostazioni',
+	'create_profile' => 'Crea Profilo',
 
 	# edit profile
-	'save_changes' => 'Save Changes',
-	'show_more' => 'Show More',
-	'show_less' => 'Show Less',
+	'save_changes' => 'Salva modifiche',
+	'show_more' => 'Mostra di piú',
+	'show_less' => 'Mostra meno',
 
 	#prices
-	'add_new_price' => 'Add New Price',
+	'add_new_price' => 'Aggiungi nuovo prezzo',
 
 	# private links
-	'reset_filters' => 'Reset Filters',
-	'grid' => 'Grid',
-	'list' => 'List',
+	'reset_filters' => 'Resetta filtri',
+	'grid' => 'Griglia',
+	'list' => 'Lista',
 
-    #locals-single
-    'work_time' => 'Work Time',
-    'club_info' => 'Club Info',
-    'girls' => 'Girls',
-    'video' => 'Video',
-    'day' => 'Day',
-    'from' => 'From',
-    'to' => 'To',
+	#locals-single
+	'work_time' => 'Orari di lavoro',
+	'club_info' => 'Informazioni club',
+	'girls' => 'Ragazze',
+	'video' => 'Video',
+	'day' => 'Giorno',
+	'from' => 'Dalle',
+	'to' => 'alle',
 
-    #auth
-    'login' => 'Log In',
-    'register' => 'Register',
-    'logout' => 'Log Out',
-    'approve' => 'Approve',
-    'rrl' => 'Request Reset Link',
+	#auth
+	'login' => 'Accedi',
+	'register' => 'Registrati',
+	'logout' => 'Esci',
+	'approve' => 'Approva',
+	'rrl' => 'Richiedi il link di ripristino',
 
-    #contact
-    'submit'=> 'Submit',
+	#contact
+	'submit'=> 'Invia',
 
-    #black book
-    'entry' => 'Make an entry',
+	#black book
+	'entry' => 'Crea una voce',
 
-    #news/events
-    'news_entry' => 'Make News Entry',
-    'events_entry' => 'Create an Event',
+	#news/events
+	'news_entry' => 'Crea una news',
+	'events_entry' => 'Crea un evento',
 
-    // nastavak
+	#add card
+	'add_card' => 'Add Card',
+	'update_card' => 'Update Card',
+
+	#banners
+	'add_banner' => 'Add Banner',
+
 	#local add girls
-    'add_girl' => 'Add Girl',
+	'add_girl' => 'Add Girl',
+
+	#create-profile
+	'next' => 'Next',
+	'finish' => 'Finish',
+	'previous' => 'Previous',
 ];

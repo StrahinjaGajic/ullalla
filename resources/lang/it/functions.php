@@ -3,198 +3,209 @@
 return [
 
     #getSexes
-    'male' => 'male',
-    'female' => 'female',
-    'transsexual' => 'transsexual',
+    'male' => 'Maschile',
+    'female' => 'Femminile',
+    'transsexual' => 'Transsessuale',
 
 
     #getSexOrientations
-    'heterosexual' => 'heterosexual',
-    'bisexual' => 'bisexual',
-    'homosexual' => 'homosexual',
+    'heterosexual' => 'Eterosessuale',
+    'bisexual' => 'Bisessuale',
+    'homosexual' => 'Omosessuale',
 
 
     #getAnswers
-    'yes' => 'yes',
-    'no' => 'no',
-    'occasionally' => 'occasionally',
+    'yes' => 'Si',
+    'no' => 'No',
+    'occasionally' => 'Occasionale',
 
 
     #getTypes
-    'asian' => 'asian',
-    'black' => 'black',
-    'european' => 'european',
-    'latina' => 'latina',
-    'indian' => 'indian',
-    'arabian' => 'arabian',
-    'mixed' => 'mixed',
-    'other' => 'other',
+    'asian' => 'Asiatico',
+    'black' => 'Africano',
+    'european' => 'Europeo',
+    'latina' => 'Latino',
+    'indian' => 'Indiano',
+    'arabian' => 'Arabo',
+    'mixed' => 'Misto',
+    'other' => 'Altro',
 
 
     #getFigures
-    'athletic' => 'athletic',
-    'chubby' => 'chubby',
-    'normal' => 'normal',
-    'slim' => 'slim',
+    'athletic' => 'Atletico',
+    'chubby' => 'Pienotto',
+    'normal' => 'Normale',
+    'slim' => 'Magro',
 
 
     #getBreastSizes
-    'a' => 'a',
-    'b' => 'b',
-    'c' => 'c',
-    'd' => 'd',
-    'e' => 'e',
-    'f' => 'f',
-    'g' => 'g',
+    'a' => 'A',
+    'b' => 'B',
+    'c' => 'C',
+    'd' => 'D',
+    'e' => 'E',
+    'f' => 'F',
+    'g' => 'G',
 
 
     #getEyeColors
-    'brown' => 'brown',
-    'green' => 'green',
-    'blue' => 'blue',
-    'gray' => 'gray',
+    'brown' => 'Marroni',
+    'green' => 'Verdi',
+    'blue' => 'Blu',
+    'gray' => 'Grigi',
 
 
     #getHairColors
-    'brunette' => 'brunette',
-    'blond' => 'blond',
-    'red' => 'red',
+    'brunette' => 'Castani',
+    'blond' => 'Biondi',
+    'red' => 'Rossi',
 
 
     #getShaveOptions
-    'shaved' => 'shaved',
-    'partial' => 'partial',
-    'hairy' => 'hairy',
+    'shaved' => 'Rasata',
+    'partial' => 'Parziale',
+    'hairy' => 'Al naturale',
 
 
     #getUnits
-    'days' => 'days',
-    'hours' => 'hours',
-    'minutes' => 'minutes',
+    'days' => 'Giorni',
+    'hours' => 'Ore',
+    'minutes' => 'Minuti',
 
 
     #getPreferedOptions
-    'sms_and_call' => 'SMS And Call',
-    'sms_only' => 'SMS Only',
-    'call_only' => 'Call Only',
+    'sms_and_call' => 'SMS e chiamate',
+    'sms_only' => 'Solo SMS',
+    'call_only' => 'Solo chiamate',
 
 
     #getIncallOptions
-    'private_apartment' => 'Private Apartment',
+    'private_apartment' => 'Appartamento privato',
     'hotel' => 'Hotel',
     'club_studio' => 'Club/Studio',
-    'define_yourself' => 'Define Yourself',
+    'define_yourself' => 'Definisci',
 
 
     #getOutcallOptions
-    'home' => 'Home',
-    'home_and_hotel' => 'Home And Hotel',
+    'home' => 'Casa',
+    'home_and_hotel' => 'Casa e hotel',
 
 
     #getCurrencies
-    'chf' => 'chf',
-    'eur' => 'eur',
-    'usd' => 'usd',
+    'chf' => 'CHF',
+    'eur' => 'EUR',
+    'usd' => 'USD',
 
 
     #getPriceTypes
-    'outcall' => 'outcall',
-    'incall' => 'incall',
+    'outcall' => 'Servizio esterno',
+    'incall' => 'Servizio interno',
 
 
     #getLanguages
-    'de' => 'German',
-    'fr' => 'French',
-    'it' => 'Italian',
-    'en' => 'English',
+    'de' => 'Tedesco',
+    'fr' => 'Francese',
+    'it' => 'Italiano',
+    'en' => 'Inglese',
 
 
     #getDaysOfTheWeek
-    'monday' => 'Monday',
-    'tuesday' => 'Tuesday',
-    'wednesday' => 'Wednesday',
-    'thursday' => 'Thursday',
-    'friday' => 'Friday',
-    'saturday' => 'Saturday',
-    'sunday' => 'Sunday',
+    'monday' => 'Lunedí',
+    'tuesday' => 'Martedí',
+    'wednesday' => 'Mercoledí',
+    'thursday' => 'Giovedí',
+    'friday' => 'Venerdí',
+    'saturday' => 'Sabato',
+    'sunday' => 'Domenica',
 
 
     #getBioFields
-    'age' => 'Age',
-    'type' => 'Type',
-    'country_id' => 'Nationality',
-    'eye_color' => 'Eyes',
-    'hair_color' => 'Hair',
-    'height' => 'Height',
-    'weight' => 'Weight',
-    'breast_size' => 'Breast Size',
-    'intimate' => 'Intimate',
-    'smoker' => 'Smoker',
-    'alcohol' => 'Alcohol',
+    'age' => 'Etá',
+    'type' => 'Tipo',
+    'country_id' => 'Nazionalitá',
+    'eye_color' => 'Occhi',
+    'hair_color' => 'Capelli',
+    'height' => 'Altezza',
+    'weight' => 'Peso',
+    'breast_size' => 'Grandezza seno',
+    'intimate' => 'Zone intime',
+    'smoker' => 'Fumatore/trice',
+    'alcohol' => 'Alcool',
 
 
 
     #getContactFields
     'email' => 'Email',
-    'phone' => 'Phone',
-    'mobile' => 'Mobile Phone',
-    'website' => 'Website',
+    'phone' => 'Telefono',
+    'mobile' => 'Cellulare',
+    'website' => 'Sito web',
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
-    'skype_name' => 'Skype Name',
-    'prefered_contact_option' => 'I Prefer',
-    'no_withheld_numbers' => 'Withheld Numbers',
+    'skype_name' => 'Nome Skype',
+    'prefered_contact_option' => 'Preferisco',
+    'no_withheld_numbers' => 'No numeri anonimi',
 
 
     #getWorkplaceFields
     'club_name' => 'Club',
-    'city' => 'City',
-    'address' => 'Address',
-    'incall_type' => 'Incall',
-    'outcall_type' => 'Outcall',
+    'city' => 'Cittá',
+    'address' => 'Indirizzo',
+    'incall_type' => 'Servizio interno',
+    'outcall_type' => 'Servizio esterno',
 
 
 
     #getOrderBy
     'nickname_asc' => 'Nickname',
-    'created_at_desc' => 'Newest',
-    'created_at_asc' => 'Oldest',
-    'service_price_asc' => 'Price Ascending',
-    'service_price_desc' => 'Price Descending',
+    'created_at_desc' => 'Piú recente',
+    'created_at_asc' => 'Piú vecchio',
+    'service_price_asc' => 'Prezzo ascendente',
+    'service_price_desc' => 'Prezzo discendente',
 
 
 
     #getEditProfilePages
-    'bio' => 'Bio',
-    'about_me' => 'About Me',
-    'languages' => 'Languages',
-    'gallery' => 'Gallery',
-    'contact' => 'Contact',
-    'services' => 'Services',
-    'workplace' => 'Workplace',
-    'working_time' => 'Working Time',
-    'prices' => 'Prices',
-    'packages' => 'Packages',
+    'bio' => 'Biografia',
+    'about_me' => 'Su di me',
+    'languages' => 'Lingue',
+    'gallery' => 'Galleria',
+    'contact' => 'Contatti',
+    'services' => 'Servizi',
+    'workplace' => 'Luogo di lavoro',
+    'working_time' => 'Orario di lavoro',
+    'prices' => 'Prezzi',
+    'packages' => 'Pacchetti',
     'banners' => 'Banners',
-    'news_and_events' => 'News/Events',
-    'add_card' => 'Add Card',
-    
+    'news_and_events' => 'News/Eventi',
+    'add_card' => 'Aggiungi carta',
+
 
     #getLoclasOrderBy
-    'username_asc' => 'Username',
+    'username_asc' => 'Nome utente',
 
 
     #getEditLocalProfilePages
-    'club_info' => 'Club Info',
+    'club_info' => 'Informazioni Club',
     'girls' => 'Girls',
 
 
     #getClubInfo
-    'yes_free' => 'Yes (Free)',
-    'yes_with_cost' => 'Yes (With cost)',
+    'yes_free' => 'Si (Gratis)',
+    'yes_with_cost' => 'Si (Costi accessori)',
 
     #
-    'girl' => 'girl',
-    'trans' => 'trans',
-    'local' => 'local',
+    'girl' => 'Girl',
+    'trans' => 'Trans',
+    'local' => 'Locale',
 
+    #add_card
+    'card_on_file' => 'Card on file',
+
+    #working_times
+    'Monday' => 'Lunedí',
+    'Tuesday' => 'Martedí',
+    'Wednesday' => 'Mercoledí',
+    'Thursday' => 'Giovedí',
+    'Friday' => 'Venerdí',
+    'Saturday' => 'Sabato',
+    'Sunday' => 'Domenica',
 ];
