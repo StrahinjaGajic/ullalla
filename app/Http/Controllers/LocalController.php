@@ -119,7 +119,7 @@ class LocalController extends Controller
             $user = Auth::guard('local')->user();
             $user->name = request('name');
             $user->phone = request('phone');
-            $user->web = request('web');
+            $user->website = request('website');
             $user->street = request('street');
             $user->zip = request('zip');
             $user->city = request('city');
