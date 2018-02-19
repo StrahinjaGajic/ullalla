@@ -20,6 +20,8 @@ class FrontAuth
         if (Auth::guard('local')->guest() && Auth::guard('web')->guest()) {
             if ($request->ajax() || $request->wantsJson()) {                
                 return response('Unauthorized.', 401);
+            } elseif (Auth::guard('local')->guest() && Auth::guard('web')->guest()) {
+                return $next($request);
             } else {
                 return redirect()->guest('/signin');
             }
