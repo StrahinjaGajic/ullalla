@@ -27,7 +27,7 @@ class ProfileController extends Controller
     {
         $this->middleware('auth:web,local');
 
-        $this->middleware('has_package', [
+        $this->middleware('has_profile', [
             'only' => [
                 'getCreate',
                 'postCreate'
@@ -44,7 +44,7 @@ class ProfileController extends Controller
                 'deletePrice'
             ]
         ]);
-        $this->middleware('not_has_package', [
+        $this->middleware('has_no_profile', [
             'except' => [
                 'getCreate', 
                 'postCreate', 
@@ -78,32 +78,28 @@ class ProfileController extends Controller
         // get the number of photos
         $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
-//        $this->validate($request, [
-//            'first_name' => 'required',
-//            'last_name' => 'required',
-//            'nickname' => 'required',
-//            'age' => ['required, numeric, new OlderThanRule'],
-//            'height' => 'required|numeric',
-//            'weight' => 'required|numeric',
-//            'sex' => 'required',
-//            'sex_orientation' => 'required',
-//            'intimate' => 'required',
-//            'alcohol' => 'required',
-//            'smoker' => 'required',
-//            'about_me' => 'required',
-//            'photos' => 'numeric|min:4|max:9',
-//            'mobile' => 'required|numeric|max:20',
-//            'phone' => 'required|numeric|max:20',
-//            'email' => 'required|email',
-//            'skype_name' => 'required_with:contact_options.3,on',
-//            'website' => 'url',
-//        ], [
-//            'skype_name.required_with' => __('validation.skype_required'),
-//        ]);
-
-        // define inputs
-        $defaultPackageInput = request('ullalla_package')[0];
-        $monthGirlPackageInput = request('ullalla_package_month_girl');
+       // $this->validate($request, [
+       //     'first_name' => 'required',
+       //     'last_name' => 'required',
+       //     'nickname' => 'required',
+       //     'age' => ['required, numeric, new OlderThanRule'],
+       //     'height' => 'required|numeric',
+       //     'weight' => 'required|numeric',
+       //     'sex' => 'required',
+       //     'sex_orientation' => 'required',
+       //     'intimate' => 'required',
+       //     'alcohol' => 'required',
+       //     'smoker' => 'required',
+       //     'about_me' => 'required',
+       //     'photos' => 'numeric|min:4|max:9',
+       //     'mobile' => 'required|numeric|max:20',
+       //     'phone' => 'required|numeric|max:20',
+       //     'email' => 'required|email',
+       //     'skype_name' => 'required_with:contact_options.3,on',
+       //     'website' => 'url',
+       // ], [
+       //     'skype_name.required_with' => __('validation.skype_required'),
+       // ]);
 
         // get working time
         $workingTime = getWorkingTime(
@@ -116,31 +112,6 @@ class ProfileController extends Controller
             $request->available_24_7_night_escort,
             $request->night_escorts
         );
-
-        // $result = DB::transaction(function () use ($totalAmount, $defaultPackageInput, $monthGirlPackageInput, $workingTime) {
-
-        // get default package obj and activation date input
-        $defaultPackage = Package::findOrFail($defaultPackageInput);
-        $defaultPackageActivationDateInput = request('default_package_activation_date')[$defaultPackage->id];
-        // format default packages dates with carbon
-        $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-        $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-        $defaultPackageExpiryDate = $carbonDate->addDays(daysToAddToExpiry($defaultPackage->id))->format('Y-m-d H:i:s');
-
-        if ($monthGirlPackageInput) {
-            $monthGirlPackage = Package::findOrFail($monthGirlPackageInput[0]);
-            $monthGirlActivationDateInput = request('month_girl_package_activation_date')[$monthGirlPackage->id];
-            // format dates with carbon
-            $carbonDate = Carbon::parse($monthGirlActivationDateInput);
-            $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-            $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
-        }
-
-        // calculate the total amount
-        $totalAmount = (int) filter_var($defaultPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
-        if (isset($monthGirlPackage)) {
-            $totalAmount += (int) filter_var($monthGirlPackage->package_price, FILTER_SANITIZE_NUMBER_INT);
-        }
 
         $incallType = null;
         $outcallType = null;
@@ -163,10 +134,9 @@ class ProfileController extends Controller
             }
         }
 
-        DB::beginTransaction();
-
         try {
             $user = Auth::user();
+            $user->has_profile = 1;
             $user->first_name = request('first_name');
             $user->last_name = request('last_name');
             $user->nickname = request('nickname');
@@ -206,16 +176,6 @@ class ProfileController extends Controller
             $user->incall_type = $incallType;
             $user->outcall_type = $outcallType;
             $user->working_time = $workingTime;
-            $user->package1_id = $defaultPackage->id;
-            $user->is_active_d_package = 1;
-            $user->package1_activation_date = $defaultPackageActivationDate;
-            $user->package1_expiry_date = $defaultPackageExpiryDate;
-            if (isset($monthGirlPackage)) {
-                $user->package2_id = $monthGirlPackage->id;
-                $user->is_active_gotm_package = 1;
-                $user->package2_activation_date = $monthGirlActivationDate;
-                $user->package2_expiry_date = $monthGirlExpiryDate;
-            }
             $user->save();
 
             // define languages input
@@ -234,41 +194,13 @@ class ProfileController extends Controller
             $user->spoken_languages()->sync($syncData);
 
         } catch (\Exception $e) {
-            DB::rollback();
 
             return response()->json([
                 'status' => 'There was a problem creating your profile.'
             ], 422);
         }
 
-        // stripe
-        try {
-            // create a customer
-            $customer = Customer::create([
-                'email' => request('stripeEmail'),
-                'source' => request('stripeToken'),
-            ]);
-            $user->stripe_id = $customer->id;
-            $user->stripe_amount = $totalAmount;
-            $user->stripe_last4_digits = $customer->sources->data[0]->last4;
-            $user->save();
-
-            Charge::create([
-                'customer' => $user->stripe_id,
-                'amount' => $user->stripe_amount,
-                'currency' => 'chf',
-            ]);
-        } catch (\Exception $e) {
-            DB::rollback();
-
-            return response()->json([
-                'status' => $e->getMessage()
-            ], 422);
-        }
-
-        DB::commit();
-
-        Session::flash('account_created', __('messages.account_created'));
+        return redirect('/')->with('account_created', __('messages.account_created'));
     }
 
     public function getBio($private_id)
@@ -595,12 +527,15 @@ class ProfileController extends Controller
 
         $showDefaultPackages = false;
         $showGotmPackages = false;
+        $dayFromWhichDefaultPackagesShouldBeShown = null;
         $dayFromWhichGotmPackagesShouldBeShown = null;
 
         $scheduledDefaultPackage = $user->scheduled_default_package;
         $scheduledGotmPackage = $user->scheduled_gotm_package;
 
-        $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
+        if ($user->package1_id) {
+            $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiry($user->package1_id)[0])->format('Y-m-d');
+        }
         if ($user->package2_id) {
             $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
         }
@@ -758,13 +693,25 @@ class ProfileController extends Controller
 
     public function postNewPrice(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'service_duration' => 'required|numeric',
-            'service_price' => 'required|numeric',
-            'price_type' => 'required',
-            'service_price_unit' => 'required',
-            'service_price_currency' => 'required',
-        ]);
+        $onDemand = $request->on_demand;
+
+        if ($onDemand == 'true') {
+            $validator = Validator::make($request->all(), [
+                'service_duration' => 'required|numeric',
+                'price_type' => 'required',
+                'service_price_unit' => 'required',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'service_duration' => 'required|numeric',
+                'service_price' => 'required|numeric',
+                'service_price_currency' => 'required',
+                'price_type' => 'required',
+                'service_price_unit' => 'required',
+            ]);
+        }
+
+        $onDemand = $onDemand == 'true' ? 1 : NULL;
 
         $user = Auth::user();
 
@@ -775,6 +722,7 @@ class ProfileController extends Controller
                 $price->user_id = $user->id;
                 $price->service_duration = $request->service_duration;
                 $price->service_price = $request->service_price;
+                $price->on_demand = $onDemand;
                 $price->price_type = $request->price_type;
                 $price->service_price_currency = $request->service_price_currency;
                 $price->service_price_unit = $request->service_price_unit;
@@ -786,6 +734,7 @@ class ProfileController extends Controller
                     'newPriceID' => $price->id,
                     'serviceDuration' => $price->service_duration,
                     'servicePrice' => $price->service_price,
+                    'onDemand' => $price->on_demand == 1 ? 'On Demand' : NULL,
                     'priceType' => $price->price_type,
                     'servicePriceUnit' => trans_choice('fields.' . $price->service_price_unit, $price->service_duration),
                     'servicePriceCurrency' => $price->service_price_currency,

@@ -35,13 +35,13 @@ class LocalController extends Controller
                     'postCreate'
                 ]
             ]);
-        $this->middleware('has_package', [
+        $this->middleware('has_profile', [
             'only' => [
                 'getCreate',
                 'postCreate'
             ]
         ]);
-        $this->middleware('not_has_package', [
+        $this->middleware('has_no_profile', [
             'except' => [
                 'getCreate', 
                 'postCreate'
@@ -429,12 +429,16 @@ class LocalController extends Controller
 
         $showDefaultPackages = false;
         $showGotmPackages = false;
+        $dayFromWhichDefaultPackagesShouldBeShown = null;
         $dayFromWhichGotmPackagesShouldBeShown = null;
 
         $scheduledDefaultPackage = $user->scheduled_default_package;
         $scheduledGotmPackage = $user->scheduled_gotm_package;
 
-        $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiryLocal($user->package1_duration)[0])->format('Y-m-d');
+        
+        if ($user->package1_id) {
+            $dayFromWhichDefaultPackagesShouldBeShown = Carbon::parse($user->package1_expiry_date)->subDays(getDaysForExpiryLocal($user->package1_duration)[0])->format('Y-m-d');
+        }
         if ($user->package2_id) {
             $dayFromWhichGotmPackagesShouldBeShown = Carbon::parse($user->package2_expiry_date)->subDays(getDaysForExpiry($user->package2_id)[0])->format('Y-m-d');
         }

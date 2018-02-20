@@ -61,6 +61,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="region">
+								<label for="Nationality">{{ __('fields.nationality') }}</label>
 								<select id="Nationality" name="nationality" class="input-select">
 									<option value="">{{ __('fields.nationality') }}</option>
 									@foreach ($countries as $country)
@@ -71,6 +72,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="col-3 input-effect {{ $errors->has('age') ? 'has-error' : ''  }}">
+								<label>{{ __('fields.age') }}</label>
 								<select name="age" class="input-select">
 									<option value="">{{ __('fields.age') }}</option>
 									@for($age = 18; $age <= 60; $age++)
@@ -100,6 +102,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.sex') }}</label>
 								<select id="sex" name="sex" class="input-select">
 									<option value="">{{ __('fields.sex') }}</option>
 									@foreach (getSexes() as $sex)
@@ -110,6 +113,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.sex_orientation') }}</label>
 								<select id="sex orientation" name="sex_orientation" class="input-select">
 									<option value="">{{ __('fields.sex_orientation') }}</option>
 									@foreach (getSexOrientations() as $sexOrientation)
@@ -120,6 +124,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.type') }}</label>
 								<select id="Type" name="type" class="input-select">
 									<option value="">{{ __('fields.type') }}</option>
 									@foreach (getTypes() as $type)
@@ -134,6 +139,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.figure') }}</label>
 								<select id="Figure" name="figure" class="input-select">
 									<option value="">{{ __('fields.figure') }}</option>
 									@foreach (getFigures() as $figure)
@@ -144,6 +150,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.breast_size') }}</label>
 								<select id="Breast Size" class="input-select" name="breast_size">
 									<option value="">{{ __('fields.breast_size') }}</option>
 									@foreach(getBreastSizes() as $breastSize)
@@ -154,6 +161,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.eye_color') }}</label>
 								<select id="Eye Color" class="input-select" name="eye_color">
 									<option value="">{{ __('fields.eye_color') }}</option>
 									@foreach(getEyeColors() as $eyeColor)
@@ -168,6 +176,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.hair_color') }}</label>
 								<select id="Hair Color" class="input-select" name="hair_color">
 									<option value="">{{ __('fields.hair_color') }}</option>
 									@foreach(getHairColors() as $hairColor)
@@ -178,6 +187,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.tattoos') }}</label>
 								<select id="Tattos" class="input-select" name="tattoos">
 									<option value="">{{ __('fields.tattoos') }}</option>
 									@foreach(array_slice(getAnswers(), 0, 2) as $answer)
@@ -188,6 +198,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.piercings') }}</label>
 								<select id="Piercings" class="input-select" name="piercings">
 									<option value="">{{ __('fields.piercings') }}</option>
 									@foreach(array_slice(getAnswers(), 0, 2) as $answer)
@@ -202,6 +213,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.body_hair') }}</label>
 								<select id="BodyHair" class="input-select" name="body_hair">
 									<option value="">{{ __('fields.body_hair') }}</option>
 									@foreach(getShaveOptions() as $answer)
@@ -212,6 +224,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.intimate') }}</label>
 								<select id="Intimate" class="input-select" name="intimate">
 									<option value="">{{ __('fields.intimate') }}</option>
 									@foreach(getShaveOptions() as $answer)
@@ -222,6 +235,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.smoker') }}</label>
 								<select id="Smoker" class="input-select" name="smoker">
 									<option value="">{{ __('fields.smoker') }}</option>
 									@foreach(getAnswers() as $answer)
@@ -236,6 +250,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="info">
+								<label>{{ __('fields.alcohol') }}</label>
 								<select id="Alcohol" class="input-select" name="alcohol">
 									<option value="">{{ __('fields.alcohol') }}</option>
 									@foreach(getAnswers() as $answer)

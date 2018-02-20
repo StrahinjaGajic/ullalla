@@ -20,7 +20,6 @@
                         <li class="pad-right"><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
                         <li class="pad-left"><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
                         <li><a href="#club-info-tab" data-toggle="tab">{{ __('headings.club_info') }}</a></li>
-                        <li class="pad-right"><a href="#packages-tab" data-toggle="tab">{{ __('headings.packages') }}</a></li>
                     </ul>
                     <div class="tab-content">
                         <section class="tab-pane active" id="contact-tab">
@@ -325,97 +324,6 @@
                             </div>
                         </section>
 
-                        <section class="tab-pane" id="packages-tab">
-                            <div class="col-xs-12">
-                                <div class="form-group club-info">
-                                    <div class="row">
-                                        <div class="col-xs-12 default-packages-section" id="default-packages-section">
-                                            <h3>{{ __('headings.default_packages') }}</h3>
-                                            <div class="has-error">
-                                                <div id="alertPackageMessage" class="help-block"></div>
-                                            </div>
-                                            <div style="overflow-x:auto;">
-                                            <table class="table packages-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>{{ __('headings.name') }}</th>
-                                                        <th>{{ __('headings.duration') }}</th>
-                                                        <th>{{ __('headings.price') }}</th>
-                                                        <th>{{ __('headings.activation_date') }}</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $counter = 1; ?>
-                                                    @foreach ($packages as $package)
-                                                    <tr>
-                                                        @if($package->id == 6)
-                                                        <td colspan="4"><p>More Girls?</p></td>
-                                                        @else
-                                                        <td>{{ $package->name. ' ' }}{{ ($package->id != 1) ? __('functions.girls') : '' }}</td>
-                                                        <td>
-                                                            <select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-                                                                <option value="month">{{ __('tables.month') }}</option>
-                                                                <option value="year">{{ __('tables.year') }}</option>
-                                                            </select>
-                                                        </td>
-                                                        <td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-                                                        <td>
-                                                            <input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-                                                        </td>
-                                                        @endif
-                                                        <td>
-                                                            <label class="control control--checkbox">
-                                                                <input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-                                                                <div class="control__indicator" onclick="{{ ($package->id == 6) ? 'hideLotm()' : 'showLotm()' }}"></div>
-                                                            </label>
-                                                        </td>
-                                                    </tr>
-                                                    <?php $counter++; ?>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="lotm" class="col-xs-12">
-                                <h3 id="gotm-totm">{{ __('headings.lotm') }}</h3>
-                                <div style="overflow-x: auto;">
-                                    <table class="table packages-table package-girl-month">
-                                        <thead>
-                                        <tr>
-                                            <th>{{ __('headings.name') }}</th>
-                                            <th>{{ __('headings.duration') }}</th>
-                                            <th>{{ __('headings.price') }}</th>
-                                            <th>{{ __('headings.activation_date') }}</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($girlPackages->take(3) as $package)
-                                            <tr>
-                                                <td>{{ $package->package_name }}</td>
-                                                <td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-                                                <td>{{ $package->package_price_local }} CHF</td>
-                                                <td>
-                                                    <input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
-                                                </td>
-                                                <td>
-                                                    <label class="control control--checkbox">
-                                                        <input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
-                                                        <div class="control__indicator"></div>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <?php $counter++; ?>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
                         <!-- Previous/Next buttons -->
                         <ul class="pager wizard">
                             <div class="col-xs-12">
@@ -428,8 +336,6 @@
                             </div>
                         </ul>
                     </div>
-                    <input type="hidden" name="stripeToken" id="stripeToken">
-                    <input type="hidden" name="stripeEmail" id="stripeEmail">
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -692,83 +598,6 @@
             document.getElementById('entrance-free').checked = false;
             document.getElementById('entrance-cost').checked = false;
         }
-    </script>
-
-    <script src="https://checkout.stripe.com/checkout.js"></script>
-    <script>
-        let stripe = StripeCheckout.configure({
-            key: '{{ config('services.stripe.key') }}',
-            image: '{{ asset('img/logo.png') }}',
-            locale: 'auto',
-            token: function (token) {
-                var stripeEmail = $('#stripeEmail');
-                var stripeToken = $('#stripeToken');
-                stripeEmail.val(token.email);
-                stripeToken.val(token.id);
-                // submit the form
-                var username = '{{ $local->username }}';
-                var url = getUrl('/locals/@' + username + '/store');
-                var token = $('input[name="_token"]').val();
-                var form = $('#profileForm');
-                var data = form.serialize();
-
-                // add loading class
-                $('#create_profile_modal').modal('hide');
-                $('#loading').removeClass('is-hidden');
-                $('.help-block').text('');
-
-                // fire ajax post request
-                $.post(url, data)
-                .done(function (data) {
-                    $('#loading').addClass('is-hidden');
-                    window.location.href = getUrl();
-                })
-                .fail(function(data, textStatus) {
-                    $('#loading').addClass('is-hidden');
-                    $('#create_profile_modal').modal('show');
-                    $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                });
-            }
-        });
-        $('#profileForm').on('submit', function (e) {
-            var packageId = document.querySelector('input[name="ullalla_package[]"]:checked').value;
-            if(packageId != 6) {
-                stripe.open({
-                    name: 'Ullallà',
-                    description: '{{ $local->email }}',
-                });
-                e.preventDefault();
-            } else {
-                var username = '{{ $local->username }}';
-                var url = getUrl('/locals/@' + username + '/store');
-                var token = $('input[name="_token"]').val();
-                var form = $('#profileForm');
-                var data = form.serialize();
-
-                // add loading class
-                $('#create_profile_modal').modal('hide');
-                $('#loading').removeClass('is-hidden');
-                $('.help-block').text('');
-
-                // fire ajax post request
-                $.post(url, data)
-                .done(function (data) {
-                    $('#loading').addClass('is-hidden');
-                    window.location.href = getUrl();
-                })
-                .fail(function(data, textStatus) {
-                    $('#loading').addClass('is-hidden');
-                    $('#create_profile_modal').modal('show');
-                    $('.default-packages-section').find('.help-block').text(data.responseJSON.status);
-                });
-            }
-        });
-
-        $('#profileForm').keypress( function(e) {
-            if (e.which == '13') {
-                e.preventDefault();
-            }
-        });
     </script>
 
     <script>

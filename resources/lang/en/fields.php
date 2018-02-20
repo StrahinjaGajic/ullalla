@@ -36,7 +36,8 @@ return [
 
 	# prices
 	'unit' => 'Unit',
-	'currency' => 'Currency',
+    'currency' => 'Currency',
+	'on_demand' => 'On Demand',
 
 	# working time
 	'available_24_7' => 'Available 24/7',

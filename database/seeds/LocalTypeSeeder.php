@@ -13,27 +13,27 @@ class LocalTypeSeeder extends Seeder
     public function run()
     {
         $type = new LocalType;
-        $type->name_de = 'Tip 1';
+        $type->name_de = 'Cabaret';
         $type->save();
 
         $type = new LocalType;
-        $type->name_de = 'Tip 2';
+        $type->name_de = 'Kontaktbar';
         $type->save();
 
         $type = new LocalType;
-        $type->name_de = 'Tip 3';
+        $type->name_de = 'Saunaclub';
         $type->save();
 
         $type = new LocalType;
-        $type->name_de = 'Tip 4';
+        $type->name_de = 'Studio';
         $type->save();
 
         $type = new LocalType;
-        $type->name_de = 'Tip 5';
+        $type->name_de = 'Escort Agency';
         $type->save();
 
         $type = new LocalType;
-        $type->name_de = 'Tip 6';
+        $type->name_de = 'Swingerclub';
         $type->save();
     }
 }

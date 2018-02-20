@@ -67,6 +67,7 @@ Route::get('get_local_radius', 'LocalProfileController@getLocalRadius');
 Route::group(['middleware' => 'forbid.locals'], function() {
 	Route::get('private/{private_id}/create', 'ProfileController@getCreate');
 	Route::put('private/{private_id}/store', 'ProfileController@postCreate');
+	
 	Route::post('ajax/add_new_price', 'ProfileController@postNewPrice');
 	Route::get('ajax/delete_price/{price_id}', 'ProfileController@deletePrice');
 

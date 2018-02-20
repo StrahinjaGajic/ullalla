@@ -34,34 +34,34 @@
 			</div>
 
 			@if($user->is_active_d_package || $user->is_active_gotm_package)
-			<div class="col-xs-12">
-				<h3>{{ __('headings.active_packages') }}</h3>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>{{ __('fields.type') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th>{{ __('headings.expiry_date') }}</th>
-						</tr>
-					</thead>	
-					<tbody>
-						@if($user->is_active_d_package)
+				<div class="col-xs-12">
+					<h3>{{ __('headings.active_packages') }}</h3>
+					<table class="table">
+						<thead>
 							<tr>
-								<td>{{ __('headings.default_package') }}</td>
-								<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
-								<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
+								<th>{{ __('fields.type') }}</th>
+								<th>{{ __('headings.activation_date') }}</th>
+								<th>{{ __('headings.expiry_date') }}</th>
 							</tr>
-						@endif
-						@if($user->is_active_gotm_package)
-							<tr>
-								<td>{{ __('headings.lotm_package') }}</td>
-								<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
-								<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
-							</tr>
-						@endif
-					</tbody>
-				</table>
-			</div>
+						</thead>	
+						<tbody>
+							@if($user->is_active_d_package)
+								<tr>
+									<td>{{ __('headings.default_package') }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package1_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package1_expiry_date)) }}</td>
+								</tr>
+							@endif
+							@if($user->is_active_gotm_package)
+								<tr>
+									<td>{{ __('headings.lotm_package') }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package2_activation_date)) }}</td>
+									<td>{{ date('d-m-Y', strtotime($user->package2_expiry_date)) }}</td>
+								</tr>
+							@endif
+						</tbody>
+					</table>
+				</div>
 			@endif
 
 			@if($scheduledDefaultPackage || $scheduledGotmPackage)
@@ -106,90 +106,90 @@
 			@endif
 
 			@if($showDefaultPackages || $showGotmPackages)
-			{!! Form::model($user, ['url' => 'locals/@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
-			@if($showDefaultPackages)
-			<div class="col-xs-12 default-packages-section" id="default-packages-section">
-				<h3>{{ __('headings.default_packages') }}</h3>
-				<table class="table packages-table">
-					<thead>
-						<tr>
-							<th>{{ __('headings.name') }}</th>
-							<th>{{ __('headings.duration') }}</th>
-							<th>{{ __('headings.price') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					@foreach ($packages as $package)
-						<tr>
-							@if($package->id == 6)
-								<td colspan="4"><p>More Girls?</p></td>
-							@else
-								<td>{{ $package->name }}</td>
-								<td>
-									<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
-										<option value="month">{{ __('tables.month') }}</option>
-										<option value="year">{{ __('tables.year') }}</option>
-									</select>
-								</td>
-								<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-								<td>
-									<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation">
-								</td>
-							@endif
-							<td>
-								<label class="control control--checkbox">
-									<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-									<div class="control__indicator" onclick="{{ ($package->id == 6) ? 'hideLotm()' : 'showLotm()' }}"></div>
-								</label>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-			@endif
-			@if($showGotmPackages)
-				<div id="lotm" class="col-xs-12">
-					<h3>{{ __('headings.lotm_package') }}</h3>
-					<table class="table packages-table package-girl-month">
-						<thead>
-						<tr>
-							<th>{{ __('headings.name') }}</th>
-							<th>{{ __('headings.duration') }}</th>
-							<th>{{ __('headings.price') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th></th>
-						</tr>
-						</thead>
-						<tbody>
-						@foreach ($girlPackages->take(3) as $package)
-							<tr>
-								<td>{{ $package->package_name }}</td>
-								<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-								<td>{{ $package->package_price_local }} CHF</td>
-								<td>
-									<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
-								</td>
-								<td>
-									<label class="control control--checkbox">
-										<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
-										<div class="control__indicator"></div>
-									</label>
-								</td>
-							</tr>
-							<?php $counter++; ?>
-						@endforeach
-						</tbody>
-					</table>
-				</div>
-			@endif
-			<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				{!! Form::model($user, ['url' => 'locals/@' . $user->username . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+				@if($showDefaultPackages)
+					<div class="col-xs-12 default-packages-section" id="default-packages-section">
+						<h3>{{ __('headings.default_packages') }}</h3>
+						<table class="table packages-table">
+							<thead>
+								<tr>
+									<th>{{ __('headings.name') }}</th>
+									<th>{{ __('headings.duration') }}</th>
+									<th>{{ __('headings.price') }}</th>
+									<th>{{ __('headings.activation_date') }}</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+							@foreach ($packages as $package)
+								<tr>
+									@if($package->id == 6)
+										<td colspan="4"><p>More Girls?</p></td>
+									@else
+										<td>{{ $package->name }}</td>
+										<td>
+											<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+												<option value="month">{{ __('tables.month') }}</option>
+												<option value="year">{{ __('tables.year') }}</option>
+											</select>
+										</td>
+										<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
+										<td>
+											<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation">
+										</td>
+									@endif
+									<td>
+										<label class="control control--checkbox">
+											<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+											<div class="control__indicator" onclick="{{ ($package->id == 6) ? 'hideLotm()' : 'showLotm()' }}"></div>
+										</label>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				@endif
 
-			<input type="hidden" name="stripeToken" id="stripeToken">
-			<input type="hidden" name="stripeEmail" id="stripeEmail">
-			{!! Form::close() !!}
+				@if($showGotmPackages)
+					<div id="lotm" class="col-xs-12">
+						<h3>{{ __('headings.lotm_package') }}</h3>
+						<table class="table packages-table package-girl-month">
+							<thead>
+							<tr>
+								<th>{{ __('headings.name') }}</th>
+								<th>{{ __('headings.duration') }}</th>
+								<th>{{ __('headings.price') }}</th>
+								<th>{{ __('headings.activation_date') }}</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							@foreach ($girlPackages->take(3) as $package)
+								<tr>
+									<td>{{ $package->package_name }}</td>
+									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td>{{ $package->package_price_local }} CHF</td>
+									<td>
+										<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+									</td>
+									<td>
+										<label class="control control--checkbox">
+											<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+											<div class="control__indicator"></div>
+										</label>
+									</td>
+								</tr>
+								<?php $counter++; ?>
+							@endforeach
+							</tbody>
+						</table>
+					</div>
+				@endif
+				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				<input type="hidden" name="stripeToken" id="stripeToken">
+				<input type="hidden" name="stripeEmail" id="stripeEmail">
+				{!! Form::close() !!}
 			@endif
 		</div>
 	</div>
@@ -237,11 +237,12 @@
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
 
-	var defaultPackageStartDate = JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}');
-	defaultPackageStartDate = new Date(defaultPackageStartDate[0]);
-	defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
-
+	var package1ExpiryDate = '{{ $user->package1_expiry_date }}';
 	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
+
+	var defaultPackageStartDate = package1ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}') : start;
+	var defaultPackageStartDate = package1ExpiryDate != '' ? new Date(defaultPackageStartDate[0]) : defaultPackageStartDate;
+	var defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
 
 	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}') : start;
 	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0]) : gotmPackageStartDate;

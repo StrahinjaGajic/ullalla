@@ -50,4 +50,9 @@ class CardController extends Controller
             $error = $err['message'];
         }
     }
+    public function deleteCard()
+    {
+        // $customer = \Stripe\Customer::retrieve($user->id);
+        // $customer->sources->retrieve("card_1BxccWFoGzjFZMfwvjaHeo6N")->delete();
+    }
 }

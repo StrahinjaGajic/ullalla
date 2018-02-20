@@ -26,7 +26,7 @@
 					<div class="alert alert-success">{{ Session::get('success_gotm_package_updated') }}</div>
 				@endif
 				
-				<ul class=" {{ $errors->has('stripe_error') || $errors->has('ullalla_package') || $errors->has('ullalla_package_month_girl') ? 'alert alert-danger' : '' }}">
+				<ul class="packages-errors {{ $errors->has('stripe_error') || $errors->has('ullalla_package') || $errors->has('ullalla_package_month_girl') ? 'alert alert-danger' : '' }}">
 					@if ($errors->has('stripe_error') || $errors->has('ullalla_package') || $errors->has('ullalla_package_month_girl'))
                     	<li>{{ $errors->first() }}</li>
                 	@endif
@@ -110,92 +110,92 @@
 			@endif
 
 			@if($showDefaultPackages || $showGotmPackages)
-			{!! Form::model($user, ['url' => 'private/' . $user->id . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
+				{!! Form::model($user, ['url' => 'private/' . $user->id . '/packages/store', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 
-			@if($showDefaultPackages)
-				<div class="col-xs-12 default-packages-section" id="default-packages-section">
-					<h3>{{ __('headings.default_packages') }}</h3>
-					<table class="table packages-table">
-						<thead>
-							<tr>
-								<th>{{ __('headings.name') }}</th>
-								<th>{{ __('headings.duration') }}</th>
-								<th>{{ __('headings.price') }}</th>
-								<th>{{ __('headings.activation_date') }}</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($packages as $package)
-							<tr>
-								<td>{{ $package->package_name }}</td>
-								<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-								<td>{{ $package->package_price }} CHF</td>
-								<td>
-									<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
-								</td>
-								<td>
-									<label class="control control--checkbox">
-										<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
-										<div class="control__indicator"></div>
-									</label>
-								</td>
-							</tr>
-							<?php $counter++; ?>
-							@endforeach
-						</tbody>
-					</table>
-					@if(!$showGotmPackages)
-						<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
-					@endif
-				</div>
-			@endif
-
-			@if($showGotmPackages)
-			<div class="col-xs-12">
-				@if($user->sex == 'transsexual')
-					<h3>{{ __('headings.totm_package') }}</h3>
-				@else
-					<h3>{{ __('headings.gotm_package') }}</h3>
+				@if($showDefaultPackages)
+					<div class="col-xs-12 default-packages-section" id="default-packages-section">
+						<h3>{{ __('headings.default_packages') }}</h3>
+						<table class="table packages-table">
+							<thead>
+								<tr>
+									<th>{{ __('headings.name') }}</th>
+									<th>{{ __('headings.duration') }}</th>
+									<th>{{ __('headings.price') }}</th>
+									<th>{{ __('headings.activation_date') }}</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($packages as $package)
+								<tr>
+									<td>{{ $package->package_name }}</td>
+									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td>{{ $package->package_price }} CHF</td>
+									<td>
+										<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
+									</td>
+									<td>
+										<label class="control control--checkbox">
+											<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
+											<div class="control__indicator"></div>
+										</label>
+									</td>
+								</tr>
+								<?php $counter++; ?>
+								@endforeach
+							</tbody>
+						</table>
+						@if(!$showGotmPackages)
+							<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+						@endif
+					</div>
 				@endif
-				<table class="table packages-table package-girl-month">
-					<thead>
-						<tr>
-							<th>{{ __('headings.name') }}</th>
-							<th>{{ __('headings.duration') }}</th>
-							<th>{{ __('headings.price') }}</th>
-							<th>{{ __('headings.activation_date') }}</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($packages->take(3) as $package)
-						<tr>
-							<td>{{ $package->package_name }}</td>
-							<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-							<td>{{ $package->package_price }} CHF</td>
-							<td>
-								<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
-							</td>
-							<td>
-								<label class="control control--checkbox">
-									<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
-									<div class="control__indicator"></div>
-								</label>
-							</td>
-						</tr>
-						<?php $counter++; ?>
-						@endforeach
-					</tbody>
-				</table>
-				<div class="save">
-					<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
-				</div>
-			</div>
-			@endif
-			<input type="hidden" name="stripeToken" id="stripeToken">
-			<input type="hidden" name="stripeEmail" id="stripeEmail">
-			{!! Form::close() !!}
+
+				@if($showGotmPackages)
+					<div class="col-xs-12">
+						@if($user->sex == 'transsexual')
+							<h3>{{ __('headings.totm_package') }}</h3>
+						@else
+							<h3>{{ __('headings.gotm_package') }}</h3>
+						@endif
+						<table class="table packages-table package-girl-month">
+							<thead>
+								<tr>
+									<th>{{ __('headings.name') }}</th>
+									<th>{{ __('headings.duration') }}</th>
+									<th>{{ __('headings.price') }}</th>
+									<th>{{ __('headings.activation_date') }}</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($packages->take(3) as $package)
+								<tr>
+									<td>{{ $package->package_name }}</td>
+									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td>{{ $package->package_price }} CHF</td>
+									<td>
+										<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
+									</td>
+									<td>
+										<label class="control control--checkbox">
+											<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
+											<div class="control__indicator"></div>
+										</label>
+									</td>
+								</tr>
+								<?php $counter++; ?>
+								@endforeach
+							</tbody>
+						</table>
+						<div class="save">
+							<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+						</div>
+					</div>
+				@endif
+				<input type="hidden" name="stripeToken" id="stripeToken">
+				<input type="hidden" name="stripeEmail" id="stripeEmail">
+				{!! Form::close() !!}
 			@endif
 		</div>
 	</div>
@@ -231,18 +231,16 @@
 	var end = new Date();
 	end.setFullYear(end.getFullYear() + 1);
 
+	var package1ExpiryDate = '{{ $user->package1_expiry_date }}';
 	var package2ExpiryDate = '{{ $user->package2_expiry_date }}';
 
-	var defaultPackageStartDate = JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}');
-	var defaultPackageStartDate = new Date(defaultPackageStartDate[0].date);
+	var defaultPackageStartDate = package1ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package1_expiry_date]) !!}') : start;
+	var defaultPackageStartDate = package1ExpiryDate != '' ? new Date(defaultPackageStartDate[0].date) : defaultPackageStartDate;
 	var defaultPackageStartDate = new Date() > defaultPackageStartDate ? new Date() : defaultPackageStartDate;
-	
+
 	var gotmPackageStartDate = package2ExpiryDate != '' ? JSON.parse('{!! json_encode([$user->package2_expiry_date]) !!}') : start;
 	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : gotmPackageStartDate;
 	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
-
-	console.log(defaultPackageStartDate);
-	
 
 	$(function () {
 		$('.package_month_girl_activation').each(function () {

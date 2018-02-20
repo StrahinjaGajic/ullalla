@@ -16,8 +16,11 @@
 <!-- Main -->
 <script src="/js/main.js"></script>
 <script>
-    $("[type='submit']").on("click", function (e) {
-        $(this).attr("disabled", true);
-        $(this).closest("form").submit()
-    });
+	$('body').on('contextmenu', 'img', function(e) {
+	 	return false; 
+	});
+    // $("[type='submit']").on("click", function (e) {
+    //     $(this).attr("disabled", true);
+    //     $(this).closest("form").submit();
+    // });
 </script>
