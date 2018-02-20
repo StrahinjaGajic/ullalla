@@ -13,7 +13,7 @@
 			{!! parseEditProfileMenu('workplace') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
-			{!! Form::model($user, ['url' => 'private/' . $user->id . 'workplace/store', 'method' => 'put']) !!}
+			{!! Form::model($user, ['url' => 'private/' . $user->id . '/workplace/store', 'method' => 'put']) !!}
 			<h3>{{ __('headings.workplace') }}</h3>
 			@if(Session::has('success'))
 			<div class="alert alert-success">{{ Session::get('success') }}</div>
