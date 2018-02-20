@@ -82,7 +82,7 @@ class ProfileController extends Controller
 //            'first_name' => 'required',
 //            'last_name' => 'required',
 //            'nickname' => 'required',
-//            'age' => 'required|numeric|older_than:18',
+//            'age' => ['required, numeric, new OlderThanRule'],
 //            'height' => 'required|numeric',
 //            'weight' => 'required|numeric',
 //            'sex' => 'required',
@@ -642,10 +642,12 @@ class ProfileController extends Controller
             // validate
             $validator = Validator::make($request->all(), [
                 'ullalla_package_month_girl' => 'required'
+            ], [
+                __('validation.gotm_package_required')
             ]);
             // check if validator passed or not
             if ($validator->passes()) {
-                // insert default package
+                // insert gotm package
                 $gotmPackageData = User::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
                 if ($gotmPackageData['scheduled'] === true) {
                     // only default package scheduled
@@ -666,6 +668,8 @@ class ProfileController extends Controller
             // validate
             $validator = Validator::make($request->all(), [
                 'ullalla_package' => 'required'
+            ], [
+                __('validation.default_package_required')
             ]);
 
             if ($validator->passes()) {
@@ -704,7 +708,11 @@ class ProfileController extends Controller
         }
 
         try {
-            $customer = Customer::retrieve($user->stripe_id);
+            $customer = null;
+
+            if ($user->stripe_last4_digits) {
+                $customer = Customer::retrieve($user->stripe_id);
+            }
 
             if (!$customer) {
                 $customer = Customer::create([
@@ -743,7 +751,9 @@ class ProfileController extends Controller
             Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
         }
 
-        return redirect()->back();
+        if (!$request->ajax()) {
+            return redirect()->back();
+        }
     }
 
     public function postNewPrice(Request $request)

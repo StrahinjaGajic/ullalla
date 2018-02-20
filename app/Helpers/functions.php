@@ -252,13 +252,15 @@ function parseSingleContactData($fields, $user) {
     foreach ($fields as $key => $field) {
         $value = $user->$key;
         if ($value) {
-            if (is_array($field) && $value->count()) {
-                $keyInsideOfArray = key($field);
-                $html .= '<tr>
-                <td>' . $keyInsideOfArray . ':</td>
-                <td>';
-                $html .= getDataAndCutLastCharacter($value, $field[$keyInsideOfArray]);
-                $html .= '</td></tr>';
+            if (is_array($field)) {
+                if ($value->count()) {
+                    $keyInsideOfArray = key($field);
+                    $html .= '<tr>
+                    <td>' . $keyInsideOfArray . ':</td>
+                    <td>';
+                    $html .= getDataAndCutLastCharacter($value, $field[$keyInsideOfArray]);
+                    $html .= '</td></tr>';
+                }
             } else {
                 $html .= '<tr>
                 <td>' . $field . ':</td>

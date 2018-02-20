@@ -96,6 +96,8 @@ return [
     'max_files' => 'You must select at least 4 files',
     'required_field' => 'This field is required',
     'default_package_required' => 'Basic package is required',
+    'gotm_package_required' => 'Girl of the Month package is required',
+    'lotm_package_required' => 'Local of the Month package is required',
     'url_invalid' => 'URL is not valid',
     'numeric_error' => 'This field must be numeric',
     'string_length' => 'This field must not exceed 200 characters',

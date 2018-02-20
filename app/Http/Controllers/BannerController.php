@@ -109,7 +109,11 @@ class BannerController extends Controller
             $user->banners()->save($banner);
 
             try {
-                $customer = Customer::retrieve($user->stripe_id);
+                $customer = null;
+            
+                if ($user->stripe_last4_digits) {
+                    $customer = Customer::retrieve($user->stripe_id);
+                }
 
                 if (!$customer) {
                     $customer = Customer::create([

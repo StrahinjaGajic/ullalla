@@ -26,7 +26,11 @@
 					<div class="alert alert-success">{{ Session::get('success_gotm_package_updated') }}</div>
 				@endif
 				
-				<div class="packages-errors"></div>
+				<ul class=" {{ $errors->has('stripe_error') || $errors->has('ullalla_package') || $errors->has('ullalla_package_month_girl') ? 'alert alert-danger' : '' }}">
+					@if ($errors->has('stripe_error') || $errors->has('ullalla_package') || $errors->has('ullalla_package_month_girl'))
+                    	<li>{{ $errors->first() }}</li>
+                	@endif
+				</ul>
 			</div>
 
 			@if($user->is_active_d_package || $user->is_active_gotm_package)
@@ -111,17 +115,6 @@
 			@if($showDefaultPackages)
 				<div class="col-xs-12 default-packages-section" id="default-packages-section">
 					<h3>{{ __('headings.default_packages') }}</h3>
-					<div class="has-error">
-						<div id="alertPackageMessage" class="help-block">
-							@if($errors->has('stripe_error'))
-                    			{{ $errors->first() }}
-                			@endif
-            			</div>
-					</div>
-					@if($errors->has('ullalla_package'))
-						<p class="has-error">{{ __('validation.default_package_required') }}</p>
-					@endif
-					
 					<table class="table packages-table">
 						<thead>
 							<tr>
@@ -248,6 +241,9 @@
 	var gotmPackageStartDate = package2ExpiryDate != '' ? new Date(gotmPackageStartDate[0].date) : gotmPackageStartDate;
 	var gotmPackageStartDate = new Date() > gotmPackageStartDate ? new Date() : gotmPackageStartDate;
 
+	console.log(defaultPackageStartDate);
+	
+
 	$(function () {
 		$('.package_month_girl_activation').each(function () {
 			$(this).daterangepicker({
@@ -305,18 +301,27 @@
 			var data = form.serialize();
 
 			// add loading class
+			var packagesErrorEl = $('ul.packages-errors');
+			packagesErrorEl.text('');
             $('#loading').removeClass('is-hidden');
             
 			// fire ajax post request
 			$.post(url, data)
 			.done(function (response, textStatus) {
 				var errors = response.errors;
+                
+                $('#loading').addClass('is-hidden');
+                packagesErrorEl.removeClass('alert alert-danger');
+
 				if (errors) {
+					$('html, body').animate({
+	                    scrollTop: (packagesErrorEl.offset().top - 30)
+	                }, 1500);
 				    //proveriti da li je greska u navodnicima !!!
-				    if (typeof errors.default_package_error !== 'undefined') {
-				    	$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
-				    } else if (typeof errors.month_girl_package_error !== 'undefined') {
-				    	$('div.packages-errors').addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
+				    if (typeof errors.ullalla_package !== 'undefined') {
+				    	packagesErrorEl.addClass('alert alert-danger').text('{{ __('validation.default_package_required') }}');
+				    } else if (typeof errors.ullalla_package_month_girl !== 'undefined') {
+				    	packagesErrorEl.addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 				    } else {
 				    	window.location.href = getUrl('/private/' + currentUser + '/packages');
 				    }
@@ -324,15 +329,20 @@
 					window.location.href = getUrl('/private/' + currentUser + '/packages');
 				}
 			})
+
 			.fail(function(data, textStatus) {
-				$('.default-packages-section').find('.help-block').text(data.responseJSON.status);
+				$('#loading').addClass('is-hidden');
+            	packagesErrorEl.addClass('alert alert-danger');
+
+            	$('html, body').animate({
+                    scrollTop: (packagesErrorEl.offset().top - 30)
+                }, 1500);
+
+				packagesErrorEl.addClass('alert alert-danger').text(data.responseJSON.status);
 			});
 		}
 	});
-	@if(!$user->stripe_last4_digits && 
-		(Carbon\Carbon::now() > Carbon\Carbon::parse($user->package1_expiry_date) || 
-			Carbon\Carbon::now() > Carbon\Carbon::parse($user->package2_expiry_date)
-		))
+	@if(!$user->stripe_last4_digits && (!$user->is_active_d_package || !$user->is_active_gotm_package))
 		$('#profileForm').on('submit', function (e) {
 			stripe.open({
 				name: 'Ullallà',
