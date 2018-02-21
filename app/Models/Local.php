@@ -148,6 +148,11 @@ class Local extends Authenticatable
         return $query;
     }
 
+    public function visitors()
+    {
+        return $this->belongsToMany('App\Models\VisitorDate', 'visitor_date_user')->withPivot('visitors', 'active');
+    }
+
     public static function insertGotmPackage($request, $user, $activationDateInput, $totalAmount, $gotm = false)
     {
         $packageInput = $request->ullalla_package_month_girl[0];

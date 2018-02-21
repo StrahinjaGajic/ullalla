@@ -106,28 +106,28 @@ return [
     ],
 
 
-    'skype_required' => 'Skype name is required',
-    'choose_package' => 'Please, choose the package',
-    'mobile_required_with_sms_checked' => 'This field is required when sms notifications are turned on',
+    'skype_required' => 'Nome Skype richiesto',
+    'choose_package' => 'Prego, seleziona un pacchetto',
+    'mobile_required_with_sms_checked' => 'Campo richiesto, se le notifiche sms sono attivate.',
 
     /* Javascript Validation */
-    'max_files' => 'You must select at least 4 files',
-    'required_field' => 'This field is required',
-    'default_package_required' => 'Basic package is required',
-    'url_invalid' => 'URL is not valid',
-    'numeric_error' => 'This field must be numeric',
-    'string_length' => 'This field must not exceed 200 characters',
-    'older_than_18' => 'You must be at least 18 years old',
-    'alpha_numerical' => 'The first name can only contain alphabetical characters',
-    'max_str_length' => 'This field must not exceed :max characters',
+    'max_files' => 'Devi selezionare almeno 4 file',
+    'required_field' => 'Questo campo č richiesto',
+    'default_package_required' => 'Il pacchetto base č richiesto',
+    'url_invalid' => 'URL non valida',
+    'numeric_error' => 'Questo campo deve essere numerico',
+    'string_length' => 'Questo campo non deve superare i 200 caratteri',
+    'older_than_18' => 'Devi aver compiuto almeno 18 anni di etŕ',
+    'alpha_numerical' => 'Il nome deve contenere solo lettere',
+    'max_str_length' => 'Questo campo non deve superare :max caratteri',
 
     /* Upload care validation */
-    'file_too_large' => 'File is too large',
-    'file_too_large_title' => 'Maximum size error',
-    'file_type' => 'Incorrect file type',
-    'file_type_title' => 'File Type Error.',
-    'min_photo_dimensions' => 'Minimum dimension of a photo should be 490x560',
-    'min_dimensions_title' => 'Minimum dimensions error',
+    'file_too_large' => 'File troppo grande',
+    'file_too_large_title' => 'Errore: grandezza massima raggiunta',
+    'file_type' => 'Tipo dato non corretto',
+    'file_type_title' => 'Errore: tipo di file errato.',
+    'min_photo_dimensions' => 'La dimensione minima della foto deve essere almeno 490x560',
+    'min_dimensions_title' => 'Errore: dimensione minima raggiunta',
 
     /*
     |--------------------------------------------------------------------------

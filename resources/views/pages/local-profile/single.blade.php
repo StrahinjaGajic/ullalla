@@ -97,6 +97,9 @@
                             @if($local->videos)
                             <li><a href="#girl-video" data-toggle="tab">{{ __('buttons.video') }}</a></li>
                             @endif
+                            @if(isset($chart_year) || isset($chart_month))
+                            <li><a href="#statistics" data-toggle="tab">{{ __('functions.statistics') }}</a></li>
+                            @endif
                         </ul>
                         <div class="tab-content">
                             @if ($local->about_me)
@@ -163,9 +166,29 @@
                             <div class="tab-pane" id="girl-video">
                                 <video poster="/path/to/poster.jpg" width="500px" controls>
                                     <source src="{{ $local->videos }}" type="video/mp4">
-                                    </video>
-                                </div>
+                                </video>
                             </div>
+                            @if(isset($chart_year) || isset($chart_month))
+                                <div class="tab-pane" id="statistics">
+                                    <a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+                                    <a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+                                    <div class="app" id="year" style="display: none;">
+                                        <center>
+                                            {!! $chart_year->html() !!}
+                                        </center>
+                                    </div>
+
+                                    <div class="app" id="month">
+                                        <center>
+                                            {!! $chart_month->html() !!}
+                                        </center>
+                                    </div>
+
+                                    {!! Charts::scripts() !!}
+                                    {!! $chart_month->script() !!}
+                                    {!! $chart_year->script() !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -291,5 +314,22 @@ span.onclick = function() {
     $('.modal').click(function(e) {
     if($(e.target).is('.modal'))  $(this).fadeOut(175);
 });
+</script>
+
+
+<script>
+    $(window).on("load", function () {
+        $(".highcharts-axis-title").remove();
+    });
+
+    function changeToYear(){
+        document.getElementById('year').style.display = "block";
+        document.getElementById('month').style.display = "none";
+    }
+
+    function changeToMonth(){
+        document.getElementById('year').style.display = "none";
+        document.getElementById('month').style.display = "block";
+    }
 </script>
 @stop

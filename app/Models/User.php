@@ -274,6 +274,11 @@ class User extends Authenticatable
         return $query;
     }
 
+    public function visitors()
+    {
+        return $this->belongsToMany('App\Models\VisitorDate', 'visitor_date_user')->withPivot('visitors', 'active');
+    }
+
     public static function insertPackage($request, $user, $activationDateInput, $totalAmount, $gotm = false)
     {
         if ($gotm) {

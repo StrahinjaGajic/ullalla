@@ -53,6 +53,7 @@ class CreateLocalsTable extends Migration
             $table->string('scheduled_default_package')->nullable();
             $table->string('stripe_id')->nullable();
             $table->string('stripe_amount')->nullable();
+            $table->string('year_visitors');
             $table->rememberToken();
             $table->timestamps();
 

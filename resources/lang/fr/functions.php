@@ -197,4 +197,8 @@ return [
     'trans' => 'trans',
     'local' => 'local',
 
+    #statistics
+    'statistics' => 'Statistics',
+    'visitors' => 'Visitors'
+
 ];

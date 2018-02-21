@@ -71,17 +71,17 @@ return [
 	'events_entry' => 'Crea un evento',
 
 	#add card
-	'add_card' => 'Add Card',
-	'update_card' => 'Update Card',
+	'add_card' => 'Aggiungi carta',
+	'update_card' => 'Aggiorna carta',
 
 	#banners
-	'add_banner' => 'Add Banner',
+	'add_banner' => 'Aggiungi banner',
 
 	#local add girls
-	'add_girl' => 'Add Girl',
+	'add_girl' => 'Aggiungi ragazza',
 
 	#create-profile
-	'next' => 'Next',
-	'finish' => 'Finish',
-	'previous' => 'Previous',
+	'next' => 'Avanti',
+	'finish' => 'Fine',
+	'previous' => 'Indietro',
 ];
