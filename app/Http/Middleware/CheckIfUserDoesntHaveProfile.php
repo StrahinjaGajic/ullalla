@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckIfHasPackage
+class CheckIfUserDoesntHaveProfile
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class CheckIfHasPackage
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->package1_id) {
+        if (auth()->user()->has_profile == 0) {
             return redirect()->action('HomeController@getIndex');
         }
 

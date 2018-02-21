@@ -68,7 +68,7 @@ class AuthController extends Controller
 		$userActivation = DB::table('user_activations')->where('token', $token)->first();
 
 		//send an email with the activation token used from user_activations table
-		Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
+		// Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
 
 		return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.success_check_activation_link'));
 
@@ -93,7 +93,7 @@ class AuthController extends Controller
 			}
 
 			// user can sign in
-			if ($user->package1_id) {
+			if ($user->has_profile == 1) {
 
 				$firstDateForGotmPackageExpiryNotification = null;
 
@@ -150,7 +150,7 @@ class AuthController extends Controller
 			// 	Auth::guard('local')->logout();
 			// 	return redirect()->back()->with('error', __('messages.error_wait_admin'));
 			// }
-			if ($local->package1_id) {
+			if ($local->has_profile == 1) {
 
 				// get expiry dates from db
 				$package1ExpiryDateCarbonParsed = Carbon::parse($local->package1_expiry_date);

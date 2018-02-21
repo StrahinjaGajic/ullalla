@@ -379,7 +379,7 @@
             });
         }
     });
-    @if(!$user->stripe_id)
+    @if(!$user->stripe_last4_digits)
         $('#bannerForm').on('submit', function (e) {
             stripe.open({
                 name: 'Ullallà',

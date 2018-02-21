@@ -25,6 +25,11 @@ return [
     'email_expired_package' => 'Your Default Package has expired. In order to renew your package please click on the following link',
     'scheduled_default_package' => 'You have successfully added a new activation date for your Basic Package. This activation date will immediately take its place after your current package expires',
     'scheduled_gotm_package' => 'You have successfully added a new activation date for your Girl of the Month package. This activation date will immediately take its place after your current package expires',
+    'scheduled_packages' => 'You have successfully scheduled your packages. This activation dates will immediately take its place after your current packages expire',
+    'gotm_package_successfully_saved' => 'Girl of the month package successfully updated',
+    'd_package_successfully_saved' => 'Basic package successfully updated',
+    'scheduled_lotm_package' => 'You have successfully added a new activation date for your Local of the Month package. This activation date will immediately take its place after your current package expires',
+    'lotm_package_successfully_saved' => 'Local of the month package successfully updated',
 
     'email_gotm_expire_warning_package' => 'Your Girl of The Month package is about to expire. In order to renew your package please click on the following link',
     'email_gotm_expired_package' => 'Your Girl of The Month package has expired. In order to renew your package please click on the following link',

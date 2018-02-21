@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use DB;
 use Carbon\Carbon;
+use App\Models\Package;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -149,5 +151,130 @@ class Local extends Authenticatable
     public function visitors()
     {
         return $this->belongsToMany('App\Models\VisitorDate', 'visitor_date_user')->withPivot('visitors', 'active');
+    }
+
+    public static function insertGotmPackage($request, $user, $activationDateInput, $totalAmount, $gotm = false)
+    {
+        $packageInput = $request->ullalla_package_month_girl[0];
+        $packageColumn = 'package2_id';
+        $activeColumn = 'is_active_gotm_package';
+        $activationDateColumn = 'package2_activation_date';
+        $expiryDateColumn = 'package2_expiry_date';
+        $scheduledColumn = 'scheduled_gotm_package';
+
+        if ($packageInput) {
+            // get package
+            $package = Package::find($packageInput);
+            // get activation date and expiry date
+            if ($package) {
+                $activationDateInput = $activationDateInput[$package->id];
+                // format dates with carbon
+                $currentExpiryDateParsed = Carbon::parse($user->$expiryDateColumn);
+                $activationDateInputParsed = Carbon::parse($activationDateInput);
+                $activationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+                $expiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($package->id))->format('Y-m-d H:i:s');
+
+                $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
+
+                // check if we should schedule the package or not
+                if (Carbon::now() <= $currentExpiryDateParsed) {
+                    $string = $package->id . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
+                    $user->$scheduledColumn = $string;
+                    $user->save();
+
+                    return ['needCharge' => false, 'scheduled' => true, 'totalAmount' => $totalAmount];
+                } else {
+                    if (DB::transactionLevel() != 1) {
+                        DB::beginTransaction();
+                    }
+
+                    try {
+                        // $user->canton_id = 'asdas';
+                        $user->$packageColumn = $package->id;
+                        $user->$activeColumn = 1;
+                        $user->$activationDateColumn = $activationDate;
+                        $user->$expiryDateColumn = $expiryDate;
+                        $user->save();
+
+                    } catch (Exception $e) {
+                        DB::rollback();
+
+                        return response()->json([
+                            'status' => 'Something went wrong'
+                        ], 422);
+                    }
+
+                    return ['needCharge' => true, 'scheduled' => false, 'totalAmount' => $totalAmount];
+                }
+            }
+        }
+    }
+
+    public static function insertDefaultPackage($request, $user, $activationDateInput, $totalAmount)
+    {
+        $packageInput = $request->ullalla_package[0];
+        $packageColumn = 'package1_id';
+        $activeColumn = 'is_active_d_package';
+        $activationDateColumn = 'package1_activation_date';
+        $expiryDateColumn = 'package1_expiry_date';
+        $scheduledColumn = 'scheduled_default_package';
+
+        if ($packageInput) {
+            // get package
+            $package = Package::find($packageInput);
+            // get activation date and expiry date
+            if ($package) {
+                if ($package->id != 6) {
+                    $activationDateInput = $activationDateInput[$package->id];
+                    // format dates with carbon
+                    $currentExpiryDateParsed = Carbon::parse($user->$expiryDateColumn);
+                    $activationDateInputParsed = Carbon::parse($activationDateInput);
+                    $activationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
+                    $expiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($package->id))->format('Y-m-d H:i:s');
+
+                    if (request('package_duration')[$package->id] == 'month') {
+                        $expiryDate = $activationDateInputParsed->addMonths(1)->format('Y-m-d H:i:s');
+                    } elseif (request('package_duration')[$package->id] == 'year') {
+                        $expiryDate = $activationDateInputParsed->addYears(1)->format('Y-m-d H:i:s');
+                    }
+
+                    $price = request('package_duration')[$package->id] . '_price';
+                    $duration = request('package_duration')[$package->id];
+
+                    $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
+
+                    // check if we should schedule the package or not
+                    if (Carbon::now() <= $currentExpiryDateParsed) {
+                        $string = $package->id . '&|' . $duration . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
+                        $user->$scheduledColumn = $string;
+                        $user->save();
+
+                        return ['needCharge' => false, 'scheduled' => true, 'totalAmount' => $totalAmount];
+                    } else {
+                        if (DB::transactionLevel() != 1) {
+                            DB::beginTransaction();
+                        }
+
+                        try {
+                            // $user->canton_id = 'asdas';
+                            $user->$packageColumn = $package->id;
+                            $user->$activeColumn = 1;
+                            $user->$activationDateColumn = $activationDate;
+                            $user->$expiryDateColumn = $expiryDate;
+                            $user->save();
+
+                        } catch (Exception $e) {
+                            DB::rollback();
+
+                            return response()->json([
+                                'status' => 'Something went wrong'
+                            ], 422);
+                        }
+
+                        return ['needCharge' => true, 'scheduled' => false, 'totalAmount' => $totalAmount];
+                    }
+                }
+            }
+        }
     }
 }
