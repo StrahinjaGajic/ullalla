@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VisitorDate;
+use App\Models\VisitorDateUser;
 use DB;
 use Session;
 use App\Models\User;
@@ -99,7 +101,16 @@ class GirlController extends Controller
 			}
 
 			if(!$checkForDate){
+				$date = new VisitorDate;
+				$date->date = date('d-m-Y');
+				$date_id = $date->save();
 
+				$visit = new VisitorDateUser;
+				$visit->visitor_date_id = $date_id;
+				$visit->user_id = $id;
+				$visit->visitors = 1;
+				$visit->active = 0;
+				$visit->save();
 			}
 		}
 		if(Auth()->user() && $id == Auth()->user()->id){
@@ -125,18 +136,20 @@ class GirlController extends Controller
 			$values_year = [];
 			$dates_year = [];
 			$num = 0;
-			foreach(explode(', ', $user->year_visitors) as $visitor){
-				$visitor = explode(':', $visitor);
-				$values_year[$num] = $visitor[1];
-				$dates_year[$num] = __('global.'.date("F", strtotime($visitor[0])));
-				$num++;
+			if($user->year_visitors) {
+				foreach (explode(', ', $user->year_visitors) as $visitor) {
+					$visitor = explode(':', $visitor);
+					$values_year[$num] = $visitor[1];
+					$dates_year[$num] = __('global.' . date("F", strtotime($visitor[0])));
+					$num++;
+				}
+				$chart_year = Charts::multi('bar', 'highcharts')
+					->title(__('functions.visitors'))
+					->dimensions(0, 400)
+					->template("highcharts")
+					->dataset(__('functions.visitors'), $values_year)
+					->labels($dates_year);
 			}
-			$chart_year = Charts::multi('bar', 'highcharts')
-				->title(__('functions.visitors'))
-				->dimensions(0, 400)
-				->template("highcharts")
-				->dataset(__('functions.visitors'), $values_year)
-				->labels($dates_year);
 		}
 
 		$user = User::with('services', 'country', 'prices')->findOrFail($id);
