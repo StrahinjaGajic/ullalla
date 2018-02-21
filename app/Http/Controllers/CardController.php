@@ -27,17 +27,27 @@ class CardController extends Controller
     	$local = Auth::guard('local')->user();
         $user = $local ? $local : Auth::user();
 
+        $stripeId = $user->stripe_id;
+        $cardId = $user->card_id;
+        $email = $user->email;
+        $token = request('stripeToken');
+
         try {
-            if ($user->stripe_id) {
-                $customer = Customer::retrieve($user->stripe_id);
+            if ($stripeId) {
+                $customer = Customer::retrieve($stripeId);
+                $customer->email = $email;
+                $customer->source = $token;
+                $customer->save();
             } else {
-                $customer = new Customer;
+                $customer = Customer::create([
+                    'email' => $email,
+                    'source' => $token,
+                ]);
             }
 
-            $customer->email = $user->email; // obtained with Checkout
-            $customer->source = request('stripeToken'); // obtained with Checkout
-            $customer->save();
+            $customer = Customer::retrieve($customer->id);
 
+            $user->stripe_id = $customer->id;
             $user->stripe_last4_digits = $customer->sources->data[0]->last4;
             $user->save();
 
