@@ -230,9 +230,7 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&callback=initialize&sensor=true"></script>
 <script>
-    var initialRadius = '{{ old('
-    radius ') ? old('
-    radius ') : 0 }}';
+    var initialRadius = '{{ old('radius') ? old('radius') : 0 }}';
     $('#radius-ranger').slider({
         range: 'min',
         min: 0,
