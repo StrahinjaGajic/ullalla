@@ -9,6 +9,7 @@ use App\Models\Canton;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
+use Charts;
 
 class GirlController extends Controller
 {
@@ -85,8 +86,61 @@ class GirlController extends Controller
 
 	public function getGirl($id)
 	{
+		if(Auth()->user() && $id != Auth()->user()->id){
+			$visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
+
+			$checkForDate = false;
+			foreach($visits as $visit){
+				if(date('d-m-Y', strtotime($visit->date)) == date('d-m-Y') && $visit->user_id == $id){
+					$visit->visitors = $visit->visitors + 1;
+					$visit->save();
+					$checkForDate = true;
+				}
+			}
+
+			if(!$checkForDate){
+
+			}
+		}
+		if(Auth()->user() && $id == Auth()->user()->id){
+			$user = User::findOrFail($id);
+			$values_month = [];
+			$dates_month = [];
+			$num = 0;
+			foreach($user->visitors as $visitor){
+				if($visitor->pivot->active) {
+					$values_month[$num] = $visitor->pivot->visitors;
+					$dates_month[$num] = date("d-m", strtotime($visitor->date));
+					$num++;
+				}
+			}
+
+			$chart_month = Charts::multi('bar', 'highcharts')
+				->title(__('functions.visitors'))
+				->dimensions(0, 400)
+				->template("highcharts")
+				->dataset(__('functions.visitors'), $values_month)
+				->labels($dates_month);
+
+			$values_year = [];
+			$dates_year = [];
+			$num = 0;
+			foreach(explode(', ', $user->year_visitors) as $visitor){
+				$visitor = explode(':', $visitor);
+				$values_year[$num] = $visitor[1];
+				$dates_year[$num] = __('global.'.date("F", strtotime($visitor[0])));
+				$num++;
+			}
+			$chart_year = Charts::multi('bar', 'highcharts')
+				->title(__('functions.visitors'))
+				->dimensions(0, 400)
+				->template("highcharts")
+				->dataset(__('functions.visitors'), $values_year)
+				->labels($dates_year);
+		}
+
 		$user = User::with('services', 'country', 'prices')->findOrFail($id);
-		return view('pages.girls.single', compact('user'));
+		return view('pages.girls.single', compact('user', 'chart_month', 'chart_year'));
 	}
 
 	public function getPriceRanges(Request $request)

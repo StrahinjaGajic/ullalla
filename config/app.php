@@ -167,6 +167,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
         PedZed\LaravelUploadcare\UploadcareServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         
         /*
          * Package Service Providers...
@@ -233,6 +234,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Countries' => Webpatser\Countries\CountriesFacade::class,
         'Str' => Illuminate\Support\Str::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
     ],
 
 ];

@@ -73,6 +73,7 @@ class CreateUsersTable extends Migration
             $table->string('scheduled_gotm_package')->nullable();
             $table->string('stripe_id')->nullable();
             $table->string('stripe_amount')->nullable();
+            $table->string('year_visitors');
             $table->rememberToken();
             $table->timestamps();
 

@@ -27,7 +27,7 @@ return [
     'web' => 'Sito web',
     'zip' => 'CAP',
     'available_24_7' => 'Disponibile 24/7',
-    'apply_to_all' => 'Apply To All',
+    'apply_to_all' => 'Applica su tutti',
     'mark_all' => 'Segna tutto',
     'about_us' => 'Su di noi',
     'local_type' => 'Tipologia locale',

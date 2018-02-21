@@ -55,9 +55,9 @@ return [
     'banner_requested_success' => 'Richiesta banner effettuata con successo',
 
     #card
-    'card_updated' => 'Your card details have been updated!',
+    'card_updated' => 'I dettagli della sua carta sono stati aggiornati!',
 
     # girls locals
-    'girl_removed_success' => 'Girl successfully removed',
-    'girl_added_success' => 'Girl successfully added',
+    'girl_removed_success' => 'Ragazza rimossa con successo',
+    'girl_added_success' => 'Ragazza aggiunta con successo',
 ];

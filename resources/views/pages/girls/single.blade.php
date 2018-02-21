@@ -5,6 +5,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
+{!! Charts::styles() !!}
 @stop
 
 @section('content')
@@ -106,6 +107,9 @@
 							@endif
 							@if($user->city)
 							<li><a href="#girl-map" data-toggle="tab">{{ __('headings.map') }}</a></li>
+							@endif
+							@if(isset($chart_year) || isset($chart_month))
+							<li><a href="#statistics" data-toggle="tab">{{ __('functions.statistics') }}</a></li>
 							@endif
 						</ul>
 						<div class="tab-content">
@@ -228,6 +232,27 @@
 								<div class="tab-pane" id="girl-map">
 									<div id="map" style="width: 100%; height: 450px;"></div>
 								</div>
+								@if(isset($chart_year) || isset($chart_month))
+									<div class="tab-pane" id="statistics">
+										<a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+										<a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+										<div class="app" id="year" style="display: none;">
+											<center>
+												{!! $chart_year->html() !!}
+											</center>
+										</div>
+
+										<div class="app" id="month">
+											<center>
+												{!! $chart_month->html() !!}
+											</center>
+										</div>
+
+										{!! Charts::scripts() !!}
+										{!! $chart_month->script() !!}
+										{!! $chart_year->script() !!}
+									</div>
+								@endif
 							</div>
 						</div>
 					</div>
@@ -408,6 +433,23 @@ span.onclick = function() {
     $('.modal').click(function(e) {
     if($(e.target).is('.modal'))  $(this).fadeOut(175);
 });
+</script>
+
+
+<script>
+$(window).on("load", function () {
+	$(".highcharts-axis-title").remove();
+});
+
+function changeToYear(){
+	document.getElementById('year').style.display = "block";
+	document.getElementById('month').style.display = "none";
+}
+
+function changeToMonth(){
+	document.getElementById('year').style.display = "none";
+	document.getElementById('month').style.display = "block";
+}
 </script>
 
 

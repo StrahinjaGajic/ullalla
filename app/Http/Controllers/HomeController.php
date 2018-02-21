@@ -10,6 +10,8 @@ use App\Models\Banner;
 use App\Models\BannerPage;
 use Illuminate\Http\Request;
 Use Plivo;
+use App\Charts\Visitors;
+use App\Models\VisitorDateUser;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,7 @@ class HomeController extends Controller
 //
 //		$response = Plivo::sendSMS($params);
 //dd($response);
+
 
 		$bigBanners = BannerPage::getByPageId(1, 1)->get();
 		$mediumBanner = BannerPage::getByPageId(1, 2)->first();

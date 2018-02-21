@@ -208,4 +208,8 @@ return [
     'Friday' => 'Friday',
     'Saturday' => 'Saturday',
     'Sunday' => 'Sunday',
+
+    #statistics
+    'statistics' => 'Statistics',
+    'visitors' => 'Visitors'
 ];

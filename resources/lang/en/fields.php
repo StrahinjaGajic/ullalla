@@ -122,5 +122,4 @@ return [
     #banners
     'prepared_banner' => 'Already have a prepared banner?',
     'url' => 'Url',
-    
 ];
