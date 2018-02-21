@@ -52,7 +52,6 @@ class ProfileController extends Controller
                 'deletePrice'
             ]
         ]);
-
     }
 
     public function getCreate()

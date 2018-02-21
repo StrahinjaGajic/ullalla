@@ -96,8 +96,8 @@
 									@else
 										<td>{{ __('headings.gotm_package') }}</td>
 									@endif
-									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[1])) }}</td>
 									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[2])) }}</td>
+									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[3])) }}</td>
 								</tr>
 							@endif
 						</tbody>

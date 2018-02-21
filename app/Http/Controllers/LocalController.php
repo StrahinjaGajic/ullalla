@@ -88,36 +88,9 @@ class LocalController extends Controller
             $request->time_to_m
         );
 
-        if(request('ullalla_package')[0] != 6) {
-            $defaultPackageInput = request('ullalla_package')[0];
-            $defaultPackage = LocalPackage::findOrFail($defaultPackageInput);
-            $defaultPackageActivationDateInput = request('default_package_activation_date')[$defaultPackage->id];
-            $carbonDate = Carbon::parse($defaultPackageActivationDateInput);
-            $defaultPackageActivationDate = $carbonDate->format('Y-m-d H:i:s');
-            if (request('package_duration')[$defaultPackage->id] == 'month') {
-                $defaultPackageExpiryDate = $carbonDate->addMonths(1)->format('Y-m-d H:i:s');
-            } elseif (request('package_duration')[$defaultPackage->id] == 'year') {
-                $defaultPackageExpiryDate = $carbonDate->addYears(1)->format('Y-m-d H:i:s');
-            }
-            $price = request('package_duration')[$defaultPackage->id] . '_price';
-            $totalAmount = (int)filter_var($defaultPackage->$price, FILTER_SANITIZE_NUMBER_INT);
-
-            $monthGirlPackageInput = request('ullalla_package_month_girl');
-            if ($monthGirlPackageInput) {
-                $monthGirlPackage = Package::findOrFail($monthGirlPackageInput[0]);
-                $monthGirlActivationDateInput = request('month_girl_package_activation_date')[$monthGirlPackage->id];
-                // format dates with carbon
-                $carbonDate = Carbon::parse($monthGirlActivationDateInput);
-                $monthGirlActivationDate = $carbonDate->format('Y-m-d H:i:s');
-                $monthGirlExpiryDate = $carbonDate->addDays(daysToAddToExpiry($monthGirlPackage->id))->format('Y-m-d H:i:s');
-                $totalAmount += (int) filter_var($monthGirlPackage->package_price_local, FILTER_SANITIZE_NUMBER_INT);
-            }
-        }
-
-        DB::beginTransaction();
-
         try {                        
             $user = Auth::guard('local')->user();
+            $user->has_profile = 1;
             $user->name = request('name');
             $user->phone = request('phone');
             $user->website = request('website');
@@ -135,66 +108,18 @@ class LocalController extends Controller
             $user->club_food_id = setClubInfo('food', request('food'), request('food-free'));
             $user->club_outdoor_id = setClubInfo('outdoor', request('outdoor'), request('outdoor-free'));            
 
-            if(request('ullalla_package')[0] != 6) {                
-                $user->package1_id = $defaultPackage->id;
-                $user->is_active_d_package = 1;
-                $user->package1_duration = request('package_duration')[$defaultPackage->id];
-                $user->package1_activation_date = $defaultPackageActivationDate;
-                $user->package1_expiry_date = $defaultPackageExpiryDate;
-
-                if (isset($monthGirlPackage)) {
-                    $user->package2_id = $monthGirlPackage->id;
-                    $user->is_active_gotm_package = 1;
-                    $user->package2_activation_date = $monthGirlActivationDate;
-                    $user->package2_expiry_date = $monthGirlExpiryDate;
-                }
-            }
-
             $user->save();
 
         } catch (\Exception $e) {
-            DB::rollback();
-
             return response()->json([
                 'status' => 'There was a problem creating your profile.'
             ], 422);
         }
 
-        if (request('ullalla_package')[0] != 6) {
-            try {
-                // create a customer
-                $customer = Customer::create([
-                    'email' => request('stripeEmail'),
-                    'source' => request('stripeToken'),
-                ]);
-                
-                $user->stripe_id = $customer->id;
-                $user->stripe_last4_digits = $customer->sources->data[0]->last4;
-                $user->stripe_amount = $totalAmount * 100;
-                $user->save();
 
-                Charge::create([
-                    'customer' => $user->stripe_id,
-                    'amount' => $user->stripe_amount,
-                    'currency' => 'chf',
-                ]);
-            } catch (\Exception $e) {
-                DB::rollback();
+        Session::flash('account_created', __('messages.account_created'));
 
-                return response()->json([
-                    'status' => $e->getMessage()
-                ], 422);
-            }
-
-            DB::commit();
-
-            Session::flash('account_created', __('messages.account_created'));
-
-        } else {
-            Auth::guard('local')->logout();
-            Session::put('account_created_elite', __('messages.account_created_elite'));
-            Session::save();
-        }
+        return redirect('/');
     }
 
     public function getContact()

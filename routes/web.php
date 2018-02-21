@@ -149,7 +149,7 @@ Route::post('locals/@{username}/events/store', 'LocalController@postEvents');
 Route::post('locals/@{username}/girls/{private_id?}/delete', 'LocalController@deleteGirl');
 
 # LOCAL PROFILE CONTROLLER
-Route::get('locals/{username}', 'LocalProfileController@getLocal');
+Route::get('locals/@{username}', 'LocalProfileController@getLocal');
 Route::get('locals', [
 	'as' => 'locals',
 	'uses' => 'LocalProfileController@getIndex'

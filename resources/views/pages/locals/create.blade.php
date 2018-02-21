@@ -137,13 +137,13 @@
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <select name="time_from [{{ $counter }}]" class="form-control club_select" disabled="">
+                                                    <select name="time_from[{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getHoursList() as $hour)
                                                         <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span class="club_hrs">{{ __('global.hrs') }}</span>
-                                                    <select name="time_from_m [{{ $counter }}]" class="form-control club_select" disabled="">
+                                                    <select name="time_from_m[{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                         <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
@@ -151,13 +151,13 @@
                                                     <span class="club_min">{{ __('global.min') }}</span>
                                                 </td>
                                                 <td>
-                                                    <select name="time_to [{{ $counter }}]" class="form-control club_select" disabled="">
+                                                    <select name="time_to[{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getHoursList() as $hour)
                                                         <option value="{{ $hour }}">{{ $hour }}</option>
                                                         @endforeach
                                                     </select>
                                                     <span class="club_hrs">{{ __('global.hrs') }}</span>
-                                                    <select name="time_to_m [{{ $counter }}]" class="form-control club_select" disabled="">
+                                                    <select name="time_to_m[{{ $counter }}]" class="form-control club_select" disabled="">
                                                         @foreach(getMinutesList() as $minute)
                                                         <option value="{{ $minute }}">{{ $minute }}</option>
                                                         @endforeach
