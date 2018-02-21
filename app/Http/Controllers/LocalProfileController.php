@@ -11,6 +11,7 @@ use DB;
 use Session;
 use Auth;
 use Charts;
+use Carbon\Carbon;
 
 class LocalProfileController extends Controller
 {
@@ -56,7 +57,7 @@ class LocalProfileController extends Controller
     {
         $local = Local::username($username)->first();
 
-        if(Auth::guard('local')->user() && $username != Auth::guard('local')->user()->username){
+//        if(Auth::guard('local')->user() && $username != Auth::guard('local')->user()->username){
             $visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
 
             $checkForDate = false;
@@ -69,39 +70,47 @@ class LocalProfileController extends Controller
             }
 
             if(!$checkForDate){
-                $date = new VisitorDate;
-                $date->date = date('d-m-Y');
-                $date_id = $date->save();
+                $dates = VisitorDate::all();
+                $check = false;
+                foreach($dates as $date){
+                    if(date('d-m-Y', strtotime($date->date)) == date('d-m-Y')){
+                        $check = true;
+                    }
+                }
+                if(!$check) {
+                    $date = new VisitorDate;
+                    $date->date = Carbon::now();
+                    $date->save();
+                }
 
                 $visit = new VisitorDateUser;
-                $visit->visitor_date_id = $date_id;
+                $visit->visitor_date_id = $date->id;
                 $visit->local_id = $local->id;
                 $visit->visitors = 1;
                 $visit->active = 0;
                 $visit->save();
             }
-        }
+//        }
         if(Auth::guard('local')->user() && $username == Auth::guard('local')->user()->username){
             $user = Local::username($username)->first();
-            if($user->visitors) {
-                $values_month = [];
-                $dates_month = [];
-                $num = 0;
-                foreach ($user->visitors as $visitor) {
-                    if ($visitor->pivot->active) {
-                        $values_month[$num] = $visitor->pivot->visitors;
-                        $dates_month[$num] = date("d-m", strtotime($visitor->date));
-                        $num++;
-                    }
+            $values_month = [];
+            $dates_month = [];
+            $num = 0;
+            foreach ($user->visitors as $visitor) {
+                if ($visitor->pivot->active) {
+                    $values_month[$num] = $visitor->pivot->visitors;
+                    $dates_month[$num] = date("d-m", strtotime($visitor->date));
+                    $num++;
                 }
-
-                $chart_month = Charts::multi('bar', 'highcharts')
-                    ->title(__('functions.visitors'))
-                    ->dimensions(0, 400)
-                    ->template("highcharts")
-                    ->dataset(__('functions.visitors'), $values_month)
-                    ->labels($dates_month);
             }
+
+            $chart_month = Charts::multi('bar', 'highcharts')
+                ->title(__('functions.visitors'))
+                ->dimensions(0, 400)
+                ->template("highcharts")
+                ->dataset(__('functions.visitors'), $values_month)
+                ->labels($dates_month);
+
             if($user->year_visitors) {
                 $values_year = [];
                 $dates_year = [];

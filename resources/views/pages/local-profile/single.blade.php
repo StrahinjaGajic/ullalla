@@ -168,33 +168,33 @@
                                     <source src="{{ $local->videos }}" type="video/mp4">
                                 </video>
                             </div>
-                                @if(isset($chart_year) || isset($chart_month))
-                                    <div class="tab-pane" id="statistics">
-                                        @if(isset($chart_year))
-                                            <a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
-                                        @endif
-                                        @if(isset($chart_month))
-                                            <a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
-                                        @endif
-                                        @if(isset($chart_year))
-                                            <div class="app" id="year" style="display: none;">
-                                                <center>
-                                                    {!! $chart_year->html() !!}
-                                                </center>
-                                            </div>
-                                            {!! $chart_year->script() !!}
-                                        @endif
-                                        @if(isset($chart_month))
-                                            <div class="app" id="month">
-                                                <center>
-                                                    {!! $chart_month->html() !!}
-                                                </center>
-                                            </div>
-                                            {!! $chart_month->script() !!}
-                                        @endif
-                                        {!! Charts::scripts() !!}
-                                    </div>
-                                @endif
+                            @if(isset($chart_year) || isset($chart_month))
+                                <div class="tab-pane" id="statistics">
+                                    @if(isset($chart_year))
+                                        <a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+                                    @endif
+                                    @if(isset($chart_month))
+                                        <a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+                                    @endif
+                                    @if(isset($chart_year))
+                                        <div class="app" id="year" style="display: none;">
+                                            <center>
+                                                {!! $chart_year->html() !!}
+                                            </center>
+                                        </div>
+                                        {!! $chart_year->script() !!}
+                                    @endif
+                                    @if(isset($chart_month))
+                                        <div class="app" id="month">
+                                            <center>
+                                                {!! $chart_month->html() !!}
+                                            </center>
+                                        </div>
+                                        {!! $chart_month->script() !!}
+                                    @endif
+                                    {!! Charts::scripts() !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
