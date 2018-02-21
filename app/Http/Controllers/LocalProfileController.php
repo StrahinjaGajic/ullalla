@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Local;
 use App\Models\LocalType;
 use App\Models\VisitorDateUser;
+use App\Models\VisitorDate;
 use DB;
 use Session;
 use Auth;
@@ -82,28 +83,29 @@ class LocalProfileController extends Controller
         }
         if(Auth::guard('local')->user() && $username == Auth::guard('local')->user()->username){
             $user = Local::username($username)->first();
-            $values_month = [];
-            $dates_month = [];
-            $num = 0;
-            foreach($user->visitors as $visitor){
-                if($visitor->pivot->active) {
-                    $values_month[$num] = $visitor->pivot->visitors;
-                    $dates_month[$num] = date("d-m", strtotime($visitor->date));
-                    $num++;
+            if($user->visitors) {
+                $values_month = [];
+                $dates_month = [];
+                $num = 0;
+                foreach ($user->visitors as $visitor) {
+                    if ($visitor->pivot->active) {
+                        $values_month[$num] = $visitor->pivot->visitors;
+                        $dates_month[$num] = date("d-m", strtotime($visitor->date));
+                        $num++;
+                    }
                 }
+
+                $chart_month = Charts::multi('bar', 'highcharts')
+                    ->title(__('functions.visitors'))
+                    ->dimensions(0, 400)
+                    ->template("highcharts")
+                    ->dataset(__('functions.visitors'), $values_month)
+                    ->labels($dates_month);
             }
-
-            $chart_month = Charts::multi('bar', 'highcharts')
-                ->title(__('functions.visitors'))
-                ->dimensions(0, 400)
-                ->template("highcharts")
-                ->dataset(__('functions.visitors'), $values_month)
-                ->labels($dates_month);
-
-            $values_year = [];
-            $dates_year = [];
-            $num = 0;
             if($user->year_visitors) {
+                $values_year = [];
+                $dates_year = [];
+                $num = 0;
                 foreach (explode(', ', $user->year_visitors) as $visitor) {
                     $visitor = explode(':', $visitor);
                     $values_year[$num] = $visitor[1];
