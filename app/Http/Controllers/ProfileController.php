@@ -607,7 +607,6 @@ class ProfileController extends Controller
             ]);
 
             if ($validator->passes()) {
-                dd('asdas');
                 // insert default package
                 $defaultPackageData = User::insertPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
                 // insert gotm package
