@@ -313,7 +313,6 @@ class User extends Authenticatable
 
                 // check if we should schedule the package or not
                 if ($user->$packageColumn && Carbon::now() <= $currentExpiryDateParsed) {
-                    dd('asd');
                     $string = $package->id . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
                     $user->$scheduledColumn = $string;
                     $user->save();

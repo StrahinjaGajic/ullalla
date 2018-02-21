@@ -131,17 +131,18 @@ class LocalController extends Controller
     public function postContact(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|min:4|max:20',
-            'email' => 'required|email|max:40',
-            'confirm_password' => 'required_with:password|same:password',
-            'name' => 'required|max:25',
-            'street' => 'required|max:40',
-            'city' => 'required|max:30',
-            'zip' => 'required|max:10',
-            'phone' => 'required_without:mobile|max:20',
-            'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
-        ], ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
-    );
+                'username' => 'required|min:4|max:20',
+                'email' => 'required|email|max:40',
+                'confirm_password' => 'required_with:password|same:password',
+                'name' => 'required|max:25',
+                'street' => 'required|max:40',
+                'city' => 'required|max:30',
+                'zip' => 'required|max:10',
+                'phone' => 'required_without:mobile|max:20',
+                'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
+            ], 
+            ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
+        );
 
         $local = Auth::guard('local')->user();
         $local->username = request('username');
@@ -152,6 +153,7 @@ class LocalController extends Controller
             $request->merge(['password' => $local->password]);
         }
         $local->username = $request->username;
+        $local->name = $request->name;
         $local->street = $request->street;
         $local->city = $request->city;
         $local->zip = $request->zip;
