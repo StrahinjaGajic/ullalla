@@ -220,13 +220,12 @@ class ProfileController extends Controller
 
     public function postBio(Request $request, $private_id)
     {
-       // $this->validate($request, [
-       //     'nickname' => 'required',
-       //     'first_name' => 'required',
-       //     'last_name' => 'required',
-       //     'sex' => 'required',
-       //     'age' => ['required', 'numeric', new OlderThanRule],
-       // ]);
+        $this->validate($request, [
+            'nickname' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'age' => ['required', 'numeric', new OlderThanRule],
+        ]);
 
         if (Auth::guard('local')->check()) {
             $user = Auth::guard('local')->user()->users()->findOrFail($private_id);

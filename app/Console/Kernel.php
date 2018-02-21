@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('ullalla:deactivate-user')->dailyAt('23:55');
         $schedule->command('ullalla:activate-scheduled-packages')->dailyAt('23:56');
         $schedule->command('ullalla:add-visitors')->dailyAt('23:57');
+        $schedule->command('ullalla:make-yearly-visitors')->dailyAt('23:57');
     }
 
     /**
