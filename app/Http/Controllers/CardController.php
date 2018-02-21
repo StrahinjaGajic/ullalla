@@ -29,14 +29,17 @@ class CardController extends Controller
 
         try {
             $customer = Customer::retrieve($user->stripe_id); // stored in your application
-            $customer->email = $user->email; // obtained with Checkout
-            $customer->source = request('stripeToken'); // obtained with Checkout
-            $customer->save();
 
-            $last4 = $customer->sources->data[0]->last4;
-            $user->stripe_last4_digits = $last4;
-            $user->save();
-
+            if (!$customer) {
+                $customer = Customer::create([
+                    "email" => request('stripeEmail'),
+                    "source" => request('stripeToken'),
+                ]);
+                $user->stripe_last4_digits = $customer->sources->data[0]->last4;
+                $user->stripe_id = $customer->id;
+                $user->save();
+            }
+            
             Session::flash('success', __('messages.card_updated'));
             // return response()->json([
             //     'customer' => $customer

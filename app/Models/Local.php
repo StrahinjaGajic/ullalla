@@ -244,7 +244,7 @@ class Local extends Authenticatable
                     $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
 
                     // check if we should schedule the package or not
-                    if ($user->package1_id && Carbon::now() <= $currentExpiryDateParsed) {
+                    if (Carbon::now() <= $currentExpiryDateParsed) {
                         $string = $package->id . '&|' . $duration . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
                         $user->$scheduledColumn = $string;
                         $user->save();
