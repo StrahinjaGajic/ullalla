@@ -2,18 +2,7 @@
 <div class="contact-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                <div class="shop-banner-area">
-                    <div class="single-banner">
-                        <a href="contact-us.html#">
-                                <span>
-                                    <img src="img/banner/contact%20baner.jpg" alt="banner">
-                                </span>
-                            </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 col-lg-offset-3">
                 <div class="row" style="margin-top:30px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-title">
@@ -63,17 +52,6 @@
                         </div>
 
                         {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                <div class="shop-banner-area">
-                    <div class="single-banner">
-                        <a href="contact-us.html#">
-                                <span>
-                                    <img src="img/banner/contact%20baner.jpg" alt="banner">
-                                </span>
-                            </a>
                     </div>
                 </div>
             </div>

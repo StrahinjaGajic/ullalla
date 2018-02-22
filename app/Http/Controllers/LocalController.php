@@ -207,15 +207,14 @@ class LocalController extends Controller
     public function postWorkingTimes(Request $request)
     {
         $local = Auth::guard('local')->user();
+
         $workingTime = getWorkingTime(
             $request->days,
             $request->available_24_7,
             $request->time_from,
             $request->time_from_m,
             $request->time_to,
-            $request->time_to_m,
-            $request->available_24_7_night_escort,
-            $request->night_escorts
+            $request->time_to_m
         );
 
         $local->working_time = $workingTime;

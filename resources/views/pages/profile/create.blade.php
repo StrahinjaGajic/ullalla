@@ -15,14 +15,14 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => 'private/'.$user->id.'/store', 'class' => 'form-horizontal wizard', 'id' => 'profileForm', 'method' => 'PUT']) !!}
 					<ul class="nav nav-pills">
-						<li class="active pad-left"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
+						<li class="active"><a href="#bio-tab" data-toggle="tab">{{ __('headings.bio') }}</a></li>
 						<li><a href="#about-me-tab" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
 						<li><a href="#gallery-tab" data-toggle="tab">{{ __('headings.gallery') }}</a></li>
-						<li class="pad-right"><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
-						<li class="pad-left"><a href="#workplace-tab" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
+						<li><a href="#contact-tab" data-toggle="tab">{{ __('headings.contact') }}</a></li>
+						<li><a href="#workplace-tab" data-toggle="tab">{{ __('headings.workplace') }}</a></li>
 						<li><a href="#working-hours-tab" data-toggle="tab">{{ __('headings.working_hours') }}</a></li>
-						<li class="pad-right"><a href="#services-tab" data-toggle="tab">{{ __('headings.services') }}</a></li>
-						<li class="pad-left"><a href="#prices-tab" data-toggle="tab">{{ __('headings.prices') }}</a></li>
+						<li><a href="#services-tab" data-toggle="tab">{{ __('headings.services') }}</a></li>
+						<li><a href="#prices-tab" data-toggle="tab">{{ __('headings.prices') }}</a></li>
 						<li><a href="#languages-tab" data-toggle="tab">{{ __('headings.languages') }}</a></li>
 					</ul>
 					<div class="tab-content">
