@@ -40,8 +40,8 @@
                     <div class="form-group">
                         <label>{{ __('fields.unit') }}</label>
                         <select name="service_price_unit" class="form-control">
-                            @foreach(getUnits() as $unit)
-                            <option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
+                            @foreach(getUnits() as $keyUnit => $unit)
+                            <option value="{{ $keyUnit }}">{{ ucfirst($unit) }}</option>
                             @endforeach
                         </select>
                         <div class="help-block"></div>

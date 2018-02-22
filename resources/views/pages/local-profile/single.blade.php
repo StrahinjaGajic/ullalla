@@ -63,9 +63,6 @@
                         <div class="product-name">
                             <h3><a>{{ $local->name }}</a></h3>
                         </div>
-                        <div class="product-reveiw">
-                            <p>{{ Str::words($local->about_me, 40) }}</p>
-                        </div>
                         <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                             <tr>
                                 <td>{{ __('headings.local_type') }}:</td>

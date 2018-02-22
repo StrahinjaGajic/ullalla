@@ -66,9 +66,6 @@
 						<div class="product-name">
 							<h3><a>{{ $user->nickname }}</a></h3>
 						</div>
-						<div class="product-reveiw">
-							<p>{{ Str::words($user->about_me, 40) }}</p>
-						</div>
 						<table class="info-table">{{ parseSingleUserData(getBioFields(), $user) }}</table>
 					</div>
 				</div>

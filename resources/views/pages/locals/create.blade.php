@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.web') }}</label>
-                                    <input type="text" class="form-control" name="web" />
+                                    <input type="text" class="form-control" name="website" />
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-xs-12">

@@ -74,9 +74,11 @@ class LocalController extends Controller
             'city' => 'required|max:30',
             'zip' => 'required|max:10',
             'phone' => 'required|max:20',
-            'mobile' => 'required_with:sms_notifications,on|max:20',
+            'mobile' => 'required_without:phone|required_with:sms_notifications,on|max:20',
             'photos' => 'numeric|min:4|max:9',
-        ]);
+        ], 
+            ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
+        );
 
         // get working time
         $workingTime = getWorkingTime(
@@ -93,6 +95,8 @@ class LocalController extends Controller
             $user->has_profile = 1;
             $user->name = request('name');
             $user->phone = request('phone');
+            $user->mobile = request('mobile');
+            $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->website = request('website');
             $user->street = request('street');
             $user->zip = request('zip');
