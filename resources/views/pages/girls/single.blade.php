@@ -119,7 +119,7 @@
 								@endif
 								@if ($user->about_me)
 								<div class="tab-pane" id="girl-description">
-									<p>{{ $user->about_me }}</p>
+									<p>{!! nl2br($user->about_me) !!}</p>
 								</div>
 								@endif
 								@if($user->services()->count())

@@ -110,19 +110,19 @@ return [
 
 
     #getDaysOfTheWeek
-    'monday' => 'Lunedí',
-    'tuesday' => 'Martedí',
-    'wednesday' => 'Mercoledí',
-    'thursday' => 'Giovedí',
-    'friday' => 'Venerdí',
+    'monday' => 'LunedÃ­',
+    'tuesday' => 'MartedÃ­',
+    'wednesday' => 'MercoledÃ­',
+    'thursday' => 'GiovedÃ­',
+    'friday' => 'VenerdÃ­',
     'saturday' => 'Sabato',
     'sunday' => 'Domenica',
 
 
     #getBioFields
-    'age' => 'Etá',
+    'age' => 'EtÃ¡',
     'type' => 'Tipo',
-    'country_id' => 'Nazionalitá',
+    'country_id' => 'NazionalitÃ¡',
     'eye_color' => 'Occhi',
     'hair_color' => 'Capelli',
     'height' => 'Altezza',
@@ -147,7 +147,7 @@ return [
 
     #getWorkplaceFields
     'club_name' => 'Club',
-    'city' => 'Cittá',
+    'city' => 'CittÃ¡',
     'address' => 'Indirizzo',
     'incall_type' => 'Servizio interno',
     'outcall_type' => 'Servizio esterno',
@@ -156,8 +156,8 @@ return [
 
     #getOrderBy
     'nickname_asc' => 'Nickname',
-    'created_at_desc' => 'Piú recente',
-    'created_at_asc' => 'Piú vecchio',
+    'created_at_desc' => 'PiÃº recente',
+    'created_at_asc' => 'PiÃº vecchio',
     'service_price_asc' => 'Prezzo ascendente',
     'service_price_desc' => 'Prezzo discendente',
 
@@ -201,11 +201,11 @@ return [
     'card_on_file' => 'Card on file',
 
     #working_times
-    'Monday' => 'Lunedí',
-    'Tuesday' => 'Martedí',
-    'Wednesday' => 'Mercoledí',
-    'Thursday' => 'Giovedí',
-    'Friday' => 'Venerdí',
+    'Monday' => 'LunedÃ­',
+    'Tuesday' => 'MartedÃ­',
+    'Wednesday' => 'MercoledÃ­',
+    'Thursday' => 'GiovedÃ­',
+    'Friday' => 'VenerdÃ­',
     'Saturday' => 'Sabato',
     'Sunday' => 'Domenica',
 

@@ -34,7 +34,7 @@
                                         @elseif(Auth::user())
                                           <li><a href="{{ url('private/' . $user->id . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                           <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                          <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
+                                          {{--<li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>--}}
                                       @endif
                                     @endif
                                     @if($user && $user->has_profile == 0)
@@ -92,7 +92,7 @@
                                        @elseif(Auth::user())
                                        <li><a href="{{ url('@' . $user->username . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                        <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                      <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>                                        
+                                      {{--<li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>                                        --}}
                                        @endif
                                        @endif
                                        @if($user && $user->has_profile = 0)
