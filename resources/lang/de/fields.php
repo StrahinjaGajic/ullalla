@@ -15,6 +15,7 @@ return [
     'height' => 'Grösse',
     'weight' => 'Gewicht',
     'sex' => 'Geschlecht',
+    'gender' => 'Geschlecht',
     'sex_orientation' => 'Sexuelle Orientierung',
     'type' => 'Typ',
     'figure' => 'Figur',

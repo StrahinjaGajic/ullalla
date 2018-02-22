@@ -256,7 +256,7 @@
 											{!! $chart_year->script() !!}
 										@endif
 										@if(isset($chart_month))
-												{!! $chart_month->script() !!}
+											{!! $chart_month->script() !!}
 										@endif
 									</div>
 								@endif

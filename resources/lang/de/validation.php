@@ -145,6 +145,7 @@ return [
     'attributes' => [
         'country'               => 'Land',
         'gender'                => 'Geschlecht',
+        'gender_type'                => 'Geschlecht',
         'day'                   => 'Tag',
         'month'                 => 'Monat',
         'year'                  => 'Jahr',

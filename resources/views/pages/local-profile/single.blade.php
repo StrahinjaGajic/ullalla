@@ -189,7 +189,6 @@
                                                 {!! $chart_year->html() !!}
                                             </center>
                                         </div>
-                                        {!! $chart_year->script() !!}
                                     @endif
                                     @if(isset($chart_month))
                                         <div class="app" id="month">
@@ -197,9 +196,14 @@
                                                 {!! $chart_month->html() !!}
                                             </center>
                                         </div>
-                                        {!! $chart_month->script() !!}
                                     @endif
                                     {!! Charts::scripts() !!}
+                                    @if(isset($chart_year))
+                                        {!! $chart_year->script() !!}
+                                    @endif
+                                    @if(isset($chart_month))
+                                        {!! $chart_month->script() !!}
+                                    @endif
                                 </div>
                             @endif
                         </div>

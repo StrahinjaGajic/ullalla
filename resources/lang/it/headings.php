@@ -7,6 +7,7 @@ return [
     'gotm' => 'Ragazze del mese',
     'totm' => 'Trans dal mese',
     'lotm' => 'Locali del mese',
+    'potm' => 'Privati del mese',
     'default_error_title' => 'Oops...',
     'info_account_not_approved_title' => 'Conto utente non approvato',
     'good_job_title' => 'Buon lavoro!',
