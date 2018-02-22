@@ -740,7 +740,6 @@ pre {
     margin: 20px 1%;
     position: relative;
     min-width: 230px;
-    z-index: 99;
 }
 
 input[type="text"], [type="password"], [type="email"] {

@@ -92,7 +92,7 @@
                     <div class="product-description-tab custom-tab">
                         <ul class="nav nav-tabs" role="tablist">
                             @if ($local->about_me)
-                            <li class="active"><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
+                            <li class="active"><a href="#girl-description" data-toggle="tab">{{ __('headings.about_us') }}</a></li>
                             @endif
                             @if($local->working_time)
                             <li><a href="#girl-workinghours" data-toggle="tab">{{ __('buttons.work_time') }}</a></li>
@@ -131,7 +131,7 @@
                                         <?php $workingTimes = json_decode($local->working_time); ?>
                                         @foreach($workingTimes as $workingTime)
                                         <tr>
-                                            <td>{{ explode('|', $workingTime)[0] }}</td>
+                                            <td>{{ __('functions.'.explode('|', $workingTime)[0]) }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[1] }}</td>
                                         </tr>

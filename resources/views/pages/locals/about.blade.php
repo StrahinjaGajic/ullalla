@@ -13,7 +13,7 @@
             {!! parseEditLocalProfileMenu('about_me') !!}
         </div>
         <div class="col-sm-10 profile-info" >
-            <h3>{{ __('headings.about_me') }}</h3>
+            <h3>{{ __('headings.about_us') }}</h3>
             <div class="row" style="margin-left: 1px;">
                 {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/about_me/store', 'method' => 'put']) !!}
                 <div class="form-group">
