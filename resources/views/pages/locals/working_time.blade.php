@@ -46,25 +46,25 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach(getDaysOfTheWeek() as $dayOfTheWeek)
-								<?php $dbDayOfTheWeek = stripos($local->working_time, $dayOfTheWeek) !== false ? $dayOfTheWeek : ''; ?>
+								@foreach(getDaysOfTheWeek() as $engDayOfTheWeek => $dayOfTheWeek)
+								<?php $dbDayOfTheWeek = stripos($local->working_time, $engDayOfTheWeek) !== false ? $engDayOfTheWeek : ''; ?>
 								<tr class="{{ !$dbDayOfTheWeek ? 'working-times-disabled' : '' }}">
 									<td>
-										<label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
-											<input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}" {{ $dbDayOfTheWeek ? 'checked' : '' }}>
+										<label class="control control--checkbox"><a>{{ __('functions.' . $engDayOfTheWeek) }}</a>
+											<input type="checkbox" name="days[{{ $counter }}]" value="{{ $engDayOfTheWeek }}" {{ $dbDayOfTheWeek ? 'checked' : '' }}>
 											<div class="control__indicator"></div>
 										</label>
 									</td>
 									<td>
 										<select name="time_from[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getHoursList() as $hour)
-											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
+											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $engDayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
 										<span>{{ __('global.hrs') }}</span>
 										<select name="time_from_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
-											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
+											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $engDayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[0])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
 										<span>{{ __('global.min') }}</span>
@@ -72,13 +72,13 @@
 									<td>
 										<select name="time_to[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getHoursList() as $hour)
-											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
+											<option value="{{ $hour }}" {{ ($dbDayOfTheWeek == $engDayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[0] == $hour) ? 'selected' : '' }}>{{ $hour }}</option>
 											@endforeach
 										</select>
 										<span>{{ __('global.hrs') }}</span>
 										<select name="time_to_m[{{ $counter }}]" class="form-control" {{ !$dbDayOfTheWeek ? 'disabled' : '' }}>
 											@foreach(getMinutesList() as $minute)
-											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $dayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
+											<option value="{{ $minute }}" {{ ($dbDayOfTheWeek == $engDayOfTheWeek) && (explode(':', explode(' - ', explode('|', arrayHasString($workingTime, $dbDayOfTheWeek))[1])[1])[1] == $minute) ? 'selected' : '' }}>{{ $minute }}</option>
 											@endforeach
 										</select>
 										<span>{{ __('global.min') }}</span>

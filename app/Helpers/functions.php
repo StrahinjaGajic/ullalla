@@ -164,14 +164,22 @@ function getMinutesList() {
 
 
 function getDaysOfTheWeek() {
-    return [__('functions.monday'), __('functions.tuesday'), __('functions.wednesday'), __('functions.thursday'), __('functions.friday'), __('functions.saturday'), __('functions.sunday')];
+    return [
+        'monday' => __('functions.monday'), 
+        'tuesday' => __('functions.tuesday'), 
+        'wednesday' => __('functions.wednesday'), 
+        'thursday' => __('functions.thursday'), 
+        'friday' => __('functions.friday'), 
+        'saturday' => __('functions.saturday'), 
+        'sunday' => __('functions.sunday')
+    ];
 }
 
 function getWorkingTime($days, $available_24_7, $timeFrom, $timeFromM, $timeTo, $timeToM, $showAsNightEscort = null, $nightEscorts = null) {
     $workingTime = null;
     // girl availability and working hours
     if ($available_24_7) {
-        $workingTime = __('fields.available_24_7');
+        $workingTime = 'Available 24/7';
         if ($showAsNightEscort) {
             $workingTime .= '&' . __('fields.night_escort');
         }
