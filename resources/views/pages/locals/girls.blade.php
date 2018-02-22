@@ -202,7 +202,8 @@
                                 </div>
                             </div>
                             <div class="form-group upload-video">
-                                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/><br><br>
+                                <video id="video" width="320" height="240" loop style="display: block;"></video>
                             </div>
                         </section>
 
@@ -210,7 +211,7 @@
                             <h3>{{ __('headings.service_offered_for') }}:</h3>
                             <div class="col-lg-12 col-sm-12 col-xs-12 services_5" style="margin-bottom:20px;">
                                 @foreach($serviceOptions as $serviceOption)
-                                <label class="control control--checkbox services_control"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
+                                <label class="control control--checkbox services_control"><a style="margin-left: 5px;">{{ ucfirst($serviceOption->service_option_name) }}</a>
                                     <input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
                                     <div class="control__indicator service_list"></div>
                                 </label>
@@ -225,7 +226,7 @@
                                         @php 
                                         $var = 'service_name_' . config()->get('app.locale');
                                         @endphp
-                                        <label class="control control--checkbox services_label" style="display: block;"><a>{{ $service->$var }}</a>
+                                        <label class="control control--checkbox services_label" style="display: block;"><a style="margin-left: 5px;">{{ $service->$var }}</a>
                                             <input type="checkbox" class="form-control" name="services[]" value="{{ $service->id }}" />
                                             <div class="control__indicator service_list"></div>
                                         </label>

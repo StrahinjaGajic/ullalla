@@ -33,7 +33,7 @@ return [
 
 	# edit profile
 	'save_changes' => 'Salva modifiche',
-	'show_more' => 'Mostra di piú',
+	'show_more' => 'Mostra di piu',
 	'show_less' => 'Mostra meno',
 
 	#prices
