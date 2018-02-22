@@ -742,7 +742,9 @@ pre {
     min-width: 230px;
 }
 
-input[type="text"], [type="password"], [type="email"] {
+input[type="text"],
+[type="password"],
+[type="email"] {
     font: 15px/24px "Lato", Arial, sans-serif;
     width: 100%;
     color: #4a6e78;
@@ -999,9 +1001,7 @@ input[list] {
 }
 
 
-.input-select {
-
-}
+.input-select {}
 
 .region {
     margin-top: 20px;
@@ -1035,7 +1035,7 @@ input[list] {
     color: white;
     background-color: #424242;
     margin-top: 30px;
-/*    width: 143.45px;*/
+    /*    width: 143.45px;*/
     height: 42px;
 }
 
@@ -1119,7 +1119,7 @@ h3 {
 }
 
 
-.choice{
+.choice {
     margin-bottom: 40px;
 }
 
@@ -1132,11 +1132,11 @@ h3 {
     background: #222;
 }
 
-.uploadcare--panel__content{
+.uploadcare--panel__content {
     background: #222;
     color: white;
     border: 1px solid #eee;
-   
+
 }
 
 
@@ -1147,20 +1147,22 @@ h3 {
 }
 
 .uploadcare--panel_multiple .uploadcare--tab_name_preview .uploadcare--tab__footer {
-    border-top: 1px solid #eee;  
+    border-top: 1px solid #eee;
 }
 
 .uploadcare--panel_multiple .uploadcare--tab_name_preview .uploadcare--tab__footer:before {
     content: none;
 }
 
-.uploadcare--dialog__panel .uploadcare--menu, .uploadcare--dialog__panel .uploadcare--menu__item {
+.uploadcare--dialog__panel .uploadcare--menu,
+.uploadcare--dialog__panel .uploadcare--menu__item {
     background: #222;
     border: 1px solid #eee;
     color: white;
 }
 
-.uploadcare--dialog__panel .uploadcare--menu, .uploadcare--dialog__panel .uploadcare--menu__item:hover {
+.uploadcare--dialog__panel .uploadcare--menu,
+.uploadcare--dialog__panel .uploadcare--menu__item:hover {
     background: #f26522;
     color: white;
 }
@@ -1219,12 +1221,13 @@ h3 {
     font-weight: 400;
     line-height: 40px;
     padding: 0 30px;
+    margin-top: 30px;
 }
 
 .uploadcare--widget__button_type_open:hover {
     background: #f26522;
     color: white;
-        font-size: 14px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 40px;
 }
@@ -1269,12 +1272,12 @@ h3 {
 
 .news_disabled {
     color: #222!important;
-    
+
 }
 
 .news_disabled::placeholder {
-   text-align: right;
-color: #222!important;
+    text-align: right;
+    color: #222!important;
 }
 
 .section-create-profile .uploadcare--widget {
@@ -1315,10 +1318,10 @@ color: #222!important;
 }
 
 .btn-success[disabled]:hover {
-       background: #f26522;
+    background: #f26522;
     color: white;
     border: 1px solid #f26522;
-    transition: all 0.3s ease 0s; 
+    transition: all 0.3s ease 0s;
 }
 
 .cancelBtn {
@@ -1331,7 +1334,8 @@ color: #222!important;
 }
 
 
-.daterangepicker td.active, .daterangepicker td.active:hover {
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
     background-color: #f26522;
 }
 
@@ -1432,8 +1436,41 @@ table.working-times-table .control--checkbox a,
 }
 
 
+.create_banner_table > tbody > tr > td {
+    padding: 8px;
+}
 
+.create_banner_table > tbody > tr > .form_group_td > .form-group {
+    margin-bottom: 0;
+}
 
+.inner_table > tbody > tr > td {
+    padding: 8px;
+}
+
+.layout-title > .banners_layout_title > a {
+    height: unset;
+    line-height: unset;
+}
+
+.add_new_banner {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccd3e1;
+    border-radius: 4px;
+    color: #484848!important;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 0 21px;
+    transition: all 0.3s ease 0s;
+}
+
+.add_new_banner:hover {
+    background: #f26522;
+    color: #fff!important;
+    border: 1px solid #f26522;
+}
 
 /****** Radio and checkbox input fields ******/
 
@@ -1473,81 +1510,79 @@ table.working-times-table .control--checkbox a,
 
 /*** MEDIA ***/
 
-
-
-
-
-@media (min-width:320px) and (max-width: 479px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+@media (min-width:320px) and (max-width: 479px) {
+    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     .vertical-menu {
         width: 100%;
     }
-    
+
     .save {
         width: 100%;
         text-align: center;
     }
-    
+
     .profile-info {
         margin: 0 auto;
         width: 100%;
     }
-    
+
     .input-select {
         width: 270px;
     }
-    
+
     #about {
         margin-right: 15px;
     }
-    
+
     .table > tbody > tr > td {
         padding: 8px;
     }
-    
+
     .image-preview-multiple ._list {
         text-align: center;
     }
-    
+
     #video {
         width: 95%;
         height: auto;
         margin-top: 30px;
     }
-    
+
     .control {
         margin-left: 0px;
     }
-    
+
     .table {
         table-layout: fixed;
         word-wrap: break-word;
         font-size: 12px;
     }
-    
+
     .product-description-tab.custom-tab .nav > li > a {
         font-size: 14px;
     }
-    
-            #home_logo {
+
+    #home_logo {
         height: 81px!important;
         width: 153px!important;
     }
-    
-        .mobile-menu-area {
-    padding: 10px 0 35px;
-}
+
+    .mobile-menu-area {
+        padding: 10px 0 35px;
+    }
 }
 
 /* iPhone 4 ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
     .vertical-menu {
         width: 100%;
     }
-        .profile-info {
+    .profile-info {
         margin: 0 auto;
         width: 100%;
     }
-    
+
     #city {
         width: 359px;
     }
@@ -1558,12 +1593,12 @@ table.working-times-table .control--checkbox a,
     #city {
         width: 343px!important;
     }
-    
+
     #home_logo {
         height: 81px;
         width: 153px;
     }
-    
+
     .mobile-menu-area {
         padding: 35px 0 35px;
     }
@@ -1572,50 +1607,46 @@ table.working-times-table .control--checkbox a,
 
 
 /* iPhone 5 & 5S in portrait */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) 
-and (orientation : portrait) { 
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
     .cancelBtn {
         position: unset;
         bottom: unset;
     }
-    
+
     .applyBtn {
         display: inline;
     }
-    
+
     .range_inputs {
-   height: unset;
+        height: unset;
         text-align: center;
-}
-    
+    }
+
     .pull-right {
         float: unset!important;
         margin-top: 30px!important;
     }
-    
+
     .image-preview-multiple {
         text-align: center;
     }
-    
+
     .flyer {
         font-size: 11px;
     }
-    
+
     .table {
         table-layout: unset;
     }
 }
-   
+
 }
 
 
 /* iPhone 5 & 5S in landscape */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) 
-and (orientation : landscape) { 
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
 
     .table > tbody > tr > td {
         padding: 8px!important;
@@ -1623,47 +1654,54 @@ and (orientation : landscape) {
 }
 
 /* iPhone 6 in portrait */
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px) 
-and (orientation : portrait) { 
 
-    
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+
+
     .cancelBtn {
         position: unset;
         bottom: unset;
     }
-    
+
     .applyBtn {
         display: inline;
     }
-    
+
     .range_inputs {
-   height: unset;
+        height: unset;
         text-align: center;
-}
-    
+    }
+
     .pull-right {
         float: unset!important;
         margin-top: 30px!important;
     }
-    
+
     .image-preview-multiple {
         text-align: center;
+    }
+
+    .banner_inner_form_group {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+    
+    .price_per {
+        display: inline-block;
+        width: 150px;
+        
     }
 }
 
 
 /* iPhone 6 in landscape */
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px) 
-and (orientation : landscape) { 
 
- .table > tbody > tr > td {
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+
+    .table > tbody > tr > td {
         padding: 8px!important;
     }
-    
+
     .cancelBtn {
         position: unset;
         bottom: unset;
@@ -1671,128 +1709,116 @@ and (orientation : landscape) {
         margin-top: 0px;
         float: right;
     }
-    
+
     .applyBtn {
         display: inline;
-        
+
+    }
+
+    .range_inputs {
+        height: unset;
+        width: 565px;
     }
     
-    .range_inputs {
-   height: unset;
-        width: 565px;
-}
+        .banner_inner_form_group {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+    
+    .price_per {
+        display: inline-block;
+        width: 150px;
+        
+    }
 }
 
 
 /* iPhone 6 Plus in landscape */
-@media only screen 
-and (min-device-width : 414px) 
-and (max-device-width : 736px) 
-and (orientation : landscape) { 
 
-.table > tbody > tr > td {
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: landscape) {
+
+    .table > tbody > tr > td {
         padding: 8px!important;
     }
 }
 
 
-@media (min-width:480px) and (max-width:599px) { /* smartphones, Android phones, landscape iPhone */ 
-
+@media (min-width:480px) and (max-width:599px) {
+    /* smartphones, Android phones, landscape iPhone */
 }
 
 
 
-@media (min-width:600px) and (max-width:800px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
-        .mobile-menu-area {
-    padding: 43px 0;
-}
-        .mobile-menu-area.home-4 {
-    padding: 35px 0 35px;
-}
+@media (min-width:600px) and (max-width:800px) {
+    /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+    .mobile-menu-area {
+        padding: 43px 0;
+    }
+    .mobile-menu-area.home-4 {
+        padding: 35px 0 35px;
+    }
     #city {
         width: 359px;
     }
-    
+
     .filters-reset {
         text-align: center;
     }
-    
+
     .product-img a.a-img {
         text-align: center;
     }
-    
+
     .vertical-menu {
         width: 100%;
     }
-    
+
     .profile-info {
         width: 100%;
     }
-    
+
     .save {
         text-align: center;
     }
-    
+
     .control {
         margin-left: 0px;
     }
-    
+
     #home_logo {
         height: 81px!important;
         width: 153px!important;
     }
-    
-        .mobile-menu-area {
-    padding: 13px 0 35px;
-}
+
+    .mobile-menu-area {
+        padding: 13px 0 35px;
+    }
 }
 
 @media (max-width:850px) {
     .vertical-menu {
         width: 100%;
     }
-    
+
     .profile-info {
         width: 100%;
     }
 }
 
-@media (min-width:801px) and (max-width: 1024px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-    
+@media (min-width:801px) and (max-width: 1024px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
 }
-@media (min-width:1025px) and (max-width: 1280px) { /* big landscape tablets, laptops, and desktops */ 
 
+@media (min-width:1025px) and (max-width: 1280px) {
+    /* big landscape tablets, laptops, and desktops */
 }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ 
 
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
 }
 
 /******** banners page ******/
+
 .btn-wrapper {
     margin-top: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

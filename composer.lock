@@ -1806,16 +1806,16 @@
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",
-            "version": "v0.11.1",
+            "version": "v0.11.1-pl-1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-FFMpeg/PHP-FFMpeg.git",
-                "reference": "c03e1149694846c2b79e021a720e2e5cafe9711d"
+                "reference": "e91b2276e349e28030e6d2a46eb292294fd5e947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-FFMpeg/PHP-FFMpeg/zipball/c03e1149694846c2b79e021a720e2e5cafe9711d",
-                "reference": "c03e1149694846c2b79e021a720e2e5cafe9711d",
+                "url": "https://api.github.com/repos/PHP-FFMpeg/PHP-FFMpeg/zipball/e91b2276e349e28030e6d2a46eb292294fd5e947",
+                "reference": "e91b2276e349e28030e6d2a46eb292294fd5e947",
                 "shasum": ""
             },
             "require": {
@@ -1886,7 +1886,7 @@
                 "video",
                 "video processing"
             ],
-            "time": "2018-02-20T17:44:55+00:00"
+            "time": "2018-02-21T19:24:02+00:00"
         },
         {
             "name": "psr/container",

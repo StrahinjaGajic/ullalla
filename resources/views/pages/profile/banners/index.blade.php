@@ -20,9 +20,9 @@
         <div class="col-sm-10 profile-info">
             <div class="btn-wrapper">
                 @if(Auth::guard('local')->check())
-                    <a href="{{ url('locals/@' . $user->username . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
+                    <a href="{{ url('locals/@' . $user->username . '/banners/create') }}" class="add_new_banner">{{ __('buttons.add_banner') }}</a>
                 @else
-                    <a href="{{ url('private/' . $user->id . '/banners/create') }}" class="btn btn-default">{{ __('buttons.add_banner') }}</a>
+                    <a href="{{ url('private/' . $user->id . '/banners/create') }}" class="add_new_banner">{{ __('buttons.add_banner') }}</a>
                 @endif
             </div>
             <div class="btn-wrapper">
@@ -33,7 +33,7 @@
             @if($user->banners()->count() > 0)
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
-                    <div class="layout-title toggle_arrow">
+                    <div class="layout-title toggle_arrow banners_layout_title">
                         <a>{{ __('headings.banners') }} <i class="fa fa-caret-down"></i></a>
                     </div>
                 </div>

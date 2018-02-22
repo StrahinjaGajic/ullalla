@@ -41,22 +41,24 @@ img {
     border: none;
 }
 
+#city {
+    width: calc(100% - 47.5px);
+}
+
 input.form-control {
     border: 1px solid #f26522;
     border-radius: 0;
     font-family: Arial;
     font-size: 14px;
     font-weight: normal;
-    width: 327px;
+    
 }
 
 .region.geolocation {
-    width: 327px;
+    width: 100%;
 }
 
-#city {
-    width: 232.5px;
-}
+
 
 
 .go {
@@ -272,9 +274,7 @@ and (orientation : landscape) {
         padding-right: 15px;
     }
     
-    #city {
-        width: 232.5px!important;
-    }
+
 }
 
 
@@ -311,9 +311,7 @@ and (min-device-width : 320px)
 and (max-device-width : 568px) 
 and (orientation : landscape) {
     
-    #city {
-        width: 232.5px!important;
-    }
+
 
     
         .left_set {
@@ -347,9 +345,7 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (orientation : landscape) { 
     
-    #city {
-        width: 242.5px;
-    }
+
     
 }
 
@@ -386,9 +382,7 @@ and (orientation : landscape) {
         padding-right: 15px;
     }
     
-     #city {
-        width: 242.5px;
-    }
+
 }
 
 
@@ -403,9 +397,7 @@ and (orientation : portrait) {
         position: unset!important;
     }
     
-    #city {
-        width: 242.5px;
-    }
+
     
    
 }
@@ -439,9 +431,7 @@ and (orientation : landscape) {
         height: 35px!important;
     }
     
-    #city {
-        width: 234.5px;
-    }
+
 }
 
 
@@ -522,9 +512,7 @@ and (orientation : landscape) {
         width: 282px!important;
     }
     
-      #city {
-        width: 233px!important;
-    }
+
     
     .fixed {
         height: 89px!important;
