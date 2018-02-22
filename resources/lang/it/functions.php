@@ -120,9 +120,9 @@ return [
 
 
     #getBioFields
-    'age' => 'Etá',
+    'age' => 'Eta',
     'type' => 'Tipo',
-    'country_id' => 'Nazionalitá',
+    'country_id' => 'Nazionalita',
     'eye_color' => 'Occhi',
     'hair_color' => 'Capelli',
     'height' => 'Altezza',
@@ -147,7 +147,7 @@ return [
 
     #getWorkplaceFields
     'club_name' => 'Club',
-    'city' => 'Cittá',
+    'city' => 'Citta',
     'address' => 'Indirizzo',
     'incall_type' => 'Servizio interno',
     'outcall_type' => 'Servizio esterno',
@@ -156,8 +156,8 @@ return [
 
     #getOrderBy
     'nickname_asc' => 'Nickname',
-    'created_at_desc' => 'Piú recente',
-    'created_at_asc' => 'Piú vecchio',
+    'created_at_desc' => 'Piu recente',
+    'created_at_asc' => 'Piu vecchio',
     'service_price_asc' => 'Prezzo ascendente',
     'service_price_desc' => 'Prezzo discendente',
 
@@ -201,11 +201,11 @@ return [
     'card_on_file' => 'Card on file',
 
     #working_times
-    'Monday' => 'Lunedí',
-    'Tuesday' => 'Martedí',
-    'Wednesday' => 'Mercoledí',
-    'Thursday' => 'Giovedí',
-    'Friday' => 'Venerdí',
+    'Monday' => 'Lunedi',
+    'Tuesday' => 'Martedi',
+    'Wednesday' => 'Mercoledi',
+    'Thursday' => 'Giovedi',
+    'Friday' => 'Venerdi',
     'Saturday' => 'Sabato',
     'Sunday' => 'Domenica',
 

@@ -4,14 +4,14 @@
 return [
     'girl' => 'Ragazza',
     'local' => 'Locale',
-    'city' => 'Citt?',
+    'city' => 'Citta',
 
     # edit profile
     'nickname' => 'Nickname',
     'first_name' => 'Nome',
     'last_name' => 'Cognome',
     'nationality' => 'Nazionalit?',
-    'age' => 'Et?',
+    'age' => 'Eta',
     'height' => 'Altezza',
     'weight' => 'Peso',
     'sex' => 'Sesso',
@@ -35,7 +35,7 @@ return [
     'no_withheld_numbers' => 'No numeri anonimi',
 
     # prices
-    'unit' => 'Unit?',
+    'unit' => 'Unita',
     'currency' => 'Valuta',
 
     # working time

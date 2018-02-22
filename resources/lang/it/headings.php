@@ -12,12 +12,11 @@ return [
     'good_job_title' => 'Buon lavoro!',
     'account_created_title' => 'Congratulazioni',
     'package_expiration_title' => 'Scadenza pacchetti',
-    'this_banner_is' => 'Questo banner ?',
-    'this_one_is_also' => 'Questo ? anche',
+    'this_banner_is' => 'Questo banner e',
+    'this_one_is_also' => 'Questo e anche',
 
     # edit profile nav
     'about_me' => 'Su di me',
-    'about_us' => 'Su di me',
     'bio' => 'Bio',
     'contact' => 'Contatti',
     'gallery' => 'Galleria',
@@ -69,7 +68,7 @@ return [
 
     # working time
     'from' => 'Dalle',
-    'to' => 'alle',
+    'to' => 'Alle',
 
     # workplace
     'available_for' => 'Disponibile per',

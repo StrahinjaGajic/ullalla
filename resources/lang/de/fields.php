@@ -60,8 +60,8 @@ return [
     'service' => 'Service',
 
     # locals
-    'male' => 'männlich',
-    'female' => 'weiblich',
+    'male' => 'Männlich',
+    'female' => 'Weiblich',
 
     #profile
     'transsexual' => 'Transsexuell',
@@ -69,9 +69,9 @@ return [
     'bisexual' => 'Bisexuell',
     'homosexual' => 'Homosexuell',
     'normal' => 'Normal',
-    'slim' => 'dünn',
-    'athletic' => 'athletisch',
-    'chubby' => 'mollig',
+    'slim' => 'Dünn',
+    'athletic' => 'Athletisch',
+    'chubby' => 'Mollig',
     'a' => 'A',
     'b' => 'B',
     'c' => 'C',
@@ -88,10 +88,10 @@ return [
     'brunette' => 'Brunette',
     'blond' => 'Blond',
     'red' => 'Rothaarig',
-    'shaved' => 'rasiert',
-    'hairy' => 'behaart',
-    'partial' => 'teilrasiert',
-    'occasionally' => 'gelegentlich',
+    'shaved' => 'Rasiert',
+    'hairy' => 'Behaart',
+    'partial' => 'Teilrasiert',
+    'occasionally' => 'Gelegentlich',
     'website_url' => 'Webseite',
     'telephone' => 'Telefon',
     'mobile_phone' => 'Mobil',
