@@ -613,6 +613,10 @@ border: none;
      padding-top: 20px;
  }
 
+ .image-preview-single img {
+    display: block;
+ }
+
  .image-preview-multiple ._item {
      margin: 0px 20px 20px 0px;
      display: inline-block;

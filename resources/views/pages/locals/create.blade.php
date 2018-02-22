@@ -83,9 +83,9 @@
 
                         <section class="tab-pane" id="gallery-tab">
                             <div class="form-group">
-                                <div class="image-preview">
+                                <div class="image-preview-single">
                                     <input type="hidden" role="uploadcare-uploader" name="logo" data-crop="490x560 minimum" data-images-only="">
-                                    <div class="_list"></div>
+                                    <img src="" alt="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -383,7 +383,7 @@
         $(window).on('load',function(){
             $('#create_profile_modal').modal('show');
             // change text of a button to upload logo
-            $('input[name="logo"]').closest('.image-preview').find('button.uploadcare--widget__button').text('{{ __('buttons.upload_logo') }}');
+            $('input[name="logo"]').closest('.image-preview-single').find('button.uploadcare--widget__button_type_open').text('{{ __('buttons.upload_logo') }}');
         });
         $(function () {
 
@@ -481,13 +481,35 @@
             };
         }
 
+        function installWidgetPreviewSingle(widget, img) {
+            widget.onChange(function(file) {
+                img.css('visibility', 'hidden');
+                img.attr('src', '');
+                if (file) {
+                    file.done(function(fileInfo) {
+                        var previewUrl = fileInfo.cdnUrl + '-/scale_crop/100x100/center/';
+                        img.attr('src', previewUrl);
+                        img.css('visibility', 'visible');
+                    });
+                }
+            });
+        }
+        
+        // implements functions
         $(function() {
             // preview images initialization
             $('.image-preview-multiple').each(function() {
                 installWidgetPreviewMultiple(
                     uploadcare.MultipleWidget($(this).children('input')),
                     $(this).children('._list')
-                    );
+                );
+            });
+
+            $('.image-preview-single').each(function() {
+                installWidgetPreviewSingle(
+                    uploadcare.SingleWidget($(this).children('input')),
+                    $(this).children('img')
+                );
             });
 
             $('[role=uploadcare-uploader]').each(function() {

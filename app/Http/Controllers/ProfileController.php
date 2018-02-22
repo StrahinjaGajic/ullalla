@@ -108,7 +108,7 @@ class ProfileController extends Controller
         $lng = null;
 
         if ($fullAddress) {
-            $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($fullAddress).'&sensor=false');
+            $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&address='.urlencode($fullAddress).'&sensor=true');
             $geo = json_decode($geo, true);
 
             if (isset($geo['status']) && ($geo['status'] == 'OK')) {

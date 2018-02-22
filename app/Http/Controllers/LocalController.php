@@ -80,6 +80,23 @@ class LocalController extends Controller
             ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
         );
 
+        // define lng and lat
+        $address = request('street');
+        $city = request('city');
+        $fullAddress = $address && $city ? $address . ', ' . $city : null;
+        $lat = null;
+        $lng = null;
+
+        if ($fullAddress) {
+            $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&address='.urlencode($fullAddress).'&sensor=true');
+            $geo = json_decode($geo, true);
+
+            if (isset($geo['status']) && ($geo['status'] == 'OK')) {
+                $lat = $geo['results'][0]['geometry']['location']['lat'];
+                $lng = $geo['results'][0]['geometry']['location']['lng'];
+            }
+        }
+
         // get working time
         $workingTime = getWorkingTime(
             $request->days,
@@ -98,9 +115,11 @@ class LocalController extends Controller
             $user->mobile = request('mobile');
             $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->website = request('website');
-            $user->street = request('street');
+            $user->street = $address;
             $user->zip = request('zip');
-            $user->city = request('city');
+            $user->city = $city;
+            $user->lat = $lat;
+            $user->lng = $lng;
             $user->about_me = request('about_me');
             $user->local_type_id = request('local_type_id');
             $user->photo = storeAndGetUploadCareFiles(request('logo'));
@@ -148,6 +167,24 @@ class LocalController extends Controller
             ['mobile.required_with' => __('validation.mobile_required_with_sms_checked')]
         );
 
+        // define lng and lat
+        $address = request('street');
+        $city = request('city');
+        $fullAddress = $address && $city ? $address . ', ' . $city : null;
+        $lat = null;
+        $lng = null;
+
+        if ($fullAddress) {
+            $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&address='.urlencode($fullAddress).'&sensor=true');
+            $geo = json_decode($geo, true);
+
+            if (isset($geo['status']) && ($geo['status'] == 'OK')) {
+                $lat = $geo['results'][0]['geometry']['location']['lat'];
+                $lng = $geo['results'][0]['geometry']['location']['lng'];
+            }
+        }
+
+        // update contact
         $local = Auth::guard('local')->user();
         $local->username = request('username');
         $local->email = request('email');
@@ -158,9 +195,11 @@ class LocalController extends Controller
         }
         $local->username = $request->username;
         $local->name = $request->name;
-        $local->street = $request->street;
-        $local->city = $request->city;
+        $local->street = $address;
+        $local->city = $city;
         $local->zip = $request->zip;
+        $local->lat = $lat;
+        $local->lng = $lng;
         $local->website = $request->web;
         $local->phone = $request->phone;
         $local->mobile = $request->mobile;

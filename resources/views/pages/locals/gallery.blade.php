@@ -18,21 +18,17 @@
         <div class="row" style="margin-left: 1px;">
             <h1>{{ __('headings.logo') }}</h1>
             <div class="form-group">
-                <div class="image-preview">
+                <div class="image-preview-single">
                     <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="490x560 minimum" data-images-only=""><br><br>
-                    <div class="_list">
-                        <div class="_item">
-                            @if($local->photo)
-                                <img src="{{ $local->photo .'/-/resize/185x211/' }}">
-                            @endif
-                        </div>
-                    </div>
+                    @if($local->photo)
+                        <img src="{{ $local->photo .'/-/resize/185x211/' }}">
+                    @endif
                 </div>
             </div>
             <h1>{{ __('headings.photos') }}</h1>
             <div class="form-group">
                 <div class="image-preview-multiple">
-                    <input type="hidden" onchange="aa()" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
+                    <input type="hidden" role="uploadcare-uploader" name="photos" data-multiple-min="4" data-multiple-max="9" data-crop="490x560 minimum" data-images-only="" data-multiple="">
                     <div class="_list">
                         @for ($i = 0; $i < substr($local->photos, -2, 1); $i++)
                         <div class="_item">
@@ -63,16 +59,17 @@
 
 @section('perPageScripts')
 <script>
-
 ////////// 2. UPLOAD CARE ////////
+// change text of a button to upload logo
+$(window).on('load',function(){
+    $('input[name="photo"]').closest('.image-preview-single').find('button.uploadcare--widget__button_type_open').text('{{ __('buttons.upload_logo') }}');
+});
+
 const widget = uploadcare.Widget('[role=uploadcare-uploader]')
 widget.value('{{ $local->photos }}')
 
 const widgetLogo = uploadcare.Widget('[role=uploadcare-uploaderLogo]')
 widgetLogo.value('{{ $local->photo }}')
-function aa(){
-    console.log('aa');
-}
 
 // preview uploaded images function
 function installWidgetPreviewMultiple(widget, list) {
@@ -87,6 +84,20 @@ function installWidgetPreviewMultiple(widget, list) {
                             [$('<img/>', {src: src, style: "width: 250px; height: 200px;"})])
                         );
                 });
+            });
+        }
+    });
+}
+
+function installWidgetPreviewSingle(widget, img) {
+    widget.onChange(function(file) {
+        img.css('visibility', 'hidden');
+        img.attr('src', '');
+        if (file) {
+            file.done(function(fileInfo) {
+                var previewUrl = fileInfo.cdnUrl + '-/resize/185x211/';
+                img.attr('src', previewUrl);
+                img.css('visibility', 'visible');
             });
         }
     });
@@ -127,6 +138,7 @@ function fileTypeLimit(types) {
     };
 }
 
+// implements functions
 $(function() {
     // preview images initialization
     $('.image-preview-multiple').each(function() {
@@ -134,6 +146,13 @@ $(function() {
             uploadcare.MultipleWidget($(this).children('input')),
             $(this).children('._list')
             );
+    });
+
+    $('.image-preview-single').each(function() {
+        installWidgetPreviewSingle(
+            uploadcare.SingleWidget($(this).children('input')),
+            $(this).children('img')
+        );
     });
 
     $('[role=uploadcare-uploader]').each(function() {
