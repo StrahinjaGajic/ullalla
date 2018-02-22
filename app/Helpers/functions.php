@@ -109,7 +109,8 @@ function getCurrencies() {
 }
 
 function getPriceTypes() {
-    return [__('functions.outcall'), __('functions.incall')];
+//    return [__('functions.outcall'), __('functions.incall')];
+    return ['outcall', 'incall'];
 }
 
 function getFilterYears() {

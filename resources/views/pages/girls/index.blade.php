@@ -187,7 +187,8 @@
 								<ul>
 									<li>
 										@foreach(getPriceTypes() as $priceType)
-										@php 
+										@php
+										$forShow = __('functions.'. $priceType);
 										$priceTypeQueryString = ['price_type' => $priceType];
 										$completeQueryString = [];
 										$requestQuery = request()->query();
@@ -208,7 +209,7 @@
 										@endphp
 
 										<label class="control control--checkbox">
-											<a href="{{ urldecode(route('private', $completeQueryString, false)) }}">{{ ucfirst($priceType) }}
+											<a href="{{ urldecode(route('private', $completeQueryString, false)) }}">{{ ucfirst($forShow) }}
 												<span>({{ \App\Models\User::payed()->whereNotNull($priceType . '_type')->count() }})</span>
 											</a>
 											<input type="radio" name="price_type" value="{{ $priceType }}" {{ request('price_type') && $priceType == request('price_type') ? 'checked' : '' }}/>

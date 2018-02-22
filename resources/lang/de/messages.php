@@ -15,7 +15,7 @@ return [
     'error_somethings_wrong' => 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.',
     'success_changes_saved' => 'Änderungen erfolgreich gespeichert.',
     'info_account_not_approved' => 'Ihr Profil wurde noch nicht geprüft. Bitte warten Sie, bis wir Ihr Profil geprüft haben.',
-    'account_already_activated' => 'Account already activated',
+    'account_already_activated' => 'Dieses Konto ist schon aktiviert',
     'account_created' => 'Profil erfolgreich erstellt. Sie können nun Ihr Profil benutzen.',
     'account_created_elite' => 'Profil wurde erfolgreich erstellet. Wir kontaktieren Sie innert 48 Stunden. Vielen Dank für Ihre Geduld.',
 
