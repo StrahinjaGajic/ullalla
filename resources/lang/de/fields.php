@@ -37,6 +37,7 @@ return [
     # prices
     'unit' => 'Einheit',
     'currency' => 'Währung',
+    'on_demand' => 'Auf Anfrage',
 
     # working time
     'available_24_7' => 'Verfügbar 24/7',

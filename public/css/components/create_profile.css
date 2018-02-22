@@ -71,6 +71,7 @@
     border-radius: 5px;
     box-shadow: none;
     color: white;
+    background-color: #222;
 }
 
 #selectDur_1,
@@ -173,7 +174,7 @@
 
 
  .uploadcare--widget__button_type_open {
-     width: 125px;
+     min-width: 125px;
      height: 40px;
      background: #f26522;
      color: #fff;

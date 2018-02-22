@@ -37,11 +37,11 @@ class MonthOfTheGirlPackageExpiredNotification
         if (!$girlOfTheMonthNotification) {
             $convertedExpiryDate = date('jS F Y', strtotime($event->user->package2_expiry_date));
             $notification = new Notification();
-            $notification->title_de = 'Girl of The Month Package Expiration';
+            $notification->title_de = 'Ablauf Girl des Monats-Paket';
             $notification->title_en = 'Girl of The Month Package Expiration';
             $notification->title_fr = 'Girl of The Month Package Expiration';
             $notification->title_it = 'Girl of The Month Package Expiration';
-            $notification->note_de = 'Your girl of the month package expires on ' . $convertedExpiryDate;
+            $notification->note_de = 'Ihr Girl des Monats läuft am ' . $convertedExpiryDate. ' ab';
             $notification->note_en = 'Your girl of the month package expires on ' . $convertedExpiryDate;
             $notification->note_fr = 'Your girl of the month package expires on ' . $convertedExpiryDate;
             $notification->note_it = 'Your girl of the month package expires on ' . $convertedExpiryDate;

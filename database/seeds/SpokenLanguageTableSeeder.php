@@ -13,7 +13,7 @@ class SpokenLanguageTableSeeder extends Seeder
     public function run()
     {
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'English';
+        $spokenLanguage->spoken_language_name_de = 'Englisch';
         $spokenLanguage->spoken_language_name_en = 'English';
         $spokenLanguage->spoken_language_name_it = 'English';
         $spokenLanguage->spoken_language_name_fr = 'English';
@@ -21,7 +21,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'German';
+        $spokenLanguage->spoken_language_name_de = 'Deutsch';
         $spokenLanguage->spoken_language_name_en = 'German';
         $spokenLanguage->spoken_language_name_it = 'German';
         $spokenLanguage->spoken_language_name_fr = 'German';
@@ -30,7 +30,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Italian';
+        $spokenLanguage->spoken_language_name_de = 'Italienisch';
         $spokenLanguage->spoken_language_name_en = 'Italian';
         $spokenLanguage->spoken_language_name_it = 'Italian';
         $spokenLanguage->spoken_language_name_fr = 'Italian';
@@ -38,7 +38,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'French';
+        $spokenLanguage->spoken_language_name_de = 'Französisch';
         $spokenLanguage->spoken_language_name_en = 'French';
         $spokenLanguage->spoken_language_name_it = 'French';
         $spokenLanguage->spoken_language_name_fr = 'French';
@@ -46,7 +46,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Spanish';
+        $spokenLanguage->spoken_language_name_de = 'Spanisch';
         $spokenLanguage->spoken_language_name_en = 'Spanish';
         $spokenLanguage->spoken_language_name_it = 'Spanish';
         $spokenLanguage->spoken_language_name_fr = 'Spanish';
@@ -54,7 +54,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Russian';
+        $spokenLanguage->spoken_language_name_de = 'Russisch';
         $spokenLanguage->spoken_language_name_en = 'Russian';
         $spokenLanguage->spoken_language_name_it = 'Russian';
         $spokenLanguage->spoken_language_name_fr = 'Russian';
@@ -62,7 +62,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Portuguese';
+        $spokenLanguage->spoken_language_name_de = 'Portugiesisch';
         $spokenLanguage->spoken_language_name_en = 'Portuguese';
         $spokenLanguage->spoken_language_name_it = 'Portuguese';
         $spokenLanguage->spoken_language_name_fr = 'Portuguese';
@@ -70,7 +70,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Dutch';
+        $spokenLanguage->spoken_language_name_de = 'Holländisch';
         $spokenLanguage->spoken_language_name_en = 'Dutch';
         $spokenLanguage->spoken_language_name_it = 'Dutch';
         $spokenLanguage->spoken_language_name_fr = 'Dutch';
@@ -78,7 +78,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Serbian';
+        $spokenLanguage->spoken_language_name_de = 'Serbisch';
         $spokenLanguage->spoken_language_name_en = 'Serbian';
         $spokenLanguage->spoken_language_name_it = 'Serbian';
         $spokenLanguage->spoken_language_name_fr = 'Serbian';
@@ -86,7 +86,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Slovenian';
+        $spokenLanguage->spoken_language_name_de = 'Slowenisch';
         $spokenLanguage->spoken_language_name_en = 'Slovenian';
         $spokenLanguage->spoken_language_name_it = 'Slovenian';
         $spokenLanguage->spoken_language_name_fr = 'Slovenian';
@@ -94,7 +94,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Slovak';
+        $spokenLanguage->spoken_language_name_de = 'Slowakisch';
         $spokenLanguage->spoken_language_name_en = 'Slovak';
         $spokenLanguage->spoken_language_name_it = 'Slovak';
         $spokenLanguage->spoken_language_name_fr = 'Slovak';
@@ -102,7 +102,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Greek';
+        $spokenLanguage->spoken_language_name_de = 'Griechsich';
         $spokenLanguage->spoken_language_name_en = 'Greek';
         $spokenLanguage->spoken_language_name_it = 'Greek';
         $spokenLanguage->spoken_language_name_fr = 'Greek';
@@ -110,7 +110,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Bulgarian';
+        $spokenLanguage->spoken_language_name_de = 'Bulgarisch';
         $spokenLanguage->spoken_language_name_en = 'Bulgarian';
         $spokenLanguage->spoken_language_name_it = 'Bulgarian';
         $spokenLanguage->spoken_language_name_fr = 'Bulgarian';
@@ -118,7 +118,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Czech';
+        $spokenLanguage->spoken_language_name_de = 'Tschechisch';
         $spokenLanguage->spoken_language_name_en = 'Czech';
         $spokenLanguage->spoken_language_name_it = 'Czech';
         $spokenLanguage->spoken_language_name_fr = 'Czech';
@@ -126,7 +126,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Indian';
+        $spokenLanguage->spoken_language_name_de = 'Indisch';
         $spokenLanguage->spoken_language_name_en = 'Indian';
         $spokenLanguage->spoken_language_name_it = 'Indian';
         $spokenLanguage->spoken_language_name_fr = 'Indian';
@@ -134,7 +134,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Arabic';
+        $spokenLanguage->spoken_language_name_de = 'Arabisch';
         $spokenLanguage->spoken_language_name_en = 'Arabic';
         $spokenLanguage->spoken_language_name_it = 'Arabic';
         $spokenLanguage->spoken_language_name_fr = 'Arabic';
@@ -142,7 +142,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Thai';
+        $spokenLanguage->spoken_language_name_de = 'Thailändisch';
         $spokenLanguage->spoken_language_name_en = 'Thai';
         $spokenLanguage->spoken_language_name_it = 'Thai';
         $spokenLanguage->spoken_language_name_fr = 'Thai';
@@ -150,7 +150,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Japanese';
+        $spokenLanguage->spoken_language_name_de = 'Japanisch';
         $spokenLanguage->spoken_language_name_en = 'Japanese';
         $spokenLanguage->spoken_language_name_it = 'Japanese';
         $spokenLanguage->spoken_language_name_fr = 'Japanese';
@@ -158,7 +158,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Chinese';
+        $spokenLanguage->spoken_language_name_de = 'Chinesisch';
         $spokenLanguage->spoken_language_name_en = 'Chinese';
         $spokenLanguage->spoken_language_name_it = 'Chinese';
         $spokenLanguage->spoken_language_name_fr = 'Chinese';
@@ -166,7 +166,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Finnish';
+        $spokenLanguage->spoken_language_name_de = 'Finnisch';
         $spokenLanguage->spoken_language_name_en = 'Finnish';
         $spokenLanguage->spoken_language_name_it = 'Finnish';
         $spokenLanguage->spoken_language_name_fr = 'Finnish';
@@ -174,7 +174,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Norwegian';
+        $spokenLanguage->spoken_language_name_de = 'Norwegisch';
         $spokenLanguage->spoken_language_name_en = 'Norwegian';
         $spokenLanguage->spoken_language_name_it = 'Norwegian';
         $spokenLanguage->spoken_language_name_fr = 'Norwegian';
@@ -182,7 +182,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Swedish';
+        $spokenLanguage->spoken_language_name_de = 'Swedisch';
         $spokenLanguage->spoken_language_name_en = 'Swedish';
         $spokenLanguage->spoken_language_name_it = 'Swedish';
         $spokenLanguage->spoken_language_name_fr = 'Swedish';
@@ -190,7 +190,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Danish';
+        $spokenLanguage->spoken_language_name_de = 'Dänisch';
         $spokenLanguage->spoken_language_name_en = 'Danish';
         $spokenLanguage->spoken_language_name_it = 'Danish';
         $spokenLanguage->spoken_language_name_fr = 'Danish';
@@ -198,7 +198,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Turkish';
+        $spokenLanguage->spoken_language_name_de = 'Turkisch';
         $spokenLanguage->spoken_language_name_en = 'Turkish';
         $spokenLanguage->spoken_language_name_it = 'Turkish';
         $spokenLanguage->spoken_language_name_fr = 'Turkish';
@@ -206,7 +206,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Polish';
+        $spokenLanguage->spoken_language_name_de = 'Polnisch';
         $spokenLanguage->spoken_language_name_en = 'Polish';
         $spokenLanguage->spoken_language_name_it = 'Polish';
         $spokenLanguage->spoken_language_name_fr = 'Polish';
@@ -214,7 +214,7 @@ class SpokenLanguageTableSeeder extends Seeder
         $spokenLanguage->save();
 
         $spokenLanguage = new SpokenLanguage;
-        $spokenLanguage->spoken_language_name_de = 'Romanian';
+        $spokenLanguage->spoken_language_name_de = 'Rumänisch';
         $spokenLanguage->spoken_language_name_en = 'Romanian';
         $spokenLanguage->spoken_language_name_it = 'Romanian';
         $spokenLanguage->spoken_language_name_fr = 'Romanian';

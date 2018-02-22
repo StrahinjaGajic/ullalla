@@ -198,7 +198,7 @@ return [
     'local' => 'Lokal',
 
     #add_card
-    'card_on_file' => 'Bestehende Kreditkarte',
+    'card_on_file' => 'Kartennummer',
 
     #working_times
     'Monday' => 'Montag',
@@ -210,8 +210,8 @@ return [
     'Sunday' => 'Sonntag',
 
     #statistics
-    'statistics' => 'Statistics',
-    'visitors' => 'Visitors',
+    'statistics' => 'Statistik',
+    'visitors' => 'Besucher',
 
     #girls
     'menage_table_items' => 'Menage Table Items',

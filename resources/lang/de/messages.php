@@ -25,6 +25,12 @@ return [
     'email_expired_package' => 'Ihr Basis-Paket ist abgelaufen. Um Ihr Paket zu reaktivieren, klicken Sie auf folgenden Link',
     'scheduled_default_package' => 'Sie haben erfolgreich Ihr neues Aktivierungsdatum hinzugefügt. Die Aktivierung erfolgt sofort nach Ablauf des aktuellen Pakets',
     'scheduled_gotm_package' => 'Sie haben erfolgreich ein neues Aktivierungsdatum hinzugefügt. Die Aktivierung erfolgt sofort nach Ablauf des aktuellen Paketskage. This activation date will immediately take its place after your current package expires',
+    'scheduled_packages' => 'Sie haben erfolgreich Ihr Paket verlängert. Die Aktivierung erfolgt, sobald das aktuelle Paket abläuft',
+    'gotm_package_successfully_saved' => 'Girl des Monats erfolgreich hinzugefügt',
+    'd_package_successfully_saved' => 'Basis Paket erfolgreich hinzugefügt',
+    'scheduled_lotm_package' => 'Sie haben erfolgreich ein neues Aktivierungsdatum für Lokal des Monats hinzugefügt. Die Aktivierung erfolgt, sobald das aktuelle Paket abläuft',
+    'lotm_package_successfully_saved' => 'Paket Lokal des Monats erfolgreich hinzugefügt','gotm_package_required' => 'Paket Girl des Monats ist erforderlich',
+    'lotm_package_required' => 'Paket Lokal des Monats ist erforderlich',
 
     'email_gotm_expire_warning_package' => 'Ihr Paket Girl des Monats läuft in K¨rze ab. Um Ihr Paket zu verlängern, klicken Sie auf folgenden Link',
     'email_gotm_expired_package' => 'Ihr Paket Girl des Monats ist abgelaufen. Um Ihr Paket zu reaktivieren, klicken Sie bitte auf folgenden Link',
@@ -46,7 +52,6 @@ return [
     'error' => 'error',
     'min_dimensions' => 'Min. Dimensionen',
 
-    'account_already_activated' => 'Profil bereits aktiviert',
 
     #blackbook
     'success_blackbook_entry' => 'Ein neuer Black Book Eintrag wurde erfolgreich erstellt.',
