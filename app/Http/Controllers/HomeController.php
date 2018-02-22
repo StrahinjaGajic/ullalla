@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Local;
 use App\Models\Banner;
 use App\Models\BannerPage;
 use Illuminate\Http\Request;

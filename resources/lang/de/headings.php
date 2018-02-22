@@ -7,6 +7,7 @@ return [
     'gotm' => 'Girl des Monats',
     'totm' => 'Transe des Monats',
     'lotm' => 'Lokale des Monats',
+    'potm' => 'Private des Monats',
     'default_error_title' => 'Ein Fehler ist aufgetreten',
     'info_account_not_approved_title' => 'Profil wurde noch nicht freigeschalten',
     'good_job_title' => 'Good job!',
