@@ -13,9 +13,9 @@ use App\Models\SpokenLanguage;
 class SearchController extends Controller
 {
 	public function getQuickSeachResults(Request $request)
-	{		
+	{
 		$this->validate($request, [
-			'type' => 'required',
+			'gender_type' => 'required',
 			'radius' => 'required',
 			'city' => 'required'
 		]);
