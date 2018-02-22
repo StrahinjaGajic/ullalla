@@ -43,6 +43,7 @@
                                 <div class="form-group">
                                     <label class="control-label">{{ __('fields.mobile') }}</label>
                                     <input type="text" class="form-control mobile-phone" name="mobile" id="mobile"/>
+                                    <input type="hidden" name="dial_code">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">{{ __('labels.web') }}</label>
@@ -663,10 +664,15 @@
 
 
 <script>
-    // my checkbox act like a radio button
     $(function () {
-        $("input.gotm_checkbox:checkbox").on('change', function() {
-            $('input.gotm_checkbox:checkbox').not(this).prop('checked', false);
+        // change dial code
+        var dialCodeInput = $('input[name="dial_code"]');
+        $(window).on('load', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
+
+        $('#mobile').on('keyup', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
         });
     });
 

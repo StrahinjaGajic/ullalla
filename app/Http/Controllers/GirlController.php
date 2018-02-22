@@ -17,7 +17,7 @@ use Carbon\Carbon;
 class GirlController extends Controller
 {
 	public function getIndex(Request $request)
-	{		
+	{
 		$services = Service::with('users')->get();
 		$spokenLanguages = SpokenLanguage::with('users')->get();
 		$maxPrice = \DB::table('prices')->max('service_price');

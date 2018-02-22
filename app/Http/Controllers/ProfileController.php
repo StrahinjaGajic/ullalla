@@ -181,7 +181,7 @@ class ProfileController extends Controller
             $user->email = request('email');
             $user->website = request('website');
             $user->phone = request('phone');
-            $user->mobile = request('mobile');
+            $user->mobile = request('dial_code') . ' ' . request('mobile');
             $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->prefered_contact_option = request('prefered_contact_option');
             $user->skype_name = request('skype_name');
@@ -362,7 +362,7 @@ class ProfileController extends Controller
         ]);
 
         $user->phone = request('phone');
-        $user->mobile = request('mobile');
+        $user->mobile = request('dial_code') . ' ' . request('mobile');
         $user->sms_notifications = request('sms_notifications') ? '1' : '0';
         $user->website = request('website');
         $user->prefered_contact_option = request('prefered_contact_option');

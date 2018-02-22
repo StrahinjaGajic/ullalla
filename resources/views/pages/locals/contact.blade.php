@@ -113,28 +113,17 @@
                                 @endif
                             </div>
                         </div>
-<!--
                         <div class="col-sm-6">
-                            <div class="col-3 input-effect {{ $errors->has('mobile') ? 'has-error' : ''  }}">
-                                <input class="effect-16" type="tel" id="mobile" placeholder="" name="mobile" value="{{ $local->mobile }}">
-                                <label>{{ __('fields.mobile') }}</label>
+                            <div class="col-3 input-effect {{ $errors->has('mobile') ? 'has-error' : ''  }}" style="margin:3px auto;">
+                                <label>{{ __('fields.mobile') }}*</label>
+                                <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $local->mobile }}" id="mobile">
+                                <input type="hidden" name="dial_code">
                                 <span class="focus-border"></span>
-                                @if ($errors->has('mobile'))
-                                <span class="help-block">{{ $errors->first('mobile') }}</span>
+                                @if($errors->has('mobile'))
+                                    <div class="has-error">{{ $errors->first('mobile') }}</div>
                                 @endif
                             </div>
                         </div>
--->
-                 <div class="col-sm-6">
-                    <div class="col-3 input-effect" style="margin:3px auto;">
-                        <label>{{ __('fields.mobile') }}*</label>
-                        <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $local->mobile }}" id="mobile">
-                        <span class="focus-border"></span>
-                        @if($errors->has('mobile'))
-                        <div class="has-error">{{ $errors->first('mobile') }}</div>
-                        @endif
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
@@ -192,4 +181,18 @@
 <script src="{{ asset('js/formValidation.min.js') }}"></script>
 <script src="{{ asset('js/framework/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/phoneValidation.js') }}"></script>
+
+<script>
+    $(function () {
+        var dialCodeInput = $('input[name="dial_code"]');
+
+        $(window).on('load', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
+
+        $('#mobile').on('keyup', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
+    })
+</script>
 @stop
