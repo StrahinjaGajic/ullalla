@@ -106,28 +106,28 @@ return [
     ],
 
 
-    'skype_required' => 'Skype name is required',
-    'choose_package' => 'Please, choose the package',
-    'mobile_required_with_sms_checked' => 'This field is required when sms notifications are turned on',
+    'skype_required' => 'Skypename ist erforderlich',
+    'choose_package' => 'Bitte wählen Sie das gewünschte Paket aus',
+    'mobile_required_with_sms_checked' => 'Dieses Feld ist obligatorisch, wenn Sie SMS Benachrichtgungen erhalten möchten.',
 
     /* Javascript Validation */
-    'max_files' => 'You must select at least 4 files',
-    'required_field' => 'This field is required',
-    'default_package_required' => 'Basic package is required',
-    'url_invalid' => 'URL is not valid',
-    'numeric_error' => 'This field must be numeric',
-    'string_length' => 'This field must not exceed 200 characters',
-    'older_than_18' => 'You must be at least 18 years old',
-    'alpha_numerical' => 'The first name can only contain alphabetical characters',
-    'max_str_length' => 'This field must not exceed :max characters',
+    'max_files' => 'Mindestens 4 Dateien sind erforderlich',
+    'required_field' => 'Dieses Feld ist erforderlich',
+    'default_package_required' => 'Basis-Paket ist erforderlich',
+    'url_invalid' => 'URL ist nicht gültig',
+    'numeric_error' => 'Dieses Feld muss numerisch sein',
+    'string_length' => 'Dieses Feld darf nicht mehr als 200 Zeichen haben',
+    'older_than_18' => 'Sie müssen mindestens 18 Jahre alt sein',
+    'alpha_numerical' => 'Der Vorname darf nur aus Buchstaben bestehen',
+    'max_str_length' => 'Dieses Feld darf nicht mehr als :max Zeichen haben',
 
     /* Upload care validation */
-    'file_too_large' => 'File is too large',
-    'file_too_large_title' => 'Maximum size error',
-    'file_type' => 'Incorrect file type',
-    'file_type_title' => 'File Type Error.',
-    'min_photo_dimensions' => 'Minimum dimension of a photo should be 490x560',
-    'min_dimensions_title' => 'Minimum dimensions error',
+    'file_too_large' => 'Datei ist zu gross',
+    'file_too_large_title' => 'Maximale Grösse Fehler',
+    'file_type' => 'Ungültiges Dateiformat',
+    'file_type_title' => 'Dateiformat Fehler.',
+    'min_photo_dimensions' => 'Die minimale Dimension vom Foto ist 490x560',
+    'min_dimensions_title' => 'Minimale Dimension Fehler',
 
     /*
     |--------------------------------------------------------------------------
