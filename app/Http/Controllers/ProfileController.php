@@ -100,6 +100,23 @@ class ProfileController extends Controller
 //            'skype_name.required_with' => __('validation.skype_required'),
 //        ]);
 
+        // define lng and lat
+        $address = request('address');
+        $city = request('city');
+        $fullAddress = $address && $city ? $address . ', ' . $city : null;
+        $lat = null;
+        $lng = null;
+
+        if ($fullAddress) {
+            $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($fullAddress).'&sensor=false');
+            $geo = json_decode($geo, true);
+
+            if (isset($geo['status']) && ($geo['status'] == 'OK')) {
+                $lat = $geo['results'][0]['geometry']['location']['lat'];
+                $lng = $geo['results'][0]['geometry']['location']['lng'];
+            }
+        }
+
         // get working time
         $workingTime = getWorkingTime(
             $request->days,
@@ -112,6 +129,7 @@ class ProfileController extends Controller
             $request->night_escorts
         );
 
+        // define incall and outcall types
         $incallType = null;
         $outcallType = null;
         $incallOption = request('incall_option');
@@ -133,6 +151,7 @@ class ProfileController extends Controller
             }
         }
 
+        // update user
         try {
             $user = Auth::user();
             $user->has_profile = 1;
@@ -172,6 +191,8 @@ class ProfileController extends Controller
             $user->zip_code = request('zip_code');
             $user->address = request('address');
             $user->club_name = request('club_name');
+            $user->lat = $lat;
+            $user->lng = $lng;
             $user->incall_type = $incallType;
             $user->outcall_type = $outcallType;
             $user->working_time = $workingTime;
@@ -402,7 +423,7 @@ class ProfileController extends Controller
         $fullAddress = $address && $city ? $address . ', ' . $city : null;
 
         if ($fullAddress) {
-            $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($fullAddress).'&sensor=false');
+            $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&address='.urlencode($fullAddress).'&sensor=true');
             $geo = json_decode($geo, true);
 
             if (isset($geo['status']) && ($geo['status'] == 'OK')) {
