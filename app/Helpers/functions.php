@@ -445,6 +445,7 @@ function arrayHasString($array, $string) {
             $values = '|:-';
         }
     }
+    // dd($values);
     return $values;
 }
 

@@ -391,11 +391,11 @@
 											</thead>
 											<tbody>
 												<?php $counter = 1; ?>
-												@foreach(getDaysOfTheWeek() as $dayOfTheWeek)
+												@foreach(getDaysOfTheWeek() as $engDayOfTheWeek => $dayOfTheWeek)
 												<tr class="working-times-disabled">
 													<td>
-														<label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
-															<input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
+														<label class="control control--checkbox"><a>{{ __('functions.' . $engDayOfTheWeek) }}</a>
+															<input type="checkbox" name="days[{{ $counter }}]" value="{{ $engDayOfTheWeek }}">
 															<div class="control__indicator days"></div>
 														</label>
 													</td>
