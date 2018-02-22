@@ -5,7 +5,9 @@
 <header id="toTop">
     <div class="header-area home-4">
         <div class="container">
-            <div class="fixed logo-img home-1"><a href="/"><img id="home_logo" src="{{ asset('img/logo/logo.png') }}" alt=""></a></div>
+            <div class="fixed logo-img home-1">
+                <img id="home_logo" src="{{ asset('img/logo/logo.png') }}" alt="">
+            </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="top-menu-area hidden-sm hidden-xs">
@@ -34,7 +36,7 @@
                                     @elseif(Auth::user())
                                     <li><a href="{{ url('private/' . $user->id . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                     <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                    <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
+                                    {{--<li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>--}}
                                     @endif
                                     @endif
                                     @if($user && $user->has_profile == 0)
@@ -92,7 +94,7 @@
                                         @elseif(Auth::user())
                                         <li><a href="{{ url('private/' . $user->id . '/bio') }}">{{ __('buttons.settings') }}</a></li>
                                         <li><a href="{{ url('private/' . $user->id) }}">{{ __('buttons.preview_profile') }}</a></li>
-                                        <li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>
+                                        {{--<li><a href="{{ url('private/blackbook') }}">{{ __('headings.blackbook') }}</a></li>--}}
                                         @endif
                                         @endif
                                         @if($user && $user->has_profile == 0)

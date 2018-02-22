@@ -54,8 +54,8 @@ Route::get('private', [
 ]);
 
 # BLACK BOOK CONTROLLER
-Route::get('private/blackbook', 'BlackbookController@getIndex');
-Route::post('private/blackbook/store', 'BlackbookController@postBlackbook');
+//Route::get('private/blackbook', 'BlackbookController@getIndex');
+//Route::post('private/blackbook/store', 'BlackbookController@postBlackbook');
 
 Route::get('private/{id}', 'GirlController@getGirl');
 Route::get('get_price_ranges', 'GirlController@getPriceRanges');
@@ -187,7 +187,7 @@ Route::get('contact', 'ContactController@getIndex');
 Route::post('contact/send', 'ContactController@postIndex');
 
 #FAQ CONTROLLER
-Route::get('faq', 'FaqController@getIndex');
+//Route::get('faq', 'FaqController@getIndex');
 
 # SEARCH CONTROLLER
 Route::get('search', 'SearchController@getQuickSeachResults');

@@ -101,7 +101,7 @@
                         <div class="tab-content">
                             @if ($local->about_me)
                             <div class="tab-pane active" id="girl-description">
-                                <p>{{ $local->about_me }}</p>
+                                <p>{!! nl2br($local->about_me) !!}</p>
                             </div>
                             @endif
                             @if($local->working_time)

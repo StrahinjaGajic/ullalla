@@ -77,28 +77,28 @@ class ProfileController extends Controller
         // get the number of photos
         $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
-       // $this->validate($request, [
-       //     'first_name' => 'required',
-       //     'last_name' => 'required',
-       //     'nickname' => 'required',
-       //     'age' => ['required', 'numeric', new OlderThanRule'],
-       //     'height' => 'required|numeric',
-       //     'weight' => 'required|numeric',
-       //     'sex' => 'required',
-       //     'sex_orientation' => 'required',
-       //     'intimate' => 'required',
-       //     'alcohol' => 'required',
-       //     'smoker' => 'required',
-       //     'about_me' => 'required',
-       //     'photos' => 'numeric|min:4|max:9',
-       //     'mobile' => 'required|numeric|max:20',
-       //     'phone' => 'required|numeric|max:20',
-       //     'email' => 'required|email',
-       //     'skype_name' => 'required_with:contact_options.3,on',
-       //     'website' => 'url',
-       // ], [
-       //     'skype_name.required_with' => __('validation.skype_required'),
-       // ]);
+//        $this->validate($request, [
+//            'first_name' => 'required',
+//            'last_name' => 'required',
+//            'nickname' => 'required',
+//            'age' => ['required', 'numeric', new OlderThanRule'],
+//            'height' => 'required|numeric',
+//            'weight' => 'required|numeric',
+//            'sex' => 'required',
+//            'sex_orientation' => 'required',
+//            'intimate' => 'required',
+//            'alcohol' => 'required',
+//            'smoker' => 'required',
+//            'about_me' => 'required',
+//            'photos' => 'numeric|min:4|max:9',
+//            'mobile' => 'required|numeric|max:20',
+//            'phone' => 'required|numeric|max:20',
+//            'email' => 'required|email',
+//            'skype_name' => 'required_with:contact_options.3,on',
+//            'website' => 'url',
+//        ], [
+//            'skype_name.required_with' => __('validation.skype_required'),
+//        ]);
 
         // get working time
         $workingTime = getWorkingTime(
@@ -145,7 +145,7 @@ class ProfileController extends Controller
             $user->sex_orientation = request('sex_orientation');
             $user->height = request('height');
             $user->weight = request('weight');
-            $user->type = request('type');
+            $user->type = request('ancestry');
             $user->figure = request('figure');
             $user->breast_size = request('breast_size');
             $user->eye_color = request('eye_color');
@@ -160,7 +160,7 @@ class ProfileController extends Controller
             $user->photos = $uploadedPhotos ? $inputPhotos : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->email = request('email');
-            $user->website = NULL;
+            $user->website = request('website');
             $user->phone = request('phone');
             $user->mobile = request('mobile');
             $user->sms_notifications = request('sms_notifications') ? '1' : '0';
