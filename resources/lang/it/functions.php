@@ -110,10 +110,10 @@ return [
 
 
     #getDaysOfTheWeek
-    'monday' => 'Lunedí',
-    'tuesday' => 'Martedí',
-    'wednesday' => 'Mercoledí',
-    'thursday' => 'Giovedí',
+    'monday' => 'Lunedi',
+    'tuesday' => 'Martedi',
+    'wednesday' => 'Mercoledi',
+    'thursday' => 'Giovedi',
     'friday' => 'Venerdí',
     'saturday' => 'Sabato',
     'sunday' => 'Domenica',

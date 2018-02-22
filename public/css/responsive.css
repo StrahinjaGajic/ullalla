@@ -318,7 +318,7 @@ li.search-hover.home-1:hover .search { top: -7px;
 }    
 .zoomWindow { height: 600px !important; width: 205px !important;
 }    
-.single-zoom-thumb .bx-wrapper .bx-controls-direction a.bx-next { top: 526px;
+.single-zoom-thumb .bx-wrapper .bx-controls-direction a.bx-next { top: 481px;
 }
 .single-zoom-thumb .bx-controls-direction a.bx-prev::after { right: 80px;
 }    
