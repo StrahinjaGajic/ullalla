@@ -14,7 +14,8 @@
         "pbmedia/laravel-ffmpeg": "^1.1",
         "pedzed/laravel-uploadcare": "^0.2.0",
         "stripe/stripe-php": "^5.6",
-        "webpatser/laravel-countries": "dev-master"
+        "webpatser/laravel-countries": "dev-master",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

@@ -218,6 +218,7 @@ class Local extends Authenticatable
         $activationDateColumn = 'package1_activation_date';
         $expiryDateColumn = 'package1_expiry_date';
         $scheduledColumn = 'scheduled_default_package';
+        $durationColumn = 'package1_duration';
 
         if ($packageInput) {
             // get package
@@ -258,6 +259,7 @@ class Local extends Authenticatable
                         try {
                             // $user->canton_id = 'asdas';
                             $user->$packageColumn = $package->id;
+                            $user->$durationColumn = $duration;
                             $user->$activeColumn = 1;
                             $user->$activationDateColumn = $activationDate;
                             $user->$expiryDateColumn = $expiryDate;
