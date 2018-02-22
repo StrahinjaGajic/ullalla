@@ -76,7 +76,7 @@
                         <div class="help-block"></div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-xs-12">
+                <div class="col-lg-12 col-xs-12">
                     <div class="form-group">
                         <input type="hidden" name="add_price_token" value="{{ csrf_token() }}">
                         <div class="save">
