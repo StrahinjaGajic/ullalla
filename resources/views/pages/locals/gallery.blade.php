@@ -55,7 +55,7 @@
                 @endif
             </div>
         </div>
-        <button type="submit" id="submitButton" class="btn btn-default">Save Changes</button>
+        <button type="submit" id="submitButton" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
         {!! Form::close() !!}
     </div>
 </div>
