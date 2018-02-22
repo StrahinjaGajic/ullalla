@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="form-group upload-video">
-                                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/><br>
                                 <video id="video" width="320" height="240" loop style="display: block;"></video>
                             </div>
                         </section>
@@ -128,11 +128,11 @@
                                         </thead>
                                         <tbody>
                                             <?php $counter = 1; ?>
-                                            @foreach(getDaysOfTheWeek() as $dayOfTheWeek)
+                                            @foreach(getDaysOfTheWeek() as $engDayOfTheWeek => $dayOfTheWeek)
                                             <tr class="working-times-disabled">
                                                 <td>
-                                                    <label class="control control--checkbox"><a>{{ $dayOfTheWeek }}</a>
-                                                        <input type="checkbox" name="days[{{ $counter }}]" value="{{ $dayOfTheWeek }}">
+                                                    <label class="control control--checkbox"><a>{{ __('functions.' . $engDayOfTheWeek) }}</a>
+                                                        <input type="checkbox" name="days[{{ $counter }}]" value="{{ $engDayOfTheWeek }}">
                                                         <div class="control__indicator club_days"></div>
                                                     </label>
                                                 </td>

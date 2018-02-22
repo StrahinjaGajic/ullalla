@@ -22,7 +22,7 @@
                     <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="490x560 minimum" data-images-only=""><br><br>
                     <div class="_list">
                         <div class="_item">
-                            @if($local->logo)
+                            @if($local->photo)
                                 <img src="{{ $local->photo .'/-/resize/185x211/' }}">
                             @endif
                         </div>

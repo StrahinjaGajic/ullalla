@@ -23,7 +23,7 @@ return [
     'name' => 'Nome',
     'street' => 'Via',
     'phone' => 'Telefono',
-    'city' => 'Citt?',
+    'city' => 'Citta',
     'web' => 'Sito web',
     'zip' => 'CAP',
     'available_24_7' => 'Disponibile 24/7',

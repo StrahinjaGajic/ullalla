@@ -445,6 +445,7 @@ function arrayHasString($array, $string) {
             $values = '|:-';
         }
     }
+    // dd($values);
     return $values;
 }
 
@@ -565,7 +566,7 @@ function getEditLocalProfilePages() {
         'contact' => __('functions.contact'),
         'gallery' => __('functions.gallery'),
         'working_time' => __('functions.working_time'),
-        'about_me' => __('functions.about_me'),
+        'about_me' => __('headings.about_us'),
         'club_info' => __('functions.club_info'),
         'girls' => __('functions.girls'),
         'packages' => __('functions.packages'),

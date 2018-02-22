@@ -1260,7 +1260,7 @@ div.fixed {
     height: 100%;
     border: 1px solid #969494;
     border-radius: 5px;
-    padding: 1.5rem;
+    padding-top: 1.5rem;
     -webkit-transition: -webkit-transform 300ms ease;
     transition: -webkit-transform 300ms ease;
     transition: transform 300ms ease;
@@ -1485,7 +1485,7 @@ input[list] {
 
 .single-zoom-thumb .bx-wrapper .bx-controls-direction a.bx-next {
     left: 20px;
-    top: 484px;
+    top: 481px;
 }
 
 .single-zoom-thumb .bx-controls-direction a.bx-prev::after {

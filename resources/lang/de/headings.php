@@ -17,6 +17,7 @@ return [
 
     # edit profile nav
     'about_me' => 'Über mich',
+    'about_us' => 'Über uns',
     'bio' => 'Bio',
     'contact' => 'Kontakt',
     'gallery' => 'Gallerie',

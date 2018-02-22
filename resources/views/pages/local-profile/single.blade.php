@@ -34,25 +34,35 @@
                             <div id="myModal" class="modal">
 								<span class="close">&times;</span>
 								<div class="modal-dialog modal-md club_modal_dialog">
-									
-									<div class="modal-content club_modal_content">
-									<img id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
-                                   <div class="prev-next">    
-                                    <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
-                                    <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+                                    <div class="modal-content club_modal_content">
+									    <img id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
+                                        <div class="prev-next">
+                                            <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
+                                            <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
                                         </div>
-                                      </div>
-                                      </div> 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="single-zoom-thumb">
                             <ul class="bxslider" id="gallery_01">
                                 @for ($i = 0; $i < substr($local->photos, -2, 1); $i++)
-                                <li>
-                                    <a href="#" class="active" data-update="">
-                                        <img src="{{ $local->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
-                                    </a>
-                                </li>
+                                    @if($i == 0)
+                                        @php($src =  $local->photos . 'nth/' . $i . '/-/resize/127x145/')
+                                    @else
+                                        <li>
+                                            <a href="#" class="active" data-update="">
+                                                <img src="{{ $local->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if($i == (substr($local->photos, -2, 1) - 1))
+                                        <li>
+                                            <a href="#" class="active" data-update="">
+                                                <img src="{{ $src }}" alt="zo-th-1" />
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endfor
                             </ul>
                         </div>
@@ -82,7 +92,7 @@
                     <div class="product-description-tab custom-tab">
                         <ul class="nav nav-tabs" role="tablist">
                             @if ($local->about_me)
-                            <li class="active"><a href="#girl-description" data-toggle="tab">{{ __('headings.about_me') }}</a></li>
+                            <li class="active"><a href="#girl-description" data-toggle="tab">{{ __('headings.about_us') }}</a></li>
                             @endif
                             @if($local->working_time)
                             <li><a href="#girl-workinghours" data-toggle="tab">{{ __('buttons.work_time') }}</a></li>
@@ -101,7 +111,7 @@
                         <div class="tab-content">
                             @if ($local->about_me)
                             <div class="tab-pane active" id="girl-description">
-                                <p>{{ $local->about_me }}</p>
+                                <p>{!! nl2br($local->about_me) !!}</p>
                             </div>
                             @endif
                             @if($local->working_time)
@@ -121,7 +131,7 @@
                                         <?php $workingTimes = json_decode($local->working_time); ?>
                                         @foreach($workingTimes as $workingTime)
                                         <tr>
-                                            <td>{{ __('functions.'. explode('|', $workingTime)[0]) }}</td>
+                                            <td>{{ __('functions.'.explode('|', $workingTime)[0]) }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[0] }}</td>
                                             <td>{{ explode(' - ', explode('|', $workingTime)[1])[1] }}</td>
                                         </tr>
@@ -161,7 +171,7 @@
                                 @endforeach
                             </div>
                             <div class="tab-pane" id="girl-video">
-                                <video poster="/path/to/poster.jpg" width="500px" controls>
+                                <video poster="/path/to/poster.jpg" width="500px" controls style="background-color: black;">
                                     <source src="{{ $local->videos }}" type="video/mp4">
                                 </video>
                             </div>
