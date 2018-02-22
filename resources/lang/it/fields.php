@@ -115,11 +115,11 @@ return [
     'title' => 'Titolo',
     'duration' => 'Durata',
     'venue' => 'Luogo',
-    'prepared_flyer' => 'Hai un volantino gi? pronto?',
+    'prepared_flyer' => 'Hai un volantino gia pronto?',
     'price_per_day' => 'Prezzo per giorno',
     'total' => 'Totale',
 
     #banners
-    'prepared_banner' => 'Hai un banner gi? pronto?',
+    'prepared_banner' => 'Hai un banner gia pronto?',
     'url' => 'Url',
 ];

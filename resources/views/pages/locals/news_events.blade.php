@@ -14,17 +14,17 @@
 			{!! parseEditLocalProfileMenu('news_and_events') !!}
 		</div>
 		<div class="col-sm-10 profile-info">
+			<div class="col-xs-12">
+				@if(Session::has('success'))
+					<div class="alert alert-success">{{ Session::get('success') }}</div>
+				@endif
+			</div><br><br>
 			<div class="btn-wrapper">
 				@if($local->news()->count() < 3)
 				<button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
 				@endif
 				@if($local->events()->count() < 3)
 				<button id="showModal2" type="submit" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
-				@endif
-			</div>
-			<div class="col-xs-12">
-				@if(Session::has('success'))
-				<div class="alert alert-success">{{ Session::get('success') }}</div>
 				@endif
 			</div>
 			@if($local->news()->count() > 0)

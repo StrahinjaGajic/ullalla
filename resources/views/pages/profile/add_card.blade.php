@@ -28,12 +28,10 @@
                 @if($user->stripe_last4_digits)
                    <div class="add_card">
                     <p style="color:#424242;">{{ __('functions.card_on_file') }}: **** **** **** {{ $user->stripe_last4_digits }}</p>
-                    <button type="submit" class="btn btn-default" style="margin-top:10px;">Update Card</button>
-                    <button type="submit" class="btn btn-default" style="margin-top:10px; float:right;">Add Card</button>
+                       <button type="submit" class="btn btn-default pull-left">{{ $user->stripe_id ? __('buttons.update_card') : __('buttons.add_card') }}</button>
                     </div>
                 @endif
                 <div class="help-block card-error" style="color: red;"></div>
-                <button type="submit" class="btn btn-default pull-left">{{ $user->stripe_id ? __('buttons.update_card') : __('buttons.add_card') }}</button>
                 <input type="hidden" name="stripeToken" id="stripeToken">
                 <input type="hidden" name="stripeEmail" id="stripeEmail">
                 {!! Form::close() !!}

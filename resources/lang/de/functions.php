@@ -211,6 +211,11 @@ return [
 
     #statistics
     'statistics' => 'Statistics',
-    'visitors' => 'Visitors'
+    'visitors' => 'Visitors',
 
+    #girls
+    'menage_table_items' => 'Menage Table Items',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'are_you_sure' => 'Are you sure?',
 ];

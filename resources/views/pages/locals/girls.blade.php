@@ -284,10 +284,10 @@
                         <ul class="pager wizard">
                             <div class="col-xs-12">
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">Previous</button></li>
+                                    <li class="previous"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.previous') }}</button></li>
                                 </div>
                                 <div class="col-xs-6" style="padding:0;">
-                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">Next</button></li>
+                                    <li class="next"><button class="btn-default" type="button" href="javascript: void(0);">{{ __('buttons.next') }}</button></li>
                                 </div>
                             </div>
                         </ul>
@@ -320,7 +320,7 @@
                                     <th>{{ __('fields.nickname') }}</th>
                                     <th>{{ __('fields.first_name') }}</th>
                                     <th>{{ __('fields.last_name') }}</th>
-                                    <th>{{ __('fields.manage_table_item') }}</th>
+                                    <th>{{ __('functions.menage_table_items') }}</th>
                                 </tr>
                             </thead>
                             <tbody id="prices_body">
@@ -340,10 +340,10 @@
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>
-                                        <a href="{{ url('private/' . $user->id . '/bio') }}" class="btn btn-default">Edit</a>
+                                        <a href="{{ url('private/' . $user->id . '/bio') }}" class="btn btn-default">{{ __('functions.edit') }}</a>
                                         <form action="{{ url('locals/@' . $local->username . '/girls/' . $user->id . '/delete') }}" method="post">
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-default" onclick="return confirm('Are you sure?');">Delete</button>
+                                            <button type="submit" class="btn btn-default" onclick="return confirm('{{ __('functions.are_you_sure') }}');">{{ __('functions.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>
