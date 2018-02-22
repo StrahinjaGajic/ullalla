@@ -26,8 +26,6 @@ class HomeController extends Controller
 //
 //		$response = Plivo::sendSMS($params);
 //dd($response);
-
-
 		$bigBanners = BannerPage::getByPageId(1, 1)->get();
 		$mediumBanner = BannerPage::getByPageId(1, 2)->first();
 		$quarterBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
