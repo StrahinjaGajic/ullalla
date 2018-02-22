@@ -121,7 +121,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Please enter for how many weeks you would like your banner
-                                                    <input class="form-control" type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff;">
+                                                    <input class="form-control" type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff; background-color: #222;">
                                                     <span class="help-block" style="color: red;"></span>
                                                 </div>
                                                 <div class="modal-footer">
@@ -150,7 +150,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Please enter for how many months you would like your banner
-                                                    <input class="form-control" type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff;">
+                                                    <input class="form-control" type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff; background-color: #222;">
                                                     <span class="help-block" style="color: red;"></span>
                                                 </div>
                                                 <div class="modal-footer">
