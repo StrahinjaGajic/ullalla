@@ -45,6 +45,10 @@ class GirlController extends Controller
 				$users = $users->whereIn('users.type', $request->types);
 			}
 
+			if ($request->has('sexes')) {
+				$users = $users->whereIn('users.sex', $request->sexes);
+			}
+
 			if ($request->has('price_type')) {
 				$users = $users->whereNotNull('users.' . $request->price_type . '_type');
 			}

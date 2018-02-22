@@ -26,18 +26,17 @@ class SearchController extends Controller
 		$address = Session::get('address');
 
 		$query = $request->query();
-		unset($query['type']);
 		unset($query['_token']);
 		unset($query['city']);
 
-		if ($request->type == 'girl') {
+		if ($request->gender_type == 'girl') {
 			$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
 
 			Session::put('users', $users);
 			Session::save();
 
 			return redirect(urldecode(route('private', $query, false)));
-		} elseif ($request->type == 'local') {
+		} elseif ($request->gender_type == 'local') {
 			$locals = Local::nearLatLng($lat, $lng, $radius)->paginate(9);
 
 			Session::put('locals', $locals);

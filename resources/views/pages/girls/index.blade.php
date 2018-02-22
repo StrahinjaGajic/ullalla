@@ -156,6 +156,30 @@
 						<div class="shop-layout headerDropdown">
 							<div class="layout-title">
 								<div class="layout-title toggle_arrow">
+									<a>{{ __('fields.gender') }} <i class="fa fa-caret-right"></i></a>
+								</div>
+							</div>
+							<div class="layout-list" style="{{ !request('sex') ? 'display: none;' : '' }}">
+								<ul>
+									<li>
+										<?php $num = 1; ?>
+										@foreach(getSexes() as $key => $sex)
+										<label class="control control--checkbox">
+											<a href="{{ urldecode(route('private', getUrlWithFilters(request('sexes'), request()->query() , $num, 'sexes', $sex), false)) }}">{{ $sex }}
+												<span>({{ \App\Models\User::payed()->where('sex', strtolower($sex))->count() }})</span>
+											</a>
+											<input type="checkbox" name="sexes[]" value="{{ $sex }}" {{ request('sexes') && in_array($sex, request('sexes')) ? 'checked' : '' }}/>
+											<div class="control__indicator top"></div>
+										</label>
+										<?php $num++; ?>
+										@endforeach
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="shop-layout headerDropdown">
+							<div class="layout-title">
+								<div class="layout-title toggle_arrow">
 									<a>{{ __('fields.age') }} <i class="fa fa-caret-right"></i></a>
 								</div>
 							</div>
@@ -208,7 +232,6 @@
 											$completeQueryString = array_merge($requestQuery, $priceTypeQueryString);
 										}
 										@endphp
-
 										<label class="control control--checkbox">
 											<a href="{{ urldecode(route('private', $completeQueryString, false)) }}">{{ ucfirst($forShow) }}
 												<span>({{ \App\Models\User::payed()->whereNotNull($priceType . '_type')->count() }})</span>

@@ -36,7 +36,7 @@
                     <div class="checkbox-tile-group">
                         @foreach(getQuickSearchTypes() as $key => $userType)
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="type" value="{{ $userType }}" />
+                            <input class="checkbox-button" type="checkbox" name="gender_type" value="{{ $userType }}" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-{{ $key }} fa-2x"></i>
                                 <label for="female" class="checkbox-tile-label">{{ $userType }}</label>
@@ -46,8 +46,8 @@
                     </div>
                 </div>
                 <div class="help-block home_help_block">
-                    @if($errors->has('type'))
-                    {{ $errors->first('type') }}
+                    @if($errors->has('gender_type'))
+                        {{ $errors->first('gender_type') }}
                     @endif
                 </div>
                 <div class="containere1">
@@ -62,7 +62,7 @@
 
                         <div class="help-block" style="color:red;">
                             @if($errors->has('city'))
-                            {{ $errors->first('city') }}
+                                {{ $errors->first('city') }}
                             @endif
                         </div>
 
@@ -78,7 +78,7 @@
                             </div>
                             <div class="help-block">
                                 @if($errors->has('radius'))
-                                {{ $errors->first('radius') }}
+                                    {{ $errors->first('radius') }}
                                 @endif
                             </div>
                         </div>
