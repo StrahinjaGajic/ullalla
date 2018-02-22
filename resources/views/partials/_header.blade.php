@@ -64,7 +64,7 @@
 							back: '{{ __('buttons.back') }}'
 						},
 						'minDimensions': {
-							title: '{{ __('validation.min_dimension_title') }}',
+							title: '{{ __('validation.min_dimensions_title') }}',
 							text: '{{ __('validation.min_photo_dimensions') }}',
 							back: '{{ __('buttons.back') }}'
 						}

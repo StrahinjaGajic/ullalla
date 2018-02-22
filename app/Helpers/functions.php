@@ -75,7 +75,11 @@ function getShaveOptions() {
 }
 
 function getUnits() {
-    return [__('functions.days'), __('functions.hours'), __('functions.minutes')];
+    return [
+        'days' => __('functions.days'),
+        'hours' => __('functions.hours'),
+        'minutes' => __('functions.minutes')
+    ];
 }
 
 function getPreferedOptions() {

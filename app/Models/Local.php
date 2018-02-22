@@ -19,7 +19,7 @@ class Local extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'activated', 'approved', 'name', 'street', 'zip', 'city', 'web', 'phone', 'about_me', 'photo', 'photos', 'videos', 'working_time', 'club_entrance_id', 'club_wellness_id', 'club_food_id', 'club_outdoor_id', 'local_type_id'
+        'username', 'email', 'password', 'activated', 'approved', 'name', 'street', 'zip', 'city', 'website', 'phone', 'about_me', 'photo', 'photos', 'videos', 'working_time', 'club_entrance_id', 'club_wellness_id', 'club_food_id', 'club_outdoor_id', 'local_type_id'
     ];
 
     /**
@@ -177,7 +177,7 @@ class Local extends Authenticatable
                 $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
 
                 // check if we should schedule the package or not
-                if ($packageColumn && Carbon::now() <= $currentExpiryDateParsed) {
+                if ($user->$packageColumn && Carbon::now() <= $currentExpiryDateParsed) {
                     $string = $package->id . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;
                     $user->$scheduledColumn = $string;
                     $user->save();
