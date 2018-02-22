@@ -100,6 +100,7 @@
 											<span class="price-value-from">{{ old('price_to') ? old('price_from') : 0 }}</span>
 											<span> - </span>
 											<span class="price-value-to">{{ old('price_to') ? old('price_to') : $maxPrice }}</span>
+											<span>CHF</span>
 										</div>
 									</li>
 								</ul>

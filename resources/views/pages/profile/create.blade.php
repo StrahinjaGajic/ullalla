@@ -241,6 +241,7 @@
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.mobile_phone') }} *</label>
 									<input type="tel" class="form-control" name="mobile" id="mobile" />
+									<input type="hidden" name="dial_code">
 								</div>
 							</div>
 							<div id="options" class="col-xs-12">
@@ -1053,6 +1054,16 @@ $(function () {
 				workingTimesBodyRows.find('input').attr('disabled', false).prop('checked', false);
 			}
 		});
+
+		// change dial code
+        var dialCodeInput = $('input[name="dial_code"]');
+        $(window).on('load', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
+
+        $('#mobile').on('keyup', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
 	});
 </script>
 

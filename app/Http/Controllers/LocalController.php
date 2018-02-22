@@ -112,7 +112,7 @@ class LocalController extends Controller
             $user->has_profile = 1;
             $user->name = request('name');
             $user->phone = request('phone');
-            $user->mobile = request('mobile');
+            $user->mobile = $request->dial_code . ' ' . $request->mobile;
             $user->sms_notifications = request('sms_notifications') ? '1' : '0';
             $user->website = request('website');
             $user->street = $address;
@@ -202,7 +202,7 @@ class LocalController extends Controller
         $local->lng = $lng;
         $local->website = $request->web;
         $local->phone = $request->phone;
-        $local->mobile = $request->mobile;
+        $local->mobile = $request->dial_code . ' ' . $request->mobile;
         $local->sms_notifications = request('sms_notifications') ? '1' : '0';
 
         $local->save();

@@ -53,6 +53,7 @@
                     <div class="col-3 input-effect">
                         <label style="color:#aaa;">{{ __('fields.mobile') }}*</label>
                         <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $user->mobile }}" id="mobile">
+                        <input type="hidden" name="dial_code">
                         <span class="focus-border"></span>
                         @if($errors->has('mobile'))
                         <div class="has-error">{{ $errors->first('mobile') }}</div>
@@ -151,6 +152,16 @@
     $(function () {
         $('input#skype_contact').on('click', function () {
             $('.skype-name').toggle();
+        });
+
+        // change dial code
+        var dialCodeInput = $('input[name="dial_code"]');
+        $(window).on('load', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
+        });
+
+        $('#mobile').on('keyup', function () {
+            dialCodeInput.val($('.selected-dial-code').text());
         });
     });
 </script>
