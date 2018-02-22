@@ -97,7 +97,9 @@
 }
 
 #languages-tab {
+    margin: 0 auto;
     margin-bottom: 19px;
+    width: 96%;
 }
 
  /******* Sign In Page ********/
@@ -194,7 +196,7 @@
  }
 
  .form-control {
-     background: 0 0;
+     background: #222;
      color: white;
      padding: 0;
  }
@@ -424,6 +426,7 @@
 
  .section-create-profile .price-table-container {
      margin-top: 20px;
+     margin-bottom: 20px;
  }
 
  .section-create-profile .price-table-container span {
@@ -648,7 +651,7 @@ border: none;
  }
 
  table.working-times-table .form-control + span {
-     margin-right: 10px;
+     margin-right: 8px;
      font-size: 12px;
  }
 

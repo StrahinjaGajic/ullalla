@@ -142,9 +142,7 @@ i {
     cursor: pointer;
 }
 
-#city {
-    width: 186px;
-}
+
 
 .go {
     background: 0 0;
@@ -539,9 +537,6 @@ html [type=button],
 
 @media (min-width:320px) and (max-width: 479px) {
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-    #city {
-        width: 193.5px;
-    }
 
     .sorter .sort-by {
         float: none;
@@ -625,9 +620,7 @@ html [type=button],
         width: 100%;
     }
 
-    #city {
-        width: 359px;
-    }
+
 
     .mean-container .mean-nav ul li li a {
         height: 13px;
@@ -665,10 +658,7 @@ and (min-device-width : 320px)
 and (max-device-width : 568px) 
 and (orientation : landscape) { 
 
-    #city {
-        width: 344px;
-    }
-    
+
         #home_logo {
         height: 81px;
         width: 153px;
@@ -705,9 +695,7 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (orientation : landscape) { 
 
-    #city {
-        width: 343.5px!important;
-    }
+
     
 }
 
@@ -733,9 +721,6 @@ and (min-device-width : 414px)
 and (max-device-width : 736px) 
 and (orientation : landscape) { 
 
-    #city {
-        width: 343.5px!important;
-    }
 
 }
 
@@ -745,9 +730,7 @@ and (orientation : landscape) {
     and (-webkit-device-pixel-ratio : 3)
     and (orientation:landscape){ 
 
-        #city {
-            width: 144px!important;
-        }
+
 
 
 }
@@ -773,9 +756,7 @@ and (orientation : portrait) {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : landscape) {
-    #city {
-        width: 136px;
-    }
+
     
     .club_modal_dialog {
         padding-top: 70px;
@@ -797,9 +778,7 @@ and (orientation : landscape) {
   and (max-device-width: 1366px) 
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 1.5) {
-      #city {
-          width: 136px;
-      }
+
       
       .club_modal_dialog {
           padding-top: 300px;
@@ -824,10 +803,7 @@ and (device-width : 375px)
 and (device-height : 812px) 
 and (device-pixel-ratio : 3)
 and (orientation : landscape) {
-    
-   #city {
-        width: 144px;
-    }
+
 }
 
 
@@ -846,9 +822,7 @@ and (orientation : landscape) {
     .mobile-menu-area.home-4 {
         padding: 35px 0 35px;
     }
-    #city {
-        width: 143.5px;
-    }
+
     
     .ui-state-default, .ui-widget-content .ui-state-default {
         margin-top: 0px;

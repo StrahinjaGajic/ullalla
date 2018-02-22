@@ -20,8 +20,8 @@
         <div class="col-sm-10 profile-info">
             {!! Form::open(['url' => 'banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
             <div class="col-xs-12">
-                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
-                    <label class="control control--checkbox"><a>{{ __('fields.prepared_banner') }}</a>
+                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}" style="margin: 0;">
+                    <label class="control control--checkbox" style="margin-left: 0;"><a>{{ __('fields.prepared_banner') }}</a>
                         <input type="checkbox" name="banner_flyer" class="prepared_flyer" {{ old('banner_flyer') ? 'checked' : '' }} autocomplete="off">
                         <div class="control__indicator"></div>
                     </label>
@@ -33,7 +33,8 @@
                         {{ $errors->first() }}
                     @endif
                 </div>
-                <table class="table table-bordered">
+                <div style="overflow-x: auto;">
+                <table class="table table-bordered create_banner_table">
                     <thead>
                         <tr>
                             <th></th>
@@ -52,8 +53,8 @@
                                 <span class="banner-price">{{ number_format($size->banner_size_price, 2) }}</span>
                                 <span>CHF</span>
                             </td>
-                            <td>
-                                <table class="table">
+                            <td class="price_per">
+                                <table class="table inner_table">
                                     <tr>
                                         <td>Price Per Day</td>
                                     </tr>
@@ -66,13 +67,13 @@
                                 </table>
                             </td>
                             @foreach($pages as $page)
-                            <td>
+                            <td class="form_group_td">
                                 @php 
                                     $price = $size->pages()->where('banner_size_id', $size->id)->where('page_id', $page->id)->first();
                                 @endphp
                                 {{ $price ? $price->pivot->banner_price : '' }}
                                 @if($price)
-                                <div class="form-group" style="position: relative;">
+                                <div class="form-group banner_inner_form_group" style="position: relative;">
                                     <label class="control control--checkbox">
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_day : '' }}</span>
@@ -91,18 +92,18 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Please enter for how many days you would like your banner
-                                                    <input type="text" name="banner_duration[price_per_day][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off">
+                                                    <input class="form-control" type="text" name="banner_duration[price_per_day][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff;">
                                                     <span class="help-block" style="color: red;"></span>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                    <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Apply</button>
+                                                    <button type="button" class="btn btn-default discard-duration" data-dismiss="modal" style="margin-top:0;">Discard</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group banner_inner_form_group">
                                     <label class="control control--checkbox">
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_week : '' }}</span>
@@ -120,18 +121,18 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Please enter for how many weeks you would like your banner
-                                                    <input type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]" autocomplete="off">
+                                                    <input class="form-control" type="text" name="banner_duration[price_per_week][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff;">
                                                     <span class="help-block" style="color: red;"></span>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                    <button type="button" class="btn btn-default apply-duration" style="margin-top: 0;">Apply</button>
+                                                    <button type="button" class="btn btn-default discard-duration" data-dismiss="modal" style="margin-top: 0;">Discard</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group banner_inner_form_group">
                                     <label class="control control--checkbox">
                                         <div class="price-per-time-holder">
                                             <span>{{ $price ? $price->pivot->price_per_month : '' }}</span>
@@ -149,12 +150,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     Please enter for how many months you would like your banner
-                                                    <input type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]" autocomplete="off">
+                                                    <input class="form-control" type="text" name="banner_duration[price_per_month][{{ $page->id }}][{{ $size->id }}]" autocomplete="off" style="color: #fff;">
                                                     <span class="help-block" style="color: red;"></span>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary apply-duration">Apply</button>
-                                                    <button type="button" class="btn btn-secondary discard-duration" data-dismiss="modal">Discard</button>
+                                                    <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Apply</button>
+                                                    <button type="button" class="btn btn-default discard-duration" data-dismiss="modal" style="margin-top:0;">Discard</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,20 +180,20 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}">
+</div>
+                <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}" style="margin: 0;">
                     <label class="control-label">{{ __('fields.url') }}*</label>
                     <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" autocomplete="off"/>
                     <span class="help-block">{{ $errors->has('banner_url') ? $errors->first('banner_url') : '' }}</span>
                 </div>
                 <div class="flyerless-fields">
-                    <div class="form-group {{ $errors->has('banner_description') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('banner_description') ? 'has-error' : '' }}" style="margin: 0;">
                         <label class="control-label">{{ __('fields.description') }}*</label>
-                        <textarea name="banner_description">{{ old('banner_description') }}</textarea>
+                        <textarea class="form-control" name="banner_description" style="margin-top:10px;">{{ old('banner_description') }}</textarea>
                         <span class="help-block">{{ $errors->has('banner_description') ? $errors->first('banner_description') : '' }}</span>
                     </div>
                 </div>
-                <div class="form-group {{ $errors->has('banner_photo') ? 'has-error' : '' }}">
+                <div class="form-group {{ $errors->has('banner_photo') ? 'has-error' : '' }}" style="margin: 0;">
                     <div class="image-preview-multiple">
                         <input type="hidden" name="banner_photo" data-crop="490x560 minimum" data-images-only="" autocomplete="off">
                         <span class="help-block">{{ $errors->has('banner_photo') ? $errors->first('banner_photo') : '' }}</span>

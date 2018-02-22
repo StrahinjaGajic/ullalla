@@ -855,7 +855,7 @@ li.search-hover:hover .search {
     display: inline-block;
     font-size: 18px;
     font-weight: 700;
-    padding: 2px 4px 3px;
+    padding: 3px 4px 3px;
     position: relative;
     top: -12px;
     color: #363636;
@@ -2292,6 +2292,10 @@ a.shop-name {
     z-index: 0;
 }
 
+#city {
+    width: calc(100% - 57.5px);
+}
+
 input.form-control {
     border: 1px solid #f26522;
     border-radius: 0;
@@ -2303,6 +2307,8 @@ input.form-control {
 textarea.form-control {
     border: 1px solid #f26522;
     padding: 15px 0 65px 10px;
+        min-width: 100%;
+    max-width: 100%;
 }
 
 label {
@@ -2437,6 +2443,7 @@ input {
 
 .has-error .help-block {
     color: #ed6c63 !important;
+    text-align: left;
 }
 
 .has-error .form-control {
