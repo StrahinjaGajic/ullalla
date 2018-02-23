@@ -19,9 +19,9 @@
             <h1>{{ __('headings.logo') }}</h1>
             <div class="form-group">
                 <div class="image-preview-single">
-                    <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="490x560 minimum" data-images-only=""><br><br>
+                    <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="278x165 minimum" data-images-only=""><br><br>
                     @if($local->photo)
-                        <img src="{{ $local->photo .'/-/resize/185x211/' }}">
+                        <img src="{{ $local->photo .'/-/resize/278x165/' }}">
                     @endif
                 </div>
             </div>

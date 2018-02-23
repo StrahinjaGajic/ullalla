@@ -85,7 +85,7 @@
                         <section class="tab-pane" id="gallery-tab">
                             <div class="form-group">
                                 <div class="image-preview-single">
-                                    <input type="hidden" role="uploadcare-uploader" name="logo" data-crop="490x560 minimum" data-images-only="">
+                                    <input type="hidden" role="uploadcare-uploader" name="logo" data-crop="278x165 minimum" data-images-only="">
                                     <img src="" alt="">
                                 </div>
                             </div>

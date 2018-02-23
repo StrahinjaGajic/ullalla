@@ -51,11 +51,24 @@
 						<div class="single-zoom-thumb">
 							<ul class="bxslider" id="gallery_01">
 								@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
-								<li>
-									<a href="#" class="active" data-update="">
-										<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
-									</a>
-								</li>
+									@if($i == 0)
+										@php
+										$src =  $user->photos . 'nth/' . $i . '/-/resize/127x145/';
+										@endphp
+									@else
+										<li>
+											<a href="#" class="active" data-update="">
+												<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+											</a>
+										</li>
+									@endif
+									@if($i == (substr($user->photos, -2, 1) - 1))
+										<li>
+											<a href="#" class="active" data-update="">
+												<img src="{{ $src }}" alt="zo-th-1" />
+											</a>
+										</li>
+									@endif
 								@endfor
 							</ul>
 						</div>
@@ -232,10 +245,10 @@
 								@if(isset($chart_year) || isset($chart_month))
 									<div class="tab-pane" id="statistics">
 										@if(isset($chart_year))
-											<a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+											<a onclick="changeToYear()" href="javascript:void(0)">{{  __('functions.yearly') }}</a>
 										@endif
 										@if(isset($chart_month))
-											<a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+											<a onclick="changeToMonth()" href="javascript:void(0)">{{  __('functions.monthly') }}</a>
 										@endif
 										@if(isset($chart_year))
 											<div class="app" id="year" style="display: none;">

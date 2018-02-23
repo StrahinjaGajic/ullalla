@@ -212,6 +212,8 @@ return [
     #statistics
     'statistics' => 'Statistik',
     'visitors' => 'Besucher',
+    'yearly' => 'Yearly',
+    'monthly' => 'Monthly',
 
     #girls
     'menage_table_items' => 'Menage Table Items',
