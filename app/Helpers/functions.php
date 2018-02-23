@@ -39,7 +39,11 @@ function sendPlivoMessage($src, $dst, $text) {
 }
 
 function getSexes() {
-    return [__('functions.male'), __('functions.female'), __('functions.transsexual')];
+    return [
+        'male' => __('functions.male'), 
+        'female' => __('functions.female'), 
+        'transsexual' => __('functions.transsexual')
+    ];
 }
 
 function getSexOrientations() {
@@ -51,7 +55,16 @@ function getAnswers() {
 }
 
 function getTypes() {
-    return [__('functions.asian'), __('functions.black'), __('functions.european'), __('functions.latina'), __('functions.indian'), __('functions.arabian'), __('functions.mixed'), __('functions.other')];
+    return [
+        'asian' => __('functions.asian'), 
+        'black' => __('functions.black'), 
+        'european' => __('functions.european'), 
+        'latina' => __('functions.latina'), 
+        'indian' => __('functions.indian'), 
+        'arabian' => __('functions.arabian'), 
+        'mixed' => __('functions.mixed'), 
+        'other' => __('functions.other')
+    ];
 }
 
 function getFigures() {

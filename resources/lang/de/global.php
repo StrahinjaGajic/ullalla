@@ -7,6 +7,7 @@ return [
     'french' => 'francais',
     'are_you_sure' => 'Sind Sie sicher?',
     'days' => 'Tage',
+    'years' => 'Years',
     'per_page' => 'pro Seite',
     'show' => 'Anzeigen',
     'sort_by' => 'Sortierung',
