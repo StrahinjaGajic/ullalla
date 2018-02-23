@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use Session;
 use Validator;
@@ -34,8 +35,9 @@ class BannerController extends Controller
         $user = $local ? $local : Auth::user();
         $pages = Page::with('banner_sizes')->get();
         $bannerSizes = BannerSize::with('pages')->get();
+        $perTimeColumns = array_slice(DB::getSchemaBuilder()->getColumnListing('page_banner_size'), 3, 6);
 
-        return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes'));
+        return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes', 'perTimeColumns'));
     }
 
     public function postBanners(Request $request)
