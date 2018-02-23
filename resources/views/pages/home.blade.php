@@ -123,8 +123,7 @@
                                 </a>
                             </div>
                             <div class="product-content">
-                                <a class="shop-name">{{ $user->nickname }}</a>
-                                <div class="pro-price"></div>
+                                <a class="shop-name">{{ $user->nickname }}</a><br>
                                 <a href="{{ url('private/' . $user->id) }}"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                 </div></a>
@@ -158,11 +157,42 @@
                                 </a>
                             </div>
                             <div class="product-content">
-                                <a class="shop-name">{{ $user->nickname }}</a>
-                                <div class="pro-price">
-                                    <p>{{ __('global.short_info') }}</p>
-                                </div>
-                                <a href="{{ url('private/' . $user->nickname) }}"><div class="product-cart">
+                                <a class="shop-name">{{ $user->nickname }}</a><br>
+                                <a href="{{ url('private/' . $user->id) }}"><div class="product-cart">
+                                    <button class="button">{{ __('buttons.view_profile') }}</button>
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    @if($lotm->count() > 0)
+    <section class="blog-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-heading pro-title blog-margin">
+                        <h3>{{ __('headings.lotm') }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="featured-product-carousel single-indicator">
+                    @foreach($lotm as $user)
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a class="a-img">
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <a class="shop-name">{{ $user->username }}</a><br>
+                                <a href="{{ url('locals/' . $user->username) }}"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                 </div></a>
                             </div>
