@@ -15,7 +15,7 @@ class SearchController extends Controller
 	public function getQuickSeachResults(Request $request)
 	{
 		$this->validate($request, [
-			'gender_type' => 'required',
+			'sexes' => 'required',
 			'radius' => 'required',
 			'city' => 'required'
 		]);
@@ -29,15 +29,15 @@ class SearchController extends Controller
 		unset($query['_token']);
 		unset($query['city']);
 
-		if ($request->gender_type == 'girl') {
-			$users = User::nearLatLng($lat, $lng, $radius)->paginate(9);
+		if (in_array('female', $request->sexes) || in_array('transsexual', $request->sexes)) {
+			$users = User::nearLatLng($lat, $lng, $radius, $request)->paginate(9);
 
 			Session::put('users', $users);
 			Session::save();
 
 			return redirect(urldecode(route('private', $query, false)));
-		} elseif ($request->gender_type == 'local') {
-			$locals = Local::nearLatLng($lat, $lng, $radius)->paginate(9);
+		} elseif (in_array('local', $request->sexes)) {
+			$locals = Local::nearLatLng($lat, $lng, $radius, $request)->paginate(9);
 
 			Session::put('locals', $locals);
 			Session::save();

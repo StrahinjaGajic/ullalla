@@ -35,11 +35,14 @@
                 <div class="containere">
                     <div class="checkbox-tile-group">
                         @foreach(getQuickSearchTypes() as $key => $userType)
+                        @php
+                            $toShow = __('buttons.' . $userType);
+                        @endphp
                         <div class="input-container">
-                            <input class="checkbox-button" type="checkbox" name="gender_type" value="{{ $userType }}" />
+                            <input class="checkbox-button" type="checkbox" name="sexes[1]" value="{{ $userType }}" />
                             <div class="checkbox-tile">
                                 <i class="fa fa-{{ $key }} fa-2x"></i>
-                                <label for="female" class="checkbox-tile-label">{{ $userType }}</label>
+                                <label for="female" class="checkbox-tile-label">{{ $toShow }}</label>
                             </div>
                         </div>
                         @endforeach
