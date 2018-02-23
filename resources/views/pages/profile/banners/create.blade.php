@@ -99,9 +99,9 @@
 
                                                                 <ul class="nav nav-pills">
                                                                     <li class="active">
-                                                                        <a href="#duration-tab-" data-toggle="tab">{{ __('fields.duration') }}</a>
+                                                                        <a href="#duration-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.duration') }}</a>
                                                                     </li>
-                                                                    <li>
+                                                                    <li class="flyerless-fields">
                                                                         <a href="#description-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.description') }}</a>
                                                                     </li>
                                                                     <li>
@@ -121,8 +121,8 @@
                                                                         </div>
                                                                     </section>
 
-                                                                    <section class="tab-pane flyerless-fields" id="description-tab-{{ $sizeIdPageIdStr }}">
-                                                                        <div class="form-group">
+                                                                    <section class="tab-pane" id="description-tab-{{ $sizeIdPageIdStr }}">
+                                                                        <div class="form-group flyerless-fields">
                                                                             <label class="control-label">{{ __('fields.description') }} *</label>
                                                                             <textarea name="description[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" class="form-control banner_description"></textarea>
                                                                         </div>
@@ -272,7 +272,7 @@
         var totalEl = form.find('.events_total');
 
         flyerlessDiv.toggle();
-        console.log('');
+        console.log(flyerlessDiv);
 
         var diffInDays = parseFloat(form.find('input[class="banner_duration"]').val());
 
