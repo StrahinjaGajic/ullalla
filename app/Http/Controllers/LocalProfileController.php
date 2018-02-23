@@ -57,7 +57,7 @@ class LocalProfileController extends Controller
     {
         $local = Local::username($username)->first();
 
-//        if(Auth::guard('local')->user() && $username != Auth::guard('local')->user()->username){
+        if(Auth::guard('local')->user() && $username != Auth::guard('local')->user()->username){
             $visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
 
             $checkForDate = false;
@@ -90,7 +90,7 @@ class LocalProfileController extends Controller
                 $visit->active = 0;
                 $visit->save();
             }
-//        }
+        }
         if(Auth::guard('local')->user() && $username == Auth::guard('local')->user()->username){
             $user = Local::username($username)->first();
             $values_month = [];

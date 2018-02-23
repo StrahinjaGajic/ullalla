@@ -93,7 +93,7 @@ class GirlController extends Controller
 
 	public function getGirl($id)
 	{
-//		if(Auth()->user() && $id != Auth()->user()->id){
+		if(Auth()->user() && $id != Auth()->user()->id){
 			$visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
 			$checkForDate = false;
 			foreach($visits as $visit){
@@ -125,7 +125,7 @@ class GirlController extends Controller
 				$visit->active = 0;
 				$visit->save();
 			}
-//		}
+		}
 		if(Auth()->user() && $id == Auth()->user()->id){
 			$user = User::findOrFail($id);
 			$values_month = [];
