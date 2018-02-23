@@ -30,6 +30,8 @@
                     <p style="color:#424242;">{{ __('functions.card_on_file') }}: **** **** **** {{ $user->stripe_last4_digits }}</p>
                        <button type="submit" class="btn btn-default pull-left">{{ $user->stripe_id ? __('buttons.update_card') : __('buttons.add_card') }}</button>
                     </div>
+                @else
+                <button type="submit" class="btn btn-default pull-left">{{ __('buttons.add_card') }}</button>
                 @endif
                 <div class="help-block card-error" style="color: red;"></div>
                 <input type="hidden" name="stripeToken" id="stripeToken">
