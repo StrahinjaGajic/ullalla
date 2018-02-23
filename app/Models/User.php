@@ -241,6 +241,10 @@ class User extends Authenticatable
                 $query->whereIn('users.type', $request->types);
             }
 
+            if ($request->has('sexes')) {
+                $query->whereIn('users.sex', $request->sexes);
+            }
+
             if ($request->has('price_type')) {
                 $query->whereNotNull('users.' . $request->price_type . '_type');
             }

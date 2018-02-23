@@ -159,7 +159,7 @@
 									<a>{{ __('fields.gender') }} <i class="fa fa-caret-right"></i></a>
 								</div>
 							</div>
-							<div class="layout-list" style="{{ !request('sex') ? 'display: none;' : '' }}">
+							<div class="layout-list" style="{{ !request('sexes') ? 'display: none;' : '' }}">
 								<ul>
 									<li>
 										<?php $num = 1; ?>
