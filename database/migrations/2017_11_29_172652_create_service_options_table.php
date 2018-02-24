@@ -15,7 +15,10 @@ class CreateServiceOptionsTable extends Migration
     {
         Schema::create('service_options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('service_option_name');
+            $table->string('service_option_name_de');
+            $table->string('service_option_name_en');
+            $table->string('service_option_name_it');
+            $table->string('service_option_name_fr');
         });
     }
 

@@ -34,6 +34,7 @@ class HomeController extends Controller
 
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
+		$lotm = Local::whereNotNull('package2_id')->inRandomOrder()->get();
 		$field = 'title_'. config()->get('app.locale');
 
 		$user = Auth::user();
@@ -91,6 +92,7 @@ class HomeController extends Controller
 			'localDefaultPackageExpired', 
 			'gotm', 
 			'totm', 
+			'lotm',
 			'bigBanners',
 			'mediumBanner',
 			'quarterBanners',

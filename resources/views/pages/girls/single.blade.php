@@ -51,11 +51,24 @@
 						<div class="single-zoom-thumb">
 							<ul class="bxslider" id="gallery_01">
 								@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
-								<li>
-									<a href="#" class="active" data-update="">
-										<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
-									</a>
-								</li>
+									@if($i == 0)
+										@php
+										$src =  $user->photos . 'nth/' . $i . '/-/resize/127x145/';
+										@endphp
+									@else
+										<li>
+											<a href="#" class="active" data-update="">
+												<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+											</a>
+										</li>
+									@endif
+									@if($i == (substr($user->photos, -2, 1) - 1))
+										<li>
+											<a href="#" class="active" data-update="">
+												<img src="{{ $src }}" alt="zo-th-1" />
+											</a>
+										</li>
+									@endif
 								@endfor
 							</ul>
 						</div>
@@ -126,7 +139,7 @@
 								<div class="tab-pane" id="girl-services">
 									@if($user->service_options()->count())
 									<h4 style="display: inline-block; margin-right: 10px;"><strong>{{ __('headings.i_o_s_f') }}:</strong></h4>
-									<span><strong>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name') }}</strong></span>
+									<span><strong>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name_'. config()->get('app.locale')) }}</strong></span>
 									@endif
 									<div style="overflow-x: auto">
 									<table class="table services-table">{{ parseChunkedServices($user) }}</table>
@@ -234,10 +247,10 @@
 								@if(isset($chart_year) || isset($chart_month))
 									<div class="tab-pane" id="statistics">
 										@if(isset($chart_year))
-											<a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+											<a onclick="changeToYear()" href="javascript:void(0)">{{  __('functions.yearly') }}</a>
 										@endif
 										@if(isset($chart_month))
-											<a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+											<a onclick="changeToMonth()" href="javascript:void(0)">{{  __('functions.monthly') }}</a>
 										@endif
 										@if(isset($chart_year))
 											<div class="app" id="year" style="display: none;">

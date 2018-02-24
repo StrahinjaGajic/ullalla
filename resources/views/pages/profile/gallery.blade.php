@@ -133,7 +133,7 @@ const videosWidget = uploadcare.Widget('#video-uploader');
 videosWidget.value('{{ $user->videos }}');
 
 videosWidget.validators.push(fileTypeLimit($('#video-uploader').data('file-types')));    
-videosWidget.validators.push(maxFileSize(20000000));
+videosWidget.validators.push(maxFileSize(100000000));
 // preview single video
 videosWidget.onUploadComplete(function (fileInfo) {
     source.setAttribute('src', fileInfo.cdnUrl);
@@ -143,5 +143,18 @@ videosWidget.onUploadComplete(function (fileInfo) {
     $('.upload-video').find('button.uploadcare--widget__button_type_remove').on('click', function () {
         $('.upload-video').find('#video').remove();
     });
+
+setInterval(function(){
+    var text = document.getElementsByClassName('uploadcare--widget__text')[1].innerHTML;
+    var button = document.getElementsByClassName('btn')[0];
+    if(text.includes('Uploading') && text.includes('Please wait')) {
+        button.disabled = true;
+    }else{
+        button.disabled = false;
+    }
+    document.getElementsByClassName('uploadcare--widget__button_type_cancel')[1].onclick = function(){
+        document.getElementsByClassName('uploadcare--widget__text')[1].innerHTML = "";
+    };
+},500);
 </script>
 @stop

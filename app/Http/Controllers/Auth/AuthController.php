@@ -163,7 +163,7 @@ class AuthController extends Controller
 				$package1ExpiryDate = $package1ExpiryDateCarbonParsed->format('Y-m-d');
 				$package2ExpiryDate = $package2ExpiryDateCarbonParsed->format('Y-m-d');
 
-				if ($local->is_active_d_package == 0) {
+				if ($local->package1_id && $local->is_active_d_package == 0) {
 					return redirect()->action('LocalController@getPackages', ['username' => $local->username])
 					->with('expired_package_info', __('messages.error_default_package_expired'));
 				}
@@ -176,16 +176,22 @@ class AuthController extends Controller
 							__('messages.error_lotm_package_expired', ['url' => $url]));
 					}
 				}
-				$daysForExpiryDefaultPackage = getDaysForExpiryLocal($local->package1_duration);
-				$firstDateForDefaultPackageExpiryNotification = getPackageExpiryDate($daysForExpiryDefaultPackage[0]);
 
-				// package expiry notifications
-				if ($package1ExpiryDate < $firstDateForDefaultPackageExpiryNotification) {
-					event(new LocalDefaultPackageExpired($local));
-					Session::flash('localDefaultPackageExpired', __('messages.default_package_about_to_expire'));
+				if ($local->package1_id) {
+					$firstDateForDefaultPackageExpiryNotification = null;
+					$daysForExpiryDefaultPackage = getDaysForExpiryLocal($local->package1_duration);
+					$firstDateForDefaultPackageExpiryNotification = getPackageExpiryDate($daysForExpiryDefaultPackage[0]);
+
+					// package expiry notifications
+					if ($firstDateForDefaultPackageExpiryNotification !== null && $package1ExpiryDate < $firstDateForDefaultPackageExpiryNotification) {
+						event(new LocalDefaultPackageExpired($local));
+						Session::flash('localDefaultPackageExpired', __('messages.default_package_about_to_expire'));
+					}
 				}
+				
 
 				if ($local->package2_id) {
+					$firstDateForGotmPackageExpiryNotification = null;
 					$daysForExpiryGotmPackage = getDaysForExpiry($local->package2_id);
 					$firstDateForGotmPackageExpiryNotification = getPackageExpiryDate($daysForExpiryGotmPackage[0]);
 

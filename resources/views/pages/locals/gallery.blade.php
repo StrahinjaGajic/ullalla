@@ -19,9 +19,9 @@
             <h1>{{ __('headings.logo') }}</h1>
             <div class="form-group">
                 <div class="image-preview-single">
-                    <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="490x560 minimum" data-images-only=""><br><br>
+                    <input type="hidden" role="uploadcare-uploaderLogo" name="photo" data-crop="278x165 minimum" data-images-only=""><br><br>
                     @if($local->photo)
-                        <img src="{{ $local->photo .'/-/resize/185x211/' }}">
+                        <img src="{{ $local->photo .'/-/resize/278x165/' }}">
                     @endif
                 </div>
             </div>
@@ -165,7 +165,7 @@ $(function() {
     var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
     widget.value('{{ $local->videos }}')
     widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));    
-    widget.validators.push(maxFileSize(20000000));
+    widget.validators.push(maxFileSize(400000000));
     // preview single video
     widget.onUploadComplete(function (fileInfo) {
         source.setAttribute('src', fileInfo.cdnUrl);
@@ -178,5 +178,17 @@ $(function() {
     });
 });
 
+setInterval(function(){
+    var text = document.getElementsByClassName('uploadcare--widget__text')[2].innerHTML;
+    var button = document.getElementsByClassName('btn')[0];
+    if(text.includes('Uploading') && text.includes('Please wait')) {
+        button.disabled = true;
+    }else{
+        button.disabled = false;
+    }
+    document.getElementsByClassName('uploadcare--widget__button_type_cancel')[2].onclick = function () {
+        document.getElementsByClassName('uploadcare--widget__text')[2].innerHTML = "";
+    };
+},500);
 </script>
 @stop

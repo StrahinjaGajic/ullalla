@@ -73,6 +73,9 @@
                         <div class="product-name">
                             <h3><a>{{ $local->name }}</a></h3>
                         </div>
+                        <div class="product-name">
+                            <img src="{{ $local->photo .'/-/resize/278x165/' }}">
+                        </div><br>
                         <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
                             <tr>
                                 <td>{{ __('headings.local_type') }}:</td>
@@ -178,10 +181,10 @@
                             @if(isset($chart_year) || isset($chart_month))
                                 <div class="tab-pane" id="statistics">
                                     @if(isset($chart_year))
-                                        <a onclick="changeToYear()" href="javascript:void(0)">Yearly</a>
+                                        <a onclick="changeToYear()" href="javascript:void(0)">{{  __('functions.yearly') }}</a>
                                     @endif
                                     @if(isset($chart_month))
-                                        <a onclick="changeToMonth()" href="javascript:void(0)">Monthly</a>
+                                        <a onclick="changeToMonth()" href="javascript:void(0)">{{  __('functions.monthly') }}</a>
                                     @endif
                                     @if(isset($chart_year))
                                         <div class="app" id="year" style="display: none;">
