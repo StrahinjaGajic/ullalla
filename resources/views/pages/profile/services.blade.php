@@ -26,7 +26,10 @@
 				<div class="col-xs-12 choice">
 					@foreach($serviceOptions as $serviceOption)
 					<label class="control control--checkbox" style="display: inline-block;">
-						<a>{{ ucfirst($serviceOption->service_option_name) }}</a>
+						@php
+						$var = 'service_option_name_'. config()->get('app.locale');
+						@endphp
+						<a>{{ ucfirst($serviceOption->$var) }}</a>
 						<input 
 						type="checkbox" 
 						name="service_options[]" 

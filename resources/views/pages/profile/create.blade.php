@@ -449,10 +449,13 @@
 							<h3>{{ __('headings.service_offered_for') }}:</h3>
 							<div class="col-lg-12 col-sm-12 col-xs-12 services_5" style="margin-bottom:20px;">
 								@foreach($serviceOptions as $serviceOption)
-								<label class="control control--checkbox services_control"><a>{{ ucfirst($serviceOption->service_option_name) }}</a>
-									<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
-									<div class="control__indicator service_list"></div>
-								</label>
+									@php
+										$var = 'service_option_name_'. config()->get('app.locale');
+									@endphp
+									<label class="control control--checkbox services_control"><a>{{ ucfirst($serviceOption->$var) }}</a>
+										<input type="checkbox" name="service_options[]" value="{{ $serviceOption->id }}">
+										<div class="control__indicator service_list"></div>
+									</label>
 								@endforeach
 							</div>
 							<div class="service-list">
@@ -807,7 +810,7 @@ $(function() {
 	var source = document.createElement('source');
 	var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
 	widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));	
-	widget.validators.push(maxFileSize(20000000));
+	widget.validators.push(maxFileSize(100000000));
 	// preview single video
 	widget.onUploadComplete(function (fileInfo) {
 		source.setAttribute('src', fileInfo.cdnUrl);
@@ -819,6 +822,22 @@ $(function() {
 		$('.upload-video').find('#video').remove();
 	});
 });
+
+setInterval(function(){
+	var text = document.getElementsByClassName('uploadcare--widget__text')[1].innerHTML;
+	var prev = document.getElementsByClassName('btn-default')[2];
+	var next = document.getElementsByClassName('btn-default')[3];
+	if(text.includes('Uploading') && text.includes('Please wait')) {
+		prev.disabled = true;
+		next.disabled = true;
+	}else{
+		prev.disabled = false;
+		next.disabled = false;
+	}
+	document.getElementsByClassName('uploadcare--widget__button_type_cancel')[1].onclick = function () {
+		document.getElementsByClassName('uploadcare--widget__text')[1].innerHTML = "";
+	};
+},500);
 </script>
 <script>
 /////////// 3. MY JQUERY ////////////

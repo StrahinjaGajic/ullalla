@@ -522,7 +522,7 @@
             var source = document.createElement('source');
             var widget = uploadcare.Widget('[role=uploadcare-uploader-video]');
             widget.validators.push(fileTypeLimit($('[role=uploadcare-uploader-video]').data('file-types')));
-            widget.validators.push(maxFileSize(20000000));
+            widget.validators.push(maxFileSize(100000000));
             // preview single video
             widget.onUploadComplete(function (fileInfo) {
                 source.setAttribute('src', fileInfo.cdnUrl);
@@ -533,6 +533,21 @@
                 $('.upload-video').find('#video').remove();
             });
         });
+    setInterval(function(){
+        var text = document.getElementsByClassName('uploadcare--widget__text')[2].innerHTML;
+        var prev = document.getElementsByClassName('btn-default')[1];
+        var next = document.getElementsByClassName('btn-default')[2];
+        if(text.includes('Uploading') && text.includes('Please wait')) {
+            prev.disabled = true;
+            next.disabled = true;
+        }else{
+            prev.disabled = false;
+            next.disabled = false;
+        }
+        document.getElementsByClassName('uploadcare--widget__button_type_cancel')[2].onclick = function () {
+            document.getElementsByClassName('uploadcare--widget__text')[2].innerHTML = "";
+        };
+    },500);
     </script>
 
     <script>
