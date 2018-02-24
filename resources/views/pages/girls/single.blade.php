@@ -128,7 +128,9 @@
 									<h4 style="display: inline-block; margin-right: 10px;"><strong>{{ __('headings.i_o_s_f') }}:</strong></h4>
 									<span><strong>{{ getDataAndCutLastCharacter($user->service_options, 'service_option_name') }}</strong></span>
 									@endif
+									<div style="overflow-x: auto">
 									<table class="table services-table">{{ parseChunkedServices($user) }}</table>
+									</div>
 								</div>
 								@endif
 								@if($user->hasContact())
