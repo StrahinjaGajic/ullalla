@@ -2819,3 +2819,10 @@ img.geolocation-image {
     opacity: 0;
   }
 }
+
+
+/******* Banners *******/
+.small_banner {
+    margin: 0px !important;
+    padding: 0px !important;
+}

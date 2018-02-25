@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Local;
-use App\Models\LocalType;
-use App\Models\VisitorDateUser;
-use App\Models\VisitorDate;
 use DB;
-use Session;
 use Auth;
 use Charts;
+use Session;
 use Carbon\Carbon;
+use App\Models\Local;
+use App\Models\LocalType;
+use App\Models\BannerPage;
+use App\Models\VisitorDate;
+use Illuminate\Http\Request;
+use App\Models\VisitorDateUser;
+
 
 class LocalProfileController extends Controller
 {
     public function getIndex(Request $request)
     {
         $types = LocalType::all();
+        $smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
 
         $orderBy = $request->order_by ? $request->order_by : null;
         $mode = $request->mode == 'list' ? 'list' : 'grid';
@@ -50,7 +53,7 @@ class LocalProfileController extends Controller
 
         $request->flash();
 
-        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types', 'mode'));
+        return view('pages.local-profile.index', compact('locals', 'currentQueries', 'types', 'mode', 'smallBanners'));
     }
 
     public function getLocal($username)

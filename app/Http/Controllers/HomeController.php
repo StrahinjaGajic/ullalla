@@ -25,12 +25,12 @@ class HomeController extends Controller
 //		);
 //
 //		$response = Plivo::sendSMS($params);
-//dd($response);
+
 		$bigBanners = BannerPage::getByPageId(1, 1)->get();
 		$mediumBanner = BannerPage::getByPageId(1, 2)->first();
-		$quarterBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
-		$verticalBanners = BannerPage::getByPageId(1, 4, true)->take(4)->get();
-		$horizontalBanners = BannerPage::getByPageId(1, 5, true)->take(2)->get();
+		$smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
+		// $verticalBanners = BannerPage::getByPageId(1, 4, true)->take(4)->get();
+		// $horizontalBanners = BannerPage::getByPageId(1, 5, true)->take(2)->get();
 
 		$gotm = User::whereNotNull('package2_id')->where('sex', 'female')->inRandomOrder()->get();
 		$totm = User::whereNotNull('package2_id')->where('sex', 'transsexual')->inRandomOrder()->get();
@@ -95,9 +95,7 @@ class HomeController extends Controller
 			'lotm',
 			'bigBanners',
 			'mediumBanner',
-			'quarterBanners',
-			'verticalBanners',
-			'horizontalBanners'
+			'smallBanners'
 		));
 	}
 }

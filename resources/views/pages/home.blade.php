@@ -14,10 +14,7 @@
                     <div id="ensign-nivoslider" class="slides">
                         @if($bigBanners->count() > 0)
                             @foreach($bigBanners as $banner)
-                                @php
-                                    $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                @endphp
-                                <img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(1140, 360)->getUrl() }}" alt="">
+                                <img src="{{ $banner->banner_photo }}" alt="">
                             @endforeach
                         @endif
                     </div>
@@ -96,11 +93,8 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
                     @if($mediumBanner)
-                        @php
-                            $singleBanner = App\Models\Banner::find($mediumBanner->banner_id);
-                        @endphp
+                        <a href="/#"><span><img src="{{ $mediumBanner->banner_photo }}" alt="" /></span></a>
                     @endif
-                    <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(555, 330)->getUrl() }}" alt="" /></span></a>
                 </div>
             </div>
         </div>
@@ -210,56 +204,19 @@
     <div class="banner-area-2 home-4">
         <div class="container">
             <div class="row">
-                @if($verticalBanners->count() > 0)
-                    @foreach($verticalBanners->chunk(2) as $banners)
+                @if($smallBanners->count() > 0)
+                    @foreach($smallBanners->chunk(2) as $banners)
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="single-banner home-3">
                                 @foreach($banners as $banner)
-                                    @php
-                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                    @endphp
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 330)->getUrl() }}" alt="" /></span></a>
+                                        <a href="/#"><span><img src="{{ $banner->banner_photo }}" alt="" /></span></a>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
                 @endif
-
-                @if($quarterBanners->count() > 0)
-                    @foreach($quarterBanners->chunk(2) as $banners)
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-banner home-3">
-                                @foreach($banners as $banner)
-                                    @php
-                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                    @endphp
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(277, 165)->getUrl() }}" alt="" /></span></a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-                
-                @if($horizontalBanners->count() > 0)
-                    @foreach($horizontalBanners->chunk(1) as $banners)
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="single-banner home-3">
-                                @foreach($banners as $banner)
-                                    @php
-                                        $singleBanner = App\Models\Banner::find($banner->banner_id);
-                                    @endphp
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 small_banner">
-                                        <a href="/#"><span><img src="{{ app()->uploadcare->getFile($singleBanner->banner_photo)->op('quality/best')->op('progressive/yes')->resize(585, 165)->getUrl() }}" alt="" /></span></a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                @endif 
             </div>
         </div>
     </div>
