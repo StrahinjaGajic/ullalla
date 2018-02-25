@@ -736,4 +736,8 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
     return ['total' => $total, 'syncedData' => $sync];
 }
 
+function removeHttp($url) {
+   $url = preg_replace("(^https?://)", "", $url );
+}
+
 ?>
