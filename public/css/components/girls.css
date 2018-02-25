@@ -38,6 +38,15 @@
     color: #f26522;
 }
 
+.info-table a {
+    color: #f26522;
+    text-decoration: underline;
+}
+
+.info-table a:hover {
+    color: #E75C1E;
+}
+
 .section-single-girl .info-table td {
     font-weight: 600;
     padding: 11px;
@@ -905,3 +914,5 @@ and (orientation : landscape) {
 @media (min-width:1281px) {
     /* hi-res laptops and desktops */
 }
+
+
