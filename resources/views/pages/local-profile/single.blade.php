@@ -74,7 +74,9 @@
                             <h3><a>{{ $local->name }}</a></h3>
                         </div>
                         <div class="product-name">
-                            <img src="{{ $local->photo .'/-/resize/278x165/' }}">
+                            @if($local->photo)
+                                <img src="{{ $local->photo .'/-/resize/278x165/' }}">
+                            @endif
                         </div><br>
                         <table class="info-table">{{ parseSingleUserData(getLocalContactFields(), $local) }}
                             <tr>
