@@ -76,7 +76,7 @@
                         <div class="product-name">
                             <img src="{{ $local->photo .'/-/resize/278x165/' }}">
                         </div><br>
-                        <table class="info-table">{{ parseSingleUserData(getContactFields(), $local) }}
+                        <table class="info-table">{{ parseSingleUserData(getLocalContactFields(), $local) }}
                             <tr>
                                 <td>{{ __('headings.local_type') }}:</td>
                                 @php ($var = 'name_'. config()->get('app.locale'))

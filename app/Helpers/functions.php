@@ -246,10 +246,13 @@ function parseSingleUserData($fields, $user) {
             if ($field == __('fields.nationality')) {
                 $html .= \App\Models\Country::where('id', $value)->value('citizenship');
             } else {
-                if (strpos($value, 'http') === false) {
+                if (strpos($value, 'http') === false || strpos($value, 'https')) {
                     $html .= ucfirst($value);
                 } else {
-                    $html .= $value;
+                    $url = strpos($value, 'www') !== false ? removeHttp($value) : 'www.' . removeHttp($value);
+                    $html .= '<a href="' . $value . '" target="_blank">';
+                    $html .= $url;
+                    $html .= '</a>';
                 }
             }
             $html .= '</td>
@@ -270,6 +273,16 @@ function getContactFields() {
         'skype_name' => __('functions.skype_name'),
         'prefered_contact_option' => __('functions.prefered_contact_option'),
         'no_withheld_numbers' => __('functions.no_withheld_numbers'),
+    ];
+}
+
+function getLocalContactFields() {
+    return [
+        // 'email' => __('functions.email'),
+        'phone' => __('functions.phone'),
+        'mobile' => __('functions.mobile'),
+        'website' => __('functions.website'),
+        'street' => __('functions.address'),
     ];
 }
 
@@ -737,7 +750,7 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
 }
 
 function removeHttp($url) {
-   $url = preg_replace("(^https?://)", "", $url );
+   return $url = preg_replace("(^https?://)", "", $url );
 }
 
 ?>
