@@ -95,7 +95,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="single-banner home-3">
                     @if($mediumBanner)
-                        <a href="{{ $mediumBanner->banner_url }}"><span><img src="{{ $mediumBanner->banner_photo }}" alt="" /></span></a>
+                        <a href="{{ $mediumBanner->banner_url }}" target="_blank"><span><img src="{{ $mediumBanner->banner_photo }}" alt="" /></span></a>
                     @endif
                 </div>
             </div>
@@ -212,7 +212,7 @@
                             <div class="single-banner home-3">
                                 @foreach($banners as $banner)
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                        <a href="{{ $banner->banner_url }}"><span><img src="{{ $banner->banner_photo }}" alt="small banner" /></span></a>
+                                        <a href="{{ $banner->banner_url }}" target="_blank"><span><img src="{{ $banner->banner_photo }}" alt="small banner" /></span></a>
                                     </div>
                                 @endforeach
                             </div>
