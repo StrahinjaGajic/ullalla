@@ -215,15 +215,15 @@
             <div class="row">
                 @if($smallBanners->count() > 0)
                     @foreach($smallBanners->chunk(2) as $banners)
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        @foreach($banners as $banner)
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="single-banner home-3">
-                                @foreach($banners as $banner)
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 small_banner">
-                                        <a href="{{ $banner->banner_url }}" target="_blank"><span><img src="{{ $banner->banner_photo }}" alt="" /></span></a>
+                                    <div class="small_banner">
+                                        <a href="{{ $banner->banner_url }}" target="_blank"><span><img src="{{ $banner->banner_photo }}" alt="small banner" /></span></a>
                                     </div>
-                                @endforeach
                             </div>
                         </div>
+                        @endforeach
                     @endforeach
                 @endif
             </div>
