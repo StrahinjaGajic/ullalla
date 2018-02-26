@@ -41,11 +41,18 @@
 									<input type="text" class="form-control" name="nickname" />
 								</div>
 								<div class="form-group">
+									@php 
+										$mlCountries = Countries::lookup(app()->getLocale());
+									@endphp
 									<label class="control-label">{{ __('fields.nationality') }}</label>
 									<select name="nationality_id" class="form-control">
 										<option value=""></option>
 										@foreach ($countries as $country)
-										<option value="{{ $country->id }}">{{ $country->citizenship }}</option>
+											@if(isset($mlCountries[$country->iso_3166_2]))
+												<option value="{{ $country->id }}" {{ getSelectedOption($user->country_id, $country->id) }}>
+														{{ $mlCountries[$country->iso_3166_2] }}
+												</option>
+											@endif
 										@endforeach
 									</select>
 								</div>

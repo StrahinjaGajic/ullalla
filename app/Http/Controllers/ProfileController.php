@@ -77,28 +77,28 @@ class ProfileController extends Controller
         // get the number of photos
         $request->merge(['photos' => (int) substr($inputPhotos, -2, 1)]);
 
-//        $this->validate($request, [
-//            'first_name' => 'required',
-//            'last_name' => 'required',
-//            'nickname' => 'required',
-//            'age' => ['required', 'numeric', new OlderThanRule'],
-//            'height' => 'required|numeric',
-//            'weight' => 'required|numeric',
-//            'sex' => 'required',
-//            'sex_orientation' => 'required',
-//            'intimate' => 'required',
-//            'alcohol' => 'required',
-//            'smoker' => 'required',
-//            'about_me' => 'required',
-//            'photos' => 'numeric|min:4|max:9',
-//            'mobile' => 'required|numeric|max:20',
-//            'phone' => 'required|numeric|max:20',
-//            'email' => 'required|email',
-//            'skype_name' => 'required_with:contact_options.3,on',
-//            'website' => 'url',
-//        ], [
-//            'skype_name.required_with' => __('validation.skype_required'),
-//        ]);
+       //  $this->validate($request, [
+       //     'first_name' => 'required',
+       //     'last_name' => 'required',
+       //     'nickname' => 'required',
+       //     'age' => ['required', 'numeric', new OlderThanRule],
+       //     'height' => 'required|numeric',
+       //     'weight' => 'required|numeric',
+       //     'sex' => 'required',
+       //     'sex_orientation' => 'required',
+       //     'intimate' => 'required',
+       //     'alcohol' => 'required',
+       //     'smoker' => 'required',
+       //     'about_me' => 'required',
+       //     'photos' => 'numeric|min:4|max:9',
+       //     'mobile' => 'required|numeric|max:20',
+       //     'phone' => 'required|numeric|max:20',
+       //     'email' => 'required|email',
+       //     'skype_name' => 'required_with:contact_options.3,on',
+       //     'website' => 'url',
+       // ], [
+       //     'skype_name.required_with' => __('validation.skype_required'),
+       // ]);
 
         // define lng and lat
         $address = request('address');

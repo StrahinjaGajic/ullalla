@@ -168,6 +168,7 @@ class GirlController extends Controller
 		}
 
 		$user = User::with('services', 'country', 'prices')->findOrFail($id);
+
 		return view('pages.girls.single', compact('user', 'chart_month', 'chart_year'));
 	}
 

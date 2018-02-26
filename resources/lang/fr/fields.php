@@ -10,7 +10,7 @@ return [
 	'nickname' => 'Nickname',
 	'first_name' => 'First Name',
 	'last_name' => 'Last Name',
-	'nationality' => 'Nationality',
+	'nationality' => 'Place of Origin',
 	'age' => 'Age',
 	'height' => 'Height',
 	'weight' => 'Weight',

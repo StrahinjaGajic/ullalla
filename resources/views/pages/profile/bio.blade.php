@@ -61,11 +61,18 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="region">
+								@php 
+									$mlCountries = Countries::lookup(app()->getLocale());
+								@endphp
 								<label for="Nationality">{{ __('fields.nationality') }}</label>
 								<select id="Nationality" name="nationality" class="input-select">
 									<option value="">{{ __('fields.nationality') }}</option>
 									@foreach ($countries as $country)
-									<option value="{{ $country->id }}" {{ getSelectedOption($user->country_id, $country->id) }}>{{ $country->citizenship }}</option>
+										@if(isset($mlCountries[$country->iso_3166_2]))
+											<option value="{{ $country->id }}" {{ getSelectedOption($user->country_id, $country->id) }}>
+													{{ $mlCountries[$country->iso_3166_2] }}
+											</option>
+										@endif
 									@endforeach
 								</select>
 							</div>
