@@ -142,8 +142,8 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default discard-duration pull-left" data-dismiss="modal" style="margin-top:0;">Discard</button>
-                                                                <button type="button" class="btn btn-default pull-right" id="next-btn" onclick="nextPrev(1, this)" style="margin-top:0;">Next</button>
-                                                                <button type="button" class="btn btn-default pull-right" id="prev-btn" onclick="nextPrev(-1, this)" style="margin-top:0;">Previous</button>
+                                                                <button type="button" class="btn btn-default pull-right next-btn" onclick="nextPrev(1, this)" style="margin-top:0;">Next</button>
+                                                                <button type="button" class="btn btn-default pull-right prev-btn" onclick="nextPrev(-1, this)" style="margin-top:0;">Previous</button>
                                                                 {{-- <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Finish</button> --}}
                                                             </div>
                                                         </div>
@@ -396,6 +396,8 @@
         $("input.price_per_duration:checkbox").on('change', function(event) {
             var that = $(this);
             showTab(0, that);
+            resetCurrentTab();
+
             var thatVal = that.val();
             var formGroup = that.closest('.form-group');
             var closestTr = that.closest('tr');
@@ -442,6 +444,7 @@
 
         formGroup.find('input:checkbox').prop('checked', false);
         spanError.text('');
+        resetCurrentTab();
     });
 
     // $('.apply-duration').on('click', function () {
@@ -530,26 +533,34 @@
         }
     });
 
+function resetCurrentTab() {
+    currentTab = 0;
+}
 
 var currentTab = 0;
 
 function showTab(num, el = null) {
     // display the specified tab
-    var tab = $(el).closest('.form-group').find('.tab-pane');
+    var formGroup = $(el).closest('.form-group');
+    var tab = formGroup.find('.tab-pane');
+    var nextBtn = formGroup.find('button.next-btn');
+    var prevBtn = formGroup.find('button.prev-btn');
+
     $(tab[num]).addClass('active');
     // fix the Previous/Next buttons:
     if (num > 0) {
-        $("#prev-btn").css('display', 'block');
+        console.log();
+        prevBtn.css('display', 'block');
     } else {
-        $("#prev-btn").css('display', 'none');
+        prevBtn.css('display', 'none');
     }
     if (num == (tab.length - 1)) {
-        $('#next-btn').text('Finish');
+        nextBtn.text('Finish');
     } else {
-        $('#next-btn').text('Next');    
+        nextBtn.text('Next');    
     }
     // display the correct step
-    fixStepIndicator(num);
+    fixStepIndicator(num, el);
 }
 
 function nextPrev(num, el = null) {
@@ -561,6 +572,7 @@ function nextPrev(num, el = null) {
     $(tab[currentTab]).removeClass('active');
     // increase or decrease the current tab by 1:
     currentTab = currentTab + num;
+
     // end of the wizard
     if (currentTab >= tab.length) {
         // finish
@@ -637,7 +649,6 @@ function nextPrev(num, el = null) {
 function validateForm(el) {
     // validate
     var tab = $(el).closest('.form-group').find('.tab-pane');
-    // console.log(tab);
     var y, i, valid = true;
     input = $(tab[currentTab]).find('[name]');
 
@@ -661,14 +672,16 @@ function validateForm(el) {
     return valid; // return the valid status
 }
 
-function fixStepIndicator(n) {
+function fixStepIndicator(num, el = null) {
     // remove the active class of all steps
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
+    var i, steps = $(el).closest('.form-group').find('.step');
+    for (i = 0; i < steps.length; i++) {
+        var step = steps[i];
+        step.className = step.className.replace(" active", "");
+
     }
     // add the active class to the current step
-    x[n].className += " active";
+    $(steps[num]).addClass('active');
 }
 
 function removeError(that) {
