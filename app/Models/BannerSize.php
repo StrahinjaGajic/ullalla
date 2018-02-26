@@ -10,6 +10,6 @@ class BannerSize extends Model
 
     public function pages()
     {
-        return $this->belongsToMany('App\Models\Page', 'page_banner_size')->withPivot('price_per_day', 'price_per_week', 'price_per_month');
+        return $this->belongsToMany('App\Models\Page', 'page_banner_size')->withPivot('price_per_week', 'price_per_month');
     }
 }
