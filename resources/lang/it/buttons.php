@@ -12,6 +12,9 @@ return [
 	'view_profile' => 'Vedi profilo',
 	'close' => 'Chiudi',
 	'search' => 'Cerca',
+	'female' => 'Donna',
+	'transsexual' => 'Trans',
+	'local' => 'Locali',
 
 
 	# footer links
