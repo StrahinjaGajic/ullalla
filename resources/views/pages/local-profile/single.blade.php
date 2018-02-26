@@ -107,6 +107,9 @@
                             @if($local->videos)
                             <li><a href="#girl-video" data-toggle="tab">{{ __('buttons.video') }}</a></li>
                             @endif
+                            @if($local->city)
+                                <li><a href="#girl-map" data-toggle="tab">{{ __('headings.map') }}</a></li>
+                            @endif
                             @if(isset($chart_year) || isset($chart_month))
                             <li><a href="#statistics" data-toggle="tab">{{ __('functions.statistics') }}</a></li>
                             @endif
@@ -178,6 +181,9 @@
                                     <source src="{{ $local->videos }}" type="video/mp4">
                                 </video>
                             </div>
+                            <div class="tab-pane" id="girl-map">
+                                <div id="map" style="width: 100%; height: 450px;"></div>
+                            </div>
                             @if(isset($chart_year) || isset($chart_month))
                                 <div class="tab-pane" id="statistics">
                                     @if(isset($chart_year))
@@ -230,6 +236,13 @@
             </div>
         </div>
     </div>
+    @if($local->city)
+        @php($userAddress = $local->city)
+        @if($local->street)
+            @php($userAddress = $local->street. ', '. $local->city)
+        @endif
+    @endif
+
     @stop
     @section('perPageScripts')
     <script>
@@ -259,6 +272,47 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 </script>
+        <script src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4"></script>
+        <!-- Call Plyr -->
+        <script>
+            plyr.setup({
+                speeds: [0.5, 1.0, 1.5, 2.0, 2.5],
+            });
+        </script>
+        @if(isset($userAddress))
+            <script>
+
+                $('a[href="#girl-map"]').on('click', function () {
+                    setTimeout(initMap, 10);
+                });
+
+                function initMap() {
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 16,
+                        center: {lat: -34.397, lng: 150.644}
+                    });
+                    var geocoder = new google.maps.Geocoder();
+                    geocodeAddress(geocoder, map);
+                }
+
+                function geocodeAddress(geocoder, resultsMap) {
+                    var address = '{{ $userAddress }}';
+                    geocoder.geocode({'address': address}, function(results, status) {
+                        if (status === 'OK') {
+                            resultsMap.setCenter(results[0].geometry.location);
+                            console.log(results);
+                            var marker = new google.maps.Marker({
+                                map: resultsMap,
+                                position: results[0].geometry.location
+                            });
+                        } else {
+                            alert('{{ __('messages.geolocation_not_successful') }} ' + status);
+                        }
+                    });
+                }
+            </script>
+        @endif
 
 <script>
     $('.nav-tabs').find('li:first-child').addClass('active');
