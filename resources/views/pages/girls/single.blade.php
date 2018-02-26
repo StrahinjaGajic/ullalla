@@ -35,15 +35,18 @@
 								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
 								<div id="myModal" class="modal">
 								<span class="close">&times;</span>
-								<div class="modal-dialog modal-md">
+								<div class="modal-dialog modal-lg">
 									
 									<div class="modal-content">
-									<img id="img01" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}">
-                                   <div class="prev-next">    
-                                    <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
-                                    <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
-                                        </div>
+                                        <div class="owl-carousel owl-theme">
+                                          <div class="item">
+                                               <img id="img01" src="{{ $user->photos . '/-/resize/490x560/' }}">
+                                           </div>
+                                        </div>								
+
                                       </div>
+                                       
+
                                       </div>      
 								</div>
 							</a>
@@ -366,62 +369,62 @@
 // Get the modal
 var modal = document.getElementById('myModal');
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
+//// Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementsByClassName('expand')[0];
 
         
-var modalImg = document.getElementById("img01");
-        
-        var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
-        
-        
-        function prev () {
-            var now = modalImg.getAttribute("src").substr(-19 , 1);
-            
-            if (now == 0) {
-                
-                var prev = all;
-            }
-            
-            else {
-                var prev = now - 1;
-            }
-            
-            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
-             
-            
-            var src = src + "nth/"+prev+"/-/resize/490x560/";
-            
-            modalImg.setAttribute("src", src); 
-
-        }
-        
-        function next () {
-            
-            
-            var now = modalImg.getAttribute("src").substr(-19 , 1);
-            
-            now = parseInt(now);
-
-            
-            if (now == all) {
-                
-                var next = 0;
-            }
-            
-            else {
-                var next = now + 1;
-            }
-            
-            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
-             
-            
-            var src = src + "nth/"+next+"/-/resize/490x560/";
-            
-            modalImg.setAttribute("src", src);   
-
-
-        }
+//var modalImg = document.getElementById("img01");
+//        
+//        var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
+//        
+//        
+//        function prev () {
+//            var now = modalImg.getAttribute("src").substr(-19 , 1);
+//            
+//            if (now == 0) {
+//                
+//                var prev = all;
+//            }
+//            
+//            else {
+//                var prev = now - 1;
+//            }
+//            
+//            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+//             
+//            
+//            var src = src + "nth/"+prev+"/-/resize/490x560/";
+//            
+//            modalImg.setAttribute("src", src); 
+//
+//        }
+//        
+//        function next () {
+//            
+//            
+//            var now = modalImg.getAttribute("src").substr(-19 , 1);
+//            
+//            now = parseInt(now);
+//
+//            
+//            if (now == all) {
+//                
+//                var next = 0;
+//            }
+//            
+//            else {
+//                var next = now + 1;
+//            }
+//            
+//            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+//             
+//            
+//            var src = src + "nth/"+next+"/-/resize/490x560/";
+//            
+//            modalImg.setAttribute("src", src);   
+//
+//
+//        }
         
         
 var captionText = document.getElementById("caption");
@@ -474,6 +477,12 @@ function changeToMonth(){
 }
 </script>
 
-
+<script>
+    
+    $(document).ready(function(){
+  $('.owl-carousel').owlCarousel();
+});
+    
+    </script>
 
 @stop
