@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Mail\Contact;
 use Mail;
+use App\Mail\Contact;
+use App\Models\BannerPage;
+use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     public function getIndex()
     {
-        return view('pages.contact.contact');
+        $smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
+
+        return view('pages.contact.contact', compact('smallBanners'));
     }
 
     public function postIndex(Request $request)

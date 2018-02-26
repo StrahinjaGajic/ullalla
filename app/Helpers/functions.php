@@ -246,10 +246,13 @@ function parseSingleUserData($fields, $user) {
             if ($field == __('fields.nationality')) {
                 $html .= \App\Models\Country::where('id', $value)->value('citizenship');
             } else {
-                if (strpos($value, 'http') === false) {
+                if (strpos($value, 'http') === false || strpos($value, 'https')) {
                     $html .= ucfirst($value);
                 } else {
-                    $html .= $value;
+                    $url = strpos($value, 'www') !== false ? removeHttp($value) : 'www.' . removeHttp($value);
+                    $html .= '<a href="' . $value . '" target="_blank">';
+                    $html .= $url;
+                    $html .= '</a>';
                 }
             }
             $html .= '</td>
@@ -273,6 +276,16 @@ function getContactFields() {
     ];
 }
 
+function getLocalContactFields() {
+    return [
+        // 'email' => __('functions.email'),
+        'phone' => __('functions.phone'),
+        'mobile' => __('functions.mobile'),
+        'website' => __('functions.website'),
+        'street' => __('functions.address'),
+    ];
+}
+
 function parseSingleContactData($fields, $user) {
     $html = '';
     foreach ($fields as $key => $field) {
@@ -293,6 +306,11 @@ function parseSingleContactData($fields, $user) {
                 <td>';
                 if (array_key_exists($value, getPreferedOptions())) {
                     $html .= getPreferedOptions()[$value];
+                } elseif ($key == 'website') {
+                    $url = strpos($value, 'www') !== false ? removeHttp($value) : 'www.' . removeHttp($value);
+                    $html .= '<a href="' . $value . '" target="_blank">';
+                    $html .= $url;
+                    $html .= '</a>';
                 } else {
                     if ($key == 'no_withheld_numbers') {
                         $html .= $value == 0 ? __('labels.yes') : __('labels.no');
@@ -734,6 +752,10 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
     }
 
     return ['total' => $total, 'syncedData' => $sync];
+}
+
+function removeHttp($url) {
+   return $url = preg_replace("(^https?://)", "", $url );
 }
 
 ?>

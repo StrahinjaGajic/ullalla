@@ -38,6 +38,17 @@
     color: #f26522;
 }
 
+.info-table a,
+.product-description-tab table a {
+    color: #f26522;
+    text-decoration: underline;
+}
+
+.info-table a:hover,
+.product-description-tab table a:hover {
+    color: #E75C1E;
+}
+
 .section-single-girl .info-table td {
     font-weight: 600;
     padding: 11px;
@@ -580,6 +591,8 @@ html [type=button],
         text-align: center!important;
         padding-top: 20px;
     }
+    
+    
 
 
 
@@ -626,6 +639,10 @@ html [type=button],
         height: 13px;
         padding: 10px 10% 15px 10%;
     }
+    
+        .section-single-girl .services-table td {
+    display: block;
+}
 }
 
 
@@ -647,6 +664,12 @@ and (orientation : portrait) {
     .club_modal_dialog {
         margin-left: 0px;
     }
+    
+        .section-single-girl .services-table td {
+    font-weight: 600;
+    display: inline-block;
+    width: 100%;
+}
 
 }
 
@@ -668,6 +691,10 @@ and (orientation : landscape) {
         padding: 35px 0 35px;
     }
 
+    
+        .section-single-girl .services-table td {
+    display: block;
+}
 }
 
 
@@ -682,7 +709,11 @@ and (orientation : portrait) {
     margin-left: 20px;
     padding-top: 60px;
 }
-    
+    .section-single-girl .services-table td {
+    font-weight: 600;
+    display: inline-block;
+    width: 100%;
+}
 }
 
 
@@ -695,7 +726,9 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (orientation : landscape) { 
 
-
+    .section-single-girl .services-table td {
+    display: block;
+}
     
 }
 
@@ -710,6 +743,12 @@ and (orientation : portrait) {
     margin-left: 30px;
     padding-top: 60px;
 }
+    
+        .section-single-girl .services-table td {
+    font-weight: 600;
+    display: inline-block;
+    width: 100%;
+}
 
 }
 
@@ -720,20 +759,12 @@ and (orientation : portrait) {
 and (min-device-width : 414px) 
 and (max-device-width : 736px) 
 and (orientation : landscape) { 
-
+        .section-single-girl .services-table td {
+    display: block;
+}
 
 }
 
-@media only screen 
-    and (min-device-width : 375px) 
-    and (max-device-height : 812px) 
-    and (-webkit-device-pixel-ratio : 3)
-    and (orientation:landscape){ 
-
-
-
-
-}
 
 
 /* iPad in portrait */
@@ -745,6 +776,10 @@ and (orientation : portrait) {
     .club_modal_dialog {
         padding-top: 200px;
     }
+    
+        .section-single-girl .services-table td {
+    display: block;
+}
 }
 
 
@@ -761,6 +796,14 @@ and (orientation : landscape) {
     .club_modal_dialog {
         padding-top: 70px;
     }
+    
+    .section-single-girl .services-table td {
+    font-weight: 600;
+    padding: 0;
+    vertical-align: middle;
+    font-size: 10px;
+    line-height: 35px;
+}
 }
 
 
@@ -783,6 +826,10 @@ and (orientation : landscape) {
       .club_modal_dialog {
           padding-top: 300px;
       }
+      
+          .section-single-girl .services-table td {
+    display: block;
+}
 }
 
 /* Landscape */
@@ -794,16 +841,21 @@ and (orientation : landscape) {
   .club_modal_dialog {
           padding-top: 200px;
       }
+      
+    .section-single-girl .services-table td {
+    font-weight: 600;
+    padding: 0;
+    vertical-align: middle;
+    font-size: 10px;
+    line-height: 35px;
+}
 }
 
-
-/* iPhone X landsacpe mode*/
-@media only screen 
-and (device-width : 375px) 
-and (device-height : 812px) 
-and (device-pixel-ratio : 3)
-and (orientation : landscape) {
-
+/* iphone X */
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    .section-single-girl .services-table td {
+    display: block;
+}
 }
 
 
@@ -864,3 +916,5 @@ and (orientation : landscape) {
 @media (min-width:1281px) {
     /* hi-res laptops and desktops */
 }
+
+

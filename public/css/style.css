@@ -1619,7 +1619,7 @@ input[list] {
 }
 
 .product-description-tab .tab-content td {
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 0.5px;
 }
 
@@ -2818,4 +2818,11 @@ img.geolocation-image {
   100% {
     opacity: 0;
   }
+}
+
+
+/******* Banners *******/
+.small_banner {
+    margin: 0px !important;
+    padding: 0px !important;
 }

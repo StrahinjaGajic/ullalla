@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VisitorDate;
-use App\Models\VisitorDateUser;
 use DB;
+use Charts;
 use Session;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Canton;
 use App\Models\Service;
+use App\Models\BannerPage;
+use App\Models\VisitorDate;
 use Illuminate\Http\Request;
 use App\Models\SpokenLanguage;
-use Charts;
-use Carbon\Carbon;
+use App\Models\VisitorDateUser;
 
 class GirlController extends Controller
 {
 	public function getIndex(Request $request)
 	{
+		$smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
 		$services = Service::with('users')->get();
 		$spokenLanguages = SpokenLanguage::with('users')->get();
 		$maxPrice = \DB::table('prices')->max('service_price');
@@ -88,7 +90,7 @@ class GirlController extends Controller
 
 		$request->flash();
 
-		return view('pages.girls.index', compact('services', 'users', 'cantons', 'spokenLanguages', 'pricesTypes', 'maxPrice', 'mode'));
+		return view('pages.girls.index', compact('services', 'users', 'cantons', 'spokenLanguages', 'pricesTypes', 'maxPrice', 'mode', 'smallBanners'));
 	}
 
 	public function getGirl($id)
