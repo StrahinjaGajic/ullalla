@@ -36,18 +36,16 @@
 								<div id="myModal" class="modal">
 								<span class="close">&times;</span>
 								<div class="modal-dialog modal-lg">
-									
 									<div class="modal-content">
                                         <div class="owl-carousel owl-theme">
-                                          <div class="item">
-                                               <img id="img01" src="{{ $user->photos . '/-/resize/490x560/' }}">
-                                           </div>
+                                        	@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
+												<div class="div">
+													<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/490x560/' }}"/>
+												</div>
+											@endfor
                                         </div>								
-
                                       </div>
-                                       
-
-                                      </div>      
+                                    </div>      
 								</div>
 							</a>
 						</div>

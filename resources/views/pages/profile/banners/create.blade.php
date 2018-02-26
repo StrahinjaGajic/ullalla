@@ -95,16 +95,16 @@
 
                                                                 <ul class="nav nav-pills">
                                                                     <li class="step active">
-                                                                        <a href="#duration-tab-{{ $pptId }}" data-toggle="tab">{{ __('fields.duration') }}</a>
+                                                                        <a href="#duration-tab-{{ $pptId }}">{{ __('fields.duration') }}</a>
                                                                     </li>
                                                                     <li class="step flyerless-fields">
-                                                                        <a href="#description-tab-{{ $pptId }}" data-toggle="tab">{{ __('fields.description') }}</a>
+                                                                        <a href="#description-tab-{{ $pptId }}">{{ __('fields.description') }}</a>
                                                                     </li>
                                                                     <li class="step">
-                                                                        <a href="#website-tab-{{ $pptId }}" data-toggle="tab">{{ __('fields.website') }}</a>
+                                                                        <a href="#website-tab-{{ $pptId }}">{{ __('fields.website') }}</a>
                                                                     </li>
                                                                     <li class="step">
-                                                                        <a class="step" href="#photo-tab-{{ $pptId }}" data-toggle="tab">{{ __('fields.photo') }}</a>
+                                                                        <a class="step" href="#photo-tab-{{ $pptId }}">{{ __('fields.photo') }}</a>
                                                                     </li>
                                                                 </ul>
 
