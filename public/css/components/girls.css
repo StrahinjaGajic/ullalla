@@ -38,12 +38,14 @@
     color: #f26522;
 }
 
-.info-table a {
+.info-table a,
+.product-description-tab table a {
     color: #f26522;
     text-decoration: underline;
 }
 
-.info-table a:hover {
+.info-table a:hover,
+.product-description-tab table a:hover {
     color: #E75C1E;
 }
 

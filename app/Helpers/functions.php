@@ -306,6 +306,11 @@ function parseSingleContactData($fields, $user) {
                 <td>';
                 if (array_key_exists($value, getPreferedOptions())) {
                     $html .= getPreferedOptions()[$value];
+                } elseif ($key == 'website') {
+                    $url = strpos($value, 'www') !== false ? removeHttp($value) : 'www.' . removeHttp($value);
+                    $html .= '<a href="' . $value . '" target="_blank">';
+                    $html .= $url;
+                    $html .= '</a>';
                 } else {
                     if ($key == 'no_withheld_numbers') {
                         $html .= $value == 0 ? __('labels.yes') : __('labels.no');
