@@ -190,7 +190,7 @@
                                 </a>
                             </div>
                             <div class="product-content">
-                                <a class="shop-name">{{ $user->username }}</a><br>
+                                <a class="shop-name">{{ $user->name }}</a><br>
                                 <a href="{{ url('locals/' . $user->username) }}"><div class="product-cart">
                                     <button class="button">{{ __('buttons.view_profile') }}</button>
                                 </div></a>

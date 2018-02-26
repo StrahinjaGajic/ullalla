@@ -122,7 +122,7 @@ return [
     #getBioFields
     'age' => 'Age',
     'type' => 'Type',
-    'country_id' => 'Nationality',
+    'country_id' => 'Place of Origin',
     'eye_color' => 'Eyes',
     'hair_color' => 'Hair',
     'height' => 'Height',

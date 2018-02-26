@@ -243,9 +243,11 @@ function parseSingleUserData($fields, $user) {
             $html .= '<tr>
             <td>' . $field . ':</td>
             <td>';
+            
             if ($field == __('fields.nationality')) {
-                $html .= \App\Models\Country::where('id', $value)->value('citizenship');
+                $html .= Countries::lookup(app()->getLocale())[App\Models\Country::where('id', $user->country_id)->value('iso_3166_2')];
             } else {
+                // remove http or https and add www if needed
                 if (strpos($value, 'http') === false || strpos($value, 'https')) {
                     $html .= ucfirst($value);
                 } else {
@@ -255,6 +257,7 @@ function parseSingleUserData($fields, $user) {
                     $html .= '</a>';
                 }
             }
+
             $html .= '</td>
             </tr>';
         }
