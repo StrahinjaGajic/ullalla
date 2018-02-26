@@ -110,7 +110,7 @@
 
                                                                 <div class="tab-content">
                                                                     <section class="tab-pane active" id="duration-tab-{{ $pptId }}">
-                                                                        <div class="form-group">
+                                                                        <div class="form-group banner_days">
                                                                             <label>Please Enter for how many days you want banner</label>
                                                                             <input class="form-control banner_duration" type="text" name="banner_duration[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;" oninput="removeError(this)">
                                                                             <span class="help-block" style="color: red;"></span>
@@ -118,7 +118,7 @@
                                                                     </section>
 
                                                                     <section class="tab-pane" id="description-tab-{{ $pptId }}">
-                                                                        <div class="form-group flyerless-fields">
+                                                                        <div class="form-group flyerless-fields banner_days">
                                                                             <label class="control-label">{{ __('fields.description') }} *</label>
                                                                             <textarea name="description[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" class="form-control banner_description" oninput="removeError(this)"></textarea>
                                                                             <span class="help-block" style="color: red;"></span>
@@ -126,14 +126,14 @@
                                                                     </section>
 
                                                                     <section class="tab-pane" id="website-tab-{{ $pptId }}">
-                                                                        <div class="form-group">
+                                                                        <div class="form-group banner_days">
                                                                             <label class="control-label">{{ __('fields.website') }} *</label>
                                                                             <input class="form-control banner_website" type="text" name="website[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;" oninput="removeError(this)">
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
                                                                     </section>
                                                                     <section class="tab-pane" id="photo-tab-{{ $pptId }}">
-                                                                        <div class="form-group">
+                                                                        <div class="form-group banner_days">
                                                                             <input type="hidden" class="banner_photo" name="banner_photo[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" data-crop="490x560 minimum" data-images-only="" autocomplete="off">
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
