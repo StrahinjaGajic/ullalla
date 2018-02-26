@@ -38,6 +38,7 @@
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
                                         <div class="owl-carousel owl-theme">
+                                        
                                         	@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
 												<div class="div">
 													<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/490x560/' }}"/>
@@ -478,7 +479,26 @@ function changeToMonth(){
 <script>
     
     $(document).ready(function(){
-  $('.owl-carousel').owlCarousel();
+  $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+        0:{
+            items:1,
+            nav:true,
+        },
+        600:{
+            items:1,
+            nav:false,
+        },
+        1000:{
+            items:1,
+            nav:true,
+            loop:false,
+        }
+    }
+  });
 });
     
     </script>

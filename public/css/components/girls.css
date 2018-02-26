@@ -539,8 +539,33 @@ html [type=button],
     z-index: 1;
 }
 
+li.step {
+    padding: 0!important;
+}
 
+.step > a:hover {
+    background-color: transparent!important;
+}
 
+.step.active > a, .step.active > a:hover, .step.active > a:focus {
+    background-color: #f26522!important;
+    color: #fff!important;
+}
+
+.banner_days {
+    padding: 0 15px;
+    margin-top: 35px;
+}
+
+.banner_days > span.help-block {
+    text-align: left;
+}
+
+.banner_description {
+    background: none;
+    color: #fff;
+    padding-top: 5px!important;
+}
 
 /*** MEDIA ***/
 
