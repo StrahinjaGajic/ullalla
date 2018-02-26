@@ -212,12 +212,12 @@ return [
     #statistics
     'statistics' => 'Statistik',
     'visitors' => 'Besucher',
-    'yearly' => 'Yearly',
-    'monthly' => 'Monthly',
+    'yearly' => 'Jährlich',
+    'monthly' => 'Monatlich',
 
     #girls
-    'menage_table_items' => 'Menage Table Items',
-    'edit' => 'Edit',
-    'delete' => 'Delete',
-    'are_you_sure' => 'Are you sure?',
+    'menage_table_items' => 'Eingaben verwalten',
+    'edit' => 'Bearbeiten',
+    'delete' => 'Löschen',
+    'are_you_sure' => 'Sind Sie sicher?',
 ];

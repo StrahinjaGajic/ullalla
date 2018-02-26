@@ -27,8 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('ullalla:deactivate-user')->dailyAt('23:55'); // add in production
         // $schedule->command('ullalla:activate-scheduled-packages')->dailyAt('23:56'); //add in production
-        $schedule->command('ullalla:add-visitors')->dailyAt('23:59');
-//        $schedule->command('ullalla:make-yearly-visitors')->dailyAt('23:57');
+        $schedule->command('ullalla:add-visitors')->dailyAt('23:57');
+        $schedule->command('ullalla:make-yearly-visitors')->dailyAt('23:58')->when(function () {
+            return \Carbon\Carbon::now()->endOfMonth()->isToday();
+        });
     }
 
     /**

@@ -13,21 +13,21 @@ class ServiceOptionTableSeeder extends Seeder
     public function run()
     {
         $serviceOption = new ServiceOption;
-        $serviceOption->service_option_name_de = 'men';
+        $serviceOption->service_option_name_de = 'männer';
         $serviceOption->service_option_name_en = 'men';
         $serviceOption->service_option_name_it = 'men';
         $serviceOption->service_option_name_fr = 'men';
         $serviceOption->save();
 
         $serviceOption = new ServiceOption;
-        $serviceOption->service_option_name_de = 'women';
+        $serviceOption->service_option_name_de = 'frauen';
         $serviceOption->service_option_name_en = 'women';
         $serviceOption->service_option_name_it = 'women';
         $serviceOption->service_option_name_fr = 'women';
         $serviceOption->save();
 
         $serviceOption = new ServiceOption;
-        $serviceOption->service_option_name_de = 'couples';
+        $serviceOption->service_option_name_de = 'paare';
         $serviceOption->service_option_name_en = 'couples';
         $serviceOption->service_option_name_it = 'couples';
         $serviceOption->service_option_name_fr = 'couples';

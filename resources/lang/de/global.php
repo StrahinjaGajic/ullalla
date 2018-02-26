@@ -36,5 +36,5 @@ return [
     'October' => 'Oktober',
     'November' => 'November',
     'December' => 'Dezember',
-    'years' => 'Years',
+    'years' => 'Jahre',
 ];

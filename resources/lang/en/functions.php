@@ -216,7 +216,7 @@ return [
     'monthly' => 'Monthly',
 
     #girls
-    'menage_table_items' => 'Menage Table Items',
+    'menage_table_items' => 'Menage Item',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'are_you_sure' => 'Are you sure?',
