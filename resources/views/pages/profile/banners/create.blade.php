@@ -27,7 +27,7 @@
                     </label>
                 </div>
                 <div class="help-block banner-error" style="color: red;">
-                    @if($errors->has('price_per_day') || $errors->has('price_per_week') || $errors->has('price_per_month'))
+                    @if($errors->has('price_per_week') || $errors->has('price_per_month'))
                         Please choose at least one banner
                     @elseif($errors->has('stripe_error'))
                         {{ $errors->first() }}
@@ -56,9 +56,6 @@
                                 <td class="price_per">
                                     <table class="table inner_table">
                                         <tr>
-                                            <td>Price Per Day</td>
-                                        </tr>
-                                        <tr>
                                             <td>Price Per Week</td>
                                         </tr>
                                         <tr>
@@ -75,7 +72,6 @@
                                     @foreach($perTimeColumns as $perTimeColumn)
                                         @if($price)
                                             @php
-                                                $sizeIdPageIdStr = $size->id . $page->id;
                                                 $pptId = $perTimeColumn . $size->id . $page->id;
                                             @endphp
                                             <div class="form-group banner_inner_form_group" style="position: relative;">
@@ -98,44 +94,46 @@
                                                             <div class="modal-body">
 
                                                                 <ul class="nav nav-pills">
-                                                                    <li class="active">
-                                                                        <a href="#duration-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.duration') }}</a>
+                                                                    <li class="step active">
+                                                                        <a href="#duration-tab-{{ $pptId }}">{{ __('fields.duration') }}</a>
                                                                     </li>
-                                                                    <li class="flyerless-fields">
-                                                                        <a href="#description-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.description') }}</a>
+                                                                    <li class="step flyerless-fields">
+                                                                        <a href="#description-tab-{{ $pptId }}">{{ __('fields.description') }}</a>
                                                                     </li>
-                                                                    <li>
-                                                                        <a href="#website-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.website') }}</a>
+                                                                    <li class="step">
+                                                                        <a href="#website-tab-{{ $pptId }}">{{ __('fields.website') }}</a>
                                                                     </li>
-                                                                    <li>
-                                                                        <a href="#photo-tab-{{ $sizeIdPageIdStr }}" data-toggle="tab">{{ __('fields.photo') }}</a>
+                                                                    <li class="step">
+                                                                        <a class="step" href="#photo-tab-{{ $pptId }}">{{ __('fields.photo') }}</a>
                                                                     </li>
                                                                 </ul>
 
                                                                 <div class="tab-content">
-                                                                    <section class="tab-pane active" id="duration-tab-{{ $sizeIdPageIdStr }}">
-                                                                        <div class="form-group">
+                                                                    <section class="tab-pane active" id="duration-tab-{{ $pptId }}">
+                                                                        <div class="form-group banner_days">
                                                                             <label>Please Enter for how many days you want banner</label>
-                                                                            <input class="form-control banner_duration" type="text" name="banner_duration[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;">
+                                                                            <input class="form-control banner_duration" type="text" name="banner_duration[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;" oninput="removeError(this)">
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
                                                                     </section>
 
-                                                                    <section class="tab-pane" id="description-tab-{{ $sizeIdPageIdStr }}">
-                                                                        <div class="form-group flyerless-fields">
+                                                                    <section class="tab-pane" id="description-tab-{{ $pptId }}">
+                                                                        <div class="form-group flyerless-fields banner_days">
                                                                             <label class="control-label">{{ __('fields.description') }} *</label>
-                                                                            <textarea name="description[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" class="form-control banner_description"></textarea>
-                                                                        </div>
-                                                                    </section>
-
-                                                                    <section class="tab-pane" id="website-tab-{{ $sizeIdPageIdStr }}">
-                                                                        <div class="form-group">
-                                                                            <input class="form-control banner_website" type="text" name="webiste[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;">
+                                                                            <textarea name="description[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" class="form-control banner_description" oninput="removeError(this)"></textarea>
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
                                                                     </section>
-                                                                    <section class="tab-pane" id="photo-tab-{{ $sizeIdPageIdStr }}">
-                                                                        <div class="form-group">
+
+                                                                    <section class="tab-pane" id="website-tab-{{ $pptId }}">
+                                                                        <div class="form-group banner_days">
+                                                                            <label class="control-label">{{ __('fields.website') }} *</label>
+                                                                            <input class="form-control banner_website" type="text" name="website[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;" oninput="removeError(this)">
+                                                                            <span class="help-block" style="color: red;"></span>
+                                                                        </div>
+                                                                    </section>
+                                                                    <section class="tab-pane" id="photo-tab-{{ $pptId }}">
+                                                                        <div class="form-group banner_days">
                                                                             <input type="hidden" class="banner_photo" name="banner_photo[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]" data-crop="490x560 minimum" data-images-only="" autocomplete="off">
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
@@ -143,8 +141,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Apply</button>
-                                                                <button type="button" class="btn btn-default discard-duration" data-dismiss="modal" style="margin-top:0;">Discard</button>
+                                                                <button type="button" class="btn btn-default discard-duration pull-left" data-dismiss="modal" style="margin-top:0;">Discard</button>
+                                                                <button type="button" class="btn btn-default pull-right next-btn" onclick="nextPrev(1, this)" style="margin-top:0;">Next</button>
+                                                                <button type="button" class="btn btn-default pull-right prev-btn" onclick="nextPrev(-1, this)" style="margin-top:0;">Previous</button>
+                                                                {{-- <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Finish</button> --}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,7 +211,6 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
 
 <script>
     ////////// 2. UPLOAD CARE ////////
@@ -240,6 +239,18 @@
         bannerWidget.validators.push(maxFileSize(20000000));
     });
 
+    function removeUploadCareError(widget, that) {
+            widget.onChange(function(file) {
+                if (file) {
+                    file.done(function(fileInfo) {
+                        removeError(that);
+                    });
+                }
+            });
+        }
+        $('.banner_photo').each(function() {
+            removeUploadCareError(uploadcare.SingleWidget($(this)), $(this));
+        });
 </script>
 
 <script>
@@ -272,7 +283,6 @@
         var totalEl = form.find('.events_total');
 
         flyerlessDiv.toggle();
-        console.log(flyerlessDiv);
 
         var diffInDays = parseFloat(form.find('input[class="banner_duration"]').val());
 
@@ -342,7 +352,7 @@
                             var errorField = $('[name="' + index + '"]');
                             errorField.siblings('.help-block').text(value);
                             errorField.closest('.form-group').addClass('has-error');
-                            if (index == 'price_per_day' || index == 'price_per_week' || index == 'price_per_month') {
+                            if (index == 'price_per_week' || index == 'price_per_month') {
                                 $('.banner-error').addClass('has-error');
                                 $('.banner-error').text('Please choose at least one banner');
                             }
@@ -385,6 +395,9 @@
     $(function () {
         $("input.price_per_duration:checkbox").on('change', function(event) {
             var that = $(this);
+            showTab(0, that);
+            resetCurrentTab();
+
             var thatVal = that.val();
             var formGroup = that.closest('.form-group');
             var closestTr = that.closest('tr');
@@ -431,72 +444,12 @@
 
         formGroup.find('input:checkbox').prop('checked', false);
         spanError.text('');
+        resetCurrentTab();
     });
 
-    $('.apply-duration').on('click', function () {
-        var that = $(this);
-        var formGroup = that.closest('.form-group');
-        var modal = formGroup.find('.modal');
-        var input = modal.find('input[type="text"]');
-        var val = input.val();
-        var spanError = input.next();
+    // $('.apply-duration').on('click', function () {
 
-        if (val == '') {
-            spanError.text('Please enter value');
-            return false;
-        } else if (isNaN(val) || val == 0) {
-            spanError.text('Value must be a number greater than zero');
-            return false;
-        }
-
-        // calculate total per size and total
-        var closestTd = that.closest('td');
-        var closestTr = that.closest('tr');
-        var thatTds = closestTr.find('td');
-        var totalPerSizeSingle = closestTd.siblings('td.total-per-size');
-        var totalPerSizeAll = $('#bannerForm').find('td.total-per-size');
-        var bannerPrice = parseFloat(closestTr.find('span.banner-price').text());
-        var totalPerSizeSingleText = totalPerSizeSingle.find('span:first-child').text();
-
-        var totalPerSize = parseFloat(totalPerSizeSingleText);
-        var total = 0;
-
-        var inputCheckbox = closestTd.find('input:checked');
-        var fieldVal = parseFloat(inputCheckbox.siblings('.price-per-time-holder').find('span:first-child').text());
-        var fieldValMultipliedByDuration = fieldVal * parseFloat(val);
-        $('<input>').attr({
-            type: 'hidden',
-            class: 'pmd',
-            value: fieldValMultipliedByDuration
-        }).insertAfter(inputCheckbox);
-        if (isNaN(fieldVal)) {
-            return true;
-        } else {
-            totalPerSize += fieldValMultipliedByDuration;
-        }
-
-        if (totalPerSizeSingleText == '0.00') {
-            totalPerSize = totalPerSize + bannerPrice;
-        }
-
-        totalPerSizeSingle.find('span:first-child').text(totalPerSize.toFixed(2));
-
-        $.each(totalPerSizeAll, function (index, field) {
-            var elVal = parseFloat($(field).find('span:first-child').text());
-            if (isNaN(elVal)) {
-                return true;
-            } else {
-                total += elVal;
-            }
-        });
-
-        $('td.total-banners').find('span:first-child').text(total.toFixed(2));
-
-        modal.modal('hide');
-        spanError.text('');
-
-        that.closest('.form-group').find('input:checkbox').prop('checked', true);
-    });
+    // });
 
     // set price to zero if user chooses option to upload his own banner
     $('.prepared_flyer').on('click', function () {
@@ -579,5 +532,161 @@
             localStorage.setItem('bannerSizesPrices', JSON.stringify([]));
         }
     });
+
+function resetCurrentTab() {
+    currentTab = 0;
+}
+
+var currentTab = 0;
+
+function showTab(num, el = null) {
+    // display the specified tab
+    var formGroup = $(el).closest('.form-group');
+    var tab = formGroup.find('.tab-pane');
+    var nextBtn = formGroup.find('button.next-btn');
+    var prevBtn = formGroup.find('button.prev-btn');
+
+    $(tab[num]).addClass('active');
+    // fix the Previous/Next buttons:
+    if (num > 0) {
+        console.log();
+        prevBtn.css('display', 'block');
+    } else {
+        prevBtn.css('display', 'none');
+    }
+    if (num == (tab.length - 1)) {
+        nextBtn.text('Finish');
+    } else {
+        nextBtn.text('Next');    
+    }
+    // display the correct step
+    fixStepIndicator(num, el);
+}
+
+function nextPrev(num, el = null) {
+    // This function will figure out which tab to display
+    var tab = $(el).closest('.form-group').find('.tab-pane');
+    // Exit the function if any field in the current tab is invalid:
+    if (num == 1 && !validateForm(el)) return false;
+    // hide the current tabf
+    $(tab[currentTab]).removeClass('active');
+    // increase or decrease the current tab by 1:
+    currentTab = currentTab + num;
+
+    // end of the wizard
+    if (currentTab >= tab.length) {
+        // finish
+        var that = $(this);
+        var formGroup = that.closest('.form-group');
+        var modal = formGroup.find('.modal');
+        var input = modal.find('input[type="text"]');
+        var val = input.val();
+        var spanError = input.next();
+
+        // if (val == '') {
+        //     spanError.text('Please enter value');
+        //     return false;
+        // } else if (isNaN(val) || val == 0) {
+        //     spanError.text('Value must be a number greater than zero');
+        //     return false;
+        // }
+
+        // calculate total per size and total
+        var closestTd = that.closest('td');
+        var closestTr = that.closest('tr');
+        var thatTds = closestTr.find('td');
+        var totalPerSizeSingle = closestTd.siblings('td.total-per-size');
+        var totalPerSizeAll = $('#bannerForm').find('td.total-per-size');
+        var bannerPrice = parseFloat(closestTr.find('span.banner-price').text());
+        var totalPerSizeSingleText = totalPerSizeSingle.find('span:first-child').text();
+
+        var totalPerSize = parseFloat(totalPerSizeSingleText);
+        var total = 0;
+
+        var inputCheckbox = closestTd.find('input:checked');
+        var fieldVal = parseFloat(inputCheckbox.siblings('.price-per-time-holder').find('span:first-child').text());
+        var fieldValMultipliedByDuration = fieldVal * parseFloat(val);
+        $('<input>').attr({
+            type: 'hidden',
+            class: 'pmd',
+            value: fieldValMultipliedByDuration
+        }).insertAfter(inputCheckbox);
+        if (isNaN(fieldVal)) {
+            return true;
+        } else {
+            totalPerSize += fieldValMultipliedByDuration;
+        }
+
+        if (totalPerSizeSingleText == '0.00') {
+            totalPerSize = totalPerSize + bannerPrice;
+        }
+
+        totalPerSizeSingle.find('span:first-child').text(totalPerSize.toFixed(2));
+
+        $.each(totalPerSizeAll, function (index, field) {
+            var elVal = parseFloat($(field).find('span:first-child').text());
+            if (isNaN(elVal)) {
+                return true;
+            } else {
+                total += elVal;
+            }
+        });
+
+        $('td.total-banners').find('span:first-child').text(total.toFixed(2));
+
+        modal.modal('hide');
+        spanError.text('');
+
+        that.closest('.form-group').find('input:checkbox').prop('checked', true);
+
+        return false;
+    }
+
+    // Otherwise, display the correct tab:
+    showTab(currentTab, el);
+}
+
+function validateForm(el) {
+    // validate
+    var tab = $(el).closest('.form-group').find('.tab-pane');
+    var y, i, valid = true;
+    input = $(tab[currentTab]).find('[name]');
+
+    // validate inputs
+    for (i = 0; i < input.length; i++) {
+        var input = $(input[i]);
+
+        // If a field is empty...
+        if (input.val() == "") {
+            // add an "invalid" class to the field:
+            input.siblings('.help-block').text('This field is required');
+            // and set the current valid status to false:
+            valid = false;
+        }
+    }
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+        document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+
+    return valid; // return the valid status
+}
+
+function fixStepIndicator(num, el = null) {
+    // remove the active class of all steps
+    var i, steps = $(el).closest('.form-group').find('.step');
+    for (i = 0; i < steps.length; i++) {
+        var step = steps[i];
+        step.className = step.className.replace(" active", "");
+
+    }
+    // add the active class to the current step
+    $(steps[num]).addClass('active');
+}
+
+function removeError(that) {
+    $(that).siblings('.help-block').text('');
+}
+
 </script>
 @stop

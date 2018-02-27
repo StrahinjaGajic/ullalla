@@ -715,7 +715,7 @@ function getEventPrice($perDay = false, $flyerless = true)
     }
 }
 
-function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_day', $total = 0, $sync = [], $sizesToCheck = [], $neverDone = true) {
+function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_week', $total = 0, $sync = [], $sizesToCheck = [], $neverDone = true) {
 
     $array = $request->$pricePerTime;
     $sizeId = '1';
@@ -750,9 +750,7 @@ function getBannerTotalAmountAndDataToSync($request, $pricePerTime = 'price_per_
 
     $sizeIds = array_keys($checkIfTimeIsMentioned);
 
-    if ($pricePerTime == 'price_per_day') {
-        return getBannerTotalAmountAndDataToSync($request, 'price_per_week', $total, $sync, $sizeIds);
-    } elseif ($pricePerTime == 'price_per_week') {
+    if ($pricePerTime == 'price_per_week') {
         return getBannerTotalAmountAndDataToSync($request, 'price_per_month', $total, $sync, $sizeIds);
     }
 

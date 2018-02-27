@@ -49,8 +49,6 @@ class BannerController extends Controller
         $total = $data['total'];
 
         $perDay = 'price_per_week, price_per_month';
-        $perMonth = 'price_per_day, price_per_week';
-        $perWeek = 'price_per_day, price_per_month';
 
         $field = '';
         foreach ($request->all() as $field => $value) {
@@ -60,30 +58,17 @@ class BannerController extends Controller
             }
         }
 
-        // get price per time input, check it and define validation rules to use them later in validator
-        if ($field == 'price_per_day') {
-            $perDay = 'price_per_day, price_per_month';
-        } elseif ($field == 'price_per_week') {
-            $perDay = 'price_per_week, price_per_day';
-            $perMonth = 'price_per_week, price_per_month';
-        } elseif ($field == 'price_per_month') {
-            $perDay = 'price_per_month, price_per_day';
-            $perMonth = 'price_per_month, price_per_week';
-        }
-
         if ($request->banner_flyer == 'on') {
             $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
+                'price_per_week' => 'required_without:price_per_month',
+                'price_per_month' => 'required_without:price_per_week',
                 'banner_photo' => 'required',
                 'banner_url' => 'required',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'price_per_day' => 'required_without_all:' . $perMonth,
-                'price_per_week' => 'required_without_all:' . $perDay,
-                'price_per_month' => 'required_without_all:' . $perDay,
+                'price_per_week' => 'required_without:price_per_month',
+                'price_per_month' => 'required_without:price_per_week',
                 'banner_description' => 'required',
                 'banner_photo' => 'required',
                 'banner_url' => 'required',
