@@ -34,9 +34,17 @@
 Media
 ----------------------------------*/
 
-@media (min-width: 768px) {}
 
 
+@media (min-width: 768px) {
+    
+}
+
+@media (max-width: 992px) {
+    .ban_block {
+        display: none;
+    }
+}
 
 @media (min-width: 992px) {
 
