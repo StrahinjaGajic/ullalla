@@ -30,10 +30,13 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div class="col-3 input-effect">
+					<div class="col-3 input-effect {{ $errors->has('city') ? 'has-error' : ''  }}"">
 						<input class="effect-16" type="text" placeholder="" name="city" value="{{ $user->city }}">
-						<label>{{ __('fields.city') }}</label>
+						<label>{{ __('fields.city') }} *</label>
 						<span class="focus-border"></span>
+						@if ($errors->has('city'))
+							<span class="help-block">{{ $errors->first('city') }}</span>
+						@endif
 					</div>
 				</div>
 				<div class="col-sm-4">

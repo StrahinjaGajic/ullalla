@@ -111,7 +111,7 @@
                                                                 <div class="tab-content">
                                                                     <section class="tab-pane active" id="duration-tab-{{ $pptId }}">
                                                                         <div class="form-group banner_days">
-                                                                            <label>Please Enter for how many days you want banner</label>
+                                                                            <label>{{ __('fields.label_' . $perTimeColumn) }}</label>
                                                                             <input class="form-control banner_duration" type="text" name="banner_duration[{{ $perTimeColumn }}][{{ $page->id }}][{{ $size->id }}]"  autocomplete="off" style="color: #fff; background-color: #222;" oninput="removeError(this)">
                                                                             <span class="help-block" style="color: red;"></span>
                                                                         </div>
@@ -429,7 +429,8 @@
                 modal.modal();
             } else {
                 modal.modal('hide');
-                modal.find('input').val('');
+                modal.find('[name]').val('');
+                modal.find('button.uploadcare--widget__button_type_remove').trigger('click');
             }
 
             closestTd.find('input.price_per_duration:checkbox').not(this).prop('checked', false);
@@ -443,8 +444,11 @@
         var spanError = formGroup.find('span.help-block');
 
         formGroup.find('input:checkbox').prop('checked', false);
+        formGroup.find('.tab-pane').not(':first').removeClass('active');
+        formGroup.find('button.uploadcare--widget__button_type_remove').trigger('click');
         spanError.text('');
         resetCurrentTab();
+        resetModalData(formGroup);
     });
 
     // $('.apply-duration').on('click', function () {
@@ -533,6 +537,10 @@
         }
     });
 
+function resetModalData(formGroup) {
+    formGroup.find('[name]').val('');
+}
+
 function resetCurrentTab() {
     currentTab = 0;
 }
@@ -576,20 +584,11 @@ function nextPrev(num, el = null) {
     // end of the wizard
     if (currentTab >= tab.length) {
         // finish
-        var that = $(this);
+        var that = $(el);
         var formGroup = that.closest('.form-group');
         var modal = formGroup.find('.modal');
-        var input = modal.find('input[type="text"]');
+        var input = modal.find('input.banner_duration');
         var val = input.val();
-        var spanError = input.next();
-
-        // if (val == '') {
-        //     spanError.text('Please enter value');
-        //     return false;
-        // } else if (isNaN(val) || val == 0) {
-        //     spanError.text('Value must be a number greater than zero');
-        //     return false;
-        // }
 
         // calculate total per size and total
         var closestTd = that.closest('td');
@@ -635,8 +634,6 @@ function nextPrev(num, el = null) {
         $('td.total-banners').find('span:first-child').text(total.toFixed(2));
 
         modal.modal('hide');
-        spanError.text('');
-
         that.closest('.form-group').find('input:checkbox').prop('checked', true);
 
         return false;
@@ -655,21 +652,26 @@ function validateForm(el) {
     // validate inputs
     for (i = 0; i < input.length; i++) {
         var input = $(input[i]);
+        var val = input.val();
 
         // If a field is empty...
-        if (input.val() == "") {
-            // add an "invalid" class to the field:
+        if (val == "") {
             input.siblings('.help-block').text('This field is required');
-            // and set the current valid status to false:
+            valid = false;
+        } else if(input.hasClass('banner_duration') && (isNaN(val) || val == 0)) {
+            input.siblings('.help-block').text('Value must be a number greater than zero');
+            valid = false;
+        } else if(input.hasClass('banner_website') && !validateUrl(val)) {
+            input.siblings('.help-block').text('Please enter a valid website');
             valid = false;
         }
     }
-    // If the valid status is true, mark the step as finished and valid:
+    // If the valid status is true, mark the step as finished and valid
     if (valid) {
         document.getElementsByClassName("step")[currentTab].className += " finish";
     }
 
-    return valid; // return the valid status
+    return valid; // valid
 }
 
 function fixStepIndicator(num, el = null) {

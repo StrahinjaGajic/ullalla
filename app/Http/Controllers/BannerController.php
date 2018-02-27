@@ -48,8 +48,6 @@ class BannerController extends Controller
         $data = getBannerTotalAmountAndDataToSync($request);
         $total = $data['total'];
 
-        $perDay = 'price_per_week, price_per_month';
-
         $field = '';
         foreach ($request->all() as $field => $value) {
             if (strpos($field, 'price_per') !== false) {

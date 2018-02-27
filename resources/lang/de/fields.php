@@ -123,4 +123,6 @@ return [
     #banners
     'prepared_banner' => 'Haben Sie bereits eine Vorlage für Ihren Banner?',
     'url' => 'Url',
+    'label_price_per_week' => 'Please enter on how many weeks you would like your banner',
+    'label_price_per_month' => 'Please enter on how many months you would like your banner',
 ];

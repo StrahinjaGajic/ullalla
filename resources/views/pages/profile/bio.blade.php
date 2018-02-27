@@ -31,7 +31,7 @@
 								<label>{{ __('fields.nickname') }}</label>
 								<span class="focus-border"></span>
 								@if ($errors->has('nickname'))
-								<span class="help-block">{{ $errors->first('nickname') }}</span>
+									<span class="help-block">{{ $errors->first('nickname') }}</span>
 								@endif
 							</div>
 						</div>
