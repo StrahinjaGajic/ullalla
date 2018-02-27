@@ -149,6 +149,7 @@ return [
     'club_name' => 'Club',
     'city' => 'Ort',
     'zip_code' => 'PLZ',
+    'zip' => 'PLZ',
     'address' => 'Adresse',
     'incall_type' => 'Incall',
     'outcall_type' => 'Outcall',
