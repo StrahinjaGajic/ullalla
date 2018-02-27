@@ -61,6 +61,10 @@ Media
     .ban_block {
         padding: 15px 0;
     }
+    
+    .description {
+        margin: 0;
+    }
 
 }
 
