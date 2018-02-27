@@ -429,7 +429,8 @@
                 modal.modal();
             } else {
                 modal.modal('hide');
-                modal.find('input').val('');
+                modal.find('[name]').val('');
+                modal.find('button.uploadcare--widget__button_type_remove').trigger('click');
             }
 
             closestTd.find('input.price_per_duration:checkbox').not(this).prop('checked', false);
@@ -443,8 +444,11 @@
         var spanError = formGroup.find('span.help-block');
 
         formGroup.find('input:checkbox').prop('checked', false);
+        formGroup.find('.tab-pane').not(':first').removeClass('active');
+        formGroup.find('button.uploadcare--widget__button_type_remove').trigger('click');
         spanError.text('');
         resetCurrentTab();
+        resetModalData(formGroup);
     });
 
     // $('.apply-duration').on('click', function () {
@@ -533,6 +537,10 @@
         }
     });
 
+function resetModalData(formGroup) {
+    formGroup.find('[name]').val('');
+}
+
 function resetCurrentTab() {
     currentTab = 0;
 }
@@ -579,7 +587,7 @@ function nextPrev(num, el = null) {
         var that = $(el);
         var formGroup = that.closest('.form-group');
         var modal = formGroup.find('.modal');
-        var input = modal.find('input[type="text"]');
+        var input = modal.find('input.banner_duration');
         var val = input.val();
 
         // calculate total per size and total
@@ -626,8 +634,6 @@ function nextPrev(num, el = null) {
         $('td.total-banners').find('span:first-child').text(total.toFixed(2));
 
         modal.modal('hide');
-        spanError.text('');
-
         that.closest('.form-group').find('input:checkbox').prop('checked', true);
 
         return false;
