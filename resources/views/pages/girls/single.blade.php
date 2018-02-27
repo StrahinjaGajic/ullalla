@@ -372,58 +372,58 @@ var modal = document.getElementById('myModal');
 var img = document.getElementsByClassName('expand')[0];
 
         
-//var modalImg = document.getElementById("img01");
-//        
+var modalImg = document.getElementById("img01");
+        
 //        var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
 //        
-//        
-//        function prev () {
-//            var now = modalImg.getAttribute("src").substr(-19 , 1);
-//            
-//            if (now == 0) {
-//                
-//                var prev = all;
-//            }
-//            
-//            else {
-//                var prev = now - 1;
-//            }
-//            
-//            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
-//             
-//            
-//            var src = src + "nth/"+prev+"/-/resize/490x560/";
-//            
-//            modalImg.setAttribute("src", src); 
-//
-//        }
-//        
-//        function next () {
-//            
-//            
-//            var now = modalImg.getAttribute("src").substr(-19 , 1);
-//            
-//            now = parseInt(now);
-//
-//            
-//            if (now == all) {
-//                
-//                var next = 0;
-//            }
-//            
-//            else {
-//                var next = now + 1;
-//            }
-//            
-//            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
-//             
-//            
-//            var src = src + "nth/"+next+"/-/resize/490x560/";
-//            
-//            modalImg.setAttribute("src", src);   
-//
-//
-//        }
+////        
+////        function prev () {
+////            var now = modalImg.getAttribute("src").substr(-19 , 1);
+////            
+////            if (now == 0) {
+////                
+////                var prev = all;
+////            }
+////            
+////            else {
+////                var prev = now - 1;
+////            }
+////            
+////            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+////             
+////            
+////            var src = src + "nth/"+prev+"/-/resize/490x560/";
+////            
+////            modalImg.setAttribute("src", src); 
+////
+////        }
+////        
+////        function next () {
+////            
+////            
+////            var now = modalImg.getAttribute("src").substr(-19 , 1);
+////            
+////            now = parseInt(now);
+////
+////            
+////            if (now == all) {
+////                
+////                var next = 0;
+////            }
+////            
+////            else {
+////                var next = now + 1;
+////            }
+////            
+////            var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+////             
+////            
+////            var src = src + "nth/"+next+"/-/resize/490x560/";
+////            
+////            modalImg.setAttribute("src", src);   
+////
+////
+////        }
         
         
 var captionText = document.getElementById("caption");
