@@ -149,6 +149,7 @@ return [
     'club_name' => 'Club',
     'city' => 'Citta',
     'zip_code' => 'CAP',
+    'zip' => 'CAP',
     'address' => 'Indirizzo',
     'incall_type' => 'Servizio interno',
     'outcall_type' => 'Servizio esterno',
