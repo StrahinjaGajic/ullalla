@@ -56,22 +56,14 @@ class BannerController extends Controller
             }
         }
 
-        if ($request->banner_flyer == 'on') {
-            $validator = Validator::make($request->all(), [
-                'price_per_week' => 'required_without:price_per_month',
-                'price_per_month' => 'required_without:price_per_week',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'price_per_week' => 'required_without:price_per_month',
-                'price_per_month' => 'required_without:price_per_week',
-                'banner_description' => 'required',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        }
+
+        $validator = Validator::make($request->all(), [
+            'price_per_week' => 'required_without:price_per_month',
+            'price_per_month' => 'required_without:price_per_week',
+            'banner_description' => 'required',
+            'banner_photo' => 'required',
+            'banner_url' => 'required',
+        ]);
 
         if ($validator->passes()) {
 
