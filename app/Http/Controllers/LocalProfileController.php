@@ -59,6 +59,7 @@ class LocalProfileController extends Controller
     public function getLocal($username)
     {
         $local = Local::username($username)->first();
+        $smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
 
         if(Auth::guard('local')->user() && $username != Auth::guard('local')->user()->username){
             $visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
@@ -94,6 +95,7 @@ class LocalProfileController extends Controller
                 $visit->save();
             }
         }
+        
         if(Auth::guard('local')->user() && $username == Auth::guard('local')->user()->username){
             $user = Local::username($username)->first();
             $values_month = [];
@@ -138,7 +140,8 @@ class LocalProfileController extends Controller
             $wellness = getClubInfo($local->clubWellness);
             $food = getClubInfo($local->clubFood);
             $outdoor = getClubInfo($local->clubOutdoor);
-            return view('pages.local-profile.single', compact('local' ,'entrance', 'wellness', 'food', 'outdoor', 'chart_month', 'chart_year'));
+
+            return view('pages.local-profile.single', compact('local' ,'entrance', 'wellness', 'food', 'outdoor', 'chart_month', 'chart_year', 'smallBanners'));
         }
     }
 

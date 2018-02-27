@@ -76,4 +76,7 @@ return [
    	// nastavak
 	#local add girls
     'add_girl' => 'Add Girl',
+
+    #prices page
+	'prices' => 'Prices',
 ];

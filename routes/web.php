@@ -192,6 +192,10 @@ Route::post('contact/send', 'ContactController@postIndex');
 # SEARCH CONTROLLER
 Route::get('search', 'SearchController@getQuickSeachResults');
 Route::post('get_guest_data', 'SessionController@storeGuestData');
+
+Route::get('prices', function () {
+	return view('pages.prices.index');
+});
 });
 
 Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');

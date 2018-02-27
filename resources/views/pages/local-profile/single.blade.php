@@ -222,18 +222,26 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <hr>
+        </div>
         <div class="banner-area-2 home-4">
             <div class="container">
+
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="single-banner">
-                            <a class="last-banner" href="index.html">
-                                <span>
-                                    <img src="{{ asset('img/banner/fullwide-banner-4.jpg') }}" alt="">
-                                </span>
-                            </a>
-                        </div>
-                    </div>
+                    @if($smallBanners->count() > 0)
+                        @foreach($smallBanners->chunk(2) as $banners)
+                            @foreach($banners as $banner)
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="single-banner home-3">
+                                        <div class="small_banner">
+                                            <a href="{{ $banner->banner_url }}" target="_blank"><span><img src="{{ $banner->banner_photo }}" alt="small banner" /></span></a>
+                                        </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
