@@ -48,6 +48,9 @@
                                     <th>{{ __('fields.url') }}</th>
                                     <th>{{ __('headings.activation_date') }}</th>
                                     <th>{{ __('headings.expiry_date') }}</th>
+                                    {{-- @if ($banner->banner_expiry_date > Carbon::now()) --}}
+                                        <th>Manage Item</th>
+                                    {{-- @endif --}}
                                 </tr>
                             </thead>
                             <tbody id="prices_body">
@@ -68,6 +71,11 @@
                                     <td>{{ $banner->banner_url }}</td>
                                     <td>{{ date('d-m-Y', strtotime($banner->banner_activation_date)) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($banner->banner_expiry_date)) }}</td>
+                                    @if ($banner->banner_expiry_date < \Carbon\Carbon::now())
+                                        <td>
+                                            <a href="{{ url('private/' . $user->id . '/banners/edit/' . $banner->id) }}">Renew</a>
+                                        </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
