@@ -25,8 +25,18 @@ class BannerController extends Controller
     {
     	$local = Auth::guard('local')->user();
         $user = $local ? $local : Auth::user();
+        $table = $local ? 'locals' : 'users';
 
-        return view('pages.profile.banners.index', compact('user', 'pages', 'bannerSizes'));
+        $banners = DB::table($table)
+                    ->join('banners', 'banners.bannerable_id', '=', $table . '.id')
+                    ->join('banner_page', 'banners.id', '=', 'banner_page.banner_id')
+                    ->join('pages', 'banner_page.page_id', '=', 'pages.id')
+                    ->join('banner_sizes', 'banner_page.banner_size_id', '=', 'banner_sizes.id')
+                    ->where($table . '.id', $user->id)
+                    ->paginate(10);
+        // dd($banners);
+
+        return view('pages.profile.banners.index', compact('user', 'pages', 'banners'));
     }
 
     public function getCreateBanners()
