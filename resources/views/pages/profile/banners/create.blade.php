@@ -575,7 +575,60 @@ function nextPrev(num, el = null) {
 
     // end of the wizard
     if (currentTab >= tab.length) {
-        console.log('done');
+        // finish
+        var that = $(el);
+        var formGroup = that.closest('.form-group');
+        var modal = formGroup.find('.modal');
+        var input = modal.find('input[type="text"]');
+        var val = input.val();
+
+        // calculate total per size and total
+        var closestTd = that.closest('td');
+        var closestTr = that.closest('tr');
+        var thatTds = closestTr.find('td');
+        var totalPerSizeSingle = closestTd.siblings('td.total-per-size');
+        var totalPerSizeAll = $('#bannerForm').find('td.total-per-size');
+        var bannerPrice = parseFloat(closestTr.find('span.banner-price').text());
+        var totalPerSizeSingleText = totalPerSizeSingle.find('span:first-child').text();
+
+        var totalPerSize = parseFloat(totalPerSizeSingleText);
+        var total = 0;
+
+        var inputCheckbox = closestTd.find('input:checked');
+        var fieldVal = parseFloat(inputCheckbox.siblings('.price-per-time-holder').find('span:first-child').text());
+        var fieldValMultipliedByDuration = fieldVal * parseFloat(val);
+        $('<input>').attr({
+            type: 'hidden',
+            class: 'pmd',
+            value: fieldValMultipliedByDuration
+        }).insertAfter(inputCheckbox);
+        if (isNaN(fieldVal)) {
+            return true;
+        } else {
+            totalPerSize += fieldValMultipliedByDuration;
+        }
+
+        if (totalPerSizeSingleText == '0.00') {
+            totalPerSize = totalPerSize + bannerPrice;
+        }
+
+        totalPerSizeSingle.find('span:first-child').text(totalPerSize.toFixed(2));
+
+        $.each(totalPerSizeAll, function (index, field) {
+            var elVal = parseFloat($(field).find('span:first-child').text());
+            if (isNaN(elVal)) {
+                return true;
+            } else {
+                total += elVal;
+            }
+        });
+
+        $('td.total-banners').find('span:first-child').text(total.toFixed(2));
+
+        modal.modal('hide');
+        spanError.text('');
+
+        that.closest('.form-group').find('input:checkbox').prop('checked', true);
 
         return false;
     }

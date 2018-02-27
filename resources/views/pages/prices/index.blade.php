@@ -69,13 +69,41 @@
 </div>
 @stop @section('perPageScripts')
 <!-- Scripts go here -->
-
 <script>
     $('.control__indicator').on('click', function() {
         window.location.href = $(this).closest('label').find('a').attr('href');
     });
 </script>
 <script>
+
+    var fa = $('i.fa');
+
+    if ($(window).width() < 992) {
+        fa.removeClass('fa-caret-down').addClass("fa-caret-right");
+    }
+
+    $(window).on('resize', function () {
+        if ($(this).width() < 992) {
+            return fa
+                .removeClass('fa-caret-down')
+                .removeClass('rotateCaretBack')
+                .removeClass('rotateCaret')
+                .addClass("fa-caret-right")
+                .closest('.shop-layout')
+                .find('.layout-list')
+                .hide('fast');
+        } else {
+            return fa
+                .removeClass('fa-caret-right')
+                .removeClass('rotateCaretBack')
+                .removeClass('rotateCaret')
+                .addClass("fa-caret-down")
+                .closest('.shop-layout')
+                .find('.layout-list')
+                .show('fast');
+        }
+    })
+
     $(".toggle_arrow").on("click", function() {
         var that = $(this);
         that.closest('.shop-layout').find('.layout-list').toggle('fast');
