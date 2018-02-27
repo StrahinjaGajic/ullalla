@@ -9,10 +9,10 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>First Banner <i class="fa fa-caret-right"></i></a>
+                    <a>First Banner <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
-            <div class="layout-list ban_block" style="display:none;">
+            <div class="layout-list ban_block">
                 <div class="col-lg-6 description ban_1">
                     <h2>First Banner</h2>
                     <p>Platzierung: Regionalseite</p>
@@ -30,10 +30,10 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Second Banner <i class="fa fa-caret-right"></i></a>
+                    <a>Second Banner <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
-            <div class="layout-list ban_block" style="display:none;">
+            <div class="layout-list ban_block">
                 <div class="col-lg-6 description ban_2">
                     <h2>Second Banner</h2>
                     <p>Platzierung: Regionalseite</p>
@@ -50,10 +50,10 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Third Banner <i class="fa fa-caret-right"></i></a>
+                    <a>Third Banner <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
-            <div class="layout-list ban_block" style="display:none;">
+            <div class="layout-list ban_block">
                 <div class="col-lg-6 description ban_3">
                     <h2>Third Banner</h2>
                     <p>Platzierung: Regionalseite</p>
