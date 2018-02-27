@@ -249,7 +249,11 @@ function parseSingleUserData($fields, $user) {
             } else {
                 // remove http or https and add www if needed
                 if (strpos($value, 'http') === false || strpos($value, 'https')) {
-                    $html .= ucfirst($value);
+                    if(__('fields.'. $value) != 'fields.'. $value){
+                        $html .= ucfirst(__('fields.'. $value));
+                    }else {
+                        $html .= ucfirst($value);
+                    }
                 } else {
                     $url = strpos($value, 'www') !== false ? removeHttp($value) : 'www.' . removeHttp($value);
                     $html .= '<a href="' . $value . '" target="_blank">';
