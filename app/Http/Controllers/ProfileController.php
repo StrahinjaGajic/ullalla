@@ -359,6 +359,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
+            'email' => 'required',
             'mobile' => 'required',
             'skype_name' => 'required_with:contact_options.3,on'
         ], [
@@ -366,6 +367,7 @@ class ProfileController extends Controller
         ]);
 
         $user->phone = request('phone');
+        $user->email = request('email');
         $user->mobile = request('dial_code') . ' ' . request('mobile');
         $user->sms_notifications = request('sms_notifications') ? '1' : '0';
         $user->website = request('website');

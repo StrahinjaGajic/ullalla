@@ -33,6 +33,9 @@
                         <input class="effect-16" type="text" placeholder="" name="email" value="{{ $user->email }}">
                         <label>{{ __('fields.email') }}*</label>
                         <span class="focus-border"></span>
+                        @if ($errors->has('email'))
+                            <span class="help-block">{{ $errors->first('email') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -40,6 +43,9 @@
                         <input class="effect-16" type="text" placeholder="" name="website" value="{{ $user->website }}">
                         <label>{{ __('fields.website') }}</label>
                         <span class="focus-border"></span>
+                        @if ($errors->has('website'))
+                            <span class="help-block">{{ $errors->first('website') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="col-sm-4"> 
@@ -47,6 +53,9 @@
                         <input class="effect-16" type="text" placeholder="" name="phone" value="{{ $user->phone }}">
                         <label>{{ __('fields.phone') }}</label>
                         <span class="focus-border"></span>
+                        @if ($errors->has('phone'))
+                            <span class="help-block">{{ $errors->first('phone') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="col-sm-4">

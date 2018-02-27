@@ -14,6 +14,9 @@
             </div>
             <div class="col-sm-10 profile-info">
                 <h3>{{ __('headings.club_info') }}</h3>
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                @endif
                 {!! Form::model($local, ['url' => 'locals/@' . $local->username . '/club_info/store', 'method' => 'put']) !!}
                 <div class="row">
                     <div class="col-md-3">
