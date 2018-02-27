@@ -286,6 +286,8 @@ function getLocalContactFields() {
         'mobile' => __('functions.mobile'),
         'website' => __('functions.website'),
         'street' => __('functions.address'),
+        'zip' => __('functions.zip'),
+        'city' => __('functions.city'),
     ];
 }
 

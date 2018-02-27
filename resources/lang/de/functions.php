@@ -148,6 +148,7 @@ return [
     #getWorkplaceFields
     'club_name' => 'Club',
     'city' => 'Ort',
+    'zip_code' => 'PLZ',
     'address' => 'Adresse',
     'incall_type' => 'Incall',
     'outcall_type' => 'Outcall',

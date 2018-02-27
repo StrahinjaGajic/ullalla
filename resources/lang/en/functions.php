@@ -139,6 +139,7 @@ return [
     'phone' => 'Phone',
     'mobile' => 'Mobile Phone',
     'website' => 'Website',
+    'zip_code' => 'Zip Code',
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
     'skype_name' => 'Skype Name',
     'prefered_contact_option' => 'I Prefer',
