@@ -74,7 +74,6 @@ $(document).ready(function() {
                         }
                     }
                 },
-
                 about_me: {
                     validators: {
                         notEmpty: {
@@ -207,6 +206,13 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: defaultPackageRequired
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: requiredField
                         }
                     }
                 },
