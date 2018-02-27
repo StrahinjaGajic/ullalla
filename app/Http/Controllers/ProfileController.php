@@ -292,8 +292,11 @@ class ProfileController extends Controller
         return view('pages.profile.about', compact('user'));
     }
 
-    public function postAbout($private_id)
+    public function postAbout(Request $request, $private_id)
     {
+        $this->validate($request, [
+            'about_me' => 'required',
+        ]);
         if (Auth::guard('local')->check()) {
             $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
         } else {

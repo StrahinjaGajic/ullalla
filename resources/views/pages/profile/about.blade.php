@@ -25,6 +25,9 @@
                 {!! Form::model($user, ['url' => 'private/' . $user->id . '/about_me/store', 'method' => 'put']) !!}
                 <div id="about" class="form-group" style="margin-left:15px;">
                     <textarea class="form-control" rows="5" id="comment" name="about_me">{{ $user->about_me }}</textarea>
+                    @if ($errors->has('about_me'))
+                        <span class="help-block">{{ $errors->first('about_me') }}</span>
+                    @endif
                     <button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
                 </div>
                 {!! Form::close() !!}
