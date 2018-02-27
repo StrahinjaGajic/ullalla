@@ -87,4 +87,7 @@ return [
 	'next' => 'nächste',
 	'finish' => 'beenden',
 	'previous' => 'vorherige',
+
+	#prices page
+	'prices' => 'Prices',
 ];

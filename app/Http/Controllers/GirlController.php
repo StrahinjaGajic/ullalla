@@ -95,6 +95,8 @@ class GirlController extends Controller
 
 	public function getGirl($id)
 	{
+		$smallBanners = BannerPage::getByPageId(1, 3, true)->take(4)->get();
+
 		if(Auth()->user() && $id != Auth()->user()->id){
 			$visits = VisitorDateUser::join('visitor_dates', 'visitor_dates.id', '=', 'visitor_date_user.visitor_date_id')->select('visitor_dates.id AS date_id', 'visitor_dates.date', 'visitor_date_user.*')->get();
 			$checkForDate = false;
@@ -169,7 +171,7 @@ class GirlController extends Controller
 
 		$user = User::with('services', 'country', 'prices')->findOrFail($id);
 
-		return view('pages.girls.single', compact('user', 'chart_month', 'chart_year'));
+		return view('pages.girls.single', compact('user', 'chart_month', 'chart_year', 'smallBanners'));
 	}
 
 	public function getPriceRanges(Request $request)
