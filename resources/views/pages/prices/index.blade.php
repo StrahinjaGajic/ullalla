@@ -1,15 +1,86 @@
-@extends('layouts.app')
+@extends('layouts.app') @section('title', __('buttons.prices')) @section('styles')
+<!-- Styles go here -->
+<link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
+<link rel="stylesheet" href="{{ asset('css/components/prices.css?ver=' . str_random(10)) }}"> @stop @section('content')
+<!-- Content goes here -->
 
-@section('title', __('buttons.prices'))
+<div class="container prices_banners">
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>First Banner <i class="fa fa-caret-right"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block" style="display:none;">
+                <div class="col-lg-6 description ban_1">
+                    <h2>First Banner</h2>
+                    <p>Platzierung: Regionalseite</p>
+                    <p>Preis/Tag: Fr. 70.-</p>
+                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive" src="../img/prices/HOME.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 
-@section('styles')
-	<!-- Styles go here -->
-@stop
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>Second Banner <i class="fa fa-caret-right"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block" style="display:none;">
+                <div class="col-lg-6 description ban_2">
+                    <h2>Second Banner</h2>
+                    <p>Platzierung: Regionalseite</p>
+                    <p>Preis/Tag: Fr. 70.-</p>
+                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive" src="../img/prices/PRIVATE.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>Third Banner <i class="fa fa-caret-right"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block" style="display:none;">
+                <div class="col-lg-6 description ban_3">
+                    <h2>Third Banner</h2>
+                    <p>Platzierung: Regionalseite</p>
+                    <p>Preis/Tag: Fr. 70.-</p>
+                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive" src="../img/prices/LOKAL.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop @section('perPageScripts')
+<!-- Scripts go here -->
 
-@section('content')
-	<!-- Content goes here -->
-@stop
-
-@section('perPageScripts')
-	<!-- Scripts go here -->
+<script>
+    $('.control__indicator').on('click', function() {
+        window.location.href = $(this).closest('label').find('a').attr('href');
+    });
+</script>
+<script>
+    $(".toggle_arrow").on("click", function() {
+        var that = $(this);
+        that.closest('.shop-layout').find('.layout-list').toggle('fast');
+        that.parent().find(".fa-caret-right").toggleClass("rotateCaret");
+        that.parent().find(".fa-caret-down").toggleClass("rotateCaretBack");
+    });
+</script>
 @stop
