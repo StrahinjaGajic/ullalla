@@ -5,20 +5,110 @@
 <!-- Content goes here -->
 
 <div class="container prices_banners">
-     <h3>Packages</h3>
-      <div class="row prices_banners_block">
+    <h3>Packages</h3>
+
+    <div class="row prices_banners_block">
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>First Package <i class="fa fa-caret-down"></i></a>
+                    <a>Private Basic Package <i class="fa fa-caret-down"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block">
+                <div class="col-lg-6 description pck_1 nt-absolute">
+                    <h2>Private Basic Packages</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Duration</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($privatePackages as $package)
+                                <tr>
+                                    <td>{{ $package->package_name }}</td>
+                                    <td>{{ $package->package_duration }} {{ trans_choice('fields.days', $package->package_duration) }}</td>
+                                    <td>CHF {{ $package->package_price }} .-</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive mobile" src="../img/prices/private_profile.png" alt="">
+                    <img class="img-responsive" src="../img/prices/private_profile.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>Local Basic Package <i class="fa fa-caret-down"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block">
+                <div class="col-lg-6 description pck_1 nt-absolute">
+                    <h2>Private Basic Packages</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price/Month</th>
+                                <th>Price/Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($localPackages as $package)
+                                <tr>
+                                    <td>{{ $package->package_name }}</td>
+                                    <td>CHF {{ $package->month_price }} .-</td>
+                                    <td>CHF {{ $package->year_price }} .-</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive mobile" src="../img/prices/local_profile.png" alt="">
+                    <img class="img-responsive" src="../img/prices/local_profile.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>Private Basic Package <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
                 <div class="col-lg-6 description pck_1">
-                    <h2>Lokale des monats</h2>
-                    <p>Platzierung: Regionalseite</p>
-                    <p>Preis/Tag: Fr. 70.-</p>
-                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                    <h2>Private Basic Packages</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Duration</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($privatePackages as $package)
+                                <tr>
+                                    <td>{{ $package->package_name }}</td>
+                                    <td>{{ $package->package_duration }} {{ __('fields.days') }}</td>
+                                    <td>CHF {{ $package->package_price }} .-</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-lg-6 image">
                     <img class="img-responsive mobile" src="../img/prices/LOKALE%20DES%20MONATS.png" alt="">
@@ -32,7 +122,7 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Second Package <i class="fa fa-caret-down"></i></a>
+                    <a>Local Basic Package <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">

@@ -70,6 +70,10 @@ Media
     right: 0;
     top: 330px;
     }
+
+    .nt-absolute {
+        top: 75px;
+    }
     
     .pck_2 {
         position: absolute;
