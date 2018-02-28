@@ -198,7 +198,9 @@ Route::post('get_guest_data', 'SessionController@storeGuestData');
 Route::get('prices', function () {
 	$privatePackages = App\Models\Package::all();
 	$localPackages = App\Models\LocalPackage::all();
-	return view('pages.prices.index', compact('privatePackages', 'localPackages'));
+	$banners = App\Models\PageBannerSize::all();
+
+	return view('pages.prices.index', compact('privatePackages', 'localPackages', 'banners'));
 });
 });
 

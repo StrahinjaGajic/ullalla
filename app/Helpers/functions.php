@@ -799,4 +799,20 @@ function removeHttp($url) {
    return $url = preg_replace("(^https?://)", "", $url );
 }
 
+function getBannerDimensions($name) {
+    $bannerSize = '';
+
+    if ($name == 'Big') {
+        $bannerSize = '1140x360';
+    } else if ($name == 'Medium') {
+        $bannerSize = '555x350';
+    } else if ($name == 'Small') {
+        $bannerSize = '262x165';
+    }
+
+    return $bannerSize;
+}
+
+
+
 ?>

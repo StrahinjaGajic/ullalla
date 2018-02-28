@@ -11,7 +11,7 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Private Basic Package <i class="fa fa-caret-down"></i></a>
+                    <a>Private Basic <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
@@ -48,12 +48,12 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Local Basic Package <i class="fa fa-caret-down"></i></a>
+                    <a>Local Basic <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
                 <div class="col-lg-6 description pck_1 nt-absolute">
-                    <h2>Private Basic Packages</h2>
+                    <h2>Private Basic</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -65,7 +65,7 @@
                         <tbody>
                             @foreach($localPackages as $package)
                                 <tr>
-                                    <td>{{ $package->package_name }}</td>
+                                    <td>{{ $package->name }}</td>
                                     <td>CHF {{ $package->month_price }} .-</td>
                                     <td>CHF {{ $package->year_price }} .-</td>
                                 </tr>
@@ -85,25 +85,25 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Private Basic Package <i class="fa fa-caret-down"></i></a>
+                    <a>Private of the Month <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
-                <div class="col-lg-6 description pck_1">
-                    <h2>Private Basic Packages</h2>
+                <div class="col-lg-6 description pck_2">
+                    <h2>Private of the Month</h2>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Duration</th>
-                                <th>Price</th>
+                                <th>{{ __('headings.name') }}</th>
+                                <th>{{ __('headings.duration') }}</th>
+                                <th>{{ __('headings.price') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($privatePackages as $package)
+                            @foreach ($privatePackages->take(3) as $package)
                                 <tr>
                                     <td>{{ $package->package_name }}</td>
-                                    <td>{{ $package->package_duration }} {{ __('fields.days') }}</td>
+                                    <td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
                                     <td>CHF {{ $package->package_price }} .-</td>
                                 </tr>
                             @endforeach
@@ -111,8 +111,8 @@
                     </table>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive mobile" src="../img/prices/LOKALE%20DES%20MONATS.png" alt="">
-                    <img class="img-responsive" src="../img/prices_mobile/LOKALE%20DES%20MONATS.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/potm.png" alt="">
+                    <img class="img-responsive" src="../img/prices/potm.png" alt="">
                 </div>
             </div>
         </div>
@@ -122,19 +122,34 @@
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Local Basic Package <i class="fa fa-caret-down"></i></a>
+                    <a>Local of the Month <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
-                <div class="col-lg-6 description pck_2">
-                    <h2>Private des monats</h2>
-                    <p>Platzierung: Regionalseite</p>
-                    <p>Preis/Tag: Fr. 70.-</p>
-                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                <div class="col-lg-6 description pck_1">
+                    <h2>Local of the Month</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('headings.name') }}</th>
+                                <th>{{ __('headings.duration') }}</th>
+                                <th>{{ __('headings.price') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($privatePackages->take(3) as $package)
+                                <tr>
+                                    <td>{{ $package->package_name }}</td>
+                                    <td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+                                    <td>CHF {{ $package->package_price }} .-</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive mobile" src="../img/prices/PRIVATE%20DES%20MONATS.png" alt="">
-                    <img class="img-responsive" src="../img/prices_mobile/PRIVATE%20DES%20MONATS.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/lotm.png" alt="">
+                    <img class="img-responsive" src="../img/prices/lotm.png" alt="">
                 </div>
             </div>
         </div>
@@ -142,70 +157,35 @@
     
     
    <h3>Banners</h3>
-    <div class="row prices_banners_block">
-        <div class="shop-layout canton-layout headerDropdown">
-            <div class="layout-title prices_title">
-                <div class="layout-title toggle_arrow">
-                    <a>First Banner <i class="fa fa-caret-down"></i></a>
-                </div>
-            </div>
-            <div class="layout-list ban_block">
-                <div class="col-lg-6 description ban_1">
-                    <h2>First Banner</h2>
-                    <p>Platzierung: Regionalseite</p>
-                    <p>Preis/Tag: Fr. 70.-</p>
-                    <p>Format: 950x120 | nicht animiert | JPEG</p>
-                </div>
-                <div class="col-lg-6 image">
-                    <img class="img-responsive mobile" src="../img/prices/HOME.png" alt="">
-                    <img class="img-responsive" src="../img/prices_mobile/HOME.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
 
+    @foreach($banners as $banner)
     <div class="row prices_banners_block">
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
                 <div class="layout-title toggle_arrow">
-                    <a>Second Banner <i class="fa fa-caret-down"></i></a>
+                    @php
+                        $bannerSize = App\Models\BannerSize::where('id', $banner->banner_size_id)->first();
+                        $pageName = App\Models\Page::where('id', $banner->page_id)->value('page_name');
+                    @endphp
+                    <a> {{ $bannerSize->banner_size_name }} {{ $pageName }} page <i class="fa fa-caret-down"></i></a>
                 </div>
             </div>
             <div class="layout-list ban_block">
-                <div class="col-lg-6 description ban_2">
-                    <h2>Second Banner</h2>
-                    <p>Platzierung: Regionalseite</p>
-                    <p>Preis/Tag: Fr. 70.-</p>
-                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                <div class="col-lg-6 description {{ $pageName == 'Contact' ? 'pck_2' : strtolower($bannerSize->banner_size_name . '_banner') }}">
+                    <h2>First Banner</h2>
+                    <p>Price: CHF {{ $bannerSize->banner_size_price }} .-</p>
+                    <p>Price/Week: CHF {{ $banner->price_per_week }} .-</p>
+                    <p>Price/Month: CHF {{ $banner->price_per_month }} .-</p>
+                    <p>Format: {{ getBannerDimensions($bannerSize->banner_size_name) }}</p>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive mobile" src="../img/prices/PRIVATE.png" alt="">
-                    <img class="img-responsive" src="../img/prices_mobile/PRIVATE.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/{{ strtolower($bannerSize->banner_size_name) . '_' . strtolower($pageName) }}.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/{{ strtolower($bannerSize->banner_size_name) . '_' . strtolower($pageName) }}.png" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <div class="row prices_banners_block">
-        <div class="shop-layout canton-layout headerDropdown">
-            <div class="layout-title prices_title">
-                <div class="layout-title toggle_arrow">
-                    <a>Third Banner <i class="fa fa-caret-down"></i></a>
-                </div>
-            </div>
-            <div class="layout-list ban_block">
-                <div class="col-lg-6 description ban_3">
-                    <h2>Third Banner</h2>
-                    <p>Platzierung: Regionalseite</p>
-                    <p>Preis/Tag: Fr. 70.-</p>
-                    <p>Format: 950x120 | nicht animiert | JPEG</p>
-                </div>
-                <div class="col-lg-6 image">
-                    <img class="img-responsive mobile" src="../img/prices/LOKAL.png" alt="">
-                    <img class="img-responsive" src="../img/prices_mobile/LOKAL.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 @stop @section('perPageScripts')
 <!-- Scripts go here -->
