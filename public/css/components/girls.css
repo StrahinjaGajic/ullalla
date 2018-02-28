@@ -433,6 +433,7 @@ html [type=button],
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+    z-index: 5000;
 
 }
 
@@ -441,6 +442,11 @@ html [type=button],
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-dialog {
+    display: flex;
+    height: 100%;
 }
 
 /* 100% Image Width on Smaller Screens */

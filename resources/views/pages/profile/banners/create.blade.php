@@ -79,7 +79,7 @@
                                                 $pptId = $perTimeColumn . $size->id . $page->id;
                                             @endphp
                                             <div class="form-group banner_inner_form_group" style="position: relative;">
-                                                <label class="control control--checkbox">
+                                                <label class="control control--checkbox banner_control">
                                                     <div class="price-per-time-holder">
                                                         <span>{{ $price ? $price->pivot->$perTimeColumn : '' }}</span>
                                                     </div>
@@ -87,13 +87,13 @@
                                                     <div class="control__indicator"></div>
                                                 </label>
                                                 <div class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog" id="{{ $pptId }}">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"></h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
                                                             </div>
                                                             <div class="modal-body">
 
@@ -146,8 +146,9 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default discard-duration pull-left" data-dismiss="modal" style="margin-top:0;">Discard</button>
-                                                                <button type="button" class="btn btn-default pull-right next-btn" onclick="nextPrev(1, this)" style="margin-top:0;">Next</button>
-                                                                <button type="button" class="btn btn-default pull-right prev-btn" onclick="nextPrev(-1, this)" style="margin-top:0;">Previous</button>
+                                                                    <button type="button" class="btn btn-default prev-btn" onclick="nextPrev(-1, this)" style="margin-top:0;">Previous</button>
+                                                                    <button type="button" class="btn btn-default next-btn" onclick="nextPrev(1, this)" style="margin-top:0;">Next</button>
+
                                                                 {{-- <button type="button" class="btn btn-default apply-duration" style="margin-top:0;">Finish</button> --}}
                                                             </div>
                                                         </div>
@@ -540,7 +541,7 @@ function showTab(num, el = null) {
     // fix the Previous/Next buttons:
     if (num > 0) {
         console.log();
-        prevBtn.css('display', 'block');
+        prevBtn.css('display', 'inline-block');
     } else {
         prevBtn.css('display', 'none');
     }

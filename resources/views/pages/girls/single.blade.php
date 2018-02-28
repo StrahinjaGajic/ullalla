@@ -36,11 +36,11 @@
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
 									<div class="modal-dialog modal-lg">
-										<div class="modal-content">
+										<div class="modal-content" style="text-align: center;">
 											<img id="img01" class="slide" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}"/>
 											<div class="prev-next">    
 		                                    	<a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
-		                                    	<a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+		                                    	<a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right"></a>
 	                                        </div>
 	                                    </div>
 	                                </div>      
