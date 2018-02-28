@@ -125,7 +125,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                             <div class="single-product">
                                                 <div class="product-img">
-                                                    <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/-/resize/263x300/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/150x27/110,270/50p/' }}" alt="" />
+                                                    <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="" />
                                                         </a>
                                                 </div>
                                                 <div class="product-content">
@@ -150,7 +150,7 @@
                                                 <div class="single-product">
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                         <div class="product-img">
-                                                            <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/-/resize/263x300/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/150x27/110,270/50p/' }}" alt="" /></a>
+                                                            <a class="a-img"><img class="primary-img" src="{{ $local->photos. '/nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="" /></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
