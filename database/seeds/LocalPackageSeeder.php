@@ -14,38 +14,38 @@ class LocalPackageSeeder extends Seeder
     {
         $package = new LocalPackage;
         $package->name = 'Solo';
-        $package->month_price = '1';
-        $package->year_price = '12';
+        $package->month_price = '125';
+        $package->year_price = '1250';
         $package->save();
 
         $package = new LocalPackage;
         $package->name = 'Start 1-5';
-        $package->month_price = '2';
-        $package->year_price = '24';
+        $package->month_price = '200';
+        $package->year_price = '2000';
         $package->save();
 
         $package = new LocalPackage;
         $package->name = 'Business 6-10';
-        $package->month_price = '3';
-        $package->year_price = '36';
+        $package->month_price = '325';
+        $package->year_price = '3250';
         $package->save();
 
         $package = new LocalPackage;
         $package->name = 'Pro 11-20';
-        $package->month_price = '4';
-        $package->year_price = '48';
+        $package->month_price = '550';
+        $package->year_price = '5500';
         $package->save();
 
         $package = new LocalPackage;
         $package->name = 'VIP 21-40';
-        $package->month_price = '4';
-        $package->year_price = '48';
+        $package->month_price = '750';
+        $package->year_price = '7500';
         $package->save();
 
         $package = new LocalPackage;
         $package->name = 'ELITE 41+';
-        $package->month_price = '4';
-        $package->year_price = '48';
+        $package->month_price = '0';
+        $package->year_price = '0';
         $package->save();
     }
 }

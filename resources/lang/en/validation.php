@@ -232,6 +232,7 @@ return [
         "events_photo" => 'Photo',
         "news_description" => 'Description',
         "events_description" => 'Description',
+        "sexes[1]" => 'Type',
     ],
 
 ];
