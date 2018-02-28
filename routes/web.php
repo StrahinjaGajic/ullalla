@@ -107,10 +107,12 @@ Route::put('private/{private_id}/languages/store', 'ProfileController@postLangua
 
 # BANNER CONTROLLER
 Route::get('private/{private_id}/banners', 'BannerController@getBanners')->name('private_banners');
-Route::get('private/{private_id}/banners/create', 'BannerController@getCreateBanners');
+Route::get('private/{private_id}/banners/create', 'BannerController@getCreate');
+Route::get('private/{private_id}/banners/edit/{banner_id}', 'BannerController@getEdit');
 Route::get('locals/@{username}/banners', 'BannerController@getBanners')->name('local_banners');
-Route::get('locals/@{username}/banners/create', 'BannerController@getCreateBanners');
-Route::post('banners/store', 'BannerController@postBanners');
+Route::get('locals/@{username}/banners/create', 'BannerController@getCreate');
+Route::get('locals/@{username}/banners/edit/{banner_id}', 'BannerController@getEdit');
+Route::post('banners/{banner_id?}/store', 'BannerController@postBanners');
 
 # CARD CONTROLLER
 Route::get('private/{private_id}/add_card', 'CardController@getCard');

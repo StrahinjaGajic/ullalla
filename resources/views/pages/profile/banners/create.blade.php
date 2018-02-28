@@ -18,7 +18,11 @@
             @endif
         </div>
         <div class="col-sm-10 profile-info">
-            {!! Form::open(['url' => 'banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
+            @if(isset($banner))
+                {!! Form::open(['url' => 'banners/' . $banner->id . '/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
+            @else
+                {!! Form::open(['url' => 'banners/store', 'class' => 'form-horizontal wizard', 'id' => 'bannerForm']) !!}
+            @endif
             <div class="col-xs-12">
                 <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}" style="margin: 0;">
                     <label class="control control--checkbox" style="margin-left: 0;"><a>{{ __('fields.prepared_banner') }}</a>
@@ -46,7 +50,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($bannerSizes as $size)
+                        @foreach($bannerSizes as $size)
                             <tr class="banner-size">
                                 <td class="banner-price-td">
                                     <span style="display: block;">{{ $size->banner_size_name }}</span>
@@ -171,24 +175,6 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="form-group {{ $errors->has('banner_url') ? 'has-error' : '' }}" style="margin: 0;">
-                    <label class="control-label">{{ __('fields.url') }}*</label>
-                    <input type="text" class="form-control" name="banner_url" value="{{ old('banner_url') }}" autocomplete="off"/>
-                    <span class="help-block">{{ $errors->has('banner_url') ? $errors->first('banner_url') : '' }}</span>
-                </div>
-                <div class="flyerless-fields">
-                    <div class="form-group {{ $errors->has('banner_description') ? 'has-error' : '' }}" style="margin: 0;">
-                        <label class="control-label">{{ __('fields.description') }}*</label>
-                        <textarea class="form-control" name="banner_description" style="margin-top:10px;">{{ old('banner_description') }}</textarea>
-                        <span class="help-block">{{ $errors->has('banner_description') ? $errors->first('banner_description') : '' }}</span>
-                    </div>
-                </div>
-                <div class="form-group {{ $errors->has('banner_photo') ? 'has-error' : '' }}" style="margin: 0;">
-                    <div class="image-preview-multiple">
-                        <input type="hidden" name="banner_photo" data-crop="490x560 minimum" data-images-only="" autocomplete="off">
-                        <span class="help-block">{{ $errors->has('banner_photo') ? $errors->first('banner_photo') : '' }}</span>
-                    </div>
-                </div> --}}
                 <button type="submit" class="btn btn-default pull-right">{{ __('buttons.submit') }}</button>
                 <input type="hidden" name="stripeToken" id="stripeToken">
                 <input type="hidden" name="stripeEmail" id="stripeEmail">
@@ -450,10 +436,6 @@
         resetCurrentTab();
         resetModalData(formGroup);
     });
-
-    // $('.apply-duration').on('click', function () {
-
-    // });
 
     // set price to zero if user chooses option to upload his own banner
     $('.prepared_flyer').on('click', function () {
