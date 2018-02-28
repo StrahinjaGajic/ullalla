@@ -171,8 +171,8 @@
                 </div>
             </div>
             <div class="layout-list ban_block">
-                <div class="col-lg-6 description {{ $pageName == 'Contact' ? 'pck_2' : strtolower($bannerSize->banner_size_name . '_banner') }}">
-                    <h2>First Banner</h2>
+                <div class="col-lg-6 description {{ strtolower($bannerSize->banner_size_name . '_banner') }}" style="{{ $pageName == 'Contact' ? 'top: 250px; bottom: 250px;' : '' }}">
+                    <h2>{{ $bannerSize->banner_size_name }} {{ $pageName }} page</h2>
                     <p>Price: CHF {{ $bannerSize->banner_size_price }} .-</p>
                     <p>Price/Week: CHF {{ $banner->price_per_week }} .-</p>
                     <p>Price/Month: CHF {{ $banner->price_per_month }} .-</p>
