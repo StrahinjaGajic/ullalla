@@ -60,7 +60,7 @@ return [
     'banner_requested_success' => 'You have successfully made a banner request',
 
     #card
-    'card_updated' => 'Your card details have been updated!',
+    'card_updated' => 'Your card details have been saved!',
 
     # girls locals
     'girl_removed_success' => 'Girl successfully removed',

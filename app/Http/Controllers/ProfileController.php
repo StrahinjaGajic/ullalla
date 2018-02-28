@@ -96,6 +96,7 @@ class ProfileController extends Controller
        //     'email' => 'required|email',
        //     'skype_name' => 'required_with:contact_options.3,on',
        //     'website' => 'url',
+       //     'city' => 'required',
        // ], [
        //     'skype_name.required_with' => __('validation.skype_required'),
        // ]);
@@ -103,7 +104,7 @@ class ProfileController extends Controller
         // define lng and lat
         $address = request('address');
         $city = request('city');
-        $fullAddress = $address && $city ? $address . ', ' . $city : null;
+        $fullAddress = $address && $city ? $address . ', ' . $city : $city;
         $lat = null;
         $lng = null;
 
@@ -292,8 +293,11 @@ class ProfileController extends Controller
         return view('pages.profile.about', compact('user'));
     }
 
-    public function postAbout($private_id)
+    public function postAbout(Request $request, $private_id)
     {
+        $this->validate($request, [
+            'about_me' => 'required',
+        ]);
         if (Auth::guard('local')->check()) {
             $user = Auth::guard('local')->user()->users()->findOrFail($private_id);
         } else {
@@ -355,6 +359,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
+            'email' => 'required',
             'mobile' => 'required',
             'skype_name' => 'required_with:contact_options.3,on'
         ], [
@@ -362,6 +367,7 @@ class ProfileController extends Controller
         ]);
 
         $user->phone = request('phone');
+        $user->email = request('email');
         $user->mobile = request('dial_code') . ' ' . request('mobile');
         $user->sms_notifications = request('sms_notifications') ? '1' : '0';
         $user->website = request('website');
@@ -413,14 +419,18 @@ class ProfileController extends Controller
         return view('pages.profile.workplace', compact('user', 'cantons'));
     }
 
-    public function postWorkplace()
+    public function postWorkplace(Request $request)
     {
+        $this->validate($request, [
+            'city' => 'required'
+        ]);
+
         $user = Auth::user();
         $address = request('address');
         $city = request('city');
         $lat = null;
         $lng = null;
-        $fullAddress = $address && $city ? $address . ', ' . $city : null;
+        $fullAddress = $address && $city ? $address . ', ' . $city : $city;
 
         if ($fullAddress) {
             $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBZdaqR1wW7f-IealrpiTna-fBPPawZVY4&libraries=places&address='.urlencode($fullAddress).'&sensor=true');

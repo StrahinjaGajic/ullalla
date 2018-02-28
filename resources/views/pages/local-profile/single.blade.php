@@ -35,10 +35,10 @@
 								<span class="close">&times;</span>
 								<div class="modal-dialog modal-md club_modal_dialog">
                                     <div class="modal-content club_modal_content">
-									    <img id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
+									    <img class="slide" id="img01" src="{{ $local->photos . 'nth/0/-/resize/490x560/' }}">
                                         <div class="prev-next">
                                             <a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
-                                            <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float:right;"></a>
+                                            <a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right" style="float: right;"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -254,8 +254,10 @@
     @endif
 
     @stop
-    @section('perPageScripts')
-    <script>
+
+@section('perPageScripts')
+<script src="{{ asset('js/jquery.touchSwipe.min.js') }}"></script>
+<script>
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -333,6 +335,20 @@ span.onclick = function() {
     });
 </script>
 
+<script>
+    $(function () {
+        $(".slide").swipe({
+            //Generic swipe handler for all directions
+            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                if (direction == 'left') {
+                    next();
+                } else if (direction == 'right') {
+                    prev();
+                }
+            }
+         });
+    });
+</script>
 
 <script>
     
@@ -391,8 +407,6 @@ span.onclick = function() {
         
     
 </script>
-
-
 
 <script>
     $('.modal').click(function(e) {

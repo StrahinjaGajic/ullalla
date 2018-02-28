@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use Session;
 use Validator;
+use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\Banner;
 use App\Models\BannerSize;
@@ -25,11 +26,22 @@ class BannerController extends Controller
     {
     	$local = Auth::guard('local')->user();
         $user = $local ? $local : Auth::user();
+        $table = $local ? 'locals' : 'users';
 
-        return view('pages.profile.banners.index', compact('user', 'pages', 'bannerSizes'));
+        $banners = DB::table($table)
+                    ->join('banners', 'banners.bannerable_id', '=', $table . '.id')
+                    ->join('banner_page', 'banners.id', '=', 'banner_page.banner_id')
+                    ->join('pages', 'banner_page.page_id', '=', 'pages.id')
+                    ->join('banner_sizes', 'banner_page.banner_size_id', '=', 'banner_sizes.id')
+                    ->where($table . '.id', $user->id)
+                    ->select('banner_page.*', 'banner_sizes.banner_size_name', 'pages.page_name')
+                    ->paginate(10);
+        // dd($banners);
+
+        return view('pages.profile.banners.index', compact('user', 'pages', 'banners'));
     }
 
-    public function getCreateBanners()
+    public function getCreate()
     {
         $local = Auth::guard('local')->user();
         $user = $local ? $local : Auth::user();
@@ -40,15 +52,28 @@ class BannerController extends Controller
         return view('pages.profile.banners.create', compact('user', 'pages', 'bannerSizes', 'perTimeColumns'));
     }
 
-    public function postBanners(Request $request)
+    public function getEdit($user_id, $banner_id)
+    {
+        $local = Auth::guard('local')->user();
+        $user = $local ? $local : Auth::user();
+        $pages = Page::with('banner_sizes')->get();
+        // get banner
+        $banner = BannerPage::findOrFail($banner_id);
+        // get banner size
+        $bannerSizes = BannerSize::with('pages')->where('id', $banner->banner_size_id)->get();
+        // get name of the columns (price_per_week, price_per_monhth)
+        $perTimeColumns = array_slice(DB::getSchemaBuilder()->getColumnListing('page_banner_size'), 3, 6);
+
+        return view('pages.profile.banners.create', compact('user', 'pages', 'perTimeColumns', 'bannerSizes', 'banner'));
+    }
+
+    public function postBanners(Request $request, $banner_id = null)
     {
         $local = Auth::guard('local')->user();
         $user = $local ? $local : Auth::user();
 
         $data = getBannerTotalAmountAndDataToSync($request);
         $total = $data['total'];
-
-        $perDay = 'price_per_week, price_per_month';
 
         $field = '';
         foreach ($request->all() as $field => $value) {
@@ -58,22 +83,13 @@ class BannerController extends Controller
             }
         }
 
-        if ($request->banner_flyer == 'on') {
-            $validator = Validator::make($request->all(), [
-                'price_per_week' => 'required_without:price_per_month',
-                'price_per_month' => 'required_without:price_per_week',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        } else {
-            $validator = Validator::make($request->all(), [
-                'price_per_week' => 'required_without:price_per_month',
-                'price_per_month' => 'required_without:price_per_week',
-                'banner_description' => 'required',
-                'banner_photo' => 'required',
-                'banner_url' => 'required',
-            ]);
-        }
+        $validator = Validator::make($request->all(), [
+            'price_per_week' => 'required_without:price_per_month',
+            'price_per_month' => 'required_without:price_per_week',
+            'banner_description' => 'required',
+            'banner_photo' => 'required',
+            'banner_url' => 'required',
+        ]);
 
         if ($validator->passes()) {
 

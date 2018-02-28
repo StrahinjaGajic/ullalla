@@ -30,7 +30,7 @@
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
             </div>
-            @if($user->banners()->count() > 0)
+            @if($banners->count() > 0)
             <div class="shop-layout headerDropdown">
                 <div class="layout-title">
                     <div class="layout-title toggle_arrow banners_layout_title">
@@ -43,13 +43,18 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('fields.photo') }}</th>
+                                    <th>{{ __('fields.size') }}</th>
+                                    <th>{{ __('fields.page') }}</th>
                                     <th>{{ __('fields.url') }}</th>
                                     <th>{{ __('headings.activation_date') }}</th>
                                     <th>{{ __('headings.expiry_date') }}</th>
+                                    {{-- @if ($banner->banner_expiry_date > Carbon::now()) --}}
+                                        <th>Manage Item</th>
+                                    {{-- @endif --}}
                                 </tr>
                             </thead>
                             <tbody id="prices_body">
-                                @foreach($user->banners as $banner)
+                                @foreach($banners as $banner)
                                 <tr>
                                     <td>
                                         @if ($banner->banner_photo)
@@ -61,9 +66,16 @@
                                         </div>
                                         @endif
                                     </td>
+                                    <td>{{ $banner->banner_size_name }}</td>
+                                    <td>{{ $banner->page_name }}</td>
                                     <td>{{ $banner->banner_url }}</td>
                                     <td>{{ date('d-m-Y', strtotime($banner->banner_activation_date)) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($banner->banner_expiry_date)) }}</td>
+                                    @if ($banner->banner_expiry_date < \Carbon\Carbon::now())
+                                        <td>
+                                            <a href="{{ url('private/' . $user->id . '/banners/edit/' . $banner->id) }}">Renew</a>
+                                        </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

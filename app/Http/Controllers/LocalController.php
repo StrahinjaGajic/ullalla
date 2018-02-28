@@ -269,8 +269,11 @@ class LocalController extends Controller
         return view('pages.locals.about', compact('local'));
     }
 
-    public function postAbout()
+    public function postAbout(Request $request)
     {
+        $this->validate($request, [
+            'about_me' => 'required',
+        ]);
         $local = Auth::guard('local')->user();
         $local->about_me = request('about_me');
         $local->save();
