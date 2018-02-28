@@ -20,7 +20,7 @@ return [
     |
     */
 
-    'public_key' => env('UPLOADCARE_PUBLIC_KEY', 'c3f04780a8cb0f9153fe'),
+    'public_key' => env('UPLOADCARE_PUBLIC_KEY', 'aeb2871347a8c70df675'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,6 +31,6 @@ return [
     |
     */
 
-    'private_key' => env('UPLOADCARE_PRIVATE_KEY', 'a3df3e121afb10a70ad3'),
+    'private_key' => env('UPLOADCARE_PRIVATE_KEY', 'c71b4b337a0ef6424e94'),
 
 ];
