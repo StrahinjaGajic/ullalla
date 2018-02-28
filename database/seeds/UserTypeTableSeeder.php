@@ -15,14 +15,14 @@ class UserTypeTableSeeder extends Seeder
         $user_type = new UserType;
         $user_type->user_type_name_de = 'Privat';
         $user_type->user_type_name_en = 'Private';
-        $user_type->user_type_name_it = 'Private';
+        $user_type->user_type_name_it = 'Privato';
         $user_type->user_type_name_fr = 'Private';
         $user_type->save();
 
         $user_type = new UserType;
         $user_type->user_type_name_de = 'Lokal';
         $user_type->user_type_name_en = 'Local';
-        $user_type->user_type_name_it = 'Local';
+        $user_type->user_type_name_it = 'Locale';
         $user_type->user_type_name_fr = 'Local';
         $user_type->save();
     }

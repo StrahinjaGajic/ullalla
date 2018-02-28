@@ -67,4 +67,6 @@ return [
     # girls locals
     'girl_removed_success' => 'Girl erfolgreich entfernt',
     'girl_added_success' => 'Girl erfolgreich hinzugefügt',
+
+    'err_max_girls' => 'Sorry, but you have exceeded the maximum number of girls your package allows you to have',
 ];

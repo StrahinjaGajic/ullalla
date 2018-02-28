@@ -18,6 +18,7 @@ return [
 
     # edit profile nav
     'about_me' => 'Su di me',
+    'about_me' => 'Su di me',
     'bio' => 'Bio',
     'contact' => 'Contatti',
     'gallery' => 'Galleria',
@@ -54,8 +55,8 @@ return [
     'default_package' => 'Pacchetto base',
     'default_packages' => 'Pacchetti base',
     'gotm_package' => 'Pacchetto ragazza del mese',
-    'totm_package' => 'Tran of The Month Package',
-    'lotm_package' => 'Local of The Month Package',
+    'totm_package' => 'Pacchetto trans del mese',
+    'lotm_package' => 'Pacchetto locale del mese',
     'name' => 'Nome',
     'duration' => 'Durata',
     'price' => 'Prezzo',

@@ -22,7 +22,7 @@ class LocalTypeSeeder extends Seeder
         $type = new LocalType;
         $type->name_de = 'Kontaktbar';
         $type->name_en = 'Kontaktbar';
-        $type->name_it = 'Kontaktbar';
+        $type->name_it = 'Contact-bar';
         $type->name_fr = 'Kontaktbar';
         $type->save();
 
@@ -43,14 +43,14 @@ class LocalTypeSeeder extends Seeder
         $type = new LocalType;
         $type->name_de = 'Escort Agentur';
         $type->name_en = 'Escort Agency';
-        $type->name_it = 'Escort Agency';
+        $type->name_it = 'Agenzi Escort';
         $type->name_fr = 'Escort Agency';
         $type->save();
 
         $type = new LocalType;
         $type->name_de = 'Swingerclub';
         $type->name_en = 'Swingerclub';
-        $type->name_it = 'Swingerclub';
+        $type->name_it = 'Club scambisti';
         $type->name_fr = 'Swingerclub';
         $type->save();
     }

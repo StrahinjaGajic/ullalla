@@ -200,7 +200,7 @@ return [
     'local' => 'Locale',
 
     #add_card
-    'card_on_file' => 'Card on file',
+    'card_on_file' => 'Carta numero',
 
     #working_times
     'Monday' => 'Lunedi',
@@ -212,14 +212,14 @@ return [
     'Sunday' => 'Domenica',
 
     #statistics
-    'statistics' => 'Statistics',
-    'visitors' => 'Visitors',
-    'yearly' => 'Yearly',
-    'monthly' => 'Monthly',
+    'statistics' => 'Statistiche',
+    'visitors' => 'Visitatori',
+    'yearly' => 'Annuale',
+    'monthly' => 'Mensile',
 
     #girls
-    'menage_table_items' => 'Menage Table Items',
-    'edit' => 'Edit',
-    'delete' => 'Delete',
-    'are_you_sure' => 'Are you sure?',
+    'menage_table_items' => 'Gestisci elementi tabella',
+    'edit' => 'Modifica',
+    'delete' => 'Cancella',
+    'are_you_sure' => 'Sei sicuro?',
 ];

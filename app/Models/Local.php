@@ -4,7 +4,6 @@ namespace App\Models;
 
 use DB;
 use Carbon\Carbon;
-use App\Models\Package;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -98,7 +97,7 @@ class Local extends Authenticatable
 
     public function package()
     {
-        return $this->belongsTo('App\Models\LocalPackages');
+        return $this->belongsTo('App\Models\LocalPackage', 'package1_id');
     }
 
     public function scopeNearLatLng($query, $lat, $lng, $radius = 10, $request = null)

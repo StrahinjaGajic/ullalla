@@ -314,7 +314,10 @@ class LocalController extends Controller
     public function postCreateGirl(Request $request)
     {
         $local = Auth::guard('local')->user();
-
+        $numOfGirls = User::where('local_id', $local->id)->count();
+        if($numOfGirls >= $local->package->max_girls){
+            return redirect()->back()->with('err_max_girls', __('messages.err_max_girls'));
+        }
         $uploadedPhotos = storeAndGetUploadCareFiles(request('photos'));
         $inputPhotos = request('photos');
 

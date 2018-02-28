@@ -25,6 +25,12 @@ return [
     'email_expired_package' => 'Il tuo pacchetto base ? scaduto. Per rinnovare il pacchetto clicca il seguente link',
     'scheduled_default_package' => 'La nuova data di attivazione del suo pacchetto base ? stata aggiunta con successo. Il nuovo periodo di attivazione inizier? immediatamente allo scadere del precedente',
     'scheduled_gotm_package' => 'La nuova data di attivazione del suo pacchetto ragazza del mese ? stata aggiunta con successo. Il nuovo periodo di attivazione inizier? immediatamente allo scadere del precedente',
+    'scheduled_packages' => 'Hai programmato i tuoi pacchetti con successo. Il nuovo periodo di attivazione inizierà immediatamente allo scadere del precedente',
+    'gotm_package_successfully_saved' => 'Pacchetto ragazza del mese aggiornato con succsso',
+    'd_package_successfully_saved' => 'Pacchetto base agigornato con successo',
+    'scheduled_lotm_package' => 'Hai aggiunto con successo la nuova data di attivazione per il tuo pacchetto locale del mese. Il nuovo periodo di attivazione inizierà immediatamente allo scadere del precedente',
+    'lotm_package_successfully_saved' => 'Pacchetto locale del mese aggiunto con succsso','gotm_package_required' => 'Campo richiesto',
+    'lotm_package_required' => 'Campo richiesto',
 
     'email_gotm_expire_warning_package' => 'Il tuo pacchetto ragazza del mese st? per scadere. Per rinnovare il pacchetto clicca il seguente link',
     'email_gotm_expired_package' => 'Il tuo pacchetto ragazza del mese ? scaduto. Per rinnovare il pacchetto clicca il seguente link',
@@ -60,4 +66,6 @@ return [
     # girls locals
     'girl_removed_success' => 'Ragazza rimossa con successo',
     'girl_added_success' => 'Ragazza aggiunta con successo',
+
+    'err_max_girls' => 'Sorry, but you have exceeded the maximum number of girls your package allows you to have',
 ];

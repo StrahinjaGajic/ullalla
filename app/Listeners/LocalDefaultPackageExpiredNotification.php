@@ -39,12 +39,12 @@ class LocalDefaultPackageExpiredNotification
             $notification = new Notification();
             $notification->title_de = 'Ablauf von Lokal Basis-Paket';
             $notification->title_en = 'Local Basic Package Expiration';
+            $notification->title_it = 'Scadenza del pacchetto base del locale';
             $notification->title_fr = 'Local Basic Package Expiration';
-            $notification->title_it = 'Local Basic Package Expiration';
             $notification->note_de = 'Ihr Basis-Paket läuft am ' . $convertedExpiryDate. ' ab';
             $notification->note_en = 'Your basic package expires on ' . $convertedExpiryDate;
+            $notification->note_it = 'Il suo pacchetto base scade il ' . $convertedExpiryDate;
             $notification->note_fr = 'Your basic package expires on ' . $convertedExpiryDate;
-            $notification->note_it = 'Your basic package expires on ' . $convertedExpiryDate;
             $notification->notifiable_id = $event->user->id;
             $notification->notifiable_type = 'App\Models\Local';
             $notification->save();

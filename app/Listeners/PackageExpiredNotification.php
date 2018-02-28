@@ -39,12 +39,12 @@ class PackageExpiredNotification
             $notification = new Notification();
             $notification->title_de = 'Ablauf von Basis-Paket';
             $notification->title_en = 'Basic Package Expiration';
+            $notification->title_it = 'Scadenza pacchetto base';
             $notification->title_fr = 'Basic Package Expiration';
-            $notification->title_it = 'Basic Package Expiration';
             $notification->note_de = 'Ihr Basis-Paket läuft am ' . $convertedExpiryDate. ' ab';
             $notification->note_en = 'Your default package expires on ' . $convertedExpiryDate;
+            $notification->note_it = 'Il suo pacchetto base scade il ' . $convertedExpiryDate;
             $notification->note_fr = 'Your default package expires on ' . $convertedExpiryDate;
-            $notification->note_it = 'Your default package expires on ' . $convertedExpiryDate;
             $notification->notifiable_id = $event->user->id;
             $notification->notifiable_type = 'App\Models\User';
             $notification->save();

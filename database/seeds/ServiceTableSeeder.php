@@ -162,7 +162,7 @@ class ServiceTableSeeder extends Seeder
         $service = new Service;
         $service->service_name_de = 'Double Penetration (DP)';
         $service->service_name_en = 'Double Penetration (DP)';
-        $service->service_name_fr = 'Double pénétration';
+        $service->service_name_fr = 'Doppia penetrazione (DP)';
         $service->service_name_it = 'Doppia penetrazione (DP)';
         $service->save();
 

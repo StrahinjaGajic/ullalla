@@ -15,7 +15,7 @@ return [
     'height' => 'Altezza',
     'weight' => 'Peso',
     'sex' => 'Sesso',
-    'gender' => 'Gender',
+    'gender' => 'Genere',
     'sex_orientation' => 'Orientamento sessuale',
     'type' => 'Tipo',
     'figure' => 'Corporatura',
@@ -38,6 +38,7 @@ return [
     # prices
     'unit' => 'Unita',
     'currency' => 'Valuta',
+    'on_demand' => 'Su richiesta',
 
     # working time
     'available_24_7' => 'Disponibile 24/7',

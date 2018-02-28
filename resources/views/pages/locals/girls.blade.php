@@ -308,6 +308,9 @@
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
+                @if(Session::has('err_max_girls'))
+                    <div class="alert alert-danger">{{ Session::get('err_max_girls') }}</div>
+                @endif
             </div>
             @if($local->users()->count() > 0)
                 <h3 style="margin: 0; font-size:34px;">Girls</h3>

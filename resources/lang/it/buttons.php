@@ -90,5 +90,5 @@ return [
 	'previous' => 'Indietro',
 
 	#prices page
-	'prices' => 'Prices',
+	'prices' => 'Prezzi'
 ];
