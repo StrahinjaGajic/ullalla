@@ -35,7 +35,7 @@
                     <div class="_list">
                         @for ($i = 0; $i < substr($local->photos, -2, 1); $i++)
                         <div class="_item">
-                            <img src="{{ $local->photos . 'nth/' . $i . '/-/resize/185x211/' }}">
+                            <img src="{{ $local->photos . 'nth/' . $i . '/-/resize/185x211/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/130x20/70,190/50p/' }}">
                         </div>
                         @endfor
                     </div>

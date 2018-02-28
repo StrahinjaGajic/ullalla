@@ -47,11 +47,17 @@ function getSexes() {
 }
 
 function getSexOrientations() {
-    return [__('functions.heterosexual'), __('functions.bisexual'), __('functions.homosexual')];
+    return [
+        'heterosexual' => __('functions.heterosexual'),
+        'bisexual' => __('functions.bisexual'),
+        'homosexual' => __('functions.homosexual')];
 }
 
 function getAnswers() {
-    return [__('functions.yes'), __('functions.no'), __('functions.occasionally')];
+    return [
+        'yes' => __('functions.yes'),
+        'no' => __('functions.no'),
+        'occasionally' => __('functions.occasionally')];
 }
 
 function getTypes() {
@@ -68,23 +74,49 @@ function getTypes() {
 }
 
 function getFigures() {
-    return [__('functions.athletic'), __('functions.chubby'), __('functions.normal'), __('functions.slim'), __('functions.other')];
+    return [
+        'athletic' => __('functions.athletic'),
+        'chubby' => __('functions.chubby'),
+        'normal' => __('functions.normal'),
+        'slim' => __('functions.slim'),
+        'other' => __('functions.other')];
 }
 
 function getBreastSizes() {
-    return [__('functions.a'), __('functions.b'), __('functions.c'), __('functions.d'), __('functions.e'), __('functions.f'), __('functions.g')];
+    return [
+        'a' => __('functions.a'),
+        'b' => __('functions.b'),
+        'c' => __('functions.c'),
+        'd' => __('functions.d'),
+        'e' => __('functions.e'),
+        'f' => __('functions.f'),
+        'g' => __('functions.g')];
 }
 
 function getEyeColors() {
-    return [__('functions.black'), __('functions.brown'), __('functions.green'), __('functions.blue'), __('functions.gray'), __('functions.other')];
+    return [
+        'black' => __('functions.black'),
+        'brown' => __('functions.brown'),
+        'green' => __('functions.green'),
+        'blue' => __('functions.blue'),
+        'gray' => __('functions.gray'),
+        'other' => __('functions.other')];
 }
 
 function getHairColors() {
-    return [__('functions.black'), __('functions.brunette'), __('functions.blond'), __('functions.red'), __('functions.other')];
+    return [
+        'black' => __('functions.black'),
+        'brunette' => __('functions.brunette'),
+        'blond' => __('functions.blond'),
+        'red' => __('functions.red'),
+        'other' => __('functions.other')];
 }
 
 function getShaveOptions() {
-    return [__('functions.shaved'), __('functions.partial'), __('functions.hairy')];
+    return [
+        'shaved' => __('functions.shaved'),
+        'partial' => __('functions.partial'),
+        'hairy' => __('functions.hairy')];
 }
 
 function getUnits() {
@@ -122,7 +154,10 @@ function getOutcallOptions() {
 }
 
 function getCurrencies() {
-    return [__('functions.chf'), __('functions.eur'), __('functions.usd')];
+    return [
+        'chf' => __('functions.chf'),
+        'eur' => __('functions.eur'),
+        'usd' => __('functions.usd')];
 }
 
 function getPriceTypes() {
@@ -472,7 +507,7 @@ function getSelectedOption($dbOption, $option) {
 }
 
 function checkIfItemExists($itemsArray, $item) {
-    return in_array($item, $itemsArray) ? $item : null;
+    return array_key_exists($item, $itemsArray) ? $item : null;
 }
 
 function arrayHasString($array, $string) {

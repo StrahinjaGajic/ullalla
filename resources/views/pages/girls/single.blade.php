@@ -32,12 +32,12 @@
 					<div class="zoomWrapper">
 						<div id="img-1" class="zoomWrapper single-zoom">
 							<a href="#">
-								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}" alt="">
+								<img id="is_image_large" class="expand" src="{{ $user->photos . 'nth/0/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/' }}" alt="">
 								<div id="myModal" class="modal">
 									<span class="close">&times;</span>
 									<div class="modal-dialog modal-lg">
 										<div class="modal-content" style="text-align: center;">
-											<img id="img01" class="slide" src="{{ $user->photos . 'nth/0/-/resize/490x560/' }}"/>
+											<img id="img01" class="slide" src="{{ $user->photos . 'nth/0/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/' }}"/>
 											<div class="prev-next">    
 		                                    	<a type="button" onclick="prev()" id="prev" class="glyphicon glyphicon-chevron-left"></a>
 		                                    	<a type="button" onclick="next()" id="next" class="glyphicon glyphicon-chevron-right"></a>
@@ -57,7 +57,7 @@
 									@else
 										<li>
 											<a href="#" class="active" data-update="">
-												<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/' }}" alt="zo-th-1" />
+												<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/50x10/75,135/50p/' }}" alt="zo-th-1" />
 											</a>
 										</li>
 									@endif
@@ -393,10 +393,10 @@ var img = document.getElementsByClassName('expand')[0];
         
 var modalImg = document.getElementById("img01");
 
-var all = modalImg.getAttribute("src").substr(-25 , 1) -1;
-     
+var all = modalImg.getAttribute("src").substr(-91 , 1) -1;
+
 function prev () {
-   var now = modalImg.getAttribute("src").substr(-19 , 1);
+   var now = modalImg.getAttribute("src").substr(-85 , 1);
    
    if (now == 0) {
        
@@ -406,12 +406,12 @@ function prev () {
    else {
        var prev = now - 1;
    }
-   
-   var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
-    
-   
-   var src = src + "nth/"+prev+"/-/resize/490x560/";
-   
+
+   var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/", "");
+
+
+   var src = src + "nth/"+prev+"/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/";
+
    modalImg.setAttribute("src", src); 
 
 }
@@ -419,8 +419,8 @@ function prev () {
 function next () {
    
    
-   var now = modalImg.getAttribute("src").substr(-19 , 1);
-   
+   var now = modalImg.getAttribute("src").substr(-85 , 1);
+
    now = parseInt(now);
 
    
@@ -433,11 +433,11 @@ function next () {
        var next = now + 1;
    }
    
-   var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/", "");
+   var src = modalImg.getAttribute("src").replace("nth/"+now+"/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/", "");
     
    
-   var src = src + "nth/"+next+"/-/resize/490x560/";
-   
+   var src = src + "nth/"+next+"/-/resize/490x560/-/overlay/1c53f72b-9fba-4dcc-94fd-29a7dce59f8f/300x54/170,500/50p/";
+
    modalImg.setAttribute("src", src);   
 
 
