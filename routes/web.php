@@ -37,7 +37,7 @@ Route::middleware(['web', 'front.auth'])->group( function () { // remove in prod
 	Route::get('/', 'HomeController@getIndex');
 });
 # AUTH CONTROLLER
-Route::get('/signin', 'Auth\AuthController@getSignin');
+Route::get('/signin', 'Auth\AuthController@getSignin')->name('login');
 Route::post('/signin', 'Auth\AuthController@postSignin');
 Route::get('/signup', 'Auth\AuthController@getSignup');
 Route::post('/signup', 'Auth\AuthController@postSignup');
