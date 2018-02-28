@@ -90,5 +90,5 @@ return [
 	'previous' => 'vorherige',
 
 	#prices page
-	'prices' => 'Geschlecht',
+	'prices' => 'Preise',
 ];
