@@ -20,6 +20,7 @@ return [
 	# footer links
 	'privacy_policy' => 'Privacy Policy',
 	'contact_us' => 'Contatti',
+	'impressum' => 'Impressum',
 	'faq' => 'Domande frequenti',
 
 	#nav links

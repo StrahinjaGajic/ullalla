@@ -15,7 +15,7 @@ class SearchController extends Controller
 	public function getQuickSeachResults(Request $request)
 	{
 		$this->validate($request, [
-			'sexes' => 'required',
+			'sexes[1]' => 'required',
 			'radius' => 'required',
 			'city' => 'required'
 		]);

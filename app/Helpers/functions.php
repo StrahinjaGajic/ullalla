@@ -141,7 +141,6 @@ function getFilterYears() {
 function getLanguages() {
     return [
         'de' => __('functions.de'),
-        'fr' => __('functions.fr'),
         'it' => __('functions.it'),
         'en' => __('functions.en'),
     ];

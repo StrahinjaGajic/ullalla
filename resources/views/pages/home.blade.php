@@ -47,6 +47,11 @@
                         @endforeach
                     </div>
                 </div>
+                <div class="containere">
+                    @if($errors->has('sexes[1]'))
+                        {{ $errors->first('sexes[1]') }}
+                    @endif
+                </div>
                 <div class="help-block home_help_block">
                     @if($errors->has('gender_type'))
                         {{ $errors->first('gender_type') }}

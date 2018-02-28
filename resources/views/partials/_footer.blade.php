@@ -12,7 +12,7 @@
                 <div class="col-lg-4">
                     <div class="single-corporate onl-support">
                         <div class="service-name">
-{{--                            <a href="{{ url('faq') }}"><h3>{{ __('buttons.faq') }}</h3></a>--}}
+                            <a href="/impressum"><h3>{{ __('buttons.impressum') }}</h3></a>
                         </div>
                     </div>
                 </div>

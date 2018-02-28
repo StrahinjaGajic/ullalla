@@ -199,3 +199,11 @@ Route::get('prices', function () {
 });
 
 Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
+
+Route::get('/impressum', function(){
+	return view('pages.impressum.impressum');
+});
+
+Route::get('/privacy_policy', function(){
+	return view('pages.privacy-policy.privacy-policy');
+});

@@ -20,6 +20,7 @@ return [
 	# footer links
 	'privacy_policy' => 'Datenschutzerklärung ',
 	'contact_us' => 'Kontaktieren Sie uns',
+	'impressum' => 'Impressum',
 	'faq' => 'FAQ',
 
 	#nav links
@@ -89,5 +90,5 @@ return [
 	'previous' => 'vorherige',
 
 	#prices page
-	'prices' => 'Prices',
+	'prices' => 'Geschlecht',
 ];

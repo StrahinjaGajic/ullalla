@@ -15,28 +15,25 @@ class PackageTableSeeder extends Seeder
         $package = new Package;
         $package->package_name = 'S';
         $package->package_duration = '7';
-        $package->package_price = '50';
-        $package->package_price = '50';
+        $package->package_price = '35';
         $package->save();
 
         $package = new Package;
         $package->package_name = 'M';
         $package->package_duration = '14';
-        $package->package_price = '150';
-        $package->package_price = '150';
+        $package->package_price = '60';
         $package->save();
 
         $package = new Package;
         $package->package_name = 'L';
         $package->package_duration = '30';
-        $package->package_price = '250';
-        $package->package_price = '250';
+        $package->package_price = '100';
         $package->save();
 
         $package = new Package;
         $package->package_name = 'XL';
         $package->package_duration = '90';
-        $package->package_price = '350';
+        $package->package_price = '250';
         $package->save();
 
         $package = new Package;
@@ -48,7 +45,7 @@ class PackageTableSeeder extends Seeder
         $package = new Package;
         $package->package_name = 'XXXL';
         $package->package_duration = '365';
-        $package->package_price = '550';
+        $package->package_price = '850';
         $package->save();
     }
 }
