@@ -67,5 +67,5 @@ return [
     'girl_removed_success' => 'Ragazza rimossa con successo',
     'girl_added_success' => 'Ragazza aggiunta con successo',
 
-    'err_max_girls' => 'Sorry, but you have exceeded the maximum number of girls your package allows you to have',
+    'err_max_girls' => 'Attenzione: ha raggiunto il numero massimo di profili ragazze consentiti dal suo pachetto.',
 ];
