@@ -39,6 +39,7 @@
                 </div>
                 <div class="layout-list">
                     <div class="form-group girls_preview">
+                       <div style="overflow-x: auto;">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -80,6 +81,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>  
                 </div>
             </div>

@@ -1244,6 +1244,9 @@ h3 {
     background: #222!important;
 }
 
+
+
+
 .modal-body {
     color: white;
 }
@@ -1448,6 +1451,14 @@ table.working-times-table .control--checkbox a,
     padding: 8px;
 }
 
+.inner_table {
+    margin-bottom: 0;
+}
+
+.banner_control {
+    margin: 10px 20px;
+}
+
 .layout-title > .banners_layout_title > a {
     height: unset;
     line-height: unset;
@@ -1639,6 +1650,29 @@ table.working-times-table .control--checkbox a,
     .table {
         table-layout: unset;
     }
+    
+        .price_per {
+        display: inline-block;
+        width: 200px;
+    }
+    
+    .create_banner_table > tbody > tr > td {
+        padding: 20px;
+    }
+    
+    .discard-duration {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .prev-btn {
+        float: left;
+        margin-left: 0!important ;
+    }
+    
+    .step {
+        width: 100%;
+    }
 }
 
 }
@@ -1651,6 +1685,8 @@ table.working-times-table .control--checkbox a,
     .table > tbody > tr > td {
         padding: 8px!important;
     }
+
+
 }
 
 /* iPhone 6 in portrait */
@@ -1732,13 +1768,70 @@ table.working-times-table .control--checkbox a,
     }
 }
 
+/* iPhone 6 Plus in portrait */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: portrait) {
+
+
+    
+    
+
+}
+
 
 /* iPhone 6 Plus in landscape */
 
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: landscape) {
 
     .table > tbody > tr > td {
-        padding: 8px!important;
+        padding: 8px;
+    }
+    
+            .price_per {
+        display: inline-block;
+        width: 200px;
+    }
+    
+    .create_banner_table > tbody > tr > td {
+        padding: 20px;
+    }
+    
+
+}
+
+
+/* Retina iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 2) { 
+        
+        .price_per {
+        display: inline-block;
+        width: 200px;
+    }
+    
+    .create_banner_table > tbody > tr > td {
+        padding: 20px;
+    }
+}
+
+
+/* Retina iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) { 
+        
+        .price_per {
+        display: inline-block;
+        width: 200px;
+    }
+    
+    .create_banner_table > tbody > tr > td {
+        padding: 20px;
     }
 }
 

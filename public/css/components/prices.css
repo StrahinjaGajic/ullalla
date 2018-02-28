@@ -12,6 +12,16 @@
     padding: 0;
 }
 
+    .img-responsive {
+        display: block;
+        width: 100%;
+    }
+    
+    .img-responsive.mobile {
+        display: none;
+    }
+
+
 .prices_title {
     border-bottom: 1px solid #ebebeb;
 }
@@ -27,6 +37,13 @@
     color: #f26522;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 20px;
+    color: #f26522;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+}
 
 
 
@@ -37,7 +54,7 @@ Media
 
 
 @media (min-width: 768px) {
-    
+
 }
 
 @media (max-width: 992px) {
@@ -48,6 +65,18 @@ Media
 
 @media (min-width: 992px) {
 
+    .pck_1 {
+    position: absolute;
+    right: 0;
+    top: 330px;
+    }
+    
+    .pck_2 {
+        position: absolute;
+        right: 0;
+        top: 90px;
+    }
+    
     .ban_1 {
         position: absolute;
         right: 0;
@@ -73,9 +102,68 @@ Media
     .description {
         margin: 0;
     }
+    
+    .img-responsive {
+        display: none;
+    }
+    
+    .img-responsive.mobile {
+        display: block;
+    }
 
 }
 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+    .img-responsive {
+        display: block;
+    }
+    
+    .img-responsive.mobile {
+        display: none;
+    }
+    
+    .pck_1,
+    .pck_2,
+    .ban_1,
+    .ban_2,
+    .ban_3{
+        position: unset;
+        right: unset;
+        top: unset;
+        margin: 15px 0;
+    }
+    
+}
+
+/* iPad Pro Portrait */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+          .img-responsive {
+        display: block;
+    }
+    
+    .img-responsive.mobile {
+        display: none;
+    }
+    
+    .pck_1,
+    .pck_2,
+    .ban_1,
+    .ban_2,
+    .ban_3{
+        position: unset;
+        right: unset;
+        top: unset;
+        margin: 15px 0;
+    }
+      
+}
 
 
 @media (min-width: 1200px) {}

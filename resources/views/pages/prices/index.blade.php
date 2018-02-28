@@ -5,6 +5,53 @@
 <!-- Content goes here -->
 
 <div class="container prices_banners">
+     <h3>Packages</h3>
+      <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>First Package <i class="fa fa-caret-down"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block">
+                <div class="col-lg-6 description pck_1">
+                    <h2>Lokale des monats</h2>
+                    <p>Platzierung: Regionalseite</p>
+                    <p>Preis/Tag: Fr. 70.-</p>
+                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive mobile" src="../img/prices/LOKALE%20DES%20MONATS.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/LOKALE%20DES%20MONATS.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row prices_banners_block">
+        <div class="shop-layout canton-layout headerDropdown">
+            <div class="layout-title prices_title">
+                <div class="layout-title toggle_arrow">
+                    <a>Second Package <i class="fa fa-caret-down"></i></a>
+                </div>
+            </div>
+            <div class="layout-list ban_block">
+                <div class="col-lg-6 description pck_2">
+                    <h2>Private des monats</h2>
+                    <p>Platzierung: Regionalseite</p>
+                    <p>Preis/Tag: Fr. 70.-</p>
+                    <p>Format: 950x120 | nicht animiert | JPEG</p>
+                </div>
+                <div class="col-lg-6 image">
+                    <img class="img-responsive mobile" src="../img/prices/PRIVATE%20DES%20MONATS.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/PRIVATE%20DES%20MONATS.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+   <h3>Banners</h3>
     <div class="row prices_banners_block">
         <div class="shop-layout canton-layout headerDropdown">
             <div class="layout-title prices_title">
@@ -20,7 +67,8 @@
                     <p>Format: 950x120 | nicht animiert | JPEG</p>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive" src="../img/prices/HOME.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/HOME.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/HOME.png" alt="">
                 </div>
             </div>
         </div>
@@ -41,7 +89,8 @@
                     <p>Format: 950x120 | nicht animiert | JPEG</p>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive" src="../img/prices/PRIVATE.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/PRIVATE.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/PRIVATE.png" alt="">
                 </div>
             </div>
         </div>
@@ -61,7 +110,8 @@
                     <p>Format: 950x120 | nicht animiert | JPEG</p>
                 </div>
                 <div class="col-lg-6 image">
-                    <img class="img-responsive" src="../img/prices/LOKAL.png" alt="">
+                    <img class="img-responsive mobile" src="../img/prices/LOKAL.png" alt="">
+                    <img class="img-responsive" src="../img/prices_mobile/LOKAL.png" alt="">
                 </div>
             </div>
         </div>
