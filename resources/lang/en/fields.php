@@ -82,7 +82,7 @@ return [
     'f' => 'F',
     'g' => 'G',
     'black' => 'Black',
-    'brown' => 'Brow',
+    'brown' => 'Brown',
     'green' => 'Green',
     'blue' => 'Blue',
     'gray' => 'Gray',

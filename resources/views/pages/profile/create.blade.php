@@ -128,7 +128,7 @@
 									<select name="eye_color" class="form-control">
 										<option value=""></option>
 										<option value="black">{{ __('fields.black') }}</option>
-										<option value="Brown">{{ __('fields.brown') }}</option>
+										<option value="brown">{{ __('fields.brown') }}</option>
 										<option value="green">{{ __('fields.green') }}</option>
 										<option value="blue">{{ __('fields.blue') }}</option>
 										<option value="gray">{{ __('fields.gray') }}</option>
