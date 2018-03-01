@@ -300,7 +300,7 @@
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="single-product">
 												<div class="product-img">
-													<a class="a-img"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="profile image" />
+													<a class="a-img"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="profile image" />
 													</a>
 												</div>
 												<div class="product-content">
@@ -325,7 +325,7 @@
 												<div class="single-product">
 													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 														<div class="product-img">
-															<a class="a-img" href="shop.html#"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="profile image" />
+															<a class="a-img" href="shop.html#"><img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="profile image" />
 															</a>
 														</div>
 													</div>

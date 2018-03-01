@@ -123,7 +123,7 @@
                         <div class="single-product">
                             <div class="product-img">
                                 <a class="a-img">
-                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-content">
@@ -157,7 +157,7 @@
                         <div class="single-product">
                             <div class="product-img">
                                 <a class="a-img">
-                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-content">
@@ -191,7 +191,7 @@
                         <div class="single-product">
                             <div class="product-img">
                                 <a class="a-img">
-                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/' }}" alt="" />
+                                    <img class="primary-img" src="{{ $user->photos . 'nth/0/-/resize/263x300/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/150x27/110,270/50p/' }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-content">
