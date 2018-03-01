@@ -50,24 +50,11 @@
 						<div class="single-zoom-thumb">
 							<ul class="bxslider" id="gallery_01">
 								@for ($i = 0; $i < substr($user->photos, -2, 1); $i++)
-									@if($i == 0)
-										@php
-										$src =  $user->photos . 'nth/' . $i . '/-/resize/127x145/';
-										@endphp
-									@else
-										<li>
-											<a href="#" class="active" data-update="">
-												<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/50x10/75,135/50p/' }}" alt="zo-th-1" />
-											</a>
-										</li>
-									@endif
-									@if($i == (substr($user->photos, -2, 1) - 1))
-										<li>
-											<a href="#" class="active" data-update="">
-												<img src="{{ $src }}" alt="zo-th-1" />
-											</a>
-										</li>
-									@endif
+									<li>
+										<a href="#" class="active" data-update="">
+											<img src="{{ $user->photos . 'nth/' . $i . '/-/resize/127x145/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/50x10/75,135/50p/' }}" alt="zo-th-1" />
+										</a>
+									</li>
 								@endfor
 							</ul>
 						</div>
