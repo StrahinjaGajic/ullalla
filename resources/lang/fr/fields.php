@@ -84,6 +84,7 @@ return [
     'green' => 'Green',
     'blue' => 'Blue',
     'gray' => 'Gray',
+    'grey' => 'Gray',
     'other' => 'Other',
     'brunette' => 'Brunette',
     'blond' => 'Blond',
