@@ -22,7 +22,7 @@ return [
 
     #getTypes
     'asian' => 'Asiatico',
-    'black' => 'Africano',
+    'african' => 'Africano',
     'european' => 'Europeo',
     'latina' => 'Latino',
     'indian' => 'Indiano',
@@ -49,6 +49,7 @@ return [
 
 
     #getEyeColors
+    
     'brown' => 'Marroni',
     'green' => 'Verdi',
     'blue' => 'Blu',
@@ -56,6 +57,8 @@ return [
 
 
     #getHairColors
+    'black' => 'Nero',
+    'brunette' => 'Castani',
     'brunette' => 'Castani',
     'blond' => 'Biondi',
     'red' => 'Rossi',

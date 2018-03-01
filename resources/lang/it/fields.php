@@ -100,7 +100,7 @@ return [
 
     #getTypes
     'asian' => 'Asiatico',
-    'black' => 'Africano',
+    'african' => 'Africano',
     'european' => 'Europeo',
     'latina' => 'Latino',
     'indian' => 'Indiano',

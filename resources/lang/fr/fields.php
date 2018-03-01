@@ -98,7 +98,7 @@ return [
 
     #getTypes
     'asian' => 'asian',
-    'black' => 'black',
+    'african' => 'black',
     'european' => 'european',
     'latina' => 'latina',
     'indian' => 'indian',

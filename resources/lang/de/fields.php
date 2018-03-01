@@ -101,7 +101,7 @@ return [
 
     #getTypes
     'asian' => 'asiatisch',
-    'black' => 'afrikanisch',
+    'african' => 'afrikanisch',
     'european' => 'europäisch',
     'latina' => 'lateinamerikanisch',
     'indian' => 'indisch',

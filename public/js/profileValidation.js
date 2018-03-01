@@ -180,35 +180,6 @@ $(document).ready(function() {
                         }
                     }
                 },
-                alcohol: {
-                    validators: {
-                        notEmpty: {
-                            message: requiredField
-                        }
-                    }
-                },
-                smoker: {
-                    validators: {
-                        notEmpty: {
-                            message: requiredField
-                        }
-                    }
-                },
-                intimate: {
-                    validators: {
-                        notEmpty: {
-                            message: requiredField
-                        }
-                    }
-                },
-                'ullalla_package[]': {
-                    err: '#alertPackageMessage',
-                    validators: {
-                        notEmpty: {
-                            message: defaultPackageRequired
-                        }
-                    }
-                },
                 city: {
                     validators: {
                         notEmpty: {

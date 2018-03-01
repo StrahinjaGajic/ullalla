@@ -63,7 +63,7 @@ function getAnswers() {
 function getTypes() {
     return [
         'asian' => __('functions.asian'), 
-        'black' => __('functions.black'), 
+        'african' => __('functions.african'), 
         'european' => __('functions.european'), 
         'latina' => __('functions.latina'), 
         'indian' => __('functions.indian'), 

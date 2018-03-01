@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="col-3 input-effect {{ $errors->has('mobile') ? 'has-error' : ''  }}" style="margin:3px auto;">
-                                <label>{{ __('fields.mobile') }}*</label>
+                                <label>{{ __('fields.mobile') }}</label>
                                 <input class="effect-16" type="tel" placeholder="" name="mobile" value="{{ $local->mobile }}" id="mobile">
                                 <input type="hidden" name="dial_code">
                                 <span class="focus-border"></span>

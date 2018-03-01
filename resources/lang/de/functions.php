@@ -22,7 +22,7 @@ return [
 
     #getTypes
     'asian' => 'asiatisch',
-    'black' => 'afrikanisch',
+    'african' => 'afrikanisch',
     'european' => 'europäisch',
     'latina' => 'lateinamerikanisch',
     'indian' => 'indisch',
@@ -49,13 +49,15 @@ return [
 
 
     #getEyeColors
+
     'brown' => 'braun',
     'green' => 'grün',
     'blue' => 'blau',
     'gray' => 'grau',
 
 
-    #getHairColors
+    #getHairColors    
+    'black' => 'Swarz',
     'brunette' => 'brunette',
     'blond' => 'blond',
     'red' => 'rothaarig',
