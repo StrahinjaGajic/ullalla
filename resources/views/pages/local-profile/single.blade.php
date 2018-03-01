@@ -331,7 +331,7 @@ span.onclick = function() {
     $('.tab-content > .tab-pane:first-child').show(); 
     $('#gallery_01 img').click(function(e) {
         e.preventDefault();
-        $('#is_image_large').attr('src',$(this).attr('src').replace('127x145','490x560'));
+        $('#is_image_large').attr('src',$(this).attr('src').replace('127x145/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/50x10/75,135/50p/','490x560/-/overlay/f90362fd-8c5f-4daf-8c1b-7f1ca3ca90f8/300x54/170,500/50p/'));
     });
 </script>
 
