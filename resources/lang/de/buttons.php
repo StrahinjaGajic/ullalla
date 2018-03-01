@@ -18,7 +18,7 @@ return [
 
 
 	# footer links
-	'privacy_policy' => 'Datenschutzerklärung ',
+	'privacy_policy' => 'AGB\'s',
 	'contact_us' => 'Kontaktieren Sie uns',
 	'impressum' => 'Impressum',
 	'faq' => 'FAQ',

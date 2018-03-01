@@ -478,7 +478,7 @@ function getEditProfilePages() {
         'working_time' => __('functions.working_time'),
         'prices' => __('functions.prices'),
         'packages' => __('functions.packages'),
-        'banners' => __('functions.banners'),
+        // 'banners' => __('functions.banners'),
         'add_card' => __('functions.add_card')
     ];
 }

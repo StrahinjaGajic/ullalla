@@ -100,6 +100,10 @@ return [
     'telephone' => 'Telefon',
     'mobile_phone' => 'Mobil',
 
+    #get Answers
+    'yes' => 'Ja',
+    'no' => 'Nein',
+
     #getTypes
     'asian' => 'asiatisch',
     'african' => 'afrikanisch',

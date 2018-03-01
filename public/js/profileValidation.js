@@ -173,13 +173,6 @@ $(document).ready(function() {
                         }
                     }
                 },
-                sex_orientation: {
-                    validators: {
-                        notEmpty: {
-                            message: requiredField
-                        }
-                    }
-                },
                 city: {
                     validators: {
                         notEmpty: {

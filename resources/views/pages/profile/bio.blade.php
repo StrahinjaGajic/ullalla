@@ -66,7 +66,7 @@
 								@endphp
 								<label for="Nationality">{{ __('fields.nationality') }}</label>
 								<select id="Nationality" name="nationality" class="input-select">
-									<option value="">{{ __('fields.nationality') }}</option>
+									<option value=""></option>
 									@foreach ($countries as $country)
 										@if(isset($mlCountries[$country->iso_3166_2]))
 											<option value="{{ $country->id }}" {{ getSelectedOption($user->country_id, $country->id) }}>
@@ -81,7 +81,6 @@
 							<div class="col-3 input-effect {{ $errors->has('age') ? 'has-error' : ''  }}">
 								<label>{{ __('fields.age') }}</label>
 								<select name="age" class="input-select">
-									<option value="">{{ __('fields.age') }}</option>
 									@for($age = 18; $age <= 60; $age++)
 									<option value="{{ $age }}" {{ getSelectedOption($user->age, $age) }}>{{ $age }}</option>
 									@endfor
@@ -111,7 +110,7 @@
 							<div class="info">
 								<label>{{ __('fields.sex') }}</label>
 								<select id="sex" name="sex" class="input-select">
-									<option value="">{{ __('fields.sex') }}</option>
+									<option value=""></option>
 									@foreach (getSexes() as $key => $sex)
 									<option value="{{ $key }}" {{ getSelectedOption($user->sex, $key) }}>{{ ucfirst($sex) }}</option>
 									@endforeach
@@ -122,7 +121,7 @@
 							<div class="info">
 								<label>{{ __('fields.sex_orientation') }}</label>
 								<select id="sex orientation" name="sex_orientation" class="input-select">
-									<option value="">{{ __('fields.sex_orientation') }}</option>
+									<option value=""></option>
 									@foreach (getSexOrientations() as $key => $sexOrientation)
 									<option value="{{ $key }}" {{ getSelectedOption($user->sex_orientation, $key) }}>{{ ucfirst($sexOrientation) }}</option>
 									@endforeach
@@ -133,7 +132,7 @@
 							<div class="info">
 								<label>{{ __('fields.type') }}</label>
 								<select id="Type" name="type" class="input-select">
-									<option value="">{{ __('fields.type') }}</option>
+									<option value=""></option>
 									@foreach (getTypes() as $key => $type)
 									<option value="{{ $key }}" {{ getSelectedOption($user->type, $key) }}>{{ ucfirst($type) }}</option>
 									@endforeach
@@ -148,7 +147,7 @@
 							<div class="info">
 								<label>{{ __('fields.figure') }}</label>
 								<select id="Figure" name="figure" class="input-select">
-									<option value="">{{ __('fields.figure') }}</option>
+									<option value=""></option>
 									@foreach (getFigures() as $key => $figure)
 									<option value="{{ $key }}" {{ getSelectedOption($user->figure, $key) }}>{{ ucfirst($figure) }}</option>
 									@endforeach
@@ -159,7 +158,7 @@
 							<div class="info">
 								<label>{{ __('fields.breast_size') }}</label>
 								<select id="Breast Size" class="input-select" name="breast_size">
-									<option value="">{{ __('fields.breast_size') }}</option>
+									<option value=""></option>
 									@foreach(getBreastSizes() as $key => $breastSize)
 									<option value="{{ $key }}" {{ getSelectedOption($user->breast_size, $key) }}>{{ ucfirst($breastSize) }}</option>
 									@endforeach
@@ -170,7 +169,7 @@
 							<div class="info">
 								<label>{{ __('fields.eye_color') }}</label>
 								<select id="Eye Color" class="input-select" name="eye_color">
-									<option value="">{{ __('fields.eye_color') }}</option>
+									<option value=""></option>
 									@foreach(getEyeColors() as $key => $eyeColor)
 									<option value="{{ $key }}" {{ getSelectedOption($user->eye_color, $key) }}>{{ ucfirst($eyeColor) }}</option>
 									@endforeach
@@ -185,7 +184,7 @@
 							<div class="info">
 								<label>{{ __('fields.hair_color') }}</label>
 								<select id="Hair Color" class="input-select" name="hair_color">
-									<option value="">{{ __('fields.hair_color') }}</option>
+									<option value=""></option>
 									@foreach(getHairColors() as $key => $hairColor)
 									<option value="{{ $key }}" {{ getSelectedOption($user->hair_color, $key) }}>{{ ucfirst($hairColor) }}</option>
 									@endforeach
@@ -196,7 +195,7 @@
 							<div class="info">
 								<label>{{ __('fields.tattoos') }}</label>
 								<select id="Tattos" class="input-select" name="tattoos">
-									<option value="">{{ __('fields.tattoos') }}</option>
+									<option value=""></option>
 									@foreach(array_slice(getAnswers(), 0, 2) as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->tattoos, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach
@@ -207,7 +206,7 @@
 							<div class="info">
 								<label>{{ __('fields.piercings') }}</label>
 								<select id="Piercings" class="input-select" name="piercings">
-									<option value="">{{ __('fields.piercings') }}</option>
+									<option value=""></option>
 									@foreach(array_slice(getAnswers(), 0, 2) as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->piercings, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach
@@ -222,7 +221,7 @@
 							<div class="info">
 								<label>{{ __('fields.body_hair') }}</label>
 								<select id="BodyHair" class="input-select" name="body_hair">
-									<option value="">{{ __('fields.body_hair') }}</option>
+									<option value=""></option>
 									@foreach(getShaveOptions() as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->body_hair, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach
@@ -233,7 +232,7 @@
 							<div class="info">
 								<label>{{ __('fields.intimate') }}</label>
 								<select id="Intimate" class="input-select" name="intimate">
-									<option value="">{{ __('fields.intimate') }}</option>
+									<option value=""></option>
 									@foreach(getShaveOptions() as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->intimate, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach
@@ -244,7 +243,7 @@
 							<div class="info">
 								<label>{{ __('fields.smoker') }}</label>
 								<select id="Smoker" class="input-select" name="smoker">
-									<option value="">{{ __('fields.smoker') }}</option>
+									<option value=""></option>
 									@foreach(getAnswers() as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->smoker, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach
@@ -259,7 +258,7 @@
 							<div class="info">
 								<label>{{ __('fields.alcohol') }}</label>
 								<select id="Alcohol" class="input-select" name="alcohol">
-									<option value="">{{ __('fields.alcohol') }}</option>
+									<option value=""></option>
 									@foreach(getAnswers() as $key => $answer)
 									<option value="{{ $key }}" {{ getSelectedOption($user->alcohol, $key) }}>{{ ucfirst($answer) }}</option>
 									@endforeach

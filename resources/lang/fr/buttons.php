@@ -18,7 +18,7 @@ return [
 
 
 	# footer links
-	'privacy_policy' => 'Privacy Policy',
+	'privacy_policy' => 'Terms & Conditions',
 	'contact_us' => 'Contact Us',
 	'faq' => 'FAQ',
 

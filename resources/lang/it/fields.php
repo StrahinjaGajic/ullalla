@@ -98,6 +98,10 @@ return [
     'telephone' => 'Telefono',
     'mobile_phone' => 'Cellulare',
 
+    #get Answers
+    'yes' => 'Si',
+    'no' => 'No',
+
     #getTypes
     'asian' => 'Asiatico',
     'african' => 'Africano',

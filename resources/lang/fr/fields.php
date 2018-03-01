@@ -97,6 +97,10 @@ return [
     'telephone' => 'Telephone',
     'mobile_phone' => 'Mobile Phone',
 
+    #get Answers
+    'yes' => 'Yes',
+    'no' => 'No',
+
     #getTypes
     'asian' => 'asian',
     'african' => 'black',
