@@ -74,6 +74,7 @@ return [
     'slim' => 'Dünn',
     'athletic' => 'Athletisch',
     'chubby' => 'Mollig',
+    'european' => 'Mollig',
     'a' => 'A',
     'b' => 'B',
     'c' => 'C',
@@ -97,6 +98,16 @@ return [
     'website_url' => 'Webseite',
     'telephone' => 'Telefon',
     'mobile_phone' => 'Mobil',
+
+    #getTypes
+    'asian' => 'asiatisch',
+    'black' => 'afrikanisch',
+    'european' => 'europäisch',
+    'latina' => 'lateinamerikanisch',
+    'indian' => 'indisch',
+    'arabian' => 'arabisch',
+    'mixed' => 'mischling',
+    'other' => 'anderes',
 
 
 	'sms_notify' => 'Erhalten Sie Benachrichtigungen via SMS',

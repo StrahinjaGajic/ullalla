@@ -98,6 +98,15 @@ return [
     'telephone' => 'Telefono',
     'mobile_phone' => 'Cellulare',
 
+    #getTypes
+    'asian' => 'Asiatico',
+    'black' => 'Africano',
+    'european' => 'Europeo',
+    'latina' => 'Latino',
+    'indian' => 'Indiano',
+    'arabian' => 'Arabo',
+    'mixed' => 'Misto',
+    'other' => 'Altro',
 
     'sms_notify' => 'Ricevi notifiche via SMS',
 

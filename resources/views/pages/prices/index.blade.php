@@ -66,8 +66,8 @@
                             @foreach($localPackages as $package)
                                 <tr>
                                     <td>{{ $package->name }}</td>
-                                    <td>CHF {{ $package->month_price }} .-</td>
-                                    <td>CHF {{ $package->year_price }} .-</td>
+                                    <td>{{ $package->id == 6 ? __('fields.on_demand') : 'CHF ' . $package->month_price . ' .-' }}</td>
+                                    <td>{{ $package->id == 6 ? __('fields.on_demand') : 'CHF ' . $package->year_price . ' .-' }} </td>
                                 </tr>
                             @endforeach
                         </tbody>

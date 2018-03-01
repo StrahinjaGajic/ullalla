@@ -96,6 +96,15 @@ return [
     'telephone' => 'Telephone',
     'mobile_phone' => 'Mobile Phone',
 
+    #getTypes
+    'asian' => 'asian',
+    'black' => 'black',
+    'european' => 'european',
+    'latina' => 'latina',
+    'indian' => 'indian',
+    'arabian' => 'arabian',
+    'mixed' => 'mixed',
+    'other' => 'other',
 
     'sms_notify' => 'Receive SMS notifications',
 

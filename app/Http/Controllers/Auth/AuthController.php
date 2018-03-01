@@ -45,7 +45,7 @@ class AuthController extends Controller
 			$user->email = $request->email;
 			$user->password = bcrypt($request->password);
 			$user->user_type_id = $request->user_type;
-			// $user->activated = 1; // remove in production
+			$user->activated = 1; // remove in production
 			$user->save();
 		}
 		// create a new local
@@ -54,7 +54,7 @@ class AuthController extends Controller
 			$user->username = $request->username;
 			$user->email = $request->email;
 			$user->password = bcrypt($request->password);
-			// $user->activated = 1; // remove in production
+			$user->activated = 1; // remove in production
 			$user->save();
 		}
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
 		$userActivation = DB::table('user_activations')->where('token', $token)->first();
 
 		//send an email with the activation token used from user_activations table
-		Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
+		// Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
 
 		return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.success_check_activation_link'));
 
