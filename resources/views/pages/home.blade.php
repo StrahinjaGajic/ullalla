@@ -49,8 +49,8 @@
                 </div>
                 <div class="containere">
                     <div class="help-block" style="color: red;">
-                        @if($errors->has('sexes[1]'))
-                            {{ $errors->first('sexes[1]') }}
+                        @if($errors->has('sexes.1'))
+                            {{ $errors->first('sexes.1') }}
                         @endif
                     </div>
                 </div>

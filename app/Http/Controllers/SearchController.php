@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use Validator;
 use App\Models\User;
 use App\Models\Local;
 use App\Models\Canton;
@@ -15,7 +16,7 @@ class SearchController extends Controller
 	public function getQuickSeachResults(Request $request)
 	{
 		$this->validate($request, [
-			'sexes[1]' => 'required',
+			'sexes.1' => 'required',
 			'radius' => 'required',
 			'city' => 'required'
 		]);
