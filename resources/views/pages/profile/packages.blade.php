@@ -283,7 +283,7 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
 	let stripe = StripeCheckout.configure({
-		key: '{{ config('services.stripe.key') }}',
+		key: '{{ getStripePublishableKey() }}',
 		image: '{{ asset('img/logo.png') }}',
 		locale: 'auto',
 		token: function (token) {

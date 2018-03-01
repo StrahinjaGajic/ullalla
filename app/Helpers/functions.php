@@ -813,6 +813,12 @@ function getBannerDimensions($name) {
     return $bannerSize;
 }
 
-
+function getStripePublishableKey() {
+    if (app()->environment('local')) {
+        return config('development.stripe.publishable_key');
+    } else if (app()->environment('production')) {
+        return config('stripe.publishable_key');
+    }
+}
 
 ?>
