@@ -799,4 +799,26 @@ function removeHttp($url) {
    return $url = preg_replace("(^https?://)", "", $url );
 }
 
+function getBannerDimensions($name) {
+    $bannerSize = '';
+
+    if ($name == 'Big') {
+        $bannerSize = '1140x360';
+    } else if ($name == 'Medium') {
+        $bannerSize = '555x350';
+    } else if ($name == 'Small') {
+        $bannerSize = '262x165';
+    }
+
+    return $bannerSize;
+}
+
+function getStripePublishableKey() {
+    if (app()->environment('local')) {
+        return config('development.stripe.publishable_key');
+    } else if (app()->environment('production')) {
+        return config('stripe.publishable_key');
+    }
+}
+
 ?>

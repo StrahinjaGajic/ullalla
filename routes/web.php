@@ -1,28 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Cookie;
+// use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Cookie;
 
-Route::get('/polarna_kobra', function() { // remove in production
-    return view('temp_login');
-})->name('tempLogin');
+// Route::get('/polarna_kobra', function() { // remove in production
+//     return view('temp_login');
+// })->name('tempLogin');
 
-Route::post('/polarna_kobra', function() { // remove in production
-    $_username = 'milan';
-    $_password = 'vejn123123';
+// Route::post('/polarna_kobra', function() { // remove in production
+//     $_username = 'milan';
+//     $_password = 'vejn123123';
 
-    $username = Request::input('username');
-    $password = Request::input('password');
+//     $username = Request::input('username');
+//     $password = Request::input('password');
 
-    if (($username == $_username) && ($password == $_password)) {
-        Cookie::queue(Cookie::make('temp_login', true, 3600));
-        return redirect('/');
-    } else {
-        echo "Wrong username or password";
-    }
-});
+//     if (($username == $_username) && ($password == $_password)) {
+//         Cookie::queue(Cookie::make('temp_login', true, 3600));
+//         return redirect('/');
+//     } else {
+//         echo "Wrong username or password";
+//     }
+// });
 
-Route::group(['middleware' => 'maintenance'], function () { // remove in production
+// Route::group(['middleware' => 'maintenance'], function () { // remove in production
 	# LANGUAGE CONTROLLER
 Route::get('change_language/{language}', 'LanguageController@changeLanguage');
 
@@ -33,9 +33,9 @@ Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetFor
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 # HOME CONTROLLER
-Route::middleware(['web', 'front.auth'])->group( function () { // remove in productions
+// Route::middleware(['web', 'front.auth'])->group( function () { // remove in productions
 	Route::get('/', 'HomeController@getIndex');
-});
+// });
 # AUTH CONTROLLER
 Route::get('/signin', 'Auth\AuthController@getSignin')->name('login');
 Route::post('/signin', 'Auth\AuthController@postSignin');
@@ -45,7 +45,6 @@ Route::get('/signout', 'Auth\AuthController@getSignout');
 
 # USER ACTIVATION
 Route::get('user/activation/{token}', 'Auth\AuthController@userActivation');
-
 
 # GIRL CONTROLLER
 Route::get('private', [
@@ -198,11 +197,12 @@ Route::post('get_guest_data', 'SessionController@storeGuestData');
 Route::get('prices', function () {
 	$privatePackages = App\Models\Package::all();
 	$localPackages = App\Models\LocalPackage::all();
-	return view('pages.prices.index', compact('privatePackages', 'localPackages'));
-});
+	$banners = App\Models\PageBannerSize::all();
+
+	return view('pages.prices.index', compact('privatePackages', 'localPackages', 'banners'));
 });
 
-Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
+// Route::get('/home', 'Auth\AuthController@countdown')->name('countdown');
 
 Route::get('/impressum', function(){
 	return view('pages.impressum.impressum');

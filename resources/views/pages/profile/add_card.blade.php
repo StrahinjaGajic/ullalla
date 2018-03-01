@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('functions.news_and_events'))
+@section('title', __('functions.add_card'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">
@@ -54,7 +54,7 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     let stripe = StripeCheckout.configure({
-        key: '{{ config('services.stripe.key') }}',
+        key: '{{ getStripePublishableKey() }}',
         image: '{{ asset('img/logo.png') }}',
         locale: 'auto',
         token: function (token) {

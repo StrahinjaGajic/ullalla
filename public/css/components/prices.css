@@ -81,19 +81,19 @@ Media
         top: 90px;
     }
     
-    .ban_1 {
+    .big_banner {
         position: absolute;
         right: 0;
         top: 75px;
     }
     
-    .ban_2 {
+    .medium_banner {
         position: absolute;
         right: 0;
         bottom: 0;
     }
     
-    .ban_3 {
+    .small_banner {
         position: absolute;
         right: 0;
         bottom: 0;
@@ -131,9 +131,9 @@ and (orientation : landscape) {
     
     .pck_1,
     .pck_2,
-    .ban_1,
-    .ban_2,
-    .ban_3{
+    .big_banner,
+    .medium_banner,
+    .small_banner{
         position: unset;
         right: unset;
         top: unset;
@@ -158,9 +158,9 @@ and (orientation : landscape) {
     
     .pck_1,
     .pck_2,
-    .ban_1,
-    .ban_2,
-    .ban_3{
+    .big_banner,
+    .medium_banner,
+    .small_banner{
         position: unset;
         right: unset;
         top: unset;
