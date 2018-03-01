@@ -644,8 +644,8 @@ function getEditLocalProfilePages() {
         'club_info' => __('functions.club_info'),
         'girls' => __('functions.girls'),
         'packages' => __('functions.packages'),
-        'news_and_events' => __('functions.news_and_events'),
-        'banners' => __('functions.banners'),
+        // 'news_and_events' => __('functions.news_and_events'),
+        // 'banners' => __('functions.banners'),
         'add_card' => __('functions.add_card'),
     ];
 }
