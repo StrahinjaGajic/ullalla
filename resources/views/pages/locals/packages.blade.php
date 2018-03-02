@@ -134,11 +134,15 @@
 											</select>
 										</td>
 										<td class="text-center">
-											<span id="price_{{ $package->id }}">{{ $package->month_price }} CHF</span>
+											@if($package->package_discount && $package->package_discount != 0)
+												<span id="price_{{ $package->id }}" style="text-decoration:line-through; font-size:12px">{{ $package->month_price }} CHF</span>
+											@else
+												<span id="price_{{ $package->id }}">{{ $package->month_price }} CHF</span>
+											@endif
 											@if($package->package_discount && $package->package_discount != 0)
 												<p>
-													<span id="discountPercent_{{ $package->id }}">{{ $package->package_discount }} %</span> |
-													<span id="discount_{{ $package->id }}">{{ callTotalPackagePrice($package->month_price, $package->package_discount, 0) }} CHF</span>
+													<span id="discountPercent_{{ $package->id }}" style="color:#f26522;">{{ $package->package_discount }}%</span> |
+													<span id="discount_{{ $package->id }}" style="font-weight: bold;">{{ callTotalPackagePrice($package->month_price, $package->package_discount, 0) }} CHF</span>
 												</p>
 											@endif
 										</td>
@@ -178,11 +182,15 @@
 									<td class="text-center">{{ $package->package_name }}</td>
 									<td class="text-center">{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
 									<td class="text-center">
-										{{ $package->package_price_local }} CHF
+										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
+											<span id="price_{{ $package->id }}" style="text-decoration:line-through; font-size:12px">{{ $package->package_price_local }} CHF</span>
+										@else
+											<span id="price_{{ $package->id }}">{{ $package->package_price_local }} CHF</span>
+										@endif
 										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
 											<p>
-												<span>{{ explode(',', $package->package_discount)[2] }} %</span> |
-												{{ callTotalPackagePrice($package->package_price_local, $package->package_discount, 2) }} CHF
+												<span style="color:#f26522;">{{ explode(',', $package->package_discount)[2] }}%</span> |
+												<span style="font-weight: bold;">{{ callTotalPackagePrice($package->package_price_local, $package->package_discount, 2) }} CHF</span>
 											</p>
 										@endif
 									</td>
