@@ -118,23 +118,31 @@
 						<table class="table packages-table">
 							<thead>
 								<tr>
-									<th>{{ __('headings.name') }}</th>
-									<th>{{ __('headings.duration') }}</th>
-									<th>{{ __('headings.price') }}</th>
-									<th>{{ __('headings.activation_date') }}</th>
-									<th></th>
+									<th class="text-center">{{ __('headings.name') }}</th>
+									<th class="text-center">{{ __('headings.duration') }}</th>
+									<th class="text-center">{{ __('headings.price') }}</th>
+									<th class="text-center">{{ __('headings.activation_date') }}</th>
+									<th class="text-center"></th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($packages as $package)
 								<tr>
-									<td>{{ $package->package_name }}</td>
-									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-									<td>{{ $package->package_price }} CHF</td>
-									<td>
+									<td class="text-center">{{ $package->package_name }}</td>
+									<td class="text-center">{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td class="text-center">
+										{{ $package->package_price }} CHF
+										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
+										<p>
+											<span>{{ explode(',', $package->package_discount)[0] }} %</span> |
+											{{ callTotalPackagePrice($package->package_price, $package->package_discount, 0) }} CHF
+										</p>
+										@endif
+									</td>
+									<td class="text-center">
 										<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation{{ $counter }}">
 									</td>
-									<td>
+									<td class="text-center">
 										<label class="control control--checkbox">
 											<input type="radio" name="ullalla_package[]" value="{{ $package->id }}" />
 											<div class="control__indicator"></div>
@@ -161,23 +169,31 @@
 						<table class="table packages-table package-girl-month">
 							<thead>
 								<tr>
-									<th>{{ __('headings.name') }}</th>
-									<th>{{ __('headings.duration') }}</th>
-									<th>{{ __('headings.price') }}</th>
-									<th>{{ __('headings.activation_date') }}</th>
-									<th></th>
+									<th class="text-center">{{ __('headings.name') }}</th>
+									<th class="text-center">{{ __('headings.duration') }}</th>
+									<th class="text-center">{{ __('headings.price') }}</th>
+									<th class="text-center">{{ __('headings.activation_date') }}</th>
+									<th class="text-center"></th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($packages->take(3) as $package)
 								<tr>
-									<td>{{ $package->package_name }}</td>
-									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-									<td>{{ $package->package_price }} CHF</td>
-									<td>
+									<td class="text-center">{{ $package->package_name }}</td>
+									<td class="text-center">{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td class="text-center">
+										{{ $package->package_price }} CHF
+										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
+											<p>
+												<span>{{ explode(',', $package->package_discount)[1] }} %</span> |
+												{{ callTotalPackagePrice($package->package_price, $package->package_discount, 1) }} CHF
+											</p>
+										@endif
+									</td>
+									<td class="text-center">
 										<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
 									</td>
-									<td>
+									<td class="text-center">
 										<label class="control control--checkbox">
 											<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
 											<div class="control__indicator"></div>

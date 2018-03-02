@@ -461,7 +461,7 @@ class LocalController extends Controller
             // check if validator passed or not
             if ($validator->passes()) {
                 // insert gotm package
-                $gotmPackageData = Local::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                $gotmPackageData = Local::insertGotmPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
                 if ($gotmPackageData['scheduled'] === true) {
                     // only default package scheduled
                     return redirect()->back()->with('success_scheduled', __('messages.scheduled_lotm_package'));

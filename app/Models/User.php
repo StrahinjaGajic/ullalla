@@ -312,9 +312,21 @@ class User extends Authenticatable
                 $activationDateInputParsed = Carbon::parse($activationDateInput);
                 $activationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
                 $expiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($package->id))->format('Y-m-d H:i:s');
-
-                $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
-
+                // get either discounted price or real price
+                if($gotm) {
+                    if(explode(',', $package->package_discount)[1] && explode(',', $package->package_discount)[1] != 0){
+                        $price = callTotalPackagePrice($package->package_price, $package->package_discount, 1);
+                    }else{
+                        $price = $package->package_price;
+                    }
+                }else{
+                    if(explode(',', $package->package_discount)[0] && explode(',', $package->package_discount)[0] != 0){
+                        $price = callTotalPackagePrice($package->package_price, $package->package_discount, 0);
+                    }else{
+                        $price = $package->package_price;
+                    }
+                }
+                $totalAmount += (int)filter_var($price, FILTER_SANITIZE_NUMBER_INT);
                 // check if we should schedule the package or not
                 if ($user->$packageColumn && Carbon::now() <= $currentExpiryDateParsed) {
                     $string = $package->id . '&|' . $activationDate . '&|' . $expiryDate . '&|' . $totalAmount;

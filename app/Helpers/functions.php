@@ -821,4 +821,8 @@ function getStripePublishableKey() {
     }
 }
 
+function callTotalPackagePrice($price, $discount, $key){
+    return ceil($price * ( 100 - explode(',', $discount)[$key] ) / 100);
+}
+
 ?>

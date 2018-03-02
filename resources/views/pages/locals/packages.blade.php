@@ -113,11 +113,11 @@
 						<table class="table packages-table">
 							<thead>
 								<tr>
-									<th>{{ __('headings.name') }}</th>
-									<th>{{ __('headings.duration') }}</th>
-									<th>{{ __('headings.price') }}</th>
-									<th>{{ __('headings.activation_date') }}</th>
-									<th></th>
+									<th class="text-center">{{ __('headings.name') }}</th>
+									<th class="text-center">{{ __('headings.duration') }}</th>
+									<th class="text-center">{{ __('headings.price') }}</th>
+									<th class="text-center">{{ __('headings.activation_date') }}</th>
+									<th class="text-center"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -126,15 +126,23 @@
 									@if($package->id == 6)
 										<td colspan="4"><p>More Girls?</p></td>
 									@else
-										<td>{{ $package->name }}</td>
-										<td>
-											<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}')">
+										<td class="text-center">{{ $package->name }}</td>
+										<td class="text-center">
+											<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}', '{{ $package->package_discount }}', '{{ callTotalPackagePrice($package->month_price, $package->package_discount, 0) }}', '{{ callTotalPackagePrice($package->year_price, $package->package_discount, 0) }}')">
 												<option value="month">{{ __('tables.month') }}</option>
 												<option value="year">{{ __('tables.year') }}</option>
 											</select>
 										</td>
-										<td id="price_{{ $package->id }}">{{ $package->month_price }}</td>
-										<td>
+										<td class="text-center">
+											<span id="price_{{ $package->id }}">{{ $package->month_price }} CHF</span>
+											@if($package->package_discount && $package->package_discount != 0)
+												<p>
+													<span id="discountPercent_{{ $package->id }}">{{ $package->package_discount }} %</span> |
+													<span id="discount_{{ $package->id }}">{{ callTotalPackagePrice($package->month_price, $package->package_discount, 0) }} CHF</span>
+												</p>
+											@endif
+										</td>
+										<td class="text-center">
 											<input type="text" name="default_package_activation_date[{{ $package->id }}]" class="package_activation" id="package_activation">
 										</td>
 									@endif
@@ -157,23 +165,31 @@
 						<table class="table packages-table package-girl-month">
 							<thead>
 							<tr>
-								<th>{{ __('headings.name') }}</th>
-								<th>{{ __('headings.duration') }}</th>
-								<th>{{ __('headings.price') }}</th>
-								<th>{{ __('headings.activation_date') }}</th>
-								<th></th>
+								<th class="text-center">{{ __('headings.name') }}</th>
+								<th class="text-center">{{ __('headings.duration') }}</th>
+								<th class="text-center">{{ __('headings.price') }}</th>
+								<th class="text-center">{{ __('headings.activation_date') }}</th>
+								<th class="text-center"></th>
 							</tr>
 							</thead>
 							<tbody>
 							@foreach ($girlPackages->take(3) as $package)
 								<tr>
-									<td>{{ $package->package_name }}</td>
-									<td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-									<td>{{ $package->package_price_local }} CHF</td>
-									<td>
+									<td class="text-center">{{ $package->package_name }}</td>
+									<td class="text-center">{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
+									<td class="text-center">
+										{{ $package->package_price_local }} CHF
+										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
+											<p>
+												<span>{{ explode(',', $package->package_discount)[2] }} %</span> |
+												{{ callTotalPackagePrice($package->package_price_local, $package->package_discount, 2) }} CHF
+											</p>
+										@endif
+									</td>
+									<td class="text-center">
 										<input type="text" name="month_girl_package_activation_date[{{ $package->id }}]" class="package_month_girl_activation" id="package_month_activation{{ $counter }}">
 									</td>
-									<td>
+									<td class="text-center">
 										<label class="control control--checkbox">
 											<input type="checkbox" class="gotm_checkbox" name="ullalla_package_month_girl[]" value="{{ $package->id }}"/>
 											<div class="control__indicator"></div>
@@ -220,14 +236,22 @@
 @endif
 <script>
 
-	function changePrice(id, month, year){
+	function changePrice(id, month, year, discountPercent, discount_month, discount_year){
 		var price = $('#selectDur_' + id + ' :selected').val();
 		if(price == 'month'){
 			price = month;
+			if(discountPercent != 0){
+				$('#discountPercent_' + id).text(discountPercent + '%');
+				$('#discount_' + id).text(discount_month + ' CHF');
+			}
 		}else if(price == 'year'){
 			price = year;
+			if(discountPercent != 0){
+				$('#discountPercent_' + id).text(discountPercent + '%');
+				$('#discount_' + id).text(discount_year + ' CHF');
+			}
 		}
-		$('#price_' + id).text(price);
+		$('#price_' + id).text(price + ' CHF');
 	}
 
 

@@ -172,8 +172,12 @@ class Local extends Authenticatable
                 $activationDateInputParsed = Carbon::parse($activationDateInput);
                 $activationDate = $activationDateInputParsed->format('Y-m-d H:i:s');
                 $expiryDate = $activationDateInputParsed->addDays(daysToAddToExpiry($package->id))->format('Y-m-d H:i:s');
-
-                $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
+                if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0){
+                    $price = callTotalPackagePrice($package->package_price, $package->package_discount, 2);
+                }else{
+                    $price = $package->package_price;
+                }
+                $totalAmount += (int) filter_var($price, FILTER_SANITIZE_NUMBER_INT);
 
                 // check if we should schedule the package or not
                 if ($user->$packageColumn && Carbon::now() <= $currentExpiryDateParsed) {
@@ -221,7 +225,7 @@ class Local extends Authenticatable
 
         if ($packageInput) {
             // get package
-            $package = Package::find($packageInput);
+            $package = LocalPackage::find($packageInput);
             // get activation date and expiry date
             if ($package) {
                 if ($package->id != 6) {
@@ -239,9 +243,12 @@ class Local extends Authenticatable
                     }
 
                     $price = request('package_duration')[$package->id] . '_price';
+                    if($package->package_discount && $package->package_discount != 0){
+                        $price = callTotalPackagePrice($package->$price, $package->package_discount, 0);
+                    }
                     $duration = request('package_duration')[$package->id];
 
-                    $totalAmount += (int) filter_var($package->package_price, FILTER_SANITIZE_NUMBER_INT);
+                    $totalAmount += (int) filter_var($price, FILTER_SANITIZE_NUMBER_INT);
 
                     // check if we should schedule the package or not
                     if ($user->$packageColumn && Carbon::now() <= $currentExpiryDateParsed) {

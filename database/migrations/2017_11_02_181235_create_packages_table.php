@@ -19,6 +19,7 @@ class CreatePackagesTable extends Migration
             $table->string('package_duration');
             $table->string('package_price');
             $table->string('package_price_local');
+            $table->integer('package_discount');
             $table->timestamps();
         });
     }

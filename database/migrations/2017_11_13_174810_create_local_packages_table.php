@@ -19,6 +19,7 @@ class CreateLocalPackagesTable extends Migration
             $table->string('month_price');
             $table->string('year_price');
             $table->string('max_girls');
+            $table->integer('package_discount');
             $table->timestamps();
         });
     }
