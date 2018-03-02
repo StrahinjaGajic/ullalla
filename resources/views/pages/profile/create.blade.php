@@ -66,6 +66,7 @@
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.sex_orientation') }}</label>
 									<select name="sex_orientation" class="form-control">
+										<option value=""></option>
 										<option value="heterosexual">{{ __('fields.heterosexual') }}</option>
 										<option value="bisexual">{{ __('fields.bisexual') }}</option>
 										<option value="homosexual">{{ __('fields.homosexual') }}</option>
@@ -127,7 +128,7 @@
 									<select name="eye_color" class="form-control">
 										<option value=""></option>
 										<option value="black">{{ __('fields.black') }}</option>
-										<option value="Brown">{{ __('fields.brown') }}</option>
+										<option value="brown">{{ __('fields.brown') }}</option>
 										<option value="green">{{ __('fields.green') }}</option>
 										<option value="blue">{{ __('fields.blue') }}</option>
 										<option value="gray">{{ __('fields.gray') }}</option>
@@ -173,6 +174,7 @@
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.intimate') }}</label>
 									<select name="intimate" class="form-control">
+										<option value=""></option>
 										<option value="shaved">{{ __('fields.shaved') }}</option>
 										<option value="hairy">{{ __('fields.hairy') }}</option>
 										<option value="partial">{{ __('fields.partial') }}</option>
@@ -181,6 +183,7 @@
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.smoker') }}</label>
 									<select name="smoker" class="form-control">
+										<option value=""></option>
 										<option value="yes">{{ __('labels.yes') }}</option>
 										<option value="no">{{ __('labels.no') }}</option>
 										<option value="occasionally">{{ __('fields.occasionally') }}</option>
@@ -189,6 +192,7 @@
 								<div class="form-group">
 									<label class="control-label">{{ __('fields.alcohol') }}</label>
 									<select name="alcohol" class="form-control">
+										<option value=""></option>
 										<option value="yes">{{ __('labels.yes') }}</option>
 										<option value="no">{{ __('labels.no') }}</option>
 										<option value="occasionally">{{ __('fields.occasionally') }}</option>

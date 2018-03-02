@@ -82,7 +82,7 @@ return [
     'f' => 'F',
     'g' => 'G',
     'black' => 'Black',
-    'brown' => 'Brow',
+    'brown' => 'Brown',
     'green' => 'Green',
     'blue' => 'Blue',
     'gray' => 'Gray',
@@ -97,6 +97,10 @@ return [
     'website_url' => 'Website URL',
     'telephone' => 'Telephone',
     'mobile_phone' => 'Mobile Phone',
+
+    #get Answers
+    'yes' => 'Yes',
+    'no' => 'No',
 
     #getTypes
     'asian' => 'asian',

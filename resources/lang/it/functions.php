@@ -125,7 +125,7 @@ return [
     #getBioFields
     'age' => 'Eta',
     'type' => 'Tipo',
-    'country_id' => 'Place of Origin',
+    'country_id' => 'Nazionalità',
     'eye_color' => 'Occhi',
     'hair_color' => 'Capelli',
     'height' => 'Altezza',

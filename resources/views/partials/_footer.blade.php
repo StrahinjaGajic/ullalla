@@ -26,7 +26,7 @@
                 
             </div>
         </div>
-        <p>© MPSoft 2018. All Rights Reserved.</p>
+        <p style="font-size: 12px;"><a href="{{ url('http://www.mpsoft.ch') }}">© MP Soft</a> 2018. All Rights Reserved.</p>
     </div>
 </section>
 @include('partials._scripts')

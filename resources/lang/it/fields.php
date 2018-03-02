@@ -10,7 +10,7 @@ return [
     'nickname' => 'Nickname',
     'first_name' => 'Nome',
     'last_name' => 'Cognome',
-    'nationality' => 'Place of Origin',
+    'nationality' => 'Nazionalità',
     'age' => 'Eta',
     'height' => 'Altezza',
     'weight' => 'Peso',
@@ -82,7 +82,7 @@ return [
     'f' => 'F',
     'g' => 'G',
     'black' => 'Nero',
-    'brow' => 'Marrone',
+    'brown' => 'Marrone',
     'green' => 'Verde',
     'blue' => 'Blu',
     'gray' => 'Grigio',
@@ -97,6 +97,10 @@ return [
     'website_url' => 'URL sito web',
     'telephone' => 'Telefono',
     'mobile_phone' => 'Cellulare',
+
+    #get Answers
+    'yes' => 'Si',
+    'no' => 'No',
 
     #getTypes
     'asian' => 'Asiatico',
