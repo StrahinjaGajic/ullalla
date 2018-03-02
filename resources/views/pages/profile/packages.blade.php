@@ -158,7 +158,7 @@
 							</tbody>
 						</table>
 						@if(!$showGotmPackages)
-							<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+							<button type="submit" class="btn btn-default">{{ __('buttons.pay_now') }}</button>
 						@endif
 					</div>
 				@endif
@@ -213,7 +213,7 @@
 							</tbody>
 						</table>
 						<div class="save">
-							<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+							<button type="submit" class="btn btn-default">{{ __('buttons.pay_now') }}</button>
 						</div>
 					</div>
 				@endif

@@ -39,6 +39,7 @@ return [
 	'save_changes' => 'Salva modifiche',
 	'show_more' => 'Mostra di piu',
 	'show_less' => 'Mostra meno',
+	'pay_now' => 'Paga Ora',
 
 	#prices
 	'add_new_price' => 'Aggiungi nuovo prezzo',

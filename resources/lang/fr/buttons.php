@@ -38,6 +38,7 @@ return [
 	'save_changes' => 'Save Changes',
 	'show_more' => 'Show More',
 	'show_less' => 'Show Less',
+	'pay_now' => 'Pay Now',
 
 	#prices
 	'add_new_price' => 'Add New Price',

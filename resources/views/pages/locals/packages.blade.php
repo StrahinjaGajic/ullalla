@@ -210,7 +210,7 @@
 						</table>
 					</div>
 				@endif
-				<button type="submit" class="btn btn-default">{{ __('buttons.save_changes') }}</button>
+				<button type="submit" class="btn btn-default">{{ __('buttons.pay_now') }}</button>
 				<input type="hidden" name="stripeToken" id="stripeToken">
 				<input type="hidden" name="stripeEmail" id="stripeEmail">
 				{!! Form::close() !!}
