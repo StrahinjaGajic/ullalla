@@ -19,8 +19,8 @@
 	$('body').on('contextmenu', 'img', function(e) {
 	 	return false; 
 	});
-    // $("[type='submit']").on("click", function (e) {
-    //     $(this).attr("disabled", true);
-    //     $(this).closest("form").submit();
-    // });
+     $("[type='submit']").on("click", function (e) {
+         $(this).attr("disabled", true);
+         $(this).closest("form").submit();
+     });
 </script>

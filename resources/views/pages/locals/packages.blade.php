@@ -384,6 +384,7 @@
 					description: '{{ $user->email }}',
 				});
 				e.preventDefault();
+				$("[type='submit']").attr("disabled", false);
 			} else {
 				var username = '{{ $user->username }}';
 				var url = getUrl('/locals/@' + username + '/packages/store');
