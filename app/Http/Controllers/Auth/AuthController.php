@@ -68,7 +68,7 @@ class AuthController extends Controller
 		$userActivation = DB::table('user_activations')->where('token', $token)->first();
 
 		//send an email with the activation token used from user_activations table
-		// Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
+		Mail::to($user->email)->send(new ActivationMail($userActivation)); // add in production
 
 		return redirect()->action('Auth\AuthController@getSignin')->with('success', __('messages.success_check_activation_link'));
 
