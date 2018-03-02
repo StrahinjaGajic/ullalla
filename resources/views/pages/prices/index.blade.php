@@ -141,7 +141,7 @@
                                 <tr>
                                     <td>{{ $package->package_name }}</td>
                                     <td>{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
-                                    <td>CHF {{ $package->package_price }} .-</td>
+                                    <td>CHF {{ $package->package_price_local }} .-</td>
                                 </tr>
                             @endforeach
                         </tbody>
