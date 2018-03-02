@@ -362,7 +362,8 @@
 				name: 'Ullallà',
 				description: '{{ $user->email }}',
 			});
-			e.preventDefault();	
+			e.preventDefault();
+			$("[type='submit']").attr("disabled", false);
 		});
 	@endif
 </script>
