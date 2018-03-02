@@ -484,7 +484,8 @@
 			name: 'Ullallà',
 			description: '{{ $local->email }}',
 		});
-		e.preventDefault();	
+		e.preventDefault();
+		$("[type='submit']").attr("disabled", false);
 	});
 </script>
 
@@ -530,7 +531,8 @@
 			name: 'Ullallà',
 			description: '{{ $local->email }}',
 		});
-		e.preventDefault();	
+		e.preventDefault();
+		$("[type='submit']").attr("disabled", false);
 	});
 </script>
 @stop
