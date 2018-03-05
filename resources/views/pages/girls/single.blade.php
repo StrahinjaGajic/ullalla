@@ -192,7 +192,7 @@
 									@php
 									$workingTime = explode('&', $user->working_time);
 									@endphp
-									<h3>{{ $workingTime[0] }} <span>{{ isset($workingTime[1]) ? $workingTime[1] : '' }}</span></h3>
+									<h3>{{ __('fields.available_24_7') }} <span>{{ isset($workingTime[1]) ? '+ ' . __('fields.night_escort') : '' }}</span></h3>
 									@endif
 								</div>
 								@endif
