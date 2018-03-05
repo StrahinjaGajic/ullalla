@@ -444,8 +444,8 @@ class LocalController extends Controller
     {
         $user = Auth::guard('local')->user();
 
-        $defaultPackageData = ['needCharge' => false, 'totalAmount' => 0];
-        $gotmPackageData = ['needCharge' => false, 'totalAmount' => 0];
+        $defaultPackageData = ['elite' => false, 'scheduled' => false, 'totalAmount' => 0];
+        $gotmPackageData = ['scheduled' => false, 'totalAmount' => 0];
 
         $totalAmount = 0;
         $defaultPackageActivationDateInput = request('default_package_activation_date');
@@ -462,12 +462,16 @@ class LocalController extends Controller
             if ($validator->passes()) {
                 // insert gotm package
                 $gotmPackageData = Local::insertGotmPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                // check if gotm package is scheduled or not 
                 if ($gotmPackageData['scheduled'] === true) {
-                    // only default package scheduled
-                    return redirect()->back()->with('success_scheduled', __('messages.scheduled_lotm_package'));
+                    // scheduled
+                    Session::flash('success_gotm_scheduled', __('messages.scheduled_lotm_package'));
+                } else {
+                    // not scheduled
+                    Session::flash('success_gotm_package_updated', __('messages.lotm_package_successfully_saved'));
                 }
 
-                // continue to with payment
+                // advance to payment
             } else {
                 if ($request->ajax()) {
                     return response()->json([
@@ -486,36 +490,29 @@ class LocalController extends Controller
             ]);
 
             if ($validator->passes()) {
-                // get default package input
-                $defaultPackageInput = request('ullalla_package')[0];
-
-                // get default package obj and activation date input
-                $defaultPackage = Package::find($defaultPackageInput);
-                if ($defaultPackage) {
-                    // insert default package
-                    $defaultPackageData = Local::insertDefaultPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
-                }
-
+                // insert default package
+                $defaultPackageData = Local::insertDefaultPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
                 // insert gotm package
-                if ($monthGirlActivationDateInput) {
-                    $gotmPackageData = Local::insertGotmPackage($request, $user, $monthGirlActivationDateInput, $totalAmount);
-                    if ($gotmPackageData['scheduled'] && !$defaultPackageData['scheduled']) {
-                        // only gotm package scheduled
-                        Session::flash('success_scheduled', __('messages.scheduled_lotm_package'));                        
-                    } elseif ($gotmPackageData['scheduled'] && $defaultPackageData['scheduled']) {
-                        // both packages scheduled
-                        return redirect()->back()->with('success_scheduled', __('messages.scheduled_packages'));
+                if ($monthGirlActivationDateInput || $defaultPackageData['elite'] === false) {
+                    $gotmPackageData = Local::insertGotmPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                    if ($gotmPackageData['scheduled'] === true) {
+                        // gotm package scheduled
+                        Session::flash('success_gotm_scheduled', __('messages.scheduled_lotm_package'));                        
+                    } else if ($gotmPackageData['scheduled'] === false) {
+                        // gotm package not scheduled
+                        Session::flash('success_gotm_package_updated', __('messages.lotm_package_successfully_saved'));
                     }
                 }
 
-                if ($defaultPackageData['scheduled']) {
-                        Session::flash('success_scheduled', __('messages.scheduled_default_package'));
-                    if (!$gotmPackageData['needCharge']) {
-                        return redirect()->back();
-                    }
+                // check if default package is scheduled or not
+                if ($defaultPackageData['scheduled'] === true) {
+                    Session::flash('success_d_scheduled', __('messages.scheduled_default_package'));
+                } else {
+                    Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
                 }
 
-                // continue to with payment
+                // advance to payment
+
             } else {
                 if ($request->ajax()) {
                     return response()->json([
@@ -561,22 +558,15 @@ class LocalController extends Controller
                 return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
             }
         } else {
-            Auth::guard('local')->logout();
+            $elitePackage = true;
+            // create elite account
             Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
 
+        // commit transaction if everything went well
         DB::commit();
 
-        if ($defaultPackageData['needCharge']) {
-            if ($gotmPackageData['needCharge']) {
-                Session::flash('success_gotm_package_updated', __('messages.lotm_package_successfully_saved'));
-            }
-            Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
-        } else if ($gotmPackageData['needCharge']) {
-            Session::flash('success_gotm_package_updated', __('messages.lotm_package_successfully_saved'));
-        }
-
-        if (!$request->ajax()) {
+        if (!$request->ajax() && $elitePackage === false) {
             return redirect()->back();
         }
     }

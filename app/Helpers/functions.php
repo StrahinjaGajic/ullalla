@@ -228,7 +228,7 @@ function getWorkingTime($days, $available_24_7, $timeFrom, $timeFromM, $timeTo, 
     if ($available_24_7) {
         $workingTime = 'Available 24/7';
         if ($showAsNightEscort) {
-            $workingTime .= '&' . __('fields.night_escort');
+            $workingTime .= '&Escort';
         }
     } elseif ($days) {
         // loop through each day and put in array day of the week delimited (|) with time from and time to

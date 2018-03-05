@@ -16,8 +16,11 @@
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
 			<div class="col-xs-12">
-				@if(Session::has('success_scheduled'))
-					<div class="alert alert-success">{{ Session::get('success_scheduled') }}</div>
+				@if(Session::has('success_gotm_scheduled'))
+					<div class="alert alert-success">{{ Session::get('success_gotm_scheduled') }}</div>
+				@endif
+				@if(Session::has('success_d_scheduled'))
+					<div class="alert alert-success">{{ Session::get('success_d_scheduled') }}</div>
 				@endif
 				@if(Session::has('success_d_package_updated'))
 					<div class="alert alert-success">{{ Session::get('success_d_package_updated') }}</div>
@@ -360,11 +363,13 @@
                     scrollTop: (packagesErrorEl.offset().top - 30)
                 }, 1500);
 
+                console.log('asdas');
+
 				packagesErrorEl.addClass('alert alert-danger').text(data.responseJSON.status);
 			});
 		}
 	});
-	@if(!$user->stripe_last4_digits && (!$user->is_active_d_package || !$user->is_active_gotm_package))
+	@if(!$user->stripe_last4_digits)
 		$('#profileForm').on('submit', function (e) {
 			stripe.open({
 				name: 'Ullallà',

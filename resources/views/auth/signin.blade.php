@@ -52,19 +52,3 @@
     </div>
 </div>
 @stop
-
-@section('perPageScripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.all.min.js"></script>
-    @if(Session::has('account_created_elite'))
-        <script>
-            swal(
-                '{{ __('headings.account_created_title') }}',
-                '{{ Session::get('account_created_elite') }}',
-                'success'
-            );
-        </script>
-        @php
-            Session::forget('account_created_elite');
-        @endphp
-    @endif
-@stop

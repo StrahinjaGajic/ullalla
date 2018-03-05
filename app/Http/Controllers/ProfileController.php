@@ -595,8 +595,8 @@ class ProfileController extends Controller
     public function postPackages(Request $request)
     {
         $user = Auth::user();
-        $defaultPackageData = ['needCharge' => false, 'totalAmount' => 0];
-        $gotmPackageData = ['needCharge' => false, 'totalAmount' => 0];
+        $defaultPackageData = ['scheduled' => false, 'totalAmount' => 0];
+        $gotmPackageData = ['scheduled' => false, 'totalAmount' => 0];
         $totalAmount = 0;
 
         $defaultPackageActivationDateInput = request('default_package_activation_date');
@@ -611,14 +611,19 @@ class ProfileController extends Controller
             ]);
             // check if validator passed or not
             if ($validator->passes()) {
+                $gotmPackage = $request->ullalla_package_month_girl[0];
                 // insert gotm package
                 $gotmPackageData = User::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
+                // check if gotm package is scheduled or not 
                 if ($gotmPackageData['scheduled'] === true) {
-                    // only default package scheduled
-                    return redirect()->back()->with('success_scheduled', __('messages.scheduled_gotm_package'));
+                    // scheduled
+                    Session::flash('success_gotm_scheduled', __('messages.scheduled_gotm_package'));
+                } else {
+                    // not scheduled
+                    Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
                 }
 
-                // continue to with payment
+                // advance to payment
             } else {
                 if ($request->ajax()) {
                     return response()->json([
@@ -636,29 +641,30 @@ class ProfileController extends Controller
                 __('validation.default_package_required')
             ]);
 
+            // check if validator passed or not
             if ($validator->passes()) {
                 // insert default package
                 $defaultPackageData = User::insertPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
                 // insert gotm package
                 if ($monthGirlActivationDateInput) {
                     $gotmPackageData = User::insertPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
-                    if ($gotmPackageData['scheduled'] && !$defaultPackageData['scheduled']) {
-                        // only gotm package scheduled
-                        Session::flash('success_scheduled', __('messages.scheduled_gotm_package'));                        
-                    } elseif ($gotmPackageData['scheduled'] && $defaultPackageData['scheduled']) {
-                        // both packages scheduled
-                        return redirect()->back()->with('success_scheduled', __('messages.scheduled_packages'));
+                    if ($gotmPackageData['scheduled'] === true) {
+                        // gotm package scheduled
+                        Session::flash('success_gotm_scheduled', __('messages.scheduled_gotm_package'));                        
+                    } else if ($gotmPackageData['scheduled'] === false) {
+                        // gotm package not scheduled
+                        Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
                     }
                 }
 
-                if ($defaultPackageData['scheduled']) {
-                        Session::flash('success_scheduled', __('messages.scheduled_default_package'));
-                    if (!$gotmPackageData['needCharge']) {
-                        return redirect()->back();
-                    }
+                // check if default package is scheduled or not
+                if ($defaultPackageData['scheduled'] === true) {
+                    Session::flash('success_d_scheduled', __('messages.scheduled_default_package'));
+                } else {
+                    Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
                 }
 
-                // continue to with payment
+                // advance to payment
 
             } else {
                 if ($request->ajax()) {
@@ -671,6 +677,7 @@ class ProfileController extends Controller
             }
         }
 
+        // create a customer and charge him
         try {
             $customer = null;
 
@@ -704,16 +711,8 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
         }
 
+        // commit a transaction if everything went good
         DB::commit();
-
-        if ($defaultPackageData['needCharge']) {
-            if ($gotmPackageData['needCharge']) {
-                Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
-            }
-            Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
-        } else if ($gotmPackageData['needCharge']) {
-            Session::flash('success_gotm_package_updated', __('messages.gotm_package_successfully_saved'));
-        }
 
         if (!$request->ajax()) {
             return redirect()->back();

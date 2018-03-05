@@ -16,8 +16,11 @@
 		<?php $counter = 1; ?>
 		<div class="col-sm-10 profile-info">
 			<div class="col-xs-12">
-				@if(Session::has('success_scheduled'))
-					<div class="alert alert-success">{{ Session::get('success_scheduled') }}</div>
+				@if(Session::has('success_gotm_scheduled'))
+					<div class="alert alert-success">{{ Session::get('success_gotm_scheduled') }}</div>
+				@endif
+				@if(Session::has('success_d_scheduled'))
+					<div class="alert alert-success">{{ Session::get('success_d_scheduled') }}</div>
 				@endif
 				@if(Session::has('success_d_package_updated'))
 					<div class="alert alert-success">{{ Session::get('success_d_package_updated') }}</div>
@@ -82,8 +85,8 @@
 								@endphp
 								<tr>
 									<td>{{ __('headings.default_package') }}</td>
-									<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[2])) }}</td>
-									<td>{{ date('d-m-Y', strtotime($scheduledDefaultPackage[3])) }}</td>
+									<td>{{ $scheduledDefaultPackage[2] != 'elite' ? date('d-m-Y', strtotime($scheduledDefaultPackage[2])) : 'N/A' }}</td>
+									<td>{{ isset($scheduledDefaultPackage[3]) ? date('d-m-Y', strtotime($scheduledDefaultPackage[3])) : 'N/A' }}</td>
 								</tr>
 								@endif
 								@if($scheduledGotmPackage)
@@ -96,8 +99,8 @@
 									@else
 										<td>{{ __('headings.gotm_package') }}</td>
 									@endif
+									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[1])) }}</td>
 									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[2])) }}</td>
-									<td>{{ date('d-m-Y', strtotime($scheduledGotmPackage[3])) }}</td>
 								</tr>
 							@endif
 						</tbody>
@@ -242,6 +245,20 @@
     );
 </script>
 @endif
+
+@if(Session::has('account_created_elite'))
+    <script>
+        swal(
+            '{{ __('headings.account_created_title') }}',
+            '{{ Session::get('account_created_elite') }}',
+            'success'
+        );
+    </script>
+    @php
+        Session::forget('account_created_elite');
+    @endphp
+@endif
+
 <script>
 
 	function changePrice(id, month, year, discountPercent, discount_month, discount_year){
@@ -359,7 +376,7 @@
 				    } else if (typeof errors.ullalla_package_month_girl !== 'undefined') {
 				    	packagesErrorEl.addClass('alert alert-danger').text('{{ __('validation.choose_package') }}');
 				    } else {
-				    	window.location.href = getUrl('/private/' + currentUser + '/packages');
+						window.location.href = getUrl("/locals/@" + username  + "/packages");
 				    }
 				} else {
 					window.location.href = getUrl("/locals/@" + username  + "/packages");
@@ -373,14 +390,12 @@
                     scrollTop: (packagesErrorEl.offset().top - 30)
                 }, 1500);
 
-            	console.log(data.responseJSON);
-
 				packagesErrorEl.text(data.responseJSON.status);
 			});
 		}
 	});
 
-	@if (!$user->stripe_last4_digits && (!$user->is_active_d_package || !$user->is_active_gotm_package))
+	@if (!$user->stripe_last4_digits)
 		$('#profileForm').on('submit', function (e) {
 			var defaultPackageInput = document.querySelector('input[name="ullalla_package[]"]:checked');
 			if (defaultPackageInput) {
@@ -408,7 +423,7 @@
 				// fire ajax post request
 				$.post(url, data)
 					.done(function (data) {
-						window.location.href = getUrl("/signin");
+						window.location.href = getUrl("/locals/@" + username  + "/packages");
 					})
 					.fail(function(data, textStatus) {
 						$('#loading').addClass('is-hidden');
@@ -423,7 +438,6 @@
 			}
 		});
 	@endif
-
 
 	function hideLotm() {
 		document.getElementById('lotm').style.display = "none";
