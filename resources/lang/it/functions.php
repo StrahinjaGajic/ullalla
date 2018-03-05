@@ -145,7 +145,7 @@ return [
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
     'skype_name' => 'Nome Skype',
     'prefered_contact_option' => 'Preferisco',
-    'no_withheld_numbers' => 'No numeri anonimi',
+    'no_withheld_numbers' => 'Numeri anonimi',
 
 
     #getWorkplaceFields

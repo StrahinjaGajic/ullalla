@@ -144,7 +144,7 @@ return [
     //'contact_options' => ['Available Apps' => 'contact_option_name'],
     'skype_name' => 'Skype Name',
     'prefered_contact_option' => 'Ich bevorzuge Kontakt über',
-    'no_withheld_numbers' => 'Withheld Numbers',
+    'no_withheld_numbers' => 'Anonyme Nummern',
 
 
     #getWorkplaceFields
