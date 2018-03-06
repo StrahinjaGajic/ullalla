@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact us')
+@section('title', __('global.f_a_q'))
 
 @section('content')
     <div class="contact-area">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Contact us')
+@section('title', __('buttons.privacy_policy'))
 @section('content')
     <br><br>
     <div class="container">

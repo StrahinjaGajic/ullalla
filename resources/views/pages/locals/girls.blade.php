@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Girls')
+@section('title', __('buttons.girls'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/create_profile.css?ver=' . str_random(10)) }}">

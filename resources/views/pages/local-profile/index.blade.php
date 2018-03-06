@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 
-@section('title', 'Locals') 
+@section('title', __('buttons.locals')) 
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}"> 

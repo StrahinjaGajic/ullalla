@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Club Info')
+@section('title', __('headings.club_info'))
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/components/edit_profile.css?ver=' . str_random(10)) }}">

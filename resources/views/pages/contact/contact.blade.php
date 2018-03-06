@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('title', 'Contact us') @section('content')
+@extends('layouts.app') @section('title', __('buttons.contact_us')) @section('content')
 <div class="contact-area">
     <div class="container">
         <div class="row">
@@ -6,7 +6,7 @@
                 <div class="row" style="margin-top:30px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-title">
-                            <h3 style="color:#f26522">Contact Us</h3>
+                            <h3 style="color:#f26522">{{ __('buttons.contact_us') }}</h3>
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -38,7 +38,6 @@
                                             <em>*</em>
                                         </label>
                             <textarea name="message" class="form-control" required></textarea>
-
 
                             <div class="actions actn-contact">
                                 <label class="c-contact cc-con">
