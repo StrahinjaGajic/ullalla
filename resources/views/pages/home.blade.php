@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
-@section('content')
+@section('title', 'Home')
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css">
 <link rel="stylesheet" href="{{ asset('css/components/home.css?ver=' . str_random(10)) }}">
 @stop
+
+@section('content')
 <section class="slider-area home-4">
     <div class="container">
         <div class="row">
