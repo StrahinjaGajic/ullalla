@@ -46,7 +46,7 @@
             @endif
             <h1>{{ __('headings.videos') }}</h1>
             <div class="form-group upload-video">
-                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="avi mp4 ogv mov wmv mkv"/><br><br>
+                <input type="hidden" role="uploadcare-uploader-video" name="video" id="uploadcare-file" data-crop="true" data-file-types="mp4 ogv mov mkv"/><br><br>
                 @if($local->videos)
                 <video src="{{ $local->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
                 @else
