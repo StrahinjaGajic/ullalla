@@ -127,9 +127,12 @@
 							@foreach ($packages as $package)
 								<tr>
 									@if($package->id == 6)
-										<td colspan="4"><p>More Girls?</p></td>
+										<td class="text-center"><strong>{{ $package->name }}</strong></td>
+										<td></td>
+										<td class="text-center">{{ __('fields.on_demand') }}</td>
+										<td></td>
 									@else
-										<td class="text-center">{{ $package->name }}</td>
+										<td class="text-center"><strong>{{ $package->name }}</strong></td>
 										<td class="text-center">
 											<select name="package_duration[{{ $package->id }}]" id="selectDur_{{ $package->id }}" onchange="changePrice('{{ $package->id }}', '{{ $package->month_price }}', '{{ $package->year_price }}', '{{ $package->package_discount }}', '{{ callTotalPackagePrice($package->month_price, $package->package_discount, 0) }}', '{{ callTotalPackagePrice($package->year_price, $package->package_discount, 0) }}')">
 												<option value="month">{{ __('tables.month') }}</option>
@@ -182,7 +185,7 @@
 							<tbody>
 							@foreach ($girlPackages->take(3) as $package)
 								<tr>
-									<td class="text-center">{{ $package->package_name }}</td>
+									<td class="text-center"><strong>{{ $package->package_name }}</strong></td>
 									<td class="text-center">{{ $package->package_duration }} {{ trans_choice('fields.days', 2) }}</td>
 									<td class="text-center">
 										@if(explode(',', $package->package_discount)[2] && explode(',', $package->package_discount)[2] != 0)
@@ -213,7 +216,11 @@
 						</table>
 					</div>
 				@endif
-				<button type="submit" class="btn btn-default">{{ __('buttons.pay_now') }}</button>
+				@if($user->stripe_last4_digits)
+					<button class="btn btn-default confirm pay-button">{{ __('buttons.pay_now') }}</button>
+				@else
+					<button class="btn btn-default pay-button">{{ __('buttons.pay_now') }}</button>
+				@endif
 				<input type="hidden" name="stripeToken" id="stripeToken">
 				<input type="hidden" name="stripeEmail" id="stripeEmail">
 				{!! Form::close() !!}
@@ -228,6 +235,24 @@
         </div>
     </div>
 </div>
+
+{{-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you usre</p>
+        <button type="button" class="action confirm">Yes</button>
+        <button type="button" class="action cancel">No</button>
+      </div>
+    </div>
+
+  </div>
+</div> --}}
 @stop
 
 @section('perPageScripts')
@@ -441,9 +466,50 @@
 
 	function hideLotm() {
 		document.getElementById('lotm').style.display = "none";
+		$('button').addClass('confirm');
 	}
 	function showLotm() {
 		document.getElementById('lotm').style.display = "block";
+		@if(!$user->stripe_last4_digits)
+			$('button').removeClass('confirm');
+		@endif
 	}
 </script>
+
+<script>
+	$(document.body).on('click', 'button.confirm', function () {
+		if (confirm('Are you sure you want to purchase this package?')) {
+			$(this).attr('disabled', true);
+			$('#profileForm').submit();
+		} else {
+			return false;
+		}
+	});
+</script>
+{{-- 
+<script>
+	var canSend = false;
+
+	$('button').on('submit', function () {
+		var form = $(this);
+
+		if (canSend == true) {
+			canSend = false;
+			return true;
+		}
+
+		$('#myModal').show();
+	});
+
+	$('#myModal button.action').on('click', function () {
+		if ($(this).hasClass('confirm')) {
+			canSend = true;
+			$('#myModal').hide();
+			form.submit();
+		} else {
+			canSend = false;
+			$('#myModal').hide();
+		}
+	});
+</script> --}}
 @stop

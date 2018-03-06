@@ -5,6 +5,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/components/girls.css?ver=' . str_random(10)) }}">
 <link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/2.0.18/plyr.svg">
 {!! Charts::styles() !!}
 @stop
 

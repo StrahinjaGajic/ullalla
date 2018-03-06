@@ -401,6 +401,7 @@ class LocalController extends Controller
         $user = Auth::guard('local')->user();
         $packages = LocalPackage::all();
         $girlPackages = Package::all();
+        $hasElitePackage = $user->where('scheduled_default_package', 'LIKE', '%elite%')->first();
 
         $showDefaultPackages = false;
         $showGotmPackages = false;
@@ -421,7 +422,7 @@ class LocalController extends Controller
         if ($scheduledDefaultPackage === null && Carbon::now() >= $dayFromWhichDefaultPackagesShouldBeShown) {
             $showDefaultPackages = true;
         }
-        if ($scheduledGotmPackage === null && Carbon::now() >= $dayFromWhichGotmPackagesShouldBeShown) {
+        if ($scheduledGotmPackage === null && Carbon::now() >= $dayFromWhichGotmPackagesShouldBeShown && !$hasElitePackage) {
             $showGotmPackages = true;
         }
 
@@ -493,7 +494,7 @@ class LocalController extends Controller
                 // insert default package
                 $defaultPackageData = Local::insertDefaultPackage($request, $user, $defaultPackageActivationDateInput, $totalAmount);
                 // insert gotm package
-                if ($monthGirlActivationDateInput || $defaultPackageData['elite'] === false) {
+                if ($monthGirlActivationDateInput && $defaultPackageData['elite'] === false) {
                     $gotmPackageData = Local::insertGotmPackage($request, $user, $monthGirlActivationDateInput, $totalAmount, true);
                     if ($gotmPackageData['scheduled'] === true) {
                         // gotm package scheduled
@@ -505,7 +506,9 @@ class LocalController extends Controller
                 }
 
                 // check if default package is scheduled or not
-                if ($defaultPackageData['scheduled'] === true) {
+                if ($defaultPackageData['elite'] === true) {
+                    Session::flash('account_created_elite', __('messages.account_created_elite'));
+                } elseif ($defaultPackageData['scheduled'] === true) {
                     Session::flash('success_d_scheduled', __('messages.scheduled_default_package'));
                 } else {
                     Session::flash('success_d_package_updated', __('messages.d_package_successfully_saved'));
@@ -524,7 +527,7 @@ class LocalController extends Controller
             }
         }
 
-        if (request('ullalla_package')[0] != 6) {
+        if ($defaultPackageData['elite'] === false) {
             try {
                 $customer = null;
 
@@ -557,16 +560,12 @@ class LocalController extends Controller
 
                 return redirect()->back()->withErrors(['stripe_error' => $e->getMessage()]);
             }
-        } else {
-            $elitePackage = true;
-            // create elite account
-            Session::flash('account_created_elite', __('messages.account_created_elite'));
         }
 
         // commit transaction if everything went well
         DB::commit();
 
-        if (!$request->ajax() && $elitePackage === false) {
+        if (!$request->ajax() || $defaultPackageData['elite'] === true) {
             return redirect()->back();
         }
     }
