@@ -21,10 +21,10 @@
 			</div><br><br>
 			<div class="btn-wrapper">
 				@if($local->news()->count() < 3)
-				<button id="showModal" type="submit" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
+				<button id="showModal" class="btn btn-default">{{ __('buttons.news_entry') }}</button>
 				@endif
 				@if($local->events()->count() < 3)
-				<button id="showModal2" type="submit" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
+				<button id="showModal2" class="btn btn-default">{{ __('buttons.events_entry') }}</button>
 				@endif
 			</div>
 			@if($local->news()->count() > 0)

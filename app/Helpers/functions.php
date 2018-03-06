@@ -747,9 +747,9 @@ function getNavUris() {
 function getEventPrice($perDay = false, $flyerless = true)
 {
     if ($perDay === true) {
-        return 1;
+        return 5;
     } else {
-        return $flyerless === true ? 10 : 5;
+        return $flyerless === true ? 100 : 0;
     }
 }
 

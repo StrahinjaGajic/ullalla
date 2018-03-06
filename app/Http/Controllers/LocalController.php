@@ -122,7 +122,7 @@ class LocalController extends Controller
             $user->lng = $lng;
             $user->about_me = request('about_me');
             $user->local_type_id = request('local_type_id');
-            $user->photo = request('logo') ? storeAndGetUploadCareFiles(request('logo')) . '-/overlay/b423f7a8-2a4f-43e8-acfe-4eb6fe21f7de/60x30/210,130/70p/' : NULL;
+            $user->photo = request('logo') ? storeAndGetUploadCareFiles(request('logo')) : NULL;
             $user->photos = $uploadedPhotos ? $inputPhotos : null;
             $user->videos = storeAndGetUploadCareFiles(request('video'));
             $user->working_time = $workingTime;
@@ -229,7 +229,7 @@ class LocalController extends Controller
             'photos' => 'numeric|min:4|max:9',
         ]);
 
-        $local->photo = request('photo') ? storeAndGetUploadCareFiles(request('photo')) . '-/overlay/b423f7a8-2a4f-43e8-acfe-4eb6fe21f7de/60x30/210,130/70p/' : NULL;
+        $local->photo = request('photo') ? storeAndGetUploadCareFiles(request('photo')) : NULL;
         $local->photos = $uploadedPhotos ? $inputPhotos : null;
         $local->videos = storeAndGetUploadCareFiles(request('video'));
         $local->save();
