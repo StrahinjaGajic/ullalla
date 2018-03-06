@@ -38,7 +38,7 @@
                 </div>
                 <h4>{{ __('headings.videos') }}</h4>
                 <div class="form-group upload-video">
-                    <input type="hidden" name="video" id="video-uploader" data-file-types="avi mp4 ogv mov wmv mkv"/>
+                    <input type="hidden" name="video" id="video-uploader" data-file-types="mp4 ogv mov mkv"/>
                     @if($user->videos)
                     <video src="{{ $user->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
                     @else

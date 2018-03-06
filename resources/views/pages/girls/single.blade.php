@@ -111,9 +111,7 @@
 						<div class="tab-content">
 							@if($user->videos)
 							<div class="tab-pane" id="girl-videos">
-								<video controls>
-									<source src="{{ $user->videos }}" type="video/mp4">
-									</video>
+								<video src="{{ $user->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
 								</div>
 								@endif
 								@if ($user->about_me)

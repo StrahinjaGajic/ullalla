@@ -169,9 +169,6 @@
                                 @endforeach
                             </div>
                             <div class="tab-pane" id="girl-video">
-                                {{--<video poster="/path/to/poster.jpg" width="500px" controls>--}}
-                                    {{--<source src="{{ $local->videos }}" type="video/mp4">--}}
-                                {{--</video>--}}
                                 <video src="{{ $local->videos }}" id="video" width="320" height="240" style="display: block;" controls=""></video>
                             </div>
                             <div class="tab-pane" id="girl-map">
