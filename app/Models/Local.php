@@ -280,7 +280,7 @@ class Local extends Authenticatable
                             ], 422);
                         }
 
-                        return ['scheduled' => true, 'totalAmount' => $totalAmount];
+                        return ['elite' => false, 'scheduled' => true, 'totalAmount' => $totalAmount];
                     } else {
                         try {
                             $user->$packageColumn = $package->id;
@@ -298,14 +298,14 @@ class Local extends Authenticatable
                             ], 422);
                         }
 
-                        return ['scheduled' => false, 'totalAmount' => $totalAmount];
+                        return ['elite' => false, 'scheduled' => false, 'totalAmount' => $totalAmount];
                     }
                 } else {
-                    $string = $package->id . '&|' . $duration . '&|elite';
+                    $string = $package->id . '&|month&|elite';
                     $user->$scheduledColumn = $string;
                     $user->save();
 
-                    return ['elite' => true, 'scheduled' => false, 'totalAmount' => $totalAmount];
+                    return ['elite' => true, 'scheduled' => true, 'totalAmount' => $totalAmount];
                 }
             }
         }
